@@ -1,0 +1,233 @@
+.abt-section-main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.abt-section1{
+    width: 95%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    /* margin-top: 50px;  */
+}
+
+.abt-section1-container1{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.abt-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+
+.abt-head-para{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.abt-head-para h1{
+    color: var(--brand-onSurface-default);
+    font-weight: 700;
+}
+
+.abt-head-para p{
+    color: var(--neutral-onSurface-medium);
+    font-weight: 400;
+    line-height: 30px;
+}
+
+.abt-section1-container2{
+    min-width: clamp(330px, 40%, 500px);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.abt-section1-container2 img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.abt-section2-main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 80px 0;
+}
+
+.abt-section2{
+    width: 90%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 60px;
+}
+
+.abt-section2 h1{
+    color: var(--brand-onSurface-default);
+    font-size: clamp(2.6rem, 2.857vw + 2.428rem, 4.5rem);
+}
+
+.abt-sec2{
+    display: flex;
+    flex-wrap: wrap; 
+    width: 100%;
+    height: 100%; 
+    gap: 20px;
+}
+
+.abt-sec2-con1{
+    flex: 1 1 20%; 
+    height: 50%; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+
+.abt-con1-img-head{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.abt-con1-img-head p{
+    color: var(--neutral-onSurface-medium);
+    font-weight: 600;
+}
+
+.abt-con1-para p{
+    color: var(--neutral-onSurface-medium);
+    font-weight: 400;
+    text-align: left;
+}
+
+.abt-section3-main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* margin: 50px 0; */
+}
+
+.abt-sec3{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.abt-sec3-head-para{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px;
+}
+
+.abt-sec3-head-para h1{
+    color: var(--brand-onSurface-default);
+    font-size: clamp(2.6rem, 2.857vw + 2.428rem, 4.5rem);
+}
+
+.abt-sec3-head-para p{
+    color: var(--neutral-onSurface-medium);
+    font-weight: 400;
+    text-align: left;
+}
+
+
+.abt-cont1-img-text-main{
+    display: flex;
+    flex-wrap: wrap; 
+    width: 100%;
+    height: 100%; 
+    gap: 20px;
+}
+
+.abt-cont1-img-text{
+    flex: 1 1 20%; 
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.abt-cont1-img-container{
+    width: clamp(130px, 10vw + 90px, 200px);
+    height: clamp(130px, 10vw + 90px, 200px);
+    border-radius: 50%;
+    background-color: var(--brand-surface-lighter);
+}
+
+.abt-cont1-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.abt-cont1-para2{
+    color: var(--neutral-onSurface-medium);
+    font-weight: 400;
+}
+
+.abt-cont1-para{
+    color: var(--brand-onSurface-default);
+    font-weight: 400;
+}
+
+@media screen and (max-width:500px){
+    .abt-section1{
+        height: 40vh;
+        margin-top: 40px;
+        padding: 10px;
+    }
+    
+
+    .abt-section1-container1{
+        width: 100%;
+        margin: 0;
+    }
+
+    .abt-section1-container2 {
+        display: none;
+        width: 0;
+    }
+
+    .abt-section2{
+        gap: 30px;
+    }
+
+    .abt-section2-main{
+        margin: 80px 0 0 0;
+    }
+
+    .abt-cont1-img-text-main{
+        height: 30%;
+    }
+
+    .abt-sec3-head-para{
+        width: 100%;
+    }
+
+}

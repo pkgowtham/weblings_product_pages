@@ -1,0 +1,447 @@
+{
+  "fileName": "Design system",
+  "textStyles":{
+    "desktop": [
+      {
+        "name": "DM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 700,
+        "fontSize": 84,
+        "lineHeight":6.25,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -2
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "HM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 48,
+        "lineHeight":3.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -1
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "HS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 36,
+        "lineHeight":2.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -1
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "TM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 28,
+        "lineHeight":2.25,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "TS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 20,
+        "lineHeight":1.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BL",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 18,
+        "lineHeight":1.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": 0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 16,
+        "lineHeight":1.5,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": 0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 14,
+        "lineHeight":1.38,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": 0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BXS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 12,
+        "lineHeight":1.38,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": 0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "LM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 500,
+        "fontSize": 16,
+        "lineHeight":1.5,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": 0.30000001192092896
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "LS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 500,
+        "fontSize": 14,
+        "lineHeight":1.38,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "LXS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 500,
+        "fontSize": 12,
+        "lineHeight":1,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      }
+     
+    ],
+    "tablet": [
+      {
+        "name": "DM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 700,
+        "fontSize": 52,
+        "lineHeight":6.25,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -3
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "HM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 36,
+        "lineHeight":3.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -2
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "HS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 28,
+        "lineHeight":2.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -2
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "TM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 24,
+        "lineHeight":2.25,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.5
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "TS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 18,
+        "lineHeight":1.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.5
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BL",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 16,
+        "lineHeight":1.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 14,
+        "lineHeight":1.5,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 12,
+        "lineHeight":1.38,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BXS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 10,
+        "lineHeight":1.38,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "LM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 500,
+        "fontSize": 14,
+        "lineHeight":1.5,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.5
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "LS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 500,
+        "fontSize": 12,
+        "lineHeight":1.38,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.5
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "LXS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 500,
+        "fontSize": 10,
+        "lineHeight":1,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.5
+        },
+        "textCase": "ORIGINAL"
+      }
+     
+    ],
+    "mobile": [
+      {
+        "name": "DM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 700,
+        "fontSize": 40,
+        "lineHeight":6.25,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -3
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "HM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 32,
+        "lineHeight":3.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -2
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "HS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 28,
+        "lineHeight":2.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -2
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "TM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 24,
+        "lineHeight":2.25,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.5
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "TS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 600,
+        "fontSize": 18,
+        "lineHeight":1.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.5
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BL",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 16,
+        "lineHeight":1.75,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 14,
+        "lineHeight":1.5,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 12,
+        "lineHeight":1.38,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "BXS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 400,
+        "fontSize": 10,
+        "lineHeight":1.38,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.20000000298023224
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "LM",
+        "fontFamily": "Open Sans",
+        "fontWeight": 500,
+        "fontSize": 14,
+        "lineHeight":1.5,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.5
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "LS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 500,
+        "fontSize": 12,
+        "lineHeight":1.38,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.5
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "name": "LXS",
+        "fontFamily": "Open Sans",
+        "fontWeight": 500,
+        "fontSize": 10,
+        "lineHeight":1,
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": -0.5
+        },
+        "textCase": "ORIGINAL"
+      }
+     
+    ]
+  }
+ 
+}
