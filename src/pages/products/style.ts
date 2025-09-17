@@ -4,6 +4,10 @@ import background from "../../assets/icons/section4_background.svg";
 import { Theme } from "../../theme/themeType";
 
 export const usestyles = createUseStyles((theme: Theme) => ({
+
+  mainSecCon:{
+      // backgroundColor: 'black',
+  },
   NavBar: {
     display: "flex",
     justifyContent: "space-between",
@@ -513,5 +517,79 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     '& path':{
         fill:theme.light.neutral.surface.lighter
     }
+  },
+
+  heroFirstAvatarCon:{
+     width: "112px",
+    height: "112px",
+    borderRadius: "50%",
+    // backgroundColor: "transparent", // default transparent
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    left: '2%',
+    // backgroundColor: "rgba(245, 247, 248, 0.5)",
+    top: '13%',
+    transition: "background-color 0.3s ease",
+    //  backdropFilter: "blur(10px)", // frosted glass effect
+    // WebkitBackdropFilter: "blur(10px)", // Safari support
+
+    "&:hover": {
+      // backgroundColor: "#f5f7f8", // hover color
+      backgroundColor: "rgba(245, 247, 248, 0.8)",
+      boxShadow:theme.elevation.m
+    },
+  },
+
+    heroSecondAvatarCon:{
+     width: "112px",
+    height: "112px",
+    borderRadius: "50%",
+    backgroundColor: "transparent", // default transparent
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    left: 160,
+    top: 250,
+    transition: "background-color 0.3s ease",
+
+    "&:hover": {
+      backgroundColor: "rgba(245, 247, 248, 0.8)",
+      boxShadow:theme.elevation.m
+    },
+  },
+
+
+    heroThirdAvatarCon:{
+     width: "112px",
+    height: "112px",
+    borderRadius: "50%",
+    backgroundColor: "transparent", // default transparent
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    left: '2%',
+    top: '78%',
+    transition: "background-color 0.3s ease",
+
+    "&:hover": {
+      backgroundColor: "rgba(245, 247, 248, 0.8)",
+      boxShadow:theme.elevation.m
+    },
+
+     "&:hover $heroThirdInsideCon": {
+      backgroundColor: theme.light.brand.surface.lighter,
+    },
+  },
+
+  heroThirdInsideCon:{
+    width:'75px',
+    height:'75px',
+     borderRadius: "50%",
+    backgroundColor: "transparent",
+    position:'relative'
   }
 }));

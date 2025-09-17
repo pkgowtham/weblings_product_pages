@@ -1,139 +1,142 @@
-import React from 'react'
-import Typography from '../../components/typography/component.tsx'
-import { usestyles } from './style.ts'
-import Button from '../../components/button/button.tsx';
-import SvgUserlogo from '../../components/svg/Userlogo.tsx';
-import SvgChevronRight from '../../components/svg/ChevronRight.tsx';
-import clsx from 'clsx';
-import SvgFrame from '../../components/svg/Frame.tsx';
-import SvgStar from '../../components/svg/Star.tsx';
-import SvgPuzzle from '../../components/svg/Puzzle.tsx';
-import SvgShieldCheck from '../../components/svg/ShieldCheck.tsx';
-import SvgBoxes from '../../components/svg/Boxes.tsx';
-import SvgPackage from '../../components/svg/Package.tsx';
-import SvgVectorLeft from '../../components/svg/VectorLeft.tsx';
-import SvgVectorRight from '../../components/svg/VectorRight.tsx';
-import SvgFeature1 from '../../components/svg/Feature1.tsx';
-import SvgFeature2 from '../../components/svg/Feature2.tsx';
-import SvgFeature3 from '../../components/svg/Feature3.tsx';
-import SvgFeature4 from '../../components/svg/Feature4.tsx';
-import SvgNewsletter from '../../components/svg/Newsletter.tsx';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import Typography from "../../components/typography/component.tsx";
+import { usestyles } from "./style.ts";
+import Button from "../../components/button/button.tsx";
+import SvgUserlogo from "../../components/svg/Userlogo.tsx";
+import SvgChevronRight from "../../components/svg/ChevronRight.tsx";
+import clsx from "clsx";
+import SvgFrame from "../../components/svg/Frame.tsx";
+import SvgStar from "../../components/svg/Star.tsx";
+import SvgPuzzle from "../../components/svg/Puzzle.tsx";
+import SvgShieldCheck from "../../components/svg/ShieldCheck.tsx";
+import SvgBoxes from "../../components/svg/Boxes.tsx";
+import SvgPackage from "../../components/svg/Package.tsx";
+import SvgVectorLeft from "../../components/svg/VectorLeft.tsx";
+import SvgVectorRight from "../../components/svg/VectorRight.tsx";
+import SvgFeature1 from "../../components/svg/Feature1.tsx";
+import SvgFeature2 from "../../components/svg/Feature2.tsx";
+import SvgFeature3 from "../../components/svg/Feature3.tsx";
+import SvgFeature4 from "../../components/svg/Feature4.tsx";
+import SvgNewsletter from "../../components/svg/Newsletter.tsx";
+import first from "../../assets/icons/FrameFirst.svg";
+import firstLeftAvatar from "../../assets/icons/firstLeft.svg";
+import secondLeftAvatar from "../../assets/icons/secondLeft.svg";
+import thirdLeftAvatar from "../../assets/icons/thirdLeft.svg";
+import { useNavigate } from "react-router-dom";
 
 const data = {
-    headSection: {
-      titleSubtext: "",
-      title: "Your life's Work,Powered By Our life's Work",
+  headSection: {
+    titleSubtext: "",
+    title: "Your life's Work,Powered By Our life's Work",
+    titleDescription:
+      "Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. ",
+    action: {
+      label: "Get Started",
+      link: "/",
+    },
+  },
+  banner: [
+    {
+      titleSmallSubtext: "Weblings",
+      titleSubtext: "Workspace",
+      suiteText: "Suite",
+      title: "“Get your work done, at one place”",
       titleDescription:
-        "Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. ",
+        "Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
       action: {
-        label: "Get Started",
+        label: "Learn More",
         link: "/",
       },
+      bg: "./import",
     },
-    banner: [
+  ],
+  bannerFeatures: [],
+  features: {
+    title: "Why our Product ?",
+    description:
+      "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per ",
+    featureBox: [
       {
-        titleSmallSubtext: "Weblings",
-        titleSubtext: "Workspace",
-        suiteText: "Suite",
-        title: "“Get your work done, at one place”",
-        titleDescription:
-          "Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
-        action: {
-          label: "Learn More",
-          link: "/",
-        },
-        bg: "./import",
+        titleSubtext: "Seamless Integration",
+        titleSmallSubText:
+          "Effortlessly sync your chat messages with your project management platform for smooth collaboration.",
+        icon: <SvgPuzzle />,
+      },
+      {
+        titleSubtext: "Single Sign-On (SSO)",
+        titleSmallSubText:
+          "No need for third-party integration—we provide a one-stop authentication solution.",
+        icon: <SvgShieldCheck />,
+      },
+      {
+        titleSubtext: "Centralized Data",
+        titleSmallSubText:
+          "Keep all your data in one place with no unnecessary scattering across platforms.",
+        icon: <SvgBoxes />,
+      },
+      {
+        titleSubtext: "All-in-One Pricing",
+        titleSmallSubText:
+          "Enjoy every feature and service at a single, affordable price—no more juggling multiple plans.",
+        icon: <SvgPackage />,
       },
     ],
-    bannerFeatures: [],
-    features: {
-      title: "Why our Product ?",
-      description:
-        "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per ",
-      featureBox: [
-        {
-          titleSubtext: "Seamless Integration",
-          titleSmallSubText:
-            "Effortlessly sync your chat messages with your project management platform for smooth collaboration.",
-          icon: <SvgPuzzle/>,
-        },
-        {
-          titleSubtext: "Single Sign-On (SSO)",
-          titleSmallSubText:
-            "No need for third-party integration—we provide a one-stop authentication solution.",
-          icon: <SvgShieldCheck/>,
-        },
-        {
-          titleSubtext: "Centralized Data",
-          titleSmallSubText:
-            "Keep all your data in one place with no unnecessary scattering across platforms.",
-          icon: <SvgBoxes/>,
-        },
-        {
-          titleSubtext: "All-in-One Pricing",
-          titleSmallSubText:
-            "Enjoy every feature and service at a single, affordable price—no more juggling multiple plans.",
-          icon: <SvgPackage/>,
-        },
-      ],
+  },
+  values: {
+    title: "Our Principle",
+    description:
+      "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per ",
+    action: {
+      label: "Know More",
+      link: "/",
     },
-    values: {
-      title: "Our Principle",
-      description:
-        "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per ",
-      action: {
-        label: "Know More",
-        link: "/",
+    Card: [
+      {
+        img: <SvgFeature1 />,
+        subTitle: "No Ads",
+        titleDescription:
+          "We respect your privacy. No ads, ever, your data will never be sold for third Parties",
       },
-      Card: [
-        {
-          img: <SvgFeature1/>,
-          subTitle: "No Ads",
-          titleDescription:
-            "We respect your privacy. No ads, ever, your data will never be sold for third Parties",
-        },
-        {
-          img: <SvgFeature2/>,
-          subTitle: "No Residual Data",
-          titleDescription:
-            "If you decide to leave, your data leaves with you. We guarantee 100% data deletion.",
-        },
-        {
-          img: <SvgFeature3/>,
-          subTitle: "Trustworthy & Secure",
-          titleDescription:
-            "We stand by our commitments. Your datas security is always our top priorities.",
-        },
-        {
-          img: <SvgFeature4/>,
-          subTitle: "No Hidden Fees",
-          titleDescription:
-            "What you see is what you get. We promise clear, upfront pricing with no surprises.",
-        },
-      ],
-    },
-    subscribe: {
-      title: "Stay Updated ",
-      description:
-        "Get Exclusive Offers & Product Updates Delivered to Your Inbox.No spam. Just offers and updates.",
-      action: {
-        label: "Subscribe",
-        path: "/",
+      {
+        img: <SvgFeature2 />,
+        subTitle: "No Residual Data",
+        titleDescription:
+          "If you decide to leave, your data leaves with you. We guarantee 100% data deletion.",
       },
+      {
+        img: <SvgFeature3 />,
+        subTitle: "Trustworthy & Secure",
+        titleDescription:
+          "We stand by our commitments. Your datas security is always our top priorities.",
+      },
+      {
+        img: <SvgFeature4 />,
+        subTitle: "No Hidden Fees",
+        titleDescription:
+          "What you see is what you get. We promise clear, upfront pricing with no surprises.",
+      },
+    ],
+  },
+  subscribe: {
+    title: "Stay Updated ",
+    description:
+      "Get Exclusive Offers & Product Updates Delivered to Your Inbox.No spam. Just offers and updates.",
+    action: {
+      label: "Subscribe",
+      path: "/",
     },
-    footer: {},
-  };
+  },
+  footer: {},
+};
 
 const Products = () => {
-
-const navigate = useNavigate()
-const classes = usestyles()
+  const navigate = useNavigate();
+  const classes = usestyles();
 
   return (
     <div>
-              {/* HeaderSection */}
-      <div className={classes.HeaderSection}>
+      {/* HeaderSection */}
+      {/* <div className={classes.HeaderSection}>
         <div className={classes.headTitle}>
           <Typography variant="HM">{data.headSection.title}</Typography>
         </div>
@@ -147,6 +150,39 @@ const classes = usestyles()
           {data.headSection.action.label}
           </Button>
         </div>
+      </div> */}
+      <div
+        className={classes.mainSecCon}
+        style={{ width: "100%", height: "80vh", position: "relative" }}
+      >
+        <img
+          src={first}
+          alt="Flow Chart"
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
+        <div className={classes.heroFirstAvatarCon}>
+          <img
+            src={firstLeftAvatar}
+            alt="first avatar"
+            style={{ width: "80%", height: "80%", objectFit: "contain" }}
+          />
+        </div>
+        <div className={classes.heroSecondAvatarCon}>
+          <img
+            src={secondLeftAvatar}
+            alt="second avatar"
+            style={{ width: "80%", height: "80%", objectFit: "contain" }}
+          />
+        </div>
+        <div className={classes.heroThirdAvatarCon}>
+          <div className={classes.heroThirdInsideCon}>
+          <img
+            src={thirdLeftAvatar}
+            alt="third avatar"
+            style={{ width: "150%",  objectFit: "cover", position:'absolute', top:-10, right:0 }}
+          />
+          </div>
+        </div>
       </div>
       {/* HeaderSection End */}
       {/* BannerSection */}
@@ -156,7 +192,7 @@ const classes = usestyles()
             <div className={classes.BannerHeadSectionDiv}>
               <div key={index} className={classes.BannerHeadSection}>
                 <div>
-                  <SvgUserlogo/>
+                  <SvgUserlogo />
                 </div>
                 <div>
                   <Typography variant="LXS">
@@ -180,10 +216,10 @@ const classes = usestyles()
                     element="button"
                     brand
                     className={classes.BannerButton}
-                    rightIcon={<SvgChevronRight/>}
+                    rightIcon={<SvgChevronRight />}
                   >
                     <div className={classes.BannerLabel}>
-                        {item.action.label}
+                      {item.action.label}
                     </div>
                   </Button>
                 </div>
@@ -218,33 +254,31 @@ const classes = usestyles()
                 })}
               >
                 {index === 0 && (
-                //   <img
-                //     src={data.features.Leftimg}
-                //     className={classes.LeftImg}
-                //     alt=""
-                //   />
-                <div className={classes.LeftImg}>
-                    <SvgStar/>
-                </div>
+                  //   <img
+                  //     src={data.features.Leftimg}
+                  //     className={classes.LeftImg}
+                  //     alt=""
+                  //   />
+                  <div className={classes.LeftImg}>
+                    <SvgStar />
+                  </div>
                 )}
                 {index === 3 && (
-                //   <img
-                //     src={data.features.Rightimg}
-                //     className={classes.RightImg}
-                //     alt=""
-                //   />
-                <div className={classes.RightImg}>
-                    <SvgFrame/>
-                </div>
+                  //   <img
+                  //     src={data.features.Rightimg}
+                  //     className={classes.RightImg}
+                  //     alt=""
+                  //   />
+                  <div className={classes.RightImg}>
+                    <SvgFrame />
+                  </div>
                 )}
                 {/* <img
                   src={feature.icon}
                   alt=""
                   className={classes.FeatureIcon}
                 /> */}
-                <div className={classes.FeatureIcon}>
-                {feature.icon}
-                </div>
+                <div className={classes.FeatureIcon}>{feature.icon}</div>
                 <Typography
                   variant="TS"
                   className={clsx(classes.titleSubtext, {
@@ -269,10 +303,10 @@ const classes = usestyles()
         <div className={classes.HeadSection}>
           <Typography variant="HM">{data.values.title}</Typography>
           <div className={classes.StarLogo}>
-            <SvgVectorLeft/>
+            <SvgVectorLeft />
           </div>
           <div className={classes.StarLogo2}>
-            <SvgVectorRight/>
+            <SvgVectorRight />
           </div>
         </div>
         <div className={classes.ValuesDescription}>
@@ -314,9 +348,9 @@ const classes = usestyles()
             element="button"
             onClick={() => navigate("/about")}
             className={classes.button}
-            rightIcon={<SvgChevronRight/>}
+            rightIcon={<SvgChevronRight />}
           >
-                {data.values.action.label}
+            {data.values.action.label}
           </Button>
         </div>
       </div>
@@ -326,7 +360,7 @@ const classes = usestyles()
         <div className={classes.SubscribeDiv}>
           <div className={classes.Subscribe}>
             <div className={classes.NewsLetterImg}>
-             <SvgNewsletter/>
+              <SvgNewsletter />
             </div>
             <Typography variant="HS">{data.subscribe.title}</Typography>
             <div className={classes.Description}>
@@ -348,7 +382,7 @@ const classes = usestyles()
       </div>
       {/* subscribe end */}
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;
