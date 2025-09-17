@@ -18,10 +18,13 @@ import SvgFeature2 from "../../components/svg/Feature2.tsx";
 import SvgFeature3 from "../../components/svg/Feature3.tsx";
 import SvgFeature4 from "../../components/svg/Feature4.tsx";
 import SvgNewsletter from "../../components/svg/Newsletter.tsx";
-import first from "../../assets/icons/FrameFirst.svg";
+import first from "../../assets/icons/newHero.svg";
 import firstLeftAvatar from "../../assets/icons/firstLeft.svg";
 import secondLeftAvatar from "../../assets/icons/secondLeft.svg";
 import thirdLeftAvatar from "../../assets/icons/thirdLeft.svg";
+import firstRightAvatar from "../../assets/icons/firstRight.svg";
+import secondRightAvatar from "../../assets/icons/secondRight.svg";
+import thirdRightAvatar from "../../assets/icons/thirdRight.svg";
 import { useNavigate } from "react-router-dom";
 
 const data = {
@@ -136,7 +139,11 @@ const Products = () => {
   return (
     <div>
       {/* HeaderSection */}
-      {/* <div className={classes.HeaderSection}>
+      <div
+        className={classes.mainSecCon}
+        style={{ width: "100%", height: "80vh", position: "relative" }}
+      >
+      <div className={classes.HeaderSection}>
         <div className={classes.headTitle}>
           <Typography variant="HM">{data.headSection.title}</Typography>
         </div>
@@ -150,30 +157,34 @@ const Products = () => {
           {data.headSection.action.label}
           </Button>
         </div>
-      </div> */}
-      <div
-        className={classes.mainSecCon}
-        style={{ width: "100%", height: "80vh", position: "relative" }}
-      >
+      </div>
         <img
           src={first}
           alt="Flow Chart"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", objectFit: "cover" }}
         />
-        <div className={classes.heroFirstAvatarCon}>
+
+        {/* Left section avatar */}
+         {/* <div className={classes.heroFirstAvatarCon}>
+          <div className={classes.heroFirstRightInsideCon}>
           <img
             src={firstLeftAvatar}
             alt="first avatar"
-            style={{ width: "80%", height: "80%", objectFit: "contain" }}
+            style={{ width: "100%",   objectFit: "cover", position:'absolute', top:0, right:0 }}
           />
+          </div>
         </div>
+
         <div className={classes.heroSecondAvatarCon}>
+           <div className={classes.heroFirstRightInsideCon}>
           <img
             src={secondLeftAvatar}
             alt="second avatar"
-            style={{ width: "80%", height: "80%", objectFit: "contain" }}
+             style={{ width: "100%",   objectFit: "cover", position:'absolute', top:0, right:0 }}
           />
+          </div>
         </div>
+
         <div className={classes.heroThirdAvatarCon}>
           <div className={classes.heroThirdInsideCon}>
           <img
@@ -182,7 +193,38 @@ const Products = () => {
             style={{ width: "150%",  objectFit: "cover", position:'absolute', top:-10, right:0 }}
           />
           </div>
+        </div> */}
+
+       {/* Right section avatar */}
+        {/* <div className={classes.heroFirstRightAvatarCon}>
+          <div className={classes.heroFirstRightInsideCon}>
+          <img
+            src={firstRightAvatar}
+            alt="first right avatar"
+            style={{ width: "100%",   objectFit: "cover", position:'absolute', top:0, right:0 }}
+          />
+          </div>
         </div>
+
+         <div className={classes.heroSecondRightAvatarCon}>
+          <div className={classes.heroThirdRightInsideCon}>
+          <img
+           src={secondRightAvatar}
+            alt="second right avatar"
+             style={{ width: "100%",   objectFit: "cover", position:'absolute', top:0, right:0 }}
+          />
+          </div>
+        </div>
+
+        <div className={classes.heroThirdRightAvatarCon}>
+          <div className={classes.heroThirdRightInsideCon}>
+          <img
+            src={thirdRightAvatar}
+            alt="third right avatar"
+            style={{ width: "100%",   objectFit: "cover", position:'absolute', top:0, right:0 }}
+          />
+          </div>
+        </div> */}
       </div>
       {/* HeaderSection End */}
       {/* BannerSection */}

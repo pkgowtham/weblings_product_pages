@@ -37,7 +37,7 @@ const useStyle = createUseStyles((theme:Theme) => ({
 
 
   brand: {
-    padding:'0 12px',
+    padding:'18px 16px',
     backgroundColor: theme.light.brand.surface.medium,
     color: theme.light.neutral.onSurface.negative,
     border: 0,

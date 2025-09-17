@@ -3,12 +3,21 @@ import { Theme } from "../../theme/themeType";
 
 export const usestyles = createUseStyles((theme: Theme) => ({
   NavBar: {
+    position: "fixed",     // fixed = removes it from document flow
+    top: 0,
+    left: "50%",
+    transform: "translateX(-50%)", // center horizontally
+    width: "80%",
+    height: "80px",
+    backgroundColor: "#fff",
     display: "flex",
-    justifyContent: "space-between",
     alignItems: "center",
-    height: "48px",
-    width: "100%",
-    padding: theme.spacing.s300,
+    justifyContent: "space-between",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+    zIndex: 1000, 
+    padding:'0 16px',
+    borderBottomLeftRadius:'16px',
+    borderBottomRightRadius:'16px',
   },
   NavBarLogo: {
     width: "200px",

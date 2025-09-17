@@ -1,12 +1,10 @@
 import { createUseStyles } from "react-jss";
-import headingseclogo from "../../assets/icons/Pattern.svg";
 import background from "../../assets/icons/section4_background.svg";
 import { Theme } from "../../theme/themeType";
 
 export const usestyles = createUseStyles((theme: Theme) => ({
-
-  mainSecCon:{
-      // backgroundColor: 'black',
+  mainSecCon: {
+    // backgroundColor: 'black',
   },
   NavBar: {
     display: "flex",
@@ -43,26 +41,29 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    position: "relative",
-    backgroundImage: `url(${headingseclogo})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundColor: "#0066D8",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    // backgroundImage: `url(${headingseclogo})`,
+    // backgroundSize: "cover",
+    // backgroundPosition: "center",
+    // backgroundColor: "#0066D8",
     gap: theme.spacing.s1200,
-    marginBottom: theme.spacing.s2000,
+    // marginBottom: theme.spacing.s2000,
   },
   headTitle: {
-    color: theme.light.neutral.onSurface.inverse,
+    color: theme.light.neutral.onSurface.light,
     maxWidth: "564px",
   },
   headTitleDescription: {
-    color: theme.light.neutral.onSurface.inverse,
+    color: theme.light.neutral.onSurface.light,
     maxWidth: "564px",
   },
   headbutton: {
     display: "flex",
     alignItems: "center",
-    backgroundColor: "transparent",
+    backgroundColor: theme.light.brand.surface.dark,
   },
   ActionLabel: {
     display: "flex",
@@ -78,6 +79,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     maxWidth: "95%",
     margin: "auto",
     display: "flex",
+    marginTop: "10%",
     flexWrap: "wrap",
     backgroundColor: "#FFEE34",
     borderRadius: theme.spacing.s300,
@@ -338,7 +340,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   button: {
     boxShadow: theme.elevation.m,
-    backgroundColor:theme.light.neutral.surface.light,
+    backgroundColor: theme.light.neutral.surface.light,
     marginTop: theme.spacing.s2000,
     minHeight: "32px",
     padding: theme.spacing.s300,
@@ -385,9 +387,9 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "100%",
     minWidth: "280px",
     height: "30px",
-    border: `1px solid ${theme.light.neutral.border.light }`,
+    border: `1px solid ${theme.light.neutral.border.light}`,
     borderRadius: theme.borderRadius.b100,
-    padding:`${theme.spacing.s0} ${theme.spacing.s100}`,
+    padding: `${theme.spacing.s0} ${theme.spacing.s100}`,
   },
   HasDropdown: {
     position: "relative",
@@ -400,7 +402,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     position: "absolute",
     top: theme.spacing.s800,
     left: 0,
-    backgroundColor:theme.light.neutral.surface.light,
+    backgroundColor: theme.light.neutral.surface.light,
     border: `1px solid ${theme.light.neutral.border.light}`,
     height: "300px",
     width: "1000px",
@@ -430,7 +432,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   ProductItem: {
     display: "flex",
-    gap:theme.spacing.s500,
+    gap: theme.spacing.s500,
     alignItems: "center",
   },
   ProductHeadings: {
@@ -442,11 +444,11 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    gap:theme.spacing.s1200,
+    gap: theme.spacing.s1200,
     width: "300px",
   },
   RightSide: {
-    padding:theme.spacing.s300,
+    padding: theme.spacing.s300,
     display: "flex",
     flex: "1",
     flexDirection: "column",
@@ -468,23 +470,23 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     // backgroundColor:'black',
     display: "flex",
     flexDirection: "column",
-    gap:theme.spacing.s300,
-    borderRadius:theme.borderRadius.b200,
-    padding:theme.spacing.s300,
+    gap: theme.spacing.s300,
+    borderRadius: theme.borderRadius.b200,
+    padding: theme.spacing.s300,
   },
   SectionTwo: {
     flex: 0.4,
-    padding:theme.spacing.s300,
+    padding: theme.spacing.s300,
   },
   SectionThree: {
     flex: 0.4,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding:theme.spacing.s300,
+    padding: theme.spacing.s300,
   },
   SectionTitle: {
-    marginBottom:theme.spacing.s600,
+    marginBottom: theme.spacing.s600,
   },
   Hover: {
     "&:hover": {
@@ -496,7 +498,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
 
   LinksDiv: {
     display: "flex",
-    gap:theme.spacing.s200,
+    gap: theme.spacing.s200,
     justifyContent: "space-between",
     position: "relative",
     "&:hover $chevronright": {
@@ -513,14 +515,122 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     transition: "opacity 0.3s ease",
   },
 
-  rightIcon:{
-    '& path':{
-        fill:theme.light.neutral.surface.lighter
-    }
+  rightIcon: {
+    "& path": {
+      fill: theme.light.neutral.surface.lighter,
+    },
   },
 
-  heroFirstAvatarCon:{
-     width: "112px",
+  heroFirstAvatarCon: {
+    width: "112px",
+    height: "112px",
+    borderRadius: "50%",
+    backgroundColor: "transparent", // default transparent
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    left: "2%",
+    top: "13%",
+    transition: "background-color 0.3s ease",
+
+    "&:hover": {
+      backgroundColor: "rgba(245, 247, 248, 0.8)",
+      boxShadow: theme.elevation.m,
+    },
+
+    "&:hover $heroFirstRightInsideCon": {
+      backgroundColor: theme.light.brand.surface.lighter,
+    },
+  },
+
+  heroSecondAvatarCon: {
+    width: "112px",
+    height: "112px",
+    borderRadius: "50%",
+    backgroundColor: "transparent", // default transparent
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    left: "11%",
+    top: "50%",
+    transition: "background-color 0.3s ease",
+
+    "&:hover": {
+      backgroundColor: "rgba(245, 247, 248, 0.8)",
+      boxShadow: theme.elevation.m,
+    },
+
+    "&:hover $heroFirstRightInsideCon": {
+      backgroundColor: theme.light.brand.surface.lighter,
+    },
+  },
+
+  heroThirdAvatarCon: {
+    width: "112px",
+    height: "112px",
+    borderRadius: "50%",
+    backgroundColor: "transparent", // default transparent
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    left: "2%",
+    top: "85%",
+    transition: "background-color 0.3s ease",
+
+    "&:hover": {
+      backgroundColor: "rgba(245, 247, 248, 0.8)",
+      boxShadow: theme.elevation.m,
+    },
+
+    "&:hover $heroThirdInsideCon": {
+      backgroundColor: theme.light.brand.surface.lighter,
+    },
+  },
+
+  heroThirdInsideCon: {
+    width: "75px",
+    height: "75px",
+    borderRadius: "50%",
+    backgroundColor: "transparent",
+    position: "relative",
+  },
+
+  heroFirstRightAvatarCon: {
+    width: "112px",
+    height: "112px",
+    borderRadius: "50%",
+    backgroundColor: "transparent", // default transparent
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    right: "17%",
+    top: "18%",
+    transition: "background-color 0.3s ease",
+
+    "&:hover": {
+      backgroundColor: "rgba(245, 247, 248, 0.8)",
+      boxShadow: theme.elevation.m,
+    },
+
+    "&:hover $heroFirstRightInsideCon": {
+      backgroundColor: theme.light.brand.surface.lighter,
+    },
+  },
+
+  heroFirstRightInsideCon: {
+    width: "75px",
+    height: "75px",
+    borderRadius: "50%",
+    backgroundColor: "transparent",
+    position: "relative",
+  },
+
+  heroSecondRightAvatarCon: {
+    width: "112px",
     height: "112px",
     borderRadius: "50%",
     // backgroundColor: "transparent", // default transparent
@@ -528,9 +638,9 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
-    left: '2%',
+    right: "2%",
     // backgroundColor: "rgba(245, 247, 248, 0.5)",
-    top: '13%',
+    top: "60%",
     transition: "background-color 0.3s ease",
     //  backdropFilter: "blur(10px)", // frosted glass effect
     // WebkitBackdropFilter: "blur(10px)", // Safari support
@@ -538,58 +648,41 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     "&:hover": {
       // backgroundColor: "#f5f7f8", // hover color
       backgroundColor: "rgba(245, 247, 248, 0.8)",
-      boxShadow:theme.elevation.m
+      boxShadow: theme.elevation.m,
     },
-  },
-
-    heroSecondAvatarCon:{
-     width: "112px",
-    height: "112px",
-    borderRadius: "50%",
-    backgroundColor: "transparent", // default transparent
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
-    left: 160,
-    top: 250,
-    transition: "background-color 0.3s ease",
-
-    "&:hover": {
-      backgroundColor: "rgba(245, 247, 248, 0.8)",
-      boxShadow:theme.elevation.m
-    },
-  },
-
-
-    heroThirdAvatarCon:{
-     width: "112px",
-    height: "112px",
-    borderRadius: "50%",
-    backgroundColor: "transparent", // default transparent
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
-    left: '2%',
-    top: '78%',
-    transition: "background-color 0.3s ease",
-
-    "&:hover": {
-      backgroundColor: "rgba(245, 247, 248, 0.8)",
-      boxShadow:theme.elevation.m
-    },
-
-     "&:hover $heroThirdInsideCon": {
+    "&:hover $heroThirdRightInsideCon": {
       backgroundColor: theme.light.brand.surface.lighter,
     },
   },
 
-  heroThirdInsideCon:{
-    width:'75px',
-    height:'75px',
-     borderRadius: "50%",
+  heroThirdRightAvatarCon: {
+    width: "112px",
+    height: "112px",
+    borderRadius: "50%",
+    backgroundColor: "transparent", // default transparent
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    right: "10%",
+    top: "103%",
+    transition: "background-color 0.3s ease",
+
+    "&:hover": {
+      backgroundColor: "rgba(245, 247, 248, 0.8)",
+      boxShadow: theme.elevation.m,
+    },
+
+    "&:hover $heroThirdRightInsideCon": {
+      backgroundColor: theme.light.brand.surface.lighter,
+    },
+  },
+
+  heroThirdRightInsideCon: {
+    width: "75px",
+    height: "75px",
+    borderRadius: "50%",
     backgroundColor: "transparent",
-    position:'relative'
-  }
+    position: "relative",
+  },
 }));
