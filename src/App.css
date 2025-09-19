@@ -15,7 +15,7 @@
     --negative-onSurface-medium:#E35D6A;
   }
 
-  /* h1{
+   h1{
     font-size: clamp(40px, calc(40px + (64 - 40) * ((100vw - 320px) / (1440 - 320))), 64px);
   }
 
@@ -31,9 +31,9 @@
     font-size: clamp(1rem, 0.714vw + 0.857rem, 1.5rem);
   }
 
-  p{
+  /* p{
     font-size: clamp(0.875rem, 0.5357vw + 0.768rem, 1.25rem);
-  } */
+  }  */
 
 
 
@@ -46,6 +46,7 @@
 
 .container{
     height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }

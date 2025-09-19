@@ -3,7 +3,7 @@ import { Theme } from "../../theme/themeType";
 
 export const usestyles = createUseStyles((theme: Theme) => ({
   NavBar: {
-    position: "fixed",     // fixed = removes it from document flow
+    position: "absolute",     // fixed = removes it from document flow
     top: 0,
     left: "50%",
     transform: "translateX(-50%)", // center horizontally

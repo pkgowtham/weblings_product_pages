@@ -84,7 +84,7 @@ const navigate = useNavigate()
 const location = useLocation();
 const currentPath = location.pathname;
 const [activeItem, setActiveItem] = useState<any | null>(null);
-const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(true);
+const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
 
 useEffect(()=>{
 
@@ -169,7 +169,13 @@ const handleOnHover = (item: string) => {
           <li
             key={index}
             className={nav.dropdown ? classes.HasDropdown : ""}
-            onMouseEnter={() => nav.dropdown && handleDropdownToggle(true)}
+              onMouseEnter={() => {
+  if (nav.dropdown) {
+    handleDropdownToggle(true);
+  }
+  handleOnHover('Mail');
+}}
+              onMouseLeave={() => nav.dropdown && handleDropdownToggle(false)}
           >
             {index === 0 ? (
               <div

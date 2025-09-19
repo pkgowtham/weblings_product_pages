@@ -26,6 +26,9 @@ import firstRightAvatar from "../../assets/icons/firstRight.svg";
 import secondRightAvatar from "../../assets/icons/secondRight.svg";
 import thirdRightAvatar from "../../assets/icons/thirdRight.svg";
 import { useNavigate } from "react-router-dom";
+import AvatarSVG from "../../components/firstSection/index.jsx";
+import StickyScrollSection from "../../components/stickyScrollSection/index.tsx";
+import SvgNewHero from "../../custom-icons/NewHero.tsx";
 
 const data = {
   headSection: {
@@ -158,12 +161,17 @@ const Products = () => {
           </Button>
         </div>
       </div>
-        <img
+        {/* <img
           src={first}
           alt="Flow Chart"
           style={{ width: "100%", objectFit: "cover" }}
-        />
-
+        /> */}
+        <div style={{width:'100%', height:'100vh'}}>
+            <SvgNewHero/>
+        </div>
+        {/* <div style={{width:'100%', height:'100%'}}>
+        <SvgNewHero/>
+        </div> */}
         {/* Left section avatar */}
          {/* <div className={classes.heroFirstAvatarCon}>
           <div className={classes.heroFirstRightInsideCon}>
@@ -277,6 +285,11 @@ const Products = () => {
       {/* Banner Features */}
       <div></div>
       {/* Banner Features end */}
+
+
+     {/* Sticky sections */}
+     <StickyScrollSection/>
+
       {/*  Features */}
       <div className={classes.FeatureContainer}>
         <div className={classes.FeatureDiv}>

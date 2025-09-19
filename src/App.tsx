@@ -3,8 +3,10 @@ import "./App.css";
 import RouterPath from "./routes";
 
 function App() {
+
+
   return (
-    <div>
+    <div style={{width:'100%'}}>
       <RouterPath />
     </div>
   );
