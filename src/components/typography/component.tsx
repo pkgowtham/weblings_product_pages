@@ -1,42 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { createUseStyles } from 'react-jss';
-import typographyData from './textStyles.json'; 
+import typographyData from './textStyles.json';
 import { TypographyProps, TextStyle } from './typographyType';
 import clsx from 'clsx';
 
-// Define breakpoints for desktop, tablet, and mobile
-const breakpoints = {
-  desktop: 1024,
-  tablet: 768,
-};
+// Create responsive styles using CSS media queries
+const createResponsiveStyles = () => {
+  const { desktop, tablet, mobile } = typographyData.textStyles;
+  
+  const styles: { [key: string]: any } = {};
 
-// Function to get styles based on screen size
-const getStylesForScreenSize = (screenSize) => {
-  if (screenSize >= breakpoints.desktop) {
-    return typographyData.textStyles.desktop;
-  } else if (screenSize >= breakpoints.tablet) {
-    return typographyData.textStyles.tablet;
-  } else {
-    return typographyData.textStyles.mobile;
-  }
-};
-
-const createStylesFromJson = (styles: TextStyle[]): { [key: string]: React.CSSProperties } => {
-  const jssStyles: { [key: string]: React.CSSProperties } = {};
-  styles.forEach(style => {
-    jssStyles[style.name] = {
-      fontFamily: style.fontFamily,
-      fontWeight: style.fontWeight,
-      fontSize: `${style.fontSize}px`,
-      letterSpacing: `${style.letterSpacing.value}px`,
-      lineHeight: `${style.lineHeight}rem`,
-      textTransform: style.textCase === 'UPPER' ? 'uppercase' : 'none',
+  // Create styles for each variant with media queries
+  desktop.forEach((desktopStyle:any) => {
+    const variantName = desktopStyle.name;
+    
+    styles[variantName] = {
+      // Mobile first (base styles)
+      ...createStyleObject(mobile.find(m => m.name === variantName) || desktopStyle),
+      
+      // Tablet styles
+      [`@media (min-width: 768px)`]: {
+        ...createStyleObject(tablet.find(t => t.name === variantName) || desktopStyle),
+      },
+      
+      // Desktop styles
+      [`@media (min-width: 1024px)`]: {
+        ...createStyleObject(desktopStyle),
+      },
     };
   });
-  return jssStyles;
+
+  return createUseStyles(styles);
 };
 
-// Main Typography component
+const createStyleObject = (style: TextStyle): React.CSSProperties => ({
+  fontFamily: style.fontFamily,
+  fontWeight: style.fontWeight,
+  fontSize: `${style.fontSize}px`,
+  letterSpacing: `${style.letterSpacing.value}px`,
+  lineHeight: `${style.lineHeight * 16}px`,
+  textTransform: style.textCase === 'UPPER' ? 'uppercase' : 'none',
+  margin:0,
+  padding:0
+});
+
+// Create styles once
+const useStyles = createResponsiveStyles();
+
+// Simplified Typography component
 const Typography: React.FC<TypographyProps> = ({
   variant = 'BM',
   component: Component = 'p',
@@ -47,22 +58,9 @@ const Typography: React.FC<TypographyProps> = ({
   truncate = false,
   ...props
 }) => {
-  const [screenSize, setScreenSize] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenSize(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const styles = getStylesForScreenSize(screenSize);
-  const useStyles = createUseStyles(createStylesFromJson(styles as TextStyle[]));
   const classes = useStyles();
 
-  const variantStyle = classes[variant] || classes['BM']; 
+  const variantStyle = classes[variant] || classes['BM'];
 
   const truncateStyle = truncate
     ? {
@@ -74,7 +72,11 @@ const Typography: React.FC<TypographyProps> = ({
     : {};
 
   return (
-    <Component className={clsx(variantStyle, className)} style={{ ...style, ...truncateStyle }} {...props}>
+    <Component 
+      className={clsx(variantStyle, className)} 
+      style={{ ...truncateStyle, ...style }} 
+      {...props}
+    >
       {children}
     </Component>
   );

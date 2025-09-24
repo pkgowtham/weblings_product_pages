@@ -6,9 +6,9 @@ function App() {
 
 
   return (
-    <div style={{width:'100%'}}>
+    <>
       <RouterPath />
-    </div>
+    </>
   );
 }
 

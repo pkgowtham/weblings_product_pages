@@ -8,6 +8,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     left: "50%",
     transform: "translateX(-50%)", // center horizontally
     width: "80%",
+    maxWidth:'1200px',
     height: "80px",
     backgroundColor: "#fff",
     display: "flex",

@@ -74,26 +74,41 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     height: "24px",
   },
   BannerSection: {
-    minHeight: "60vh",
+    minHeight: "55vh",
     width: "100%",
-    maxWidth: "95%",
+    maxWidth: "1200px",
     margin: "auto",
     display: "flex",
     marginTop: "10%",
-    flexWrap: "wrap",
     backgroundColor: "#FFEE34",
     borderRadius: theme.spacing.s300,
-    padding: theme.spacing.s1000,
-    alignItems: "center",
+    padding: `${theme.spacing.s1000} 100px`,
+    alignItems: "flex-end",
     justifyContent: "space-between",
+    
+    '@media (max-width: 750px)': {
+       flexWrap: "wrap",
+       gap:'20px',
+      maxWidth: "90%", // Adjust for tablet
+       padding: `${theme.spacing.s1000} 50px`,
+    },
+
+    '@media (max-width: 1200px)': {
+       maxWidth:'95%'
+    },
+
   },
   BannerHeadSectionDiv: {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    gap: theme.spacing.s1600,
-    flex: "1",
-    maxWidth: "583px",
+    gap: '48px',
+    // flex: "1",
+    // maxWidth: "400px",
+    '@media (max-width: 750px)': {
+      width:'100%',
+      alignItems: "center",
+    },
   },
   BannerTitleSection: {
     display: "flex",
@@ -103,6 +118,9 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   BannerTitleDescription: {
     maxWidth: "400px",
+    '@media (max-width: 750px)': {
+      maxWidth:'100%',
+    },
   },
   BannerButton: {
     backgroundColor: "transparent",
@@ -133,7 +151,13 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     flexDirection: "column",
   },
   SideImageContainer: {
-    display: "contents",
+    // display: "contents",
+    // display:'flex',
+    // alignItems:"flex-end",
+    // height:"100%"
+    '@media (max-width: 750px)': {
+      width:'100%'
+    },
   },
   SideImage: {
     width: "100%",
@@ -197,6 +221,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   FeatureDiv: {
     width: "80%",
+    maxWidth:'1200px',
     display: "flex",
     flexDirection: "column",
     gap: theme.spacing.s2000,

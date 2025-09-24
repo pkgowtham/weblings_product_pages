@@ -18,6 +18,7 @@ import SvgFeature2 from "../../components/svg/Feature2.tsx";
 import SvgFeature3 from "../../components/svg/Feature3.tsx";
 import SvgFeature4 from "../../components/svg/Feature4.tsx";
 import SvgNewsletter from "../../components/svg/Newsletter.tsx";
+import sideImage from "../../assets/images/sideimg.svg";
 import first from "../../assets/icons/newHero.svg";
 import firstLeftAvatar from "../../assets/icons/firstLeft.svg";
 import secondLeftAvatar from "../../assets/icons/secondLeft.svg";
@@ -29,6 +30,8 @@ import { useNavigate } from "react-router-dom";
 import AvatarSVG from "../../components/firstSection/index.jsx";
 import StickyScrollSection from "../../components/stickyScrollSection/index.tsx";
 import SvgNewHero from "../../custom-icons/NewHero.tsx";
+import SvgBasic from "../../custom-icons/Basic.tsx";
+import SvgBasicCssAnimation from "../../custom-icons/BasicCssAnimation.tsx";
 
 const data = {
   headSection: {
@@ -161,14 +164,18 @@ const Products = () => {
           </Button>
         </div>
       </div>
-        {/* <img
-          src={first}
-          alt="Flow Chart"
-          style={{ width: "100%", objectFit: "cover" }}
-        /> */}
         <div style={{width:'100%', height:'100vh'}}>
             <SvgNewHero/>
         </div>
+        {/* <div style={{width:'400px', height:'400px'}}>
+              <SvgBasicCssAnimation/>
+        </div> */}
+        {/* <img
+          src={testSvg}
+          alt="Flow Chart"
+          style={{ width: "100%", objectFit: "cover" }}
+        /> */}
+
         {/* <div style={{width:'100%', height:'100%'}}>
         <SvgNewHero/>
         </div> */}
@@ -276,22 +283,18 @@ const Products = () => {
               </div>
             </div>
             <div className={classes.SideImageContainer}>
-              <img src={item.sideImage} alt="" className={classes.SideImage} />
+              <img src={sideImage} alt="" className={classes.SideImage} />
             </div>
           </>
         ))}
       </div>
       {/* BannerSection end */}
-      {/* Banner Features */}
-      <div></div>
-      {/* Banner Features end */}
-
 
      {/* Sticky sections */}
      <StickyScrollSection/>
 
       {/*  Features */}
-      <div className={classes.FeatureContainer}>
+      {/* <div className={classes.FeatureContainer}>
         <div className={classes.FeatureDiv}>
           <></>
           <div className={classes.FeatureHeading}>
@@ -309,30 +312,18 @@ const Products = () => {
                 })}
               >
                 {index === 0 && (
-                  //   <img
-                  //     src={data.features.Leftimg}
-                  //     className={classes.LeftImg}
-                  //     alt=""
-                  //   />
+                
                   <div className={classes.LeftImg}>
                     <SvgStar />
                   </div>
                 )}
                 {index === 3 && (
-                  //   <img
-                  //     src={data.features.Rightimg}
-                  //     className={classes.RightImg}
-                  //     alt=""
-                  //   />
+                
                   <div className={classes.RightImg}>
                     <SvgFrame />
                   </div>
                 )}
-                {/* <img
-                  src={feature.icon}
-                  alt=""
-                  className={classes.FeatureIcon}
-                /> */}
+                
                 <div className={classes.FeatureIcon}>{feature.icon}</div>
                 <Typography
                   variant="TS"
@@ -351,10 +342,10 @@ const Products = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
       {/*  Features end */}
       {/* values */}
-      <div className={classes.ValuesContainer}>
+      {/* <div className={classes.ValuesContainer}>
         <div className={classes.HeadSection}>
           <Typography variant="HM">{data.values.title}</Typography>
           <div className={classes.StarLogo}>
@@ -377,7 +368,6 @@ const Products = () => {
                   [classes.valueGreen]: index === 3,
                 })}
               >
-                {/* <img src={values.img} alt="" /> */}
                 {values.img}
               </div>
               <div className={classes.ValuesTitle}>
@@ -408,10 +398,10 @@ const Products = () => {
             {data.values.action.label}
           </Button>
         </div>
-      </div>
+      </div> */}
       {/* values end */}
       {/* scbcribe */}
-      <div className={classes.MainSubscribe}>
+      {/* <div className={classes.MainSubscribe}>
         <div className={classes.SubscribeDiv}>
           <div className={classes.Subscribe}>
             <div className={classes.NewsLetterImg}>
@@ -434,7 +424,7 @@ const Products = () => {
             </Button>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* subscribe end */}
     </div>
   );

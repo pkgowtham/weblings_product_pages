@@ -17,7 +17,7 @@ interface ContentItem {
   buttonText: string;
   interfaceType: string;
   image: any;
-  icon?:any;
+  icon?: any;
 }
 
 interface StickyScrollProps {
@@ -26,7 +26,6 @@ interface StickyScrollProps {
 
 // JSS Styles
 const useStyles = createUseStyles({
- 
   section1: {
     background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
   },
@@ -41,6 +40,7 @@ const useStyles = createUseStyles({
   stickyScrollContainer: {
     position: "relative",
     height: "300vh", // 5 content sets * 100vh each
+    marginTop:'50px'
   },
 
   stickyContent: {
@@ -48,6 +48,8 @@ const useStyles = createUseStyles({
     top: 0,
     height: "100vh",
     display: "flex",
+    flexDirection:'column',
+    justifyContent:"center",
     alignItems: "center",
     overflow: "hidden",
   },
@@ -56,6 +58,7 @@ const useStyles = createUseStyles({
     maxWidth: "1200px",
     margin: "0 auto",
     padding: "0 2rem",
+    marginTop:'150px',
     display: "grid",
     gridTemplateColumns: "1.3fr 2fr",
     gap: "4rem",
@@ -65,6 +68,7 @@ const useStyles = createUseStyles({
 
   contentLeft: {
     position: "relative",
+    height: "50%",
   },
 
   contentItem: {
@@ -127,16 +131,17 @@ const useStyles = createUseStyles({
     top: 0,
     left: 0,
     width: "100%",
-    height: "100%",
+    // height: "%",
     opacity: 0,
     transform: "translateY(100px) rotateX(10deg)",
     transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
     borderRadius: "12px",
     overflow: "hidden",
-    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
+    // boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
     "&.active": {
       opacity: 1,
       transform: "translateY(0) rotateX(0deg)",
+      // width: "fit-content",
     },
     "&.exit": {
       opacity: 0,
@@ -251,25 +256,38 @@ const useStyles = createUseStyles({
     },
   },
 
-  mailIconColor:{
-      '& path':{
-        fill:'white'
-      }
+  mailIconColor: {
+    "& path": {
+      fill: "white",
+    },
   },
 
-  header:{
-     position: "absolute", 
-     top: 80, 
-     left: 150
+  header: {
+    position: "absolute",
+    top: '10%',
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    whiteSpace:'nowrap'
+  },
+
+  firstStar: {
+    width: "70px",
+    objectFit: "cover",
+    position: "absolute",
+    top: -50,
+    left: -60,
+  },
+
+  secondStar: {
+    width: "40px",
+    objectFit: "cover",
+    position: "absolute",
+    top: 30,
+    left: -80,
   },
 
   // Mobile responsiveness
   "@media (max-width: 768px)": {
-    contentWrapper: {
-      gridTemplateColumns: "1fr",
-      height:'100vh',
-      textAlign: "center",
-    },
     contentRight: {
       height: "300px",
     },
@@ -279,11 +297,34 @@ const useStyles = createUseStyles({
     progressIndicator: {
       display: "none",
     },
-    header:{
-      fontSize:30,
-      top:10, 
-      left:10
+  },
+
+  "@media (max-width: 1000px)": {
+    contentWrapper: {
+      gridTemplateColumns: "1fr",
+      height: "100vh",
+      textAlign: "center",
+    },
+
+    imageContainer: {
+      right: "50%",
+      width: "80%",
+      left: "10%",
+      transform: "translate(-50%, -50%)",
+    },
+    firstStar:{
+        left:20
+    },
+    secondStar:{
+      left:24
     }
+  },
+
+  "@media (max-width: 1220px)": {
+    contentWrapper: {
+      maxWidth:'95%'
+    },
+
   },
 });
 
@@ -297,7 +338,7 @@ const defaultContentItems: ContentItem[] = [
     buttonText: "Learn More",
     interfaceType: "📧 Webmail Interface",
     image: first,
-    icon:<SvgMail color="white"/>
+    icon: <SvgMail color="white" />,
   },
   {
     id: 2,
@@ -344,6 +385,22 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
   const stickyContainerRef = useRef<HTMLDivElement>(null);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 700);
+    };
+
+    // Check immediately
+    checkScreenSize();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkScreenSize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   const updateContent = useCallback(
     (newIndex: number) => {
@@ -481,14 +538,10 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
 
   return (
     <>
-
       {/* Sticky scroll section */}
       <div className={classes.stickyScrollContainer} ref={stickyContainerRef}>
         <div className={classes.stickyContent}>
-          <Typography
-          variant="HS"
-            className={classes.header}
-          >
+          <Typography variant="HS" className={classes.header}>
             Solutions for Your work
           </Typography>
           {/* <div className={classes.sparkles}>
@@ -526,7 +579,29 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
                         borderRadius: "6px",
                         backgroundColor: "#0072c4",
                       }}
-                    >{index === 0 ? <SvgMail viewBox="0 0 16 16" width={40} height={40} className={classes.mailIconColor}/> : index === 1 ? <SvgEofficeSticky viewBox="0 0 16 16" width={40} height={40} className={classes.mailIconColor}/> : <SvgCalendarSticky viewBox="0 0 16 16" width={40} height={40} className={classes.mailIconColor}/>}
+                    >
+                      {index === 0 ? (
+                        <SvgMail
+                          viewBox="0 0 16 16"
+                          width={40}
+                          height={40}
+                          className={classes.mailIconColor}
+                        />
+                      ) : index === 1 ? (
+                        <SvgEofficeSticky
+                          viewBox="0 0 16 16"
+                          width={40}
+                          height={40}
+                          className={classes.mailIconColor}
+                        />
+                      ) : (
+                        <SvgCalendarSticky
+                          viewBox="0 0 16 16"
+                          width={40}
+                          height={40}
+                          className={classes.mailIconColor}
+                        />
+                      )}
                     </div>
                     <div
                       style={{
@@ -569,56 +644,60 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
               </div>
             </div>
 
-            <div className={classes.contentRight}>
-              {contentItems.map((item, index) => (
-                <div
-                  key={`image-${item.id}`}
-                  className={`${classes.imageContainer} ${
-                    index === currentIndex ? "active" : ""
-                  } image-container`}
-                  data-index={index}
-                >
+            {!isSmallScreen && (
+              <div className={classes.contentRight}>
+                {contentItems.map((item, index) => (
                   <div
-                    className={`${classes.mockInterface} ${getInterfaceClass(
-                      index
-                    )}`}
+                    key={`image-${item.id}`}
+                    className={`${classes.imageContainer} ${
+                      index === currentIndex ? "active" : ""
+                    } image-container`}
+                    data-index={index}
                   >
-                    <img
-                      src={item.image}
-                      alt="first avatar"
-                      style={{
-                        width: "100%",
-                        objectFit: "cover",
-                        borderRadius: "12px",
-                      }}
-                    />
+                    <div
+                      className={`${classes.mockInterface} ${getInterfaceClass(
+                        index
+                      )}`}
+                    >
+                      <img
+                        src={item.image}
+                        alt="first avatar"
+                        style={{
+                          width: "100%",
+                          objectFit: "cover",
+                          borderRadius: "12px",
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
 
-              <img
-                src={largeStar}
-                alt="first avatar"
-                style={{
-                  width: "70px",
-                  objectFit: "cover",
-                  position: "absolute",
-                  top: -50,
-                  left: -60,
-                }}
-              />
-              <img
-                src={smallStar}
-                alt="first avatar"
-                style={{
-                  width: "40px",
-                  objectFit: "cover",
-                  position: "absolute",
-                  top: 30,
-                  left: -80,
-                }}
-              />
-            </div>
+                <img
+                  src={largeStar}
+                  alt="first avatar"
+                  className={classes.firstStar}
+                  // style={{
+                  //   width: "70px",
+                  //   objectFit: "cover",
+                  //   position: "absolute",
+                  //   top: -50,
+                  //   left: -60,
+                  // }}
+                />
+                <img
+                  src={smallStar}
+                  alt="first avatar"
+                  className={classes.secondStar}
+                  // style={{
+                  //   width: "40px",
+                  //   objectFit: "cover",
+                  //   position: "absolute",
+                  //   top: 30,
+                  //   left: -80,
+                  // }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
