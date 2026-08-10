@@ -1,0 +1,167 @@
+{
+  "feature": {
+    "main": {
+      "subtitle": "Calender",
+      "title": "Calender",
+      "content": "Manage meetings, tasks, and schedule from a centralized calendar. Plan work, organize your availability, set reminders, and manage daily commitments in a simple and clear workflow.",
+      "action": [
+        {
+          "label": "Learn More",
+          "path": "",
+          "color": "secondary"
+        },
+        {
+          "label": "Get Free Trial",
+          "path": "",
+          "color": "primary"
+        }
+      ]
+    },
+    "features": [
+      {
+        "id": "meetings",
+        "subtitle": "Meetings",
+        "title": "Schedule Meetings with Ease",
+        "content": [
+          "Create and manage meetings directly from your calendar in just a few clicks. Add meeting details, participants, date, time, and duration in one place. Keep your schedule organized and get a clear view of your upcoming meetings."
+        ],
+        "imageKey": "meetings",
+        "imageAlt": "Schedule Meetings with Ease",
+        "imagePosition": "right"
+      },
+      {
+        "id": "tasks",
+        "subtitle": "Tasks",
+        "title": "Create and Track Your Tasks",
+        "content": [
+          "Create tasks and organize your work directly from your calendar. Set task dates, times, and duration to plan your work more effectively. Get a clear view of upcoming and scheduled tasks alongside your meetings."
+        ],
+        "imageKey": "tasks",
+        "imageAlt": "Create and Track Your Tasks",
+        "imagePosition": "left"
+      },
+      {
+        "id": "schedule",
+        "subtitle": "Schedule",
+        "title": "See Your Schedule at a Glance",
+        "content": [
+          "View meetings and tasks together in a clear and organized calendar. Understand when each activity starts and how long it is scheduled to take. Plan your day around important meetings, tasks, and available time."
+        ],
+        "imageKey": "schedule",
+        "imageAlt": "See Your Schedule at a Glance",
+        "imagePosition": "right",
+        "showSparkle": true
+      },
+      {
+        "id": "duration",
+        "subtitle": "Duration",
+        "title": "Stay on Top of Your Time",
+        "content": [
+          "See the duration of every meeting and task directly on your calendar. Understand how much time is planned for each activity throughout the day. Use time information to prioritize your work and manage your schedule better. Make it easier to balance meetings, tasks, and focused work time."
+        ],
+        "imageKey": "duration",
+        "imageAlt": "Stay on Top of Your Time",
+        "imagePosition": "fullWidth"
+      },
+      {
+        "id": "tags_filter",
+        "subtitle": "Tags & Filters",
+        "title": "Find What Matters Faster",
+        "content": [
+          "Organize meetings and tasks using simple tags that make your calendar easier to manage. Filter your schedule by tags to quickly find specific types of activities. Separate meetings, tasks, or other scheduled activities based on your needs."
+        ],
+        "imageKey": "tags_filter",
+        "imageAlt": "Find What Matters Faster",
+        "imagePosition": "left"
+      }
+    ],
+    "demo": {
+      "subtitle": "Weblings demo",
+      "title": "See Weblings Workspace in Action",
+      "description": "Watch a quick demo showing how Weblings Workspace helps teams stay organized, collaborate effectively, and streamline daily operations."
+    }
+  },
+  "comparison": {
+    "titleSubtext": "Price to features comparison",
+    "title": "How much you can save",
+    "titleDescription": "Replace expensive software by replacing multiple software tools with one unified workspace. Pay only for what your team needs and scale as your business grows.",
+    "tableHead": [
+      {
+        "title": "Features"
+      },
+      {
+        "title": "Weblings Worksuite",
+        "badge": "Recommended",
+        "priceValue": {
+          "symbol": "₹",
+          "largeText": "400",
+          "smallText": "/per user/month"
+        },
+        "featureShort": {
+          "key": "Includes:",
+          "value": "Mail,Chat,Calendar,Streamline and eOffice"
+        },
+        "action": {
+          "label": "Get Free Trial",
+          "path": "",
+          "color": "primary"
+        },
+        "actionSubtext": "*No credit card required"
+      },
+      {
+        "title": "Other Workspaces",
+        "priceValue": {
+          "symbol": "₹",
+          "largeText": "600-800",
+          "smallText": "/per user/month"
+        },
+        "featureShort": {
+          "key": "Includes:",
+          "value": " only Mail,Chat,Calendar"
+        }
+      }
+    ],
+    "tableBody": [
+      {
+        "name": "Project Management",
+        "weblings": true,
+        "others": "Limited"
+      },
+      {
+        "name": "Team Collaboration",
+        "weblings": true,
+        "others": true
+      },
+      {
+        "name": "Sprint & Backlog",
+        "weblings": true,
+        "others": "Add-on Extra"
+      },
+      {
+        "name": "Digital Office",
+        "weblings": true,
+        "others": "Unknown"
+      },
+      {
+        "name": "Custom Tags & Filters",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Cloud Storage & Media",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Advanced Security",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Response Speed & Log",
+        "weblings": true,
+        "others": "Unknown"
+      }
+    ]
+  }
+}

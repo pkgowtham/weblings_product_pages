@@ -1,4 +1,4 @@
-/* Contact Page CSS Styles - Exact match to Figma design */
+/* Contact Page CSS Styles - Spacious Vertical Flow */
 
 .main-sec {
     width: 100%;
@@ -11,12 +11,10 @@
 
 .cont-sec {
     width: 80%;
-    max-width: 1140px;
+    max-width: 1050px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
+    gap: 56px;
 }
 
 .cont-head-main {
@@ -45,113 +43,78 @@
     line-height: 24px;
 }
 
-.cont-detail-main {
+/* Enquire Card */
+.enquire-card {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: row;
-    gap: 60px;
-}
-
-.cont-detail-address {
-    flex: 1;
-    min-width: 0;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    gap: 28px;
+    background-color: #FFFFFF;
+    border: 1px solid var(--neutral-border-light, #D9D9D9);
+    border-radius: 16px;
+    padding: 44px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.enquire-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+/* Office Cards Grid */
+.office-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     gap: 24px;
 }
 
-.cont-detail-address h5 {
-    color: var(--neutral-onSurface-title);
-    font-weight: 600;
-    font-size: 1.125rem;
+.office-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
 }
 
-.cont-detail {
-    width: 100%;
+.office-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--neutral-border-light, #E6E6E6);
+    border-radius: 12px;
+    padding: 28px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    justify-content: flex-start;
+    gap: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
-.cont-detail p {
-    color: var(--neutral-onSurface-medium);
-    font-weight: 400;
-    line-height: 24px;
-    margin: 0;
-}
-
-.cont-det-head-img {
+/* Full Size Map Section */
+.map-section {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-}
-
-.cont-det-head-img h5 {
-    color: var(--neutral-onSurface-title);
-    font-weight: 600;
-    font-size: 1.125rem;
-}
-
-.cont-det-head-img iframe {
-    width: 100%;
-    max-width: 380px;
-    border-radius: 8px;
-    border: 1px solid var(--neutral-border-light, #d9d9d9);
-}
-
-.cont-detail-input {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-}
-
-.cont-detail-input h5 {
-    color: var(--neutral-onSurface-title);
-    font-weight: 600;
-    font-size: 1.125rem;
-    margin: 0;
-}
-
-.cont-detail-input p {
-    color: var(--neutral-onSurface-medium);
-    font-weight: 400;
-    line-height: 22px;
-    margin-bottom: 8px;
-}
-
-.lab-inp-main {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     gap: 20px;
 }
 
-.lab-inp-main button {
-    padding: 10px 24px;
-    outline: none;
-    border: none;
-    background-color: var(--brand-surface-medium, #0072C4);
-    border-radius: 6px;
-    color: white;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: background-color 0.2s ease;
+.full-map-wrapper {
+    width: 100%;
+    height: 380px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--neutral-border-light, #D9D9D9);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.lab-inp-main button:hover {
-    background-color: var(--brand-surface-dark, #00448c);
+.full-map-wrapper iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 /* Breakpoints */
@@ -164,11 +127,16 @@
 
     .cont-sec {
         width: 88%;
-        gap: 32px;
+        gap: 44px;
     }
 
-    .cont-detail-main {
-        gap: 40px;
+    .enquire-card {
+        padding: 32px;
+    }
+
+    .office-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
     }
 }
 
@@ -180,24 +148,20 @@
 
     .cont-sec {
         width: 90%;
-        gap: 28px;
-    }
-
-    .cont-detail-main {
-        flex-direction: column;
         gap: 36px;
     }
 
-    .cont-detail-address {
-        width: 100%;
+    .enquire-card {
+        padding: 24px;
     }
 
-    .cont-det-head-img iframe {
-        max-width: 100%;
+    .office-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
 
-    .cont-detail-input {
-        width: 100%;
+    .full-map-wrapper {
+        height: 300px;
     }
 }
 
@@ -209,10 +173,15 @@
 
     .cont-sec {
         width: 92%;
-        gap: 24px;
+        gap: 28px;
     }
 
-    .cont-detail-main {
-        gap: 28px;
+    .enquire-card {
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    .full-map-wrapper {
+        height: 250px;
     }
 }

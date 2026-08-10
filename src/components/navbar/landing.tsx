@@ -17,14 +17,14 @@ const nav: any = {
     links: [
       {
         label: "Product",
-        path: "/layout/product",
+        path: "/",
         dropdown: [
           {
             logo: <SvgLogo />,
             dropdownlogo: "",
             label: "Mail",
             title: "You can message to the teams",
-            path: "/layout/mail/feature",
+            path: "/mail/feature",
             subtitle:
               "Worem ipsum dolor sit amet, consectetur adipiscing elit.",
           },
@@ -32,7 +32,7 @@ const nav: any = {
             logo: <SvgLogo />,
             label: "Calender",
             title: "You can message to the teams",
-            path: "/layout/calender/feature",
+            path: "/calender/feature",
             subtitle:
               "Worem ipsum dolor sit amet, consectetur adipiscing elit.",
           },
@@ -40,7 +40,7 @@ const nav: any = {
             logo: <SvgLogo />,
             label: "Connect",
             title: "You can message to the teams",
-            path: "/layout/connect/feature",
+            path: "/connect/feature",
             subtitle:
               "Worem ipsum dolor sit amet, consectetur adipiscing elit.",
           },
@@ -48,7 +48,7 @@ const nav: any = {
             logo: <SvgLogo />,
             label: "Streamline",
             title: "You can message to the teams",
-            path: "/layout/streamline/feature",
+            path: "/streamline/feature",
             subtitle:
               "Worem ipsum dolor sit amet, consectetur adipiscing elit.",
           },
@@ -56,7 +56,7 @@ const nav: any = {
             logo: <SvgLogo />,
             label: "Eoffice",
             title: "You can message to the teams",
-            path: "/layout/eoffice/feature",
+            path: "/eoffice/feature",
             subtitle:
               "Worem ipsum dolor sit amet, consectetur adipiscing elit.",
           },
@@ -64,11 +64,11 @@ const nav: any = {
       },
       {
         label: "About",
-        path: "/layout/about",
+        path: "/about",
       },
       {
         label: "Contact",
-        path: "/layout/contact",
+        path: "/contact",
       },
     ],
     action: {
@@ -174,7 +174,7 @@ const Navbar = () => {
   return (
     <nav className={classes.NavBar}>
       <div className={classes.NavText}>
-        <Link to="/layout/product">
+        <Link to="/">
           <img className={classes.NavBarLogo} src={weblingslogo} alt="" />
         </Link>
        {!isSmallScreen && <ul className={classes.NavBarLinks}>

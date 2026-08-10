@@ -32,8 +32,13 @@ const RouterPath = () => {
   return (
     <Router basename="/">
       <Routes>
-        <Route path="/" element={<Navigate to="/layout/product" />} />
-        <Route path="layout" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
+          {/* Root path '/' directly renders the Products homepage */}
+          <Route index element={<Products />} />
+          <Route path="product" element={<Navigate to="/" replace />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+
           {/* eoffice */}
           <Route path="eoffice" element={<EofficeLayout />}>
             <Route path="feature" element={<EofficeFeature />} />
@@ -70,10 +75,9 @@ const RouterPath = () => {
             <Route path="price" element={<About />} />
             <Route path="comparison" element={<WorkSuiteComparison />} />
           </Route>
-          <Route path="about" element={<About />} />
-          <Route path="product" element={<Products />} />
-          <Route path="contact" element={<Contact />} />
         </Route>
+        {/* Legacy redirect for any old /layout/... links */}
+        <Route path="layout/*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

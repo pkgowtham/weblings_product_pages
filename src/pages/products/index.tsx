@@ -19,131 +19,27 @@ import SvgFeature3 from "../../components/svg/Feature3.tsx";
 import SvgFeature4 from "../../components/svg/Feature4.tsx";
 import SvgNewsletter from "../../components/svg/Newsletter.tsx";
 import sideImage from "../../assets/images/sideimg.svg";
-import first from "../../assets/icons/newHero.svg";
-import firstLeftAvatar from "../../assets/icons/firstLeft.svg";
-import secondLeftAvatar from "../../assets/icons/secondLeft.svg";
-import thirdLeftAvatar from "../../assets/icons/thirdLeft.svg";
-import firstRightAvatar from "../../assets/icons/firstRight.svg";
-import secondRightAvatar from "../../assets/icons/secondRight.svg";
-import thirdRightAvatar from "../../assets/icons/thirdRight.svg";
 import { useNavigate } from "react-router-dom";
-import AvatarSVG from "../../components/firstSection/index.jsx";
 import StickyScrollSection from "../../components/stickyScrollSection/index.tsx";
 import SvgNewHero from "../../custom-icons/NewHero.tsx";
-import SvgBasic from "../../custom-icons/Basic.tsx";
-import SvgBasicCssAnimation from "../../custom-icons/BasicCssAnimation.tsx";
-
 import StorageGraphic from "../../components/svg/StorageGraphic.tsx";
 
-const data = {
-  headSection: {
-    titleSubtext: "",
-    title: "Manage Your Business from One Smart Workspace",
-    titleDescription:
-      "Bring your teams, projects, communication, and daily operations together in a single platform. Weblings Workspace helps businesses collaborate efficiently, stay organized, and get more done with less effort.",
-    action: {
-      label: "Get Started",
-      link: "/",
-    },
-  },
-  banner: [
-    {
-      titleSmallSubtext: "Weblings",
-      titleSubtext: "Workspace",
-      suiteText: "Suite",
-      title: "“Get your work done, at one place”",
-      titleDescription:
-        "Bring your entire workflow together. Manage project tasks, track real-time progress, dynamic team discussions, and shared file repositories without ever switching tabs or losing focus.",
-      action: {
-        label: "Learn More",
-        link: "/",
-      },
-      bg: "./import",
-    },
-  ],
-  bannerFeatures: [],
-  features: {
-    title: "Why our Product ?",
-    description:
-      "Empowering modern businesses with seamless software that optimizes operations and outpaces the competition.",
-    featureBox: [
-      {
-        titleSubtext: "Seamless Integration",
-        titleSmallSubText:
-          "Effortlessly sync your chat messages with your project management platform for smooth collaboration.",
-        icon: <SvgPuzzle />,
-      },
-      {
-        titleSubtext: "Single Sign-On (SSO)",
-        titleSmallSubText:
-          "No need for third-party integration—-we provide a one-stop authentication solution.",
-        icon: <SvgShieldCheck />,
-      },
-      {
-        titleSubtext: "Centralized Data",
-        titleSmallSubText:
-          "Keep all your data in one place with no unnecessary scattering across platforms.",
-        icon: <SvgBoxes />,
-      },
-      {
-        titleSubtext: "All-in-One Pricing",
-        titleSmallSubText:
-          "Enjoy every feature and service at a single, affordable price—-no more juggling multiple plans.",
-        icon: <SvgPackage />,
-      },
-    ],
-  },
-  values: {
-    title: "Our Principle",
-    description:
-      "Driven by core values focused on user privacy, transparency, and building tools that truly serve your growth.",
-    action: {
-      label: "Know More",
-      link: "/",
-    },
-    Card: [
-      {
-        img: <SvgFeature1 />,
-        subTitle: "No Ads",
-        titleDescription:
-          "We respect your privacy. No ads, ever, your data will never be sold for third Parties",
-      },
-      {
-        img: <SvgFeature2 />,
-        subTitle: "No Residual Data",
-        titleDescription:
-          "If you decide to leave, your data leaves with you. We guarantee 100% data deletion.",
-      },
-      {
-        img: <SvgFeature3 />,
-        subTitle: "Trustworthy & Secure",
-        titleDescription:
-          "We stand by our commitments. Your datas security is always our top priorities.",
-      },
-      {
-        img: <SvgFeature4 />,
-        subTitle: "No Hidden Fees",
-        titleDescription:
-          "What you see is what you get. We promise clear, upfront pricing with no surprises.",
-      },
-    ],
-  },
-  subscribe: {
-    title: "Stay Updated ",
-    description:
-      "Get Exclusive Offers & Product Updates Delivered to Your Inbox.No spam. Just offers and updates.",
-    action: {
-      label: "Subscribe",
-      path: "/",
-    },
-  },
-  storage: {
-    category: "Storage",
-    title: "Secure, Scalable Cloud Storage for Teams",
-    description:
-      "Keep your team's work organized, accessible, and safe from anywhere. Simple file management powered by advanced security.",
-  },
-  footer: {},
+// Import static data from JSON
+import data from "../../data/home.json";
+
+// Icon mappings for data items referenced by ID in home.json
+const featureIcons: Record<string, React.ReactNode> = {
+  puzzle: <SvgPuzzle />,
+  shieldCheck: <SvgShieldCheck />,
+  boxes: <SvgBoxes />,
+  package: <SvgPackage />,
+};
+
+const valueIcons: Record<string, React.ReactNode> = {
+  feature1: <SvgFeature1 />,
+  feature2: <SvgFeature2 />,
+  feature3: <SvgFeature3 />,
+  feature4: <SvgFeature4 />,
 };
 
 const Products = () => {
@@ -173,86 +69,13 @@ const Products = () => {
           <SvgNewHero />
         </div>
       </div>
-      {/* <div style={{width:'400px', height:'400px'}}>
-              <SvgBasicCssAnimation/>
-        </div> */}
-      {/* <img
-          src={testSvg}
-          alt="Flow Chart"
-          style={{ width: "100%", objectFit: "cover" }}
-        /> */}
 
-      {/* <div style={{width:'100%', height:'100%'}}>
-        <SvgNewHero/>
-        </div> */}
-      {/* Left section avatar */}
-      {/* <div className={classes.heroFirstAvatarCon}>
-          <div className={classes.heroFirstRightInsideCon}>
-          <img
-            src={firstLeftAvatar}
-            alt="first avatar"
-            style={{ width: "100%",   objectFit: "cover", position:'absolute', top:0, right:0 }}
-          />
-          </div>
-        </div>
-
-        <div className={classes.heroSecondAvatarCon}>
-           <div className={classes.heroFirstRightInsideCon}>
-          <img
-            src={secondLeftAvatar}
-            alt="second avatar"
-             style={{ width: "100%",   objectFit: "cover", position:'absolute', top:0, right:0 }}
-          />
-          </div>
-        </div>
-
-        <div className={classes.heroThirdAvatarCon}>
-          <div className={classes.heroThirdInsideCon}>
-          <img
-            src={thirdLeftAvatar}
-            alt="third avatar"
-            style={{ width: "150%",  objectFit: "cover", position:'absolute', top:-10, right:0 }}
-          />
-          </div>
-        </div> */}
-
-      {/* Right section avatar */}
-      {/* <div className={classes.heroFirstRightAvatarCon}>
-          <div className={classes.heroFirstRightInsideCon}>
-          <img
-            src={firstRightAvatar}
-            alt="first right avatar"
-            style={{ width: "100%",   objectFit: "cover", position:'absolute', top:0, right:0 }}
-          />
-          </div>
-        </div>
-
-         <div className={classes.heroSecondRightAvatarCon}>
-          <div className={classes.heroThirdRightInsideCon}>
-          <img
-           src={secondRightAvatar}
-            alt="second right avatar"
-             style={{ width: "100%",   objectFit: "cover", position:'absolute', top:0, right:0 }}
-          />
-          </div>
-        </div>
-
-        <div className={classes.heroThirdRightAvatarCon}>
-          <div className={classes.heroThirdRightInsideCon}>
-          <img
-            src={thirdRightAvatar}
-            alt="third right avatar"
-            style={{ width: "100%",   objectFit: "cover", position:'absolute', top:0, right:0 }}
-          />
-          </div>
-        </div> */}
-      {/* HeaderSection End */}
       {/* BannerSection */}
       <div className={classes.BannerSection}>
         {data.banner.map((item: any, index: number) => (
-          <>
+          <React.Fragment key={index}>
             <div className={classes.BannerHeadSectionDiv}>
-              <div key={index} className={classes.BannerHeadSection}>
+              <div className={classes.BannerHeadSection}>
                 <div>
                   <SvgUserlogo />
                 </div>
@@ -290,7 +113,7 @@ const Products = () => {
             <div className={classes.SideImageContainer}>
               <img src={sideImage} alt="" className={classes.SideImage} />
             </div>
-          </>
+          </React.Fragment>
         ))}
       </div>
       {/* BannerSection end */}
@@ -301,7 +124,6 @@ const Products = () => {
       {/*  Features */}
       <div className={classes.FeatureContainer}>
         <div className={classes.FeatureDiv}>
-          <></>
           <div className={classes.FeatureHeading}>
             <Typography variant="HM">{data.features.title}</Typography>
             <Typography variant="BM">{data.features.description}</Typography>
@@ -317,19 +139,19 @@ const Products = () => {
                 })}
               >
                 {index === 0 && (
-
                   <div className={classes.LeftImg}>
                     <SvgStar />
                   </div>
                 )}
                 {index === 3 && (
-
                   <div className={classes.RightImg}>
                     <SvgFrame />
                   </div>
                 )}
 
-                <div className={classes.FeatureIcon}>{feature.icon}</div>
+                <div className={classes.FeatureIcon}>
+                  {featureIcons[feature.id] || feature.icon}
+                </div>
                 <Typography
                   variant="TS"
                   className={clsx(classes.titleSubtext, {
@@ -349,6 +171,7 @@ const Products = () => {
         </div>
       </div>
       {/*  Features end */}
+
       {/* values */}
       <div className={classes.ValuesContainer}>
         <div className={classes.HeadSection}>
@@ -373,7 +196,7 @@ const Products = () => {
                   [classes.valueGreen]: index === 3,
                 })}
               >
-                {values.img}
+                {valueIcons[values.id] || values.img}
               </div>
               <div className={classes.ValuesTitle}>
                 <Typography
@@ -386,7 +209,7 @@ const Products = () => {
                 >
                   {values.subTitle}
                 </Typography>
-                <Typography variant=":'LM">
+                <Typography variant="LM">
                   {values.titleDescription}
                 </Typography>
               </div>
@@ -427,7 +250,7 @@ const Products = () => {
       </div>
       {/* storage end */}
 
-      {/* scbcribe */}
+      {/* subscribe */}
       <div className={classes.MainSubscribe}>
         <div className={classes.SubscribeDiv}>
           <div className={classes.Subscribe}>
@@ -442,9 +265,9 @@ const Products = () => {
           <div className={classes.InputDiv}>
             <input
               className={classes.InputText}
-              placeholder="Enter Your Email"
+              placeholder={data.subscribe.inputPlaceholder}
               type="text"
-              value=""
+              defaultValue=""
             />
             <Button element="button" brand>
               {data.subscribe.action.label}

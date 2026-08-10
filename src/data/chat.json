@@ -1,0 +1,156 @@
+{
+  "feature": {
+    "main": {
+      "subtitle": "Chat",
+      "title": "Chat",
+      "content": "Stay connected with your team through instant messaging, group conversations, audio calls, and video calls. Create groups, share conversations, and collaborate with your colleagues without switching between different communication tools.",
+      "action": [
+        {
+          "label": "Learn More",
+          "path": "",
+          "color": "secondary"
+        },
+        {
+          "label": "Get Free Trial",
+          "path": "",
+          "color": "primary"
+        }
+      ]
+    },
+    "features": [
+      {
+        "id": "individual_chat",
+        "subtitle": "Individual Chat",
+        "title": "Chat One-on-One with Ease",
+        "content": [
+          "Connect directly with colleagues through private one-on-one conversations. Send messages and stay connected with your team throughout the workday. Make quick discussions simple without unnecessary meetings or emails."
+        ],
+        "imageKey": "individual_chat",
+        "imageAlt": "Chat One-on-One with Ease",
+        "imagePosition": "right"
+      },
+      {
+        "id": "group_chat",
+        "subtitle": "Group Chat",
+        "title": "Bring Your Team Together",
+        "content": [
+          "Create group conversations for teams, projects, departments, or specific discussions. Add multiple members and keep everyone connected in a shared conversation. Keep important team conversations organized in one central place."
+        ],
+        "imageKey": "group_chat",
+        "imageAlt": "Bring Your Team Together",
+        "imagePosition": "left"
+      },
+      {
+        "id": "create_groups",
+        "subtitle": "Create Groups",
+        "title": "Create Groups for Every Team",
+        "content": [
+          "Create new groups and bring the right people together for every conversation. Add members based on teams, projects, departments, or specific work requirements. Give each group a clear purpose and keep related conversations in one place."
+        ],
+        "imageKey": "create_groups",
+        "imageAlt": "Create Groups for Every Team",
+        "imagePosition": "right",
+        "showSparkle": true
+      },
+      {
+        "id": "audio_calls",
+        "subtitle": "Audio Calls",
+        "title": "Talk Clearly with Audio Calls",
+        "content": [
+          "Start an audio call directly from your individual or group conversation. Connect with colleagues instantly when messaging is not enough. Use audio calls for quick discussions, updates, and team collaboration. Stay connected without needing to switch to another communication platform."
+        ],
+        "imageKey": "audio_calls",
+        "imageAlt": "Talk Clearly with Audio Calls",
+        "imagePosition": "fullWidth"
+      }
+    ],
+    "demo": {
+      "subtitle": "Weblings demo",
+      "title": "See Weblings Workspace in Action",
+      "description": "Watch a quick demo showing how Weblings Workspace helps teams stay organized, collaborate effectively, and streamline daily operations."
+    }
+  },
+  "comparison": {
+    "titleSubtext": "Price to features comparison",
+    "title": "How much you can save",
+    "titleDescription": "Replace expensive software by replacing multiple software tools with one unified workspace. Pay only for what your team needs and scale as your business grows.",
+    "tableHead": [
+      {
+        "title": "Features"
+      },
+      {
+        "title": "Weblings Worksuite",
+        "badge": "Recommended",
+        "priceValue": {
+          "symbol": "₹",
+          "largeText": "400",
+          "smallText": "/per user/month"
+        },
+        "featureShort": {
+          "key": "Includes:",
+          "value": "Mail,Chat,Calendar,Streamline and eOffice"
+        },
+        "action": {
+          "label": "Get Free Trial",
+          "path": "",
+          "color": "primary"
+        },
+        "actionSubtext": "*No credit card required"
+      },
+      {
+        "title": "Other Workspaces",
+        "priceValue": {
+          "symbol": "₹",
+          "largeText": "600-800",
+          "smallText": "/per user/month"
+        },
+        "featureShort": {
+          "key": "Includes:",
+          "value": " only Mail,Chat,Calendar"
+        }
+      }
+    ],
+    "tableBody": [
+      {
+        "name": "Project Management",
+        "weblings": true,
+        "others": "Limited"
+      },
+      {
+        "name": "Team Collaboration",
+        "weblings": true,
+        "others": true
+      },
+      {
+        "name": "Sprint & Backlog",
+        "weblings": true,
+        "others": "Add-on Extra"
+      },
+      {
+        "name": "Digital Office",
+        "weblings": true,
+        "others": "Unknown"
+      },
+      {
+        "name": "Custom Tags & Filters",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Cloud Storage & Media",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Advanced Security",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Response Speed & Log",
+        "weblings": true,
+        "others": "Unknown"
+      }
+    ]
+  }
+}

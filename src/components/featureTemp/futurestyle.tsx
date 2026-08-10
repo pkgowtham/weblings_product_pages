@@ -45,6 +45,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     height: "auto",
     margin: `${theme.spacing.s1200} ${theme.spacing.s0}`,
   },
+
   // featuresection
   Mainfeature: {
     minHeight: "70vh",
@@ -60,6 +61,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     flexWrap: 'wrap',
     justifyContent: 'center',
+    alignItems: 'center',
     gap: '100px',
     "@media (max-width: 1031px)": {
       gap: theme.spacing.s2000
@@ -68,13 +70,23 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   featureleftcontainer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: theme.spacing.s300
+    gap: theme.spacing.s300,
+    maxWidth: "400px",
+    alignItems: 'flex-start',
+    textAlign: 'start',
   },
 
   subtitleDiv: {},
   ptitle: {
     textAlign: "start",
     color: theme.light.brand.onSurface.default,
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+  },
+  sparkleIcon: {
+    color: "#FFC107",
+    fontSize: "1.1rem",
   },
   titleDiv: {
     fontSize: "20px",
@@ -83,14 +95,18 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   htitle: {
     textAlign: "start",
   },
-  ulline: {
+  listDiv: {
+    maxWidth: "400px",
+    lineHeight: "1.6",
+    fontSize: "1rem",
+    color: "#2c2e31",
     textAlign: "start",
   },
-  listDiv: {
-    maxWidth: "394px",
-    lineHeight: "1.7",
-    fontSize: "1.2rem",
-    color: "#2c2e31",
+  paraLine: {
+    margin: "4px 0",
+    lineHeight: "1.6",
+    color: "#434343",
+    textAlign: "start",
   },
   imgDiv: {
     position: 'relative',
@@ -147,5 +163,60 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     textAlign: 'start',
     color: theme.light.brand.onSurface.default,
     cursor: 'pointer'
-  }
-}))
+  },
+
+  // ─────────────────────────────────────────────────────────────────────
+  // 4th Item: Full Width Container & Framed Device Card
+  // ─────────────────────────────────────────────────────────────────────
+  fullWidthContainer: {
+    marginTop: "100px",
+    width: "100%",
+    maxWidth: "960px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "28px",
+    alignItems: "stretch",
+  },
+  fullWidthHeaderRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    gap: "48px",
+    width: "100%",
+    "@media (max-width: 768px)": {
+      flexDirection: "column",
+      gap: "16px",
+    },
+  },
+  fullWidthLeftCol: {
+    flex: "1",
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    textAlign: "start",
+  },
+  fullWidthRightCol: {
+    flex: "1",
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    textAlign: "start",
+  },
+  fullWidthFrameCard: {
+    width: "100%",
+    boxSizing: "border-box",
+    border: "2px solid #000000",
+    borderRadius: "16px",
+    overflow: "hidden",
+    padding: "2px",
+    backgroundColor: "#000000",
+    boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+  },
+  fullWidthImg: {
+    width: "100%",
+    height: "auto",
+    display: "block",
+    borderRadius: "14px",
+  },
+}));

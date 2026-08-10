@@ -19,10 +19,10 @@ const Header: React.FC<HeaderProps> = ({ prop }): JSX.Element => {
 
   return (
     <div className={classes.navDiv}>
-      <nav className={classes.navbar}>
+      {/* <nav className={classes.navbar}>
         <div className={classes.logo}>
           <Link to="/landing">
-            {/* <img src={prop.navBar.logo}    alt="Logo" className={classes.img}/> */}
+            {/* <img src={prop.navBar.logo}    alt="Logo" className={classes.img}/>
             <SvgWeblingslogo />
           </Link>
         </div>
@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ prop }): JSX.Element => {
         <div className={classes.login}>
           <Button element='button' brand onClick={() => navigate(prop.navBar.action.link)}>{prop.navBar.action.label}</Button>
         </div>
-      </nav>
+      </nav> */}
     </div>
   );
 };

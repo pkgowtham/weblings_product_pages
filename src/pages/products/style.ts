@@ -267,15 +267,13 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     gap: theme.spacing.s500,
     justifyContent: "center",
     marginTop: theme.spacing.s500,
+    marginBottom: theme.spacing.s1600,
     boxSizing: "border-box",
     "@media (max-width: 768px)": {
       flexDirection: "column",
       alignItems: "center",
       gap: theme.spacing.s600,
       width: "100%",
-    },
-    "@media (max-width: 900px)": {
-      marginBottom: theme.spacing.s1600,
     },
   },
   LeftImg: {

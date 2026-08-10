@@ -6,32 +6,30 @@ let data: any = {
   navBar: {
     logo: <SvgLogo/>,
     links: [
-  {
-    label: "Feature",
-    path: "/layout/streamline/feature",
-  },
-  {
-    label: "Comparison",
-    path: "/layout/streamline/comparison",
-  },
-  {
-    label: "Pricing",
-    path: "/layout/streamline/price",
-  },
-],
-action: {
-  label: "Get Free Trail",
-  link: "/layout/product",
-},
-}
+      {
+        label: "Feature",
+        path: "/streamline/feature",
+      },
+      {
+        label: "Comparison",
+        path: "/streamline/comparison",
+      },
+      {
+        label: "Pricing",
+        path: "/streamline/price",
+      },
+    ],
+    action: {
+      label: "Get Free Trial",
+      link: "/",
+    },
+  }
 }
 
 const NavBar = () => {
-
-
   return (
     <>
-        <Header prop={data} /> 
+      <Header prop={data} /> 
     </>
   )
 }

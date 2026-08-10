@@ -2,11 +2,10 @@ import React from "react";
 import { Outlet } from 'react-router-dom'
 import NavBar from "./navbar/index.tsx";
 
-
 function StreamlineLayout() {
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <div>
         <Outlet />
       </div>

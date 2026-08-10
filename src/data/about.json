@@ -1,0 +1,57 @@
+{
+  "journey": {
+    "title": "Our Journey",
+    "description": "Founded in insert founding year, we set out to simplify business operations by creating an all-in-one platform for HR, scheduling, and communication. What began as a small idea has grown into a trusted solution for companies of all sizes. Despite challenges, our commitment to innovation drives us forward, with a clear vision to make work life simpler and more efficient for businesses worldwide."
+  },
+  "foundation": {
+    "title": "Our Foundation",
+    "items": [
+      {
+        "id": "idea",
+        "title": "Innovative Solutions",
+        "description": "We deliver advanced solutions that simplify works"
+      },
+      {
+        "id": "heart",
+        "title": "User-Centric",
+        "description": "User first-tailored solutions and exceptional support."
+      },
+      {
+        "id": "lock",
+        "title": "Transparency",
+        "description": "We ensure honesty, transparency, and accountability in all actions."
+      },
+      {
+        "id": "team",
+        "title": "Teamwork",
+        "description": "We value teamwork and diverse perspectives for better solutions."
+      }
+    ]
+  },
+  "team": {
+    "title": "Our Team",
+    "description": "At weblings, we combine innovation and expertise to revolutionize business operations. Our diverse team collaborates to deliver impactful, cutting-edge solutions.",
+    "members": [
+      {
+        "id": "asief",
+        "name": "Mohammed Asief",
+        "role": "Designer"
+      },
+      {
+        "id": "praveen",
+        "name": "Praveen",
+        "role": "Developer"
+      },
+      {
+        "id": "ragul",
+        "name": "Rathinavel",
+        "role": "Developer"
+      },
+      {
+        "id": "diwagar",
+        "name": "Diwagar",
+        "role": "Developer"
+      }
+    ]
+  }
+}

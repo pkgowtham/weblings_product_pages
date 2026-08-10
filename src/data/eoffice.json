@@ -1,0 +1,167 @@
+{
+  "feature": {
+    "main": {
+      "subtitle": "E-Office",
+      "title": "E-Office",
+      "content": "Bring your projects, teams, tasks, and workflows together in one centralized workspace. Plan work, manage sprints, collaborate with your team, and track progress from start to finish. ",
+      "action": [
+        {
+          "label": "Learn More",
+          "path": "",
+          "color": "secondary"
+        },
+        {
+          "label": "Get Free Trial",
+          "path": "",
+          "color": "primary"
+        }
+      ]
+    },
+    "features": [
+      {
+        "id": "attendance",
+        "subtitle": "Attendance",
+        "title": "Track Attendance with Ease",
+        "content": [
+          "Manage employee attendance with simple and accurate check-in and check-out tracking. Monitor attendance status and daily activity across your organization. Make attendance management easier for both employees and administrators."
+        ],
+        "imageKey": "attendance",
+        "imageAlt": "Track Attendance with Ease",
+        "imagePosition": "right"
+      },
+      {
+        "id": "leave",
+        "subtitle": "Leave & Holidays",
+        "title": "Manage Leave and Holidays",
+        "content": [
+          "Manage leave types, leave plans, holidays, and weekly offs from one place. Define leave policies and assign suitable plans to employees and teams. Give employees a clear view of their available leaves and time off."
+        ],
+        "imageKey": "leave",
+        "imageAlt": "Manage Leave and Holidays",
+        "imagePosition": "left"
+      },
+      {
+        "id": "clients",
+        "subtitle": "Clients",
+        "title": "Manage Your Clients",
+        "content": [
+          "Keep all your client information organized in one centralized workspace. Create and maintain client profiles with important business and contact details."
+        ],
+        "imageKey": "clients",
+        "imageAlt": "Manage Your Clients",
+        "imagePosition": "right",
+        "showSparkle": true
+      },
+      {
+        "id": "organization",
+        "subtitle": "Organization",
+        "title": "Build Your Organization Hierarchy",
+        "content": [
+          "Create a structured organization tree to represent your workforce clearly. Define role hierarchy and organize employees based on their levels and responsibilities. Maintain employee categories, departments, designations, and reporting relationships. Build a clear structure that makes managing your organization easier."
+        ],
+        "imageKey": "organization",
+        "imageAlt": "Build Your Organization Hierarchy",
+        "imagePosition": "fullWidth"
+      },
+      {
+        "id": "teams",
+        "subtitle": "Teams",
+        "title": "Build and Manage Your Teams",
+        "content": [
+          "Create teams and bring employees together based on projects and responsibilities. Assign team leads and manage team members from a single workspace. Keep teams aligned and make collaboration easier throughout the project lifecycle."
+        ],
+        "imageKey": "teams",
+        "imageAlt": "Build and Manage Your Teams",
+        "imagePosition": "left"
+      }
+    ],
+    "demo": {
+      "subtitle": "Weblings demo",
+      "title": "See Weblings Workspace in Action",
+      "description": "Watch a quick demo showing how Weblings Workspace helps teams stay organized, collaborate effectively, and streamline daily operations."
+    }
+  },
+  "comparison": {
+    "titleSubtext": "Price to features comparison",
+    "title": "How much you can save",
+    "titleDescription": "Replace expensive software by replacing multiple software tools with one unified workspace. Pay only for what your team needs and scale as your business grows.",
+    "tableHead": [
+      {
+        "title": "Features"
+      },
+      {
+        "title": "Weblings Worksuite",
+        "badge": "Recommended",
+        "priceValue": {
+          "symbol": "₹",
+          "largeText": "400",
+          "smallText": "/per user/month"
+        },
+        "featureShort": {
+          "key": "Includes:",
+          "value": "Mail,Chat,Calendar,Streamline and eOffice"
+        },
+        "action": {
+          "label": "Get Free Trial",
+          "path": "",
+          "color": "primary"
+        },
+        "actionSubtext": "*No credit card required"
+      },
+      {
+        "title": "Other Workspaces",
+        "priceValue": {
+          "symbol": "₹",
+          "largeText": "600-800",
+          "smallText": "/per user/month"
+        },
+        "featureShort": {
+          "key": "Includes:",
+          "value": " only Mail,Chat,Calendar"
+        }
+      }
+    ],
+    "tableBody": [
+      {
+        "name": "Project Management",
+        "weblings": true,
+        "others": "Limited"
+      },
+      {
+        "name": "Team Collaboration",
+        "weblings": true,
+        "others": true
+      },
+      {
+        "name": "Sprint & Backlog",
+        "weblings": true,
+        "others": "Add-on Extra"
+      },
+      {
+        "name": "Digital Office",
+        "weblings": true,
+        "others": "Unknown"
+      },
+      {
+        "name": "Custom Tags & Filters",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Cloud Storage & Media",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Advanced Security",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Response Speed & Log",
+        "weblings": true,
+        "others": "Unknown"
+      }
+    ]
+  }
+}

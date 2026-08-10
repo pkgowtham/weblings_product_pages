@@ -1,11 +1,11 @@
 import React from 'react'
-import { eofficeData } from '../../../../../data/index.tsx';
+import eofficeDataJson from '../../../../../data/eoffice.json';
 import Comparison from '../../../../../components/comparison/index.tsx';
 
 const EofficeComparison = () => {
   return (
     <div>
-        <Comparison comparisonData={eofficeData.comparison} />
+      <Comparison comparisonData={eofficeDataJson.comparison} />
     </div>
   )
 }

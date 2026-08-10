@@ -1,0 +1,97 @@
+{
+  "headSection": {
+    "titleSubtext": "",
+    "title": "Manage Your Business from One Smart Workspace",
+    "titleDescription": "Bring your teams, projects, communication, and daily operations together in a single platform. Weblings Workspace helps businesses collaborate efficiently, stay organized, and get more done with less effort.",
+    "action": {
+      "label": "Get Started",
+      "link": "/"
+    }
+  },
+  "banner": [
+    {
+      "titleSmallSubtext": "Weblings",
+      "titleSubtext": "Workspace",
+      "suiteText": "Suite",
+      "title": "“Get your work done, at one place”",
+      "titleDescription": "Bring your entire workflow together. Manage project tasks, track real-time progress, dynamic team discussions, and shared file repositories without ever switching tabs or losing focus.",
+      "action": {
+        "label": "Learn More",
+        "link": "/"
+      },
+      "bg": "./import"
+    }
+  ],
+  "bannerFeatures": [],
+  "features": {
+    "title": "Why our Product ?",
+    "description": "Empowering modern businesses with seamless software that optimizes operations and outpaces the competition.",
+    "featureBox": [
+      {
+        "id": "puzzle",
+        "titleSubtext": "Seamless Integration",
+        "titleSmallSubText": "Effortlessly sync your chat messages with your project management platform for smooth collaboration."
+      },
+      {
+        "id": "shieldCheck",
+        "titleSubtext": "Single Sign-On (SSO)",
+        "titleSmallSubText": "No need for third-party integration—-we provide a one-stop authentication solution."
+      },
+      {
+        "id": "boxes",
+        "titleSubtext": "Centralized Data",
+        "titleSmallSubText": "Keep all your data in one place with no unnecessary scattering across platforms."
+      },
+      {
+        "id": "package",
+        "titleSubtext": "All-in-One Pricing",
+        "titleSmallSubText": "Enjoy every feature and service at a single, affordable price—-no more juggling multiple plans."
+      }
+    ]
+  },
+  "values": {
+    "title": "Our Principle",
+    "description": "Driven by core values focused on user privacy, transparency, and building tools that truly serve your growth.",
+    "action": {
+      "label": "Know More",
+      "link": "/"
+    },
+    "Card": [
+      {
+        "id": "feature1",
+        "subTitle": "No Ads",
+        "titleDescription": "We respect your privacy. No ads, ever, your data will never be sold for third Parties"
+      },
+      {
+        "id": "feature2",
+        "subTitle": "No Residual Data",
+        "titleDescription": "If you decide to leave, your data leaves with you. We guarantee 100% data deletion."
+      },
+      {
+        "id": "feature3",
+        "subTitle": "Trustworthy & Secure",
+        "titleDescription": "We stand by our commitments. Your datas security is always our top priorities."
+      },
+      {
+        "id": "feature4",
+        "subTitle": "No Hidden Fees",
+        "titleDescription": "What you see is what you get. We promise clear, upfront pricing with no surprises."
+      }
+    ]
+  },
+  "storage": {
+    "category": "Storage",
+    "title": "Secure, Scalable Cloud Storage for Teams",
+    "description": "Keep your team's work organized, accessible, and safe from anywhere. Simple file management powered by advanced security."
+  },
+  "subscribe": {
+    "title": "Stay Updated ",
+    "description": "Get Exclusive Offers & Product Updates Delivered to Your Inbox.No spam. Just offers and updates.",
+    "inputPlaceholder": "Enter Your Email",
+    "action": {
+      "label": "Subscribe",
+      "path": "/"
+    }
+  },
+  "footer": {}
+}

@@ -1,0 +1,167 @@
+{
+  "feature": {
+    "main": {
+      "subtitle": "Streamline",
+      "title": "Streamline",
+      "content": "Bring your projects, teams, tasks, and workflows together in one centralized workspace. Plan work, manage sprints, collaborate with your team, and track progress from start to finish.",
+      "action": [
+        {
+          "label": "Learn More",
+          "path": "",
+          "color": "secondary"
+        },
+        {
+          "label": "Get Free Trial",
+          "path": "",
+          "color": "primary"
+        }
+      ]
+    },
+    "features": [
+      {
+        "id": "project",
+        "subtitle": "Project",
+        "title": "Manage Projects with Ease",
+        "content": [
+          "Create and manage projects from one centralized workspace. Organize tasks, assign responsibilities, track progress, and keep your entire team aligned with project goals and deadlines."
+        ],
+        "imageKey": "project",
+        "imageAlt": "Manage Projects with Ease",
+        "imagePosition": "right"
+      },
+      {
+        "id": "timeline",
+        "subtitle": "Timeline",
+        "title": "Plan Projects with Timeline",
+        "content": [
+          "Get a clear visual overview of your project schedule and activities. Set milestones, manage deadlines, track progress, and understand how every task contributes to the overall project."
+        ],
+        "imageKey": "timeline",
+        "imageAlt": "Plan Projects with Timeline",
+        "imagePosition": "left"
+      },
+      {
+        "id": "backlogs",
+        "subtitle": "Backlogs",
+        "title": "Organize Your Backlog",
+        "content": [
+          "Keep tasks, ideas, and requirements organized in one place. Prioritize important work, manage pending activities, and prepare your team for upcoming sprints and project milestones."
+        ],
+        "imageKey": "backlogs",
+        "imageAlt": "Organize Your Backlog",
+        "imagePosition": "right",
+        "showSparkle": true
+      },
+      {
+        "id": "members",
+        "subtitle": "Members",
+        "title": "Collaborate with Your Team",
+        "content": [
+          "Bring your project team together in one connected workspace. Add members, assign responsibilities, manage project access, and make collaboration easier throughout the project lifecycle."
+        ],
+        "imageKey": "members",
+        "imageAlt": "Collaborate with Your Team",
+        "imagePosition": "fullWidth"
+      },
+      {
+        "id": "settings",
+        "subtitle": "Settings",
+        "title": "Customize Your Workspace",
+        "content": [
+          "Bring your projects, teams, tasks, and workflows together in one centralized workspace. Plan work, manage sprints, collaborate with your team, and track progress from start to finish."
+        ],
+        "imageKey": "settings",
+        "imageAlt": "Customize Your Workspace",
+        "imagePosition": "left"
+      }
+    ],
+    "demo": {
+      "subtitle": "Weblings demo",
+      "title": "See Weblings Workspace in Action",
+      "description": "Watch a quick demo showing how Weblings Workspace helps teams stay organized, collaborate effectively, and streamline daily operations."
+    }
+  },
+  "comparison": {
+    "titleSubtext": "Price to features comparison",
+    "title": "How much you can save",
+    "titleDescription": "Replace expensive software by replacing multiple software tools with one unified workspace. Pay only for what your team needs and scale as your business grows.",
+    "tableHead": [
+      {
+        "title": "Features"
+      },
+      {
+        "title": "Weblings Worksuite",
+        "badge": "Recommended",
+        "priceValue": {
+          "symbol": "₹",
+          "largeText": "400",
+          "smallText": "/per user/month"
+        },
+        "featureShort": {
+          "key": "Includes:",
+          "value": "Mail,Chat,Calendar,Streamline and eOffice"
+        },
+        "action": {
+          "label": "Get Free Trial",
+          "path": "",
+          "color": "primary"
+        },
+        "actionSubtext": "*No credit card required"
+      },
+      {
+        "title": "Other Workspaces",
+        "priceValue": {
+          "symbol": "₹",
+          "largeText": "600-800",
+          "smallText": "/per user/month"
+        },
+        "featureShort": {
+          "key": "Includes:",
+          "value": " only Mail,Chat,Calendar"
+        }
+      }
+    ],
+    "tableBody": [
+      {
+        "name": "Project Management",
+        "weblings": true,
+        "others": "Limited"
+      },
+      {
+        "name": "Team Collaboration",
+        "weblings": true,
+        "others": true
+      },
+      {
+        "name": "Sprint & Backlog",
+        "weblings": true,
+        "others": "Add-on Extra"
+      },
+      {
+        "name": "Digital Office",
+        "weblings": true,
+        "others": "Unknown"
+      },
+      {
+        "name": "Custom Tags & Filters",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Cloud Storage & Media",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Advanced Security",
+        "weblings": true,
+        "others": "100% Limited"
+      },
+      {
+        "name": "Response Speed & Log",
+        "weblings": true,
+        "others": "Unknown"
+      }
+    ]
+  }
+}

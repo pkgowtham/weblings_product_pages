@@ -6,66 +6,130 @@ import Button from "../button/button.tsx";
 const FeatureTemp: React.FC<any> = (props): JSX.Element => {
   const classes = usestyles();
   const { jsonData } = props;
-  console.log('jsonData', jsonData)
+
   return (
     <div className={classes.Mainsection}>
       <div className={classes.subtitle}>
-        <Typography variant="HM" className={classes.heading}>{jsonData.main.subtitle}</Typography>
+        <Typography variant="HM" className={classes.heading}>
+          {jsonData.main.subtitle}
+        </Typography>
       </div>
       <div className={classes.content}>
-        <Typography variant="BL" className={classes.para}>{jsonData.main.content}</Typography>
+        <Typography variant="BL" className={classes.para}>
+          {jsonData.main.content}
+        </Typography>
       </div>
 
       <div className={classes.action}>
-        {jsonData.main.action.map((action: any, index: number) => (
+        {jsonData.main.action.map((action: any, index: number) =>
           index === 0 ? (
-          <Button element='button' primary key={`${index}`} >
-            {action.label}
-          </Button>
-          ) : 
-          (
-            <Button element='button' brand key={`${index}`} >
-            {action.label}
-          </Button>
+            <Button element="button" primary key={`${index}`}>
+              {action.label}
+            </Button>
+          ) : (
+            <Button element="button" brand key={`${index}`}>
+              {action.label}
+            </Button>
           )
-        )
         )}
       </div>
-      <div className={classes.img}>
-        {jsonData.main.img.map((img: any, index: number) => (
-          <img
-            key={`${index}`}
-            src={img.src}
-            alt={img.alt}
-            className={classes.imgstyle}
-          />
-        ))}
-      </div>
+
+
       {/* Feature Section */}
       <div className={classes.Mainfeature}>
         {jsonData.features.map((feature: any, index: number) => {
-          console.log('feature', feature)
-          return index % 2 == 0 ? (
+          const isFullWidth = feature.isFullWidth || index === 3;
+          const isEven = index % 2 === 0;
+
+          // Render description paragraph lines without bullets
+          const renderDescription = () => (
+            <div className={classes.listDiv}>
+              {Array.isArray(feature.content) ? (
+                feature.content.map((line: any, idx: number) => (
+                  <Typography
+                    key={idx}
+                    component="p"
+                    variant="BL"
+                    className={classes.paraLine}
+                  >
+                    {line}
+                  </Typography>
+                ))
+              ) : (
+                <Typography
+                  component="p"
+                  variant="BL"
+                  className={classes.paraLine}
+                >
+                  {feature.content}
+                </Typography>
+              )}
+            </div>
+          );
+
+          // 4th Item: Full-Width Layout (Header title left / description right, framed full image below)
+          if (isFullWidth) {
+            return (
+              <div key={`${index}`} className={classes.fullWidthContainer}>
+                <div className={classes.fullWidthHeaderRow}>
+                  <div className={classes.fullWidthLeftCol}>
+                    <div className={classes.subtitleDiv}>
+                      <Typography variant="TS" className={classes.ptitle}>
+                        {feature.subtitle}
+                        {feature.showSparkle && (
+                          <span className={classes.sparkleIcon}>✦</span>
+                        )}
+                      </Typography>
+                    </div>
+                    <div className={classes.titleDiv}>
+                      <Typography variant="HM" className={classes.htitle}>
+                        {feature.title}
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className={classes.fullWidthRightCol}>
+                    {renderDescription()}
+                  </div>
+                </div>
+
+                <div className={classes.fullWidthFrameCard}>
+                  <img
+                    src={feature.img.src}
+                    alt={feature.img.alt}
+                    className={classes.fullWidthImg}
+                  />
+                </div>
+              </div>
+            );
+          }
+
+          // Side-by-Side Layouts (Items 1, 2, 3, 5)
+          return isEven ? (
             <div key={`${index}`} className={classes.featureContainer}>
               <div className={classes.featureleftcontainer}>
                 <div className={classes.subtitleDiv}>
-                  <Typography variant="TS" className={classes.ptitle}>{feature.subtitle}</Typography>
+                  <Typography variant="TS" className={classes.ptitle}>
+                    {feature.subtitle}
+                    {feature.showSparkle && (
+                      <span className={classes.sparkleIcon}>✦</span>
+                    )}
+                  </Typography>
                 </div>
                 <div className={classes.titleDiv}>
-                  <Typography variant="HM" className={classes.htitle}>{feature.title}</Typography>
+                  <Typography variant="HM" className={classes.htitle}>
+                    {feature.title}
+                  </Typography>
                 </div>
-                <div className={classes.listDiv}>
-                  <ul className={classes.ulline}>
-                    {feature.content.map((line: any, idx: Number) => (
-                      <li key={`${index}`}><Typography component={"span"} variant="BL">{line}</Typography></li>
+                {renderDescription()}
+                {feature.action && feature.action.length > 0 && (
+                  <div className={classes.button}>
+                    {feature.action.map((act: any, idx: number) => (
+                      <Typography key={idx} variant="TS">
+                        {act.label}
+                      </Typography>
                     ))}
-                  </ul>
-                </div>
-                <div className={classes.button}>
-                  {feature.action.map((act: any) => (
-                    <Typography variant="TS">{act.label}</Typography>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
               <div className={classes.imgDiv}>
                 <img
@@ -73,14 +137,11 @@ const FeatureTemp: React.FC<any> = (props): JSX.Element => {
                   alt={feature.img.alt}
                   className={classes.featureimg}
                 />
-                <div className={classes.abstractDiv}>
-                  {/* <img
-                    src={feature.abstractImg.src}
-                    alt={feature.abstractImg.alt}
-                    className={classes.abstractimg}
-                  /> */}
-                  {feature.abstractImg.src}
-                </div>
+                {feature.abstractImg && (
+                  <div className={classes.abstractDiv}>
+                    {feature.abstractImg.src}
+                  </div>
+                )}
               </div>
             </div>
           ) : (
@@ -91,34 +152,36 @@ const FeatureTemp: React.FC<any> = (props): JSX.Element => {
                   alt={feature.img.alt}
                   className={classes.featureimg}
                 />
-                <div className={classes.abstractDiv2}>
-                  {/* <img
-                    src={feature.abstractImg.src}
-                    alt={feature.abstractImg.alt}
-                    className={classes.abstractimg}
-                  /> */}
-                  {feature.abstractImg.src}
-                </div>
+                {feature.abstractImg && (
+                  <div className={classes.abstractDiv2}>
+                    {feature.abstractImg.src}
+                  </div>
+                )}
               </div>
-              <div>
+              <div className={classes.featureleftcontainer}>
                 <div className={classes.subtitleDiv}>
-                  <Typography variant="TS" className={classes.ptitle}>{feature.subtitle}</Typography>
+                  <Typography variant="TS" className={classes.ptitle}>
+                    {feature.subtitle}
+                    {feature.showSparkle && (
+                      <span className={classes.sparkleIcon}>✦</span>
+                    )}
+                  </Typography>
                 </div>
                 <div className={classes.titleDiv}>
-                  <Typography variant="HM" className={classes.htitle}>{feature.title}</Typography>
+                  <Typography variant="HM" className={classes.htitle}>
+                    {feature.title}
+                  </Typography>
                 </div>
-                <div className={classes.listDiv}>
-                  <ul className={classes.ulline}>
-                    {feature.content.map((line: any, idx: Number) => (
-                      <li key={`${index}`}><Typography component={"span"} variant="BL">{line}</Typography></li>
+                {renderDescription()}
+                {feature.action && feature.action.length > 0 && (
+                  <div className={classes.button}>
+                    {feature.action.map((act: any, idx: number) => (
+                      <div key={idx}>
+                        <Typography variant="TS">{act.label}</Typography>
+                      </div>
                     ))}
-                  </ul>
-                </div>
-                <div className={classes.button}>
-                  {feature.action.map((act: any) => (
-                    <div><Typography variant="TS">{act.label}</Typography></div>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           );

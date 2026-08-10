@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import Comparison from '../../../../../components/comparison/index.tsx';
-import { calenderData } from '../../../../../data/index.tsx';
+import calendarDataJson from '../../../../../data/calendar.json';
 
 const CalenderComparison = () => {
   return (
     <div>
-        <Comparison comparisonData={calenderData.comparison} />
+      <Comparison comparisonData={calendarDataJson.comparison} />
     </div>
-  )
-}
+  );
+};
 
-export default CalenderComparison
+export default CalenderComparison;

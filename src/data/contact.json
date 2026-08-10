@@ -1,0 +1,83 @@
+{
+  "header": {
+    "title": "Get in Touch",
+    "subtitle": "Whether you have a question, need assistance, or want to schedule a demo, our team is here to help."
+  },
+  "office": {
+    "title": "Our Office",
+    "address": {
+      "title": "Address:",
+      "company": "Weblings",
+      "doorNo": "Door No:8, K.M Nagar,",
+      "street": "3rd Street, Velliyankadu,",
+      "cityState": "Tirupur, Tamilnadu, 641604.",
+      "country": "India"
+    },
+    "phone": {
+      "title": "Phone:",
+      "value": "97895 13198"
+    },
+    "email": {
+      "title": "Email:",
+      "value": "pkgowthamit@gmail.com"
+    },
+    "map": {
+      "title": "Location Map",
+      "iframeSrc": "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1030.6618979390794!2d77.35222260239145!3d11.08118816408997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1727780601175!5m2!1sen!2sin"
+    }
+  },
+  "enquireForm": {
+    "title": "Enquire",
+    "subtitle": "Have a question or need assistance? Fill out the form below and our dedicated team will get back to you within 24 hours.",
+    "fields": {
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Placeholder"
+      },
+      "category": {
+        "label": "Category",
+        "placeholder": "Placeholder",
+        "options": [
+          "Technical support",
+          "Billing & Payments",
+          "Account Management",
+          "Feature Request",
+          "Onboarding",
+          "Free Trial",
+          "Security & Complaints",
+          "Other"
+        ]
+      },
+      "priority": {
+        "label": "Priority Level",
+        "options": ["Low", "Medium", "High"],
+        "default": "Medium"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Describe your query in detail..."
+      },
+      "attachments": {
+        "label": "Attachments"
+      }
+    },
+    "buttons": {
+      "submit": "Send Enquire",
+      "cancel": "Cancel"
+    }
+  },
+  "quickContact": [
+    {
+      "id": "email",
+      "title": "Direct Email",
+      "value": "enquire@weblings.com",
+      "link": "mailto:enquire@weblings.com"
+    },
+    {
+      "id": "phone",
+      "title": "Phone support",
+      "value": "+91 98765 43210",
+      "link": "tel:+919876543210"
+    }
+  ]
+}

@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import Comparison from '../../../../../components/comparison/index.tsx';
-import { connectData } from '../../../../../data/index.tsx';
+import chatDataJson from '../../../../../data/chat.json';
 
 const ConnectComparison = () => {
   return (
     <div>
-        <Comparison comparisonData={connectData.comparison} />
+      <Comparison comparisonData={chatDataJson.comparison} />
     </div>
-  )
-}
+  );
+};
 
-export default ConnectComparison
+export default ConnectComparison;

@@ -7,20 +7,20 @@ export const usestyles = createUseStyles({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding:`${theme.spacing.s200} ${theme.spacing.s800}`,
+    padding: `${theme.spacing.s200} ${theme.spacing.s800}`,
     backgroundColor: theme.light.brand.surface.lighter
   },
-  navDiv:{
-    width:'100%',
-    height:'40px',
-    backgroundColor: theme.light.brand.surface.lighter
+  navDiv: {
+    width: '100%',
+    height: '40px',
+    // backgroundColor: theme.light.brand.surface.lighter
   },
   logo: {
     width: "100%",
     maxWidth: "200px",
     height: "auto",
     overflow: "hidden",
-    cursor:'pointer'
+    cursor: 'pointer'
   },
   img: {
     width: "100%",
@@ -32,7 +32,7 @@ export const usestyles = createUseStyles({
     listStyle: "none",
     padding: "0",
     margin: "0",
-    cursor:'pointer',
+    cursor: 'pointer',
     "@media (max-width: 768px)": {
       flexDirection: "column",
       display: "none",
@@ -61,7 +61,7 @@ export const usestyles = createUseStyles({
     backgroundColor: "black",
     margin: "3px 0",
   },
-  login:{
-    cursor:'pointer'
+  login: {
+    cursor: 'pointer'
   }
 });
