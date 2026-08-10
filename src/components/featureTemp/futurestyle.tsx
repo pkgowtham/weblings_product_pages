@@ -1,7 +1,7 @@
 import { createUseStyles } from "react-jss";
 import { Theme } from "../../theme/themeType";
 
-export const usestyles = createUseStyles((theme:Theme)=>({
+export const usestyles = createUseStyles((theme: Theme) => ({
   Mainsection: {
     minHeight: "70vh",
     width: "100%",
@@ -16,21 +16,21 @@ export const usestyles = createUseStyles((theme:Theme)=>({
   heading: {
     margin: "auto",
     maxWidth: "500px",
-    color:'#262626',
-    marginTop:theme.spacing.s1200
+    color: '#262626',
+    marginTop: theme.spacing.s1200
   },
   para: {
     maxWidth: "740px",
     color: "#2c2e31",
-    margin:`${theme.spacing.s500} ${theme.spacing.s0}`,
+    margin: `${theme.spacing.s500} ${theme.spacing.s0}`,
   },
   action: {
     display: "flex",
-    justifyContent:'center',
+    justifyContent: 'center',
     gap: theme.spacing.s500,
   },
   btn: {
-    backgroundColor:theme.light.brand.surface.medium
+    backgroundColor: theme.light.brand.surface.medium
   },
   img: {
     display: "flex",
@@ -58,23 +58,23 @@ export const usestyles = createUseStyles((theme:Theme)=>({
   featureContainer: {
     marginTop: "100px",
     display: "flex",
-    flexWrap:'wrap',
-    justifyContent:'center',
-    gap:'100px'   ,
-    "@media (max-width: 1031px)":{
-      gap:theme.spacing.s2000
-    } 
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '100px',
+    "@media (max-width: 1031px)": {
+      gap: theme.spacing.s2000
+    }
   },
-  featureleftcontainer:{
-    display:'flex',
-    flexDirection:'column',
-    gap:theme.spacing.s300
+  featureleftcontainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing.s300
   },
- 
+
   subtitleDiv: {},
   ptitle: {
     textAlign: "start",
-    color:theme.light.brand.onSurface.default,
+    color: theme.light.brand.onSurface.default,
   },
   titleDiv: {
     fontSize: "20px",
@@ -93,7 +93,7 @@ export const usestyles = createUseStyles((theme:Theme)=>({
     color: "#2c2e31",
   },
   imgDiv: {
-    position:'relative',
+    position: 'relative',
     display: "flex",
     flexWrap: "wrap",
     alignItems: "center",
@@ -103,49 +103,49 @@ export const usestyles = createUseStyles((theme:Theme)=>({
   },
   featureimg: {
     width: "100%",
-    borderRadius:theme.borderRadius.b500,
+    borderRadius: theme.borderRadius.b500,
     maxWidth: "550px",
     height: "auto",
     margin: `${theme.spacing.s1200} ${theme.spacing.s0}`,
-    zIndex:'1',
+    zIndex: '1',
   },
   abstractDiv: {
-    position:'absolute',
+    position: 'absolute',
     maxWidth: "190px",
-    top:'20px',
-    left:'435px',
-    right:'-629px',
-    "@media (max-width: 1085px)":{
-      position:'absolute',
+    top: '20px',
+    left: '435px',
+    right: '-629px',
+    "@media (max-width: 1085px)": {
+      position: 'absolute',
       maxWidth: "190px",
-      top:'-45px',
-      left:'435px',
-      right:'-629px',
+      top: '-45px',
+      left: '435px',
+      right: '-629px',
     }
   },
   abstractDiv2: {
-    position:'absolute',
+    position: 'absolute',
     maxWidth: "190px",
-    top:'-1px',
-    left:'-58px',
-    right:'-629px',
-    "@media (max-width: 1085px)":{
-      position:'absolute',
+    top: '-1px',
+    left: '-58px',
+    right: '-629px',
+    "@media (max-width: 1085px)": {
+      position: 'absolute',
       maxWidth: "190px",
-      top:'-45px',
-      left:'-58px',
-      right:'-629px',
+      top: '-45px',
+      left: '-58px',
+      right: '-629px',
     }
   },
   abstractimg: {
     width: "100%",
     height: "auto",
     maxWidth: "190px",
-    margin:theme.spacing.s0
+    margin: theme.spacing.s0
   },
-  button:{
-    textAlign:'start',
-    color:theme.light.brand.onSurface.default,
-    cursor:'pointer'
+  button: {
+    textAlign: 'start',
+    color: theme.light.brand.onSurface.default,
+    cursor: 'pointer'
   }
 }))

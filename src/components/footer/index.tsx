@@ -10,21 +10,12 @@ import SvgPhone from "../svg/Phone.tsx";
 import SvgMail from "../svg/Mail.tsx";
 import SvgLocation from "../svg/Location.tsx";
 import SvgWeblingslogo from "../svg/Weblingslogo.tsx";
+import weblingslogo from "../../assets/images/weblings_logo.svg";
 
 const Footer: React.FC = (): JSX.Element => {
   const classes = usestyles();
   const footer = {
     sections: [
-      {
-        title: 'Product',
-        features: [
-          "Mail",
-          "Chat",
-          "Calendar",
-          "Streamline",
-          "eOffice"
-        ]
-      },
       {
         title: 'Company',
         features: [
@@ -52,27 +43,20 @@ const Footer: React.FC = (): JSX.Element => {
       <div className={classes.FooterContent}>
         <div className={classes.FirstSection}>
           <div className={classes.SubDiv}>
-          {/* <img src={weblingslogo} alt="" className={classes.weblingslogo} /> */}
-          <SvgWeblingslogo/>
-          <div>
-            <span className={classes.Title}>Weblings</span>
-
-          </div>
-          </div>
-          <div className={classes.Para}>
-            <Typography variant="LXS">Simple and Affordable</Typography>
+            <img src={weblingslogo} alt="" className={classes.weblingslogo} />
+            {/* <SvgWeblingslogo/> */}
           </div>
           <div className={classes.Icons}>
             {/* <img src={twitter} alt={twitter} /> */}
-            <SvgTwitter/>
+            <SvgTwitter />
             {/* <img src={linkedin} alt={linkedin} /> */}
-            <SvgLinkedin/>
+            <SvgLinkedin />
             {/* <img src={youtube} alt={youtube} /> */}
-            <SvgYoutube/>
+            <SvgYoutube />
             {/* <img src={facebook} alt={facebook} /> */}
-            <SvgFacebook/>
+            <SvgFacebook />
             {/* <img src={insta} alt={insta} /> */}
-            <SvgInsta/>
+            <SvgInsta />
           </div>
         </div>
 
@@ -88,7 +72,7 @@ const Footer: React.FC = (): JSX.Element => {
             </ul>
           </div>
         ))}
-        
+
         <div className={classes.ThirdSection}>
           <div>
             <Typography className={classes.SectionTitleColor} variant="LS">Contact</Typography>
@@ -96,24 +80,24 @@ const Footer: React.FC = (): JSX.Element => {
           <ul className={classes.ul}>
             <li className={classes.li}>
               {/* <img src={phone} alt="phone" className={classes.LogoStyle}/> */}
-              <SvgPhone/>
+              <SvgPhone />
               <Typography variant="LXS">97895 13198</Typography>
-              </li>
+            </li>
             <li className={classes.li}>
-            {/* <img src={mail} alt="mail" className={classes.LogoStyle}/> */}
-            <SvgMail/>
-             <Typography variant="LXS">pkgowthamit@gmail.com</Typography> 
-              </li>
+              {/* <img src={mail} alt="mail" className={classes.LogoStyle}/> */}
+              <SvgMail />
+              <Typography variant="LXS">pkgowthamit@gmail.com</Typography>
+            </li>
             <li className={classes.li}>
-            {/* <img src={location} alt="location" className={classes.LogoStyle}/> */}
-            <SvgLocation/>
-            <Typography variant="LXS">Weblings No:8, K.M Nagar,3rd Street, Velliyankadu, Tirupur,
-            Tamilnadu, 641604. India</Typography>
-              
+              {/* <img src={location} alt="location" className={classes.LogoStyle}/> */}
+              <SvgLocation />
+              <Typography variant="LXS">Weblings No:8, K.M Nagar,3rd Street, Velliyankadu, Tirupur,
+                Tamilnadu, 641604. India</Typography>
+
             </li>
           </ul>
         </div>
-        
+
       </div>
     </footer>
   );

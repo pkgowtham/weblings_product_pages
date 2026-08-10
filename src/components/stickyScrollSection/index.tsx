@@ -39,8 +39,8 @@ const useStyles = createUseStyles({
   // Sticky scroll section
   stickyScrollContainer: {
     position: "relative",
-    height: "300vh", // 5 content sets * 100vh each
-    marginTop:'50px'
+    // Height is set dynamically via inline style based on contentItems.length
+    marginTop: '50px'
   },
 
   stickyContent: {
@@ -48,8 +48,8 @@ const useStyles = createUseStyles({
     top: 0,
     height: "100vh",
     display: "flex",
-    flexDirection:'column',
-    justifyContent:"center",
+    flexDirection: 'column',
+    justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
   },
@@ -57,8 +57,7 @@ const useStyles = createUseStyles({
   contentWrapper: {
     maxWidth: "1200px",
     margin: "0 auto",
-    padding: "0 2rem",
-    marginTop:'150px',
+    marginTop: '150px',
     display: "grid",
     gridTemplateColumns: "1.3fr 2fr",
     gap: "4rem",
@@ -69,6 +68,7 @@ const useStyles = createUseStyles({
   contentLeft: {
     position: "relative",
     height: "50%",
+    minHeight: "260px",
   },
 
   contentItem: {
@@ -267,7 +267,7 @@ const useStyles = createUseStyles({
     top: '10%',
     left: "50%",
     transform: "translate(-50%, -50%)",
-    whiteSpace:'nowrap'
+    whiteSpace: 'nowrap'
   },
 
   firstStar: {
@@ -288,6 +288,9 @@ const useStyles = createUseStyles({
 
   // Mobile responsiveness
   "@media (max-width: 768px)": {
+    contentWrapper: {
+      marginTop: "70px",
+    },
     contentRight: {
       height: "300px",
     },
@@ -302,27 +305,34 @@ const useStyles = createUseStyles({
   "@media (max-width: 1000px)": {
     contentWrapper: {
       gridTemplateColumns: "1fr",
-      height: "100vh",
+      height: "auto",
+      marginTop: "80px",
       textAlign: "center",
     },
-
+    contentLeft: {
+      height: "260px",
+      minHeight: "260px",
+    },
+    contentRight: {
+      height: "220px",
+    },
     imageContainer: {
       right: "50%",
       width: "80%",
       left: "10%",
       transform: "translate(-50%, -50%)",
     },
-    firstStar:{
-        left:20
+    firstStar: {
+      left: 20
     },
-    secondStar:{
-      left:24
+    secondStar: {
+      left: 24
     }
   },
 
   "@media (max-width: 1220px)": {
     contentWrapper: {
-      maxWidth:'95%'
+      maxWidth: '95%'
     },
 
   },
@@ -334,7 +344,7 @@ const defaultContentItems: ContentItem[] = [
     id: 1,
     title: "Mail",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+      "Smart, secure, and intuitive email for modern teams. Organize communications with custom tags, collaborative inbox sharing, and automated rules designed to keep your inbox clutter-free.",
     buttonText: "Learn More",
     interfaceType: "📧 Webmail Interface",
     image: first,
@@ -539,7 +549,11 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
   return (
     <>
       {/* Sticky scroll section */}
-      <div className={classes.stickyScrollContainer} ref={stickyContainerRef}>
+      <div
+        className={classes.stickyScrollContainer}
+        ref={stickyContainerRef}
+        style={{ height: `${contentItems.length * 100}vh` }}
+      >
         <div className={classes.stickyContent}>
           <Typography variant="HS" className={classes.header}>
             Solutions for Your work
@@ -556,9 +570,8 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
               {contentItems.map((item, index) => (
                 <div
                   key={item.id}
-                  className={`${classes.contentItem} ${
-                    index === currentIndex ? "active" : ""
-                  } content-item`}
+                  className={`${classes.contentItem} ${index === currentIndex ? "active" : ""
+                    } content-item`}
                   data-index={index}
                 >
                   <div
@@ -633,9 +646,8 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
                 {contentItems.map((_, index) => (
                   <button
                     key={`dot-${index}`}
-                    className={`${classes.progressDot} ${
-                      index === currentIndex ? "active" : ""
-                    }`}
+                    className={`${classes.progressDot} ${index === currentIndex ? "active" : ""
+                      }`}
                     data-index={index}
                     onClick={() => handleProgressDotClick(index)}
                     aria-label={`Go to content ${index + 1}`}
@@ -644,60 +656,59 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
               </div>
             </div>
 
-            {!isSmallScreen && (
-              <div className={classes.contentRight}>
-                {contentItems.map((item, index) => (
-                  <div
-                    key={`image-${item.id}`}
-                    className={`${classes.imageContainer} ${
-                      index === currentIndex ? "active" : ""
+            {/* {!isSmallScreen && ( */}
+            <div className={classes.contentRight}>
+              {contentItems.map((item, index) => (
+                <div
+                  key={`image-${item.id}`}
+                  className={`${classes.imageContainer} ${index === currentIndex ? "active" : ""
                     } image-container`}
-                    data-index={index}
+                  data-index={index}
+                >
+                  <div
+                    className={`${classes.mockInterface} ${getInterfaceClass(
+                      index
+                    )}`}
                   >
-                    <div
-                      className={`${classes.mockInterface} ${getInterfaceClass(
-                        index
-                      )}`}
-                    >
-                      <img
-                        src={item.image}
-                        alt="first avatar"
-                        style={{
-                          width: "100%",
-                          objectFit: "cover",
-                          borderRadius: "12px",
-                        }}
-                      />
-                    </div>
+                    <img
+                      src={item.image}
+                      alt="first avatar"
+                      style={{
+                        width: "100%",
+                        objectFit: "cover",
+                        borderRadius: "12px",
+                      }}
+                    />
                   </div>
-                ))}
+                </div>
+              ))}
 
-                <img
-                  src={largeStar}
-                  alt="first avatar"
-                  className={classes.firstStar}
-                  // style={{
-                  //   width: "70px",
-                  //   objectFit: "cover",
-                  //   position: "absolute",
-                  //   top: -50,
-                  //   left: -60,
-                  // }}
-                />
-                <img
-                  src={smallStar}
-                  alt="first avatar"
-                  className={classes.secondStar}
-                  // style={{
-                  //   width: "40px",
-                  //   objectFit: "cover",
-                  //   position: "absolute",
-                  //   top: 30,
-                  //   left: -80,
-                  // }}
-                />
-              </div>
-            )}
+              <img
+                src={largeStar}
+                alt="first avatar"
+                className={classes.firstStar}
+              // style={{
+              //   width: "70px",
+              //   objectFit: "cover",
+              //   position: "absolute",
+              //   top: -50,
+              //   left: -60,
+              // }}
+              />
+              <img
+                src={smallStar}
+                alt="first avatar"
+                className={classes.secondStar}
+              // style={{
+              //   width: "40px",
+              //   objectFit: "cover",
+              //   position: "absolute",
+              //   top: 30,
+              //   left: -80,
+              // }}
+              />
+            </div>
+            {/* )} */}
           </div>
         </div>
       </div>

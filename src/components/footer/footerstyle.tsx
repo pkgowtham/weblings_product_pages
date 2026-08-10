@@ -32,8 +32,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     gap: theme.spacing.s100,
   },
   weblingslogo: {
-    width: "55px",
-    height: "55px",
+    width: "200px",
+    height: "auto",
   },
   Title: {
     color: theme.light.brand.surface.medium,

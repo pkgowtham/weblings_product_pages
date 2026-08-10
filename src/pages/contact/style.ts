@@ -1,70 +1,66 @@
 import { createUseStyles } from "react-jss";
 import { Theme } from "../../theme/themeType";
 
-export const useStyle = createUseStyles((theme:Theme)=>({
+export const useStyle = createUseStyles((theme: Theme) => ({
   mainSec: {
     width: "100%",
     display: "flex",
     justifyContent: "center",
-    margin: "30px 0",
+    paddingTop: "120px", // Clears 80px navbar
+    paddingBottom: "80px",
+    overflowX: "hidden",
   },
   contSec: {
-    width: "65%",
+    width: "80%",
+    maxWidth: "1140px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
     gap: "40px",
   },
   contHeadMain: {
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    alignItems: "center",
+    alignItems: "flex-start",
     "& h1": {
-      color: "var(--brand-onSurface-default)",
-    },
-    "& h6": {
-      fontWeight: 400,
-      color: "var(--neutral-onSurface-title)",
+      color: theme.light.brand.onSurface.default,
+      marginBottom: "8px",
     },
   },
   contHead: {
     display: "flex",
-    width:'100%',
+    width: "100%",
+    maxWidth: "750px",
     flexDirection: "column",
-    gap:theme.spacing.s400,
+    gap: "8px",
     alignItems: "flex-start",
+    "& p": {
+      color: theme.light.neutral.onSurface.medium,
+      lineHeight: "24px",
+    },
   },
   contDetailMain: {
     width: "100%",
     display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap-reverse",
-    gap: "130px",
-    "@media screen and (max-width:1200px)": {
-      justifyContent: "flex-start",
-    },
-    "@media screen and (min-width:500px)": {
-      gap: "40px",
-    },
-    "@media screen and (max-width:930px)": {
-      gap: "40px",
-    },
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    flexDirection: "row",
+    gap: "60px",
   },
   contDetailAddress: {
-    minWidth: "clamp(250px, 30%, 400px)",
+    flex: "1",
+    minWidth: 0,
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
     gap: "24px",
     "& h5": {
-      color: "var(--neutral-onSurface-title)",
+      color: theme.light.neutral.onSurface.title,
       fontWeight: 600,
-    },
-    "@media screen and (max-width:930px)": {
-      flex: 1,
+      fontSize: "1.125rem",
     },
   },
   contDetail: {
@@ -72,66 +68,49 @@ export const useStyle = createUseStyles((theme:Theme)=>({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    gap: "15px",
+    gap: "16px",
     "& p": {
       color: theme.light.neutral.onSurface.medium,
       fontWeight: 400,
-      lineHeight: "30px",
+      lineHeight: "24px",
+      margin: 0,
     },
   },
   contDetHeadImg: {
     width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
     "& h5": {
       color: theme.light.neutral.onSurface.title,
       fontWeight: 600,
+      fontSize: "1.125rem",
     },
-    "& img": {
+    "& iframe": {
       width: "100%",
-      height: "100%",
+      maxWidth: "380px",
+      borderRadius: "8px",
+      border: `1px solid ${theme.light.neutral.border.light}`,
     },
   },
   contDetailInput: {
-    flex: 1.2,
+    flex: "1",
+    minWidth: 0,
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    gap: "30px",
-    paddingLeft: "27px",
+    gap: "16px",
     "& h5": {
       color: theme.light.neutral.onSurface.title,
       fontWeight: 600,
+      fontSize: "1.125rem",
+      margin: 0,
     },
     "& p": {
       color: theme.light.neutral.onSurface.medium,
       fontWeight: 400,
-    },
-    // "& input": {
-    //   padding: "12px 16px",
-    //   borderRadius: "4px",
-    //   border: `1px solid ${theme.light.neutral.border.light}`,
-    //   outline: "none",
-    //   width: "clamp(19rem, 11.43vw + 14.714rem, 30rem)",
-    // },
-    "& button": {
-      padding: "clamp(0.5rem, 1vw + 0.3rem, 0.5rem) clamp(1rem, 2vw + 0.5rem, 1.5rem)",
-      outline: "none",
-      border: "none",
-      backgroundColor: theme.light.brand.onSurface.default,
-      borderRadius: "4px",
-      color: "white",
-      fontSize: "clamp(0.875rem, 1vw + 0.5rem, 1.25rem)",
-      fontWeight: 600,
-      "&:hover": {
-        backgroundColor:theme.light.brand.surface.dark,
-      },
-      "&:focus": {
-        backgroundColor: theme.light.brand.surface.lighter,
-        color: theme.light.brand.onSurface.default,
-      },
-    },
-    "@media screen and (max-width:930px)": {
-      flex: 1,
-      padding: 0,
+      lineHeight: "22px",
+      marginBottom: "8px",
     },
   },
   labInpMain: {
@@ -139,28 +118,83 @@ export const useStyle = createUseStyles((theme:Theme)=>({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    gap: "24px",
-  },
-  labInp: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "center",
-  },
-  labInpLabel: {
-    fontSize: "clamp(0.875rem, 0.5357vw + 0.768rem, 1.25rem)",
-    color: theme.light.neutral.onSurface.medium,
-    marginBottom: "10px",
-  },
-  mainSecAdjustments: {
-    "@media screen and (max-width:930px)": {
-      marginTop: "10px",
+    gap: "20px",
+    "& button": {
+      padding: "10px 24px",
+      outline: "none",
+      border: "none",
+      backgroundColor: theme.light.brand.surface.medium || theme.light.brand.onSurface.default,
+      borderRadius: "6px",
+      color: "white",
+      fontSize: "0.9375rem",
+      fontWeight: 600,
+      cursor: "pointer",
+      marginTop: "8px",
+      transition: "background-color 0.2s ease",
+      "&:hover": {
+        backgroundColor: theme.light.brand.surface.darker || theme.light.brand.surface.dark,
+      },
     },
   },
-  contHeadMainAdjustments: {
-    "@media screen and (max-width:930px)": {
-      margin: 0,
+
+  // ─────────────────────────────────────────────────────────────────────
+  // Media Queries for Responsiveness
+  // ─────────────────────────────────────────────────────────────────────
+
+  // Tablet ≤1024px
+  "@media screen and (max-width: 1024px)": {
+    mainSec: {
+      paddingTop: "110px",
+      paddingBottom: "60px",
+    },
+    contSec: {
+      width: "88%",
+      gap: "32px",
+    },
+    contDetailMain: {
+      gap: "40px",
     },
   },
-}))
+
+  // Mobile ≤768px (Stack to 1 column)
+  "@media screen and (max-width: 768px)": {
+    mainSec: {
+      paddingTop: "100px",
+      paddingBottom: "40px",
+    },
+    contSec: {
+      width: "90%",
+      gap: "28px",
+    },
+    contDetailMain: {
+      flexDirection: "column",
+      gap: "36px",
+    },
+    contDetailAddress: {
+      width: "100%",
+    },
+    contDetHeadImg: {
+      "& iframe": {
+        maxWidth: "100%",
+      },
+    },
+    contDetailInput: {
+      width: "100%",
+    },
+  },
+
+  // Small Mobile ≤480px
+  "@media screen and (max-width: 480px)": {
+    mainSec: {
+      paddingTop: "95px",
+      paddingBottom: "32px",
+    },
+    contSec: {
+      width: "92%",
+      gap: "24px",
+    },
+    contDetailMain: {
+      gap: "28px",
+    },
+  },
+}));

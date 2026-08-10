@@ -1,10 +1,50 @@
 import { createUseStyles } from "react-jss";
-import background from "../../assets/icons/section4_background.svg";
+import principle_background from "../../assets/icons/background.svg";
 import { Theme } from "../../theme/themeType";
 
 export const usestyles = createUseStyles((theme: Theme) => ({
   mainSecCon: {
-    // backgroundColor: 'black',
+    width: "100%",
+    height: "auto",
+    aspectRatio: "1279 / 626",
+    maxHeight: "92vh",
+    minHeight: "520px",
+    position: "relative",
+    overflow: "hidden",
+    margin: 0,
+    padding: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "linear-gradient(180deg, #CFDEF9 0%, #FFFFFF 100%)",
+    "@media (max-width: 768px)": {
+      width: "100%",
+      height: "auto",
+      aspectRatio: "unset",
+      minHeight: "65vh",
+      padding: "80px 20px 40px 20px",
+      boxSizing: "border-box",
+    },
+  },
+  heroSvgContainer: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    pointerEvents: "auto",
+    zIndex: 1,
+    "& svg": {
+      width: "100%",
+      height: "100%",
+      objectFit: "contain",
+    },
+    "@media (max-width: 768px)": {
+      display: "none",
+    },
   },
   NavBar: {
     display: "flex",
@@ -34,31 +74,49 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     gap: theme.spacing.s500,
   },
   HeaderSection: {
-    minHeight: "80vh",
-    width: "100%",
+    position: "absolute",
+    top: "52%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: 2,
+    width: "90%",
+    maxWidth: "564px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    // backgroundImage: `url(${headingseclogo})`,
-    // backgroundSize: "cover",
-    // backgroundPosition: "center",
-    // backgroundColor: "#0066D8",
-    gap: theme.spacing.s1200,
-    // marginBottom: theme.spacing.s2000,
+    gap: theme.spacing.s800,
+    padding: "0 20px",
+    boxSizing: "border-box",
+    margin: 0,
+    "@media (max-width: 1200px)": {
+      top: "54%",
+      gap: theme.spacing.s600,
+    },
+    "@media (max-width: 768px)": {
+      position: "relative",
+      top: "auto",
+      left: "auto",
+      transform: "none",
+      width: "100%",
+      maxWidth: "560px",
+      gap: theme.spacing.s800,
+      padding: 0,
+      margin: "0 auto",
+    },
   },
   headTitle: {
     color: theme.light.neutral.onSurface.light,
     maxWidth: "564px",
+    width: "100%",
+    textAlign: "center",
   },
   headTitleDescription: {
     color: theme.light.neutral.onSurface.light,
     maxWidth: "564px",
+    width: "100%",
+    textAlign: "center",
   },
   headbutton: {
     display: "flex",
@@ -85,28 +143,35 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     padding: `${theme.spacing.s1000} 100px`,
     alignItems: "flex-end",
     justifyContent: "space-between",
-    
-    '@media (max-width: 750px)': {
-       flexWrap: "wrap",
-       gap:'20px',
-      maxWidth: "90%", // Adjust for tablet
-       padding: `${theme.spacing.s1000} 50px`,
+    boxSizing: "border-box",
+
+    "@media (max-width: 1200px)": {
+      maxWidth: "95%",
+      padding: `${theme.spacing.s1000} 60px`,
     },
 
-    '@media (max-width: 1200px)': {
-       maxWidth:'95%'
+    "@media (max-width: 750px)": {
+      flexWrap: "wrap",
+      gap: "20px",
+      maxWidth: "90%",
+      padding: `${theme.spacing.s800} 32px`,
+      justifyContent: "center",
     },
 
+    "@media (max-width: 480px)": {
+      padding: "32px 20px",
+      borderRadius: "16px",
+    },
   },
   BannerHeadSectionDiv: {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    gap: '48px',
+    gap: "48px",
     // flex: "1",
     // maxWidth: "400px",
-    '@media (max-width: 750px)': {
-      width:'100%',
+    "@media (max-width: 750px)": {
+      width: "100%",
       alignItems: "center",
     },
   },
@@ -118,8 +183,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   BannerTitleDescription: {
     maxWidth: "400px",
-    '@media (max-width: 750px)': {
-      maxWidth:'100%',
+    "@media (max-width: 750px)": {
+      maxWidth: "100%",
     },
   },
   BannerButton: {
@@ -155,8 +220,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     // display:'flex',
     // alignItems:"flex-end",
     // height:"100%"
-    '@media (max-width: 750px)': {
-      width:'100%'
+    "@media (max-width: 750px)": {
+      width: "100%",
     },
   },
   SideImage: {
@@ -171,7 +236,21 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     marginTop: theme.spacing.s2000,
     gap: theme.spacing.s2000,
-    // position: "relative",
+    boxSizing: "border-box",
+    overflow: "hidden",
+    // Prevents this section from bleeding into the StickyScrollSection above
+    position: "relative",
+    zIndex: 10,
+    backgroundColor: "#FFFFFF",
+    "@media (max-width: 1000px)": {
+      marginTop: "80px",
+    },
+    "@media (max-width: 768px)": {
+      minHeight: "auto",
+      marginTop: theme.spacing.s1000,
+      gap: theme.spacing.s1000,
+      padding: "0 24px",
+    },
   },
   FeatureHeading: {
     display: "flex",
@@ -179,6 +258,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     textAlign: "center",
     gap: theme.spacing.s600,
     maxWidth: "755px",
+    width: "100%",
   },
   FeaturesFlex: {
     width: "100%",
@@ -187,6 +267,16 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     gap: theme.spacing.s500,
     justifyContent: "center",
     marginTop: theme.spacing.s500,
+    boxSizing: "border-box",
+    "@media (max-width: 768px)": {
+      flexDirection: "column",
+      alignItems: "center",
+      gap: theme.spacing.s600,
+      width: "100%",
+    },
+    "@media (max-width: 900px)": {
+      marginBottom: theme.spacing.s1600,
+    },
   },
   LeftImg: {
     width: "54px",
@@ -196,6 +286,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     left: "-22px",
     zIndex: -1,
     transform: "translateZ(-1px)",
+    "@media (max-width: 768px)": {
+      left: "-10px",
+      top: "-20px",
+    },
   },
   RightImg: {
     width: "54px",
@@ -205,6 +299,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     right: "-22px",
     zIndex: -1,
     transform: "translateZ(-1px)",
+    "@media (max-width: 768px)": {
+      right: "-10px",
+      bottom: "-15px",
+    },
   },
   FeaturesBlue: {
     display: "flex",
@@ -218,14 +316,26 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     position: "relative",
     overflow: "visible",
     boxShadow: theme.elevation.m,
+    "@media (max-width: 768px)": {
+      width: "100%",
+      maxWidth: "100%",
+    },
   },
   FeatureDiv: {
     width: "80%",
-    maxWidth:'1200px',
+    maxWidth: "1200px",
     display: "flex",
     flexDirection: "column",
     gap: theme.spacing.s2000,
     alignItems: "center",
+    boxSizing: "border-box",
+    "@media (max-width: 768px)": {
+      width: "100%",
+      maxWidth: "100%",
+      gap: theme.spacing.s1000,
+      padding: 0,
+      margin: "0 auto",
+    },
   },
   FeatureIcon: {
     width: "48px",
@@ -235,16 +345,25 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   purple: {
     backgroundColor: "#EDDAF5",
     width: "40%",
+    "@media (max-width: 768px)": {
+      width: "100%",
+    },
   },
 
   red: {
     backgroundColor: "#FFD0C7",
     width: "40%",
+    "@media (max-width: 768px)": {
+      width: "100%",
+    },
   },
 
   green: {
     backgroundColor: "#ACE9AF",
     width: "50%",
+    "@media (max-width: 768px)": {
+      width: "100%",
+    },
   },
   titleSubtext: {
     color: "#3C69D7",
@@ -259,16 +378,28 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     color: "#00812B",
   },
   ValuesContainer: {
-    minHeight: "80vh",
     width: "100%",
+    // Container height is auto-derived from the SVG's own aspect ratio (1280 × 1323)
+    // At 100vw width → height = 100vw × (1323/1280) ≈ 103.4vw — exactly the SVG height
+    aspectRatio: "1280 / 1323",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "flex-start",
+    // 35vw is proportional to the SVG coordinate system:
+    // blue wave in background.svg starts at y≈415/1323 ≈ 31% of SVG height.
+    // 35vw = 35% of width = ~35% of container height → content lands in blue area at all sizes
+    paddingTop: "35vw",
+    paddingBottom: "3vw",
+    boxSizing: "border-box",
     marginTop: theme.spacing.s2000,
-    backgroundImage: `url(${background})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    backgroundImage: `url(${principle_background})`,
+    // Width = 100% of container (= 100vw), height = auto from aspect ratio
+    // Background fills edge-to-edge; left/right overflow is fine per design intent
+    backgroundSize: "100% auto",
+    backgroundPosition: "top center",
     backgroundRepeat: "no-repeat",
+    // No overflow:hidden — allows the background to naturally fill to both edges
   },
   ValuesDescription: {
     maxWidth: "930px",
@@ -276,6 +407,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     textAlign: "center",
     marginTop: "24px",
+    color: "#ffffff",
+    padding: "0 24px",
   },
   StarLogo: {
     position: "absolute",
@@ -293,6 +426,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   HeadSection: {
     position: "relative",
+    color: "#ffffff",
+    textAlign: "center",
   },
   CardContainer: {
     display: "flex",
@@ -372,13 +507,19 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
 
   MainSubscribe: {
-    minHeight: "80vh",
+    minHeight: "50vh",
+    padding: "80px 20px",
     width: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    boxSizing: "border-box",
+    "@media (max-width: 768px)": {
+      minHeight: "auto",
+      padding: "60px 16px",
+    },
   },
   SubscribeDiv: {
     display: "flex",
@@ -386,35 +527,72 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     justifyItems: "center",
     alignItems: "center",
     textAlign: "center",
+    width: "100%",
+    maxWidth: "500px",
+    boxSizing: "border-box",
   },
   Description: {
     color: theme.light.neutral.onSurface.dark,
     textAlign: "center",
+    maxWidth: "100%",
+    boxSizing: "border-box",
+    padding: "0 8px",
   },
   Subscribe: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     gap: theme.spacing.s600,
-    width: "500px",
+    width: "100%",
+    maxWidth: "500px",
+    boxSizing: "border-box",
   },
   NewsLetterImg: {
     width: "184px",
     height: "120px",
+    maxWidth: "100%",
+    "& svg": {
+      width: "100%",
+      height: "100%",
+      objectFit: "contain",
+    },
+    "@media (max-width: 480px)": {
+      width: "140px",
+      height: "90px",
+    },
   },
   InputDiv: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     gap: theme.spacing.s300,
     marginTop: theme.spacing.s1000,
+    width: "100%",
+    maxWidth: "450px",
+    boxSizing: "border-box",
+    "@media (max-width: 480px)": {
+      flexDirection: "column",
+      gap: "12px",
+      width: "100%",
+      "& > button, & > div": {
+        width: "100%",
+      },
+    },
   },
   InputText: {
     width: "100%",
-    minWidth: "280px",
-    height: "30px",
+    maxWidth: "320px",
+    minWidth: "0",
+    height: "40px",
+    boxSizing: "border-box",
     border: `1px solid ${theme.light.neutral.border.light}`,
     borderRadius: theme.borderRadius.b100,
-    padding: `${theme.spacing.s0} ${theme.spacing.s100}`,
+    padding: `0 ${theme.spacing.s300}`,
+    outline: "none",
+    fontSize: "14px",
+    "@media (max-width: 480px)": {
+      maxWidth: "100%",
+    },
   },
   HasDropdown: {
     position: "relative",
@@ -709,5 +887,103 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     borderRadius: "50%",
     backgroundColor: "transparent",
     position: "relative",
+  },
+
+  StorageContainer: {
+    width: "100%",
+    backgroundColor: "#F0F5FC",
+    padding: "20px 40px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    boxSizing: "border-box",
+    margin: "60px 0",
+    "@media (max-width: 900px)": {
+      padding: "50px 24px",
+      margin: "40px 0",
+    },
+    "@media (max-width: 480px)": {
+      padding: "36px 16px",
+      margin: "24px 0",
+    },
+  },
+  StorageWrapper: {
+    width: "100%",
+    maxWidth: "1200px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "48px",
+    boxSizing: "border-box",
+    "@media (max-width: 900px)": {
+      flexDirection: "column",
+      alignItems: "flex-start",
+      gap: "36px",
+    },
+  },
+  StorageContentLeft: {
+    flex: "1.1",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: "8px",
+    maxWidth: "560px",
+    width: "100%",
+    boxSizing: "border-box",
+    "@media (max-width: 900px)": {
+      maxWidth: "100%",
+    },
+  },
+  StorageCategory: {
+    color: "#0072C4",
+    fontWeight: 600,
+    fontSize: "1.125rem",
+    marginBottom: "4px",
+    letterSpacing: "0.2px",
+  },
+  StorageTitle: {
+    color: "#222222",
+    fontWeight: 700,
+    fontSize: "2.4rem",
+    lineHeight: 1.25,
+    margin: 0,
+    "@media (max-width: 900px)": {
+      fontSize: "2rem",
+    },
+    "@media (max-width: 480px)": {
+      fontSize: "1.6rem",
+      lineHeight: 1.3,
+    },
+  },
+  StorageDescription: {
+    color: "#4A5568",
+    fontSize: "1.05rem",
+    lineHeight: 1.6,
+    marginTop: "8px",
+    maxWidth: "500px",
+    "@media (max-width: 900px)": {
+      maxWidth: "100%",
+    },
+    "@media (max-width: 480px)": {
+      fontSize: "0.95rem",
+    },
+  },
+  StorageGraphicRight: {
+    flex: "1",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    maxWidth: "560px",
+    boxSizing: "border-box",
+    "& svg": {
+      width: "100%",
+      height: "auto",
+      maxHeight: "360px",
+      display: "block",
+    },
+    "@media (max-width: 900px)": {
+      maxWidth: "100%",
+    },
   },
 }));

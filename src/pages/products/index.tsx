@@ -33,12 +33,14 @@ import SvgNewHero from "../../custom-icons/NewHero.tsx";
 import SvgBasic from "../../custom-icons/Basic.tsx";
 import SvgBasicCssAnimation from "../../custom-icons/BasicCssAnimation.tsx";
 
+import StorageGraphic from "../../components/svg/StorageGraphic.tsx";
+
 const data = {
   headSection: {
     titleSubtext: "",
-    title: "Your life's Work,Powered By Our life's Work",
+    title: "Manage Your Business from One Smart Workspace",
     titleDescription:
-      "Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. ",
+      "Bring your teams, projects, communication, and daily operations together in a single platform. Weblings Workspace helps businesses collaborate efficiently, stay organized, and get more done with less effort.",
     action: {
       label: "Get Started",
       link: "/",
@@ -51,7 +53,7 @@ const data = {
       suiteText: "Suite",
       title: "“Get your work done, at one place”",
       titleDescription:
-        "Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        "Bring your entire workflow together. Manage project tasks, track real-time progress, dynamic team discussions, and shared file repositories without ever switching tabs or losing focus.",
       action: {
         label: "Learn More",
         link: "/",
@@ -63,7 +65,7 @@ const data = {
   features: {
     title: "Why our Product ?",
     description:
-      "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per ",
+      "Empowering modern businesses with seamless software that optimizes operations and outpaces the competition.",
     featureBox: [
       {
         titleSubtext: "Seamless Integration",
@@ -74,7 +76,7 @@ const data = {
       {
         titleSubtext: "Single Sign-On (SSO)",
         titleSmallSubText:
-          "No need for third-party integration—we provide a one-stop authentication solution.",
+          "No need for third-party integration—-we provide a one-stop authentication solution.",
         icon: <SvgShieldCheck />,
       },
       {
@@ -86,7 +88,7 @@ const data = {
       {
         titleSubtext: "All-in-One Pricing",
         titleSmallSubText:
-          "Enjoy every feature and service at a single, affordable price—no more juggling multiple plans.",
+          "Enjoy every feature and service at a single, affordable price—-no more juggling multiple plans.",
         icon: <SvgPackage />,
       },
     ],
@@ -94,7 +96,7 @@ const data = {
   values: {
     title: "Our Principle",
     description:
-      "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per ",
+      "Driven by core values focused on user privacy, transparency, and building tools that truly serve your growth.",
     action: {
       label: "Know More",
       link: "/",
@@ -135,6 +137,12 @@ const data = {
       path: "/",
     },
   },
+  storage: {
+    category: "Storage",
+    title: "Secure, Scalable Cloud Storage for Teams",
+    description:
+      "Keep your team's work organized, accessible, and safe from anywhere. Simple file management powered by advanced security.",
+  },
   footer: {},
 };
 
@@ -145,42 +153,40 @@ const Products = () => {
   return (
     <div>
       {/* HeaderSection */}
-      <div
-        className={classes.mainSecCon}
-        style={{ width: "100%", height: "80vh", position: "relative" }}
-      >
-      <div className={classes.HeaderSection}>
-        <div className={classes.headTitle}>
-          <Typography variant="HM">{data.headSection.title}</Typography>
+      <div className={classes.mainSecCon}>
+        <div className={classes.HeaderSection}>
+          <div className={classes.headTitle}>
+            <Typography variant="HM">{data.headSection.title}</Typography>
+          </div>
+          <div className={classes.headTitleDescription}>
+            <Typography variant="BM">
+              {data.headSection.titleDescription}
+            </Typography>
+          </div>
+          <div>
+            <Button element="button" brand className={classes.headbutton} rightIcon={<SvgChevronRight className={classes.rightIcon} />}>
+              {data.headSection.action.label}
+            </Button>
+          </div>
         </div>
-        <div className={classes.headTitleDescription}>
-          <Typography variant="BM">
-            {data.headSection.titleDescription}
-          </Typography>
-        </div>
-        <div>
-          <Button element="button" brand className={classes.headbutton} rightIcon={<SvgChevronRight className={classes.rightIcon}/>}>
-          {data.headSection.action.label}
-          </Button>
+        <div className={classes.heroSvgContainer}>
+          <SvgNewHero />
         </div>
       </div>
-        <div style={{width:'100%', height:'100vh'}}>
-            <SvgNewHero/>
-        </div>
-        {/* <div style={{width:'400px', height:'400px'}}>
+      {/* <div style={{width:'400px', height:'400px'}}>
               <SvgBasicCssAnimation/>
         </div> */}
-        {/* <img
+      {/* <img
           src={testSvg}
           alt="Flow Chart"
           style={{ width: "100%", objectFit: "cover" }}
         /> */}
 
-        {/* <div style={{width:'100%', height:'100%'}}>
+      {/* <div style={{width:'100%', height:'100%'}}>
         <SvgNewHero/>
         </div> */}
-        {/* Left section avatar */}
-         {/* <div className={classes.heroFirstAvatarCon}>
+      {/* Left section avatar */}
+      {/* <div className={classes.heroFirstAvatarCon}>
           <div className={classes.heroFirstRightInsideCon}>
           <img
             src={firstLeftAvatar}
@@ -210,8 +216,8 @@ const Products = () => {
           </div>
         </div> */}
 
-       {/* Right section avatar */}
-        {/* <div className={classes.heroFirstRightAvatarCon}>
+      {/* Right section avatar */}
+      {/* <div className={classes.heroFirstRightAvatarCon}>
           <div className={classes.heroFirstRightInsideCon}>
           <img
             src={firstRightAvatar}
@@ -240,7 +246,6 @@ const Products = () => {
           />
           </div>
         </div> */}
-      </div>
       {/* HeaderSection End */}
       {/* BannerSection */}
       <div className={classes.BannerSection}>
@@ -290,11 +295,11 @@ const Products = () => {
       </div>
       {/* BannerSection end */}
 
-     {/* Sticky sections */}
-     <StickyScrollSection/>
+      {/* Sticky sections */}
+      <StickyScrollSection />
 
       {/*  Features */}
-      {/* <div className={classes.FeatureContainer}>
+      <div className={classes.FeatureContainer}>
         <div className={classes.FeatureDiv}>
           <></>
           <div className={classes.FeatureHeading}>
@@ -312,18 +317,18 @@ const Products = () => {
                 })}
               >
                 {index === 0 && (
-                
+
                   <div className={classes.LeftImg}>
                     <SvgStar />
                   </div>
                 )}
                 {index === 3 && (
-                
+
                   <div className={classes.RightImg}>
                     <SvgFrame />
                   </div>
                 )}
-                
+
                 <div className={classes.FeatureIcon}>{feature.icon}</div>
                 <Typography
                   variant="TS"
@@ -342,10 +347,10 @@ const Products = () => {
             ))}
           </div>
         </div>
-      </div> */}
+      </div>
       {/*  Features end */}
       {/* values */}
-      {/* <div className={classes.ValuesContainer}>
+      <div className={classes.ValuesContainer}>
         <div className={classes.HeadSection}>
           <Typography variant="HM">{data.values.title}</Typography>
           <div className={classes.StarLogo}>
@@ -398,10 +403,32 @@ const Products = () => {
             {data.values.action.label}
           </Button>
         </div>
-      </div> */}
+      </div>
       {/* values end */}
+
+      {/* storage start */}
+      <div className={classes.StorageContainer}>
+        <div className={classes.StorageWrapper}>
+          <div className={classes.StorageContentLeft}>
+            <Typography variant="TS" className={classes.StorageCategory}>
+              {data.storage.category}
+            </Typography>
+            <Typography variant="HM" className={classes.StorageTitle}>
+              {data.storage.title}
+            </Typography>
+            <Typography variant="BL" className={classes.StorageDescription}>
+              {data.storage.description}
+            </Typography>
+          </div>
+          <div className={classes.StorageGraphicRight}>
+            <StorageGraphic />
+          </div>
+        </div>
+      </div>
+      {/* storage end */}
+
       {/* scbcribe */}
-      {/* <div className={classes.MainSubscribe}>
+      <div className={classes.MainSubscribe}>
         <div className={classes.SubscribeDiv}>
           <div className={classes.Subscribe}>
             <div className={classes.NewsLetterImg}>
@@ -424,7 +451,7 @@ const Products = () => {
             </Button>
           </div>
         </div>
-      </div> */}
+      </div>
       {/* subscribe end */}
     </div>
   );
