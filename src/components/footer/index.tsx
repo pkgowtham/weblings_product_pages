@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { usestyles } from "../footer/footerstyle.tsx";
 import Typography from "../typography/component.tsx";
 import SvgTwitter from "../svg/Twitter.tsx";
@@ -9,53 +10,59 @@ import SvgInsta from "../svg/Insta.tsx";
 import SvgPhone from "../svg/Phone.tsx";
 import SvgMail from "../svg/Mail.tsx";
 import SvgLocation from "../svg/Location.tsx";
-import SvgWeblingslogo from "../svg/Weblingslogo.tsx";
 import weblingslogo from "../../assets/images/weblings_logo.svg";
+
+interface FooterLink {
+  label: string;
+  path: string;
+}
+
+interface FooterSection {
+  title: string;
+  features: FooterLink[];
+}
 
 const Footer: React.FC = (): JSX.Element => {
   const classes = usestyles();
-  const footer = {
+
+  const footer: { sections: FooterSection[] } = {
     sections: [
       {
-        title: 'Company',
+        title: "Company",
         features: [
-          "About",
-          "Chat",
-          "Calender",
-          "StreamLine",
-          "eOffice"
-        ]
+          { label: "Home", path: "/" },
+          { label: "About", path: "/about" },
+          { label: "Worksuite", path: "/workSuite/feature" },
+          { label: "Contact", path: "/contact" },
+        ],
       },
       {
-        title: 'Product',
+        title: "Product",
         features: [
-          "Mail",
-          "Chat",
-          "Calendar",
-          "Streamline",
-          "eOffice"
-        ]
-      }
-    ]
+          { label: "Mail", path: "/mail/feature" },
+          { label: "Chat", path: "/connect/feature" },
+          { label: "Calendar", path: "/calender/feature" },
+          { label: "Streamline", path: "/streamline/feature" },
+          { label: "eOffice", path: "/eoffice/feature" },
+        ],
+      },
+    ],
   };
+
   return (
     <footer className={classes.Footer}>
       <div className={classes.FooterContent}>
         <div className={classes.FirstSection}>
           <div className={classes.SubDiv}>
-            <img src={weblingslogo} alt="" className={classes.weblingslogo} />
-            {/* <SvgWeblingslogo/> */}
+            <Link to="/">
+              <img src={weblingslogo} alt="Weblings Logo" className={classes.weblingslogo} />
+            </Link>
           </div>
           <div className={classes.Icons}>
-            {/* <img src={twitter} alt={twitter} /> */}
             <SvgTwitter />
-            {/* <img src={linkedin} alt={linkedin} /> */}
             <SvgLinkedin />
-            {/* <img src={youtube} alt={youtube} /> */}
             <SvgYoutube />
-            {/* <img src={facebook} alt={facebook} /> */}
             <SvgFacebook />
-            {/* <img src={insta} alt={insta} /> */}
             <SvgInsta />
           </div>
         </div>
@@ -63,11 +70,17 @@ const Footer: React.FC = (): JSX.Element => {
         {footer.sections.map((section, index) => (
           <div className={classes.SecondSection} key={index}>
             <div>
-              <Typography variant="LS" className={classes.SectionTitleColor}>{section.title}</Typography>
+              <Typography variant="LS" className={classes.SectionTitleColor}>
+                {section.title}
+              </Typography>
             </div>
             <ul className={classes.ulist}>
               {section.features.map((feature, featureIndex) => (
-                <li className={classes.list} key={featureIndex}><Typography variant="LXS">{feature}</Typography></li>
+                <li className={classes.list} key={featureIndex}>
+                  <Link to={feature.path} className={classes.footerLink}>
+                    <Typography variant="LXS">{feature.label}</Typography>
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
@@ -75,29 +88,28 @@ const Footer: React.FC = (): JSX.Element => {
 
         <div className={classes.ThirdSection}>
           <div>
-            <Typography className={classes.SectionTitleColor} variant="LS">Contact</Typography>
+            <Typography className={classes.SectionTitleColor} variant="LS">
+              Contact
+            </Typography>
           </div>
           <ul className={classes.ul}>
             <li className={classes.li}>
-              {/* <img src={phone} alt="phone" className={classes.LogoStyle}/> */}
               <SvgPhone />
               <Typography variant="LXS">97895 13198</Typography>
             </li>
             <li className={classes.li}>
-              {/* <img src={mail} alt="mail" className={classes.LogoStyle}/> */}
               <SvgMail />
               <Typography variant="LXS">pkgowthamit@gmail.com</Typography>
             </li>
             <li className={classes.li}>
-              {/* <img src={location} alt="location" className={classes.LogoStyle}/> */}
               <SvgLocation />
-              <Typography variant="LXS">Weblings No:8, K.M Nagar,3rd Street, Velliyankadu, Tirupur,
-                Tamilnadu, 641604. India</Typography>
-
+              <Typography variant="LXS">
+                Weblings No:8, K.M Nagar,3rd Street, Velliyankadu, Tirupur,
+                Tamilnadu, 641604. India
+              </Typography>
             </li>
           </ul>
         </div>
-
       </div>
     </footer>
   );

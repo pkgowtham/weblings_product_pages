@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import About from "./pages/about/index.tsx";
 import Contact from "./pages/contact/index.tsx";
@@ -28,9 +29,21 @@ import WorkSuiteLayout from "./pages/products/apps/workSuite/index.tsx";
 import WorkSuiteFeature from "./pages/products/apps/workSuite/feature/index.tsx";
 import WorkSuiteComparison from "./pages/products/apps/workSuite/comparison/index.tsx";
 
+// Helper component that automatically scrolls window to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
+
+  return null;
+};
+
 const RouterPath = () => {
   return (
     <Router basename="/">
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* Root path '/' directly renders the Products homepage */}

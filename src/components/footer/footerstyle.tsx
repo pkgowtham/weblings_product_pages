@@ -6,7 +6,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     marginTop: theme.spacing.s2000,
     flexDirection: "column",
-    borderTop: `1px soild ${theme.light.neutral.border.light}`,
+    borderTop: `1px solid ${theme.light.neutral.border.light}`,
     alignItems: "center",
     background: theme.light.neutral.surface.lighter,
     boxShadow: theme.elevation.m,
@@ -43,9 +43,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     fontWeight: "700",
     lineHeight: "31px",
   },
-  Para: {
-    // marginBottom:'100px'
-  },
+  Para: {},
   ThirdSection: {
     display: "flex",
     flexDirection: "column",
@@ -75,7 +73,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   SecondSection: {
     display: "flex",
-    width: "78px",
+    width: "110px",
     flexDirection: "column",
     alignItems: "flex-start",
     gap: theme.spacing.s400,
@@ -85,9 +83,20 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     gap: theme.spacing.s400,
+    listStyle: "none",
+    padding: 0,
+    margin: 0,
   },
   list: {
     listStyle: "none",
+  },
+  footerLink: {
+    textDecoration: "none",
+    color: "inherit",
+    transition: "color 0.2s ease",
+    "&:hover": {
+      color: theme.light.brand.onSurface.default || "#0072C4",
+    },
   },
   SectionTitleColor: {
     color: theme.light.brand.onSurface.default,
