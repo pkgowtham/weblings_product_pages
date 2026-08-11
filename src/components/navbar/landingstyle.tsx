@@ -3,173 +3,285 @@ import { Theme } from "../../theme/themeType";
 
 export const usestyles = createUseStyles((theme: Theme) => ({
   NavBar: {
-    position: "absolute",     // fixed = removes it from document flow
+    position: "fixed",
     top: 0,
     left: "50%",
-    transform: "translateX(-50%)", // center horizontally
+    transform: "translateX(-50%)",
     width: "80%",
-    maxWidth:'1200px',
+    maxWidth: "1200px",
     height: "80px",
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-    zIndex: 1000, 
-    padding:'0 16px',
-    borderBottomLeftRadius:'16px',
-    borderBottomRightRadius:'16px',
+    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.06)",
+    zIndex: 1000,
+    padding: "0 24px",
+    borderBottomLeftRadius: "16px",
+    borderBottomRightRadius: "16px",
+    boxSizing: "border-box",
+    transition: "border-radius 0.2s ease, box-shadow 0.2s ease",
+  },
+  NavBarOpen: {
+    borderBottomLeftRadius: "0 !important",
+    borderBottomRightRadius: "0 !important",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.03) !important",
   },
   NavBarLogo: {
-    width: "200px",
+    width: "180px",
     height: "auto",
-  },
-  NavBarLinks: {
-    listStyle: "none",
-    display: "flex",
-    gap: theme.spacing.s500,
-    cursor: "pointer",
-  },
-  NavBarLink: {
-    textDecoration: "none",
-    color: "#3A3A3A",
+    display: "block",
   },
   NavText: {
     display: "flex",
     alignItems: "center",
-    gap: theme.spacing.s500,
+    gap: "32px",
   },
-
-  HasDropdown: {
+  NavBarLinks: {
+    listStyle: "none",
+    display: "flex",
+    alignItems: "center",
+    gap: "28px",
+    margin: 0,
+    padding: 0,
+  },
+  NavBarItem: {
     position: "relative",
-    "&:hover $DropdownMenu": {
-      display: "block",
+    display: "flex",
+    alignItems: "center",
+  },
+  NavBarLink: {
+    textDecoration: "none",
+    color: theme.light.neutral.onSurface.title || "#3A3A3A",
+    fontWeight: 600,
+    fontSize: "0.9375rem",
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    cursor: "pointer",
+    padding: "8px 12px",
+    borderRadius: "8px",
+    transition: "color 0.2s ease, background-color 0.2s ease",
+    "&:hover": {
+      color: theme.light.brand.onSurface.default || "#0072C4",
+      backgroundColor: "#F4F8FC",
     },
   },
+  ActiveLink: {
+    color: theme.light.brand.onSurface.default || "#0072C4",
+  },
+  DropdownArrowIcon: {
+    transition: "transform 0.25s ease",
+    display: "flex",
+    alignItems: "center",
+  },
+  ArrowRotated: {
+    transform: "rotate(180deg)",
+  },
 
+  // ─────────────────────────────────────────────────────────────────────
+  // Desktop Beautified Dropdown Menu Card
+  // ─────────────────────────────────────────────────────────────────────
   DropdownMenu: {
-    display: "none",
     position: "absolute",
-    top:25,
-    left: 0,
-    zIndex:100,
-    backgroundColor:theme.light.neutral.surface.light,
-    border: `1px solid ${theme.light.neutral.border.light}`,
-    height: "300px",
-    width: "1000px",
-    listStyleType: "none",
-    borderRadius: theme.borderRadius.b150,
-    // zIndex: "1000",
+    top: "50px",
+    left: "-20px",
+    zIndex: 1100,
+    backgroundColor: "#FFFFFF",
+    border: `1px solid ${theme.light.neutral.border.light || "rgba(0, 0, 0, 0.08)"}`,
+    width: "780px",
+    maxWidth: "90vw",
+    borderRadius: "16px",
+    boxShadow: "0 16px 40px -8px rgba(0, 0, 0, 0.12)",
+    padding: "16px",
+    display: "flex",
+    flexDirection: "row",
+    gap: "16px",
+    boxSizing: "border-box",
+    animation: "$fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
   },
-  DropdownLink: {
-    padding: `${theme.spacing.s300} ${theme.spacing.s500}`,
-    textDecoration: "none",
-    position: "absolute",
-    top: -10,
-    right: 0,
-    color: "#333",
+  "@keyframes fadeIn": {
+    from: {
+      opacity: 0,
+      transform: "translateY(8px)",
+    },
+    to: {
+      opacity: 1,
+      transform: "translateY(0)",
+    },
   },
 
-  product: {
-    top: 43,
-  },
-
-  chat: {
-    top: 103,
-  },
-  DropDownLogo: {
-    width: "48px",
-    height: "48px",
-  },
-  ProductItem: {
-    display: "flex",
-    gap:theme.spacing.s500,
-    alignItems: "center",
-  },
-  ProductHeadings: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  LeftSide: {
-    padding: theme.spacing.s300,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    gap:theme.spacing.s1200,
-    width: "300px",
-  },
-  RightSide: {
-    padding:theme.spacing.s300,
-    display: "flex",
-    flex: "1",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    width: "300px",
-  },
-  DropDownContainer: {
-    display: "flex",
-    alignItems: "flex-start",
-    position: "relative",
-  },
-  NavLinks: {
-    textDecoration: "none",
-    color: theme.light.neutral.onSurface.medium,
-  },
+  // Left Column: Product Links List
   SectionOne: {
-    flex: 0.1,
-    backgroundColor: theme.light.neutral.surface.light,
-    // backgroundColor:'black',
+    flex: "0 0 300px",
     display: "flex",
     flexDirection: "column",
-    gap:theme.spacing.s300,
-    borderRadius:theme.borderRadius.b200,
-    padding:theme.spacing.s300,
+    gap: "6px",
   },
-  SectionTwo: {
-    flex: 0.4,
-    padding:theme.spacing.s300,
-  },
-  SectionThree: {
-    flex: 0.4,
+  ProductLinkCard: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    padding:theme.spacing.s300,
-  },
-  SectionTitle: {
-    marginBottom:theme.spacing.s600,
-  },
-
-  LinksDiv: {
-    display: "flex",
-    gap:theme.spacing.s200,
     justifyContent: "space-between",
-    position: "relative",
-    "&:hover $chevronright": {
-      opacity: 1, // Show the image on hover
-    },
-    "&:hover $Hover": {
-      color: theme.light.brand.onSurface.default,
-      transform: "scale(1.02)",
-      transition: "color 0.3s",
+    padding: "12px 14px",
+    borderRadius: "10px",
+    cursor: "pointer",
+    textDecoration: "none",
+    transition: "all 0.2s ease",
+    backgroundColor: "transparent",
+    "&:hover": {
+      backgroundColor: "#F0F7FF",
+      transform: "translateX(3px)",
     },
   },
-
-  Hover: {
-    color:theme.light.neutral.onSurface.medium,
+  ActiveProductCard: {
+    backgroundColor: "#E6F2FF !important",
   },
-
-  chevronright: {
+  ProductItemContent: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+  },
+  ProductIcon: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    textAlign: "center",
-    opacity: 0, // Hide the image by default
-    transition: "opacity 0.3s ease",
+    width: "36px",
+    height: "36px",
+    borderRadius: "8px",
+    backgroundColor: "#F5F5F5",
+    color: "#3A3A3A",
+  },
+  ActiveProductIcon: {
+    backgroundColor: "#FFFFFF",
+    color: theme.light.brand.onSurface.default || "#0072C4",
+    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.06)",
+  },
+  ProductLabel: {
+    fontWeight: 600,
+    fontSize: "0.9375rem",
+    color: theme.light.neutral.onSurface.title,
+  },
+  ActiveProductLabel: {
+    color: theme.light.brand.onSurface.default || "#0072C4",
   },
 
-  visible:{
-    opacity:1
-  }
+  // Right Column: Active Item Detail & Preview Card
+  SectionTwo: {
+    flex: "1",
+    backgroundColor: "#FAFAFA",
+    borderRadius: "12px",
+    padding: "24px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    gap: "16px",
+    border: `1px solid ${theme.light.neutral.border.light || "#ECECEC"}`,
+  },
+  PreviewHeader: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+  },
+  PreviewTitle: {
+    color: theme.light.neutral.onSurface.title,
+    fontWeight: 700,
+    fontSize: "1.25rem",
+  },
+  PreviewDescription: {
+    color: theme.light.neutral.onSurface.medium,
+    fontSize: "0.875rem",
+    lineHeight: "1.6",
+  },
+  PreviewFooter: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: "8px",
+  },
+  PreviewImage: {
+    width: "100%",
+    height: "auto",
+    maxHeight: "120px",
+    objectFit: "contain",
+    borderRadius: "8px",
+    marginTop: "8px",
+  },
 
+  // ─────────────────────────────────────────────────────────────────────
+  // Mobile / Touchscreen Navigation Drawer
+  // ─────────────────────────────────────────────────────────────────────
+  MobileMenuBtn: {
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "8px",
+    borderRadius: "8px",
+    backgroundColor: "#F5F5F5",
+    border: "none",
+  },
+  MobileDrawer: {
+    position: "absolute",
+    top: "80px",
+    left: 0,
+    right: 0,
+    backgroundColor: "#FFFFFF",
+    borderBottomLeftRadius: "16px",
+    borderBottomRightRadius: "16px",
+    boxShadow: "0 16px 32px rgba(0, 0, 0, 0.12)",
+    borderTop: `1px solid ${theme.light.neutral.border.light || "#E8E8E8"}`,
+    padding: "20px 24px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+    zIndex: 999,
+    boxSizing: "border-box",
+  },
+  MobileNavItem: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  MobileNavLink: {
+    textDecoration: "none",
+    color: theme.light.neutral.onSurface.title,
+    fontWeight: 600,
+    fontSize: "1rem",
+    padding: "10px 0",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    cursor: "pointer",
+    borderBottom: "1px solid #F0F0F0",
+  },
+  MobileAccordion: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "4px",
+    paddingLeft: "12px",
+    marginTop: "8px",
+    marginBottom: "8px",
+  },
+  MobileAccordionItem: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    padding: "10px 12px",
+    borderRadius: "8px",
+    textDecoration: "none",
+    color: theme.light.neutral.onSurface.title,
+    fontSize: "0.9375rem",
+    fontWeight: 500,
+    "&:hover": {
+      backgroundColor: "#F0F7FF",
+      color: theme.light.brand.onSurface.default,
+    },
+  },
+  MobileActionWrapper: {
+    marginTop: "8px",
+    display: "flex",
+    width: "100%",
+    "& button": {
+      width: "100%",
+    },
+  },
 }));

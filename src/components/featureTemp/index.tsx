@@ -2,6 +2,7 @@ import React from "react";
 import { usestyles } from "../featureTemp/futurestyle.tsx";
 import Typography from "../typography/component.tsx";
 import Button from "../button/button.tsx";
+import VideoSection from "../videoSection/index.tsx";
 
 const FeatureTemp: React.FC<any> = (props): JSX.Element => {
   const classes = usestyles();
@@ -33,7 +34,6 @@ const FeatureTemp: React.FC<any> = (props): JSX.Element => {
           )
         )}
       </div>
-
 
       {/* Feature Section */}
       <div className={classes.Mainfeature}>
@@ -104,60 +104,16 @@ const FeatureTemp: React.FC<any> = (props): JSX.Element => {
           }
 
           // Side-by-Side Layouts (Items 1, 2, 3, 5)
-          return isEven ? (
-            <div key={`${index}`} className={classes.featureContainer}>
-              <div className={classes.featureleftcontainer}>
-                <div className={classes.subtitleDiv}>
-                  <Typography variant="TS" className={classes.ptitle}>
-                    {feature.subtitle}
-                    {feature.showSparkle && (
-                      <span className={classes.sparkleIcon}>✦</span>
-                    )}
-                  </Typography>
-                </div>
-                <div className={classes.titleDiv}>
-                  <Typography variant="HM" className={classes.htitle}>
-                    {feature.title}
-                  </Typography>
-                </div>
-                {renderDescription()}
-                {feature.action && feature.action.length > 0 && (
-                  <div className={classes.button}>
-                    {feature.action.map((act: any, idx: number) => (
-                      <Typography key={idx} variant="TS">
-                        {act.label}
-                      </Typography>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <div className={classes.imgDiv}>
-                <img
-                  src={feature.img.src}
-                  alt={feature.img.alt}
-                  className={classes.featureimg}
-                />
-                {feature.abstractImg && (
-                  <div className={classes.abstractDiv}>
-                    {feature.abstractImg.src}
-                  </div>
-                )}
-              </div>
-            </div>
-          ) : (
-            <div key={`${index}`} className={classes.featureContainer}>
-              <div className={classes.imgDiv}>
-                <img
-                  src={feature.img.src}
-                  alt={feature.img.alt}
-                  className={classes.featureimg}
-                />
-                {feature.abstractImg && (
-                  <div className={classes.abstractDiv2}>
-                    {feature.abstractImg.src}
-                  </div>
-                )}
-              </div>
+          // Uniform JSX: Text content FIRST, Image SECOND for all rows.
+          // CSS handles row-reverse on desktop for odd rows, and column (text top, image bottom) on mobile/tab!
+          return (
+            <div
+              key={`${index}`}
+              className={`${classes.featureContainer} ${
+                !isEven ? classes.featureContainerOdd : ""
+              }`}
+            >
+              {/* Text Content Column */}
               <div className={classes.featureleftcontainer}>
                 <div className={classes.subtitleDiv}>
                   <Typography variant="TS" className={classes.ptitle}>
@@ -183,11 +139,32 @@ const FeatureTemp: React.FC<any> = (props): JSX.Element => {
                   </div>
                 )}
               </div>
+
+              {/* Image Container Column */}
+              <div className={classes.imgDiv}>
+                <img
+                  src={feature.img.src}
+                  alt={feature.img.alt}
+                  className={classes.featureimg}
+                />
+                {feature.abstractImg && (
+                  <div
+                    className={
+                      isEven ? classes.abstractDiv : classes.abstractDiv2
+                    }
+                  >
+                    {feature.abstractImg.src}
+                  </div>
+                )}
+              </div>
             </div>
           );
         })}
       </div>
       {/* Feature Section End */}
+
+      {/* Reusable Video Demo Section */}
+      <VideoSection demoData={jsonData.demo} />
     </div>
   );
 };

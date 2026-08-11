@@ -5,11 +5,14 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   Mainsection: {
     minHeight: "70vh",
     width: "100%",
+    maxWidth: "100vw",
+    overflowX: "hidden",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    boxSizing: "border-box",
   },
   subtitle: {},
   content: {},
@@ -50,30 +53,47 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   Mainfeature: {
     minHeight: "70vh",
     width: "100%",
+    maxWidth: "100vw",
+    overflowX: "hidden",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    padding: "0 24px",
+    boxSizing: "border-box",
   },
   featureContainer: {
     marginTop: "100px",
+    width: "100%",
+    maxWidth: "1050px",
     display: "flex",
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '100px',
-    "@media (max-width: 1031px)": {
-      gap: theme.spacing.s2000
-    }
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "60px",
+    boxSizing: "border-box",
+    "@media (max-width: 960px)": {
+      flexDirection: "column", // Mobile/Tablet: Text FIRST (top), Image SECOND (bottom)
+      gap: "36px",
+      marginTop: "60px",
+    },
+  },
+  featureContainerOdd: {
+    flexDirection: "row-reverse", // Desktop web view: Image LEFT, Text RIGHT
+    "@media (max-width: 960px)": {
+      flexDirection: "column", // Mobile/Tablet: Text FIRST (top), Image SECOND (bottom)
+    },
   },
   featureleftcontainer: {
-    display: 'flex',
-    flexDirection: 'column',
+    flex: "1 1 45%",
+    display: "flex",
+    flexDirection: "column",
     gap: theme.spacing.s300,
-    maxWidth: "400px",
-    alignItems: 'flex-start',
-    textAlign: 'start',
+    maxWidth: "480px",
+    width: "100%",
+    alignItems: "flex-start",
+    textAlign: "start",
   },
 
   subtitleDiv: {},
@@ -90,13 +110,13 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   titleDiv: {
     fontSize: "20px",
-    maxWidth: "400px",
+    maxWidth: "480px",
   },
   htitle: {
     textAlign: "start",
   },
   listDiv: {
-    maxWidth: "400px",
+    maxWidth: "480px",
     lineHeight: "1.6",
     fontSize: "1rem",
     color: "#2c2e31",
@@ -109,54 +129,70 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     textAlign: "start",
   },
   imgDiv: {
-    position: 'relative',
+    flex: "1 1 45%",
+    maxWidth: "520px",
+    width: "100%",
+    position: "relative",
     display: "flex",
-    flexWrap: "wrap",
     alignItems: "center",
-    "@media (max-width: 700px)": {
-      display: "none",
-    },
+    justifyContent: "center",
   },
   featureimg: {
     width: "100%",
     borderRadius: theme.borderRadius.b500,
-    maxWidth: "550px",
+    maxWidth: "520px",
     height: "auto",
-    margin: `${theme.spacing.s1200} ${theme.spacing.s0}`,
-    zIndex: '1',
+    position: "relative",
+    zIndex: 2,
   },
   abstractDiv: {
-    position: 'absolute',
-    maxWidth: "190px",
-    top: '20px',
-    left: '435px',
-    right: '-629px',
-    "@media (max-width: 1085px)": {
-      position: 'absolute',
-      maxWidth: "190px",
-      top: '-45px',
-      left: '435px',
-      right: '-629px',
-    }
+    position: "absolute",
+    top: "-50px",
+    right: "-60px",
+    width: "180px",
+    height: "auto",
+    zIndex: 1,
+    pointerEvents: "none",
+    transition: "right 0.3s ease, width 0.3s ease",
+    "& svg": {
+      width: "100%",
+      height: "auto",
+      display: "block",
+    },
+    "@media (max-width: 1100px)": {
+      right: "-30px",
+    },
+    "@media (max-width: 960px)": {
+      right: "-10px",
+      width: "140px",
+    },
   },
   abstractDiv2: {
-    position: 'absolute',
-    maxWidth: "190px",
-    top: '-1px',
-    left: '-58px',
-    right: '-629px',
-    "@media (max-width: 1085px)": {
-      position: 'absolute',
-      maxWidth: "190px",
-      top: '-45px',
-      left: '-58px',
-      right: '-629px',
-    }
+    position: "absolute",
+    top: "-50px",
+    left: "-60px",
+    width: "180px",
+    height: "auto",
+    zIndex: 1,
+    pointerEvents: "none",
+    transition: "left 0.3s ease, width 0.3s ease",
+    "& svg": {
+      width: "100%",
+      height: "auto",
+      display: "block",
+    },
+    "@media (max-width: 1100px)": {
+      left: "-30px",
+    },
+    "@media (max-width: 960px)": {
+      left: "-10px",
+      width: "140px",
+    },
   },
   abstractimg: {
     width: "100%",
     height: "auto",
-    maxWidth: "190px",
+    maxWidth: "160px",
     margin: theme.spacing.s0
   },
   button: {
@@ -176,6 +212,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     flexDirection: "column",
     gap: "28px",
     alignItems: "stretch",
+    boxSizing: "border-box",
   },
   fullWidthHeaderRow: {
     display: "flex",

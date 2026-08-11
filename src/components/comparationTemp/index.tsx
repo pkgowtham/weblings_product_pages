@@ -1,236 +1,242 @@
 import React, { useState } from "react";
-import { usestyles } from "../comparationTemp/comparisonstyle.tsx";
-import Typography from "../typography/component.tsx";
-import Button from "../button/button.tsx";
-import clsx from "clsx";
+import { usestyles } from "./comparisonstyle.tsx";
 import SvgWeblingslogo from "../svg/Weblingslogo.tsx";
-import SvgChevronRight from "../svg/ChevronRight.tsx";
-import SvgVector from "../svg/Vector.tsx";
-import SvgClose from "../svg/Close.tsx";
+import { DoneIcon } from "../../assets/icons_component/index.tsx";
+import Typography from "../typography/component.tsx";
+import comparisonJson from "../../data/comparison.json";
+import { useNavigate } from "react-router-dom";
 
 const ComparisonTemp: React.FC<any> = (props): JSX.Element => {
   const classes = usestyles();
-  const comparisonData = props.comparisonData || [];
-  console.log("comparisondata", comparisonData);
+  const navigate = useNavigate();
 
-  const [openRow, setOpenRow] = useState(null);
+  // Use props data if available or fallback to comparison.json
+  const data =
+    props.comparisonData && props.comparisonData.plans
+      ? props.comparisonData
+      : comparisonJson;
 
-  const toggleRow = (index: any) => {
-    setOpenRow(openRow === index ? null : index);
+  const titleSubtext = data.titleSubtext || "Price to features comparision";
+  const title = data.title || "How much you can save";
+  const titleDescription =
+    data.titleDescription ||
+    "Reduce software costs by replacing multiple business tools with one unified workspace. Pay only for what your team needs and scale as your business grows.";
+  const badgeText = data.badgeText || "Save up to 50% with 2 additional features";
+
+  const plans = data.plans || comparisonJson.plans;
+  const features = data.features || comparisonJson.features;
+
+  const weblingsPlan = plans.find((p: any) => p.id === "weblings") || plans[0];
+  const othersPlan = plans.find((p: any) => p.id === "others") || plans[1];
+
+  // Accordion state to manage expanded category rows (open by default for first item)
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
+    project_management: true,
+    0: true,
+  });
+
+  const toggleCategory = (id: string | number) => {
+    setExpandedCategories((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  const renderCheckmark = (val: any) => {
+    if (val === true) {
+      return <DoneIcon />;
+    }
+    if (val === false || val === null || val === undefined) {
+      return "-";
+    }
+    if (typeof val === "string") {
+      return <Typography variant="BS" component="span">{val}</Typography>;
+    }
+    return val;
   };
 
   return (
     <div className={classes.MainComparisontemp}>
-      {/* title subtext */}
-      <div>
-        <Typography variant="TS" className={classes.para}>
-          {comparisonData.titleSubtext}
+      {/* Header Section using Typography component */}
+      <div className={classes.headerSection}>
+        <Typography variant="TS" component="span" className={classes.subtitle}>
+          {titleSubtext}
+        </Typography>
+        <Typography variant="HM" component="h2" className={classes.title}>
+          {title}
+        </Typography>
+        <Typography variant="BL" component="p" className={classes.titleDescription}>
+          {titleDescription}
         </Typography>
       </div>
 
-      {/* title subtext */}
-      <div>
-        <Typography variant="HM" className={classes.title}>
-          {comparisonData.title}
-        </Typography>
-      </div>
-
-      {/* title description */}
-      <div className={classes.textDiv}>
-        <Typography variant="BL" className={classes.text}>
-          {comparisonData.titleDescription}
-        </Typography>
-      </div>
-
-      {/* Table */}
-      <div>
-        {/* Tooltip Image */}
-
+      {/* Pricing & Comparison Matrix Table */}
+      <div className={classes.tableWrapper}>
         <table className={classes.table}>
           <thead>
             <tr>
-              {comparisonData?.tableHead?.map((data: any, idx: number) => (
-                <th
-                  style={{ verticalAlign: idx === 0 ? "center" : "top" }}
-                  className={clsx(classes.th, {
-                    [classes.titleheading]: idx === 0,
-                    [classes.headingColor]: idx === 1,
-                  })}
+              {/* Column 1 Header: Price */}
+              <th className={classes.thPriceLabel}>
+                <Typography variant="TS" component="span">
+                  {data.priceLabel || "Price"}
+                </Typography>
+              </th>
+
+              {/* Column 2 Header: Weblings Worksuite (Highlighted Column) */}
+              <th className={classes.thHighlight}>
+                {/* Savings Pill Tooltip */}
+                <div className={classes.badgeTooltip}>
+                  <span>✦</span>
+                  <Typography variant="LXS" component="span">
+                    {badgeText}
+                  </Typography>
+                </div>
+
+                {/* Logo & Title */}
+                <div className={classes.weblingsHeaderTitle}>
+                  <SvgWeblingslogo />
+                  <Typography variant="TS" component="span">
+                    {weblingsPlan.name}
+                  </Typography>
+                </div>
+
+                {/* Price Tag */}
+                <div className={classes.priceRow}>
+                  <Typography variant="HM" component="span" className={classes.priceLarge}>
+                    {weblingsPlan.price}
+                  </Typography>
+                  <Typography variant="TS" component="span" className={classes.pricePeriod}>
+                    {weblingsPlan.period}
+                  </Typography>
+                </div>
+
+                {/* Includes Note */}
+                <div className={classes.includesNote}>
+                  <Typography variant="LS" component="span" className={classes.includesKey}>
+                    {weblingsPlan.includesKey || "Includes:"}
+                  </Typography>
+                  <Typography variant="LS" component="span">
+                    {weblingsPlan.includesValue}
+                  </Typography>
+                </div>
+
+                {/* Free Trial Button */}
+                <button
+                  className={classes.btnGetTrial}
+                  onClick={() => navigate("/contact")}
                 >
-                  <div className={classes.popupDiv}>
-                    {data?.popupImg && (
-                      // <img
-                      //   src={data?.popupImg}
-                      //   alt="Tooltip"
-                      //   className={classes.tooltipimg}
-                      // />
-                      data?.popupImg
-                    )}
-                  </div>
-                  {data.title && (
-                    <div>
-                      {data.title === "Weblings Worksuite" && (
-                        <>
-                          {/* <img
-                            src={weblingslogo}
-                            alt={weblingslogo}
-                            className={classes.weblingslogo}
-                          /> */}
-                          <SvgWeblingslogo/>
-                          <Typography
-                            variant="TS"
-                            className={classes.titleText}
-                          >
-                            {data.title}
-                          </Typography>
-                        </>
-                      )}
-                      {data.title !== "Weblings Worksuite" && (
-                        <Typography variant="TS">{data.title}</Typography>
-                      )}
-                    </div>
-                  )}
-                  {data?.priceValue?.symbol && (
-                    <div className={classes.SpanDiv}>
-                      <Typography
-                        component={"span"}
-                        variant="HM"
-                        className={classes.value}
-                      >
-                        {data?.priceValue?.symbol}
-                      </Typography>
-                      <Typography
-                        component={"span"}
-                        variant="HM"
-                        className={classes.value}
-                      >
-                        {data.priceValue?.largeText}
-                      </Typography>
-                      <br />
-                      <Typography
-                        component={"span"}
-                        variant="TS"
-                        className={classes.subtext}
-                      >
-                        {data.priceValue.smallText}
-                      </Typography>
-                    </div>
-                  )}
-                  {data.featureShort?.key && (
-                    <div className={classes.featureShort}>
-                      <Typography
-                        component={"span"}
-                        variant="LS"
-                        className={classes.subtextColor}
-                      >
-                        {data.featureShort?.key}
-                      </Typography>{" "}
-                      <Typography
-                        component={"span"}
-                        variant="LS"
-                        className={classes.subtext}
-                      >
-                        {data.featureShort?.value}
-                      </Typography>
-                    </div>
-                  )}
-                  {data.action?.label && (
-                    <div>
-                      <Button element="button" outline className={classes.btn}>
-                        {data.action.label}
-                      </Button>
-                    </div>
-                  )}
-                  {data.actionSubtext && (
-                    <Typography variant="LXS" className={classes.actionSubtext}>
-                      {data.actionSubtext}
-                    </Typography>
-                  )}
-                </th>
-              ))}
+                  {weblingsPlan.actionLabel || "Get Free Trial"}
+                </button>
+
+                {/* Subtext */}
+                <Typography variant="LXS" component="p" className={classes.actionSubtext}>
+                  {weblingsPlan.actionSubtext || "*No credit card required"}
+                </Typography>
+              </th>
+
+              {/* Column 3 Header: Other Workspaces */}
+              <th className={classes.thNormal}>
+                <Typography variant="TS" component="div" className={classes.otherHeaderTitle}>
+                  {othersPlan.name}
+                </Typography>
+
+                <div className={classes.priceRow}>
+                  <Typography variant="HM" component="span" className={classes.priceLarge}>
+                    {othersPlan.price}
+                  </Typography>
+                  <Typography variant="TS" component="span" className={classes.pricePeriod}>
+                    {othersPlan.period}
+                  </Typography>
+                </div>
+
+                <div className={classes.includesNote}>
+                  <Typography variant="LS" component="span" className={classes.includesKey}>
+                    {othersPlan.includesKey || "Includes:"}
+                  </Typography>
+                  <Typography variant="LS" component="span">
+                    {othersPlan.includesValue}
+                  </Typography>
+                </div>
+              </th>
             </tr>
           </thead>
-          <tbody>
-            {Object.keys(comparisonData?.tableBody).map(
-              (data: any, index: number) => {
-                const isOpen = openRow === index;
-                return (
-                  <React.Fragment key={index}>
-                    <tr
-                      key={index}
-                      onClick={() => toggleRow(index)}
-                      className={classes.accordionbutton}
-                    >
-                      <td className={classes.td}>
-                        {/* <img
-                          src={chevorn_right}
-                          alt={chevorn_right}
-                          className={`${classes.accordionimg} ${
-                            isOpen ? classes.rotate : ""
-                          }`}
-                        /> */}
-                        <SvgChevronRight  className={`${classes.accordionimg} ${
-                            isOpen ? classes.rotate : ""
-                          }`}/>
-                        <Typography variant="BL">{data}</Typography>
-                      </td>
-                      <td
-                        className={classes.td}
-                        style={{ backgroundColor: "#F7FBFE" }}
-                      >
-                        {/* <Typography  variant="BS">Second</Typography> */}
-                      </td>
-                      <td className={classes.td}>
-                        {/* <Typography  variant="BS">Third</Typography> */}
-                      </td>
-                    </tr>
 
-                    {isOpen &&
-                      comparisonData?.tableBody[data].map(
-                        (dat: any, ind: number) => {
-                          return (
-                            <tr key={`pr${ind}`}>
-                              {dat.map((da: any, idx: number) => {
-                                let content;
-                                if (da.toString() === "true") {
-                                  // content = <img src={vector} alt="True"/>;
-                                  content = (
-                                    <td
-                                      key={idx}
-                                      style={{ backgroundColor: "#F7FBFE" }}
-                                      className={classes.td}
-                                    >
-                                      {/* <img src={vector} alt="True" /> */}
-                                      <SvgVector/>
-                                    </td>
-                                  );
-                                } else if (da.toString() === "false") {
-                                  // content = <img src={close} alt="False"/>;
-                                  content = (
-                                    <td key={idx} className={classes.td}>
-                                      {/* <img src={close} alt="False" /> */}
-                                      <SvgClose/>
-                                    </td>
-                                  );
-                                } else {
-                                  content = (
-                                    <td key={idx} className={classes.td}>
-                                      <Typography variant="BL">
-                                        {da.toString()}
-                                      </Typography>
-                                    </td>
-                                  );
-                                }
-                                return content;
-                              })}
-                            </tr>
-                          );
-                        }
-                      )}
-                  </React.Fragment>
-                );
-              }
-            )}
+          <tbody>
+            {features.map((feature: any, idx: number) => {
+              const catId = feature.id || idx;
+              const hasSubFeatures = feature.subFeatures && feature.subFeatures.length > 0;
+              const isExpanded = !!expandedCategories[catId];
+              const isLastMainRow = idx === features.length - 1 && (!hasSubFeatures || !isExpanded);
+
+              return (
+                <React.Fragment key={catId}>
+                  {/* Category / Parent Feature Row */}
+                  <tr
+                    className={hasSubFeatures ? classes.categoryRow : ""}
+                    onClick={() => hasSubFeatures && toggleCategory(catId)}
+                  >
+                    {/* Column 1: Feature Title with Chevron */}
+                    <td className={classes.tdFeatureName}>
+                      <span
+                        className={`${classes.chevron} ${isExpanded ? classes.chevronRotated : ""
+                          }`}
+                      >
+                        ❯
+                      </span>
+                      <Typography variant="BS" component="span">
+                        {feature.name}
+                      </Typography>
+                    </td>
+
+                    {/* Column 2: Weblings Worksuite Checkmark */}
+                    <td
+                      className={`${classes.tdHighlight} ${isLastMainRow ? classes.tdHighlightLast : ""
+                        }`}
+                    >
+                      {renderCheckmark(feature.weblings)}
+                    </td>
+
+                    {/* Column 3: Other Workspaces Status */}
+                    <td className={classes.tdNormal}>
+                      {renderCheckmark(feature.others)}
+                    </td>
+                  </tr>
+
+                  {/* Expanded Sub-Features (Stairs-like Indented Alignment) */}
+                  {hasSubFeatures &&
+                    isExpanded &&
+                    feature.subFeatures.map((sub: any, subIdx: number) => {
+                      const isLastSubRow =
+                        idx === features.length - 1 &&
+                        subIdx === feature.subFeatures.length - 1;
+
+                      return (
+                        <tr key={`${catId}_sub_${subIdx}`}>
+                          {/* Indented Sub-Feature Title */}
+                          <td className={classes.tdSubFeatureName}>
+                            <Typography variant="BS" component="span">
+                              {sub.name}
+                            </Typography>
+                          </td>
+
+                          {/* Column 2: Weblings Checkmark */}
+                          <td
+                            className={`${classes.tdHighlight} ${isLastSubRow ? classes.tdHighlightLast : ""
+                              }`}
+                          >
+                            {renderCheckmark(sub.weblings)}
+                          </td>
+
+                          {/* Column 3: Other Workspaces Status */}
+                          <td className={classes.tdNormal}>
+                            {renderCheckmark(sub.others)}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </React.Fragment>
+              );
+            })}
           </tbody>
         </table>
       </div>

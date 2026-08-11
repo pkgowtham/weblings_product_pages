@@ -1,0 +1,80 @@
+{
+  "titleSubtext": "Price to features comparision",
+  "title": "How much you can save",
+  "titleDescription": "Reduce software costs by replacing multiple business tools with one unified workspace. Pay only for what your team needs and scale as your business grows.",
+  "badgeText": "Save up to 50% with 2 additional features",
+  "priceLabel": "Price",
+  "plans": [
+    {
+      "id": "weblings",
+      "isHighlighted": true,
+      "name": "Weblings Worksuite",
+      "price": "₹400",
+      "period": "/ per user / month",
+      "includesKey": "Includes:",
+      "includesValue": "Mail, Chat, Calendar, Streamline and eOffice",
+      "actionLabel": "Get Free Trial",
+      "actionSubtext": "*No credit card required"
+    },
+    {
+      "id": "others",
+      "isHighlighted": false,
+      "name": "Other Workspaces",
+      "price": "₹600 - 800",
+      "period": "/ per user / month",
+      "includesKey": "Includes:",
+      "includesValue": "Partial features"
+    }
+  ],
+  "features": [
+    {
+      "id": "project_management",
+      "name": "Project Management",
+      "weblings": true,
+      "others": "Limited",
+      "subFeatures": [
+        {
+          "name": "Team Collaboration",
+          "weblings": true,
+          "others": true
+        }
+      ]
+    },
+    {
+      "id": "secure_chat",
+      "name": "Secure Team Chat",
+      "weblings": true,
+      "others": "Additional Cost"
+    },
+    {
+      "id": "digital_eoffice",
+      "name": "Digital eOffice",
+      "weblings": true,
+      "others": "Limited"
+    },
+    {
+      "id": "shared_calendar",
+      "name": "Shared Calendar",
+      "weblings": true,
+      "others": "Extra Module"
+    },
+    {
+      "id": "client_management",
+      "name": "Client Management",
+      "weblings": true,
+      "others": "Limited"
+    },
+    {
+      "id": "timesheet_approval",
+      "name": "Timesheet Approval",
+      "weblings": true,
+      "others": "Extra Module"
+    },
+    {
+      "id": "employee_directory",
+      "name": "Employee Directory",
+      "weblings": true,
+      "others": "Limited"
+    }
+  ]
+}

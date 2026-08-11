@@ -76,91 +76,88 @@
       }
     ],
     "demo": {
-      "subtitle": "Weblings demo",
+      "subtitle": "Video Section",
       "title": "See Weblings Workspace in Action",
-      "description": "Watch a quick demo showing how Weblings Workspace helps teams stay organized, collaborate effectively, and streamline daily operations."
+      "description": "Watch how organizations simplify operations, improve collaboration, and increase productivity using a single digital workspace built for modern businesses."
     }
   },
   "comparison": {
-    "titleSubtext": "Price to features comparison",
+    "titleSubtext": "Price to features comparision",
     "title": "How much you can save",
-    "titleDescription": "Replace expensive software by replacing multiple software tools with one unified workspace. Pay only for what your team needs and scale as your business grows.",
-    "tableHead": [
+    "titleDescription": "Reduce software costs by replacing multiple business tools with one unified workspace. Pay only for what your team needs and scale as your business grows.",
+    "badgeText": "Save up to 50% with 2 additional features",
+    "priceLabel": "Price",
+    "plans": [
       {
-        "title": "Features"
-      },
-      {
-        "title": "Weblings Worksuite",
-        "badge": "Recommended",
-        "priceValue": {
-          "symbol": "₹",
-          "largeText": "400",
-          "smallText": "/per user/month"
-        },
-        "featureShort": {
-          "key": "Includes:",
-          "value": "Mail,Chat,Calendar,Streamline and eOffice"
-        },
-        "action": {
-          "label": "Get Free Trial",
-          "path": "",
-          "color": "primary"
-        },
+        "id": "weblings",
+        "isHighlighted": true,
+        "name": "Weblings Worksuite",
+        "price": "₹400",
+        "period": "/ per user / month",
+        "includesKey": "Includes:",
+        "includesValue": "Mail, Chat, Calendar, Streamline and eOffice",
+        "actionLabel": "Get Free Trial",
         "actionSubtext": "*No credit card required"
       },
       {
-        "title": "Other Workspaces",
-        "priceValue": {
-          "symbol": "₹",
-          "largeText": "600-800",
-          "smallText": "/per user/month"
-        },
-        "featureShort": {
-          "key": "Includes:",
-          "value": " only Mail,Chat,Calendar"
-        }
+        "id": "others",
+        "isHighlighted": false,
+        "name": "Other Workspaces",
+        "price": "₹600 - 800",
+        "period": "/ per user / month",
+        "includesKey": "Includes:",
+        "includesValue": "Partial features"
       }
     ],
-    "tableBody": [
+    "features": [
       {
+        "id": "project_management",
         "name": "Project Management",
+        "weblings": true,
+        "others": "Limited",
+        "subFeatures": [
+          {
+            "name": "Team Collaboration",
+            "weblings": true,
+            "others": true
+          }
+        ]
+      },
+      {
+        "id": "secure_chat",
+        "name": "Secure Team Chat",
+        "weblings": true,
+        "others": "Additional Cost"
+      },
+      {
+        "id": "digital_eoffice",
+        "name": "Digital eOffice",
         "weblings": true,
         "others": "Limited"
       },
       {
-        "name": "Team Collaboration",
+        "id": "shared_calendar",
+        "name": "Shared Calendar",
         "weblings": true,
-        "others": true
+        "others": "Extra Module"
       },
       {
-        "name": "Sprint & Backlog",
+        "id": "client_management",
+        "name": "Client Management",
         "weblings": true,
-        "others": "Add-on Extra"
+        "others": "Limited"
       },
       {
-        "name": "Digital Office",
+        "id": "timesheet_approval",
+        "name": "Timesheet Approval",
         "weblings": true,
-        "others": "Unknown"
+        "others": "Extra Module"
       },
       {
-        "name": "Custom Tags & Filters",
+        "id": "employee_directory",
+        "name": "Employee Directory",
         "weblings": true,
-        "others": "100% Limited"
-      },
-      {
-        "name": "Cloud Storage & Media",
-        "weblings": true,
-        "others": "100% Limited"
-      },
-      {
-        "name": "Advanced Security",
-        "weblings": true,
-        "others": "100% Limited"
-      },
-      {
-        "name": "Response Speed & Log",
-        "weblings": true,
-        "others": "Unknown"
+        "others": "Limited"
       }
     ]
   }

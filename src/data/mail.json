@@ -1,9 +1,9 @@
 {
   "feature": {
     "main": {
-      "subtitle": "E-Office",
-      "title": "E-Office",
-      "content": "Bring your projects, teams, tasks, and workflows together in one centralized workspace. Plan work, manage sprints, collaborate with your team, and track progress from start to finish. ",
+      "subtitle": "Mail",
+      "title": "Mail",
+      "content": "Read, organize, and respond to your emails from one centralized mailbox. Compose new messages, manage conversations, organize emails with labels and tags, and keep your inbox clean and easy to manage.",
       "action": [
         {
           "label": "Learn More",
@@ -19,59 +19,59 @@
     },
     "features": [
       {
-        "id": "attendance",
-        "subtitle": "Attendance",
-        "title": "Track Attendance with Ease",
+        "id": "inbox",
+        "subtitle": "Inbox",
+        "title": "Stay on Top of Your Inbox",
         "content": [
-          "Manage employee attendance with simple and accurate check-in and check-out tracking. Monitor attendance status and daily activity across your organization. Make attendance management easier for both employees and administrators."
+          "View and manage all your incoming emails from one organized inbox. Open messages to read complete email details and review previous conversations. Quickly identify important messages and keep track of your latest communication."
         ],
-        "imageKey": "attendance",
-        "imageAlt": "Track Attendance with Ease",
+        "imageKey": "inbox",
+        "imageAlt": "Stay on Top of Your Inbox",
         "imagePosition": "right"
       },
       {
-        "id": "leave",
-        "subtitle": "Leave & Holidays",
-        "title": "Manage Leave and Holidays",
+        "id": "compose_mail",
+        "subtitle": "Compose Mail",
+        "title": "Compose and Send Emails",
         "content": [
-          "Manage leave types, leave plans, holidays, and weekly offs from one place. Define leave policies and assign suitable plans to employees and teams. Give employees a clear view of their available leaves and time off."
+          "Create and send professional emails directly from your workspace. Add recipients, subject, message content, and attachments when needed. Keep your business communication simple, quick, and organized."
         ],
-        "imageKey": "leave",
-        "imageAlt": "Manage Leave and Holidays",
+        "imageKey": "compose_mail",
+        "imageAlt": "Compose and Send Emails",
         "imagePosition": "left"
       },
       {
-        "id": "clients",
-        "subtitle": "Clients",
-        "title": "Manage Your Clients",
+        "id": "reply_manage",
+        "subtitle": "Reply & Manage",
+        "title": "Reply to Emails with Ease",
         "content": [
-          "Keep all your client information organized in one centralized workspace. Create and maintain client profiles with important business and contact details."
+          "Open any email to view its complete details and conversation history. Reply directly to messages and continue conversations from the same workspace. Manage emails efficiently without switching between different communication tools."
         ],
-        "imageKey": "clients",
-        "imageAlt": "Manage Your Clients",
+        "imageKey": "reply_manage",
+        "imageAlt": "Reply to Emails with Ease",
         "imagePosition": "right",
         "showSparkle": true
       },
       {
-        "id": "organization",
-        "subtitle": "Organization",
-        "title": "Build Your Organization Hierarchy",
+        "id": "mail_boxes",
+        "subtitle": "Mail Boxes",
+        "title": "Keep Your Mail Organized",
         "content": [
-          "Create a structured organization tree to represent your workforce clearly. Define role hierarchy and organize employees based on their levels and responsibilities. Maintain employee categories, departments, designations, and reporting relationships. Build a clear structure that makes managing your organization easier."
+          "Access all your emails through dedicated mailboxes for easier management. Use Inbox, Sent, Spam, and Trash to organize messages based on their status. Move unwanted or suspicious emails to Spam and keep your inbox clutter-free. Find sent and deleted messages quickly whenever you need them."
         ],
-        "imageKey": "organization",
-        "imageAlt": "Build Your Organization Hierarchy",
+        "imageKey": "mail_boxes",
+        "imageAlt": "Keep Your Mail Organized",
         "imagePosition": "fullWidth"
       },
       {
-        "id": "teams",
-        "subtitle": "Teams",
-        "title": "Build and Manage Your Teams",
+        "id": "labels_tags",
+        "subtitle": "Labels & Tags",
+        "title": "Organize Emails Your Way",
         "content": [
-          "Create teams and bring employees together based on projects and responsibilities. Assign team leads and manage team members from a single workspace. Keep teams aligned and make collaboration easier throughout the project lifecycle."
+          "Use labels such as Archive and Important to organize emails based on their purpose. Create custom tags to categorize messages according to your workflow. Apply tags to quickly identify and group related emails."
         ],
-        "imageKey": "teams",
-        "imageAlt": "Build and Manage Your Teams",
+        "imageKey": "labels_tags",
+        "imageAlt": "Organize Emails Your Way",
         "imagePosition": "left"
       }
     ],

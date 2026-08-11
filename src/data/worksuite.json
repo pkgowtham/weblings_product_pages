@@ -1,9 +1,9 @@
 {
   "feature": {
     "main": {
-      "subtitle": "E-Office",
-      "title": "E-Office",
-      "content": "Bring your projects, teams, tasks, and workflows together in one centralized workspace. Plan work, manage sprints, collaborate with your team, and track progress from start to finish. ",
+      "subtitle": "Worksuite",
+      "title": "Manage Your Business from One Smart Workspace",
+      "content": "Bring your teams, projects, communication, and daily operations together in a single platform. Weblings Workspace helps businesses collaborate efficiently, stay organized, and get more done with less effort.",
       "action": [
         {
           "label": "Learn More",
@@ -19,60 +19,52 @@
     },
     "features": [
       {
-        "id": "attendance",
-        "subtitle": "Attendance",
-        "title": "Track Attendance with Ease",
+        "id": "streamline",
+        "subtitle": "Streamline",
+        "title": "Streamline Your Business Operations",
         "content": [
-          "Manage employee attendance with simple and accurate check-in and check-out tracking. Monitor attendance status and daily activity across your organization. Make attendance management easier for both employees and administrators."
+          "Simplify everyday workflows and keep every department connected. Track projects, manage clients, organize teams, approve timesheets, and monitor business performance from one centralized workspace."
         ],
-        "imageKey": "attendance",
-        "imageAlt": "Track Attendance with Ease",
-        "imagePosition": "right"
-      },
-      {
-        "id": "leave",
-        "subtitle": "Leave & Holidays",
-        "title": "Manage Leave and Holidays",
-        "content": [
-          "Manage leave types, leave plans, holidays, and weekly offs from one place. Define leave policies and assign suitable plans to employees and teams. Give employees a clear view of their available leaves and time off."
-        ],
-        "imageKey": "leave",
-        "imageAlt": "Manage Leave and Holidays",
-        "imagePosition": "left"
-      },
-      {
-        "id": "clients",
-        "subtitle": "Clients",
-        "title": "Manage Your Clients",
-        "content": [
-          "Keep all your client information organized in one centralized workspace. Create and maintain client profiles with important business and contact details."
-        ],
-        "imageKey": "clients",
-        "imageAlt": "Manage Your Clients",
+        "imageKey": "streamline",
+        "imageAlt": "Streamline Your Business Operations",
         "imagePosition": "right",
-        "showSparkle": true
+        "actionText": "Explore Streamline"
       },
       {
-        "id": "organization",
-        "subtitle": "Organization",
-        "title": "Build Your Organization Hierarchy",
+        "id": "eoffice",
+        "subtitle": "eOffice",
+        "title": "Go Paperless with eOffice",
         "content": [
-          "Create a structured organization tree to represent your workforce clearly. Define role hierarchy and organize employees based on their levels and responsibilities. Maintain employee categories, departments, designations, and reporting relationships. Build a clear structure that makes managing your organization easier."
+          "Digitize your workplace by replacing paperwork with secure digital processes. Store documents, manage approvals, organize employee records, and access business information anytime from anywhere."
         ],
-        "imageKey": "organization",
-        "imageAlt": "Build Your Organization Hierarchy",
+        "imageKey": "eoffice",
+        "imageAlt": "Go Paperless with eOffice",
+        "imagePosition": "left",
+        "actionText": "Explore eOffice"
+      },
+      {
+        "id": "calendar",
+        "subtitle": "Calendar",
+        "title": "Plan Every Day with Smart Calendar",
+        "content": [
+          "Stay ahead of meetings, project deadlines, leave schedules, and company events. The integrated calendar keeps everyone informed and ensures important activities are never missed."
+        ],
+        "imageKey": "calendar",
+        "imageAlt": "Plan Every Day with Smart Calendar",
+        "imagePosition": "right",
+        "showSparkle": true,
+        "actionText": "View Calendar Features"
+      },
+      {
+        "id": "chat",
+        "subtitle": "Chat",
+        "title": "Collaborate Instantly with Team Chat",
+        "content": [
+          "Communicate faster with secure real-time messaging. Share files, discuss projects, create group conversations, and keep everyone connected without switching between multiple applications."
+        ],
+        "imageKey": "chat",
+        "imageAlt": "Collaborate Instantly with Team Chat",
         "imagePosition": "fullWidth"
-      },
-      {
-        "id": "teams",
-        "subtitle": "Teams",
-        "title": "Build and Manage Your Teams",
-        "content": [
-          "Create teams and bring employees together based on projects and responsibilities. Assign team leads and manage team members from a single workspace. Keep teams aligned and make collaboration easier throughout the project lifecycle."
-        ],
-        "imageKey": "teams",
-        "imageAlt": "Build and Manage Your Teams",
-        "imagePosition": "left"
       }
     ],
     "demo": {

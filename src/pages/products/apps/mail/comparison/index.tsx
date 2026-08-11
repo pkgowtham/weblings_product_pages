@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import Comparison from '../../../../../components/comparison/index.tsx';
-import { mailData } from '../../../../../data/index.tsx';
+import mailDataJson from '../../../../../data/mail.json';
 
 const MailComparison = () => {
   return (
     <div>
-        <Comparison comparisonData={mailData.comparison} />
+      <Comparison comparisonData={mailDataJson.comparison} />
     </div>
-  )
-}
+  );
+};
 
-export default MailComparison
+export default MailComparison;

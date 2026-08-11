@@ -41,7 +41,7 @@ const StreamlineFeature = () => {
       isFullWidth: item.imagePosition === "fullWidth",
       action: [
         {
-          label: "Learn more ...",
+          label: "",
           path: "",
           color: "Secondary",
         },

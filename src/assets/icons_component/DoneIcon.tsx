@@ -1,0 +1,19 @@
+import React, { SVGProps } from "react";
+
+export const DoneIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M5.86596 10.6031L3.53263 8.26977C3.27263 8.00977 2.8593 8.00977 2.5993 8.26977C2.3393 8.52977 2.3393 8.94311 2.5993 9.20311L5.39263 11.9964C5.65263 12.2564 6.07263 12.2564 6.33263 11.9964L13.3993 4.93644C13.6593 4.67644 13.6593 4.26311 13.3993 4.00311C13.1393 3.74311 12.726 3.74311 12.466 4.00311L5.86596 10.6031Z"
+      fill={props.fill || "#0072C4"}
+    />
+  </svg>
+);
+
+export default DoneIcon;
