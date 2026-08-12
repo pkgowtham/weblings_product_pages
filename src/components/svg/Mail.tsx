@@ -6,11 +6,12 @@ const SvgMail = (props: SVGProps<SVGSVGElement>) => (
     width={17}
     height={16}
     fill="none"
+    viewBox="0 0 17 16"
     {...props}
   >
     <g clipPath="url(#mail_svg__a)">
       <path
-        stroke="#3C69D7"
+        stroke={props.stroke || "currentColor"}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.333}

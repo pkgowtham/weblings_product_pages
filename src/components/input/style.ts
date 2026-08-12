@@ -45,19 +45,21 @@ const useStyle = createUseStyles((theme:Theme) => ({
     boxSizing: 'border-box',
     fontSize: '1rem',
     fontWeight:400,
-    fontFamily:'Open Sans',
-    // transition: 'border-width 0.3s ease',
+    fontFamily: "'Open Sans', sans-serif",
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
     '&:focus':{
-      border: `2px solid ${theme.light.brand.border.medium}`,
+      borderColor: theme.light.brand.border.medium,
+      boxShadow: `0 0 0 1px ${theme.light.brand.border.medium}`,
       outline:'none'
     },
     '&:hover': {
-      borderWidth: '2px',  
+      borderColor: theme.light.brand.border.medium,
     },
     '&::placeholder':{
       color:theme.light.neutral.onSurface.medium,
       fontWeight:500,
-      fontSize:'14px'
+      fontSize:'14px',
+      fontFamily: "'Open Sans', sans-serif",
      }
   },
 

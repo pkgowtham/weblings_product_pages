@@ -10,7 +10,7 @@ const SvgPhone = (props: SVGProps<SVGSVGElement>) => (
   >
     <g clipPath="url(#phone_svg__a)">
       <path
-        stroke="#3C69D7"
+        stroke={props.stroke || "currentColor"}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.333}

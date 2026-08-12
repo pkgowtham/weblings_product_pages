@@ -106,7 +106,9 @@ const Contact = () => {
                   {contactData.enquireForm.fields.category.label}
                 </label>
                 <div
-                  className={classes.selectTrigger}
+                  className={`${classes.selectTrigger} ${
+                    isCategoryOpen ? classes.selectTriggerActive : ""
+                  }`}
                   onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                 >
                   <span

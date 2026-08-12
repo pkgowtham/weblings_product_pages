@@ -1,11 +1,11 @@
 import { createUseStyles } from "react-jss";
 import { Theme } from "../../theme/themeType";
 
-const useStyle = createUseStyles((theme:Theme) => ({
+const useStyle = createUseStyles((theme: Theme) => ({
   button: {
-    width:'100%',
-    whiteSpace:'nowrap',
-    height:'32px',
+    width: "100%",
+    whiteSpace: "nowrap",
+    height: "32px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -13,31 +13,30 @@ const useStyle = createUseStyles((theme:Theme) => ({
     fontWeight: "600",
     fontSize: "14px",
     border: 0,
-    position:'relative',
+    position: "relative",
     backgroundColor: "transparent",
     cursor: "pointer",
     textDecoration: "none",
     outline: "none",
   },
 
-  buttonContainer:{
-    display: 'flex',
-    justifyContent:'center',
-    alignItems:'center',
-    minWidth:'100%',
-    height:'100%',
-    gap:'8px',
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minWidth: "100%",
+    height: "100%",
+    gap: "8px",
   },
 
-  buttonIcon:{
-    display:'flex',
-    alignItems:'center',
-    justifyContent:'center'
+  buttonIcon: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
-
 
   brand: {
-    padding:'18px 16px',
+    padding: "18px 16px",
     backgroundColor: theme.light.brand.surface.medium,
     color: theme.light.neutral.onSurface.negative,
     border: 0,
@@ -51,21 +50,21 @@ const useStyle = createUseStyles((theme:Theme) => ({
     },
   },
 
-  icon:{
-      padding:theme.spacing.s200
+  icon: {
+    padding: theme.spacing.s200,
   },
 
-  Large:{
-    minHeight:'40px',
-    maxHeight:'40px'
+  Large: {
+    minHeight: "40px",
+    maxHeight: "40px",
   },
 
-  small:{
-    minHeight:'24px'
+  small: {
+    minHeight: "24px",
   },
 
   primary: {
-    padding:'0 12px',
+    padding: "18px 16px",
     backgroundColor: theme.light.neutral.surface.light,
     color: theme.light.neutral.onSurface.medium,
     border: 0,
@@ -94,17 +93,17 @@ const useStyle = createUseStyles((theme:Theme) => ({
     },
   },
 
-  outline:{
+  outline: {
     // backgroundColor: theme.light.negative.surface.medium,
     color: theme.light.brand.onSurface.default,
     padding: "6px 12px",
     border: `1px solid ${theme.light.brand.border.medium}`,
     "&:hover": {
-      backgroundColor: 'rgba(0, 0, 0, 0.10)',
+      backgroundColor: "rgba(0, 0, 0, 0.10)",
       color: theme.light.brand.onSurface.default,
     },
     "&:focus": {
-      backgroundColor: 'rgba(0, 0, 0, 0.10)',
+      backgroundColor: "rgba(0, 0, 0, 0.10)",
       color: theme.light.brand.onSurface.default,
     },
   },
@@ -116,10 +115,6 @@ const useStyle = createUseStyles((theme:Theme) => ({
     // border:`1px solid ${theme.light.neutral.border.disabled}`,
     // border: 0,
   },
-
-
-
-  
 }));
 
 export default useStyle;

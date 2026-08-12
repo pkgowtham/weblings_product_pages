@@ -3,13 +3,14 @@ import type { SVGProps } from "react";
 const SvgLocation = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={13}
-    height={15}
+    width={17}
+    height={16}
     fill="none"
+    viewBox="0 0 17 16"
     {...props}
   >
     <g
-      stroke="#3C69D7"
+      stroke={props.stroke || "currentColor"}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.333}

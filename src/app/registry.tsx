@@ -11,6 +11,7 @@ export default function JssRegistryProvider({
   children: React.ReactNode;
 }) {
   const [sheets] = useState(() => new SheetsRegistry());
+  const [generateId] = useState(() => createGenerateId());
 
   useServerInsertedHTML(() => {
     const styles = sheets.toString();
@@ -23,7 +24,7 @@ export default function JssRegistryProvider({
   });
 
   return (
-    <JssProvider registry={sheets} generateId={createGenerateId()}>
+    <JssProvider registry={sheets} generateId={generateId}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </JssProvider>
   );

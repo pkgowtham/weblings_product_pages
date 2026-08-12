@@ -106,9 +106,9 @@ const Products = () => {
                     className={classes.BannerButton}
                     rightIcon={<SvgChevronRight />}
                   >
-                    <div className={classes.BannerLabel}>
+                    <span className={classes.BannerLabel}>
                       {item.action.label}
-                    </div>
+                    </span>
                   </Button>
                 </div>
               </div>
@@ -222,6 +222,7 @@ const Products = () => {
         <div>
           <Button
             element="button"
+            primary
             onClick={() => router.push("/about")}
             className={classes.button}
             rightIcon={<SvgChevronRight />}

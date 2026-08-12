@@ -74,7 +74,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
       commonProps,
       <div className={classes.buttonContainer}>
         { leftIcon && <span className={classes.buttonIcon}>{leftIcon}</span> }
-         <Typography variant="LM"  style={{color:textColor, fontSize:fontSize}}>{icon || children}</Typography>
+         <Typography variant="LM" component="span" style={{color:textColor, fontSize:fontSize}}>{icon || children}</Typography>
         { rightIcon && <span className={classes.buttonIcon}>{rightIcon}</span> }
         {/* {badgedot && <Badge dot brand={badgeBrand}/>}
         {badge && <Badge brand={badgeBrand} badgeAbsolute={badgeAbsolute}>{text}</Badge>} */}

@@ -112,17 +112,24 @@ export const useStyle = createUseStyles((theme: Theme) => ({
     backgroundColor: "#FFFFFF",
     cursor: "pointer",
     userSelect: "none",
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
     "&:hover": {
       borderColor: theme.light.brand.border.medium,
     },
+  },
+  selectTriggerActive: {
+    borderColor: `${theme.light.brand.border.medium} !important`,
+    boxShadow: `0 0 0 1px ${theme.light.brand.border.medium}`,
   },
   selectedCategoryText: {
     color: theme.light.neutral.onSurface.title,
     fontSize: "0.9375rem",
   },
   placeholderCategoryText: {
-    color: "#8C8C8C",
-    fontSize: "0.9375rem",
+    color: theme.light.neutral.onSurface.medium || "#595959",
+    fontSize: "14px",
+    fontWeight: 500,
+    fontFamily: "'Open Sans', sans-serif",
   },
   dropdownMenu: {
     position: "absolute",
@@ -170,15 +177,17 @@ export const useStyle = createUseStyles((theme: Theme) => ({
     fontSize: "0.875rem",
     fontWeight: 500,
     cursor: "pointer",
-    transition: "all 0.2s ease",
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease",
     "&:hover": {
       borderColor: theme.light.brand.border.medium,
     },
   },
   priorityActive: {
-    border: `2px solid ${theme.light.brand.onSurface.default || "#0072C4"}`,
+    borderColor: `${theme.light.brand.onSurface.default || "#0072C4"} !important`,
+    boxShadow: `0 0 0 1px ${theme.light.brand.onSurface.default || "#0072C4"}`,
     color: theme.light.brand.onSurface.default || "#0072C4",
-    fontWeight: 600,
+    backgroundColor: theme.light.brand.surface.lighter || "#E6F2FF",
+    fontWeight: 500,
   },
 
   // Textarea
@@ -193,12 +202,24 @@ export const useStyle = createUseStyles((theme: Theme) => ({
     border: `1px solid ${theme.light.neutral.border.light || "#D9D9D9"}`,
     borderRadius: "6px",
     fontSize: "0.9375rem",
-    fontFamily: "Open Sans, sans-serif",
+    fontFamily: "'Open Sans', sans-serif",
     boxSizing: "border-box",
     resize: "vertical",
     outline: "none",
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+    "&:hover": {
+      borderColor: theme.light.brand.border.medium,
+    },
     "&:focus": {
-      border: `2px solid ${theme.light.brand.border.medium}`,
+      borderColor: theme.light.brand.border.medium,
+      boxShadow: `0 0 0 1px ${theme.light.brand.border.medium}`,
+      outline: "none",
+    },
+    "&::placeholder": {
+      fontFamily: "'Open Sans', sans-serif",
+      color: theme.light.neutral.onSurface.medium || "#595959",
+      fontWeight: 500,
+      fontSize: "14px",
     },
   },
 

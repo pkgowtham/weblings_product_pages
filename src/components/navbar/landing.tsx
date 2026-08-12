@@ -156,7 +156,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Links */}
-        {!isSmallScreen && (
+        <div className={classes.DesktopOnly}>
           <ul className={classes.NavBarLinks}>
             {/* Product with Dropdown */}
             <li className={classes.NavBarItem}>
@@ -275,20 +275,18 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-        )}
+        </div>
       </div>
 
       {/* Desktop Action Button */}
-      {!isSmallScreen && (
-        <div>
-          <Button element="button" brand onClick={() => router.push("/contact")}>
-            Try Now
-          </Button>
-        </div>
-      )}
+      <div className={classes.DesktopOnly}>
+        <Button element="button" brand onClick={() => router.push("/contact")}>
+          Try Now
+        </Button>
+      </div>
 
       {/* Mobile Screen Hamburger Toggle */}
-      {isSmallScreen && (
+      <div className={classes.MobileOnly}>
         <button
           className={classes.MobileMenuBtn}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -296,11 +294,11 @@ const Navbar = () => {
         >
           <SvgMenu />
         </button>
-      )}
+      </div>
 
       {/* Mobile Responsive Navigation Drawer */}
-      {isSmallScreen && isMenuOpen && (
-        <div className={classes.MobileDrawer}>
+      {isMenuOpen && (
+        <div className={`${classes.MobileDrawer} ${classes.MobileOnly}`}>
           <div className={classes.MobileNavItem}>
             <div
               className={classes.MobileNavLink}

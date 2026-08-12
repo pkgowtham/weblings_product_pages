@@ -129,4 +129,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   SectionTitleColor: {
     color: theme.light.brand.onSurface.default,
   },
+  contactIcon: {
+    color: theme.light.brand.onSurface.default,
+    flexShrink: 0,
+  },
 }));

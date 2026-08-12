@@ -284,4 +284,18 @@ export const usestyles = createUseStyles((theme: Theme) => ({
       width: "100%",
     },
   },
+  DesktopOnly: {
+    display: "flex !important",
+    alignItems: "center",
+    gap: "32px",
+    "@media (max-width: 860px)": {
+      display: "none !important",
+    },
+  },
+  MobileOnly: {
+    display: "none !important",
+    "@media (max-width: 860px)": {
+      display: "flex !important",
+    },
+  },
 }));

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
 import { createUseStyles } from "react-jss";
 import first from "../../assets/images/mailSticky.svg";
 import eoffice from "../../assets/images/eoffice.svg";
@@ -20,6 +21,7 @@ interface ContentItem {
   buttonText: string;
   interfaceType: string;
   image: any;
+  path?: string;
   icon?: any;
 }
 
@@ -87,10 +89,14 @@ const useStyles = createUseStyles({
     left: 0,
     width: "100%",
     opacity: 0,
+    pointerEvents: "none",
+    zIndex: 1,
     transform: "translateY(50px)",
     transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
     "&.active": {
       opacity: 1,
+      pointerEvents: "auto",
+      zIndex: 10,
       transform: "translateY(0)",
     },
   },
@@ -278,8 +284,15 @@ const useStyles = createUseStyles({
   },
 
   mailIconColor: {
+    color: "#ffffff",
+    stroke: "#ffffff",
     "& path": {
-      fill: "white",
+      stroke: "#ffffff",
+    },
+  },
+  filledIconColor: {
+    "& path": {
+      fill: "#ffffff",
     },
   },
 
@@ -390,7 +403,7 @@ const defaultContentItems: ContentItem[] = [
     buttonText: "Learn More",
     interfaceType: "📧 Webmail Interface",
     image: first,
-    icon: <SvgMail color="white" />,
+    path: "/mail/feature",
   },
   {
     id: 2,
@@ -400,6 +413,7 @@ const defaultContentItems: ContentItem[] = [
     buttonText: "Learn More",
     interfaceType: "📊 Analytics Dashboard",
     image: eoffice,
+    path: "/eoffice/feature",
   },
   {
     id: 3,
@@ -409,6 +423,7 @@ const defaultContentItems: ContentItem[] = [
     buttonText: "Learn More",
     interfaceType: "👥 Team Workspace",
     image: calender,
+    path: "/calender/feature",
   },
   // {
   //   id: 4,
@@ -633,6 +648,7 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
                           viewBox="0 0 16 16"
                           width={40}
                           height={40}
+                          stroke="white"
                           className={classes.mailIconColor}
                         />
                       ) : index === 1 ? (
@@ -640,14 +656,14 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
                           viewBox="0 0 16 16"
                           width={40}
                           height={40}
-                          className={classes.mailIconColor}
+                          className={classes.filledIconColor}
                         />
                       ) : (
                         <SvgCalendarSticky
                           viewBox="0 0 16 16"
                           width={40}
                           height={40}
-                          className={classes.mailIconColor}
+                          className={classes.filledIconColor}
                         />
                       )}
                     </div>
@@ -667,13 +683,19 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
                   <p className={classes.contentDescription}>
                     {item.description}
                   </p>
-                  <a
-                    href="#"
+                  <Link
+                    href={
+                      item.path ||
+                      (index === 0
+                        ? "/mail/feature"
+                        : index === 1
+                        ? "/eoffice/feature"
+                        : "/calender/feature")
+                    }
                     className={classes.learnMore}
-                    onClick={(e) => e.preventDefault()}
                   >
                     {item.buttonText}
-                  </a>
+                  </Link>
                 </div>
               ))}
               {/* Progress indicator */}

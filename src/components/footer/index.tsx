@@ -25,8 +25,15 @@ interface FooterSection {
   features: FooterLink[];
 }
 
-const Footer: React.FC = (): JSX.Element => {
+export interface FooterProps {
+  iconColor?: string;
+  brandColor?: string;
+  className?: string;
+}
+
+const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): JSX.Element => {
   const classes = usestyles();
+  const effectiveIconColor = iconColor || brandColor;
 
   const footer: { sections: FooterSection[] } = {
     sections: [
@@ -53,7 +60,7 @@ const Footer: React.FC = (): JSX.Element => {
   };
 
   return (
-    <footer className={classes.Footer}>
+    <footer className={`${classes.Footer} ${className || ""}`.trim()}>
       <div className={classes.FooterContent}>
         <div className={classes.FirstSection}>
           <div className={classes.SubDiv}>
@@ -97,15 +104,15 @@ const Footer: React.FC = (): JSX.Element => {
           </div>
           <ul className={classes.ul}>
             <li className={classes.li}>
-              <SvgPhone />
+              <SvgPhone className={classes.contactIcon} stroke={effectiveIconColor} />
               <Typography variant="LXS">97895 13198</Typography>
             </li>
             <li className={classes.li}>
-              <SvgMail />
+              <SvgMail className={classes.contactIcon} stroke={effectiveIconColor} />
               <Typography variant="LXS">pkgowthamit@gmail.com</Typography>
             </li>
             <li className={classes.li}>
-              <SvgLocation />
+              <SvgLocation className={classes.contactIcon} stroke={effectiveIconColor} />
               <Typography variant="LXS">
                 Weblings No:8, K.M Nagar,3rd Street, Velliyankadu, Tirupur,
                 Tamilnadu, 641604. India

@@ -107,7 +107,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     },
   },
   headTitle: {
-    color: theme.light.neutral.onSurface.dark,
+    color: theme.light.neutral.onSurface.title,
     maxWidth: "564px",
     width: "100%",
     textAlign: "center",
