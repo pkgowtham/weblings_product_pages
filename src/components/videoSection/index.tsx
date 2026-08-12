@@ -1,6 +1,8 @@
-import React from "react";
-import { useStyles } from "./videoSectionStyle.ts";
-import Typography from "../typography/component.tsx";
+'use client';
+
+import React, { useState } from "react";
+import { useStyles } from "./videoSectionStyle";
+import Typography from "../typography/component";
 
 interface VideoSectionProps {
   demoData?: {

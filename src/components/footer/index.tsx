@@ -1,16 +1,19 @@
+'use client';
+
 import React from "react";
-import { Link } from "react-router-dom";
-import { usestyles } from "../footer/footerstyle.tsx";
-import Typography from "../typography/component.tsx";
-import SvgTwitter from "../svg/Twitter.tsx";
-import SvgLinkedin from "../svg/Linkedin.tsx";
-import SvgYoutube from "../svg/Youtube.tsx";
-import SvgFacebook from "../svg/Facebook.tsx";
-import SvgInsta from "../svg/Insta.tsx";
-import SvgPhone from "../svg/Phone.tsx";
-import SvgMail from "../svg/Mail.tsx";
-import SvgLocation from "../svg/Location.tsx";
+import Link from "next/link";
+import { usestyles } from "../footer/footerstyle";
+import Typography from "../typography/component";
+import SvgTwitter from "../svg/Twitter";
+import SvgLinkedin from "../svg/Linkedin";
+import SvgYoutube from "../svg/Youtube";
+import SvgFacebook from "../svg/Facebook";
+import SvgInsta from "../svg/Insta";
+import SvgPhone from "../svg/Phone";
+import SvgMail from "../svg/Mail";
+import SvgLocation from "../svg/Location";
 import weblingslogo from "../../assets/images/weblings_logo.svg";
+import { getSrc } from "../../utils/getSrc";
 
 interface FooterLink {
   label: string;
@@ -54,8 +57,8 @@ const Footer: React.FC = (): JSX.Element => {
       <div className={classes.FooterContent}>
         <div className={classes.FirstSection}>
           <div className={classes.SubDiv}>
-            <Link to="/">
-              <img src={weblingslogo} alt="Weblings Logo" className={classes.weblingslogo} />
+            <Link href="/">
+              <img src={getSrc(weblingslogo)} alt="Weblings Logo" className={classes.weblingslogo} />
             </Link>
           </div>
           <div className={classes.Icons}>
@@ -77,7 +80,7 @@ const Footer: React.FC = (): JSX.Element => {
             <ul className={classes.ulist}>
               {section.features.map((feature, featureIndex) => (
                 <li className={classes.list} key={featureIndex}>
-                  <Link to={feature.path} className={classes.footerLink}>
+                  <Link href={feature.path} className={classes.footerLink}>
                     <Typography variant="LXS">{feature.label}</Typography>
                   </Link>
                 </li>

@@ -1,8 +1,10 @@
+'use client';
+
 import React, { forwardRef, ReactNode, ElementType } from "react";
-import useStyle from "./style.ts";
+import useStyle from "./style";
 import clsx from "clsx";
-import { ButtonProps } from "./buttonType.ts";
-import Typography from "../typography/component.tsx";
+import { ButtonProps } from "./buttonType";
+import Typography from "../typography/component";
 
 
 const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(

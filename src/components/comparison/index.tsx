@@ -1,5 +1,5 @@
 import React from "react";
-import ComparisonTemp from "../comparationTemp/index.tsx";
+import ComparisonTemp from "../comparationTemp/index";
 
 const Comparison: React.FC<any> = (props): JSX.Element => {
   return <ComparisonTemp {...props} />;

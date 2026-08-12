@@ -1,5 +1,5 @@
 import { createUseStyles } from "react-jss";
-import { Theme } from "../../theme/themeType.ts";
+import { Theme } from "../../theme/themeType";
 
 export const usestyles = createUseStyles((theme: Theme) => ({
   Footer: {
@@ -10,21 +10,38 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     background: theme.light.neutral.surface.lighter,
     boxShadow: theme.elevation.m,
+    width: "100%",
+    boxSizing: "border-box",
+    overflowX: "hidden",
   },
   FooterContent: {
     display: "flex",
     justifyContent: "space-between",
     width: "100%",
-    maxWidth: "90%",
+    maxWidth: "1200px",
     padding: theme.spacing.s1200,
+    boxSizing: "border-box",
     flexWrap: "wrap",
+    gap: theme.spacing.s800,
+    "@media (max-width: 950px)": {
+      justifyContent: "flex-start",
+      gap: "36px 48px",
+      padding: "40px 24px",
+    },
+    "@media (max-width: 600px)": {
+      flexDirection: "column",
+      gap: "32px",
+      padding: "32px 20px",
+    },
   },
   FirstSection: {
     display: "flex",
     flexDirection: "column",
     gap: theme.spacing.s400,
     width: "251px",
+    maxWidth: "100%",
     cursor: "pointer",
+    boxSizing: "border-box",
   },
   SubDiv: {
     display: "flex",
@@ -34,6 +51,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   weblingslogo: {
     width: "200px",
     height: "auto",
+    maxWidth: "100%",
   },
   Title: {
     color: theme.light.brand.surface.medium,
@@ -48,36 +66,46 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     gap: theme.spacing.s400,
-    width: "251px",
+    width: "280px",
+    maxWidth: "100%",
     cursor: "pointer",
+    boxSizing: "border-box",
+    "@media (max-width: 950px)": {
+      width: "100%",
+    },
   },
   ul: {
     listStyle: "none",
     display: "flex",
     flexDirection: "column",
     gap: theme.spacing.s400,
+    padding: 0,
+    margin: 0,
+    maxWidth: "100%",
   },
   li: {
     display: "flex",
-    alignItems: "start",
+    alignItems: "flex-start",
     gap: theme.spacing.s400,
+    wordBreak: "break-word",
   },
   LogoStyle: {
     width: "16px",
     height: "16px",
   },
-
   Icons: {
     display: "flex",
     gap: theme.spacing.s600,
   },
   SecondSection: {
     display: "flex",
-    width: "110px",
+    width: "120px",
+    maxWidth: "100%",
     flexDirection: "column",
     alignItems: "flex-start",
     gap: theme.spacing.s400,
     cursor: "pointer",
+    boxSizing: "border-box",
   },
   ulist: {
     display: "flex",

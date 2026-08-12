@@ -1,5 +1,5 @@
 import { createUseStyles } from "react-jss";
-import { theme } from "../../theme/theme.ts";
+import { theme } from "../../theme/theme";
 
 export const usestyles = createUseStyles({
   navbar: {
@@ -12,7 +12,7 @@ export const usestyles = createUseStyles({
   },
   navDiv: {
     width: '100%',
-    height: '40px',
+    height: '120px',
     // backgroundColor: theme.light.brand.surface.lighter
   },
   logo: {

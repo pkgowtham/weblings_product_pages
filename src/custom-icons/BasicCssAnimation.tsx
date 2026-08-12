@@ -53,19 +53,19 @@ const SvgBasicCssAnimation = (props: SVGProps<SVGSVGElement>) => (
     <g
       id="basicCssAnimation_svg__eL602DS84ZQ7"
       style={{
-        display: "inline!important",
-        fill: "#000!important",
-        fillOpacity: "1!important",
-        filter: "none!important",
-        mask: "none!important",
-        opacity: "1!important",
-        stroke: "none!important",
-        strokeOpacity: "1!important",
-        strokeWidth: "1px!important",
+        display: "inline",
+        fill: "#000",
+        fillOpacity: "1",
+        filter: "none",
+        mask: "none",
+        opacity: "1",
+        stroke: "none",
+        strokeOpacity: "1",
+        strokeWidth: "1px",
         transform:
-          "matrix(.857143,0,0,.857143,435.754286,530.571429)!important",
-        transformOrigin: "0 0!important",
-        visibility: "visible!important",
+          "matrix(.857143,0,0,.857143,435.754286,530.571429)",
+        transformOrigin: "0 0",
+        visibility: "visible",
       }}
       transform="matrix(.85714 0 0 .85714 435.754 530.571)"
     >
@@ -79,22 +79,22 @@ const SvgBasicCssAnimation = (props: SVGProps<SVGSVGElement>) => (
         rx={28}
         ry={28}
         style={{
-          display: "inline!important",
-          height: "61.25px!important",
-          fill: "#112346!important",
-          fillOpacity: "1!important",
-          filter: "none!important",
-          mask: "none!important",
-          opacity: ".2!important",
-          stroke: "none!important",
-          strokeOpacity: "1!important",
-          strokeWidth: "0!important",
-          transform: "matrix(1,0,0,1,-8.375042,-5.249997)!important",
-          transformOrigin: "0 0!important",
-          visibility: "visible!important",
-          width: "175px!important",
-          x: "0!important",
-          y: "0!important",
+          display: "inline",
+          height: "61.25px",
+          fill: "#112346",
+          fillOpacity: "1",
+          filter: "none",
+          mask: "none",
+          opacity: ".2",
+          stroke: "none",
+          strokeOpacity: "1",
+          strokeWidth: "0",
+          transform: "matrix(1,0,0,1,-8.375042,-5.249997)",
+          transformOrigin: "0 0",
+          visibility: "visible",
+          width: "175px",
+          x: "0",
+          y: "0",
         }}
         transform="translate(-8.375 -5.25)"
       />
@@ -107,18 +107,18 @@ const SvgBasicCssAnimation = (props: SVGProps<SVGSVGElement>) => (
         opacity={0.8}
         style={{
           d: "path(&quot",
-          display: "inline!important",
-          fill: "#fff!important",
-          fillOpacity: "1!important",
-          filter: "none!important",
-          mask: "none!important",
-          opacity: ".8!important",
-          stroke: "none!important",
-          strokeOpacity: "1!important",
-          strokeWidth: "1px!important",
-          transform: "none!important",
-          transformOrigin: "0 0!important",
-          visibility: "visible!important",
+          display: "inline",
+          fill: "#fff",
+          fillOpacity: "1",
+          filter: "none",
+          mask: "none",
+          opacity: ".8",
+          stroke: "none",
+          strokeOpacity: "1",
+          strokeWidth: "1px",
+          transform: "none",
+          transformOrigin: "0 0",
+          visibility: "visible",
         }}
       />
       <g
@@ -126,18 +126,18 @@ const SvgBasicCssAnimation = (props: SVGProps<SVGSVGElement>) => (
         mask="url(#basicCssAnimation_svg__eL602DS84ZQ12)"
         opacity={0.8}
         style={{
-          display: "inline!important",
-          fill: "#000!important",
-          fillOpacity: "1!important",
-          filter: "none!important",
-          mask: "url(#basicCssAnimation_svg__eL602DS84ZQ12)!important",
-          opacity: ".8!important",
-          stroke: "none!important",
-          strokeOpacity: "1!important",
-          strokeWidth: "1px!important",
-          transform: "matrix(.3,0,0,.3,-18.12243,-25.905895)!important",
-          transformOrigin: "0 0!important",
-          visibility: "visible!important",
+          display: "inline",
+          fill: "#000",
+          fillOpacity: "1",
+          filter: "none",
+          mask: "url(#basicCssAnimation_svg__eL602DS84ZQ12)",
+          opacity: ".8",
+          stroke: "none",
+          strokeOpacity: "1",
+          strokeWidth: "1px",
+          transform: "matrix(.3,0,0,.3,-18.12243,-25.905895)",
+          transformOrigin: "0 0",
+          visibility: "visible",
         }}
         transform="matrix(.3 0 0 .3 -18.122 -25.906)"
       >
@@ -147,18 +147,18 @@ const SvgBasicCssAnimation = (props: SVGProps<SVGSVGElement>) => (
           d="M129.5 243.584c-8.76 2.18-20.08 1.79-37.33-19.63-2.358-2.928-4.382-6.363-5.934-10.028 3.008.979 6.22 1.508 9.554 1.508 17.032 0 30.84-13.807 30.84-30.84a30.7 30.7 0 0 0-3.854-14.94c22.541-3.147 48.247-1.186 56.014 6.2 12.32 11.73-14.11 59.03-49.29 67.73"
           style={{
             d: "path(&quot",
-            display: "inline!important",
-            fill: "#fff!important",
-            fillOpacity: "1!important",
-            filter: "none!important",
-            mask: "none!important",
-            opacity: "1!important",
-            stroke: "none!important",
-            strokeOpacity: "1!important",
-            strokeWidth: "1px!important",
-            transform: "none!important",
-            transformOrigin: "0 0!important",
-            visibility: "visible!important",
+            display: "inline",
+            fill: "#fff",
+            fillOpacity: "1",
+            filter: "none",
+            mask: "none",
+            opacity: "1",
+            stroke: "none",
+            strokeOpacity: "1",
+            strokeWidth: "1px",
+            transform: "none",
+            transformOrigin: "0 0",
+            visibility: "visible",
           }}
         />
         <mask
@@ -169,38 +169,38 @@ const SvgBasicCssAnimation = (props: SVGProps<SVGSVGElement>) => (
           y="-150%"
           mask-type="alpha"
           style={{
-            display: "inline!important",
-            height: "400%!important",
-            fill: "#000!important",
-            fillOpacity: "1!important",
-            filter: "none!important",
-            mask: "none!important",
-            opacity: "1!important",
-            stroke: "none!important",
-            strokeOpacity: "1!important",
-            strokeWidth: "1px!important",
-            transform: "none!important",
-            transformOrigin: "0 0!important",
-            visibility: "visible!important",
-            width: "400%!important",
-            x: "-150%!important",
-            y: "-150%!important",
+            display: "inline",
+            height: "400%",
+            fill: "#000",
+            fillOpacity: "1",
+            filter: "none",
+            mask: "none",
+            opacity: "1",
+            stroke: "none",
+            strokeOpacity: "1",
+            strokeWidth: "1px",
+            transform: "none",
+            transformOrigin: "0 0",
+            visibility: "visible",
+            width: "400%",
+            x: "-150%",
+            y: "-150%",
           }}
         >
           <g
             id="basicCssAnimation_svg__eL602DS84ZQ13_tr"
             style={{
-              display: "inline!important",
-              fill: "#000!important",
-              fillOpacity: "1!important",
-              filter: "none!important",
-              mask: "none!important",
-              opacity: "1!important",
-              stroke: "none!important",
-              strokeOpacity: "1!important",
-              strokeWidth: "1px!important",
-              transformOrigin: "0 0!important",
-              visibility: "visible!important",
+              display: "inline",
+              fill: "#000",
+              fillOpacity: "1",
+              filter: "none",
+              mask: "none",
+              opacity: "1",
+              stroke: "none",
+              strokeOpacity: "1",
+              strokeWidth: "1px",
+              transformOrigin: "0 0",
+              visibility: "visible",
             }}
             transform="translate(135.338 207.04)"
           >
@@ -211,17 +211,17 @@ const SvgBasicCssAnimation = (props: SVGProps<SVGSVGElement>) => (
               d="M78.375 207.04c0-31.46 25.503-56.964 56.963-56.964s56.963 25.503 56.963 56.963-25.503 56.964-56.963 56.964-56.963-25.504-56.963-56.964m89.235-4.716a1.74 1.74 0 0 0-2-1.41h-.06a9.88 9.88 0 0 1-9-16.37 1.76 1.76 0 0 0 0-2.49l-.11-.1a31.5 31.5 0 0 0-9.11-5.45 1.76 1.76 0 0 0-2.29 1v.06a9.88 9.88 0 0 1-18.7-.18 1.76 1.76 0 0 0-2.2-1.18h-.11a32.6 32.6 0 0 0-9.03 5.12 1.76 1.76 0 0 0-.34 2.47l.1.12a9.88 9.88 0 0 1-9.57 16 1.76 1.76 0 0 0-2.11 1.33v.09a32.6 32.6 0 0 0 0 10.38 1.76 1.76 0 0 0 2 1.5h.11a9.88 9.88 0 0 1 9 16.37 1.76 1.76 0 0 0 0 2.49l.11.1a31.5 31.5 0 0 0 9.11 5.42 1.76 1.76 0 0 0 2.29-1v-.06a9.88 9.88 0 0 1 18.68.16 1.76 1.76 0 0 0 2.2 1.18h.11a32.6 32.6 0 0 0 9.13-5.19 1.76 1.76 0 0 0 .31-2.48l-.1-.12a9.88 9.88 0 0 1 9.47-16.21 1.74 1.74 0 0 0 2.11-1.26v-.09a32.6 32.6 0 0 0 0-10.2m-41.67 4.69a9.41 9.41 0 1 1 18.82 0 9.41 9.41 0 0 1-18.82 0"
               style={{
                 d: "path(&quot",
-                display: "inline!important",
-                fillOpacity: "1!important",
-                filter: "none!important",
-                mask: "none!important",
-                opacity: "1!important",
-                stroke: "none!important",
-                strokeOpacity: "1!important",
-                strokeWidth: "0!important",
-                transform: "matrix(1,0,0,1,-135.33781,-207.03926)!important",
-                transformOrigin: "0 0!important",
-                visibility: "visible!important",
+                display: "inline",
+                fillOpacity: "1",
+                filter: "none",
+                mask: "none",
+                opacity: "1",
+                stroke: "none",
+                strokeOpacity: "1",
+                strokeWidth: "0",
+                transform: "matrix(1,0,0,1,-135.33781,-207.03926)",
+                transformOrigin: "0 0",
+                visibility: "visible",
               }}
               transform="translate(-135.338 -207.04)"
             />
@@ -231,17 +231,17 @@ const SvgBasicCssAnimation = (props: SVGProps<SVGSVGElement>) => (
       <g
         id="basicCssAnimation_svg__eL602DS84ZQ14_tr"
         style={{
-          display: "inline!important",
-          fill: "#000!important",
-          fillOpacity: "1!important",
-          filter: "none!important",
-          mask: "none!important",
-          opacity: "1!important",
-          stroke: "none!important",
-          strokeOpacity: "1!important",
-          strokeWidth: "1px!important",
-          transformOrigin: "0 0!important",
-          visibility: "visible!important",
+          display: "inline",
+          fill: "#000",
+          fillOpacity: "1",
+          filter: "none",
+          mask: "none",
+          opacity: "1",
+          stroke: "none",
+          strokeOpacity: "1",
+          strokeWidth: "1px",
+          transformOrigin: "0 0",
+          visibility: "visible",
         }}
         transform="translate(11.12 29.9)"
       >
@@ -252,18 +252,18 @@ const SvgBasicCssAnimation = (props: SVGProps<SVGSVGElement>) => (
           opacity={0.8}
           style={{
             d: "path(&quot",
-            display: "inline!important",
-            fill: "#fff!important",
-            fillOpacity: "1!important",
-            filter: "none!important",
-            mask: "none!important",
-            opacity: ".8!important",
-            stroke: "none!important",
-            strokeOpacity: "1!important",
-            strokeWidth: "1px!important",
-            transform: "matrix(.3,0,0,.3,-28.770844,-32.5395)!important",
-            transformOrigin: "0 0!important",
-            visibility: "visible!important",
+            display: "inline",
+            fill: "#fff",
+            fillOpacity: "1",
+            filter: "none",
+            mask: "none",
+            opacity: ".8",
+            stroke: "none",
+            strokeOpacity: "1",
+            strokeWidth: "1px",
+            transform: "matrix(.3,0,0,.3,-28.770844,-32.5395)",
+            transformOrigin: "0 0",
+            visibility: "visible",
           }}
           transform="matrix(.3 0 0 .3 -28.77 -32.54)"
         />

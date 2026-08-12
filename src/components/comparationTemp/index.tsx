@@ -1,14 +1,16 @@
+'use client';
+
 import React, { useState } from "react";
-import { usestyles } from "./comparisonstyle.tsx";
-import SvgWeblingslogo from "../svg/Weblingslogo.tsx";
-import { DoneIcon } from "../../assets/icons_component/index.tsx";
-import Typography from "../typography/component.tsx";
+import { usestyles } from "./comparisonstyle";
+import SvgWeblingslogo from "../svg/Weblingslogo";
+import { DoneIcon } from "../../assets/icons_component/index";
+import Typography from "../typography/component";
 import comparisonJson from "../../data/comparison.json";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 const ComparisonTemp: React.FC<any> = (props): JSX.Element => {
   const classes = usestyles();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   // Use props data if available or fallback to comparison.json
   const data =
@@ -123,7 +125,7 @@ const ComparisonTemp: React.FC<any> = (props): JSX.Element => {
                 {/* Free Trial Button */}
                 <button
                   className={classes.btnGetTrial}
-                  onClick={() => navigate("/contact")}
+                  onClick={() => router.push("/contact")}
                 >
                   {weblingsPlan.actionLabel || "Get Free Trial"}
                 </button>
@@ -136,9 +138,14 @@ const ComparisonTemp: React.FC<any> = (props): JSX.Element => {
 
               {/* Column 3 Header: Other Workspaces */}
               <th className={classes.thNormal}>
-                <Typography variant="TS" component="div" className={classes.otherHeaderTitle}>
-                  {othersPlan.name}
-                </Typography>
+                {/* Badge Spacer to align title with Column 2 */}
+                <div className={classes.badgeSpacer} />
+
+                <div className={classes.otherHeaderTitle}>
+                  <Typography variant="TS" component="span">
+                    {othersPlan.name}
+                  </Typography>
+                </div>
 
                 <div className={classes.priceRow}>
                   <Typography variant="HM" component="span" className={classes.priceLarge}>
@@ -157,6 +164,12 @@ const ComparisonTemp: React.FC<any> = (props): JSX.Element => {
                     {othersPlan.includesValue}
                   </Typography>
                 </div>
+
+                {/* Action Spacer & Subtext Spacer for exact baseline alignment */}
+                <div className={classes.actionPlaceholder} />
+                <Typography variant="LXS" component="p" className={classes.actionSubtext} style={{ opacity: 0 }}>
+                  &nbsp;
+                </Typography>
               </th>
             </tr>
           </thead>

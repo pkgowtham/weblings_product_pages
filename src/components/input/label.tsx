@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
-import useStyle from "./style.ts";
-import Typography from "../typography/component.tsx";
+import useStyle from "./style";
+import Typography from "../typography/component";
 
 interface LabelProps {
   htmlFor?: string;

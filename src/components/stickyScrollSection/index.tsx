@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { createUseStyles } from "react-jss";
 import first from "../../assets/images/mailSticky.svg";
@@ -5,10 +7,11 @@ import eoffice from "../../assets/images/eoffice.svg";
 import calender from "../../assets/images/calender.svg";
 import largeStar from "../../assets/icons/largeStickyStar.svg";
 import smallStar from "../../assets/icons/smallStickyStar.svg";
-import Typography from "../typography/component.tsx";
-import SvgMail from "../svg/Mail.tsx";
-import SvgCalendarSticky from "../svg/CalendarSticky.tsx";
-import SvgEofficeSticky from "../svg/EofficeSticky.tsx";
+import Typography from "../typography/component";
+import { getSrc } from "../../utils/getSrc";
+import SvgMail from "../svg/Mail";
+import SvgCalendarSticky from "../svg/CalendarSticky";
+import SvgEofficeSticky from "../svg/EofficeSticky";
 // Types
 interface ContentItem {
   id: number;
@@ -39,30 +42,37 @@ const useStyles = createUseStyles({
   // Sticky scroll section
   stickyScrollContainer: {
     position: "relative",
-    // Height is set dynamically via inline style based on contentItems.length
-    marginTop: '50px'
+    marginTop: '30px',
   },
 
   stickyContent: {
     position: "sticky",
-    top: 0,
-    height: "100vh",
+    top: "90px",
+    height: "calc(100vh - 90px)",
     display: "flex",
     flexDirection: 'column',
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     overflow: "hidden",
+    boxSizing: "border-box",
+    paddingTop: "16px",
+    paddingBottom: "16px",
+    "@media (max-width: 860px)": {
+      top: "80px",
+      height: "calc(100vh - 80px)",
+    },
   },
 
   contentWrapper: {
     maxWidth: "1200px",
     margin: "0 auto",
-    marginTop: '150px',
+    marginTop: '0',
     display: "grid",
     gridTemplateColumns: "1.3fr 2fr",
     gap: "4rem",
     alignItems: "center",
     width: "100%",
+    flex: 1,
   },
 
   contentLeft: {
@@ -73,7 +83,7 @@ const useStyles = createUseStyles({
 
   contentItem: {
     position: "absolute",
-    top: -80,
+    top: 0,
     left: 0,
     width: "100%",
     opacity: 0,
@@ -82,6 +92,17 @@ const useStyles = createUseStyles({
     "&.active": {
       opacity: 1,
       transform: "translateY(0)",
+    },
+  },
+
+  slideHeader: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "10px",
+    width: "100%",
+    "@media (max-width: 1000px)": {
+      justifyContent: "center",
+      alignItems: "center",
     },
   },
 
@@ -263,11 +284,19 @@ const useStyles = createUseStyles({
   },
 
   header: {
-    position: "absolute",
-    top: '10%',
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    whiteSpace: 'nowrap'
+    position: "relative",
+    top: 0,
+    left: "auto",
+    transform: "none",
+    whiteSpace: 'nowrap',
+    marginBottom: "16px",
+    textAlign: "center",
+    zIndex: 10,
+    "@media (max-width: 600px)": {
+      fontSize: "1.75rem",
+      whiteSpace: "normal",
+      marginBottom: "12px",
+    },
   },
 
   firstStar: {
@@ -289,7 +318,7 @@ const useStyles = createUseStyles({
   // Mobile responsiveness
   "@media (max-width: 768px)": {
     contentWrapper: {
-      marginTop: "70px",
+      marginTop: "0",
     },
     contentRight: {
       height: "300px",
@@ -306,21 +335,34 @@ const useStyles = createUseStyles({
     contentWrapper: {
       gridTemplateColumns: "1fr",
       height: "auto",
-      marginTop: "80px",
+      marginTop: "0",
       textAlign: "center",
+      gap: "1.5rem",
     },
     contentLeft: {
-      height: "260px",
-      minHeight: "260px",
+      height: "210px",
+      minHeight: "190px",
     },
     contentRight: {
-      height: "220px",
+      height: "260px",
+      width: "100%",
+      position: "relative",
     },
     imageContainer: {
-      right: "50%",
-      width: "80%",
-      left: "10%",
-      transform: "translate(-50%, -50%)",
+      top: 0,
+      left: "50%",
+      width: "92%",
+      maxWidth: "500px",
+      right: "auto",
+      transform: "translate(-50%, 100px) rotateX(10deg)",
+      "&.active": {
+        opacity: 1,
+        transform: "translate(-50%, 0) rotateX(0deg)",
+      },
+      "&.exit": {
+        opacity: 0,
+        transform: "translate(-50%, -100px) rotateX(-10deg)",
+      },
     },
     firstStar: {
       left: 20
@@ -574,14 +616,7 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
                     } content-item`}
                   data-index={index}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "10px",
-                      width: "100%",
-                    }}
-                  >
+                  <div className={classes.slideHeader}>
                     <div
                       style={{
                         display: "flex",
@@ -671,7 +706,7 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
                     )}`}
                   >
                     <img
-                      src={item.image}
+                      src={getSrc(item.image)}
                       alt="first avatar"
                       style={{
                         width: "100%",
@@ -684,19 +719,12 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
               ))}
 
               <img
-                src={largeStar}
+                src={getSrc(largeStar)}
                 alt="first avatar"
                 className={classes.firstStar}
-              // style={{
-              //   width: "70px",
-              //   objectFit: "cover",
-              //   position: "absolute",
-              //   top: -50,
-              //   left: -60,
-              // }}
               />
               <img
-                src={smallStar}
+                src={getSrc(smallStar)}
                 alt="first avatar"
                 className={classes.secondStar}
               // style={{

@@ -1,5 +1,5 @@
 import { createUseStyles } from "react-jss";
-import { Theme } from "../../theme/themeType.ts";
+import { Theme } from "../../theme/themeType";
 
 export const usestyles = createUseStyles((theme: Theme) => ({
   MainComparisontemp: {
@@ -125,6 +125,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     color: "#0072C4",
     fontSize: "1.25rem",
     fontWeight: 700,
+    height: "32px",
     marginBottom: "12px",
   },
   priceRow: {
@@ -133,15 +134,19 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     justifyContent: "center",
     gap: "6px",
     margin: "12px 0 8px 0",
+    whiteSpace: "nowrap",
   },
   priceLarge: {
-    fontSize: "2.75rem",
+    fontSize: "2.35rem",
+    fontWeight: 700,
     color: "#1F2937",
     lineHeight: 1,
+    whiteSpace: "nowrap",
   },
   pricePeriod: {
-    fontSize: "0.9375rem",
+    fontSize: "0.875rem",
     color: "#555555",
+    whiteSpace: "nowrap",
   },
   includesNote: {
     fontSize: "0.875rem",
@@ -149,6 +154,11 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     lineHeight: 1.5,
     margin: "8px 0 16px 0",
     padding: "0 10px",
+    minHeight: "42px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexWrap: "wrap",
   },
   includesKey: {
     color: "#0072C4",
@@ -176,6 +186,13 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     color: "#777777",
     margin: "8px 0 0 0",
   },
+  badgeSpacer: {
+    height: "31px",
+    marginBottom: "4px",
+  },
+  actionPlaceholder: {
+    height: "43px",
+  },
 
   // ─────────────────────────────────────────────────────────────────────
   // Column 3 (Other Workspaces)
@@ -185,12 +202,17 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     padding: "36px 20px 24px 20px",
     textAlign: "center",
     verticalAlign: "top",
+    position: "relative",
     borderBottom: "1px solid #ECECEC",
   },
   otherHeaderTitle: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "32px",
     color: "#1F2937",
     fontSize: "1.25rem",
-    fontWeight: 600,
+    fontWeight: 700,
     marginBottom: "12px",
   },
 

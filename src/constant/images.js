@@ -1,29 +1,29 @@
-import layer from "../assets/images/layer.svg";
-import email from "../assets/images/email.svg";
-import empty from "../assets/images/empty.svg";
-import map from "../assets/images/Basemap_image.svg";
-import about from "../assets/images/about.svg";
-import login from "../assets/images/login.svg";
-import calender from "../assets/images/calendar.svg";
-import hrms from "../assets/images/hrms.svg";
-import asief from "../assets/images/asief.svg";
-import praveen from "../assets/images/praveen.svg";
-import diwagar from "../assets/images/diwagar.svg";
-import ragul from "../assets/images/ragul.svg";
-import subscribe from "../assets/images/subscribe.svg";
+import layerRaw from "../assets/images/layer.svg";
+import emailRaw from "../assets/images/email.svg";
+import emptyRaw from "../assets/images/empty.svg";
+import mapRaw from "../assets/images/Basemap_image.svg";
+import aboutRaw from "../assets/images/about.svg";
+import loginRaw from "../assets/images/login.svg";
+import calenderRaw from "../assets/images/calendar.svg";
+import hrmsRaw from "../assets/images/hrms.svg";
+import asiefRaw from "../assets/images/asief.svg";
+import praveenRaw from "../assets/images/praveen.svg";
+import diwagarRaw from "../assets/images/diwagar.svg";
+import ragulRaw from "../assets/images/ragul.svg";
+import subscribeRaw from "../assets/images/subscribe.svg";
 
-export {
-  empty,
-  email,
-  layer,
-  map,
-  about,
-  login,
-  hrms,
-  calender,
-  asief,
-  praveen,
-  diwagar,
-  ragul,
-  subscribe,
-};
+const getSrc = (img) => (img && typeof img === "object" && img.src ? img.src : img);
+
+export const layer = getSrc(layerRaw);
+export const email = getSrc(emailRaw);
+export const empty = getSrc(emptyRaw);
+export const map = getSrc(mapRaw);
+export const about = getSrc(aboutRaw);
+export const login = getSrc(loginRaw);
+export const calender = getSrc(calenderRaw);
+export const hrms = getSrc(hrmsRaw);
+export const asief = getSrc(asiefRaw);
+export const praveen = getSrc(praveenRaw);
+export const diwagar = getSrc(diwagarRaw);
+export const ragul = getSrc(ragulRaw);
+export const subscribe = getSrc(subscribeRaw);

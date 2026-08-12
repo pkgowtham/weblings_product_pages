@@ -1,7 +1,9 @@
+'use client';
+
 import React from "react";
-import { usestyles } from "./pricingstyle.tsx";
-import Typography from "../typography/component.tsx";
-import Button from "../button/button.tsx";
+import { usestyles } from "./pricingstyle";
+import Typography from "../typography/component";
+import Button from "../button/button";
 
 const PricingTemp: React.FC<any> = (props): JSX.Element => {
   const classes = usestyles();

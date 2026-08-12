@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 import typographyData from './textStyles.json';
@@ -11,7 +13,7 @@ const createResponsiveStyles = () => {
   const styles: { [key: string]: any } = {};
 
   // Create styles for each variant with media queries
-  desktop.forEach((desktopStyle:any) => {
+  desktop.forEach((desktopStyle: any) => {
     const variantName = desktopStyle.name;
     
     styles[variantName] = {
@@ -30,18 +32,18 @@ const createResponsiveStyles = () => {
     };
   });
 
-  return createUseStyles(styles);
+  return createUseStyles(styles, { link: true });
 };
 
 const createStyleObject = (style: TextStyle): React.CSSProperties => ({
-  fontFamily: style.fontFamily,
+  fontFamily: style.fontFamily ? `'${style.fontFamily}', 'Open Sans', sans-serif` : `'Open Sans', sans-serif`,
   fontWeight: style.fontWeight,
   fontSize: `${style.fontSize}px`,
-  letterSpacing: `${style.letterSpacing.value}px`,
+  letterSpacing: `${style.letterSpacing?.value || 0}px`,
   lineHeight: `${style.lineHeight * 16}px`,
   textTransform: style.textCase === 'UPPER' ? 'uppercase' : 'none',
-  margin:0,
-  padding:0
+  margin: 0,
+  padding: 0
 });
 
 // Create styles once

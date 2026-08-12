@@ -1,8 +1,8 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
-import useStyle from "./style.ts";
+import useStyle from "./style";
 import clsx from "clsx";
-import HelperText from "./helperText.tsx";
-import Label from "./label.tsx";
+import HelperText from "./helperText";
+import Label from "./label";
 export interface Option {
   id: number;
   option: string;

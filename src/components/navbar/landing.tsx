@@ -1,13 +1,17 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from "react";
-import Typography from "../typography/component.tsx";
-import Button from "../button/button.tsx";
-import { usestyles } from "./landingstyle.tsx";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import Typography from "../typography/component";
+import Button from "../button/button";
+import { usestyles } from "./landingstyle";
+import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
+import { getSrc } from "../../utils/getSrc";
 import weblingslogo from "../../assets/images/weblings_logo.svg";
 import sideimg from "../../assets/images/sideimg.svg";
-import SvgArrowDropDown from "../svg/ArrowDropDown.tsx";
-import SvgChevronRight from "../svg/ChevronRight.tsx";
-import SvgMenu from "../svg/Menu.tsx";
+import SvgArrowDropDown from "../svg/ArrowDropDown";
+import SvgChevronRight from "../svg/ChevronRight";
+import SvgMenu from "../svg/Menu";
 
 // Import React SVG Icon components from src/assets/icons_component/
 import {
@@ -17,7 +21,7 @@ import {
   StreamlineIcon,
   EOfficeIcon,
   WorksuiteIcon,
-} from "../../assets/icons_component/index.tsx";
+} from "../../assets/icons_component/index";
 
 interface ProductItem {
   key: string;
@@ -87,9 +91,9 @@ const productsList: ProductItem[] = [
 
 const Navbar = () => {
   const classes = usestyles();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const currentPath = location.pathname;
+  const router = useRouter();
+  const pathname = usePathname();
+  const currentPath = pathname || "/";
 
   const [activeItem, setActiveItem] = useState<ProductItem>(productsList[0]);
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
@@ -136,7 +140,7 @@ const Navbar = () => {
   const handleProductNavigate = (path: string) => {
     setIsDropDownOpen(false);
     setIsMenuOpen(false);
-    navigate(path);
+    router.push(path);
   };
 
   return (
@@ -147,8 +151,8 @@ const Navbar = () => {
       ref={navRef}
     >
       <div className={classes.NavText}>
-        <Link to="/" onClick={() => setIsDropDownOpen(false)}>
-          <img className={classes.NavBarLogo} src={weblingslogo} alt="Weblings Logo" />
+        <Link href="/" onClick={() => setIsDropDownOpen(false)}>
+          <img className={classes.NavBarLogo} src={getSrc(weblingslogo)} alt="Weblings Logo" />
         </Link>
 
         {/* Desktop Links */}
@@ -226,7 +230,7 @@ const Navbar = () => {
                     </div>
 
                     <img
-                      src={sideimg}
+                      src={getSrc(sideimg)}
                       alt="Product Preview"
                       className={classes.PreviewImage}
                     />
@@ -248,7 +252,7 @@ const Navbar = () => {
             {/* About */}
             <li className={classes.NavBarItem}>
               <Link
-                to="/about"
+                href="/about"
                 className={`${classes.NavBarLink} ${
                   currentPath === "/about" ? classes.ActiveLink : ""
                 }`}
@@ -261,7 +265,7 @@ const Navbar = () => {
             {/* Contact */}
             <li className={classes.NavBarItem}>
               <Link
-                to="/contact"
+                href="/contact"
                 className={`${classes.NavBarLink} ${
                   currentPath === "/contact" ? classes.ActiveLink : ""
                 }`}
@@ -277,7 +281,7 @@ const Navbar = () => {
       {/* Desktop Action Button */}
       {!isSmallScreen && (
         <div>
-          <Button element="button" brand onClick={() => navigate("/contact")}>
+          <Button element="button" brand onClick={() => router.push("/contact")}>
             Try Now
           </Button>
         </div>
@@ -331,7 +335,7 @@ const Navbar = () => {
 
           <div className={classes.MobileNavItem}>
             <Link
-              to="/about"
+              href="/about"
               className={classes.MobileNavLink}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -341,7 +345,7 @@ const Navbar = () => {
 
           <div className={classes.MobileNavItem}>
             <Link
-              to="/contact"
+              href="/contact"
               className={classes.MobileNavLink}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -355,7 +359,7 @@ const Navbar = () => {
               brand
               onClick={() => {
                 setIsMenuOpen(false);
-                navigate("/contact");
+                router.push("/contact");
               }}
             >
               Try Now

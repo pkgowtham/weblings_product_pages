@@ -1,42 +1,41 @@
+'use client';
+
 import React from "react";
-import { header } from "../../types/index.tsx";
-import { usestyles } from './headerstyle.tsx';
-import Typography from "../typography/component.tsx";
-import Button from "../button/button.tsx";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import SvgWeblingslogo from "../svg/Weblingslogo.tsx";
+import { header } from "../../types/index";
+import { usestyles } from './headerstyle';
+import Typography from "../typography/component";
+import Button from "../button/button";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import SvgWeblingslogo from "../svg/Weblingslogo";
 
 interface HeaderProps {
   prop: header;
 }
 
-
 const Header: React.FC<HeaderProps> = ({ prop }): JSX.Element => {
-
   const classes = usestyles();
-  const navigate = useNavigate()
+  const router = useRouter();
 
   return (
     <div className={classes.navDiv}>
       {/* <nav className={classes.navbar}>
         <div className={classes.logo}>
           <Link to="/landing">
-            {/* <img src={prop.navBar.logo}    alt="Logo" className={classes.img}/>
             <SvgWeblingslogo />
           </Link>
         </div>
         <div>
           <ul className={classes.ul}>
             {prop.navBar.links.map((dat) => (
-              <li key={dat.label} className={classes.li} onClick={() => navigate(dat.path)}>
+              <li key={dat.label} className={classes.li} onClick={() => router.push(dat.path)}>
                 <Typography variant="LS">{dat.label}</Typography>
               </li>
             ))}
           </ul>
         </div>
         <div className={classes.login}>
-          <Button element='button' brand onClick={() => navigate(prop.navBar.action.link)}>{prop.navBar.action.label}</Button>
+          <Button element='button' brand onClick={() => router.push(prop.navBar.action.link)}>{prop.navBar.action.label}</Button>
         </div>
       </nav> */}
     </div>
