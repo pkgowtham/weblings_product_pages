@@ -46,3 +46,4 @@ export { default as EofficeSticky } from "./EofficeSticky";
 export { default as PrincipleBackground } from "./PrincipleBackground";
 export { default as StorageGraphic } from "./StorageGraphic";
 export { default as Group } from "./StorageGraphic";
+export * from "./CustomIcons";

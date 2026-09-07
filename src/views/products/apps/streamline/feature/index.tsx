@@ -2,6 +2,7 @@
 
 import React from 'react';
 import FeatureTemp from '../../../../../components/featureTemp/index';
+import Usage from '../../../../../components/usage/index';
 import ComparisonTemp from '../../../../../components/comparationTemp/index';
 import streamlineDataJson from '../../../../../data/streamline.json';
 import SvgAbstract from '../../../../../components/svg/Abstract';
@@ -59,11 +60,13 @@ const StreamlineFeature = () => {
         path: "",
       },
     })),
+    demo: streamlineDataJson.feature.demo,
   };
 
   return (
     <div>
       <FeatureTemp jsonData={featureData} />
+      <Usage usageData={streamlineDataJson.feature.usage} />
       <ComparisonTemp comparisonData={streamlineDataJson.comparison} />
     </div>
   );

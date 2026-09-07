@@ -2,6 +2,7 @@
 
 import React from 'react';
 import FeatureTemp from '../../../../../components/featureTemp/index';
+import Usage from '../../../../../components/usage/index';
 import ComparisonTemp from '../../../../../components/comparationTemp/index';
 import chatDataJson from '../../../../../data/chat.json';
 import SvgAbstract from '../../../../../components/svg/Abstract';
@@ -58,11 +59,13 @@ const ConnectFeature = () => {
         path: "",
       },
     })),
+    demo: chatDataJson.feature.demo,
   };
 
   return (
     <div>
       <FeatureTemp jsonData={featureData} />
+      <Usage usageData={chatDataJson.feature.usage} />
       <ComparisonTemp comparisonData={chatDataJson.comparison} />
     </div>
   );

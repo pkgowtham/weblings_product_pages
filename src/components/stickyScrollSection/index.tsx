@@ -689,8 +689,8 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
                       (index === 0
                         ? "/mail/feature"
                         : index === 1
-                        ? "/eoffice/feature"
-                        : "/calender/feature")
+                          ? "/eoffice/feature"
+                          : "/calender/feature")
                     }
                     className={classes.learnMore}
                   >

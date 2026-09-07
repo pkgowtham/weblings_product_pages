@@ -1,91 +1,110 @@
 {
   "feature": {
     "main": {
-      "subtitle": "Streamline",
-      "title": "Streamline",
-      "content": "Bring your projects, teams, tasks, and workflows together in one centralized workspace. Plan work, manage sprints, collaborate with your team, and track progress from start to finish.",
+      "subtitle": "Weblings Streamline",
+      "title": "Lean, AI-driven project management.\nZero bloat—turn client meetings directly into tickets and cut out the middleman.",
+      "content": "Streamline gives you a bloat-free, AI-supercharged board where client calls instantly become tickets. With native Team Chat integration and free external guest access, you get all the power without the frustrating learning curve or the hidden costs.",
       "action": [
         {
-          "label": "Learn More",
-          "path": "",
-          "color": "secondary"
-        },
-        {
-          "label": "Get Free Trial",
-          "path": "",
+          "label": "Deploy Streamline",
+          "path": "/contact",
           "color": "primary"
         }
       ]
     },
     "features": [
       {
-        "id": "project",
-        "subtitle": "Project",
-        "title": "Manage Projects with Ease",
+        "id": "scope_pipeline",
+        "subtitle": "The End of Manual Ticket Entry",
+        "title": "Automated Scope-to-Sprint Pipeline",
         "content": [
-          "Create and manage projects from one centralized workspace. Organize tasks, assign responsibilities, track progress, and keep your entire team aligned with project goals and deadlines."
+          "When a client drops a new requirement during a call, nobody has to scramble to type it out. The AI catches it, drafts the exact ticket, and queues it for your approval. A completely automated workflow with just a single click of human verification.",
+          "• Smart Detection: The AI listens to the live meeting, cross-references your project baseline, and extracts brand new client requirements automatically.",
+          "• Human Verification: You review the AI-generated ticket summary. Click approve to register it as a formal Change of Request without typing a single word.",
+          "• Instant Integration: The approved ticket instantly drops into the active sprint backlog, assigns itself to the right developer, and pings the team in Chat."
         ],
         "imageKey": "project",
-        "imageAlt": "Manage Projects with Ease",
-        "imagePosition": "right"
-      },
-      {
-        "id": "timeline",
-        "subtitle": "Timeline",
-        "title": "Plan Projects with Timeline",
-        "content": [
-          "Get a clear visual overview of your project schedule and activities. Set milestones, manage deadlines, track progress, and understand how every task contributes to the overall project."
-        ],
-        "imageKey": "timeline",
-        "imageAlt": "Plan Projects with Timeline",
-        "imagePosition": "left"
-      },
-      {
-        "id": "backlogs",
-        "subtitle": "Backlogs",
-        "title": "Organize Your Backlog",
-        "content": [
-          "Keep tasks, ideas, and requirements organized in one place. Prioritize important work, manage pending activities, and prepare your team for upcoming sprints and project milestones."
-        ],
-        "imageKey": "backlogs",
-        "imageAlt": "Organize Your Backlog",
+        "imageAlt": "Automated Scope-to-Sprint Pipeline",
         "imagePosition": "right",
         "showSparkle": true
       },
       {
-        "id": "members",
-        "subtitle": "Members",
-        "title": "Collaborate with Your Team",
+        "id": "vector_search",
+        "subtitle": "Intelligent Discovery",
+        "title": "Semantic Vector Search: Find Needles in a Haystack",
         "content": [
-          "Bring your project team together in one connected workspace. Add members, assign responsibilities, manage project access, and make collaboration easier throughout the project lifecycle."
+          "Don't remember the exact keyword you typed three months ago? It doesn't matter. Search through thousands of tickets using natural human language.",
+          "• Contextual Matching: The AI understands the context and meaning of your request, instantly pulling up the exact ticket, attachment, and comment history you need without relying on rigid tags.",
+          "• Millisecond Retrieval: Instantly locate specific bug descriptions, client feedback snippets, or code references across all historical sprints."
         ],
-        "imageKey": "members",
-        "imageAlt": "Collaborate with Your Team",
-        "imagePosition": "fullWidth"
+        "imageKey": "backlogs",
+        "imageAlt": "Semantic Vector Search",
+        "imagePosition": "left",
+        "showSparkle": true
       },
       {
-        "id": "settings",
-        "subtitle": "Settings",
-        "title": "Customize Your Workspace",
+        "id": "audit_trail",
+        "subtitle": "Absolute Accountability",
+        "title": "The Immutable Audit Trail",
         "content": [
-          "Bring your projects, teams, tasks, and workflows together in one centralized workspace. Plan work, manage sprints, collaborate with your team, and track progress from start to finish."
+          "Every comment, attachment, and status change is permanently recorded. You always know exactly who changed a ticket's priority, who reassigned it, and when it happened.",
+          "• Real-Time Transparency: No invisible edits or covering tracks—just absolute accountability and complete lifecycle transparency across every sprint.",
+          "• Comprehensive Log: Clear timestamps and author attribution for all file attachments, status transitions, and priority revisions."
         ],
-        "imageKey": "settings",
-        "imageAlt": "Customize Your Workspace",
-        "imagePosition": "left"
+        "imageKey": "timeline",
+        "imageAlt": "The Immutable Audit Trail",
+        "imagePosition": "right"
+      },
+      {
+        "id": "mobile_streamline",
+        "subtitle": "Unified Mobile Experience",
+        "title": "Your Team, In Your Pocket.",
+        "content": [
+          "Available on both iOS and Android. Review client comments, transition tickets across columns, and track sprint progress while waiting in line for coffee. Your agile board is always perfectly in sync."
+        ],
+        "imageKey": "members",
+        "imageAlt": "Unified Mobile Experience",
+        "imagePosition": "fullWidth"
       }
     ],
+    "usage": {
+      "subtitle": "Enterprise Architecture",
+      "title": "Enterprise Architecture, Minus the Clutter.",
+      "description": "Everything you need to run agile sprints at scale, built intuitively so your team doesn't need a manual to figure it out.",
+      "cards": [
+        {
+          "id": "reassignment",
+          "title": "1-Click Bulk Reassignment",
+          "description": "Employee resigned? Don't waste hours clicking through 50 open tickets manually. Instantly transfer an offboarded employee's entire workload to a new assignee with a single click."
+        },
+        {
+          "id": "guest",
+          "title": "Free External Guest Access",
+          "description": "Need a freelancer to fix a bug or a client to approve a design? Invite external users via email to specific boards. They can view and comment without requiring you to pay for an extra seat."
+        },
+        {
+          "id": "workflow",
+          "title": "Custom Workflow Configuration",
+          "description": "Build the board exactly how you work. Create organization-wide or project-specific statuses and custom ticket types to perfectly match different client requirements or internal workflows."
+        },
+        {
+          "id": "hierarchy",
+          "title": "Epic & Story Hierarchy",
+          "description": "Organize complex projects intuitively. Group sub-tasks under Stories, roll Stories into Epics, and manage Sprint backlogs cleanly. Unfinished tickets automatically roll over when a Sprint concludes."
+        }
+      ]
+    },
     "demo": {
       "subtitle": "Video Section",
-      "title": "See Weblings Workspace in Action",
-      "description": "Watch how organizations simplify operations, improve collaboration, and increase productivity using a single digital workspace built for modern businesses."
+      "title": "See Weblings Streamline in Action",
+      "description": "Watch how modern engineering and product teams streamline sprint planning, convert meeting action items into tickets automatically, and accelerate deliveries."
     }
   },
   "comparison": {
     "titleSubtext": "Price to features comparision",
     "title": "How much you can save",
-    "titleDescription": "Reduce software costs by replacing multiple business tools with one unified workspace. Pay only for what your team needs and scale as your business grows.",
-    "badgeText": "Save up to 50% with 2 additional features",
+    "titleDescription": "Reduce software costs by replacing multiple bloated project trackers and separate add-on licenses with one unified workspace. Pay only for what your team needs and scale as your business grows.",
+    "badgeText": "Save up to 50% with all core modules included",
     "priceLabel": "Price",
     "plans": [
       {
@@ -95,29 +114,44 @@
         "price": "₹400",
         "period": "/ per user / month",
         "includesKey": "Includes:",
-        "includesValue": "Mail, Chat, Calendar, Streamline and eOffice",
+        "includesValue": "Streamline, Team Chat, Mail, Calendar, and eOffice",
         "actionLabel": "Get Free Trial",
         "actionSubtext": "*No credit card required"
       },
       {
         "id": "others",
         "isHighlighted": false,
-        "name": "Other Workspaces",
-        "price": "₹600 - 800",
+        "name": "Other Project Tools (Jira, Asana, Monday)",
+        "price": "₹1,200 - 2,400",
         "period": "/ per user / month",
         "includesKey": "Includes:",
-        "includesValue": "Partial features"
+        "includesValue": "Per-seat ticketing only (addons extra)"
       }
     ],
     "features": [
       {
         "id": "project_management",
-        "name": "Project Management",
+        "name": "Agile Sprint & Kanban Management",
         "weblings": true,
-        "others": "Limited",
+        "others": true,
         "subFeatures": [
           {
-            "name": "Team Collaboration",
+            "name": "AI Auto-Ticket Creation from Calls",
+            "weblings": true,
+            "others": "Not Available"
+          },
+          {
+            "name": "1-Click Bulk Workload Reassignment",
+            "weblings": true,
+            "others": "Paid Add-on"
+          },
+          {
+            "name": "Free External Guest & Client Access",
+            "weblings": true,
+            "others": "Extra Seat Cost"
+          },
+          {
+            "name": "Epic, Story & Subtask Hierarchy",
             "weblings": true,
             "others": true
           }
@@ -125,39 +159,27 @@
       },
       {
         "id": "secure_chat",
-        "name": "Secure Team Chat",
+        "name": "Integrated Team Chat & Audio Calls",
         "weblings": true,
-        "others": "Additional Cost"
+        "others": "Separate Tool Required"
+      },
+      {
+        "id": "vector_search",
+        "name": "Semantic Vector Search across Sprints",
+        "weblings": true,
+        "others": "Keyword Only"
+      },
+      {
+        "id": "audit_trail",
+        "name": "Immutable Audit Trail & History",
+        "weblings": true,
+        "others": "Enterprise Tier Only"
       },
       {
         "id": "digital_eoffice",
-        "name": "Digital eOffice",
+        "name": "Integrated E-Office HRMS & Identity",
         "weblings": true,
-        "others": "Limited"
-      },
-      {
-        "id": "shared_calendar",
-        "name": "Shared Calendar",
-        "weblings": true,
-        "others": "Extra Module"
-      },
-      {
-        "id": "client_management",
-        "name": "Client Management",
-        "weblings": true,
-        "others": "Limited"
-      },
-      {
-        "id": "timesheet_approval",
-        "name": "Timesheet Approval",
-        "weblings": true,
-        "others": "Extra Module"
-      },
-      {
-        "id": "employee_directory",
-        "name": "Employee Directory",
-        "weblings": true,
-        "others": "Limited"
+        "others": "Third-Party Integration"
       }
     ]
   }

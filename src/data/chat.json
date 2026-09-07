@@ -1,73 +1,88 @@
 {
   "feature": {
     "main": {
-      "subtitle": "Chat",
-      "title": "Chat",
-      "content": "Stay connected with your team through instant messaging, group conversations, audio calls, and video calls. Create groups, share conversations, and collaborate with your colleagues without switching between different communication tools.",
+      "subtitle": "Weblings Team Chat",
+      "title": "Enterprise-grade client calls that turn into actionable tickets.\nZero premium price tag.",
+      "content": "Enjoy global video conferencing and unlimited chats, fully included in your suite. Say goodbye to miscommunication: our built-in AI translates client conversations straight into assignable tasks and flags scope changes instantly. Turn every call into a guaranteed plan of action.",
       "action": [
         {
-          "label": "Learn More",
-          "path": "",
-          "color": "secondary"
-        },
-        {
-          "label": "Get Free Trial",
-          "path": "",
+          "label": "Deploy Team Chat",
+          "path": "/contact",
           "color": "primary"
         }
       ]
     },
     "features": [
       {
-        "id": "individual_chat",
-        "subtitle": "Individual Chat",
-        "title": "Chat One-on-One with Ease",
+        "id": "infrastructure",
+        "subtitle": "Internet-Scale Infrastructure",
+        "title": "Built on the Backbone of the Modern Internet.",
         "content": [
-          "Connect directly with colleagues through private one-on-one conversations. Send messages and stay connected with your team throughout the workday. Make quick discussions simple without unnecessary meetings or emails."
+          "A chat app is useless if it drops connections. We engineered our communications architecture on a sprawling global edge network to deliver flawless, uninterrupted reliability.",
+          "• Ultra-Low Latency Edge Routing: Your chats and video calls are automatically routed through the closest data center to your employees, guaranteeing ultra-low latency whether they are in Chennai or Chicago.",
+          "• Simulcast Video Scaling: Host calls with hundreds of participants without crashing laptops with dynamic real-time video quality adjustment.",
+          "• Zero-Setup Project Channels: As soon as a project is created in the management portal, respective teams automatically get a dedicated chat group with instant file access."
         ],
-        "imageKey": "individual_chat",
-        "imageAlt": "Chat One-on-One with Ease",
+        "imageKey": "group_chat",
+        "imageAlt": "Internet-Scale Infrastructure",
         "imagePosition": "right"
       },
       {
-        "id": "group_chat",
-        "subtitle": "Group Chat",
-        "title": "Bring Your Team Together",
+        "id": "ai_intelligence",
+        "subtitle": "Built-In AI Intelligence",
+        "title": "Stop the \"Telephone Game.\" Protect Your Margins.",
         "content": [
-          "Create group conversations for teams, projects, departments, or specific discussions. Add multiple members and keep everyone connected in a shared conversation. Keep important team conversations organized in one central place."
+          "• From Conversation to Code: When project details pass from clients to managers to developers, critical context is often lost. We eliminate this friction. Our AI captures the client's exact requirements during the call and generates accurate, assignable tickets directly for your development team.",
+          "• Smart Search & Instant Proof: Say goodbye to the 'he said, she said' blame game. Our AI creates an instantly searchable memory of every meeting. If a client argues they asked for a 'PDF' instead of an 'Excel' file on Tuesday, just ask the AI. It instantly provides the exact answer, quoting the date, time, and client's exact words."
         ],
-        "imageKey": "group_chat",
-        "imageAlt": "Bring Your Team Together",
+        "imageKey": "individual_chat",
+        "imageAlt": "Built-In AI Intelligence",
         "imagePosition": "left"
       },
       {
-        "id": "create_groups",
-        "subtitle": "Create Groups",
-        "title": "Create Groups for Every Team",
+        "id": "mobile_apps",
+        "subtitle": "Mobile Apps",
+        "title": "Your Team, In Your Pocket.",
         "content": [
-          "Create new groups and bring the right people together for every conversation. Add members based on teams, projects, departments, or specific work requirements. Give each group a clear purpose and keep related conversations in one place."
+          "Available on both iOS and Android. Take live 4K video calls, review AI meeting extracts, and manage your team from anywhere. Business doesn't stop when you step away from your desk."
         ],
         "imageKey": "create_groups",
-        "imageAlt": "Create Groups for Every Team",
+        "imageAlt": "Your Team, In Your Pocket",
         "imagePosition": "right",
         "showSparkle": true
-      },
-      {
-        "id": "audio_calls",
-        "subtitle": "Audio Calls",
-        "title": "Talk Clearly with Audio Calls",
-        "content": [
-          "Start an audio call directly from your individual or group conversation. Connect with colleagues instantly when messaging is not enough. Use audio calls for quick discussions, updates, and team collaboration. Stay connected without needing to switch to another communication platform."
-        ],
-        "imageKey": "audio_calls",
-        "imageAlt": "Talk Clearly with Audio Calls",
-        "imagePosition": "fullWidth"
       }
     ],
+    "usage": {
+      "subtitle": "Enterprise Usage",
+      "title": "Enterprise Features, No Extra Invoice",
+      "description": "Unlike other platforms, you never pay extra for group video calls, unlimited message history, or screen recording. File retention is dictated by your organization's needs, not an arbitrary 6-month lockwall. It is 100% included in your flat Weblings Worksuite invoice.",
+      "cards": [
+        {
+          "id": "pip",
+          "title": "Picture-in-Picture",
+          "description": "Keep the video floating while you browse other modules and tickets."
+        },
+        {
+          "id": "recording",
+          "title": "Screen Recording",
+          "description": "Native screen sharing and recording saved directly to your cloud Drive buckets."
+        },
+        {
+          "id": "privacy",
+          "title": "Complete Privacy Between Branches",
+          "description": "Regional teams get entirely private workspaces, ensuring sensitive local data never leaks."
+        },
+        {
+          "id": "retention",
+          "title": "Custom Retention",
+          "description": "Files and message history are preserved based on your strict organization rules."
+        }
+      ]
+    },
     "demo": {
       "subtitle": "Video Section",
-      "title": "See Weblings Workspace in Action",
-      "description": "Watch how organizations simplify operations, improve collaboration, and increase productivity using a single digital workspace built for modern businesses."
+      "title": "See Weblings Team Chat in Action",
+      "description": "Watch how organizations simplify communications, run seamless video huddles, and automatically generate development tickets directly from client conversations."
     }
   },
   "comparison": {

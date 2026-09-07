@@ -1,84 +1,102 @@
 {
   "feature": {
     "main": {
-      "subtitle": "Mail",
-      "title": "Mail",
-      "content": "Read, organize, and respond to your emails from one centralized mailbox. Compose new messages, manage conversations, organize emails with labels and tags, and keep your inbox clean and easy to manage.",
+      "subtitle": "Weblings Inbox",
+      "title": "Enterprise Email Hosting.\nWithout the per-seat tax.",
+      "content": "Stop paying extra every time you hire a new employee. Get unlimited custom domain email addresses, edge-network spam protection, and the ability to send massive 10GB attachments—all fully included in your Weblings Worksuite.",
       "action": [
         {
-          "label": "Learn More",
-          "path": "",
-          "color": "secondary"
-        },
-        {
-          "label": "Get Free Trial",
-          "path": "",
+          "label": "Deploy Enterprise Inbox",
+          "path": "/contact",
           "color": "primary"
         }
       ]
     },
     "features": [
       {
-        "id": "inbox",
-        "subtitle": "Inbox",
-        "title": "Stay on Top of Your Inbox",
+        "id": "zero_day_onboarding",
+        "subtitle": "Zero-Day Onboarding",
+        "title": "From Offer Letter to Inbox in 3 Seconds.",
         "content": [
-          "View and manage all your incoming emails from one organized inbox. Open messages to read complete email details and review previous conversations. Quickly identify important messages and keep track of your latest communication."
+          "Stop filing IT tickets just to get a new employee an email address. Because Inbox is deeply integrated with the E-Office HRMS, the workflow is entirely automated.",
+          "• HR Creates the Profile: Your HR manager adds the new hire in E-Office and selects their specific branch location from a simple dropdown.",
+          "• Instant Email Allocation: The system instantly creates their custom business email under the domain allocated to that specific location.",
+          "• Ready to Work: Within seconds, the new identity is populated across Team Chat, Streamline tickets, and the company directory."
         ],
         "imageKey": "inbox",
-        "imageAlt": "Stay on Top of Your Inbox",
+        "imageAlt": "Zero-Day Onboarding",
         "imagePosition": "right"
       },
       {
-        "id": "compose_mail",
-        "subtitle": "Compose Mail",
-        "title": "Compose and Send Emails",
+        "id": "perimeter_security",
+        "subtitle": "Military-Grade Perimeter",
+        "title": "Secured by the Global Edge Network.",
         "content": [
-          "Create and send professional emails directly from your workspace. Add recipients, subject, message content, and attachments when needed. Keep your business communication simple, quick, and organized."
+          "Email is the number one vector for corporate breaches. We route your entire inbox through the same infrastructure that protects the world's largest financial institutions.",
+          "• Advanced Anti-Phishing: Our perimeter network proactively detects attacker infrastructure, stopping targeted BEC and phishing attacks before they reach your inbox.",
+          "• Zero-Headache DNS: SPF, DKIM, and DMARC configure themselves automatically when you link or purchase a domain.",
+          "• Edge-Level Antivirus: Every attachment is scanned by multiple enterprise virus engines in isolated cloud sandboxes."
         ],
         "imageKey": "compose_mail",
-        "imageAlt": "Compose and Send Emails",
+        "imageAlt": "Secured by the Global Edge Network",
         "imagePosition": "left"
       },
       {
-        "id": "reply_manage",
-        "subtitle": "Reply & Manage",
-        "title": "Reply to Emails with Ease",
+        "id": "intelligent_org",
+        "subtitle": "Intelligent Organization",
+        "title": "Find Anything. Organize Everything.",
         "content": [
-          "Open any email to view its complete details and conversation history. Reply directly to messages and continue conversations from the same workspace. Manage emails efficiently without switching between different communication tools."
+          "• Semantic Vector Search: Stop guessing exact keywords. Our built-in AI uses vector embeddings to understand the meaning and context behind your search. Ask naturally and find the exact email immediately.",
+          "• Visual Color Tags: Visually segregate your inbox with custom, color-coded tags for projects, priority levels, or specific clients. Keep your workspace perfectly categorized."
         ],
-        "imageKey": "reply_manage",
-        "imageAlt": "Reply to Emails with Ease",
+        "imageKey": "labels_tags",
+        "imageAlt": "Intelligent Organization",
         "imagePosition": "right",
         "showSparkle": true
       },
       {
-        "id": "mail_boxes",
-        "subtitle": "Mail Boxes",
-        "title": "Keep Your Mail Organized",
+        "id": "mobile_inbox",
+        "subtitle": "Unified Mobile Experience",
+        "title": "Your Team, In Your Pocket.",
         "content": [
-          "Access all your emails through dedicated mailboxes for easier management. Use Inbox, Sent, Spam, and Trash to organize messages based on their status. Move unwanted or suspicious emails to Spam and keep your inbox clutter-free. Find sent and deleted messages quickly whenever you need them."
+          "You don't need a separate app for email, another for chat, and another for HR. The unified Weblings iOS and Android app puts your Enterprise Inbox right next to your Streamline tickets and Team Chat. Stay responsive to clients and collaborate seamlessly anywhere."
         ],
         "imageKey": "mail_boxes",
-        "imageAlt": "Keep Your Mail Organized",
+        "imageAlt": "Unified Mobile Experience",
         "imagePosition": "fullWidth"
-      },
-      {
-        "id": "labels_tags",
-        "subtitle": "Labels & Tags",
-        "title": "Organize Emails Your Way",
-        "content": [
-          "Use labels such as Archive and Important to organize emails based on their purpose. Create custom tags to categorize messages according to your workflow. Apply tags to quickly identify and group related emails."
-        ],
-        "imageKey": "labels_tags",
-        "imageAlt": "Organize Emails Your Way",
-        "imagePosition": "left"
       }
     ],
+    "usage": {
+      "subtitle": "Enterprise Features",
+      "title": "Unrestricted Email, Fully Included.",
+      "description": "Stop rationing out email addresses to save money on user licenses. Create as many custom inboxes as you need for contractors, support aliases, or new hires. It is 100% included in your flat Weblings Worksuite invoice.",
+      "cards": [
+        {
+          "id": "unlimited",
+          "title": "Unlimited Addresses",
+          "description": "Create absolute unlimited aliases and standard inboxes. No extra per-user billing."
+        },
+        {
+          "id": "attachment",
+          "title": "Massive 10GB Attachments",
+          "description": "Standard 20MB native limits apply, but our Drive integration automatically swaps larger files for secure 10GB links."
+        },
+        {
+          "id": "domain",
+          "title": "In-App Domain Purchasing",
+          "description": "Search, purchase, and route new domains directly within the Organization app natively."
+        },
+        {
+          "id": "search",
+          "title": "Lightning Fast Indexing",
+          "description": "Instantly filter through years of indexed email history without browser lag or timeouts."
+        }
+      ]
+    },
     "demo": {
       "subtitle": "Video Section",
-      "title": "See Weblings Workspace in Action",
-      "description": "Watch how organizations simplify operations, improve collaboration, and increase productivity using a single digital workspace built for modern businesses."
+      "title": "See Weblings Inbox in Action",
+      "description": "Watch how organizations manage high-volume email workflows, configure custom domains in seconds, and collaborate seamlessly across teams."
     }
   },
   "comparison": {

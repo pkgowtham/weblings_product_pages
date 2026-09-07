@@ -3,12 +3,22 @@ import principle_background from "../../assets/icons/background.svg";
 import { Theme } from "../../theme/themeType";
 
 export const usestyles = createUseStyles((theme: Theme) => ({
+  "@keyframes pulse": {
+    "0%, 100%": {
+      opacity: 1,
+      transform: "scale(1)",
+    },
+    "50%": {
+      opacity: 0.4,
+      transform: "scale(0.85)",
+    },
+  },
   mainSecCon: {
     width: "100%",
     height: "auto",
     aspectRatio: "1279 / 626",
     maxHeight: "92vh",
-    minHeight: "520px",
+    minHeight: "540px",
     position: "relative",
     overflow: "hidden",
     margin: 0,
@@ -75,24 +85,24 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   HeaderSection: {
     position: "absolute",
-    top: "52%",
+    top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     zIndex: 2,
     width: "90%",
-    maxWidth: "564px",
+    maxWidth: "780px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    gap: theme.spacing.s800,
+    gap: "16px",
     padding: "0 20px",
     boxSizing: "border-box",
     margin: 0,
     "@media (max-width: 1200px)": {
-      top: "54%",
-      gap: theme.spacing.s600,
+      top: "52%",
+      gap: "14px",
     },
     "@media (max-width: 768px)": {
       position: "relative",
@@ -100,23 +110,109 @@ export const usestyles = createUseStyles((theme: Theme) => ({
       left: "auto",
       transform: "none",
       width: "100%",
-      maxWidth: "560px",
-      gap: theme.spacing.s800,
+      maxWidth: "600px",
+      gap: "16px",
       padding: 0,
       margin: "0 auto",
     },
   },
+  heroBadge: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "6px 16px",
+    borderRadius: "9999px",
+    backgroundColor: "rgba(0, 114, 196, 0.1)",
+    color: "#0072C4",
+    fontSize: "13px",
+    fontWeight: 600,
+    border: "1px solid rgba(0, 114, 196, 0.25)",
+    marginBottom: "4px",
+  },
+  pulseDot: {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    backgroundColor: "#0072C4",
+    animation: "$pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+  },
   headTitle: {
     color: theme.light.neutral.onSurface.title,
-    maxWidth: "564px",
+    maxWidth: "760px",
     width: "100%",
     textAlign: "center",
+    fontSize: "2.25rem",
+    fontWeight: 700,
+    lineHeight: 1.25,
+    margin: 0,
+    "@media (max-width: 768px)": {
+      fontSize: "1.75rem",
+    },
+  },
+  titleHighlight: {
+    color: "#0072C4",
+    display: "block",
+    marginTop: "6px",
+    fontSize: "24px",
+
   },
   headTitleDescription: {
     color: theme.light.neutral.onSurface.dark,
-    maxWidth: "564px",
+    maxWidth: "680px",
     width: "100%",
     textAlign: "center",
+    fontSize: "1rem",
+    lineHeight: 1.6,
+  },
+  heroBtnContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "6px",
+    marginTop: "8px",
+  },
+  heroButtons: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "14px",
+    flexWrap: "wrap",
+  },
+  heroPrimaryBtn: {
+    backgroundColor: "#0072C4",
+    color: "#FFFFFF",
+    padding: "10px 24px",
+    borderRadius: "10px",
+    fontWeight: 600,
+    fontSize: "15px",
+    boxShadow: "0 6px 18px rgba(0, 114, 196, 0.28)",
+    cursor: "pointer",
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    "&:hover": {
+      transform: "translateY(-1px)",
+      boxShadow: "0 8px 22px rgba(0, 114, 196, 0.38)",
+    },
+  },
+  heroSecondaryBtn: {
+    backgroundColor: "rgba(255, 255, 255, 0.85)",
+    color: "#0F172A",
+    border: "1px solid rgba(0, 0, 0, 0.12)",
+    padding: "10px 22px",
+    borderRadius: "10px",
+    fontWeight: 600,
+    fontSize: "15px",
+    backdropFilter: "blur(6px)",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      backgroundColor: "#FFFFFF",
+      transform: "translateY(-1px)",
+    },
+  },
+  heroSubtext: {
+    fontSize: "12px",
+    color: "#64748B",
+    marginTop: "2px",
   },
   headbutton: {
     display: "flex",
@@ -131,6 +227,638 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "24px",
     height: "24px",
   },
+
+  /* Ticker Section */
+  tickerSection: {
+    width: "100%",
+    backgroundColor: "#F8FAFC",
+    borderTop: "1px solid #E2E8F0",
+    borderBottom: "1px solid #E2E8F0",
+    padding: "24px 20px",
+    boxSizing: "border-box",
+    textAlign: "center",
+  },
+  tickerInner: {
+    maxWidth: "1200px",
+    margin: "0 auto",
+  },
+  tickerTitle: {
+    fontSize: "13px",
+    fontWeight: 600,
+    color: "#64748B",
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    marginBottom: "16px",
+  },
+  tickerTools: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "20px 36px",
+  },
+  tickerItem: {
+    fontSize: "17px",
+    fontWeight: 600,
+    color: "#94A3B8",
+    textDecoration: "line-through",
+    textDecorationColor: "rgba(239, 68, 68, 0.6)",
+    textDecorationThickness: "2px",
+  },
+
+  /* AI Dual-Engine Section */
+  aiSection: {
+    width: "100%",
+    maxWidth: "1200px",
+    margin: "80px auto 40px",
+    padding: "0 24px",
+    boxSizing: "border-box",
+  },
+  aiHeader: {
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "12px",
+    marginBottom: "48px",
+  },
+  aiBadge: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "6px 16px",
+    borderRadius: "9999px",
+    background: `linear-gradient(90deg, ${theme.light.info.surface.lighter} 0%, ${theme.light.brand.surface.lighter} 100%)`,
+    border: `1px solid ${theme.light.neutral.border.light}`,
+    fontSize: "13px",
+    fontWeight: 600,
+    color: theme.light.neutral.onSurface.title,
+  },
+  aiBadgeDotPurple: {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    backgroundColor: theme.light.info.surface.medium,
+  },
+  aiBadgeDotCyan: {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    backgroundColor: theme.light.brand.surface.medium,
+  },
+  aiTitle: {
+    fontSize: "2.2rem",
+    fontWeight: 700,
+    color: theme.light.neutral.onSurface.title,
+    lineHeight: 1.25,
+    textAlign: "center",
+    margin: 0,
+    whiteSpace: "pre-line",
+    "@media (max-width: 768px)": {
+      fontSize: "1.7rem",
+    },
+  },
+  aiDesc: {
+    fontSize: "1.05rem",
+    color: theme.light.neutral.onSurface.dark,
+    maxWidth: "750px",
+    lineHeight: 1.6,
+    textAlign: "center",
+    margin: 0,
+  },
+  aiFlowBlock: {
+    marginBottom: "48px",
+  },
+  aiFlowHeader: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    marginBottom: "24px",
+    fontSize: "1.25rem",
+    fontWeight: 700,
+  },
+  purpleFlowText: {
+    color: theme.light.info.onSurface.medium,
+  },
+  cyanFlowText: {
+    color: theme.light.brand.onSurface.default,
+  },
+  flowBadgePurple: {
+    width: "32px",
+    height: "32px",
+    borderRadius: "8px",
+    backgroundColor: theme.light.info.surface.lighter,
+    border: `1px solid ${theme.light.info.border.light}`,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: 700,
+    color: theme.light.info.onSurface.medium,
+    fontSize: "14px",
+  },
+  flowBadgeCyan: {
+    width: "32px",
+    height: "32px",
+    borderRadius: "8px",
+    backgroundColor: theme.light.brand.surface.lighter,
+    border: `1px solid ${theme.light.brand.border.light}`,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: 700,
+    color: theme.light.brand.onSurface.default,
+    fontSize: "14px",
+  },
+  aiGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "24px",
+    "@media (max-width: 860px)": {
+      gridTemplateColumns: "1fr",
+    },
+  },
+  aiCardPurple: {
+    backgroundColor: theme.light.neutral.surface.lighter,
+    borderRadius: "16px",
+    padding: "24px",
+    border: `1px solid ${theme.light.neutral.border.light}`,
+    borderTop: `3px solid ${theme.light.info.surface.medium}`,
+    boxShadow: "0 4px 20px -2px rgba(0, 0, 0, 0.04)",
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    "&:hover": {
+      transform: "translateY(-4px)",
+      boxShadow: "0 12px 28px -4px rgba(129, 51, 241, 0.18)",
+    },
+  },
+  aiCardCyan: {
+    backgroundColor: theme.light.neutral.surface.lighter,
+    borderRadius: "16px",
+    padding: "24px",
+    border: `1px solid ${theme.light.neutral.border.light}`,
+    borderTop: `3px solid ${theme.light.brand.surface.medium}`,
+    boxShadow: "0 4px 20px -2px rgba(0, 0, 0, 0.04)",
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    "&:hover": {
+      transform: "translateY(-4px)",
+      boxShadow: "0 12px 28px -4px rgba(0, 114, 196, 0.18)",
+    },
+  },
+  aiCardIcon: {
+    width: "44px",
+    height: "44px",
+    borderRadius: "12px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "10px",
+  },
+  aiCardIconPurple: {
+    backgroundColor: theme.light.info.surface.lighter,
+    color: theme.light.info.onSurface.medium,
+    border: `1px solid ${theme.light.info.border.light}`,
+  },
+  aiCardIconCyan: {
+    backgroundColor: theme.light.brand.surface.lighter,
+    color: theme.light.brand.onSurface.default,
+    border: `1px solid ${theme.light.brand.border.light}`,
+  },
+  aiCardTitle: {
+    fontSize: "1.1rem",
+    fontWeight: 700,
+    color: theme.light.neutral.onSurface.title,
+    margin: 0,
+  },
+  aiCardDesc: {
+    fontSize: "0.9rem",
+    color: theme.light.neutral.onSurface.medium,
+    lineHeight: 1.6,
+    margin: 0,
+  },
+
+  /* Automations Section */
+  automationsSection: {
+    width: "100%",
+    maxWidth: "1000px",
+    margin: "80px auto",
+    padding: "0 24px",
+    boxSizing: "border-box",
+  },
+  autoHeader: {
+    textAlign: "center",
+    marginBottom: "40px",
+  },
+  autoTitle: {
+    fontSize: "2.2rem",
+    fontWeight: 700,
+    color: "#0F172A",
+    marginBottom: "8px",
+    margin: 0,
+    "@media (max-width: 768px)": {
+      fontSize: "1.7rem",
+    },
+  },
+  autoSubtitle: {
+    fontSize: "1.05rem",
+    color: "#64748B",
+    margin: 0,
+  },
+  autoList: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+  },
+  autoCard: {
+    display: "flex",
+    gap: "24px",
+    padding: "28px",
+    backgroundColor: "#FFFFFF",
+    borderRadius: "16px",
+    border: "1px solid #E2E8F0",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.03)",
+    transition: "all 0.2s ease",
+    alignItems: "flex-start",
+    "&:hover": {
+      backgroundColor: "#F8FAFC",
+      transform: "translateY(-2px)",
+      boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
+    },
+    "@media (max-width: 640px)": {
+      flexDirection: "column",
+      gap: "12px",
+    },
+  },
+  autoNum: {
+    fontSize: "1.25rem",
+    fontWeight: 700,
+    color: "#0072C4",
+    backgroundColor: "rgba(0, 114, 196, 0.08)",
+    padding: "12px 16px",
+    borderRadius: "12px",
+    border: "1px solid rgba(0, 114, 196, 0.15)",
+    flexShrink: 0,
+  },
+  autoCardContent: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+  },
+  autoCardTitle: {
+    fontSize: "1.2rem",
+    fontWeight: 700,
+    color: "#0F172A",
+    margin: 0,
+  },
+  autoCardDesc: {
+    fontSize: "0.95rem",
+    color: "#475569",
+    lineHeight: 1.65,
+    margin: 0,
+  },
+
+  /* Mobile Apps Section */
+  mobileSection: {
+    width: "100%",
+    backgroundColor: "#F8FAFC",
+    borderTop: "1px solid #E2E8F0",
+    borderBottom: "1px solid #E2E8F0",
+    padding: "80px 24px",
+    boxSizing: "border-box",
+  },
+  mobileInner: {
+    maxWidth: "1100px",
+    margin: "0 auto",
+  },
+  mobileHeader: {
+    textAlign: "center",
+    marginBottom: "48px",
+  },
+  mobileTitle: {
+    fontSize: "2.2rem",
+    fontWeight: 700,
+    color: "#0F172A",
+    marginBottom: "8px",
+    margin: 0,
+    "@media (max-width: 768px)": {
+      fontSize: "1.7rem",
+    },
+  },
+  mobileDesc: {
+    fontSize: "1.05rem",
+    color: "#64748B",
+    maxWidth: "750px",
+    margin: "0 auto",
+    lineHeight: 1.6,
+  },
+  mobileGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "32px",
+    "@media (max-width: 768px)": {
+      gridTemplateColumns: "1fr",
+    },
+  },
+  mobileCard: {
+    backgroundColor: "#FFFFFF",
+    border: "1px solid #E2E8F0",
+    borderRadius: "20px",
+    padding: "36px",
+    display: "flex",
+    flexDirection: "column",
+    boxShadow: "0 4px 20px rgba(0,0,0,0.04)",
+    transition: "transform 0.2s ease",
+    "&:hover": {
+      transform: "translateY(-4px)",
+    },
+  },
+  mobileIcon: {
+    width: "56px",
+    height: "56px",
+    borderRadius: "16px",
+    backgroundColor: "rgba(0, 114, 196, 0.1)",
+    color: "#0072C4",
+    border: "1px solid rgba(0, 114, 196, 0.2)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "20px",
+  },
+  mobileTarget: {
+    fontSize: "12px",
+    fontWeight: 700,
+    color: "#0072C4",
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    marginBottom: "6px",
+  },
+  mobileCardTitle: {
+    fontSize: "1.4rem",
+    fontWeight: 700,
+    color: "#0F172A",
+    marginBottom: "12px",
+    margin: 0,
+  },
+  mobileCardDesc: {
+    fontSize: "0.95rem",
+    color: "#475569",
+    lineHeight: 1.6,
+    flexGrow: 1,
+    marginBottom: "24px",
+  },
+  mobileBadges: {
+    display: "flex",
+    gap: "10px",
+  },
+  mobileBadge: {
+    backgroundColor: "#F1F5F9",
+    color: "#334155",
+    padding: "6px 16px",
+    borderRadius: "9999px",
+    fontSize: "12px",
+    fontWeight: 600,
+    border: "1px solid #CBD5E1",
+  },
+
+  /* Founder Control / Multi-Location Section */
+  founderSection: {
+    width: "100%",
+    maxWidth: "1200px",
+    margin: "80px auto",
+    padding: "0 24px",
+    boxSizing: "border-box",
+  },
+  founderHeader: {
+    textAlign: "center",
+    marginBottom: "48px",
+  },
+  founderTitle: {
+    fontSize: "2.2rem",
+    fontWeight: 700,
+    color: "#0F172A",
+    lineHeight: 1.25,
+    marginBottom: "8px",
+    margin: 0,
+    whiteSpace: "pre-line",
+    "@media (max-width: 768px)": {
+      fontSize: "1.7rem",
+    },
+  },
+  founderDesc: {
+    fontSize: "1.05rem",
+    color: "#64748B",
+    maxWidth: "650px",
+    margin: "0 auto",
+    lineHeight: 1.6,
+  },
+  founderGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "40px",
+    "@media (max-width: 768px)": {
+      gridTemplateColumns: "1fr",
+      gap: "28px",
+    },
+  },
+  founderItem: {
+    display: "flex",
+    gap: "16px",
+    alignItems: "flex-start",
+  },
+  founderIcon: {
+    fontSize: "28px",
+    flexShrink: 0,
+    marginTop: "2px",
+  },
+  founderItemTitle: {
+    fontSize: "1.15rem",
+    fontWeight: 700,
+    color: "#0F172A",
+    marginBottom: "6px",
+    margin: 0,
+  },
+  founderItemDesc: {
+    fontSize: "0.95rem",
+    color: "#475569",
+    lineHeight: 1.6,
+    margin: 0,
+  },
+
+  /* Hesitation & Migration Section */
+  migrationSection: {
+    width: "100%",
+    maxWidth: "1200px",
+    margin: "80px auto 40px",
+    padding: "0 24px",
+    boxSizing: "border-box",
+  },
+  migrationHeader: {
+    textAlign: "center",
+    marginBottom: "48px",
+  },
+  migrationTitle: {
+    fontSize: "2.2rem",
+    fontWeight: 700,
+    color: "#0F172A",
+    marginBottom: "8px",
+    margin: 0,
+    "@media (max-width: 768px)": {
+      fontSize: "1.7rem",
+    },
+  },
+  migrationDesc: {
+    fontSize: "1.05rem",
+    color: "#64748B",
+    maxWidth: "750px",
+    margin: "0 auto",
+    lineHeight: 1.6,
+  },
+  migrationGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "24px",
+    "@media (max-width: 900px)": {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    },
+    "@media (max-width: 600px)": {
+      gridTemplateColumns: "1fr",
+    },
+  },
+  migrationCard: {
+    backgroundColor: "#FFFFFF",
+    border: "1px solid #E2E8F0",
+    borderRadius: "16px",
+    padding: "24px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.03)",
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      transform: "translateY(-3px)",
+      boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
+    },
+  },
+  migrationCardTitle: {
+    fontSize: "1rem",
+    fontWeight: 700,
+    color: "#0F172A",
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    margin: 0,
+  },
+  migrationIconWrapper: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "32px",
+    height: "32px",
+    borderRadius: "8px",
+    flexShrink: 0,
+  },
+  greenIcon: {
+    backgroundColor: "rgba(34, 197, 94, 0.12)",
+    color: "#16A34A",
+    border: "1px solid rgba(34, 197, 94, 0.25)",
+  },
+  blueIcon: {
+    backgroundColor: "rgba(59, 130, 246, 0.12)",
+    color: "#2563EB",
+    border: "1px solid rgba(59, 130, 246, 0.25)",
+  },
+  yellowIcon: {
+    backgroundColor: "rgba(234, 179, 8, 0.12)",
+    color: "#CA8A04",
+    border: "1px solid rgba(234, 179, 8, 0.25)",
+  },
+  orangeIcon: {
+    backgroundColor: "rgba(249, 115, 22, 0.12)",
+    color: "#EA580C",
+    border: "1px solid rgba(249, 115, 22, 0.25)",
+  },
+  purpleIcon: {
+    backgroundColor: "rgba(168, 85, 247, 0.12)",
+    color: "#9333EA",
+    border: "1px solid rgba(168, 85, 247, 0.25)",
+  },
+  pinkIcon: {
+    backgroundColor: "rgba(236, 72, 153, 0.12)",
+    color: "#DB2777",
+    border: "1px solid rgba(236, 72, 153, 0.25)",
+  },
+  migrationCardDesc: {
+    fontSize: "0.875rem",
+    color: "#475569",
+    lineHeight: 1.6,
+    margin: 0,
+  },
+  migrationCTA: {
+    marginTop: "56px",
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "10px",
+  },
+  migrationBtn: {
+    backgroundColor: "#0072C4",
+    color: "#FFFFFF",
+    fontSize: "1.1rem",
+    fontWeight: 700,
+    padding: "16px 36px",
+    borderRadius: "12px",
+    border: "none",
+    cursor: "pointer",
+    boxShadow: "0 10px 25px -5px rgba(0, 114, 196, 0.4)",
+    transition: "background-color 0.2s ease, transform 0.2s ease",
+    "&:hover": {
+      backgroundColor: "#005ea6",
+      transform: "translateY(-1px)",
+    },
+  },
+  migrationSubtext: {
+    fontSize: "0.875rem",
+    color: "#64748B",
+  },
+
+  dashboardMockupContainer: {
+    width: "100%",
+    maxWidth: "1140px",
+    margin: "60px auto 40px",
+    padding: "0 24px",
+    boxSizing: "border-box",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    "@media (max-width: 768px)": {
+      margin: "40px auto 20px",
+      padding: "0 16px",
+    },
+  },
+  dashboardMockupWrapper: {
+    width: "100%",
+    borderRadius: "20px",
+    overflow: "hidden",
+    boxShadow: "0 20px 50px -10px rgba(0, 114, 196, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08)",
+    backgroundColor: "#FFFFFF",
+    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    "&:hover": {
+      transform: "translateY(-4px)",
+      boxShadow: "0 28px 60px -12px rgba(0, 114, 196, 0.28), 0 0 0 1px rgba(0, 114, 196, 0.25)",
+    },
+  },
+  dashboardMockupImg: {
+    width: "100%",
+    height: "auto",
+    display: "block",
+    objectFit: "contain",
+  },
+
   BannerSection: {
     minHeight: "55vh",
     width: "100%",
@@ -168,8 +896,6 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     flexDirection: "column",
     alignItems: "flex-start",
     gap: "48px",
-    // flex: "1",
-    // maxWidth: "400px",
     "@media (max-width: 750px)": {
       width: "100%",
       alignItems: "center",
@@ -216,10 +942,6 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     flexDirection: "column",
   },
   SideImageContainer: {
-    // display: "contents",
-    // display:'flex',
-    // alignItems:"flex-end",
-    // height:"100%"
     "@media (max-width: 750px)": {
       width: "100%",
     },
@@ -238,7 +960,6 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     gap: theme.spacing.s2000,
     boxSizing: "border-box",
     overflow: "hidden",
-    // Prevents this section from bleeding into the StickyScrollSection above
     position: "relative",
     zIndex: 10,
     backgroundColor: "#FFFFFF",
@@ -377,27 +1098,19 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   ValuesContainer: {
     width: "100%",
-    // Container height is auto-derived from the SVG's own aspect ratio (1280 × 1323)
-    // At 100vw width → height = 100vw × (1323/1280) ≈ 103.4vw — exactly the SVG height
     aspectRatio: "1280 / 1323",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
-    // 35vw is proportional to the SVG coordinate system:
-    // blue wave in background.svg starts at y≈415/1323 ≈ 31% of SVG height.
-    // 35vw = 35% of width = ~35% of container height → content lands in blue area at all sizes
     paddingTop: "35vw",
     paddingBottom: "3vw",
     boxSizing: "border-box",
     marginTop: theme.spacing.s2000,
     backgroundImage: `url(${(principle_background as any)?.src || principle_background})`,
-    // Width = 100% of container (= 100vw), height = auto from aspect ratio
-    // Background fills edge-to-edge; left/right overflow is fine per design intent
     backgroundSize: "100% auto",
     backgroundPosition: "top center",
     backgroundRepeat: "no-repeat",
-    // No overflow:hidden — allows the background to naturally fill to both edges
   },
   ValuesDescription: {
     maxWidth: "930px",
@@ -445,7 +1158,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     gap: theme.spacing.s200,
     borderRadius: theme.borderRadius.b300,
-    border: `1px soild ${theme.light.neutral.border.medium}`,
+    border: `1px solid ${theme.light.neutral.border.medium}`,
     backgroundColor: theme.light.negative.surface.medium,
   },
   valueBlue: {
@@ -668,7 +1381,6 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   SectionOne: {
     flex: 0.1,
     backgroundColor: theme.light.neutral.surface.light,
-    // backgroundColor:'black',
     display: "flex",
     flexDirection: "column",
     gap: theme.spacing.s300,
@@ -703,7 +1415,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     justifyContent: "space-between",
     position: "relative",
     "&:hover $chevronright": {
-      opacity: 1, // Show the image on hover
+      opacity: 1,
     },
   },
 
@@ -712,7 +1424,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    opacity: 0, // Hide the image by default
+    opacity: 0,
     transition: "opacity 0.3s ease",
   },
 
@@ -726,7 +1438,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "112px",
     height: "112px",
     borderRadius: "50%",
-    backgroundColor: "transparent", // default transparent
+    backgroundColor: "transparent",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -734,12 +1446,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     left: "2%",
     top: "13%",
     transition: "background-color 0.3s ease",
-
     "&:hover": {
       backgroundColor: "rgba(245, 247, 248, 0.8)",
       boxShadow: theme.elevation.m,
     },
-
     "&:hover $heroFirstRightInsideCon": {
       backgroundColor: theme.light.brand.surface.lighter,
     },
@@ -749,7 +1459,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "112px",
     height: "112px",
     borderRadius: "50%",
-    backgroundColor: "transparent", // default transparent
+    backgroundColor: "transparent",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -757,12 +1467,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     left: "11%",
     top: "50%",
     transition: "background-color 0.3s ease",
-
     "&:hover": {
       backgroundColor: "rgba(245, 247, 248, 0.8)",
       boxShadow: theme.elevation.m,
     },
-
     "&:hover $heroFirstRightInsideCon": {
       backgroundColor: theme.light.brand.surface.lighter,
     },
@@ -772,7 +1480,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "112px",
     height: "112px",
     borderRadius: "50%",
-    backgroundColor: "transparent", // default transparent
+    backgroundColor: "transparent",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -780,12 +1488,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     left: "2%",
     top: "85%",
     transition: "background-color 0.3s ease",
-
     "&:hover": {
       backgroundColor: "rgba(245, 247, 248, 0.8)",
       boxShadow: theme.elevation.m,
     },
-
     "&:hover $heroThirdInsideCon": {
       backgroundColor: theme.light.brand.surface.lighter,
     },
@@ -803,7 +1509,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "112px",
     height: "112px",
     borderRadius: "50%",
-    backgroundColor: "transparent", // default transparent
+    backgroundColor: "transparent",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -811,12 +1517,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     right: "17%",
     top: "18%",
     transition: "background-color 0.3s ease",
-
     "&:hover": {
       backgroundColor: "rgba(245, 247, 248, 0.8)",
       boxShadow: theme.elevation.m,
     },
-
     "&:hover $heroFirstRightInsideCon": {
       backgroundColor: theme.light.brand.surface.lighter,
     },
@@ -834,20 +1538,14 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "112px",
     height: "112px",
     borderRadius: "50%",
-    // backgroundColor: "transparent", // default transparent
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
     right: "2%",
-    // backgroundColor: "rgba(245, 247, 248, 0.5)",
     top: "60%",
     transition: "background-color 0.3s ease",
-    //  backdropFilter: "blur(10px)", // frosted glass effect
-    // WebkitBackdropFilter: "blur(10px)", // Safari support
-
     "&:hover": {
-      // backgroundColor: "#f5f7f8", // hover color
       backgroundColor: "rgba(245, 247, 248, 0.8)",
       boxShadow: theme.elevation.m,
     },
@@ -860,7 +1558,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "112px",
     height: "112px",
     borderRadius: "50%",
-    backgroundColor: "transparent", // default transparent
+    backgroundColor: "transparent",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -868,12 +1566,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     right: "10%",
     top: "103%",
     transition: "background-color 0.3s ease",
-
     "&:hover": {
       backgroundColor: "rgba(245, 247, 248, 0.8)",
       boxShadow: theme.elevation.m,
     },
-
     "&:hover $heroThirdRightInsideCon": {
       backgroundColor: theme.light.brand.surface.lighter,
     },

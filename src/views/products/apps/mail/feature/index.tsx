@@ -2,6 +2,7 @@
 
 import React from 'react';
 import FeatureTemp from '../../../../../components/featureTemp/index';
+import Usage from '../../../../../components/usage/index';
 import ComparisonTemp from '../../../../../components/comparationTemp/index';
 import mailDataJson from '../../../../../data/mail.json';
 import SvgAbstract from '../../../../../components/svg/Abstract';
@@ -60,11 +61,13 @@ const MailFeature = () => {
         path: "",
       },
     })),
+    demo: mailDataJson.feature.demo,
   };
 
   return (
     <div>
       <FeatureTemp jsonData={featureData} />
+      <Usage usageData={mailDataJson.feature.usage} />
       <ComparisonTemp comparisonData={mailDataJson.comparison} />
     </div>
   );

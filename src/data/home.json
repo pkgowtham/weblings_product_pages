@@ -1,10 +1,201 @@
 {
   "headSection": {
-    "titleSubtext": "",
-    "title": "Manage Your Business from One Smart Workspace",
-    "titleDescription": "Bring your teams, projects, communication, and daily operations together in a single platform. Weblings Workspace helps businesses collaborate efficiently, stay organized, and get more done with less effort.",
+    "badge": "The All-in-One Business Operating System",
+    "titlePart1": "One workspace. Six apps. One simple invoice.",
+    "titleHighlight": "With built-in AI to manage your client specs and enforce developer code standards.",
+    "title": "One workspace. Six apps. One simple invoice.\nWith built-in AI to manage your client specs and enforce developer code standards.",
+    "titleDescription": "The all-in-one business workspace uniting your HRMS, agile ticketing, team chat, shared calendar, cloud drive, and webmail from a single secure dashboard. We've combined enterprise-grade scalability, fraction-of-the-cost pricing, and a built-in AI engine that automatically turns client calls into tickets—ensuring your developers build exactly what was promised.",
     "action": {
-      "label": "Get Started",
+      "label": "Start Free Trial",
+      "subtext": "No credit card required.",
+      "link": "/"
+    },
+    "secondaryAction": {
+      "label": "Watch Demo",
+      "link": "/"
+    }
+  },
+  "ticker": {
+    "title": "Replace your fragmented tool stack",
+    "tools": [
+      "Slack",
+      "Jira",
+      "Google Workspace",
+      "BambooHR / Keka",
+      "Dropbox",
+      "Zoom"
+    ]
+  },
+  "aiEngine": {
+    "badge": "Dual-Engine Intelligence",
+    "title": "AI That Protects Your Scope\nand Enforces Your Code",
+    "description": "Integrated AI listens to client meetings to catch new requests automatically, then double-checks your team's code every night to make sure nothing was missed.",
+    "scopeDefense": {
+      "badge": "A",
+      "title": "The Client Meeting Flow",
+      "steps": [
+        {
+          "step": "1",
+          "id": "brain",
+          "title": "1. The Baseline Brain",
+          "description": "Upload your initial project PDFs, designs, and requirements. The AI memorizes every detail, converting it into an unshakeable Single Source of Truth (SSOT)."
+        },
+        {
+          "step": "2",
+          "id": "mic",
+          "title": "2. Smart Call Tracking",
+          "description": "Click a button during your client meeting. The AI transcribes the conversation, compares it against the original project baseline, and instantly flags new feature requests."
+        },
+        {
+          "step": "3",
+          "id": "bolt",
+          "title": "3. Auto-Create Tickets",
+          "description": "Review the changes, approve the Change of Request (COR), and let the AI handle the rest. It automatically creates and assigns the new tasks to your team—zero manual data entry."
+        }
+      ]
+    },
+    "codeAdherence": {
+      "badge": "B",
+      "title": "The Developer Code Flow",
+      "steps": [
+        {
+          "step": "1",
+          "id": "clipboardCheck",
+          "title": "1. The Daily Guide",
+          "description": "The AI automatically hands your developers the updated client rules every day, right inside their coding tools."
+        },
+        {
+          "step": "2",
+          "id": "codeSearch",
+          "title": "2. Nightly Code Review",
+          "description": "Every night, the AI reviews the code your team wrote that day. It analyzes all daily Git commits—across any language from React to Java or Swift—directly against the client's latest requirements."
+        },
+        {
+          "step": "3",
+          "id": "bellAlert",
+          "title": "3. Morning Alerts",
+          "description": "If a developer misses a client rule, you receive an alert the next morning so you can fix deviations before they become expensive delays."
+        }
+      ]
+    }
+  },
+  "automations": {
+    "title": "How the Engine Runs Together",
+    "subtitle": "Zero third-party duct tape. Everything works out of the box.",
+    "items": [
+      {
+        "num": "01",
+        "title": "Zero-Day Onboarding",
+        "description": "Welcome new hires on day one—without the IT wait. Add a new team member in E-Office, and their custom business email is ready in seconds. No more waiting days for Jira access or waiting around for Slack invites just to say hello to teammates. New teammates can jump straight into ongoing projects, join team chats, and start collaborating from their very first hour."
+      },
+      {
+        "num": "02",
+        "title": "Instant Team Alignment",
+        "description": "Start a project, and your workspace builds itself. When you kick off a new project, everything your team needs is created automatically. A dedicated agile board appears in Streamline, and a project channel pops up in Chat right away. You can share tasks, trade updates, and celebrate milestones together without ever copying user lists or setting up permissions by hand."
+      },
+      {
+        "num": "03",
+        "title": "Unified Team Identity",
+        "description": "Update your profile once, and you're set everywhere. Changed your display name, took a fresh profile picture, or stepped into a new role? Update it once in your account settings, and it instantly refreshes across your company emails, chat messages, ticket assignments, and shared documents. Everyone sees who you are right away—clean, consistent, and effortless."
+      }
+    ]
+  },
+  "mobileApps": {
+    "title": "Stay in the Loop Anywhere",
+    "description": "Dedicated mobile apps available on both iOS and Android. Whether you are on the floor, traveling between branches, or stepping away from your desk, critical updates reach you the second they happen.",
+    "cards": [
+      {
+        "id": "smartphone",
+        "title": "The Whole Office in Your Pocket",
+        "target": "For Every Employee",
+        "description": "Never miss an urgent ping, new email, or ticket status shift. Team members can approve leave requests, review project timelines, join audio calls, and respond to clients instantly—whether sitting at a workstation or on the move.",
+        "badges": [
+          "iOS App",
+          "Android App"
+        ]
+      },
+      {
+        "id": "trendingUp",
+        "title": "Real-Time Oversight on the Go",
+        "target": "For Founders & Executives",
+        "description": "Stay tuned to your company’s pulse without checking a laptop. Receive instant alerts on high-priority milestones, cross-branch storage limits, critical system alerts, and headcount changes across every location right on your phone.",
+        "badges": [
+          "iOS App",
+          "Android App"
+        ]
+      }
+    ]
+  },
+  "founderControl": {
+    "title": "Built for Growing Businesses\nwith Multiple Locations",
+    "description": "Manage all your branches and custom domains from the top, while keeping everyday operations completely private.",
+    "features": [
+      {
+        "id": "globe",
+        "title": "Instant Domain Setup in 30 Seconds",
+        "description": "Add your company web address or pick up a new one right inside the dashboard. MX records, email security, and DNS configure themselves behind the scenes in under 30 seconds—no tech expertise needed."
+      },
+      {
+        "id": "building",
+        "title": "Flexible Web Addresses for Every Office",
+        "description": "Use one main company web address across all your offices, or assign different addresses to different locations. Whenever HR adds a new team member, they simply pick the right location address from a dropdown, and the new work email is ready immediately."
+      },
+      {
+        "id": "lock",
+        "title": "Complete Privacy Between Offices",
+        "description": "Keep local branch files, discussions, and tasks strictly within the local team. Employees only see what belongs to their office, so sensitive client work and internal communications stay completely confidential."
+      },
+      {
+        "id": "barChart",
+        "title": "Clear Big-Picture Insights for Founders",
+        "description": "Keep an eye on company-wide growth without digging into day-to-day clutter. Check team headcounts, storage usage, and active branches at a glance from your executive console."
+      }
+    ]
+  },
+  "migration": {
+    "title": "Terrified of Migrating? Don't Be.",
+    "description": "We know migrating enterprise data is scary. That's why we've engineered a zero-friction adoption process built on Fort Knox infrastructure.",
+    "points": [
+      {
+        "id": "checkCircle",
+        "iconColor": "green",
+        "title": "No \"Rip & Replace\" Rollout",
+        "description": "Start by using just our HRMS or Webmail at absolutely zero cost. Let your team keep using Jira and Teams while they slowly get comfortable with our ecosystem at their own pace."
+      },
+      {
+        "id": "messageSquare",
+        "iconColor": "blue",
+        "title": "MS Teams Embedded",
+        "description": "Worried about external clients? We built an embedded MS Teams interface. Authenticate in 5 minutes and host standard Teams calls right from inside our dashboard."
+      },
+      {
+        "id": "handshake",
+        "iconColor": "yellow",
+        "title": "White-Glove Migration",
+        "description": "Forget buggy import scripts. A real human engineer will connect with you and personally migrate your data from your old platforms into our system at zero cost."
+      },
+      {
+        "id": "cloud",
+        "iconColor": "orange",
+        "title": "Internet-Scale Stability",
+        "description": "We run on the exact same backbone that powers the modern internet: AWS and Cloudflare. You get unparalleled global edge performance and stability that scales effortlessly."
+      },
+      {
+        "id": "shieldLock",
+        "iconColor": "purple",
+        "title": "Absolute DB Isolation",
+        "description": "You do not share a database with anyone. Every organization gets its own isolated database protected by the highest tier of encryption available."
+      },
+      {
+        "id": "doorOpen",
+        "iconColor": "pink",
+        "title": "Zero Vendor Lock-In",
+        "description": "If you ever leave, we hand over your entire isolated database. Zero residual data is left on our servers. The domains you purchase are 100% yours to keep."
+      }
+    ],
+    "action": {
+      "label": "Deploy Your Custom Workspace Today",
+      "subtext": "Takes less than 60 seconds. No credit card required.",
       "link": "/"
     }
   },
@@ -24,28 +215,28 @@
   ],
   "bannerFeatures": [],
   "features": {
-    "title": "Why our Product ?",
-    "description": "Empowering modern businesses with seamless software that optimizes operations and outpaces the competition.",
+    "title": "Built for Growing Businesses with Multiple Locations",
+    "description": "Manage all your branches and custom domains from the top, while keeping everyday operations completely private..",
     "featureBox": [
       {
-        "id": "puzzle",
-        "titleSubtext": "Seamless Integration",
-        "titleSmallSubText": "Effortlessly sync your chat messages with your project management platform for smooth collaboration."
+        "id": "globe",
+        "titleSubtext": "Instant Domain Setup in 30 Seconds",
+        "titleSmallSubText": "Add your company web address or pick up a new one right inside the dashboard. MX records, email security, and DNS configure themselves behind the scenes in under 30 seconds—no tech expertise needed."
       },
       {
-        "id": "shieldCheck",
-        "titleSubtext": "Single Sign-On (SSO)",
-        "titleSmallSubText": "No need for third-party integration—-we provide a one-stop authentication solution."
+        "id": "building",
+        "titleSubtext": "Flexible Web Addresses for Every Office",
+        "titleSmallSubText": "Use one main company web address across all your offices, or assign different addresses to different locations. Whenever HR adds a new team member, they simply pick the right location address from a dropdown, and the new work email is ready immediately."
       },
       {
-        "id": "boxes",
-        "titleSubtext": "Centralized Data",
-        "titleSmallSubText": "Keep all your data in one place with no unnecessary scattering across platforms."
+        "id": "lock",
+        "titleSubtext": "Complete Privacy Between Offices",
+        "titleSmallSubText": "Keep local branch files, discussions, and tasks strictly within the local team. Employees only see what belongs to their office, so sensitive client work and internal communications stay completely confidential."
       },
       {
-        "id": "package",
-        "titleSubtext": "All-in-One Pricing",
-        "titleSmallSubText": "Enjoy every feature and service at a single, affordable price—-no more juggling multiple plans."
+        "id": "barChart",
+        "titleSubtext": "Clear Big-Picture Insights for Founders",
+        "titleSmallSubText": "Keep an eye on company-wide growth without digging into day-to-day clutter. Check team headcounts, storage usage, and active branches at a glance from your executive console."
       }
     ]
   },
