@@ -22,6 +22,7 @@ import {
   EOfficeIcon,
   WorksuiteIcon,
 } from "../../assets/icons_component/index";
+import { SvgCloud } from "../svg/CustomIcons";
 
 interface ProductItem {
   key: string;
@@ -77,6 +78,15 @@ const productsList: ProductItem[] = [
       "Track employee attendance, leave requests, organization hierarchy, and team structures in one portal.",
     path: "/eoffice/feature",
     icon: <EOfficeIcon />,
+  },
+  {
+    key: "Drive",
+    label: "Drive",
+    title: "AI-Powered Enterprise Cloud Storage",
+    description:
+      "Store, share, and understand your files with granular permissions, expiring links, and built-in document intelligence.",
+    path: "/drive",
+    icon: <SvgCloud />,
   },
   {
     key: "Worksuite",

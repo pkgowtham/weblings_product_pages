@@ -1,74 +1,39 @@
 'use client';
 
 import React from 'react';
-import FeatureTemp from '../../../../../components/featureTemp/index';
-import Usage from '../../../../../components/usage/index';
-import ComparisonTemp from '../../../../../components/comparationTemp/index';
-import mailDataJson from '../../../../../data/mail.json';
-import SvgAbstract from '../../../../../components/svg/Abstract';
-
-// Import 5 images from src/assets/images/mail/
-import inboxImg from '../../../../../assets/images/mail/inbox.svg';
-import composeMailImg from '../../../../../assets/images/mail/compose_mail.svg';
-import replyManageImg from '../../../../../assets/images/mail/reply_manage.svg';
-import mailBoxesImg from '../../../../../assets/images/mail/mail_boxes.svg';
-import labelsTagsImg from '../../../../../assets/images/mail/labels_tags.svg';
-
-const imageMap: Record<string, string> = {
-  inbox: inboxImg,
-  compose_mail: composeMailImg,
-  reply_manage: replyManageImg,
-  mail_boxes: mailBoxesImg,
-  labels_tags: labelsTagsImg,
-};
+import { useStyles } from './style';
 
 const MailFeature = () => {
-  const featureData = {
-    main: {
-      subtitle: mailDataJson.feature.main.subtitle,
-      title: mailDataJson.feature.main.title,
-      content: mailDataJson.feature.main.content,
-      action: mailDataJson.feature.main.action,
-      img: [
-        {
-          alt: "Mail Workspace",
-          src: inboxImg,
-          path: "",
-        },
-      ],
-    },
-    features: mailDataJson.feature.features.map((item: any) => ({
-      subtitle: item.subtitle,
-      title: item.title,
-      content: item.content,
-      showSparkle: item.showSparkle,
-      isFullWidth: item.imagePosition === "fullWidth",
-      action: [
-        {
-          label: "",
-          path: "",
-          color: "Secondary",
-        },
-      ],
-      img: {
-        alt: item.imageAlt || item.title,
-        src: imageMap[item.imageKey] || inboxImg,
-        path: "",
-      },
-      abstractImg: {
-        alt: "background shape",
-        src: <SvgAbstract />,
-        path: "",
-      },
-    })),
-    demo: mailDataJson.feature.demo,
-  };
+  const classes = useStyles();
 
   return (
-    <div>
-      <FeatureTemp jsonData={featureData} />
-      <Usage usageData={mailDataJson.feature.usage} />
-      <ComparisonTemp comparisonData={mailDataJson.comparison} />
+    <div className={classes.page}>
+      <section className={classes.hero}>
+        <div className={classes.glow} />
+        <div className={classes.heroContent}>
+          <div className={classes.badge}><span>📧</span> Weblings Inbox</div>
+          <h1 className={classes.title}>Enterprise Email Hosting.<span className={classes.titleAccent}>Without the per-seat tax.</span></h1>
+          <p className={classes.heroDescription}>Stop paying extra every time you hire a new employee. Get unlimited custom domain email addresses, edge-network spam protection, and the ability to send massive 10GB attachments, all fully included in your Weblings Worksuite.</p>
+          <button className={classes.primaryButton}>Deploy Enterprise Inbox</button>
+        </div>
+
+        <div className={classes.inbox}>
+          <div className={classes.inboxBar}><div className={classes.dots}><span className={classes.dot} /><span className={classes.dot} /><span className={classes.dot} /></div><span>inbox.weblings.com - Authenticated</span><span className={classes.secure}>✓ DMARC / SPF Secured</span></div>
+          <aside className={classes.sidebar}><button className={classes.compose}>Compose</button><div className={`${classes.folder} ${classes.folderActive}`}>Inbox <span className={classes.count}>3</span></div><div className={classes.folder}>Starred</div><div className={classes.folder}>Sent</div><div className={classes.folder}>Drafts</div><div className={classes.folder}>Spam <small>0</small></div></aside>
+          <div className={classes.emailList}><div className={classes.searchWrap}><input className={classes.search} placeholder="Search emails..." aria-label="Search emails" /></div><div className={`${classes.email} ${classes.emailActive}`}><div className={classes.emailSender}>Sarah Jenkins (Client)</div><div className={classes.emailSubject}>Final 4K Rendering Assets</div><div className={classes.emailPreview}>Here are the final heavy assets for the...</div></div><div className={classes.email}><div className={classes.emailSender}>HR Automations</div><div className={classes.emailSubject}>Welcome to the team, Alex!</div><div className={classes.emailPreview}>Your unified workspace is now ready...</div></div></div>
+          <main className={classes.reader}><div className={classes.readerHeader}><div><h2 className={classes.readerTitle}>Final 4K Rendering Assets</h2><div className={classes.sender}><span className={classes.avatar}>SJ</span><span>Sarah Jenkins &lt;sarah@client.com&gt;<br /><small>To: you@company.com</small></span></div></div><span className={classes.time}>10:42 AM (2 hours ago)</span></div><div className={classes.body}>Hi Team,<br /><br />Great call today. As promised, I am sending over the final 4K rendering assets for the new project. Since the files are massive, I noticed your system automatically generated a secure download link.<br /><br />Let me know if you need anything else.<br /><br />Best,<br />Sarah</div><div style={{ marginTop: 'auto' }}><div className={classes.attachmentLabel}>Attachments (4.2 GB Total)</div><div className={classes.attachment}><div style={{ display: 'flex', alignItems: 'center', gap: 12 }}><div className={classes.attachmentIcon}>📦</div><div><div className={classes.attachmentName}>Project_Assets_Final_v2.zip</div><div className={classes.attachmentDetail}>4.2 GB · Hosted via Weblings Drive Link</div></div></div><button className={classes.secondaryButton}>Download Securely</button></div><div className={classes.note}>✓ Standard 20MB limit bypassed using Drive smart-linking.</div></div></main>
+        </div>
+      </section>
+
+      <section className={classes.section}><div className={classes.split}><div><div className={classes.kicker}>Zero-Day Onboarding</div><h2 className={classes.sectionTitle}>From Offer Letter to Inbox in 3 Seconds.</h2><p className={classes.sectionText}>Stop filing IT tickets just to get a new employee an email address. Because Inbox is deeply integrated with the E-Office HRMS, the workflow is entirely automated.</p><div className={classes.points}><div className={classes.point}><span className={classes.pointNumber}>1</span><div><h3 className={classes.pointTitle}>HR Creates the Profile</h3><p className={classes.pointText}>Your HR manager adds the new hire in E-Office and selects their branch location.</p></div></div><div className={classes.point}><span className={classes.pointNumber}>2</span><div><h3 className={classes.pointTitle}>Instant Email Allocation</h3><p className={classes.pointText}>The system instantly creates their custom business email under the domain allocated to that location.</p></div></div><div className={classes.point}><span className={classes.pointNumber}>3</span><div><h3 className={classes.pointTitle}>Ready to Work</h3><p className={classes.pointText}>The new identity is immediately populated across Team Chat, Streamline tickets, and the company directory.</p></div></div></div></div><div className={classes.workflow}><div className={classes.workflowRow}><span>👤 Add Employee: Alex Smith</span><small>E-Office</small></div><div className={classes.workflowLine} /><div className={`${classes.workflowRow} ${classes.workflowActive}`}><span>✉️ alex@ny-branch.com</span><strong>0.4s</strong></div><div className={classes.workflowLine} /><div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}><div className={classes.workflowRow}>Added to Chat</div><div className={classes.workflowRow}>Added to Streamline</div></div></div></div></section>
+
+      <section className={classes.section}><div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto 40px' }}><div className={classes.kicker}>Military-Grade Perimeter</div><h2 className={classes.sectionTitle}>Secured by the Global Edge Network.</h2><p className={classes.sectionText}>Email is the number one vector for corporate breaches. We route your entire inbox through infrastructure that catches threats before they reach your employees.</p></div><div className={classes.securityGrid}><div className={classes.card}><div className={classes.cardIcon}>🛡️</div><h3 className={classes.cardTitle}>Advanced Anti-Phishing</h3><p className={classes.cardText}>Our perimeter network detects attacker infrastructure and stops targeted Business Email Compromise before it reaches your inbox.</p></div><div className={classes.card}><div className={classes.cardIcon}>⚙️</div><h3 className={classes.cardTitle}>Zero-Headache DNS</h3><p className={classes.cardText}>SPF, DKIM, and DMARC configure themselves automatically when you link or purchase a domain.</p></div><div className={classes.card}><div className={classes.cardIcon}>🦠</div><h3 className={classes.cardTitle}>Edge-Level Antivirus</h3><p className={classes.cardText}>Every attachment is scanned by multiple enterprise virus engines in isolated cloud sandboxes.</p></div></div></section>
+
+      <section className={classes.section}><div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto 36px' }}><h2 className={classes.sectionTitle}>Unrestricted Email, Fully Included.</h2><p className={classes.sectionText}>Create as many custom inboxes as you need for contractors, support aliases, or new hires. It is 100% included in your flat Weblings Worksuite invoice.</p></div><div className={classes.includedGrid}><div className={classes.includedCard}><div className={classes.cardIcon}>∞</div><h3 className={classes.cardTitle}>Unlimited Addresses</h3><p className={classes.cardText}>Create unlimited aliases and standard inboxes with no extra per-user billing.</p></div><div className={classes.includedCard}><div className={classes.cardIcon}>🗂️</div><h3 className={classes.cardTitle}>Massive 10GB Attachments</h3><p className={classes.cardText}>Drive integration automatically swaps larger files for secure 10GB links.</p></div><div className={classes.includedCard}><div className={classes.cardIcon}>🛒</div><h3 className={classes.cardTitle}>In-App Domain Purchasing</h3><p className={classes.cardText}>Search, purchase, and route new domains directly within Organization.</p></div><div className={classes.includedCard}><div className={classes.cardIcon}>🔍</div><h3 className={classes.cardTitle}>Lightning Fast Indexing</h3><p className={classes.cardText}>Filter through years of indexed email history without browser lag.</p></div></div></section>
+
+      <section className={classes.section}><div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto 40px' }}><div className={classes.kicker}>Intelligent Organization</div><h2 className={classes.sectionTitle}>Find Anything. Organize Everything.</h2><p className={classes.sectionText}>AI-powered retrieval and visual segregation help you find every thread without guessing the right keywords.</p></div><div className={classes.securityGrid}><div className={classes.card}><div className={classes.cardIcon}>🧠</div><h3 className={classes.cardTitle}>Semantic Vector Search</h3><p className={classes.cardText}>Search by meaning and context. Ask for a Q3 financial summary and find the third-quarter budget breakdown instantly.</p><div className={classes.workflowRow} style={{ marginTop: 18 }}>🔍 &quot;that design file Sarah sent last week&quot;</div></div><div className={classes.card}><div className={classes.cardIcon}>🏷️</div><h3 className={classes.cardTitle}>Visual Color Tags</h3><p className={classes.cardText}>Create tailored labels for projects, priorities, or clients and scan hundreds of emails without reading every subject line.</p><div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 18 }}><span className={classes.badge}>Urgent</span><span className={classes.badge}>Client Approval</span><span className={classes.badge}>Invoices</span><span className={classes.badge}>Internal Team</span></div></div></div></section>
+
+      <section className={`${classes.section} ${classes.mobileSection}`}><div className={classes.split}><div className={classes.phone}><div className={classes.notch} /><div className={classes.phoneHeader}><span>Inbox</span><span className={classes.avatar}>AS</span></div><div className={`${classes.phoneEmail} ${classes.phoneEmailActive}`}><strong>Sarah Jenkins</strong><br /><span>Final 4K Rendering Assets</span><br /><small>Here are the final heavy assets...</small></div><div className={classes.phoneEmail}>HR Automations<br /><small>Welcome to the team!</small></div><div className={classes.phoneEmail}>Billing Dept<br /><small>Invoice #40291 Paid</small></div><div className={classes.mobileFab}>+</div></div><div className={classes.mobileCopy}><div className={classes.kicker}>Unified Mobile Experience</div><h2 className={classes.sectionTitle}>Your Team, In Your Pocket.</h2><p className={classes.sectionText}>You do not need a separate app for email, chat, and HR. The unified Weblings mobile app puts your Enterprise Inbox next to Streamline tickets and Team Chat.</p><div style={{ display: 'flex', gap: 12, marginTop: 24 }}><button className={classes.secondaryButton}>Download iOS</button><button className={classes.secondaryButton}>Download Android</button></div></div></div></section>
     </div>
   );
 };

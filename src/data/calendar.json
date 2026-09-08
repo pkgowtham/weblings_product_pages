@@ -1,84 +1,92 @@
 {
   "feature": {
-    "main": {
-      "subtitle": "Calender",
-      "title": "Calender",
-      "content": "Manage meetings, tasks, and schedule from a centralized calendar. Plan work, organize your availability, set reminders, and manage daily commitments in a simple and clear workflow.",
-      "action": [
+    "hero": {
+      "badge": "📅 Weblings Calendar",
+      "title": "The enterprise calendar",
+      "titleGradient": "that schedules itself.",
+      "content": "Stop doing double-data entry across multiple apps. Weblings Calendar automatically pulls in your active Streamline sprint tickets and scheduled Team Chat calls into a single, unified visual timeline. Filter out the noise and see exactly what your company is delivering this month.",
+      "cta": "Deploy Unified Calendar"
+    },
+    "zeroDoubleEntry": {
+      "kicker": "Zero Double-Entry",
+      "title": "A unified timeline that builds itself.",
+      "description": "Because all Weblings apps share the same database, your calendar is always up to date. You never have to manually copy a deadline from a project board or a meeting from a chat channel ever again.",
+      "cards": [
         {
-          "label": "Learn More",
-          "path": "",
-          "color": "secondary"
+          "id": "streamline",
+          "icon": "🎯",
+          "title": "Auto-Synced Streamline Tickets",
+          "description": "When your team plans a sprint or assigns an epic in the Streamline app, those tasks automatically render as multi-day visual blocks on the calendar. You get an immediate, bird's-eye view of exactly which tasks extend until when, making it effortless to map out your month's development plan.",
+          "badge": {
+            "code": "STR-104",
+            "label": "Migrate Payments (Sep 7 - Sep 9)"
+          }
         },
         {
-          "label": "Get Free Trial",
-          "path": "",
-          "color": "primary"
+          "id": "chat",
+          "icon": "📞",
+          "title": "Auto-Synced Team Chat Calls",
+          "description": "When you schedule a video huddle or client meeting inside the Team Chat app, it instantly populates on the unified calendar for all invited participants. The event includes a direct button to join the call, ensuring nobody misses a meeting because it wasn't on their schedule.",
+          "badge": {
+            "code": "LIVE",
+            "label": "Client UI Review (Sep 9 @ 2:00 PM)"
+          }
         }
       ]
     },
-    "features": [
-      {
-        "id": "meetings",
-        "subtitle": "Meetings",
-        "title": "Schedule Meetings with Ease",
-        "content": [
-          "Create and manage meetings directly from your calendar in just a few clicks. Add meeting details, participants, date, time, and duration in one place. Keep your schedule organized and get a clear view of your upcoming meetings."
-        ],
-        "imageKey": "meetings",
-        "imageAlt": "Schedule Meetings with Ease",
-        "imagePosition": "right"
-      },
-      {
-        "id": "tasks",
-        "subtitle": "Tasks",
-        "title": "Create and Track Your Tasks",
-        "content": [
-          "Create tasks and organize your work directly from your calendar. Set task dates, times, and duration to plan your work more effectively. Get a clear view of upcoming and scheduled tasks alongside your meetings."
-        ],
-        "imageKey": "tasks",
-        "imageAlt": "Create and Track Your Tasks",
-        "imagePosition": "left"
-      },
-      {
-        "id": "schedule",
-        "subtitle": "Schedule",
-        "title": "See Your Schedule at a Glance",
-        "content": [
-          "View meetings and tasks together in a clear and organized calendar. Understand when each activity starts and how long it is scheduled to take. Plan your day around important meetings, tasks, and available time."
-        ],
-        "imageKey": "schedule",
-        "imageAlt": "See Your Schedule at a Glance",
-        "imagePosition": "right",
-        "showSparkle": true
-      },
-      {
-        "id": "duration",
-        "subtitle": "Duration",
-        "title": "Stay on Top of Your Time",
-        "content": [
-          "See the duration of every meeting and task directly on your calendar. Understand how much time is planned for each activity throughout the day. Use time information to prioritize your work and manage your schedule better. Make it easier to balance meetings, tasks, and focused work time."
-        ],
-        "imageKey": "duration",
-        "imageAlt": "Stay on Top of Your Time",
-        "imagePosition": "fullWidth"
-      },
-      {
-        "id": "tags_filter",
-        "subtitle": "Tags & Filters",
-        "title": "Find What Matters Faster",
-        "content": [
-          "Organize meetings and tasks using simple tags that make your calendar easier to manage. Filter your schedule by tags to quickly find specific types of activities. Separate meetings, tasks, or other scheduled activities based on your needs."
-        ],
-        "imageKey": "tags_filter",
-        "imageAlt": "Find What Matters Faster",
-        "imagePosition": "left"
-      }
-    ],
-    "demo": {
-      "subtitle": "Video Section",
-      "title": "See Weblings Workspace in Action",
-      "description": "Watch how organizations simplify operations, improve collaboration, and increase productivity using a single digital workspace built for modern businesses."
+    "organization": {
+      "kicker": "Intelligent Organization",
+      "title": "Filter out the noise.\nSee only what matters.",
+      "description": "A calendar is useless if it's too cluttered to read. We built a robust filtering engine so you can instantly switch context without feeling overwhelmed.",
+      "points": [
+        {
+          "number": 1,
+          "title": "Global Toggle Switches",
+          "description": "Want to just see developer tasks? Flip off the \"Meetings\" and \"Events\" toggles. In one click, your crowded monthly view transforms into a clean, distraction-free sprint timeline."
+        },
+        {
+          "number": 2,
+          "title": "Custom Color Tags",
+          "description": "Visually separate your schedule by assigning custom, color-coded tags. Create tailored labels for different projects, urgent client deliverables, or internal HR events, making them easily identifiable at a glance."
+        },
+        {
+          "number": 3,
+          "title": "Custom Ad-hoc Events",
+          "description": "Need to block out time for deep work or set a personal reminder? You can quickly create custom events and reminders directly within the calendar, independent of your tickets and chats."
+        }
+      ],
+      "tags": [
+        { "name": "Urgent Deliverables", "color": "rose", "active": true },
+        { "name": "Q3 Roadmap", "color": "indigo", "active": true },
+        { "name": "HR & Offboarding", "color": "emerald", "active": true },
+        { "name": "Internal Syncs (Hidden)", "color": "cyan", "active": false }
+      ],
+      "layers": [
+        { "name": "Show Streamline Epics", "active": true },
+        { "name": "Show Team Calls", "active": false }
+      ]
+    },
+    "mobile": {
+      "title": "Your Schedule, In Your Pocket.",
+      "description": "Available on both iOS and Android. Whether you are traveling between branches or stepping away from your desk, your unified timeline is always perfectly in sync. Join video calls or review upcoming sprint deadlines directly from your phone.",
+      "cards": [
+        {
+          "id": "employee",
+          "icon": "📱",
+          "title": "The Whole Office in Your Pocket",
+          "kicker": "For Every Employee",
+          "description": "Never miss a meeting or a deadline. Team members can view their upcoming week, check ticket extensions, and receive push notifications for upcoming team huddles—all dynamically synced from the rest of the Worksuite.",
+          "badges": ["iOS App", "Android App"]
+        },
+        {
+          "id": "executive",
+          "icon": "📈",
+          "title": "Real-Time Oversight on the Go",
+          "kicker": "For Founders & Executives",
+          "description": "Stay tuned to your company’s macro schedule. Review major project delivery dates, monitor branch-specific holidays, and oversee global operations at a glance from your executive dashboard.",
+          "badges": ["iOS App", "Android App"]
+        }
+      ]
     }
   },
   "comparison": {

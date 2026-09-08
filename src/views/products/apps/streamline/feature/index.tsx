@@ -1,73 +1,28 @@
 'use client';
 
 import React from 'react';
-import FeatureTemp from '../../../../../components/featureTemp/index';
-import Usage from '../../../../../components/usage/index';
-import ComparisonTemp from '../../../../../components/comparationTemp/index';
-import streamlineDataJson from '../../../../../data/streamline.json';
-import SvgAbstract from '../../../../../components/svg/Abstract';
-
-import projectImg from '../../../../../assets/images/streamline/project.svg';
-import timelineImg from '../../../../../assets/images/streamline/timeline.svg';
-import backlogsImg from '../../../../../assets/images/streamline/backlogs.svg';
-import membersImg from '../../../../../assets/images/streamline/members.svg';
-import settingsImg from '../../../../../assets/images/streamline/settings.svg';
-
-const imageMap: Record<string, string> = {
-  project: projectImg,
-  timeline: timelineImg,
-  backlogs: backlogsImg,
-  members: membersImg,
-  settings: settingsImg,
-};
+import { useStyles } from './style';
 
 const StreamlineFeature = () => {
-  const featureData = {
-    main: {
-      subtitle: streamlineDataJson.feature.main.subtitle,
-      title: streamlineDataJson.feature.main.title,
-      content: streamlineDataJson.feature.main.content,
-      action: streamlineDataJson.feature.main.action,
-      img: [
-        {
-          alt: "Streamline Workspace",
-          src: projectImg,
-          path: "",
-        },
-      ],
-    },
-    features: streamlineDataJson.feature.features.map((item: any) => ({
-      subtitle: item.subtitle,
-      title: item.title,
-      content: item.content,
-      showSparkle: item.showSparkle,
-      isFullWidth: item.imagePosition === "fullWidth",
-      action: [
-        {
-          label: "",
-          path: "",
-          color: "Secondary",
-        },
-      ],
-      img: {
-        alt: item.imageAlt || item.title,
-        src: imageMap[item.imageKey] || projectImg,
-        path: "",
-      },
-      abstractImg: {
-        alt: "background shape",
-        src: <SvgAbstract />,
-        path: "",
-      },
-    })),
-    demo: streamlineDataJson.feature.demo,
-  };
+  const classes = useStyles();
 
   return (
-    <div>
-      <FeatureTemp jsonData={featureData} />
-      <Usage usageData={streamlineDataJson.feature.usage} />
-      <ComparisonTemp comparisonData={streamlineDataJson.comparison} />
+    <div className={classes.page}>
+      <section className={classes.hero}><div className={classes.glow} /><div className={classes.heroContent}><div className={classes.badge}><span>🎯</span> Weblings Streamline</div><h1 className={classes.title}>Lean, AI-driven project management.<span className={classes.titleAccent}>Zero bloat - turn client meetings directly into tickets and cut out the middleman.</span></h1><p className={classes.description}>Streamline gives you a bloat-free, AI-supercharged board where client calls instantly become tickets. With native Team Chat integration and free external guest access, you get all the power without the frustrating learning curve or hidden costs.</p><button className={classes.primaryButton}>Deploy Streamline</button></div>
+        <div className={classes.board}><div className={classes.boardBar}><div className={classes.dots}><span className={classes.dot} /><span className={classes.dot} /><span className={classes.dot} /></div><span>app.weblings.com/streamline/board - Sprint 42</span><div className={classes.members}><span className={classes.member}>AS</span><span className={`${classes.member} ${classes.memberAlt}`}>MJ</span></div></div><aside className={classes.sidebar}><button className={classes.createButton}>+ Create Ticket</button><div className={`${classes.navItem} ${classes.navActive}`}>Active Sprint</div><div className={classes.navItem}>Backlog <span>124</span></div><div className={classes.navItem}>Epics &amp; Stories</div><div className={classes.label}>AI Filters</div><div className={classes.aiFilter}>✨ Created from Call</div></aside><main className={classes.boardArea}><div className={classes.column}><div className={classes.columnHeader}>To Do <span className={classes.columnCount}>1</span></div><div className={classes.ticket}><span className={classes.ticketBar} /><span className={classes.ticketCode}>STR-1042</span><h3 className={classes.ticketTitle}>Update payment gateway integration</h3><span className={classes.ticketTag}>Story</span></div></div><div className={classes.column}><div className={classes.columnHeader}>Client Review <span className={classes.columnCount}>New</span></div><div className={`${classes.ticket} ${classes.ticketAi}`}><span className={`${classes.ticketBar} ${classes.ticketBarInfo}`} /><span className={`${classes.ticketTag} ${classes.aiTag}`}>✨ AI Generated</span><h3 className={classes.ticketTitle}>Migrate export formats to Excel (Requested Tuesday)</h3><span className={classes.ticketTag}>High Priority</span></div></div></main></div>
+      </section>
+
+      <section className={classes.section}><div className={classes.sectionCenter}><h2 className={classes.sectionTitle}>Enterprise Architecture, Minus the Clutter</h2><p className={classes.sectionText}>Everything you need to run agile sprints at scale, built intuitively so your team does not need a manual.</p></div><div className={classes.cardGrid}><div className={classes.card}><div className={classes.cardIcon}>🔄</div><h3 className={classes.cardTitle}>1-Click Bulk Reassignment</h3><p className={classes.cardText}>Transfer an offboarded employee&apos;s entire workload to a new assignee with a single click.</p></div><div className={classes.card}><div className={classes.cardIcon}>🤝</div><h3 className={classes.cardTitle}>Free External Guest Access</h3><p className={classes.cardText}>Invite freelancers and clients to specific boards to view and comment without an extra seat.</p></div><div className={classes.card}><div className={classes.cardIcon}>⚙️</div><h3 className={classes.cardTitle}>Custom Workflow Configuration</h3><p className={classes.cardText}>Create statuses and ticket types that match each client requirement and internal workflow.</p></div><div className={classes.card}><div className={classes.cardIcon}>📊</div><h3 className={classes.cardTitle}>Epic &amp; Story Hierarchy</h3><p className={classes.cardText}>Group subtasks under Stories, roll Stories into Epics, and keep sprint backlogs clean.</p></div></div></section>
+
+      <section className={classes.section}><div className={classes.sectionCenter}><div className={classes.kicker}>The End of Manual Ticket Entry</div><h2 className={classes.sectionTitle}>Streamline does not just track your work; it actively builds it.</h2><p className={classes.sectionText}>The AI Scope Engine listens to client calls, auto-generates sprint tickets, and lets you find exactly what you need in milliseconds.</p></div><div className={classes.split}><div><h3 className={classes.sectionTitle}>Automated Scope-to-Sprint Pipeline</h3><p className={classes.sectionText}>When a client drops a new requirement, AI catches it, drafts the exact ticket, and queues it for one-click human approval.</p></div><div className={classes.stepper}><div className={classes.step}><span className={classes.stepNumber}>1</span><div><h3 className={classes.cardTitle}>Smart Detection</h3><p className={classes.cardText}>Extract new client requirements and cross-reference the project baseline.</p></div></div><div className={classes.step}><span className={classes.stepNumber}>2</span><div><h3 className={classes.cardTitle}>Human Verification</h3><p className={classes.cardText}>Review the generated ticket and approve it as a formal Change of Request.</p></div></div><div className={classes.step}><span className={classes.stepNumber}>3</span><div><h3 className={classes.cardTitle}>Instant Integration</h3><p className={classes.cardText}>Drop the approved ticket into the sprint and notify the team in Chat.</p></div></div></div></div></section>
+
+      <section className={classes.section}><div className={classes.split}><div className={classes.searchCard}><div className={classes.searchInput}>🔍 &quot;What was the database error the client mentioned last month?&quot;</div><div className={classes.result}><small>STR-392 - Recorded Oct 14</small><h3 className={classes.cardTitle}>Fix MongoDB timeout during checkout</h3><p className={classes.cardText}>&quot;The checkout kept timing out when writing to Mongo...&quot;</p></div></div><div><div className={classes.kicker}>Intelligent Discovery</div><h2 className={classes.sectionTitle}>Semantic Vector Search: Find Needles in a Haystack</h2><p className={classes.sectionText}>Search thousands of tickets using natural human language. The AI understands context and meaning, retrieving the exact ticket, attachment, and comment history without rigid tags.</p></div></div></section>
+
+      <section className={classes.section}><div className={classes.split}><div><div className={classes.kicker}>Absolute Accountability</div><h2 className={classes.sectionTitle}>The Immutable Audit Trail</h2><p className={classes.sectionText}>Every comment, attachment, and status change is permanently recorded. You always know who changed priority, reassigned a ticket, and when it happened.</p></div><div className={classes.audit}><div className={classes.auditRow}><span className={classes.avatar}>JD</span><span><strong>John Doe</strong> changed status from In Progress to <strong>Deployed</strong><br /><small>Oct 14, 2026 - 10:42 AM</small></span></div><div className={classes.auditRow}><span className={classes.avatar}>SJ</span><span><strong>Sarah J.</strong> attached final_specs_v2.pdf<br /><small>Oct 13, 2026 - 4:15 PM</small></span></div></div></div></section>
+
+      <section className={classes.section}><div className={classes.sectionCenter}><h2 className={classes.sectionTitle}>Your Team, In Your Pocket.</h2><p className={classes.sectionText}>Review client comments, transition tickets across columns, and track sprint progress from iOS and Android.</p><div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 24 }}><button className={classes.primaryButton}>Download iOS</button><button className={classes.primaryButton}>Download Android</button></div></div></section>
+
+      <section className={classes.section}><div className={classes.sectionCenter}><h2 className={classes.sectionTitle}>Enterprise Features, No Extra Invoice</h2><p className={classes.sectionText}>Agile boards, AI ticket creation, guest access, and audit history are included in your Weblings Worksuite.</p></div><div className={classes.includedGrid}><div className={classes.included}><div className={classes.cardIcon}>⚡</div><h3 className={classes.cardTitle}>AI Auto-Ticket Creation</h3><p className={classes.cardText}>Turn meeting requirements into assignable tickets.</p></div><div className={classes.included}><div className={classes.cardIcon}>🤝</div><h3 className={classes.cardTitle}>Guest Access</h3><p className={classes.cardText}>Collaborate with clients without extra seats.</p></div><div className={classes.included}><div className={classes.cardIcon}>🔎</div><h3 className={classes.cardTitle}>Semantic Search</h3><p className={classes.cardText}>Find historical project context instantly.</p></div><div className={classes.included}><div className={classes.cardIcon}>🧾</div><h3 className={classes.cardTitle}>Immutable History</h3><p className={classes.cardText}>Keep every project change accountable.</p></div></div></section>
     </div>
   );
 };

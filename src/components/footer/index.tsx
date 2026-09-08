@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): JS
           { label: "Calendar", path: "/calender/feature" },
           { label: "Streamline", path: "/streamline/feature" },
           { label: "eOffice", path: "/eoffice/feature" },
-          { label: "Drive", path: "/eoffice/feature" },
+          { label: "Drive", path: "/drive" },
         ],
       },
     ],

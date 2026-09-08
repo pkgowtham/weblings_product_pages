@@ -1,72 +1,35 @@
 'use client';
 
 import React from 'react';
-import FeatureTemp from '../../../../../components/featureTemp/index';
-import Usage from '../../../../../components/usage/index';
-import ComparisonTemp from '../../../../../components/comparationTemp/index';
-import chatDataJson from '../../../../../data/chat.json';
-import SvgAbstract from '../../../../../components/svg/Abstract';
-
-// Import 4 images from src/assets/images/chat/
-import individualChatImg from '../../../../../assets/images/chat/individual_chat.svg';
-import groupChatImg from '../../../../../assets/images/chat/group_chat.svg';
-import createGroupsImg from '../../../../../assets/images/chat/create_groups.svg';
-import audioCallsImg from '../../../../../assets/images/chat/audio_calls.svg';
-
-const imageMap: Record<string, string> = {
-  individual_chat: individualChatImg,
-  group_chat: groupChatImg,
-  create_groups: createGroupsImg,
-  audio_calls: audioCallsImg,
-};
+import { useStyles } from './style';
 
 const ConnectFeature = () => {
-  const featureData = {
-    main: {
-      subtitle: chatDataJson.feature.main.subtitle,
-      title: chatDataJson.feature.main.title,
-      content: chatDataJson.feature.main.content,
-      action: chatDataJson.feature.main.action,
-      img: [
-        {
-          alt: "Chat Workspace",
-          src: individualChatImg,
-          path: "",
-        },
-      ],
-    },
-    features: chatDataJson.feature.features.map((item: any) => ({
-      subtitle: item.subtitle,
-      title: item.title,
-      content: item.content,
-      showSparkle: item.showSparkle,
-      isFullWidth: item.imagePosition === "fullWidth",
-      action: [
-        {
-          label: "",
-          path: "",
-          color: "Secondary",
-        },
-      ],
-      img: {
-        alt: item.imageAlt || item.title,
-        src: imageMap[item.imageKey] || individualChatImg,
-        path: "",
-      },
-      abstractImg: {
-        alt: "background shape",
-        src: <SvgAbstract />,
-        path: "",
-      },
-    })),
-    demo: chatDataJson.feature.demo,
-  };
+  const classes = useStyles();
 
   return (
-    <div>
-      <FeatureTemp jsonData={featureData} />
-      <Usage usageData={chatDataJson.feature.usage} />
-      <ComparisonTemp comparisonData={chatDataJson.comparison} />
+    <div className={classes.page}>
+      <section className={classes.hero}>
+        <div className={classes.glow} />
+        <div className={classes.heroContent}>
+          <div className={classes.badge}><span>💬</span> Weblings Team Chat</div>
+          <h1 className={classes.title}>Enterprise-grade client calls that turn into actionable tickets.<span className={classes.titleAccent}>Zero premium price tag.</span></h1>
+          <p className={classes.description}>Enjoy global video conferencing and unlimited chats, fully included in your suite. Our built-in AI translates client conversations into assignable tasks and flags scope changes instantly. Turn every call into a guaranteed plan of action.</p>
+          <button className={classes.primaryButton}>Deploy Team Chat</button>
+        </div>
+        <div className={classes.workspace}>
+          <div className={classes.workspaceBar}><div className={classes.dots}><span className={classes.dot} /><span className={classes.dot} /><span className={classes.dot} /></div><span># client-onboarding - Live Huddle</span><span className={classes.recording}>● REC (AI Transcribing)</span></div>
+          <aside className={classes.sidebar}><div className={classes.label}>Channels</div><div className={classes.channel}># general</div><div className={`${classes.channel} ${classes.channelActive}`}># client-onboarding</div><div className={classes.channel}># engineering-v2</div><div className={classes.label} style={{ marginTop: 24 }}>Direct Messages</div><div className={classes.people}><div className={classes.person}><span className={classes.personAvatar}>AS</span>Alex S.</div><div className={classes.person}><span className={classes.personAvatar}>MJ</span>Maya J.</div></div></aside>
+          <main className={classes.chat}><div className={classes.videoGrid}><div className={classes.video}>You</div><div className={`${classes.video} ${classes.videoActive}`}><div className={classes.subtitle}>"Yes, we'll need that payment gateway updated by Tuesday."</div>Client (Speaking)</div></div><div className={classes.thread}><div className={classes.aiRow}><div className={classes.aiIcon}>AI</div><div><div className={classes.aiName}>AI Meeting Assistant</div><div className={classes.aiMessage}><strong>Scope Deviation Detected:</strong> Client requested Payment Gateway update by Tuesday. Not in original spec.<br /><button className={classes.actionButton}>Draft Change of Request (COR)</button></div></div></div></div></main>
+        </div>
+      </section>
+
+      <section className={classes.section}><div className={classes.split}><div><div className={classes.kicker}>Internet-Scale Infrastructure</div><h2 className={classes.sectionTitle}>Built on the Backbone of the Modern Internet.</h2><p className={classes.sectionText}>A chat app is useless if it drops connections. We engineered our communications architecture on a global edge network to deliver flawless, uninterrupted reliability.</p><div className={classes.points}><div className={classes.point}><span className={classes.pointIcon}>✓</span><div><h3 className={classes.pointTitle}>Ultra-Low Latency Edge Routing</h3><p className={classes.pointText}>Chats and video calls route through the closest data center for low latency anywhere your team works.</p></div></div><div className={classes.point}><span className={classes.pointIcon}>✓</span><div><h3 className={classes.pointTitle}>Simulcast Video Scaling</h3><p className={classes.pointText}>Host calls with hundreds of participants while video quality adjusts in real time for every device.</p></div></div><div className={classes.point}><span className={classes.pointIcon}>✓</span><div><h3 className={classes.pointTitle}>Zero-Setup Project Channels</h3><p className={classes.pointText}>New projects automatically receive dedicated chat groups and instant project-file access.</p></div></div></div></div><div className={classes.graphic}><div className={`${classes.ring} ${classes.ringLarge}`} /><div className={classes.ring} /><div className={classes.globe}><div style={{ fontSize: 48 }}>🌍</div><strong>GLOBAL EDGE NETWORK</strong><div className={classes.kicker}>WebSockets &amp; WebRTC Active</div></div></div></div></section>
+
+      <section className={classes.section}><div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto 40px' }}><div className={classes.kicker}>Built-In AI Intelligence</div><h2 className={classes.sectionTitle}>Stop the &quot;Telephone Game.&quot;<br />Protect Your Margins.</h2></div><div className={classes.aiGrid}><div className={classes.card}><div className={classes.cardIcon}>⚡</div><h3 className={classes.cardTitle}>From Conversation to Code</h3><p className={classes.cardText}>Our AI captures exact client requirements during the call and generates accurate, assignable tickets directly for your development team.</p></div><div className={classes.card}><div className={classes.cardIcon}>🔍</div><h3 className={classes.cardTitle}>Smart Search &amp; Instant Proof</h3><p className={classes.cardText}>Every meeting becomes searchable memory. Ask what a client requested and get the exact answer with its date, time, and words.</p></div></div></section>
+
+      <section className={classes.section}><div className={classes.split}><div className={classes.phone}><div className={classes.notch} /><div className={classes.phoneHeader}><span>Client Huddle</span><span className={classes.callBadge}>● Live Video Call</span></div><div className={classes.callView}>AI Extract:<br />"Change to navy blue."</div><div className={classes.callControls}><div className={classes.control}>🎤</div><div className={`${classes.control} ${classes.controlActive}`}>📞</div></div></div><div><div className={classes.kicker}>Mobile Apps</div><h2 className={classes.sectionTitle}>Your Team, In Your Pocket.</h2><p className={classes.sectionText}>Take live 4K video calls, review AI meeting extracts, and manage your team from anywhere on iOS and Android.</p><div style={{ display: 'flex', gap: 12, marginTop: 24 }}><button className={classes.primaryButton}>Download iOS</button><button className={classes.primaryButton}>Download Android</button></div></div></div></section>
+
+      <section className={classes.section}><div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto 36px' }}><h2 className={classes.sectionTitle}>Enterprise Features, No Extra Invoice</h2><p className={classes.sectionText}>Unlimited calls, message history, screen recording, and organization-controlled retention are included in your Weblings Worksuite.</p></div><div className={classes.includedGrid}><div className={classes.included}><div className={classes.cardIcon}>📱</div><h3 className={classes.cardTitle}>Picture-in-Picture</h3><p className={classes.cardText}>Keep video floating while browsing other modules and tickets.</p></div><div className={classes.included}><div className={classes.cardIcon}>🎥</div><h3 className={classes.cardTitle}>Screen Recording</h3><p className={classes.cardText}>Save native screen sharing and recordings to Drive.</p></div><div className={classes.included}><div className={classes.cardIcon}>🏢</div><h3 className={classes.cardTitle}>Branch Privacy</h3><p className={classes.cardText}>Keep regional teams in private workspaces.</p></div><div className={classes.included}><div className={classes.cardIcon}>💾</div><h3 className={classes.cardTitle}>Custom Retention</h3><p className={classes.cardText}>Preserve files and messages using your organization rules.</p></div></div></section>
     </div>
   );
 };

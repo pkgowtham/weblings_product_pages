@@ -2,276 +2,34 @@ import { createUseStyles } from "react-jss";
 import { Theme } from "../../../../../theme/themeType";
 
 export const useStyles = createUseStyles((theme: Theme) => ({
-  pageContainer: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    paddingTop: "120px", // Clears header
-    paddingBottom: "80px",
-    overflowX: "hidden",
-  },
-  contentWrapper: {
-    width: "80%",
-    maxWidth: "1050px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "80px",
-  },
-
-  // ─────────────────────────────────────────────────────────────────────
-  // Hero / Top Header
-  // ─────────────────────────────────────────────────────────────────────
-  heroHeader: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-    gap: "16px",
-    maxWidth: "750px",
-  },
-  heroTitle: {
-    color: theme.light.neutral.onSurface.title,
-    fontWeight: 700,
-    fontSize: "2.5rem",
-  },
-  heroDescription: {
-    color: theme.light.neutral.onSurface.medium,
-    lineHeight: "1.6",
-    fontSize: "1.0625rem",
-  },
-  heroActions: {
-    display: "flex",
-    flexDirection: "row",
-    gap: "12px",
-    marginTop: "8px",
-  },
-  pillBtn: {
-    padding: "10px 24px",
-    borderRadius: "20px",
-    fontSize: "0.9375rem",
-    fontWeight: 600,
-    cursor: "pointer",
-    border: "none",
-    transition: "all 0.2s ease",
-  },
-  pillSecondary: {
-    backgroundColor: "#F0F0F0",
-    color: theme.light.neutral.onSurface.title,
-    "&:hover": {
-      backgroundColor: "#E4E4E4",
-    },
-  },
-  pillPrimary: {
-    backgroundColor: theme.light.brand.surface.medium || "#0072C4",
-    color: "#FFFFFF",
-    "&:hover": {
-      backgroundColor: theme.light.brand.surface.darker || "#00448c",
-    },
-  },
-
-  // ─────────────────────────────────────────────────────────────────────
-  // Feature Sections
-  // ─────────────────────────────────────────────────────────────────────
-  featuresContainer: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    gap: "96px",
-  },
-  featureRow: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "56px",
-  },
-  featureRowReverse: {
-    flexDirection: "row-reverse",
-  },
-  featureTextCol: {
-    flex: "1",
-    minWidth: 0,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "12px",
-  },
-  featureCategory: {
-    color: theme.light.brand.onSurface.default || "#0072C4",
-    fontWeight: 600,
-    fontSize: "0.9375rem",
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-  },
-  sparkleIcon: {
-    color: "#FFC107",
-    fontSize: "1rem",
-  },
-  featureHeading: {
-    color: theme.light.neutral.onSurface.title,
-    fontWeight: 700,
-    fontSize: "2rem",
-    lineHeight: "1.25",
-  },
-  featureParagraph: {
-    color: theme.light.neutral.onSurface.medium,
-    lineHeight: "1.6",
-    fontSize: "1rem",
-  },
-  featureImgCol: {
-    flex: "1.1",
-    minWidth: 0,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  featureImage: {
-    width: "100%",
-    height: "auto",
-    maxHeight: "400px",
-    objectFit: "contain",
-    borderRadius: "12px",
-  },
-
-  // Full-width feature row (for Members)
-  featureFullWidthRow: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "28px",
-  },
-  featureFullImage: {
-    width: "100%",
-    height: "auto",
-    borderRadius: "14px",
-    border: `1px solid ${theme.light.neutral.border.light || "#D9D9D9"}`,
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.05)",
-  },
-
-  // ─────────────────────────────────────────────────────────────────────
-  // Video / Demo Section
-  // ─────────────────────────────────────────────────────────────────────
-  demoSection: {
-    width: "100%",
-    backgroundColor: "#F7F8FA",
-    borderRadius: "16px",
-    padding: "48px",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: "48px",
-    boxSizing: "border-box",
-  },
-  demoVideoBox: {
-    flex: "1",
-    minWidth: 0,
-    height: "260px",
-    backgroundColor: "#FFFFFF",
-    borderRadius: "12px",
-    border: `1px solid ${theme.light.neutral.border.light || "#E0E0E0"}`,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    boxShadow: "0 4px 16px rgba(0, 0, 0, 0.04)",
-    position: "relative",
-  },
-  playButton: {
-    width: "64px",
-    height: "64px",
-    borderRadius: "50%",
-    backgroundColor: "#F0F0F0",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    transition: "transform 0.2s ease, background-color 0.2s ease",
-    "&:hover": {
-      transform: "scale(1.08)",
-      backgroundColor: "#E4E4E4",
-    },
-  },
-  playIconTriangle: {
-    width: 0,
-    height: 0,
-    borderTop: "10px solid transparent",
-    borderBottom: "10px solid transparent",
-    borderLeft: `16px solid ${theme.light.neutral.onSurface.medium || "#595959"}`,
-    marginLeft: "4px",
-  },
-  demoTextCol: {
-    flex: "1",
-    minWidth: 0,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "12px",
-  },
-  demoCategory: {
-    color: theme.light.brand.onSurface.default || "#0072C4",
-    fontWeight: 600,
-    fontSize: "0.875rem",
-  },
-  demoTitle: {
-    color: theme.light.neutral.onSurface.title,
-    fontWeight: 700,
-    fontSize: "1.875rem",
-  },
-  demoDescription: {
-    color: theme.light.neutral.onSurface.medium,
-    lineHeight: "1.6",
-    fontSize: "1rem",
-  },
-
-  // ─────────────────────────────────────────────────────────────────────
-  // Media Queries for Responsiveness
-  // ─────────────────────────────────────────────────────────────────────
-  "@media screen and (max-width: 1024px)": {
-    pageContainer: {
-      paddingTop: "110px",
-    },
-    contentWrapper: {
-      width: "88%",
-      gap: "64px",
-    },
-    featuresContainer: {
-      gap: "72px",
-    },
-    featureHeading: {
-      fontSize: "1.625rem",
-    },
-  },
-
-  "@media screen and (max-width: 768px)": {
-    pageContainer: {
-      paddingTop: "100px",
-    },
-    contentWrapper: {
-      width: "90%",
-      gap: "48px",
-    },
-    featureRow: {
-      flexDirection: "column",
-      gap: "28px",
-    },
-    featureRowReverse: {
-      flexDirection: "column",
-    },
-    featureImgCol: {
-      width: "100%",
-    },
-    demoSection: {
-      flexDirection: "column",
-      padding: "28px",
-      gap: "28px",
-    },
-    demoVideoBox: {
-      width: "100%",
-      height: "200px",
-    },
-  },
+  page: { backgroundColor: theme.light.neutral.surface.lighter, color: theme.light.neutral.onSurface.title, fontFamily: "'Open Sans', sans-serif", overflow: "hidden" },
+  hero: { maxWidth: "1200px", margin: "0 auto", padding: "132px 32px 80px", textAlign: "center", position: "relative", "@media (max-width: 600px)": { padding: "112px 20px 56px" } },
+  glow: { position: "absolute", width: "520px", height: "360px", top: "130px", left: "50%", transform: "translateX(-50%)", backgroundColor: theme.light.info.surface.lighter, filter: "blur(90px)", opacity: 0.8, borderRadius: "50%", pointerEvents: "none" },
+  heroContent: { position: "relative", zIndex: 1 },
+  badge: { display: "inline-flex", alignItems: "center", gap: "8px", padding: "7px 14px", borderRadius: theme.borderRadius.b2500, backgroundColor: theme.light.info.surface.lighter, color: theme.light.info.onSurface.medium, border: `1px solid ${theme.light.info.border.light}`, fontSize: "0.875rem", fontWeight: 700 },
+  title: { maxWidth: "980px", margin: "24px auto 20px", fontSize: "clamp(2.3rem, 5vw, 4.25rem)", lineHeight: 1.12, fontWeight: 800 },
+  titleAccent: { display: "block", backgroundImage: `linear-gradient(90deg, ${theme.light.brand.surface.medium}, ${theme.light.info.surface.medium})`, WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" },
+  description: { maxWidth: "820px", margin: "0 auto 32px", color: theme.light.neutral.onSurface.medium, fontSize: "1.0625rem", lineHeight: 1.75 },
+  primaryButton: { border: "none", borderRadius: theme.borderRadius.b300, backgroundColor: theme.light.brand.surface.medium, color: theme.light.neutral.onSurface.inverse, padding: "14px 24px", fontFamily: "inherit", fontSize: "1rem", fontWeight: 700, cursor: "pointer", boxShadow: theme.elevation.m, "&:hover": { backgroundColor: theme.light.brand.surface.dark } },
+  board: { maxWidth: "1120px", minHeight: "450px", margin: "72px auto 0", display: "grid", gridTemplateColumns: "220px minmax(0, 1fr)", textAlign: "left", overflow: "hidden", backgroundColor: theme.light.neutral.surface.lighter, border: `1px solid ${theme.light.neutral.border.light}`, borderRadius: theme.borderRadius.b500, boxShadow: theme.elevation.l, "@media (max-width: 700px)": { display: "block", minHeight: "auto" } },
+  boardBar: { gridColumn: "1 / -1", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", backgroundColor: theme.light.neutral.surface.light, borderBottom: `1px solid ${theme.light.neutral.border.light}`, color: theme.light.neutral.onSurface.medium, fontSize: "0.75rem" },
+  dots: { display: "flex", gap: "6px" }, dot: { width: "9px", height: "9px", borderRadius: "50%", backgroundColor: theme.light.neutral.border.medium },
+  members: { display: "flex", gap: "6px" }, member: { width: "26px", height: "26px", display: "grid", placeItems: "center", borderRadius: "50%", backgroundColor: theme.light.info.surface.medium, color: theme.light.neutral.onSurface.inverse, fontSize: "0.625rem", fontWeight: 800 }, memberAlt: { backgroundColor: theme.light.negative.surface.medium },
+  sidebar: { padding: "18px 14px", backgroundColor: theme.light.neutral.surface.light, borderRight: `1px solid ${theme.light.neutral.border.light}`, "@media (max-width: 700px)": { display: "none" } },
+  createButton: { width: "100%", border: "none", borderRadius: theme.borderRadius.b150, backgroundColor: theme.light.brand.surface.medium, color: theme.light.neutral.onSurface.inverse, padding: "10px", fontFamily: "inherit", fontWeight: 700, cursor: "pointer", marginBottom: "18px" },
+  label: { color: theme.light.neutral.onSurface.dark, fontSize: "0.625rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", margin: "14px 0 10px" },
+  navItem: { display: "flex", justifyContent: "space-between", padding: "10px 11px", borderRadius: theme.borderRadius.b100, color: theme.light.neutral.onSurface.medium, fontSize: "0.8125rem", marginBottom: "4px" },
+  navActive: { backgroundColor: theme.light.info.surface.lighter, color: theme.light.info.onSurface.medium, borderLeft: `3px solid ${theme.light.info.surface.medium}`, fontWeight: 700 },
+  aiFilter: { marginTop: "30px", padding: "10px", borderRadius: theme.borderRadius.b100, backgroundColor: theme.light.info.surface.lighter, border: `1px solid ${theme.light.info.border.light}`, color: theme.light.info.onSurface.medium, fontSize: "0.75rem" },
+  boardArea: { minWidth: 0, display: "flex", gap: "22px", overflowX: "auto", padding: "24px", backgroundColor: theme.light.neutral.surface.lighter },
+  column: { width: "260px", flexShrink: 0 },
+  columnHeader: { display: "flex", justifyContent: "space-between", color: theme.light.neutral.onSurface.medium, fontSize: "0.75rem", fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "12px" },
+  columnCount: { padding: "3px 7px", borderRadius: theme.borderRadius.b2500, backgroundColor: theme.light.neutral.surface.medium, color: theme.light.neutral.onSurface.dark, fontSize: "0.625rem" },
+  ticket: { position: "relative", padding: "16px", borderRadius: theme.borderRadius.b200, backgroundColor: theme.light.neutral.surface.light, border: `1px solid ${theme.light.neutral.border.light}`, marginBottom: "10px", overflow: "hidden" },
+  ticketAi: { borderColor: theme.light.info.border.medium }, ticketBar: { position: "absolute", left: 0, top: 0, bottom: 0, width: "4px", backgroundColor: theme.light.brand.surface.medium }, ticketBarInfo: { backgroundColor: theme.light.info.surface.medium },
+  ticketCode: { display: "inline-block", padding: "3px 6px", borderRadius: theme.borderRadius.b100, backgroundColor: theme.light.neutral.surface.medium, color: theme.light.neutral.onSurface.dark, fontSize: "0.625rem", fontFamily: "monospace" },
+  ticketTitle: { margin: "10px 0 14px", fontSize: "0.8125rem", lineHeight: 1.45, fontWeight: 700 }, ticketTag: { display: "inline-block", padding: "4px 7px", borderRadius: theme.borderRadius.b100, backgroundColor: theme.light.positive.surface.lighter, color: theme.light.positive.onSurface.medium, border: `1px solid ${theme.light.positive.border.light}`, fontSize: "0.625rem", fontWeight: 800 }, aiTag: { backgroundColor: theme.light.info.surface.lighter, color: theme.light.info.onSurface.medium, borderColor: theme.light.info.border.light },
+  section: { maxWidth: "1200px", margin: "0 auto", padding: "88px 32px", borderTop: `1px solid ${theme.light.neutral.border.light}`, "@media (max-width: 600px)": { padding: "60px 20px" } }, sectionCenter: { textAlign: "center", maxWidth: "800px", margin: "0 auto 40px" }, kicker: { color: theme.light.brand.onSurface.default, fontSize: "0.8125rem", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase" }, sectionTitle: { margin: "12px 0 18px", fontSize: "clamp(1.9rem, 4vw, 3rem)", lineHeight: 1.18, fontWeight: 800 }, sectionText: { color: theme.light.neutral.onSurface.medium, fontSize: "1rem", lineHeight: 1.75 },
+  cardGrid: { display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px", "@media (max-width: 700px)": { gridTemplateColumns: "1fr" } }, card: { padding: "28px", borderRadius: theme.borderRadius.b300, backgroundColor: theme.light.neutral.surface.light, border: `1px solid ${theme.light.neutral.border.light}`, transition: "transform 0.2s ease, border-color 0.2s ease", "&:hover": { transform: "translateY(-3px)", borderColor: theme.light.brand.border.medium } }, cardIcon: { fontSize: "1.5rem", marginBottom: "16px" }, cardTitle: { margin: "0 0 10px", fontSize: "1.125rem", fontWeight: 800 }, cardText: { margin: 0, color: theme.light.neutral.onSurface.medium, fontSize: "0.875rem", lineHeight: 1.7 },
+  split: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "center", "@media (max-width: 800px)": { gridTemplateColumns: "1fr", gap: "32px" } }, stepper: { padding: "28px", borderRadius: theme.borderRadius.b400, backgroundColor: theme.light.neutral.surface.light, border: `1px solid ${theme.light.neutral.border.light}`, boxShadow: theme.elevation.m }, step: { display: "flex", gap: "14px", paddingBottom: "24px", marginBottom: "24px", borderBottom: `1px solid ${theme.light.neutral.border.light}` }, stepNumber: { width: "30px", height: "30px", display: "grid", placeItems: "center", borderRadius: "50%", backgroundColor: theme.light.info.surface.lighter, border: `1px solid ${theme.light.info.border.light}`, color: theme.light.info.onSurface.medium, fontWeight: 800, flexShrink: 0 }, searchCard: { padding: "24px", borderRadius: theme.borderRadius.b400, backgroundColor: theme.light.neutral.surface.light, border: `1px solid ${theme.light.neutral.border.light}` }, searchInput: { padding: "12px", borderBottom: `1px solid ${theme.light.neutral.border.light}`, color: theme.light.neutral.onSurface.medium, fontSize: "0.75rem", fontStyle: "italic" }, result: { marginTop: "14px", padding: "14px", borderRadius: theme.borderRadius.b150, backgroundColor: theme.light.info.surface.lighter, borderLeft: `3px solid ${theme.light.info.surface.medium}` }, audit: { padding: "24px", borderRadius: theme.borderRadius.b400, backgroundColor: theme.light.neutral.surface.light, border: `1px solid ${theme.light.neutral.border.light}` }, auditRow: { display: "flex", gap: "12px", padding: "14px 0", borderBottom: `1px solid ${theme.light.neutral.border.light}`, color: theme.light.neutral.onSurface.medium, fontSize: "0.75rem" }, avatar: { width: "30px", height: "30px", display: "grid", placeItems: "center", borderRadius: "50%", backgroundColor: theme.light.info.surface.medium, color: theme.light.neutral.onSurface.inverse, fontSize: "0.625rem", fontWeight: 800, flexShrink: 0 }, includedGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "18px", "@media (max-width: 800px)": { gridTemplateColumns: "repeat(2, 1fr)" }, "@media (max-width: 480px)": { gridTemplateColumns: "1fr" } }, included: { padding: "22px", borderRadius: theme.borderRadius.b300, backgroundColor: theme.light.neutral.surface.light, border: `1px solid ${theme.light.neutral.border.light}` },
 }));
