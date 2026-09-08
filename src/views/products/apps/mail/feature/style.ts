@@ -86,7 +86,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   cardIcon: { width: "48px", height: "48px", display: "grid", placeItems: "center", borderRadius: theme.borderRadius.b200, backgroundColor: theme.light.neutral.surface.medium, border: `1px solid ${theme.light.neutral.border.light}`, fontSize: "1.5rem", marginBottom: "18px" },
   cardTitle: { margin: "0 0 10px", fontSize: "1.0625rem", fontWeight: 800 },
   cardText: { margin: 0, color: theme.light.neutral.onSurface.medium, fontSize: "0.8125rem", lineHeight: 1.7 },
-  badge: { display: "inline-flex", padding: "6px 10px", borderRadius: theme.borderRadius.b2500, backgroundColor: theme.light.brand.surface.lighter, color: theme.light.brand.onSurface.default, border: `1px solid ${theme.light.brand.border.light}`, fontSize: "0.6875rem", fontWeight: 700 },
+  pillBadge: { display: "inline-flex", padding: "6px 10px", borderRadius: theme.borderRadius.b2500, backgroundColor: theme.light.brand.surface.lighter, color: theme.light.brand.onSurface.default, border: `1px solid ${theme.light.brand.border.light}`, fontSize: "0.6875rem", fontWeight: 700 },
   includedGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "18px", "@media (max-width: 800px)": { gridTemplateColumns: "repeat(2, 1fr)" }, "@media (max-width: 480px)": { gridTemplateColumns: "1fr" } },
   includedCard: { padding: "22px", borderRadius: theme.borderRadius.b300, backgroundColor: theme.light.neutral.surface.light, border: `1px solid ${theme.light.neutral.border.light}` },
   mobileSection: { backgroundColor: theme.light.neutral.surface.light },

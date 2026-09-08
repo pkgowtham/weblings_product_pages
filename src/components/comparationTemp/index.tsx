@@ -8,7 +8,7 @@ import Typography from "../typography/component";
 import comparisonJson from "../../data/comparison.json";
 import { useRouter } from "next/navigation";
 
-const ComparisonTemp: React.FC<any> = (props): JSX.Element => {
+const ComparisonTemp: React.FC<any> = (props): React.ReactElement => {
   const classes = usestyles();
   const router = useRouter();
 

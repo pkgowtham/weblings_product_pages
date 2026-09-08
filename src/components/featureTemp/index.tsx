@@ -9,7 +9,7 @@ import { getSrc } from "../../utils/getSrc";
 import largeStar from "../../assets/icons/largeStickyStar.svg";
 import smallStar from "../../assets/icons/smallStickyStar.svg";
 
-const FeatureTemp: React.FC<any> = (props): JSX.Element => {
+const FeatureTemp: React.FC<any> = (props): React.ReactElement => {
   const classes = usestyles();
   const { jsonData } = props;
 

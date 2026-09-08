@@ -31,7 +31,7 @@ export interface FooterProps {
   className?: string;
 }
 
-const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): JSX.Element => {
+const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): React.ReactElement => {
   const classes = usestyles();
   const effectiveIconColor = iconColor || brandColor;
 

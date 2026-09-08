@@ -5,7 +5,7 @@ import { usestyles } from "./pricingstyle";
 import Typography from "../typography/component";
 import Button from "../button/button";
 
-const PricingTemp: React.FC<any> = (props): JSX.Element => {
+const PricingTemp: React.FC<any> = (props): React.ReactElement => {
   const classes = usestyles();
   const { pricingData } = props;
   console.log("pricing", pricingData);

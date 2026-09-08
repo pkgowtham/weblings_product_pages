@@ -13,7 +13,7 @@ interface HeaderProps {
   prop: header;
 }
 
-const Header: React.FC<HeaderProps> = ({ prop }): JSX.Element => {
+const Header: React.FC<HeaderProps> = ({ prop }): React.ReactElement => {
   const classes = usestyles();
   const router = useRouter();
 

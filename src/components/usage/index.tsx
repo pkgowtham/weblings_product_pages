@@ -48,7 +48,7 @@ interface UsageProps {
   };
 }
 
-const Usage: React.FC<UsageProps> = ({ usageData }): JSX.Element | null => {
+const Usage: React.FC<UsageProps> = ({ usageData }): React.ReactElement | null => {
   const classes = usestyles();
 
   if (!usageData) return null;
