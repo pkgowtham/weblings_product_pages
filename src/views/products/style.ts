@@ -654,16 +654,16 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     gap: "24px",
     padding: "28px",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: theme.light.brand.surface.lighter,
     borderRadius: "16px",
-    border: "1px solid #E2E8F0",
+    border: `1px solid ${theme.light.brand.border.light}`,
     boxShadow: "0 2px 10px rgba(0,0,0,0.03)",
     transition: "all 0.2s ease",
     alignItems: "flex-start",
     "&:hover": {
-      backgroundColor: "#F8FAFC",
+      backgroundColor: theme.light.brand.surface.light,
       transform: "translateY(-2px)",
-      boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
+      boxShadow: theme.elevation.m,
     },
     "@media (max-width: 640px)": {
       flexDirection: "column",
@@ -745,16 +745,17 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     },
   },
   mobileCard: {
-    backgroundColor: "#FFFFFF",
-    border: "1px solid #E2E8F0",
+    backgroundColor: theme.light.brand.surface.lighter,
+    border: `1px solid ${theme.light.brand.border.light}`,
     borderRadius: "20px",
     padding: "36px",
     display: "flex",
     flexDirection: "column",
     boxShadow: "0 4px 20px rgba(0,0,0,0.04)",
-    transition: "transform 0.2s ease",
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
     "&:hover": {
       transform: "translateY(-4px)",
+      boxShadow: theme.elevation.m,
     },
   },
   mobileIcon: {
@@ -916,8 +917,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     },
   },
   migrationCard: {
-    backgroundColor: "#FFFFFF",
-    border: "1px solid #E2E8F0",
+    backgroundColor: theme.light.brand.surface.lighter,
+    border: `1px solid ${theme.light.brand.border.light}`,
     borderRadius: "16px",
     padding: "24px",
     boxShadow: "0 2px 10px rgba(0,0,0,0.03)",
@@ -927,7 +928,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     transition: "all 0.2s ease",
     "&:hover": {
       transform: "translateY(-3px)",
-      boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
+      boxShadow: theme.elevation.m,
     },
   },
   migrationCardTitle: {

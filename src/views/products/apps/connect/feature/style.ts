@@ -48,8 +48,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   ringLarge: { width: "310px", height: "310px", borderColor: theme.light.neutral.border.light },
   globe: { position: "relative", zIndex: 1, textAlign: "center", color: theme.light.neutral.onSurface.medium },
   aiGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", "@media (max-width: 700px)": { gridTemplateColumns: "1fr" } },
-  card: { padding: "28px", borderRadius: theme.borderRadius.b300, backgroundColor: theme.light.neutral.surface.light, border: `1px solid ${theme.light.neutral.border.light}`, borderTop: `3px solid ${theme.light.brand.border.medium}` },
-  cardIcon: { width: "48px", height: "48px", display: "grid", placeItems: "center", borderRadius: theme.borderRadius.b200, backgroundColor: theme.light.neutral.surface.medium, border: `1px solid ${theme.light.neutral.border.light}`, fontSize: "1.5rem", marginBottom: "18px" },
+  card: { padding: "28px", borderRadius: theme.borderRadius.b300, backgroundColor: theme.light.brand.surface.lighter, border: `1px solid ${theme.light.brand.border.light}`, borderTop: `3px solid ${theme.light.brand.border.medium}`, transition: "transform 0.2s ease, box-shadow 0.2s ease", "&:hover": { transform: "translateY(-3px)", boxShadow: theme.elevation.m } },
+  cardIcon: { width: "48px", height: "48px", display: "grid", placeItems: "center", borderRadius: theme.borderRadius.b200, backgroundColor: theme.light.brand.surface.light, border: `1px solid ${theme.light.brand.border.medium}`, fontSize: "1.5rem", marginBottom: "18px" },
   cardTitle: { margin: "0 0 12px 0", fontSize: "1.375rem", fontWeight: 700, color: theme.light.neutral.onSurface.title },
   cardText: { margin: 0, color: theme.light.neutral.onSurface.medium, fontSize: "0.9375rem", lineHeight: 1.7 },
   phone: { width: "250px", height: "500px", margin: "0 auto", padding: "38px 14px 14px", border: `8px solid ${theme.light.neutral.surface.inverse}`, borderRadius: "40px", backgroundColor: theme.light.neutral.surface.lighter, position: "relative", boxSizing: "border-box", boxShadow: theme.elevation.l },
@@ -61,5 +61,5 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   control: { width: "42px", height: "42px", display: "grid", placeItems: "center", borderRadius: "50%", backgroundColor: theme.light.neutral.surface.medium, border: `1px solid ${theme.light.neutral.border.light}` },
   controlActive: { backgroundColor: theme.light.brand.surface.medium, color: theme.light.neutral.onSurface.inverse },
   includedGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "18px", "@media (max-width: 800px)": { gridTemplateColumns: "repeat(2, 1fr)" }, "@media (max-width: 480px)": { gridTemplateColumns: "1fr" } },
-  included: { padding: "22px", borderRadius: theme.borderRadius.b300, backgroundColor: theme.light.neutral.surface.light, border: `1px solid ${theme.light.neutral.border.light}` },
+  included: { padding: "22px", borderRadius: theme.borderRadius.b300, backgroundColor: theme.light.info.surface.lighter, border: `1px solid ${theme.light.info.border.light}`, transition: "transform 0.2s ease", "&:hover": { transform: "translateY(-2px)", boxShadow: theme.elevation.m } },
 }));
