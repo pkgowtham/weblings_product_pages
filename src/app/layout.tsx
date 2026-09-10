@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import JssRegistryProvider from "./registry";
 import Navbar from "../components/navbar/landing";
 import Footer from "../components/footer/index";
+import MainContent from "./main-content";
 import "../index.css";
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function RootLayout({
       <body>
         <JssRegistryProvider>
           <Navbar />
-          <main style={{ paddingTop: '80px' }}>{children}</main>
+          <MainContent>{children}</MainContent>
           <Footer />
         </JssRegistryProvider>
       </body>
