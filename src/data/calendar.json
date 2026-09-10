@@ -1,7 +1,7 @@
 {
   "feature": {
     "hero": {
-      "badge": "📅 Weblings Calendar",
+      "badge": "Weblings Calendar",
       "title": "The enterprise calendar",
       "titleGradient": "that schedules itself.",
       "content": "Stop doing double-data entry across multiple apps. Weblings Calendar automatically pulls in your active Streamline sprint tickets and scheduled Team Chat calls into a single, unified visual timeline. Filter out the noise and see exactly what your company is delivering this month.",
@@ -14,7 +14,7 @@
       "cards": [
         {
           "id": "streamline",
-          "icon": "🎯",
+          "icon": "target",
           "title": "Auto-Synced Streamline Tickets",
           "description": "When your team plans a sprint or assigns an epic in the Streamline app, those tasks automatically render as multi-day visual blocks on the calendar. You get an immediate, bird's-eye view of exactly which tasks extend until when, making it effortless to map out your month's development plan.",
           "badge": {
@@ -24,7 +24,7 @@
         },
         {
           "id": "chat",
-          "icon": "📞",
+          "icon": "phone",
           "title": "Auto-Synced Team Chat Calls",
           "description": "When you schedule a video huddle or client meeting inside the Team Chat app, it instantly populates on the unified calendar for all invited participants. The event includes a direct button to join the call, ensuring nobody misses a meeting because it wasn't on their schedule.",
           "badge": {
@@ -72,7 +72,7 @@
       "cards": [
         {
           "id": "employee",
-          "icon": "📱",
+          "icon": "mobile",
           "title": "The Whole Office in Your Pocket",
           "kicker": "For Every Employee",
           "description": "Never miss a meeting or a deadline. Team members can view their upcoming week, check ticket extensions, and receive push notifications for upcoming team huddles—all dynamically synced from the rest of the Worksuite.",
@@ -80,7 +80,7 @@
         },
         {
           "id": "executive",
-          "icon": "📈",
+          "icon": "trending",
           "title": "Real-Time Oversight on the Go",
           "kicker": "For Founders & Executives",
           "description": "Stay tuned to your company’s macro schedule. Review major project delivery dates, monitor branch-specific holidays, and oversee global operations at a glance from your executive dashboard.",

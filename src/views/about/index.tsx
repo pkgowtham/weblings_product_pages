@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { usestyles } from './style';
 import { getSrc } from '../../utils/getSrc';
+import { SvgChevronRight } from '../../components/svg/CustomIcons';
 import gowthamFounderImg from '../../assets/images/about/gowtham_founder.jpg';
 import chennaiHqImg from '../../assets/images/about/chennai_hq.jpg';
 
@@ -66,7 +67,7 @@ const About: React.FC = () => {
         >
           <span className={classes.pulseDot} />
           <span>Our Story &amp; Mission</span>
-          <span style={{ fontSize: '15px', marginLeft: '2px' }}>›</span>
+          <SvgChevronRight width={12} height={12} style={{ marginLeft: '4px' }} />
         </div>
 
         <h1 className={classes.heroTitle}>
@@ -260,7 +261,7 @@ const About: React.FC = () => {
               >
                 <path
                   d="M10 90h20V30H10zM40 90h20V50h-20zM70 90h20V20h-20zM100 90h20V40h-20zM130 90h20V10H130zM160 90h20V60h-20z"
-                  fill="#0F172A"
+                  fill="currentColor"
                 />
               </svg>
 

@@ -266,6 +266,175 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     textDecorationThickness: "2px",
   },
 
+  /* Dashboard Mockup Section */
+  dashboardMockupContainer: {
+    position: "relative",
+    width: "100%",
+    maxWidth: "1080px",
+    margin: "48px auto 72px",
+    padding: "0 24px",
+    boxSizing: "border-box",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    "@media (max-width: 768px)": {
+      margin: "28px auto 44px",
+      padding: "0 16px",
+    },
+  },
+  dashboardMockupGlow: {
+    position: "absolute",
+    top: "5%",
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "90%",
+    height: "85%",
+    background:
+      "radial-gradient(ellipse at center, rgba(0, 114, 196, 0.18) 0%, rgba(138, 194, 255, 0.1) 45%, rgba(255, 255, 255, 0) 72%)",
+    filter: "blur(60px)",
+    pointerEvents: "none",
+    zIndex: 0,
+  },
+  dashboardMockupFrame: {
+    position: "relative",
+    zIndex: 1,
+    width: "100%",
+    backgroundColor: "#FFFFFF",
+    borderRadius: "18px",
+    border: "1px solid rgba(0, 114, 196, 0.18)",
+    boxShadow:
+      "0 32px 85px -15px rgba(0, 52, 107, 0.22), 0 0 0 1px rgba(0, 114, 196, 0.08), 0 12px 28px -5px rgba(0, 0, 0, 0.06)",
+    overflow: "hidden",
+    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    "&:hover": {
+      transform: "translateY(-3px)",
+      boxShadow:
+        "0 40px 95px -15px rgba(0, 52, 107, 0.28), 0 0 0 1px rgba(0, 114, 196, 0.14), 0 16px 32px -5px rgba(0, 0, 0, 0.08)",
+    },
+    "@media (max-width: 768px)": {
+      borderRadius: "12px",
+    },
+  },
+  dashboardMockupHeader: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "12px",
+    padding: "12px 18px",
+    backgroundColor: "#F8FAFC",
+    borderBottom: "1px solid rgba(0, 114, 196, 0.1)",
+    boxSizing: "border-box",
+  },
+  windowControls: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+  },
+  windowDotRed: {
+    width: "11px",
+    height: "11px",
+    borderRadius: "50%",
+    backgroundColor: "#FF5F56",
+  },
+  windowDotYellow: {
+    width: "11px",
+    height: "11px",
+    borderRadius: "50%",
+    backgroundColor: "#FFBD2E",
+  },
+  windowDotGreen: {
+    width: "11px",
+    height: "11px",
+    borderRadius: "50%",
+    backgroundColor: "#27C93F",
+  },
+  browserNavIcons: {
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#64748B",
+    marginLeft: "4px",
+    "@media (max-width: 680px)": {
+      display: "none",
+    },
+  },
+  windowUrlBar: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "6px 14px",
+    backgroundColor: "#FFFFFF",
+    border: "1px solid rgba(0, 114, 196, 0.16)",
+    borderRadius: "9999px",
+    fontSize: "12px",
+    color: "#475569",
+    maxWidth: "440px",
+    flex: 1,
+    justifyContent: "center",
+    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.04)",
+    "@media (max-width: 768px)": {
+      fontSize: "11px",
+      padding: "4px 10px",
+    },
+  },
+  lockIcon: {
+    color: "#16A34A",
+    flexShrink: 0,
+  },
+  windowUrlText: {
+    fontFamily: "monospace, sans-serif",
+    fontWeight: 500,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  },
+  windowLiveBadge: {
+    fontSize: "10px",
+    fontWeight: 700,
+    color: "#0072C4",
+    backgroundColor: "rgba(0, 114, 196, 0.08)",
+    padding: "2px 6px",
+    borderRadius: "4px",
+    marginLeft: "4px",
+    letterSpacing: "0.04em",
+    "@media (max-width: 640px)": {
+      display: "none",
+    },
+  },
+  windowActions: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    "@media (max-width: 600px)": {
+      display: "none",
+    },
+  },
+  windowActionTag: {
+    fontSize: "11px",
+    fontWeight: 600,
+    color: "#0072C4",
+    backgroundColor: "rgba(0, 114, 196, 0.08)",
+    border: "1px solid rgba(0, 114, 196, 0.2)",
+    padding: "3px 10px",
+    borderRadius: "6px",
+  },
+  dashboardMockupScreen: {
+    position: "relative",
+    width: "100%",
+    lineHeight: 0,
+    backgroundColor: "#FFFFFF",
+    overflow: "hidden",
+  },
+  dashboardMockupImg: {
+    width: "100%",
+    height: "auto",
+    display: "block",
+    objectFit: "contain",
+    imageRendering: "-webkit-optimize-contrast",
+    transform: "translateZ(0)",
+    backfaceVisibility: "hidden",
+  },
+
   /* AI Dual-Engine Section */
   aiSection: {
     width: "100%",
@@ -824,39 +993,6 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   migrationSubtext: {
     fontSize: "0.875rem",
     color: "#64748B",
-  },
-
-  dashboardMockupContainer: {
-    width: "100%",
-    maxWidth: "1140px",
-    margin: "60px auto 40px",
-    padding: "0 24px",
-    boxSizing: "border-box",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    "@media (max-width: 768px)": {
-      margin: "40px auto 20px",
-      padding: "0 16px",
-    },
-  },
-  dashboardMockupWrapper: {
-    width: "100%",
-    borderRadius: "20px",
-    overflow: "hidden",
-    boxShadow: "0 20px 50px -10px rgba(0, 114, 196, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08)",
-    backgroundColor: "#FFFFFF",
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    "&:hover": {
-      transform: "translateY(-4px)",
-      boxShadow: "0 28px 60px -12px rgba(0, 114, 196, 0.28), 0 0 0 1px rgba(0, 114, 196, 0.25)",
-    },
-  },
-  dashboardMockupImg: {
-    width: "100%",
-    height: "auto",
-    display: "block",
-    objectFit: "contain",
   },
 
   BannerSection: {

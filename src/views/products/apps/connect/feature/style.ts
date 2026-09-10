@@ -3,8 +3,8 @@ import { Theme } from "../../../../../theme/themeType";
 
 export const useStyles = createUseStyles((theme: Theme) => ({
   page: { backgroundColor: theme.light.neutral.surface.lighter, color: theme.light.neutral.onSurface.title, fontFamily: "'Open Sans', sans-serif", overflow: "hidden" },
-  hero: { maxWidth: "1200px", margin: "0 auto", padding: "132px 32px 80px", textAlign: "center", position: "relative", "@media (max-width: 600px)": { padding: "112px 20px 56px" } },
-  glow: { position: "absolute", width: "520px", height: "360px", top: "130px", left: "50%", transform: "translateX(-50%)", backgroundColor: theme.light.negative.surface.lighter, filter: "blur(90px)", opacity: 0.8, borderRadius: "50%", pointerEvents: "none" },
+  hero: { maxWidth: "1200px", margin: "0 auto", padding: "56px 32px 80px", textAlign: "center", position: "relative", "@media (max-width: 600px)": { padding: "40px 20px 56px" } },
+  glow: { position: "absolute", width: "520px", height: "360px", top: "54px", left: "50%", transform: "translateX(-50%)", backgroundColor: theme.light.negative.surface.lighter, filter: "blur(90px)", opacity: 0.8, borderRadius: "50%", pointerEvents: "none" },
   heroContent: { position: "relative", zIndex: 1 },
   badge: { display: "inline-flex", alignItems: "center", gap: "8px", padding: "7px 14px", borderRadius: theme.borderRadius.b2500, backgroundColor: theme.light.brand.surface.lighter, color: theme.light.brand.onSurface.default, border: `1px solid ${theme.light.brand.border.light}`, fontSize: "0.875rem", fontWeight: 700 },
   title: { maxWidth: "960px", margin: "24px auto 20px", fontSize: "clamp(2.3rem, 5vw, 4.25rem)", lineHeight: 1.12, fontWeight: 800 },

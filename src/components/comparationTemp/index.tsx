@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { usestyles } from "./comparisonstyle";
 import SvgWeblingslogo from "../svg/Weblingslogo";
 import { DoneIcon } from "../../assets/icons_component/index";
+import { SvgSparkleIcon, SvgChevronRight } from "../svg/CustomIcons";
 import Typography from "../typography/component";
 import comparisonJson from "../../data/comparison.json";
 import { useRouter } from "next/navigation";
@@ -88,7 +89,7 @@ const ComparisonTemp: React.FC<any> = (props): React.ReactElement => {
               <th className={classes.thHighlight}>
                 {/* Savings Pill Tooltip */}
                 <div className={classes.badgeTooltip}>
-                  <span>✦</span>
+                  <SvgSparkleIcon width={12} height={12} />
                   <Typography variant="LXS" component="span">
                     {badgeText}
                   </Typography>
@@ -193,8 +194,9 @@ const ComparisonTemp: React.FC<any> = (props): React.ReactElement => {
                       <span
                         className={`${classes.chevron} ${isExpanded ? classes.chevronRotated : ""
                           }`}
+                        style={{ display: "inline-flex", alignItems: "center", justifyContent: "center" }}
                       >
-                        ❯
+                        <SvgChevronRight width={10} height={10} />
                       </span>
                       <Typography variant="BS" component="span">
                         {feature.name}

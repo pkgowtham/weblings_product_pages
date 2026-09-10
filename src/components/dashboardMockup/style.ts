@@ -1,0 +1,568 @@
+import { createUseStyles } from "react-jss";
+import { Theme } from "../../theme/themeType";
+
+export const useStyles = createUseStyles((theme: Theme) => ({
+  dashboardRoot: {
+    width: "100%",
+    backgroundColor: "#F8FAFC",
+    fontFamily: "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    color: "#1E293B",
+    userSelect: "none",
+    overflow: "hidden",
+    boxSizing: "border-box",
+  },
+
+  // Top Dashboard Navbar
+  topBar: {
+    height: "46px",
+    backgroundColor: "#FFFFFF",
+    borderBottom: "1px solid #E2E8F0",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "0 18px",
+    boxSizing: "border-box",
+  },
+  topBarLeft: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+  },
+  weblingsBrandLogo: {
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#0072C4",
+    fontWeight: 800,
+    fontSize: "15px",
+    letterSpacing: "-0.02em",
+  },
+  topBarRight: {
+    display: "flex",
+    alignItems: "center",
+    gap: "14px",
+  },
+  iconBtn: {
+    width: "28px",
+    height: "28px",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#64748B",
+    position: "relative",
+    cursor: "pointer",
+  },
+  notifDot: {
+    position: "absolute",
+    top: "4px",
+    right: "4px",
+    width: "6px",
+    height: "6px",
+    borderRadius: "50%",
+    backgroundColor: "#EF4444",
+  },
+  userAvatarCircle: {
+    width: "28px",
+    height: "28px",
+    borderRadius: "50%",
+    backgroundColor: "#E0F2FE",
+    color: "#0072C4",
+    fontWeight: 700,
+    fontSize: "12px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  // Dashboard Main Body (Sidebar + Content)
+  bodyLayout: {
+    display: "flex",
+    minHeight: "560px",
+  },
+
+  // Two-tier slim sidebars
+  sidebarCol1: {
+    width: "44px",
+    backgroundColor: "#FFFFFF",
+    borderRight: "1px solid #E2E8F0",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "10px 0",
+    gap: "10px",
+  },
+  sidebarCol2: {
+    width: "40px",
+    backgroundColor: "#FFFFFF",
+    borderRight: "1px solid #E2E8F0",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "10px 0",
+    gap: "10px",
+    "@media (max-width: 900px)": {
+      display: "none",
+    },
+  },
+  sideAvatar: {
+    width: "24px",
+    height: "24px",
+    borderRadius: "50%",
+    backgroundColor: "#E0F2FE",
+    color: "#0072C4",
+    fontSize: "10px",
+    fontWeight: 700,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  sideIcon: {
+    width: "30px",
+    height: "30px",
+    borderRadius: "6px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#64748B",
+    cursor: "pointer",
+    transition: "all 0.15s ease",
+    "&:hover": {
+      backgroundColor: "#F1F5F9",
+      color: "#0072C4",
+    },
+  },
+  sideIconActive: {
+    backgroundColor: "#E0F2FE",
+    color: "#0072C4 !important",
+  },
+
+  // Main Dashboard Scroll Area
+  contentArea: {
+    flex: 1,
+    padding: "16px 20px",
+    boxSizing: "border-box",
+    backgroundColor: "#F8FAFC",
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+  },
+
+  // Top Banner
+  banner: {
+    background: "linear-gradient(135deg, #0284C7 0%, #0072C4 60%, #38BDF8 100%)",
+    borderRadius: "10px",
+    padding: "18px 24px",
+    color: "#FFFFFF",
+    position: "relative",
+    overflow: "hidden",
+    boxShadow: "0 4px 14px rgba(0, 114, 196, 0.18)",
+  },
+  bannerCurve: {
+    position: "absolute",
+    right: "-30px",
+    top: "-30px",
+    width: "240px",
+    height: "180px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%)",
+    pointerEvents: "none",
+  },
+  bannerTitle: {
+    margin: "0 0 6px 0",
+    fontSize: "16px",
+    fontWeight: 700,
+    letterSpacing: "-0.01em",
+  },
+  bannerSubtext: {
+    margin: 0,
+    fontSize: "12px",
+    opacity: 0.9,
+    lineHeight: 1.5,
+  },
+
+  // Two-column dashboard grid
+  dashGrid: {
+    display: "grid",
+    gridTemplateColumns: "330px 1fr",
+    gap: "16px",
+    alignItems: "start",
+    "@media (max-width: 900px)": {
+      gridTemplateColumns: "1fr",
+    },
+  },
+  colLeft: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "14px",
+  },
+  colRight: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "14px",
+  },
+
+  // Card Basics
+  card: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: "10px",
+    border: "1px solid #E2E8F0",
+    padding: "14px 16px",
+    boxSizing: "border-box",
+    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.03)",
+  },
+
+  // Row with Holiday & Today
+  holidayTodayRow: {
+    display: "grid",
+    gridTemplateColumns: "1.3fr 1fr",
+    gap: "10px",
+  },
+  holidayCard: {
+    backgroundColor: "#FFF5F5",
+    borderRadius: "10px",
+    border: "1px solid #FEE2E2",
+    padding: "12px 14px",
+    boxSizing: "border-box",
+  },
+  kickerLabel: {
+    fontSize: "11px",
+    fontWeight: 600,
+    color: "#64748B",
+    marginBottom: "8px",
+  },
+  holidayContent: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  holidayLeft: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  subSmall: {
+    fontSize: "10px",
+    color: "#94A3B8",
+    lineHeight: 1,
+    marginBottom: "3px",
+  },
+  holidayBold: {
+    fontSize: "18px",
+    fontWeight: 800,
+    color: "#1E293B",
+    lineHeight: 1.1,
+    marginBottom: "3px",
+  },
+  holidayDate: {
+    fontSize: "9px",
+    color: "#64748B",
+    whiteSpace: "nowrap",
+  },
+  holidayDivider: {
+    width: "1px",
+    height: "36px",
+    backgroundColor: "#FCA5A5",
+    margin: "0 8px",
+  },
+  holidayRight: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  holidayNextBold: {
+    fontSize: "13px",
+    fontWeight: 700,
+    color: "#334155",
+    lineHeight: 1.1,
+    marginBottom: "3px",
+  },
+
+  todayTime: {
+    fontSize: "15px",
+    fontWeight: 800,
+    color: "#1E293B",
+    lineHeight: 1.2,
+    marginBottom: "3px",
+  },
+  todayDate: {
+    fontSize: "10px",
+    color: "#64748B",
+  },
+
+  // Attendance
+  cardTitleRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: "10px",
+  },
+  cardTitle: {
+    fontSize: "13px",
+    fontWeight: 700,
+    color: "#1E293B",
+    margin: 0,
+  },
+  cardActionLink: {
+    fontSize: "11px",
+    fontWeight: 600,
+    color: "#0072C4",
+    textDecoration: "none",
+    cursor: "pointer",
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
+  clockRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingBottom: "12px",
+    borderBottom: "1px solid #F1F5F9",
+    marginBottom: "10px",
+  },
+  clockTime: {
+    fontSize: "17px",
+    fontWeight: 800,
+    color: "#1E293B",
+    marginTop: "2px",
+  },
+  onTimeText: {
+    fontSize: "11px",
+    color: "#64748B",
+    textAlign: "right",
+  },
+  avatarGroup: {
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    marginTop: "6px",
+  },
+  initialCircle: {
+    width: "24px",
+    height: "24px",
+    borderRadius: "50%",
+    backgroundColor: "#BFDBFE",
+    color: "#1E40AF",
+    fontSize: "10px",
+    fontWeight: 700,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  plusCircle: {
+    width: "24px",
+    height: "24px",
+    borderRadius: "50%",
+    backgroundColor: "#E2E8F0",
+    color: "#475569",
+    fontSize: "10px",
+    fontWeight: 700,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  // Leave Balance Gauges
+  gaugesRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+    padding: "8px 0",
+  },
+  gaugeItem: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "4px",
+  },
+  gaugeCircle: {
+    width: "48px",
+    height: "48px",
+    borderRadius: "50%",
+    border: "3px solid #10B981",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "16px",
+    fontWeight: 800,
+    color: "#1E293B",
+  },
+  gaugeLabel: {
+    fontSize: "11px",
+    fontWeight: 500,
+    color: "#64748B",
+  },
+
+  // On Leave Today
+  teamRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "8px",
+    marginTop: "4px",
+  },
+  memberItem: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "4px",
+  },
+  memberPhoto: {
+    width: "36px",
+    height: "36px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    border: "2px solid #FFFFFF",
+    boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+  },
+  memberName: {
+    fontSize: "10px",
+    color: "#475569",
+    maxWidth: "46px",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    textAlign: "center",
+  },
+
+  // Mail List Items
+  mailItem: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "10px",
+    padding: "8px 0",
+    borderBottom: "1px solid #F1F5F9",
+    "&:last-child": {
+      borderBottom: "none",
+      paddingBottom: 0,
+    },
+  },
+  mailAvatar: {
+    width: "32px",
+    height: "32px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    flexShrink: 0,
+  },
+  mailBody: {
+    flex: 1,
+    minWidth: 0,
+  },
+  mailHeader: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: "2px",
+  },
+  mailSender: {
+    fontSize: "12px",
+    fontWeight: 700,
+    color: "#1E293B",
+  },
+  mailDate: {
+    fontSize: "10px",
+    color: "#94A3B8",
+  },
+  mailSnippet: {
+    fontSize: "11px",
+    color: "#64748B",
+    margin: 0,
+    lineHeight: 1.4,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  },
+
+  // Announcement Items
+  announcementItem: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "10px",
+    padding: "8px 0",
+    borderBottom: "1px solid #F1F5F9",
+    "&:last-child": {
+      borderBottom: "none",
+      paddingBottom: 0,
+    },
+  },
+  announcementAvatar: {
+    width: "30px",
+    height: "30px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    flexShrink: 0,
+  },
+  announcementBody: {
+    flex: 1,
+  },
+  announcementSender: {
+    fontSize: "12px",
+    fontWeight: 700,
+    color: "#1E293B",
+  },
+  announcementTime: {
+    fontSize: "10px",
+    color: "#94A3B8",
+    marginLeft: "8px",
+  },
+  announcementText: {
+    fontSize: "11px",
+    fontWeight: 600,
+    color: "#334155",
+    margin: "2px 0",
+  },
+  announcementSub: {
+    fontSize: "10px",
+    color: "#64748B",
+    margin: 0,
+  },
+  teamBadge: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "4px",
+    fontSize: "10px",
+    fontWeight: 600,
+    color: "#FFFFFF",
+    backgroundColor: "#0072C4",
+    padding: "2px 8px",
+    borderRadius: "4px",
+    marginTop: "4px",
+  },
+
+  // Calendar Schedule Table
+  scheduleGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(6, 1fr)",
+    border: "1px solid #E2E8F0",
+    borderRadius: "6px",
+    overflow: "hidden",
+    marginTop: "8px",
+  },
+  scheduleCell: {
+    height: "38px",
+    borderRight: "1px solid #E2E8F0",
+    borderBottom: "1px solid #E2E8F0",
+    backgroundColor: "#FFFFFF",
+    padding: "4px",
+    boxSizing: "border-box",
+    fontSize: "9px",
+    color: "#94A3B8",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    "&:last-child": {
+      borderRight: "none",
+    },
+  },
+  scheduleEventBlock: {
+    backgroundColor: "#E0F2FE",
+    borderLeft: "2px solid #0072C4",
+    padding: "2px 4px",
+    borderRadius: "2px",
+    fontSize: "8px",
+    fontWeight: 600,
+    color: "#0072C4",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+}));

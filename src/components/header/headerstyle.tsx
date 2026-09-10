@@ -12,7 +12,7 @@ export const usestyles = createUseStyles({
   },
   navDiv: {
     width: '100%',
-    height: '120px',
+    height: '0px',
     // backgroundColor: theme.light.brand.surface.lighter
   },
   logo: {

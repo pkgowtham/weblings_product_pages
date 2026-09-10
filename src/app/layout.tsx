@@ -20,7 +20,7 @@ export default function RootLayout({
       <body>
         <JssRegistryProvider>
           <Navbar />
-          <main>{children}</main>
+          <main style={{ paddingTop: '80px' }}>{children}</main>
           <Footer />
         </JssRegistryProvider>
       </body>

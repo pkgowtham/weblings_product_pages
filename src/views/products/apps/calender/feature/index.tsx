@@ -4,6 +4,30 @@ import React, { useState } from 'react';
 import { useStyles } from './style';
 import ComparisonTemp from '../../../../../components/comparationTemp/index';
 import calendarDataJson from '../../../../../data/calendar.json';
+import {
+  SvgPhoneIcon,
+  SvgTarget,
+  SvgUtensils,
+  SvgSmartphone,
+  SvgTrendingUp,
+} from '../../../../../components/svg/CustomIcons';
+
+// Calendar icon SVG
+const SvgCalendarIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <rect x={3} y={4} width={18} height={18} rx={2} ry={2} />
+    <line x1={16} y1={2} x2={16} y2={6} />
+    <line x1={8} y1={2} x2={8} y2={6} />
+    <line x1={3} y1={10} x2={21} y2={10} />
+  </svg>
+);
+
+// Plane SVG for Out of Office event
+const SvgPlane = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: 3 }}>
+    <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 2c-2-2-4-2-5.5-.5L10 5 1.8 6.2c-.5.1-.9.5-.9 1.1 0 .4.2.8.5 1L6 12l-2 3.5c-.2.3-.1.7.2.9.2.1.4.2.6.2.2 0 .4-.1.5-.2L9 14l4 4 .3 3.6c.1.5.5.9 1.1.9.4 0 .8-.2 1-.5l.4-.8z" />
+  </svg>
+);
 
 const CalenderFeature = () => {
   const classes = useStyles();
@@ -47,8 +71,8 @@ const CalenderFeature = () => {
         <div className={classes.heroContent}>
           {/* Badge */}
           <div className={classes.badge}>
-            <span className={classes.badgeIcon}>📅</span>
-            <span>{hero.badge.replace('📅 ', '')}</span>
+            <span className={classes.badgeIcon}><SvgCalendarIcon /></span>
+            <span>{hero.badge}</span>
           </div>
 
           {/* Heading */}
@@ -174,7 +198,7 @@ const CalenderFeature = () => {
                 <span className={classes.dayNumber}>1</span>
                 {showCalls && (
                   <div className={classes.eventPillRose}>
-                    <span>📞</span> Client Huddle
+                    <SvgPhoneIcon width={12} height={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} /> Client Huddle
                   </div>
                 )}
               </div>
@@ -185,7 +209,7 @@ const CalenderFeature = () => {
                 <span className={classes.dayNumber}>3</span>
                 {showCustom && (
                   <div className={classes.eventPillAmber}>
-                    <span>🎉</span> Office Lunch
+                    <SvgUtensils width={12} height={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} /> Office Lunch
                   </div>
                 )}
               </div>
@@ -227,7 +251,7 @@ const CalenderFeature = () => {
                     className={classes.eventPillRose}
                     style={{ marginTop: '36px', zIndex: 20, position: 'relative' }}
                   >
-                    <span>📞</span> Board Meeting
+                    <SvgPhoneIcon width={12} height={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} /> Board Meeting
                   </div>
                 )}
               </div>
@@ -242,7 +266,7 @@ const CalenderFeature = () => {
                 <span className={classes.dayNumber}>11</span>
                 {showCustom && (
                   <div className={classes.eventPillCyan}>
-                    <span>✈️</span> Out of Office
+                    <SvgPlane /> Out of Office
                   </div>
                 )}
               </div>
@@ -338,7 +362,7 @@ const CalenderFeature = () => {
         <div className={classes.twoCardGrid}>
           {/* Card 1: Streamline Tickets */}
           <div className={`${classes.glassCard} ${classes.cardBorderIndigo}`}>
-            <div className={classes.cardIconBox}>🎯</div>
+            <div className={classes.cardIconBox}><SvgTarget width={26} height={26} /></div>
             <h3 className={classes.cardTitle}>{zeroDoubleEntry.cards[0].title}</h3>
             <p className={classes.cardParagraph}>{zeroDoubleEntry.cards[0].description}</p>
             <div className={classes.cardChipContainer}>
@@ -353,7 +377,7 @@ const CalenderFeature = () => {
 
           {/* Card 2: Team Chat Calls */}
           <div className={`${classes.glassCard} ${classes.cardBorderRose}`}>
-            <div className={classes.cardIconBox}>📞</div>
+            <div className={classes.cardIconBox}><SvgPhoneIcon width={26} height={26} /></div>
             <h3 className={classes.cardTitle}>{zeroDoubleEntry.cards[1].title}</h3>
             <p className={classes.cardParagraph}>{zeroDoubleEntry.cards[1].description}</p>
             <div className={classes.cardChipContainer}>
@@ -516,7 +540,13 @@ const CalenderFeature = () => {
         <div className={classes.twoCardGrid}>
           {mobile.cards.map((card: any) => (
             <div key={card.id} className={classes.glassCard}>
-              <div className={classes.mobileCardIcon}>{card.icon}</div>
+              <div className={classes.mobileCardIcon}>
+                {card.icon === 'mobile' || card.id === 'employee' ? (
+                  <SvgSmartphone width={28} height={28} />
+                ) : (
+                  <SvgTrendingUp width={28} height={28} />
+                )}
+              </div>
               <h3 className={classes.cardTitle}>{card.title}</h3>
               <div className={classes.mobileKicker}>{card.kicker}</div>
               <p className={classes.cardParagraph}>{card.description}</p>

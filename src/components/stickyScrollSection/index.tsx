@@ -401,7 +401,7 @@ const defaultContentItems: ContentItem[] = [
     description:
       "Smart, secure, and intuitive email for modern teams. Organize communications with custom tags, collaborative inbox sharing, and automated rules designed to keep your inbox clutter-free.",
     buttonText: "Learn More",
-    interfaceType: "📧 Webmail Interface",
+    interfaceType: "Webmail Interface",
     image: first,
     path: "/mail/feature",
   },
@@ -411,7 +411,7 @@ const defaultContentItems: ContentItem[] = [
     description:
       "Powerful insights and data visualization tools that help you make informed decisions. Track performance metrics, analyze trends, and optimize your workflows with our comprehensive analytics suite.",
     buttonText: "Learn More",
-    interfaceType: "📊 Analytics Dashboard",
+    interfaceType: "Analytics Dashboard",
     image: eoffice,
     path: "/eoffice/feature",
   },
@@ -421,28 +421,10 @@ const defaultContentItems: ContentItem[] = [
     description:
       "Seamlessly collaborate with your team members in real-time. Share files, communicate instantly, and manage projects together with our integrated collaboration platform.",
     buttonText: "Learn More",
-    interfaceType: "👥 Team Workspace",
+    interfaceType: "Team Workspace",
     image: calender,
     path: "/calender/feature",
   },
-  // {
-  //   id: 4,
-  //   title: "Security & Privacy",
-  //   description:
-  //     "Enterprise-grade security features to protect your data and ensure compliance. Advanced encryption, multi-factor authentication, and comprehensive audit logs keep your information safe.",
-  //   buttonText: "Security Details",
-  //   interfaceType: "🔒 Security Center",
-  //   image:first
-  // },
-  // {
-  //   id: 5,
-  //   title: "Mobile Experience",
-  //   description:
-  //     "Access your work from anywhere with our responsive mobile platform. Native apps for iOS and Android provide a seamless experience across all your devices.",
-  //   buttonText: "Download App",
-  //   interfaceType: "📱 Mobile App",
-  //   image:first
-  // },
 ];
 
 const StickyScrollSection: React.FC<StickyScrollProps> = ({
@@ -615,12 +597,6 @@ const StickyScrollSection: React.FC<StickyScrollProps> = ({
           <Typography variant="HS" className={classes.header}>
             Solutions for Your work
           </Typography>
-          {/* <div className={classes.sparkles}>
-            <div className={classes.sparkle}>✨</div>
-            <div className={classes.sparkle}>⭐</div>
-            <div className={classes.sparkle}>✨</div>
-            <div className={classes.sparkle}>⭐</div>
-          </div> */}
 
           <div className={classes.contentWrapper}>
             <div className={classes.contentLeft}>
