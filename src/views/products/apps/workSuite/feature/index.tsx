@@ -20,19 +20,19 @@ const WorkSuiteFeature = () => {
         background: 'linear-gradient(180deg, #CFDEF9 0%, #ffffff 100%)',
         minHeight: '100vh',
         width: '100%',
-        fontFamily: "'Open Sans', -apple-system, sans-serif",
+        fontFamily: "'Inter', 'Open Sans', sans-serif",
       }}
     >
       {/* Hero Section */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '40px 24px 56px', textAlign: 'center' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '56px 24px 80px', textAlign: 'center' }}>
 
         {/* Badge */}
         <div
           style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 18px',
+            display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px',
             borderRadius: 999, background: 'rgba(0, 114, 196, 0.1)', border: '1px solid rgba(0, 114, 196, 0.3)',
-            color: '#0072C4', fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
-            textTransform: 'uppercase' as const, marginBottom: 28,
+            color: '#0072C4', fontSize: '0.875rem', fontWeight: 600,
+            marginBottom: 24, boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
           }}
         >
           <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#0072C4', display: 'inline-block' }} />
@@ -42,8 +42,8 @@ const WorkSuiteFeature = () => {
         {/* Heading */}
         <h1
           style={{
-            fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: 1.12, fontWeight: 700,
-            color: '#0a1f44', margin: '0 auto 20px', maxWidth: 820,
+            fontSize: '3.5rem', lineHeight: 1.15, letterSpacing: '-0.025em', fontWeight: 800,
+            color: '#0a1f44', margin: '0 auto 24px', maxWidth: 900,
           }}
         >
           One workspace for the work your{' '}
@@ -51,7 +51,7 @@ const WorkSuiteFeature = () => {
         </h1>
 
         {/* Subtext */}
-        <p style={{ maxWidth: 700, margin: '0 auto 48px', fontSize: 18, lineHeight: 1.75, color: '#3a5278', fontWeight: 400 }}>
+        <p style={{ maxWidth: 820, margin: '0 auto 36px', fontSize: '1.125rem', lineHeight: 1.7, color: '#3a5278', fontWeight: 400 }}>
           Bring chat, email, projects, HR workflows, and operations into one connected platform without paying extra for every feature.
         </p>
 
@@ -59,9 +59,9 @@ const WorkSuiteFeature = () => {
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' as const, marginBottom: 64 }}>
           <button
             style={{
-              padding: '13px 32px', borderRadius: 10,
+              padding: '14px 32px', borderRadius: 10,
               background: 'linear-gradient(135deg, #0072C4, #005fa3)', color: '#fff',
-              fontWeight: 700, fontSize: 16, border: 'none', cursor: 'pointer',
+              fontWeight: 700, fontSize: '1.0625rem', border: 'none', cursor: 'pointer',
               boxShadow: '0 4px 20px rgba(0,114,196,0.35)', transition: 'transform 0.15s ease, box-shadow 0.15s ease',
             }}
             onMouseEnter={e => { const b = e.currentTarget as HTMLButtonElement; b.style.transform = 'translateY(-2px)'; b.style.boxShadow = '0 8px 28px rgba(0,114,196,0.45)'; }}
@@ -71,8 +71,8 @@ const WorkSuiteFeature = () => {
           </button>
           <button
             style={{
-              padding: '13px 32px', borderRadius: 10, background: 'transparent',
-              color: '#0072C4', fontWeight: 600, fontSize: 16, border: '2px solid rgba(0,114,196,0.45)',
+              padding: '14px 32px', borderRadius: 10, background: 'transparent',
+              color: '#0072C4', fontWeight: 700, fontSize: '1.0625rem', border: '2px solid rgba(0,114,196,0.45)',
               cursor: 'pointer', transition: 'border-color 0.15s ease, background 0.15s ease',
             }}
             onMouseEnter={e => { const b = e.currentTarget as HTMLButtonElement; b.style.background = 'rgba(0,114,196,0.07)'; b.style.borderColor = '#0072C4'; }}
@@ -109,9 +109,9 @@ const WorkSuiteFeature = () => {
                 <span style={{ width: 20, height: 20, borderRadius: '50%', background: '#0072C4', color: '#fff', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
                   <SvgCheckIcon width={10} height={10} />
                 </span>
-                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#0a1f44' }}>{title}</h3>
+                <h3 style={{ margin: 0, fontSize: '1.375rem', fontWeight: 700, color: '#0a1f44' }}>{title}</h3>
               </div>
-              <p style={{ margin: 0, color: '#4a6080', lineHeight: 1.7, fontSize: 15 }}>{description}</p>
+              <p style={{ margin: 0, color: '#4a6080', lineHeight: 1.7, fontSize: '0.9375rem' }}>{description}</p>
             </div>
           ))}
         </div>

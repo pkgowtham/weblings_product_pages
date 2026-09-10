@@ -20,25 +20,30 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   subtitle: {
     color: "#0072C4",
-    fontSize: "1rem",
-    fontWeight: 600,
-    letterSpacing: "0.2px",
+    fontSize: "0.8125rem",
+    fontWeight: 800,
+    textTransform: "uppercase",
+    letterSpacing: "0.1em",
   },
   title: {
     color: "#1F2937",
     fontSize: "2.5rem",
-    fontWeight: 700,
+    fontWeight: 800,
+    letterSpacing: "-0.02em",
     margin: 0,
     lineHeight: 1.2,
-    "@media (max-width: 600px)": {
-      fontSize: "1.85rem",
+    "@media (max-width: 768px)": {
+      fontSize: "1.875rem",
     },
   },
   titleDescription: {
     color: "#3A3A3A",
-    fontSize: "1.0625rem",
-    lineHeight: 1.6,
+    fontSize: "1.125rem",
+    lineHeight: 1.7,
     margin: 0,
+    "@media (max-width: 768px)": {
+      fontSize: "1rem",
+    },
   },
 
   // ─────────────────────────────────────────────────────────────────────

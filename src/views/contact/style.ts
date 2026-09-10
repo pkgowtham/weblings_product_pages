@@ -129,7 +129,7 @@ export const useStyle = createUseStyles((theme: Theme) => ({
     color: theme.light.neutral.onSurface.medium || "#595959",
     fontSize: "14px",
     fontWeight: 500,
-    fontFamily: "'Open Sans', sans-serif",
+    fontFamily: "'Inter', 'Open Sans', sans-serif",
   },
   dropdownMenu: {
     position: "absolute",
@@ -202,7 +202,7 @@ export const useStyle = createUseStyles((theme: Theme) => ({
     border: `1px solid ${theme.light.neutral.border.light || "#D9D9D9"}`,
     borderRadius: "6px",
     fontSize: "0.9375rem",
-    fontFamily: "'Open Sans', sans-serif",
+    fontFamily: "'Inter', 'Open Sans', sans-serif",
     boxSizing: "border-box",
     resize: "vertical",
     outline: "none",
@@ -216,7 +216,7 @@ export const useStyle = createUseStyles((theme: Theme) => ({
       outline: "none",
     },
     "&::placeholder": {
-      fontFamily: "'Open Sans', sans-serif",
+      fontFamily: "'Inter', 'Open Sans', sans-serif",
       color: theme.light.neutral.onSurface.medium || "#595959",
       fontWeight: 500,
       fontSize: "14px",

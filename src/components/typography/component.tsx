@@ -36,7 +36,7 @@ const createResponsiveStyles = () => {
 };
 
 const createStyleObject = (style: TextStyle): React.CSSProperties => ({
-  fontFamily: style.fontFamily ? `'${style.fontFamily}', 'Open Sans', sans-serif` : `'Open Sans', sans-serif`,
+  fontFamily: style.fontFamily === 'Caveat' ? "'Caveat', cursive" : "'Inter', 'Open Sans', sans-serif",
   fontWeight: style.fontWeight,
   fontSize: `${style.fontSize}px`,
   letterSpacing: `${style.letterSpacing?.value || 0}px`,

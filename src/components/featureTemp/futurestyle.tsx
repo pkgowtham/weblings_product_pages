@@ -25,14 +25,26 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   content: {},
   heading: {
     margin: "auto",
-    maxWidth: "500px",
+    maxWidth: "900px",
     color: '#262626',
-    marginTop: theme.spacing.s1200
+    fontSize: "3.5rem",
+    fontWeight: 800,
+    lineHeight: 1.15,
+    letterSpacing: "-0.025em",
+    marginTop: theme.spacing.s1200,
+    "@media (max-width: 768px)": {
+      fontSize: "2.25rem",
+    },
   },
   para: {
-    maxWidth: "740px",
+    maxWidth: "820px",
     color: "#2c2e31",
-    margin: `${theme.spacing.s500} ${theme.spacing.s0}`,
+    fontSize: "1.125rem",
+    lineHeight: 1.7,
+    margin: `${theme.spacing.s500} auto`,
+    "@media (max-width: 768px)": {
+      fontSize: "1rem",
+    },
   },
   action: {
     display: "flex",
@@ -120,6 +132,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     color: theme.light.brand.onSurface.default,
     display: "inline-flex",
     alignItems: "center",
+    fontSize: "0.8125rem",
+    fontWeight: 800,
+    textTransform: "uppercase",
+    letterSpacing: "0.1em",
   },
   floatingStarsWrapper: {
     position: "absolute",
@@ -149,23 +165,33 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     marginLeft: "-8px",
   },
   titleDiv: {
-    fontSize: "20px",
     maxWidth: "480px",
   },
   htitle: {
     textAlign: "start",
+    fontSize: "2.5rem",
+    lineHeight: 1.2,
+    letterSpacing: "-0.02em",
+    fontWeight: 800,
+    color: theme.light.neutral.onSurface.title,
+    "@media (max-width: 768px)": {
+      fontSize: "1.875rem",
+    },
   },
   listDiv: {
     maxWidth: "480px",
-    lineHeight: "1.6",
-    fontSize: "1rem",
-    color: "#2c2e31",
+    lineHeight: 1.7,
+    fontSize: "1.125rem",
+    color: theme.light.neutral.onSurface.medium,
     textAlign: "start",
+    "@media (max-width: 768px)": {
+      fontSize: "1rem",
+    },
   },
   paraLine: {
-    margin: "4px 0",
-    lineHeight: "1.6",
-    color: "#434343",
+    margin: "6px 0",
+    lineHeight: 1.7,
+    color: theme.light.neutral.onSurface.medium,
     textAlign: "start",
   },
   imgDiv: {
