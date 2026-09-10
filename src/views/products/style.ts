@@ -421,7 +421,6 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   dashboardMockupScreen: {
     position: "relative",
     width: "100%",
-    lineHeight: 0,
     backgroundColor: "#FFFFFF",
     overflow: "hidden",
   },

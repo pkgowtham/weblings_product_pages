@@ -20,7 +20,6 @@ import SvgFeature2 from "../../components/svg/Feature2";
 import SvgFeature3 from "../../components/svg/Feature3";
 import SvgFeature4 from "../../components/svg/Feature4";
 import SvgNewsletter from "../../components/svg/Newsletter";
-import dashboardPreview from "../../assets/images/dashboard_preview.png";
 import WorkspaceDashboardMockup from "../../components/dashboardMockup/index";
 import sideImage from "../../assets/images/sideimg.svg";
 import { getSrc } from "../../utils/getSrc";
@@ -195,13 +194,9 @@ const Products = () => {
             </div>
           </div>
 
-          {/* Screen with user's dashboard image */}
+          {/* Screen with interactive HTML dashboard mockup */}
           <div className={classes.dashboardMockupScreen}>
-            <img
-              src={getSrc(dashboardPreview)}
-              alt="Weblings Workspace Dashboard"
-              className={classes.dashboardMockupImg}
-            />
+            <WorkspaceDashboardMockup />
           </div>
         </div>
       </div>
