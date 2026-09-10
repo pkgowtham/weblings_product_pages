@@ -1,0 +1,45 @@
+# Weblings
+
+> Simply Affordable Business Tools: An all-in-one integrated worksuite combining enterprise email, team chat, calendar, sprint tracking, and office management without per-seat penalty pricing.
+
+Weblings is a unified enterprise workplace software suite designed to replace disjointed, high-cost SaaS stacks (Google Workspace, Microsoft 365, Slack, Asana) with an integrated, privacy-focused platform running on a single shared database.
+
+## Key Differentiators
+- **Zero Per-Seat Penalties**: Flat, predictable pricing that lets growing teams add contractors, aliases, and new employees without increasing software bills.
+- **Unified Ecosystem**: Mail, Chat (Connect), Calendar, Streamline (Issues/Sprints), and eOffice share the same underlying architecture—eliminating cross-app context switching and duplicate data entry.
+- **Privacy & Security**: Native edge-network spam protection, strict data segregation, and dedicated enterprise privacy standards.
+
+---
+
+## Core Products
+
+- [Weblings Worksuite](https://weblings.com/workSuite/feature): Complete overview of the unified worksuite bundling Mail, Connect, Calendar, Streamline, and eOffice.
+- [Weblings Mail (Inbox)](https://weblings.com/mail): Unlimited custom domain email addresses, edge spam protection, large 10GB attachments, and deep integration with chat and tasks.
+  - [Mail Features](https://weblings.com/mail/feature): Deep dive into Mail encryption, alias management, spam filtering, and unified inbox capabilities.
+- [Weblings Connect (Team Chat)](https://weblings.com/connect): Real-time secure team messaging, channels, direct messages, and audio/video calling.
+  - [Connect Features](https://weblings.com/connect/feature): Channel management, searchable message history, media sharing, and instant conference calls.
+- [Weblings Calendar](https://weblings.com/calender): Visual timeline automatically synchronizing Streamline sprint deadlines and scheduled Team Chat calls with zero duplicate data entry.
+  - [Calendar Features](https://weblings.com/calender/feature): Shared team calendars, milestone tracking, meeting scheduling, and task cross-linking.
+- [Weblings Streamline](https://weblings.com/streamline): Agile project management, sprint planning, and issue tracking built right alongside your team's communications.
+  - [Streamline Features](https://weblings.com/streamline/feature): Kanban boards, sprint roadmaps, milestone tracking, and ticket-to-mail associations.
+- [Weblings eOffice](https://weblings.com/eoffice/feature): Comprehensive digital workplace operations, employee directories, company policies, and workplace workflows.
+- [Weblings Drive](https://weblings.com/drive): Centralized secure cloud file storage and asset management for team documents and resources.
+
+---
+
+## Comparisons & Migration
+
+- [WorkSuite Comparison](https://weblings.com/workSuite/comparison): Comparison of Weblings Worksuite versus traditional multi-vendor enterprise suites.
+- [Mail Comparison](https://weblings.com/mail/comparison): How Weblings Mail compares to Google Workspace Gmail and Microsoft Exchange / Outlook.
+- [Connect Comparison](https://weblings.com/connect/comparison): How Weblings Connect compares to Slack and Microsoft Teams.
+- [Calendar Comparison](https://weblings.com/calender/comparison): Comparison against standalone calendar solutions like Google Calendar.
+- [Streamline Comparison](https://weblings.com/streamline/comparison): How Streamline compares to Jira, Linear, and Asana.
+- [eOffice Comparison](https://weblings.com/eoffice/comparison): Comparison of digital HR and office workspace platforms.
+
+---
+
+## Company & Pricing
+
+- [Pricing](https://weblings.com/price): Transparent tier breakdowns for the complete suite with no hidden per-user add-on costs.
+- [About Us](https://weblings.com/about): The Weblings founding story, our philosophy on software affordability, and our mission.
+- [Contact](https://weblings.com/contact): Inquiries, support, and sales assistance (enquire@weblings.com).
