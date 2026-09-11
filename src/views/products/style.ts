@@ -335,18 +335,33 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     height: "11px",
     borderRadius: "50%",
     backgroundColor: "#FF5F56",
+    cursor: "pointer",
+    transition: "transform 0.15s ease",
+    "&:hover": {
+      transform: "scale(1.25)",
+    },
   },
   windowDotYellow: {
     width: "11px",
     height: "11px",
     borderRadius: "50%",
     backgroundColor: "#FFBD2E",
+    cursor: "pointer",
+    transition: "transform 0.15s ease",
+    "&:hover": {
+      transform: "scale(1.25)",
+    },
   },
   windowDotGreen: {
     width: "11px",
     height: "11px",
     borderRadius: "50%",
     backgroundColor: "#27C93F",
+    cursor: "pointer",
+    transition: "transform 0.15s ease",
+    "&:hover": {
+      transform: "scale(1.25)",
+    },
   },
   browserNavIcons: {
     display: "flex",
@@ -354,6 +369,15 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     gap: "6px",
     color: "#64748B",
     marginLeft: "4px",
+    cursor: "pointer",
+    "& svg": {
+      transition: "all 0.15s ease",
+      "&:hover": {
+        opacity: "1 !important",
+        color: "#0072C4",
+        transform: "scale(1.15)",
+      },
+    },
     "@media (max-width: 680px)": {
       display: "none",
     },
@@ -372,6 +396,12 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     flex: 1,
     justifyContent: "center",
     boxShadow: "0 1px 3px rgba(0, 0, 0, 0.04)",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      borderColor: "rgba(0, 114, 196, 0.4)",
+      boxShadow: "0 2px 8px rgba(0, 114, 196, 0.1)",
+    },
     "@media (max-width: 768px)": {
       fontSize: "11px",
       padding: "4px 10px",
@@ -389,34 +419,33 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     whiteSpace: "nowrap",
   },
   windowLiveBadge: {
-    fontSize: "10px",
+    fontSize: "9px",
     fontWeight: 700,
-    color: "#0072C4",
-    backgroundColor: "rgba(0, 114, 196, 0.08)",
-    padding: "2px 6px",
-    borderRadius: "4px",
-    marginLeft: "4px",
+    color: "#16A34A",
+    backgroundColor: "rgba(22, 163, 74, 0.1)",
+    padding: "2px 8px",
+    borderRadius: "9999px",
     letterSpacing: "0.04em",
-    "@media (max-width: 640px)": {
-      display: "none",
-    },
+    flexShrink: 0,
   },
   windowActions: {
     display: "flex",
     alignItems: "center",
-    gap: "8px",
-    "@media (max-width: 600px)": {
-      display: "none",
-    },
   },
   windowActionTag: {
     fontSize: "11px",
     fontWeight: 600,
     color: "#0072C4",
     backgroundColor: "rgba(0, 114, 196, 0.08)",
-    border: "1px solid rgba(0, 114, 196, 0.2)",
-    padding: "3px 10px",
+    padding: "4px 10px",
     borderRadius: "6px",
+    border: "1px solid rgba(0, 114, 196, 0.15)",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      backgroundColor: "rgba(0, 114, 196, 0.15)",
+      transform: "scale(1.03)",
+    },
   },
   dashboardMockupScreen: {
     position: "relative",
@@ -831,6 +860,12 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     overflow: "hidden",
     "&:hover": {
       boxShadow: "0 20px 35px -5px rgba(0, 114, 196, 0.12), 0 10px 10px -5px rgba(15, 23, 42, 0.04)",
+      "& .phone-body": {
+        animation: "dotToPhoneGrow 0.5s cubic-bezier(0.34, 1.45, 0.64, 1) forwards",
+      },
+      "& .trending-group": {
+        animation: "growLeftRightChart 0.5s cubic-bezier(0.2, 0.9, 0.4, 1) forwards",
+      },
     },
     "@media (max-width: 768px)": {
       padding: "24px",
@@ -848,7 +883,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     pointerEvents: "none",
   },
   personaGlowSky: {
-    background: `${theme.light.brand.surface.lighter}60`,
+    background: `${theme.light.brand.surface.light}40`,
   },
   personaGlowBlue: {
     background: `${theme.light.brand.surface.light}40`,

@@ -1,61 +1,65 @@
 'use client';
 
-import React from "react";
+import React, { useState } from "react";
 import { useStyles } from "./style";
 import clsx from "clsx";
+import { WeblogoIcon } from "../../assets/icons_component";
 
 interface PhoneNotification {
-  icon: string;
-  title: string;
-  subtitle: string;
-  time: string;
+  icon?: string;
+  title?: string;
+  subtitle?: string;
+  time?: string;
 }
 
 interface PhoneFeed {
-  text: string;
-  time: string;
+  text?: string;
+  time?: string;
 }
 
 interface PhoneMockupProps {
-  variant?: "light" | "dark";
+  variant?: "dashboard" | "attendance" | "light" | "dark";
   notification?: PhoneNotification;
   feed?: PhoneFeed;
 }
 
-/* Micro SVGs for realistic iOS status & navigation */
-const CellularIcon: React.FC<{ isDark?: boolean }> = ({ isDark }) => (
+/* ─────────────────────────────────────────────────────────────
+   PRECISION SVG ASSETS FOR THE WEBLINGS MOBILE APP
+   ───────────────────────────────────────────────────────────── */
+const CellularIcon: React.FC = () => (
   <svg width="17" height="11" viewBox="0 0 17 11" fill="none">
-    <rect x="0" y="7.5" width="2.5" height="3.5" rx="0.8" fill={isDark ? "#FFFFFF" : "#0F172A"} />
-    <rect x="4.5" y="5" width="2.5" height="6" rx="0.8" fill={isDark ? "#FFFFFF" : "#0F172A"} />
-    <rect x="9" y="2.5" width="2.5" height="8.5" rx="0.8" fill={isDark ? "#FFFFFF" : "#0F172A"} />
-    <rect x="13.5" y="0" width="2.5" height="11" rx="0.8" fill={isDark ? "#FFFFFF" : "#0F172A"} />
+    <rect x="0" y="7.5" width="2.5" height="3.5" rx="0.8" fill="#0F172A" />
+    <rect x="4.5" y="5" width="2.5" height="6" rx="0.8" fill="#0F172A" />
+    <rect x="9" y="2.5" width="2.5" height="8.5" rx="0.8" fill="#0F172A" />
+    <rect x="13.5" y="0" width="2.5" height="11" rx="0.8" fill="#0F172A" />
   </svg>
 );
 
-const WifiIcon: React.FC<{ isDark?: boolean }> = ({ isDark }) => (
+const WifiIcon: React.FC = () => (
   <svg width="15" height="11" viewBox="0 0 15 11" fill="none">
     <path
       d="M7.5 10.5a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5zM3.6 6.5C4.7 5.4 6 4.8 7.5 4.8c1.5 0 2.8.6 3.9 1.7a.8.8 0 101.1-1.1C11.1 4 9.4 3.2 7.5 3.2c-1.9 0-3.6.8-5 2.2a.8.8 0 101.1 1.1zM.8 3.6C2.6 1.8 5 0.8 7.5 0.8c2.5 0 4.9 1 6.7 2.8a.8.8 0 101.1-1.1C13.2.4 10.4-.6 7.5-.6c-2.9 0-5.7 1-7.8 3.1a.8.8 0 101.1 1.1z"
-      fill={isDark ? "#FFFFFF" : "#0F172A"}
+      fill="#0F172A"
     />
   </svg>
 );
 
-const BatteryIcon: React.FC<{ isDark?: boolean }> = ({ isDark }) => (
+const BatteryIcon: React.FC = () => (
   <svg width="24" height="11" viewBox="0 0 24 11" fill="none">
-    <rect x="0.5" y="0.5" width="20" height="10" rx="3" stroke={isDark ? "#FFFFFF" : "#0F172A"} strokeWidth="1" />
-    <rect x="2" y="2" width="16" height="7" rx="1.5" fill="#10B981" />
-    <path d="M22 3.5v4" stroke={isDark ? "#FFFFFF" : "#0F172A"} strokeWidth="1" strokeLinecap="round" />
+    <rect x="0.5" y="0.5" width="20" height="10" rx="3" stroke="#0F172A" strokeWidth="1" />
+    <rect x="2" y="2" width="16" height="7" rx="1.5" fill="#0F172A" />
+    <path d="M22 3.5v4" stroke="#0F172A" strokeWidth="1" strokeLinecap="round" />
   </svg>
 );
 
-const PhoneMockup: React.FC<PhoneMockupProps> = ({
-  variant = "light",
-  notification,
-  feed,
-}) => {
+const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
   const classes = useStyles();
-  const isDark = variant === "dark";
+  const isAttendance = variant === "attendance" || variant === "dark";
+
+  // Interactive local states for high delight
+  const [clockedIn, setClockedIn] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<string>(isAttendance ? "eoffice" : "dash");
+  const [activeDay, setActiveDay] = useState<number>(1); // Monday selected
 
   return (
     <div className={classes.frame}>
@@ -64,247 +68,394 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
       <div className={classes.volumeButtonBottom} />
       <div className={classes.powerButton} />
 
-      {/* Internal Phone Screen */}
-      <div className={isDark ? classes.screenDark : classes.screenLight}>
-        {/* iOS Status Bar with Dynamic Island */}
+      {/* Smartphone Screen */}
+      <div className={classes.screen}>
+        {/* iOS Top Status Bar */}
         <div className={classes.statusBar}>
-          <span className={isDark ? classes.statusTimeDark : classes.statusTime}>
-            9:41
-          </span>
+          <span className={classes.statusTime}>3:39</span>
 
-          {/* Dynamic Island */}
-          <div className={classes.dynamicIsland}>
-            <div className={classes.islandCamera} />
-            {isDark ? (
-              <div className={classes.islandIndicatorGreen} />
-            ) : (
-              <div className={classes.islandSensor} />
-            )}
+          {/* Precision Dynamic Island */}
+          <div className={classes.dynamicIsland} title="Dynamic Island">
+            <div className={classes.islandCenterLens} />
           </div>
 
-          <div className={isDark ? classes.statusIconsDark : classes.statusIcons}>
-            <CellularIcon isDark={isDark} />
-            <WifiIcon isDark={isDark} />
-            <BatteryIcon isDark={isDark} />
+          <div className={classes.statusIcons}>
+            <CellularIcon />
+            <WifiIcon />
+            <BatteryIcon />
           </div>
         </div>
 
-        {/* In-App Screen Content */}
-        <div className={classes.appContent}>
-          {isDark ? (
+        {/* Scrollable Screen Content */}
+        <div className={classes.screenContent}>
+          {isAttendance ? (
             /* ─────────────────────────────────────────────────────────────
-               EXECUTIVE TELEMETRY CONSOLE (Dark Variant)
+               SCREEN 1: ATTENDANCE & E-OFFICE (From User Image 1)
                ───────────────────────────────────────────────────────────── */
             <>
               {/* App Bar */}
               <div className={classes.appHeader}>
-                <div className={classes.userProfile}>
-                  <div className={classes.avatarDark}>EX</div>
-                  <div>
-                    <p className={classes.userNameDark}>Executive Telemetry</p>
-                    <p className={classes.userRoleDark}>4 Branches Operational</p>
-                  </div>
+                <div className={classes.headerLeft}>
+                  <button className={classes.headerMenuBtn} aria-label="Menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                      <line x1="3" y1="6" x2="21" y2="6" />
+                      <line x1="3" y1="12" x2="21" y2="12" />
+                      <line x1="3" y1="18" x2="21" y2="18" />
+                    </svg>
+                  </button>
+                  <h3 className={classes.headerTitle}>Attendance</h3>
                 </div>
-                <div className={classes.headerActionBtn}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="3" />
-                    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
-                  </svg>
+                <div className={classes.userAvatarCircle} title="Profile">
+                  <span>👨‍💼</span>
                 </div>
               </div>
 
-              {/* Main Notification Card */}
-              {notification && (
-                <div className={classes.notifCardDark}>
-                  <div className={classes.notifLeft}>
-                    <div className={classes.notifIconDark}>
-                      {notification.icon || "⚡"}
-                    </div>
-                    <div>
-                      <p className={classes.notifTitleDark}>{notification.title}</p>
-                      <p className={classes.notifSubDark}>{notification.subtitle}</p>
-                    </div>
+              {/* Clock In / Clock Out Banner */}
+              <div className={classes.clockInBanner}>
+                <div className={classes.clockInBannerLeft}>
+                  <span className={classes.clockInDate}>Fri, Sep 11</span>
+                  <span className={classes.clockInTimeBig}>3:39 PM</span>
+                </div>
+                <button
+                  className={classes.clockInActionBtn}
+                  onClick={() => setClockedIn(!clockedIn)}
+                >
+                  {clockedIn ? "Clocked In ✓" : "Clock In"}
+                </button>
+              </div>
+
+              {/* Shift Details Card */}
+              <div className={classes.shiftDetailsCard}>
+                <h4 className={classes.shiftTitle}>Shift Details</h4>
+
+                {/* 4 Metric Columns */}
+                <div className={classes.shiftMetricsGrid}>
+                  <div className={classes.shiftMetricCol}>
+                    <span className={classes.shiftMetricLabel}>Shift Start</span>
+                    <span className={classes.shiftMetricValue}>1:00 AM</span>
                   </div>
-                  <span className={classes.notifBadgeDark}>
-                    {notification.time}
+                  <div className={classes.shiftMetricCol}>
+                    <span className={classes.shiftMetricLabel}>Shift End</span>
+                    <span className={classes.shiftMetricValue}>8:00 AM</span>
+                  </div>
+                  <div className={classes.shiftMetricCol}>
+                    <span className={classes.shiftMetricLabel}>Lunch Time</span>
+                    <span className={classes.shiftMetricValue}>00:10:00</span>
+                  </div>
+                  <div className={classes.shiftMetricCol}>
+                    <span className={classes.shiftMetricLabel}>Eff. hours</span>
+                    <span className={classes.shiftMetricValue}>7 hours</span>
+                  </div>
+                </div>
+
+                {/* Shift Name & Weekdays */}
+                <h5 className={classes.shiftSubTitle}>Shift Name</h5>
+                <div className={classes.weekDaysRow}>
+                  {["S", "M", "T", "W", "T", "F", "S"].map((day, idx) => {
+                    const isWorking = idx === 1 || idx === 2; // M and T working in screenshot
+                    const isSelected = activeDay === idx;
+                    return (
+                      <div
+                        key={idx}
+                        className={isWorking || isSelected ? classes.dayCircleActive : classes.dayCircle}
+                        onClick={() => setActiveDay(idx)}
+                      >
+                        {day}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Legend */}
+                <div className={classes.legendRow}>
+                  <span>
+                    <span className={classes.legendDotBlue} /> Working days
+                  </span>
+                  <span>
+                    <span className={classes.legendDotGray} /> Week Offs
                   </span>
                 </div>
-              )}
 
-              {/* Real-Time Telemetry Grid */}
-              <div className={classes.telemetryGrid}>
-                <div className={classes.telemetryBox}>
-                  <span className={classes.telemetryLabel}>Latency</span>
-                  <span className={classes.telemetryValue}>18ms</span>
-                  <span className={classes.telemetryStatus}>Global CDN Fast</span>
-                </div>
-                <div className={classes.telemetryBox}>
-                  <span className={classes.telemetryLabel}>Cluster Load</span>
-                  <span className={classes.telemetryValue}>24%</span>
-                  <span className={classes.telemetryStatus}>Optimal Across Nodes</span>
-                </div>
+                {/* Shift Footer Summary */}
+                <p className={classes.shiftFooterInfo}>
+                  Today 1:00 AM - 8:00 AM (7 HRS)
+                  <br />
+                  <span className={classes.shiftFooterSub}>Break/Lunch Hours 00:10:00</span>
+                </p>
               </div>
 
-              {/* Multi-Branch Live Health List */}
-              <div className={classes.branchHealthList}>
-                <div className={classes.branchHeader}>
-                  <span>Branch Health</span>
-                  <span style={{ color: "#10B981" }}>99.99% Uptime</span>
-                </div>
-                <div className={classes.branchRow}>
-                  <span><span className={classes.branchDot} />New York HQ</span>
-                  <span style={{ color: "#94A3B8" }}>142 online</span>
-                </div>
-                <div className={classes.branchRow}>
-                  <span><span className={classes.branchDot} />London Studio</span>
-                  <span style={{ color: "#94A3B8" }}>68 online</span>
-                </div>
-                <div className={classes.branchRow}>
-                  <span><span className={classes.branchDot} />Singapore Hub</span>
-                  <span style={{ color: "#94A3B8" }}>95 online</span>
-                </div>
-              </div>
-
-              {/* Live Metric / Feed Item */}
-              {feed && (
-                <div className={classes.feedCardDark}>
-                  <span className={classes.feedTextDark}>{feed.text}</span>
-                  <span className={classes.feedValueDark}>{feed.time}</span>
-                </div>
-              )}
-            </>
-          ) : (
-            /* ─────────────────────────────────────────────────────────────
-               EMPLOYEE WORKSPACE APP (Light Variant)
-               ───────────────────────────────────────────────────────────── */
-            <>
-              {/* App Bar */}
-              <div className={classes.appHeader}>
-                <div className={classes.userProfile}>
-                  <div className={classes.avatarLight}>AM</div>
-                  <div>
-                    <p className={classes.userName}>Alex Miller</p>
-                    <p className={classes.userRole}>Engineering • Weblings HQ</p>
-                  </div>
-                </div>
-                <div className={classes.headerActionBtn}>
-                  <div className={classes.notifBadgeDot} />
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#475569" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 01-3.46 0" />
+              {/* 2x2 Grid of Actions */}
+              <div className={classes.actionGrid}>
+                {/* Teams Log */}
+                <div className={classes.actionGridCard}>
+                  <svg className={classes.actionGridIcon} viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
                   </svg>
+                  <span className={classes.actionGridLabel}>Teams Log</span>
                 </div>
-              </div>
 
-              {/* Main Notification Card */}
-              {notification && (
-                <div className={classes.notifCardLight}>
-                  <div className={classes.notifLeft}>
-                    <div className={classes.notifIconLight}>
-                      {notification.icon || "✓"}
-                    </div>
-                    <div>
-                      <p className={classes.notifTitleLight}>{notification.title}</p>
-                      <p className={classes.notifSubLight}>{notification.subtitle}</p>
-                    </div>
-                  </div>
-                  <span className={classes.notifBadgeLight}>
-                    {notification.time}
-                  </span>
-                </div>
-              )}
-
-              {/* Quick Actions Bar */}
-              <div className={classes.quickActionsRow}>
-                <div className={classes.quickActionItem}>
-                  <svg className={classes.quickActionIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                  </svg>
-                  <span className={classes.quickActionLabel}>Chat (3)</span>
-                </div>
-                <div className={classes.quickActionItem}>
-                  <svg className={classes.quickActionIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                {/* Attendance Log */}
+                <div className={classes.actionGridCard}>
+                  <svg className={classes.actionGridIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                     <line x1="16" y1="2" x2="16" y2="6" />
                     <line x1="8" y1="2" x2="8" y2="6" />
                     <line x1="3" y1="10" x2="21" y2="10" />
+                    <path d="M9 16l2 2 4-4" />
                   </svg>
-                  <span className={classes.quickActionLabel}>Calendar</span>
+                  <span className={classes.actionGridLabel}>Attendance Log</span>
                 </div>
-                <div className={classes.quickActionItem}>
-                  <svg className={classes.quickActionIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M9 11l3 3L22 4" />
-                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+
+                {/* Emp. Hierarchy */}
+                <div className={classes.actionGridCard}>
+                  <svg className={classes.actionGridIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="9" y="3" width="6" height="6" rx="1" />
+                    <rect x="3" y="15" width="6" height="6" rx="1" />
+                    <rect x="15" y="15" width="6" height="6" rx="1" />
+                    <path d="M12 9v3m0 0H6v3m6-3h6v3" />
                   </svg>
-                  <span className={classes.quickActionLabel}>Tasks (4)</span>
+                  <span className={classes.actionGridLabel}>Emp. Hierarchy</span>
                 </div>
-                <div className={classes.quickActionItem}>
-                  <svg className={classes.quickActionIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+
+                {/* Department */}
+                <div className={classes.actionGridCard}>
+                  <svg className={classes.actionGridIcon} viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
                   </svg>
-                  <span className={classes.quickActionLabel}>Drive</span>
+                  <span className={classes.actionGridLabel}>Department</span>
+                </div>
+              </div>
+            </>
+          ) : (
+            /* ─────────────────────────────────────────────────────────────
+               SCREEN 2: MAIN DASHBOARD (From User Image 2)
+               ───────────────────────────────────────────────────────────── */
+            <>
+              {/* App Bar */}
+              <div className={classes.appHeader}>
+                <div className={classes.headerLeft}>
+                  <WeblogoIcon width="20" height="18" className={classes.headerLogo} />
+                  <h3 className={classes.headerTitle}>Dashboard</h3>
                 </div>
               </div>
 
-              {/* Upcoming Meeting Card */}
-              <div className={classes.meetingCard}>
-                <div className={classes.meetingHeader}>
-                  <span className={classes.meetingTitle}>#sprint-retro scheduled</span>
-                  <span className={classes.meetingTimeTag}>2:30 PM</span>
+              {/* Announcement Performance Banner */}
+              <div className={classes.announcementCard}>
+                <h4 className={classes.announcementTitle}>
+                  Quarterly Performance Reviews: Preparing for Success in Q4
+                </h4>
+                <p className={classes.announcementSub}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+              </div>
+
+              {/* 2-Column KPI Row: Holiday & Today */}
+              <div className={classes.kpiRow}>
+                {/* Holiday Card */}
+                <div className={classes.kpiCard}>
+                  <p className={classes.kpiLabel}>HOLIDAY</p>
+                  <p className={classes.kpiSubLabel}>Next</p>
+                  <p className={classes.kpiValue}>Pongal</p>
+                  <p className={classes.kpiDate}>Fri 15, Jan 2027</p>
                 </div>
-                <div className={classes.meetingSub}>
-                  <span>Audio Room 2 • 6 attending</span>
-                  <button className={classes.joinBtn}>Join Call</button>
+
+                {/* Today Card */}
+                <div className={classes.kpiCard}>
+                  <p className={classes.kpiLabel}>TODAY</p>
+                  <p className={classes.kpiValue}>3:39 PM</p>
+                  <p className={classes.kpiDate}>FRI, SEP 11, 2026</p>
                 </div>
               </div>
 
-              {/* Recent Activity / Feed */}
-              {feed && (
-                <div className={classes.feedCard}>
-                  <span className={classes.feedTextLight}>Sprint 14 Target</span>
-                  <span className={classes.feedValueLight}>84% Completed</span>
+              {/* Attendance Card */}
+              <div className={classes.dashboardAttendanceCard}>
+                <div className={classes.cardHeaderRow}>
+                  <h4 className={classes.cardHeaderTitle}>Attendance</h4>
+                  <span className={classes.viewMoreLink}>View More</span>
                 </div>
-              )}
+
+                <div className={classes.clockInTimeRow}>
+                  <span className={classes.clockInLabel}>Clock In Time</span>
+                  <span className={classes.clockInValue}>9:00 AM</span>
+                </div>
+
+                <div className={classes.arrivalStatsRow}>
+                  <span>On-Time Arrival &nbsp; <strong>-</strong></span>
+                  <span>Late Arrival &nbsp; <strong>-</strong></span>
+                </div>
+
+                {/* Clock Out & Avatar Stack Row */}
+                <div className={classes.clockOutRow}>
+                  <div className={classes.notClockedInGroup}>
+                    <span className={classes.notClockedInLabel}>Not Clocked In</span>
+                    <div className={classes.avatarStack}>
+                      <span className={classes.avatarPill}>G</span>
+                      <span className={classes.avatarPill}>T</span>
+                      <span className={classes.avatarPill}>JD</span>
+                      <span className={classes.avatarPill}>F</span>
+                      <span className={classes.avatarPillCount}>11</span>
+                    </div>
+                  </div>
+
+                  <button
+                    className={classes.clockOutBtn}
+                    onClick={() => setClockedIn(!clockedIn)}
+                  >
+                    {clockedIn ? "Clock In" : "Clock Out"}
+                  </button>
+                </div>
+              </div>
+
+              {/* Leave Balance Card */}
+              <div className={classes.leaveBalanceCard}>
+                <div className={classes.cardHeaderRow}>
+                  <h4 className={classes.cardHeaderTitle}>Leave Balance</h4>
+                  <span className={classes.viewMoreLink}>Apply Leave</span>
+                </div>
+
+                <div className={classes.gaugeArea}>
+                  <div className={classes.gaugeContainer}>
+                    {/* SVG Circular Ring Gauge */}
+                    <svg className={classes.gaugeRingSvg} viewBox="0 0 44 44">
+                      <circle
+                        cx="22"
+                        cy="22"
+                        r="18"
+                        fill="none"
+                        stroke="#E2E8F0"
+                        strokeWidth="4"
+                      />
+                      <circle
+                        cx="22"
+                        cy="22"
+                        r="18"
+                        fill="none"
+                        stroke="#10B981"
+                        strokeWidth="4"
+                        strokeDasharray="113.1"
+                        strokeDashoffset="34"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <span style={{ fontSize: "14px", fontWeight: 800, color: "#0F172A", marginTop: "-42px" }}>
+                      16
+                    </span>
+                    <span className={classes.gaugeSubText} style={{ marginTop: "24px" }}>
+                      sick leave
+                    </span>
+                  </div>
+
+                  {/* Calendar FAB Button */}
+                  <div className={classes.applyLeaveFab} title="Calendar">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                  </div>
+                </div>
+
+                <span className={classes.viewMoreLink} style={{ textAlign: "center", marginTop: "2px" }}>
+                  View More
+                </span>
+              </div>
             </>
           )}
         </div>
 
-        {/* Bottom In-App Tab Bar */}
-        <div className={isDark ? classes.tabBarDark : classes.tabBar}>
-          <div className={clsx(classes.tabItem, isDark ? classes.tabItemActiveDark : classes.tabItemActive)}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-            <span>{isDark ? "Telemetry" : "Home"}</span>
-          </div>
-          <div className={classes.tabItem}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-            </svg>
-            <span>{isDark ? "Nodes" : "Chat"}</span>
-          </div>
-          <div className={classes.tabItem}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
-            <span>{isDark ? "Logs" : "Calendar"}</span>
-          </div>
-          <div className={classes.tabItem}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-            <span>Profile</span>
-          </div>
-        </div>
+        {/* ─────────────────────────────────────────────────────────────
+           STICKY BOTTOM WORKSUITE NAVIGATION WITH CENTER FAB
+           ───────────────────────────────────────────────────────────── */}
+        <div className={classes.tabBarFixed}>
+          <div className={classes.tabRow}>
+            {/* Dashboard */}
+            <div
+              className={activeTab === "dash" ? classes.tabItemActive : classes.tabItem}
+              onClick={() => setActiveTab("dash")}
+            >
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+              </svg>
+              <span>Dashb...</span>
+            </div>
 
-        {/* iOS Home Indicator Bar */}
-        <div className={classes.homeIndicatorContainer}>
-          <div className={isDark ? classes.homeIndicatorDark : classes.homeIndicator} />
+            {/* Chats */}
+            <div
+              className={activeTab === "chats" ? classes.tabItemActive : classes.tabItem}
+              onClick={() => setActiveTab("chats")}
+            >
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+              </svg>
+              <span>Chats</span>
+            </div>
+
+            {/* Mail */}
+            <div
+              className={activeTab === "mail" ? classes.tabItemActive : classes.tabItem}
+              onClick={() => setActiveTab("mail")}
+            >
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span>Mail</span>
+            </div>
+
+            {/* Center Floating Action Button (FAB) */}
+            <div
+              className={classes.centerFab}
+              title="User Profile / Quick Action"
+              onClick={() => setClockedIn(!clockedIn)}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              </svg>
+            </div>
+
+            {/* Streamline */}
+            <div
+              className={activeTab === "stream" ? classes.tabItemActive : classes.tabItem}
+              onClick={() => setActiveTab("stream")}
+            >
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              <span>Strea...</span>
+            </div>
+
+            {/* E-Office */}
+            <div
+              className={activeTab === "eoffice" ? classes.tabItemActive : classes.tabItem}
+              onClick={() => setActiveTab("eoffice")}
+            >
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
+              </svg>
+              <span>Eoffice</span>
+            </div>
+
+            {/* Calendar */}
+            <div
+              className={activeTab === "calendar" ? classes.tabItemActive : classes.tabItem}
+              onClick={() => setActiveTab("calendar")}
+            >
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              <span>Calend...</span>
+            </div>
+          </div>
+
+          {/* iOS Home Indicator Bar — safely nested inside tab bar */}
+          <div className={classes.homeIndicator} />
         </div>
       </div>
     </div>

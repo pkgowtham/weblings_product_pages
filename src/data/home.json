@@ -130,12 +130,12 @@
         "id": "smartphone",
         "title": "The Whole Office in Your Pocket",
         "target": "For Every Employee",
-        "description": "Never miss an urgent ping, new email, or ticket status shift. Team members can approve leave requests, review project timelines, join audio calls, and respond to clients instantly—whether sitting at a workstation or on the move.",
+        "description": "Never miss an urgent ping, new email, or ticket status shift. Team members can clock in, check leave balances, track holiday schedules, and join team chats instantly—whether sitting at a workstation or on the move.",
         "badges": [
           "iOS App",
           "Android App"
         ],
-        "phoneVariant": "light",
+        "phoneVariant": "dashboard",
         "phoneNotification": {
           "icon": "✓",
           "title": "Leave Request Approved",
@@ -151,12 +151,12 @@
         "id": "trendingUp",
         "title": "Real-Time Oversight on the Go",
         "target": "For Founders & Executives",
-        "description": "Stay tuned to your company's pulse without checking a laptop. Receive instant alerts on high-priority milestones, cross-branch storage limits, critical system alerts, and headcount changes across every location right on your phone.",
+        "description": "Stay tuned to company operations without checking a laptop. Monitor employee attendance logs, department headcounts, organizational hierarchies, and shift telemetry across every branch right on your phone.",
         "badges": [
           "iOS App",
           "Android App"
         ],
-        "phoneVariant": "dark",
+        "phoneVariant": "attendance",
         "phoneNotification": {
           "icon": "⚡",
           "title": "Branch Telemetry Normal",
@@ -177,7 +177,7 @@
       {
         "id": "globe",
         "title": "Instant Domain Setup in 30 Seconds",
-        "description": "Add your company web address or pick up a new one right inside the dashboard. MX records, email security, and DNS configure themselves behind the scenes in under 30 seconds—no tech expertise needed."
+        "description": "Add your custom domain or connect an existing web address right from the dashboard. MX records, SPF, DKIM, and DNS are auto-configured in under 30 seconds—with zero manual setup required."
       },
       {
         "id": "building",
@@ -191,8 +191,8 @@
       },
       {
         "id": "barChart",
-        "title": "Clear Big-Picture Insights for Founders",
-        "description": "Keep an eye on company-wide growth without digging into day-to-day clutter. Check team headcounts, storage usage, and active branches at a glance from your executive console."
+        "title": "Clear Big-Picture Metrics for Founders",
+        "description": "Keep an eye on company-wide growth without digging into day-to-day clutter. Manually fetch team headcounts, storage usage, and active branch metrics on demand directly from your console."
       }
     ]
   },
@@ -260,12 +260,12 @@
   "bannerFeatures": [],
   "features": {
     "title": "Built for Growing Businesses with Multiple Locations",
-    "description": "Manage all your branches and custom domains from the top, while keeping everyday operations completely private..",
+    "description": "Manage all your branches and custom domains from the top, while keeping everyday operations completely private.",
     "featureBox": [
       {
         "id": "globe",
         "titleSubtext": "Instant Domain Setup in 30 Seconds",
-        "titleSmallSubText": "Add your company web address or pick up a new one right inside the dashboard. MX records, email security, and DNS configure themselves behind the scenes in under 30 seconds—no tech expertise needed."
+        "titleSmallSubText": "Add your custom domain or connect an existing web address right from the dashboard. MX records, SPF, DKIM, and DNS are auto-configured in under 30 seconds—with zero manual setup required."
       },
       {
         "id": "building",
@@ -279,8 +279,8 @@
       },
       {
         "id": "barChart",
-        "titleSubtext": "Clear Big-Picture Insights for Founders",
-        "titleSmallSubText": "Keep an eye on company-wide growth without digging into day-to-day clutter. Check team headcounts, storage usage, and active branches at a glance from your executive console."
+        "titleSubtext": "Clear Big-Picture Metrics for Founders",
+        "titleSmallSubText": "Keep an eye on company-wide growth without digging into day-to-day clutter. Manually fetch team headcounts, storage usage, and active branch metrics on demand directly from your console."
       }
     ]
   },

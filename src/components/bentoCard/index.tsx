@@ -23,6 +23,7 @@ const BentoCard: React.FC<BentoCardProps> = ({
   footer,
 }) => {
   const classes = useStyles();
+  const [isHovered, setIsHovered] = React.useState(false);
 
   const cardClass = (classes as any)[`card_${colorScheme}`];
   const glowClass = (classes as any)[`glow_${colorScheme}`];
@@ -30,15 +31,23 @@ const BentoCard: React.FC<BentoCardProps> = ({
   const badgeClass = (classes as any)[`badge_${colorScheme}`];
   const footerClass = (classes as any)[`footer_${colorScheme}`];
 
+  const renderedIcon = React.isValidElement(icon)
+    ? React.cloneElement(icon as React.ReactElement<any>, { isHovered })
+    : icon;
+
   return (
-    <div className={cardClass}>
+    <div
+      className={cardClass}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Ambient glow */}
       <div className={glowClass} />
 
       <div className={classes.cardBody}>
         {/* Header: Icon + Badge */}
         <div className={classes.headerRow}>
-          <div className={iconBoxClass}>{icon}</div>
+          <div className={iconBoxClass}>{renderedIcon}</div>
           <span className={badgeClass}>{badge}</span>
         </div>
 

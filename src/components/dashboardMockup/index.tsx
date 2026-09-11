@@ -184,6 +184,12 @@ const AvatarWithFallback: React.FC<AvatarProps> = ({ src, alt, label, bg = '#E0F
 
 export const WorkspaceDashboardMockup: React.FC = () => {
   const classes = useStyles();
+  const [activeSideCol1, setActiveSideCol1] = React.useState(4); // default chat
+  const [activeSideCol2, setActiveSideCol2] = React.useState(4); // default gear
+  const [clockedIn, setClockedIn] = React.useState(true);
+  const [activeMailIndex, setActiveMailIndex] = React.useState(0);
+  const [selectedCells, setSelectedCells] = React.useState<number[]>([2, 5]);
+  const [notifActive, setNotifActive] = React.useState(true);
 
   return (
     <div className={classes.dashboardRoot}>
@@ -195,11 +201,15 @@ export const WorkspaceDashboardMockup: React.FC = () => {
           </div>
         </div>
         <div className={classes.topBarRight}>
-          <div className={classes.iconBtn}>
+          <div
+            className={classes.iconBtn}
+            onClick={() => setNotifActive(!notifActive)}
+            title={notifActive ? "Notifications (1 unread)" : "Notifications"}
+          >
             <SvgBell />
-            <span className={classes.notifDot} />
+            {notifActive && <span className={classes.notifDot} />}
           </div>
-          <div className={classes.userAvatarCircle}>A</div>
+          <div className={classes.userAvatarCircle} title="Profile Settings">A</div>
         </div>
       </div>
 
@@ -207,30 +217,70 @@ export const WorkspaceDashboardMockup: React.FC = () => {
       <div className={classes.bodyLayout}>
         {/* Sidebar 1 (Far Left) */}
         <aside className={classes.sidebarCol1}>
-          <span className={classes.sideChevron}>›</span>
+          <span className={classes.sideChevron} title="Collapse sidebar">›</span>
           <div className={classes.sideAvatar}>A</div>
-          <div className={classes.sideIcon}><SvgBriefcase /></div>
-          <div className={classes.sideIcon}><SvgMegaphone /></div>
-          <div className={classes.sideIcon}><SvgPresentation /></div>
-          <div className={classes.sideIcon}><SvgMail /></div>
-          <div className={`${classes.sideIcon} ${classes.sideIconActiveBox}`}><SvgChatBubble /></div>
-          <div className={classes.sideIcon}><SvgCalendar /></div>
+          {[
+            { icon: <SvgBriefcase />, title: "Workspace" },
+            { icon: <SvgMegaphone />, title: "Announcements" },
+            { icon: <SvgPresentation />, title: "Presentations" },
+            { icon: <SvgMail />, title: "Mail" },
+            { icon: <SvgChatBubble />, title: "Team Chat" },
+            { icon: <SvgCalendar />, title: "Calendar" },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className={`${classes.sideIcon} ${activeSideCol1 === idx ? classes.sideIconActiveBox : ""}`}
+              onClick={() => setActiveSideCol1(idx)}
+              title={item.title}
+            >
+              {item.icon}
+            </div>
+          ))}
           <div className={classes.sidebarSpacer} />
-          <div className={classes.sideIcon}><SvgGear /></div>
-          <div className={classes.sideIcon}><SvgHelp /></div>
+          <div
+            className={`${classes.sideIcon} ${activeSideCol1 === 6 ? classes.sideIconActiveBox : ""}`}
+            onClick={() => setActiveSideCol1(6)}
+            title="Settings"
+          >
+            <SvgGear />
+          </div>
+          <div
+            className={`${classes.sideIcon} ${activeSideCol1 === 7 ? classes.sideIconActiveBox : ""}`}
+            onClick={() => setActiveSideCol1(7)}
+            title="Help"
+          >
+            <SvgHelp />
+          </div>
         </aside>
 
         {/* Sidebar 2 (Inner Left) */}
         <aside className={classes.sidebarCol2}>
-          <span className={classes.sideChevron}>›</span>
+          <span className={classes.sideChevron} title="Collapse sub-panel">›</span>
           <div className={classes.sideAvatar}>A</div>
-          <div className={classes.sideIcon}><SvgBriefcase /></div>
-          <div className={classes.sideIcon}><SvgMail /></div>
-          <div className={classes.sideIcon}><SvgChatBubble /></div>
-          <div className={classes.sideIcon}><SvgCalendar /></div>
-          <div className={`${classes.sideIcon} ${classes.sideIconActiveBar}`}><SvgGear /></div>
+          {[
+            { icon: <SvgBriefcase />, title: "Files" },
+            { icon: <SvgMail />, title: "Inbox" },
+            { icon: <SvgChatBubble />, title: "Channels" },
+            { icon: <SvgCalendar />, title: "Schedules" },
+            { icon: <SvgGear />, title: "Configurations" },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className={`${classes.sideIcon} ${activeSideCol2 === idx ? classes.sideIconActiveBar : ""}`}
+              onClick={() => setActiveSideCol2(idx)}
+              title={item.title}
+            >
+              {item.icon}
+            </div>
+          ))}
           <div className={classes.sidebarSpacer} />
-          <div className={classes.sideIcon}><SvgHelp /></div>
+          <div
+            className={`${classes.sideIcon} ${activeSideCol2 === 5 ? classes.sideIconActiveBar : ""}`}
+            onClick={() => setActiveSideCol2(5)}
+            title="Support"
+          >
+            <SvgHelp />
+          </div>
         </aside>
 
         {/* Content Area */}
@@ -282,27 +332,45 @@ export const WorkspaceDashboardMockup: React.FC = () => {
 
               {/* Attendance Card */}
               <div className={classes.card}>
-                <div className={classes.cardTitleRow}>
+                <div className={classes.cardTitleRow} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <h3 className={classes.cardTitle}>Attendance</h3>
+                  <button
+                    type="button"
+                    onClick={() => setClockedIn(!clockedIn)}
+                    style={{
+                      padding: "2px 8px",
+                      borderRadius: "4px",
+                      fontSize: "10px",
+                      fontWeight: 600,
+                      border: "none",
+                      cursor: "pointer",
+                      backgroundColor: clockedIn ? "#EFF6FF" : "#FEF2F2",
+                      color: clockedIn ? "#0072C4" : "#EF4444",
+                      transition: "all 0.15s ease",
+                    }}
+                    title="Toggle Clock In / Clock Out"
+                  >
+                    {clockedIn ? "Clock Out" : "Clock In"}
+                  </button>
                 </div>
                 <div className={classes.attendanceRow}>
                   <div>
                     <span className={classes.subSmall}>Clock In Time</span>
-                    <div className={classes.clockTime}>9:00 AM</div>
+                    <div className={classes.clockTime}>{clockedIn ? "9:00 AM" : "--:--"}</div>
                   </div>
                   <div className={classes.onTimeCol}>
-                    <div className={classes.onTimeDash}>-</div>
-                    <div className={classes.onTimeText}>On-Time Arrival</div>
+                    <div className={classes.onTimeDash}>{clockedIn ? "-" : "Off"}</div>
+                    <div className={classes.onTimeText}>{clockedIn ? "On-Time Arrival" : "Not Clocked In"}</div>
                   </div>
                 </div>
                 <div>
                   <span className={classes.subSmall}>Not Clocked In</span>
                   <div className={classes.avatarGroup}>
-                    <span className={classes.initialCircle}>G</span>
-                    <span className={classes.initialCircle}>T</span>
-                    <span className={classes.initialCircle}>D</span>
-                    <span className={classes.initialCircle}>F</span>
-                    <span className={classes.plusCircle}>+9</span>
+                    <span className={classes.initialCircle} title="Gowtham (Engineering)">G</span>
+                    <span className={classes.initialCircle} title="Thomas (Product)">T</span>
+                    <span className={classes.initialCircle} title="David (Design)">D</span>
+                    <span className={classes.initialCircle} title="Francis (Marketing)">F</span>
+                    <span className={classes.plusCircle} title="9 other employees">+9</span>
                   </div>
                 </div>
               </div>
@@ -430,7 +498,15 @@ export const WorkspaceDashboardMockup: React.FC = () => {
                 </div>
 
                 {/* Mail Item 1 */}
-                <div className={classes.mailItem}>
+                <div
+                  className={classes.mailItem}
+                  onClick={() => setActiveMailIndex(0)}
+                  style={{
+                    backgroundColor: activeMailIndex === 0 ? "#F8FAFC" : undefined,
+                    borderLeft: activeMailIndex === 0 ? "2px solid #0072C4" : "2px solid transparent",
+                  }}
+                  title="Click to view message"
+                >
                   <div className={classes.mailAvatarFrame}>
                     <AvatarWithFallback
                       src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80"
@@ -452,7 +528,15 @@ export const WorkspaceDashboardMockup: React.FC = () => {
                 </div>
 
                 {/* Mail Item 2 */}
-                <div className={classes.mailItem}>
+                <div
+                  className={classes.mailItem}
+                  onClick={() => setActiveMailIndex(1)}
+                  style={{
+                    backgroundColor: activeMailIndex === 1 ? "#F8FAFC" : undefined,
+                    borderLeft: activeMailIndex === 1 ? "2px solid #0072C4" : "2px solid transparent",
+                  }}
+                  title="Click to view message"
+                >
                   <div className={classes.mailAvatarFrame}>
                     <AvatarWithFallback
                       src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
@@ -474,7 +558,15 @@ export const WorkspaceDashboardMockup: React.FC = () => {
                 </div>
 
                 {/* Mail Item 3 */}
-                <div className={classes.mailItem}>
+                <div
+                  className={classes.mailItem}
+                  onClick={() => setActiveMailIndex(2)}
+                  style={{
+                    backgroundColor: activeMailIndex === 2 ? "#F8FAFC" : undefined,
+                    borderLeft: activeMailIndex === 2 ? "2px solid #0072C4" : "2px solid transparent",
+                  }}
+                  title="Click to view message"
+                >
                   <div className={classes.mailAvatarFrame}>
                     <AvatarWithFallback
                       src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80"
@@ -580,9 +672,24 @@ export const WorkspaceDashboardMockup: React.FC = () => {
                 </div>
 
                 <div className={classes.scheduleGrid}>
-                  {Array.from({ length: 8 }).map((_, i) => (
-                    <div key={i} className={classes.scheduleCell} />
-                  ))}
+                  {Array.from({ length: 8 }).map((_, i) => {
+                    const isSelected = selectedCells.includes(i);
+                    return (
+                      <div
+                        key={i}
+                        className={classes.scheduleCell}
+                        onClick={() =>
+                          setSelectedCells((prev) =>
+                            prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]
+                          )
+                        }
+                        style={{
+                          backgroundColor: isSelected ? "#DBEAFE" : "#FFFFFF",
+                        }}
+                        title={isSelected ? "Booked" : "Available"}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             </div>

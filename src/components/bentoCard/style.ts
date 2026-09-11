@@ -1,70 +1,78 @@
 import { createUseStyles } from "react-jss";
 import { Theme } from "../../theme/themeType";
 
-const colorSchemes: Record<string, { from: string; viaTo: string; borderColor: string; hoverBorder: string; iconBg: string; iconColor: string; iconBorder: string; iconShadow: string; badgeBg: string; badgeColor: string; badgeBorder: string; footerBorder: string; footerColor: string; glowBg: string }> = {
+const colorSchemes: Record<
+  string,
+  {
+    borderColor: string;
+    hoverBorder: string;
+    iconBg: string;
+    iconColor: string;
+    iconBorder: string;
+    iconShadow: string;
+    badgeBg: string;
+    badgeColor: string;
+    badgeBorder: string;
+    footerBorder: string;
+    footerColor: string;
+    glowBg: string;
+  }
+> = {
   blue: {
-    from: "#f0f7ff",
-    viaTo: "rgba(59, 130, 246, 0.04)",
-    borderColor: "rgba(59, 130, 246, 0.25)",
-    hoverBorder: "rgba(59, 130, 246, 0.5)",
+    borderColor: "#E2E8F0",
+    hoverBorder: "rgba(0, 114, 196, 0.45)",
     iconBg: "#FFFFFF",
-    iconColor: "#2563EB",
-    iconBorder: "rgba(59, 130, 246, 0.15)",
-    iconShadow: "rgba(59, 130, 246, 0.1)",
-    badgeBg: "rgba(59, 130, 246, 0.08)",
-    badgeColor: "#2563EB",
-    badgeBorder: "rgba(59, 130, 246, 0.2)",
-    footerBorder: "rgba(59, 130, 246, 0.15)",
-    footerColor: "#1D4ED8",
-    glowBg: "rgba(59, 130, 246, 0.12)",
+    iconColor: "#0072C4",
+    iconBorder: "rgba(0, 114, 196, 0.15)",
+    iconShadow: "rgba(0, 114, 196, 0.08)",
+    badgeBg: "rgba(0, 114, 196, 0.06)",
+    badgeColor: "#0072C4",
+    badgeBorder: "rgba(0, 114, 196, 0.2)",
+    footerBorder: "#F1F5F9",
+    footerColor: "#0072C4",
+    glowBg: "rgba(138, 194, 255, 0.28)", // Mild top-right brand glow matching native card
   },
   purple: {
-    from: "#f8f5ff",
-    viaTo: "rgba(147, 51, 234, 0.04)",
-    borderColor: "rgba(147, 51, 234, 0.25)",
-    hoverBorder: "rgba(147, 51, 234, 0.5)",
+    borderColor: "#E2E8F0",
+    hoverBorder: "rgba(124, 58, 237, 0.45)",
     iconBg: "#FFFFFF",
     iconColor: "#7C3AED",
-    iconBorder: "rgba(147, 51, 234, 0.15)",
-    iconShadow: "rgba(147, 51, 234, 0.1)",
-    badgeBg: "rgba(147, 51, 234, 0.08)",
+    iconBorder: "rgba(124, 58, 237, 0.15)",
+    iconShadow: "rgba(124, 58, 237, 0.08)",
+    badgeBg: "rgba(124, 58, 237, 0.06)",
     badgeColor: "#7C3AED",
-    badgeBorder: "rgba(147, 51, 234, 0.2)",
-    footerBorder: "rgba(147, 51, 234, 0.15)",
+    badgeBorder: "rgba(124, 58, 237, 0.2)",
+    footerBorder: "#F1F5F9",
     footerColor: "#6D28D9",
-    glowBg: "rgba(147, 51, 234, 0.12)",
+    glowBg: "rgba(192, 132, 252, 0.22)", // Mild top-right purple glow
   },
   rose: {
-    from: "#fff2f0",
-    viaTo: "rgba(244, 63, 94, 0.04)",
-    borderColor: "rgba(244, 63, 94, 0.25)",
-    hoverBorder: "rgba(244, 63, 94, 0.5)",
+    borderColor: "#E2E8F0",
+    hoverBorder: "rgba(225, 29, 72, 0.45)",
     iconBg: "#FFFFFF",
     iconColor: "#E11D48",
-    iconBorder: "rgba(244, 63, 94, 0.15)",
-    iconShadow: "rgba(244, 63, 94, 0.1)",
-    badgeBg: "rgba(244, 63, 94, 0.08)",
+    iconBorder: "rgba(225, 29, 72, 0.15)",
+    iconShadow: "rgba(225, 29, 72, 0.08)",
+    badgeBg: "rgba(225, 29, 72, 0.06)",
     badgeColor: "#E11D48",
-    badgeBorder: "rgba(244, 63, 94, 0.2)",
-    footerBorder: "rgba(244, 63, 94, 0.15)",
+    badgeBorder: "rgba(225, 29, 72, 0.2)",
+    footerBorder: "#F1F5F9",
     footerColor: "#BE123C",
-    glowBg: "rgba(244, 63, 94, 0.12)",
+    glowBg: "rgba(251, 113, 133, 0.2)", // Mild top-right rose glow
   },
   emerald: {
-    from: "#f0fbf5",
-    viaTo: "rgba(16, 185, 129, 0.04)",
-    borderColor: "rgba(16, 185, 129, 0.25)",
-    hoverBorder: "rgba(16, 185, 129, 0.5)",
+    borderColor: "#E2E8F0",
+    hoverBorder: "rgba(5, 150, 105, 0.45)",
     iconBg: "#FFFFFF",
     iconColor: "#059669",
-    iconBorder: "rgba(16, 185, 129, 0.15)",
-    iconShadow: "rgba(16, 185, 129, 0.1)",
-    badgeBg: "rgba(16, 185, 129, 0.08)",
+    iconBorder: "rgba(5, 150, 105, 0.15)",
+    iconShadow: "rgba(5, 150, 105, 0.08)",
+    badgeBg: "rgba(5, 150, 105, 0.06)",
     badgeColor: "#059669",
-    badgeBorder: "rgba(16, 185, 129, 0.2)",
-    footerBorder: "rgba(16, 185, 129, 0.15)",
+    badgeBorder: "rgba(5, 150, 105, 0.2)",
+    footerBorder: "#F1F5F9",
     footerColor: "#047857",
-    glowBg: "rgba(16, 185, 129, 0.12)",
+    glowBg: "rgba(52, 211, 153, 0.22)", // Mild top-right emerald glow
   },
 };
 
@@ -77,15 +85,18 @@ export const useStyles = createUseStyles((_theme: Theme) => {
       position: "relative",
       padding: "32px 36px",
       borderRadius: "24px",
-      background: `linear-gradient(135deg, ${scheme.from} 0%, #FFFFFF 50%, ${scheme.viaTo} 100%)`,
+      backgroundColor: "#FFFFFF",
+      background: "linear-gradient(180deg, #FFFFFF 0%, #FAFCFF 100%)",
       border: `1px solid ${scheme.borderColor}`,
+      boxShadow: "0 2px 10px rgba(15, 23, 42, 0.03)",
       transition: "all 0.3s ease",
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
       overflow: "hidden",
       "&:hover": {
-        boxShadow: `0 20px 35px -5px ${scheme.glowBg}, 0 10px 10px -5px rgba(15, 23, 42, 0.04)`,
+        transform: "translateY(-3px)",
+        boxShadow: `0 16px 32px -6px ${scheme.glowBg}, 0 4px 12px -2px rgba(15, 23, 42, 0.04)`,
         borderColor: scheme.hoverBorder,
       },
       "@media (max-width: 768px)": {
@@ -93,20 +104,21 @@ export const useStyles = createUseStyles((_theme: Theme) => {
         borderRadius: "20px",
       },
     };
+    /* Mild top-right ambient glow — matching the native cards aesthetic */
     colorClasses[`glow_${key}`] = {
       position: "absolute",
-      right: "-40px",
-      bottom: "-40px",
-      width: "176px",
-      height: "176px",
+      right: "-48px",
+      top: "-48px",
+      width: "220px",
+      height: "220px",
       background: scheme.glowBg,
       borderRadius: "50%",
-      filter: "blur(40px)",
+      filter: "blur(55px)",
       pointerEvents: "none",
     };
     colorClasses[`iconBox_${key}`] = {
-      width: "56px",
-      height: "56px",
+      width: "52px",
+      height: "52px",
       borderRadius: "16px",
       backgroundColor: scheme.iconBg,
       color: scheme.iconColor,
@@ -122,13 +134,14 @@ export const useStyles = createUseStyles((_theme: Theme) => {
     };
     colorClasses[`badge_${key}`] = {
       fontSize: "12px",
-      fontFamily: "monospace, sans-serif",
-      fontWeight: 700,
+      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+      fontWeight: 600,
       color: scheme.badgeColor,
       backgroundColor: scheme.badgeBg,
       padding: "4px 12px",
       borderRadius: "9999px",
       border: `1px solid ${scheme.badgeBorder}`,
+      letterSpacing: "0.02em",
     };
     colorClasses[`footer_${key}`] = {
       paddingTop: "16px",
@@ -176,7 +189,7 @@ export const useStyles = createUseStyles((_theme: Theme) => {
       borderRadius: "50%",
     },
     footerBadge: {
-      fontFamily: "monospace, sans-serif",
+      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
       padding: "4px 12px",
       borderRadius: "8px",
       fontWeight: 600,

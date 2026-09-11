@@ -242,6 +242,11 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     border: "1px solid #E5E7EB",
     padding: "12px 14px",
     boxSizing: "border-box",
+    transition: "box-shadow 0.2s ease, transform 0.2s ease",
+    "&:hover": {
+      boxShadow: "0 4px 12px rgba(15, 23, 42, 0.05)",
+      transform: "translateY(-1px)",
+    },
   },
 
   // Row with Holiday & Today
@@ -258,6 +263,11 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
+    transition: "box-shadow 0.2s ease, transform 0.2s ease",
+    "&:hover": {
+      boxShadow: "0 4px 12px rgba(239, 68, 68, 0.06)",
+      transform: "translateY(-1px)",
+    },
   },
   kickerLabel: {
     fontSize: "11px",
@@ -390,6 +400,12 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    cursor: "pointer",
+    transition: "transform 0.15s ease",
+    "&:hover": {
+      transform: "translateY(-2px) scale(1.15)",
+      zIndex: 5,
+    },
   },
   plusCircle: {
     width: "22px",
@@ -402,6 +418,11 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    cursor: "pointer",
+    transition: "transform 0.15s ease",
+    "&:hover": {
+      transform: "scale(1.1)",
+    },
   },
 
   // Leave Balance Gauges
@@ -422,6 +443,11 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     flexDirection: "column",
     alignItems: "center",
     gap: "4px",
+    cursor: "pointer",
+    transition: "transform 0.2s ease",
+    "&:hover": {
+      transform: "scale(1.1)",
+    },
   },
   gaugeLabel: {
     fontSize: "10px",
@@ -442,6 +468,11 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     flexDirection: "column",
     alignItems: "center",
     gap: "4px",
+    cursor: "pointer",
+    transition: "transform 0.2s ease",
+    "&:hover": {
+      transform: "translateY(-2px)",
+    },
   },
   memberAvatarFrame: {
     width: "32px",
@@ -449,6 +480,11 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     borderRadius: "50%",
     overflow: "hidden",
     boxShadow: "0 1px 2px rgba(0,0,0,0.08)",
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    "&:hover": {
+      transform: "scale(1.1)",
+      boxShadow: "0 3px 8px rgba(0,0,0,0.12)",
+    },
   },
   memberName: {
     fontSize: "9px",
@@ -472,6 +508,12 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
+    cursor: "pointer",
+    transition: "all 0.15s ease",
+    "&:hover": {
+      transform: "scale(1.08)",
+      backgroundColor: "#EFF6FF",
+    },
   },
 
   // Mail List Items
@@ -486,13 +528,25 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     color: "#9CA3AF",
     cursor: "pointer",
+    transition: "transform 0.15s ease, color 0.15s ease",
+    "&:hover": {
+      transform: "scale(1.2)",
+      color: "#0072C4",
+    },
   },
   mailItem: {
     display: "flex",
     alignItems: "flex-start",
     gap: "10px",
-    padding: "8px 0",
+    padding: "8px 6px",
+    borderRadius: "6px",
     borderBottom: "1px solid #F3F4F6",
+    cursor: "pointer",
+    transition: "all 0.15s ease",
+    "&:hover": {
+      backgroundColor: "#F8FAFC",
+      transform: "translateX(2px)",
+    },
     "&:last-child": {
       borderBottom: "none",
       paddingBottom: 0,
@@ -539,8 +593,15 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     alignItems: "flex-start",
     gap: "10px",
-    padding: "8px 0",
+    padding: "8px 6px",
+    borderRadius: "6px",
     borderBottom: "1px solid #F3F4F6",
+    cursor: "pointer",
+    transition: "all 0.15s ease",
+    "&:hover": {
+      backgroundColor: "#F8FAFC",
+      transform: "translateX(2px)",
+    },
     "&:last-child": {
       borderBottom: "none",
       paddingBottom: 0,
@@ -552,6 +613,10 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     borderRadius: "50%",
     overflow: "hidden",
     flexShrink: 0,
+    transition: "transform 0.2s ease",
+    "&:hover": {
+      transform: "scale(1.1)",
+    },
   },
   announcementBody: {
     flex: 1,
@@ -601,6 +666,11 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     padding: "2px 7px",
     borderRadius: "3px",
     marginTop: "3px",
+    cursor: "pointer",
+    transition: "background-color 0.15s ease",
+    "&:hover": {
+      backgroundColor: "#0052A3",
+    },
   },
 
   // Calendar Schedule Table
@@ -623,6 +693,11 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    cursor: "pointer",
+    transition: "all 0.15s ease",
+    "&:hover": {
+      backgroundColor: "#EFF6FF",
+    },
     "&:last-child": {
       borderRight: "none",
     },
