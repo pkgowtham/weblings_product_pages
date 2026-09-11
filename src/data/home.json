@@ -80,27 +80,49 @@
     }
   },
   "automations": {
+    "badge": "Synchronized Engine",
     "title": "How the Engine Runs Together",
     "subtitle": "Zero third-party duct tape. Everything works out of the box.",
     "items": [
       {
         "num": "01",
         "title": "Zero-Day Onboarding",
-        "description": "Welcome new hires on day one—without the IT wait. Add a new team member in E-Office, and their custom business email is ready in seconds. No more waiting days for Jira access or waiting around for Slack invites just to say hello to teammates. New teammates can jump straight into ongoing projects, join team chats, and start collaborating from their very first hour."
+        "description": "Welcome new hires on day one—without the IT wait. Add a new team member in E-Office, and their custom business email is ready in seconds. No more waiting days for Jira access or waiting around for Slack invites just to say hello to teammates. New teammates can jump straight into ongoing projects, join team chats, and start collaborating from their very first hour.",
+        "statusBadge": "user@company.com provisioned in 1.4s",
+        "statusBadgeColor": "emerald",
+        "footerItems": ["E-Office Sync Live", "Instant MX Binding", "Immediate Project & Chat Access"]
       },
       {
         "num": "02",
         "title": "Instant Team Alignment",
-        "description": "Start a project, and your workspace builds itself. When you kick off a new project, everything your team needs is created automatically. A dedicated agile board appears in Streamline, and a project channel pops up in Chat right away. You can share tasks, trade updates, and celebrate milestones together without ever copying user lists or setting up permissions by hand."
+        "description": "Start a project, and your workspace builds itself. When you kick off a new project, everything your team needs is created automatically. A dedicated agile board appears in Streamline, and a project channel pops up in Chat right away. You can share tasks, trade updates, and celebrate milestones together without ever copying user lists or setting up permissions by hand.",
+        "statusBadge": "Auto-scaffolded Sprint & Channel",
+        "statusBadgeColor": "sky",
+        "footerItems": ["Streamline Agile Board", "Dedicated Project Chat", "Automatic Permission Sync"]
       },
       {
         "num": "03",
         "title": "Unified Team Identity",
-        "description": "Update your profile once, and you're set everywhere. Changed your display name, took a fresh profile picture, or stepped into a new role? Update it once in your account settings, and it instantly refreshes across your company emails, chat messages, ticket assignments, and shared documents. Everyone sees who you are right away—clean, consistent, and effortless."
+        "description": "Update your profile once, and you're set everywhere. Changed your display name, took a fresh profile picture, or stepped into a new role? Update it once in your account settings, and it instantly refreshes across your company emails, chat messages, ticket assignments, and shared documents. Everyone sees who you are right away—clean, consistent, and effortless.",
+        "statusBadge": "Single Source of Truth Profile",
+        "statusBadgeColor": "indigo",
+        "footerItems": ["Global Identity Sync", "Instant Role & Avatar Propagation", "Live Across Mail, Chat, Streamline & E-Office"]
       }
+    ],
+    "hudSystems": [
+      { "abbr": "EO", "name": "E-Office Suite", "status": "Synced • 0ms lag", "color": "sky" },
+      { "abbr": "SL", "name": "Streamline Agile", "status": "Boards Active", "color": "indigo" },
+      { "abbr": "CH", "name": "Weblings Chat", "status": "Encrypted Hub", "color": "blue" },
+      { "abbr": "HR", "name": "Core HRMS", "status": "Single Identity", "color": "teal" }
+    ],
+    "hudEvents": [
+      { "color": "sky", "text": "Provisioning user@company.com: MX, DNS & IMAP bound." },
+      { "color": "indigo", "text": "Scaffolded sprint: Streamline Board + Project Chat." },
+      { "color": "teal", "text": "Profile update broadcast: Global identity synchronized across all apps." }
     ]
   },
   "mobileApps": {
+    "badge": "Native Ecosystem",
     "title": "Stay in the Loop Anywhere",
     "description": "Dedicated mobile apps available on both iOS and Android. Whether you are on the floor, traveling between branches, or stepping away from your desk, critical updates reach you the second they happen.",
     "cards": [
@@ -112,17 +134,39 @@
         "badges": [
           "iOS App",
           "Android App"
-        ]
+        ],
+        "phoneVariant": "light",
+        "phoneNotification": {
+          "icon": "✓",
+          "title": "Leave Request Approved",
+          "subtitle": "Alex Miller • 2 Days Annual Leave",
+          "time": "Just now"
+        },
+        "phoneFeed": {
+          "text": "#sprint-retro scheduled",
+          "time": "2:30 PM"
+        }
       },
       {
         "id": "trendingUp",
         "title": "Real-Time Oversight on the Go",
         "target": "For Founders & Executives",
-        "description": "Stay tuned to your company’s pulse without checking a laptop. Receive instant alerts on high-priority milestones, cross-branch storage limits, critical system alerts, and headcount changes across every location right on your phone.",
+        "description": "Stay tuned to your company's pulse without checking a laptop. Receive instant alerts on high-priority milestones, cross-branch storage limits, critical system alerts, and headcount changes across every location right on your phone.",
         "badges": [
           "iOS App",
           "Android App"
-        ]
+        ],
+        "phoneVariant": "dark",
+        "phoneNotification": {
+          "icon": "⚡",
+          "title": "Branch Telemetry Normal",
+          "subtitle": "4 Active Locations • 99.99% Uptime",
+          "time": "Live Feed"
+        },
+        "phoneFeed": {
+          "text": "Cluster Latency",
+          "time": "18ms (Global CDN)"
+        }
       }
     ]
   },
