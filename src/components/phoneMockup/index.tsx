@@ -18,7 +18,7 @@ interface PhoneFeed {
 }
 
 interface PhoneMockupProps {
-  variant?: "dashboard" | "attendance" | "light" | "dark";
+  variant?: "dashboard" | "attendance" | "light" | "dark" | "mail";
   notification?: PhoneNotification;
   feed?: PhoneFeed;
 }
@@ -55,11 +55,15 @@ const BatteryIcon: React.FC = () => (
 const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
   const classes = useStyles();
   const isAttendance = variant === "attendance" || variant === "dark";
+  const isMail = variant === "mail";
 
   // Interactive local states for high delight
   const [clockedIn, setClockedIn] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<string>(isAttendance ? "eoffice" : "dash");
+  const [activeTab, setActiveTab] = useState<string>(
+    isMail ? "mail" : isAttendance ? "eoffice" : "dash"
+  );
   const [activeDay, setActiveDay] = useState<number>(1); // Monday selected
+  const [selectedEmail, setSelectedEmail] = useState<number>(0);
 
   return (
     <div className={classes.frame}>
@@ -88,7 +92,99 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
 
         {/* Scrollable Screen Content */}
         <div className={classes.screenContent}>
-          {isAttendance ? (
+          {activeTab === "mail" ? (
+            /* ─────────────────────────────────────────────────────────────
+               SCREEN: WEBLINGS ENTERPRISE MAIL INBOX
+               ───────────────────────────────────────────────────────────── */
+            <>
+              {/* App Bar */}
+              <div className={classes.mailAppHeader}>
+                <div className={classes.mailHeaderTitleRow}>
+                  <h3 className={classes.mailHeaderTitle}>Inbox</h3>
+                  <span className={classes.mailUnreadBadge}>3</span>
+                </div>
+                <div className={classes.mailUserAvatar} title="Alex Smith">
+                  <span>AS</span>
+                </div>
+              </div>
+
+              {/* Search Bar */}
+              <div className={classes.mailSearchBar}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <span>Search messages, tags...</span>
+              </div>
+
+              {/* Mail list */}
+              <div className={classes.mailListWrapper}>
+                {/* Email 1 */}
+                <div
+                  className={selectedEmail === 0 ? classes.mailPhoneCardActive : classes.mailPhoneCard}
+                  onClick={() => setSelectedEmail(0)}
+                >
+                  {selectedEmail === 0 && <div className={classes.mailActiveBar} />}
+                  <div className={classes.mailPhoneCardHeader}>
+                    <span className={classes.mailPhoneSender}>Sarah Jenkins</span>
+                    <span className={classes.mailPhoneTime}>10:42 AM</span>
+                  </div>
+                  <div className={classes.mailPhoneSubject}>Final 4K Rendering Assets</div>
+                  <p className={classes.mailPhoneSnippet}>Here are the final heavy assets for the brand presentation...</p>
+                </div>
+
+                {/* Email 2 */}
+                <div
+                  className={selectedEmail === 1 ? classes.mailPhoneCardActive : classes.mailPhoneCard}
+                  onClick={() => setSelectedEmail(1)}
+                >
+                  {selectedEmail === 1 && <div className={classes.mailActiveBar} />}
+                  <div className={classes.mailPhoneCardHeader}>
+                    <span className={classes.mailPhoneSender}>HR Automations</span>
+                    <span className={classes.mailPhoneTimeMuted}>Yesterday</span>
+                  </div>
+                  <div className={classes.mailPhoneSubject}>Welcome to the team!</div>
+                  <p className={classes.mailPhoneSnippet}>Your custom business email and Worksuite profile are active.</p>
+                </div>
+
+                {/* Email 3 */}
+                <div
+                  className={selectedEmail === 2 ? classes.mailPhoneCardActive : classes.mailPhoneCard}
+                  onClick={() => setSelectedEmail(2)}
+                >
+                  {selectedEmail === 2 && <div className={classes.mailActiveBar} />}
+                  <div className={classes.mailPhoneCardHeader}>
+                    <span className={classes.mailPhoneSender}>Billing Dept</span>
+                    <span className={classes.mailPhoneTimeMuted}>Oct 12</span>
+                  </div>
+                  <div className={classes.mailPhoneSubject}>Invoice #40291 Paid</div>
+                  <p className={classes.mailPhoneSnippet}>Your subscription receipt for Weblings Enterprise Worksuite is ready.</p>
+                </div>
+
+                {/* Email 4 */}
+                <div
+                  className={selectedEmail === 3 ? classes.mailPhoneCardActive : classes.mailPhoneCard}
+                  onClick={() => setSelectedEmail(3)}
+                >
+                  {selectedEmail === 3 && <div className={classes.mailActiveBar} />}
+                  <div className={classes.mailPhoneCardHeader}>
+                    <span className={classes.mailPhoneSender}>Streamline AI</span>
+                    <span className={classes.mailPhoneTimeMuted}>Oct 10</span>
+                  </div>
+                  <div className={classes.mailPhoneSubject}>Weekly Sprint Summary</div>
+                  <p className={classes.mailPhoneSnippet}>All 24 tickets in Sprint 32 were closed without blockers.</p>
+                </div>
+
+                {/* Compose FAB */}
+                <button className={classes.mailComposeFab} title="Compose New Email">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                </button>
+              </div>
+            </>
+          ) : isAttendance ? (
             /* ─────────────────────────────────────────────────────────────
                SCREEN 1: ATTENDANCE & E-OFFICE (From User Image 1)
                ───────────────────────────────────────────────────────────── */
