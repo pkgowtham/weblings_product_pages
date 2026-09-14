@@ -34,6 +34,53 @@ const SvgStar = () => (
   </svg>
 );
 
+const SvgChevronLeft = ({ width = 14, height = 14 }: { width?: number; height?: number }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="15 18 9 12 15 6" />
+  </svg>
+);
+
+const SvgChevronRight = ({ width = 14, height = 14 }: { width?: number; height?: number }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="9 18 15 12 9 6" />
+  </svg>
+);
+
+const SvgPlus = ({ width = 14, height = 14 }: { width?: number; height?: number }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <line x1="5" y1="12" x2="19" y2="12" />
+  </svg>
+);
+
+const SvgClose = ({ width = 14, height = 14 }: { width?: number; height?: number }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+
+const SvgClock = ({ width = 14, height = 14 }: { width?: number; height?: number }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
+const SvgVideoCamera = ({ width = 14, height = 14 }: { width?: number; height?: number }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="23 7 16 12 23 17 23 7" />
+    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+  </svg>
+);
+
+const SvgArrowRight = ({ width = 14, height = 14 }: { width?: number; height?: number }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+);
+
 interface CalendarEventItem {
   id: string;
   day: number;
@@ -197,7 +244,10 @@ const CalenderFeature = () => {
   // Create new event handler
   const handleCreateEvent = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newTitle.trim()) return;
+    if (!newTitle.trim()) {
+      setIsModalOpen(false);
+      return;
+    }
 
     const created: CalendarEventItem = {
       id: `user-evt-${Date.now()}`,
@@ -211,7 +261,7 @@ const CalenderFeature = () => {
 
     setEventsList((prev) => [...prev, created]);
     setSelectedDay(created.day);
-    setSelectedEvent(created);
+    setSelectedEvent(null);
     setNewTitle('');
     setIsModalOpen(false);
   };
@@ -301,7 +351,7 @@ const CalenderFeature = () => {
                     className={classes.monthNavBtn}
                     onClick={handlePrevMonth}
                   >
-                    ‹
+                    <SvgChevronLeft width={14} height={14} />
                   </button>
                   <h2 className={classes.filterMonthTitle}>{monthsList[monthIdx]}</h2>
                   <button
@@ -310,7 +360,7 @@ const CalenderFeature = () => {
                     className={classes.monthNavBtn}
                     onClick={handleNextMonth}
                   >
-                    ›
+                    <SvgChevronRight width={14} height={14} />
                   </button>
                   <button
                     type="button"
@@ -351,9 +401,8 @@ const CalenderFeature = () => {
                     tabIndex={0}
                   >
                     <div
-                      className={`${classes.toggleSwitch} ${
-                        showStreamline ? classes.switchStreamlineOn : classes.switchOff
-                      }`}
+                      className={`${classes.toggleSwitch} ${showStreamline ? classes.switchStreamlineOn : classes.switchOff
+                        }`}
                     >
                       <div className={classes.toggleKnob} />
                     </div>
@@ -377,9 +426,8 @@ const CalenderFeature = () => {
                     tabIndex={0}
                   >
                     <div
-                      className={`${classes.toggleSwitch} ${
-                        showCalls ? classes.switchCallsOn : classes.switchOff
-                      }`}
+                      className={`${classes.toggleSwitch} ${showCalls ? classes.switchCallsOn : classes.switchOff
+                        }`}
                     >
                       <div className={classes.toggleKnob} />
                     </div>
@@ -403,9 +451,8 @@ const CalenderFeature = () => {
                     tabIndex={0}
                   >
                     <div
-                      className={`${classes.toggleSwitch} ${
-                        showCustom ? classes.switchCustomOn : classes.switchOff
-                      }`}
+                      className={`${classes.toggleSwitch} ${showCustom ? classes.switchCustomOn : classes.switchOff
+                        }`}
                     >
                       <div className={classes.toggleKnob} />
                     </div>
@@ -432,7 +479,8 @@ const CalenderFeature = () => {
                   setIsModalOpen(true);
                 }}
               >
-                <span>+</span> New Event
+                <SvgPlus width={13} height={13} />
+                <span>New Event</span>
               </button>
             </div>
 
@@ -581,13 +629,12 @@ const CalenderFeature = () => {
                       <div key={cIdx} className={classes.weekCell}>
                         {cIdx + 2 === slot.col && (
                           <div
-                            className={`${classes.eventPill} ${
-                              slot.cat === 'streamline'
-                                ? classes.eventPillBlue
-                                : slot.cat === 'call'
+                            className={`${classes.eventPill} ${slot.cat === 'streamline'
+                              ? classes.eventPillBlue
+                              : slot.cat === 'call'
                                 ? classes.eventPillRose
                                 : classes.eventPillAmber
-                            }`}
+                              }`}
                             onClick={() =>
                               setSelectedEvent({
                                 id: `week-${sIdx}`,
@@ -621,21 +668,21 @@ const CalenderFeature = () => {
                         selectedEvent.category === 'streamline'
                           ? 'rgba(0, 114, 196, 0.12)'
                           : selectedEvent.category === 'call'
-                          ? 'rgba(225, 29, 72, 0.12)'
-                          : 'rgba(245, 158, 11, 0.12)',
+                            ? 'rgba(225, 29, 72, 0.12)'
+                            : 'rgba(245, 158, 11, 0.12)',
                       color:
                         selectedEvent.category === 'streamline'
                           ? '#0072C4'
                           : selectedEvent.category === 'call'
-                          ? '#E11D48'
-                          : '#D97706',
+                            ? '#E11D48'
+                            : '#D97706',
                     }}
                   >
                     {selectedEvent.category === 'streamline'
                       ? 'STREAMLINE TICKET'
                       : selectedEvent.category === 'call'
-                      ? 'TEAM CHAT CALL'
-                      : 'CUSTOM EVENT'}
+                        ? 'TEAM CHAT CALL'
+                        : 'CUSTOM EVENT'}
                   </span>
                   <button
                     type="button"
@@ -643,13 +690,14 @@ const CalenderFeature = () => {
                     onClick={() => setSelectedEvent(null)}
                     aria-label="Close"
                   >
-                    ✕
+                    <SvgClose width={14} height={14} />
                   </button>
                 </div>
 
                 <h4 className={classes.inspectorTitle}>{selectedEvent.title}</h4>
                 <div className={classes.inspectorTimeText}>
-                  <span>🕒 {selectedEvent.time}</span>
+                  <SvgClock width={14} height={14} />
+                  <span>{selectedEvent.time}</span>
                   <span>• Day {selectedEvent.day}</span>
                 </div>
 
@@ -676,11 +724,20 @@ const CalenderFeature = () => {
                     type="button"
                     className={classes.actionBtnPrimary}
                     onClick={() => {
-                      alert(`Opening "${selectedEvent.title}" in Weblings Worksuite...`);
                       setSelectedEvent(null);
                     }}
                   >
-                    {selectedEvent.category === 'streamline' ? 'Open in Streamline →' : 'Join Video Call 🎥'}
+                    {selectedEvent.category === 'streamline' ? (
+                      <>
+                        <span>Open in Streamline</span>
+                        <SvgArrowRight width={13} height={13} />
+                      </>
+                    ) : (
+                      <>
+                        <SvgVideoCamera width={14} height={14} />
+                        <span>Join Video Call</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
@@ -697,7 +754,7 @@ const CalenderFeature = () => {
                     onClick={() => setIsModalOpen(false)}
                     aria-label="Close"
                   >
-                    ✕
+                    <SvgClose width={14} height={14} />
                   </button>
                 </div>
 
@@ -723,7 +780,8 @@ const CalenderFeature = () => {
                         className={classes.quickPill}
                         onClick={() => setNewTitle(sug)}
                       >
-                        +{sug}
+                        <SvgPlus width={10} height={10} />
+                        <span>{sug}</span>
                       </span>
                     ))}
                   </div>
@@ -897,33 +955,29 @@ const CalenderFeature = () => {
               {/* Tag Chips */}
               <div className={classes.tagChipsRow}>
                 <span
-                  className={`${classes.tagChip} ${
-                    activeTags['Urgent Deliverables'] ? classes.tagRose : classes.tagMuted
-                  }`}
+                  className={`${classes.tagChip} ${activeTags['Urgent Deliverables'] ? classes.tagRose : classes.tagMuted
+                    }`}
                   onClick={() => toggleTag('Urgent Deliverables')}
                 >
                   Urgent Deliverables
                 </span>
                 <span
-                  className={`${classes.tagChip} ${
-                    activeTags['Q3 Roadmap'] ? classes.tagIndigo : classes.tagMuted
-                  }`}
+                  className={`${classes.tagChip} ${activeTags['Q3 Roadmap'] ? classes.tagIndigo : classes.tagMuted
+                    }`}
                   onClick={() => toggleTag('Q3 Roadmap')}
                 >
                   Q3 Roadmap
                 </span>
                 <span
-                  className={`${classes.tagChip} ${
-                    activeTags['HR & Offboarding'] ? classes.tagEmerald : classes.tagMuted
-                  }`}
+                  className={`${classes.tagChip} ${activeTags['HR & Offboarding'] ? classes.tagEmerald : classes.tagMuted
+                    }`}
                   onClick={() => toggleTag('HR & Offboarding')}
                 >
                   HR & Offboarding
                 </span>
                 <span
-                  className={`${classes.tagChip} ${
-                    activeTags['Internal Syncs (Hidden)'] ? classes.tagPurple : classes.tagMuted
-                  }`}
+                  className={`${classes.tagChip} ${activeTags['Internal Syncs (Hidden)'] ? classes.tagPurple : classes.tagMuted
+                    }`}
                   onClick={() => toggleTag('Internal Syncs (Hidden)')}
                 >
                   Internal Syncs
@@ -971,7 +1025,7 @@ const CalenderFeature = () => {
             <p className={classes.sectionDescription}>{mobile.description}</p>
           </div>
 
-          <div className={classes.twoCardGrid}>
+          {/* <div className={classes.twoCardGrid}>
             {mobile.cards.map((card: any) => {
               const isCardHovered = hoveredMobileCard === card.id;
               return (
@@ -1004,7 +1058,7 @@ const CalenderFeature = () => {
                 </div>
               );
             })}
-          </div>
+          </div> */}
 
           {/* Dedicated Centered Mobile Download Area */}
           <div className={classes.mobileDownloadCard}>

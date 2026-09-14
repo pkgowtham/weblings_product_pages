@@ -164,8 +164,6 @@ const VideoOffSvg: React.FC<{ size?: number; color?: string }> = ({ size = 16, c
 export const ConnectMockup: React.FC = () => {
   const classes = useStyles();
 
-  // Active Center Speaker ID (default Alex Smith)
-  const [activeSpeakerId, setActiveSpeakerId] = useState<string>('speaker-1');
 
   // Participants in the meeting
   const [participants, setParticipants] = useState<Participant[]>([
@@ -190,11 +188,11 @@ export const ConnectMockup: React.FC = () => {
   const [inviteInput, setInviteInput] = useState<string>('');
   const [activeNavTab, setActiveNavTab] = useState<string>('chat');
 
-  // Active speaker details
-  const activeSpeaker = participants.find((p) => p.id === activeSpeakerId) || participants[0];
+  // Active speaker details (Alex Smith is the permanent host/speaker at the center)
+  const activeSpeaker = participants.find((p) => p.id === 'speaker-1') || participants[0];
 
-  // Satellite participants (all except the current active speaker)
-  const satellites = participants.filter((p) => p.id !== activeSpeakerId);
+  // Satellite participants (arranged in the radial circle around Alex)
+  const satellites = participants.filter((p) => p.id !== 'speaker-1');
 
   // Filtered participants in sidebar
   const filteredParticipants = participants.filter((p) =>
@@ -205,6 +203,13 @@ export const ConnectMockup: React.FC = () => {
     if (e) e.stopPropagation();
     setParticipants((prev) =>
       prev.map((p) => (p.id === id ? { ...p, isMuted: !p.isMuted } : p))
+    );
+  };
+
+  const handleTogglePin = (id: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setParticipants((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, isPinned: !p.isPinned } : p))
     );
   };
 
@@ -240,7 +245,7 @@ export const ConnectMockup: React.FC = () => {
             type="button"
             className={classes.bellBtn}
             title="Notifications"
-            onClick={() => alert("All notifications are clear.")}
+            onClick={() => {}}
           >
             {/* Bell SVG */}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -361,7 +366,7 @@ export const ConnectMockup: React.FC = () => {
             <button
               type="button"
               className={classes.railNavItem}
-              onClick={() => alert("Settings opened")}
+              onClick={() => {}}
               title="Settings"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -374,7 +379,7 @@ export const ConnectMockup: React.FC = () => {
             <button
               type="button"
               className={classes.railNavItem}
-              onClick={() => alert("Weblings Help Center")}
+              onClick={() => {}}
               title="Help"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -447,8 +452,8 @@ export const ConnectMockup: React.FC = () => {
                 key={participant.id}
                 className={classes.satelliteNode}
                 style={{ top: participant.topPct, left: participant.leftPct }}
-                onClick={() => setActiveSpeakerId(participant.id)}
-                title={`Click to set ${participant.name} as active speaker`}
+                onClick={(e) => handleTogglePin(participant.id, e)}
+                title={`Click to ${participant.isPinned ? 'unpin' : 'pin'} ${participant.name}`}
               >
                 {participant.isPinned ? (
                   /* Special Pinned Split Avatar (as seen on bottom-right participant in screenshot) */
@@ -563,7 +568,7 @@ export const ConnectMockup: React.FC = () => {
                     <div className={classes.peopleLeft}>
                       <div className={classes.peopleAvatar}>{p.initials}</div>
                       <span className={classes.peopleName}>
-                        {p.name} {p.id === activeSpeakerId && ' (Host)'}
+                        {p.name} {p.isHost && ' (Host)'}
                       </span>
                     </div>
 
@@ -581,18 +586,16 @@ export const ConnectMockup: React.FC = () => {
                         )}
                       </button>
 
-                      <button
-                        type="button"
-                        className={classes.actionDotsBtn}
-                        onClick={() => setActiveSpeakerId(p.id)}
-                        title="Set active speaker"
-                      >
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                          <circle cx="12" cy="5" r="2" />
-                          <circle cx="12" cy="12" r="2" />
-                          <circle cx="12" cy="19" r="2" />
-                        </svg>
-                      </button>
+                      {!p.isHost && (
+                        <button
+                          type="button"
+                          className={classes.actionDotsBtn}
+                          onClick={(e) => handleTogglePin(p.id, e)}
+                          title={p.isPinned ? "Unpin participant" : "Pin participant"}
+                        >
+                          <PinSvg size={13} color={p.isPinned ? "#0072C4" : "#94A3B8"} />
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -694,7 +697,7 @@ export const ConnectMockup: React.FC = () => {
           <button
             type="button"
             className={classes.endCallBtn}
-            onClick={() => alert("Meeting ended. Live transcript saved to Streamline & Drive.")}
+            onClick={() => {}}
             title="Leave Meeting"
           >
             {/* Phone Off SVG */}
@@ -708,7 +711,7 @@ export const ConnectMockup: React.FC = () => {
           <button
             type="button"
             className={classes.controlPillBtn}
-            onClick={() => alert("Toggled Fullscreen mode")}
+            onClick={() => {}}
             title="Fullscreen"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -726,7 +729,7 @@ export const ConnectMockup: React.FC = () => {
           <button
             type="button"
             className={classes.dockUtilBtn}
-            onClick={() => alert("Meeting ID: WEBLINGS-748-921\nPasscode: 981240\nServer: US-East Edge (8.2ms)")}
+            onClick={() => {}}
             title="Meeting Details"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -740,7 +743,7 @@ export const ConnectMockup: React.FC = () => {
           <button
             type="button"
             className={classes.dockUtilBtn}
-            onClick={() => alert("Chat drawer: 0 unread messages in #client-onboarding")}
+            onClick={() => {}}
             title="In-meeting Chat"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">

@@ -8,16 +8,15 @@ import PhoneMockup from '../../../../../components/phoneMockup';
 import AppStoreButtons from '../../../../../components/appStoreButtons';
 import {
   ConnectIcon,
-  GlobeIcon,
-  BoltIcon,
-  FolderIcon,
-  BrainIcon,
-  SearchIcon,
-  SmartphoneIcon,
-  TrendingUpIcon,
-  BuildingIcon,
-  LockIcon,
-  ShieldLockIcon,
+  EdgeRoutingIcon,
+  SimulcastVideoIcon,
+  ProjectChannelsIcon,
+  ConversionIcon,
+  SearchProofIcon,
+  MonitorPipIcon,
+  ScreenRecordIcon,
+  BranchPrivacyIcon,
+  DataRetentionIcon,
 } from '../../../../../assets/icons_component';
 
 // Apple & Android Store SVGs
@@ -39,6 +38,16 @@ const SvgStar: React.FC = () => (
   </svg>
 );
 
+// Global Edge PoPs for Interactive Network Telemetry
+const POP_NODES = [
+  { id: 'sfo', name: 'SFO', latency: '12ms', x: 62, y: 55, region: 'US West' },
+  { id: 'nyc', name: 'NYC', latency: '14ms', x: 210, y: 28, region: 'US East' },
+  { id: 'lon', name: 'LON', latency: '19ms', x: 358, y: 55, region: 'EU West' },
+  { id: 'fra', name: 'FRA', latency: '22ms', x: 352, y: 198, region: 'EU Central' },
+  { id: 'sin', name: 'SIN', latency: '24ms', x: 210, y: 232, region: 'AP South' },
+  { id: 'tyo', name: 'TYO', latency: '28ms', x: 68, y: 198, region: 'AP East' },
+];
+
 const ConnectFeature: React.FC = () => {
   const classes = useStyles();
 
@@ -55,6 +64,9 @@ const ConnectFeature: React.FC = () => {
   const [hoveredInfraCard, setHoveredInfraCard] = useState<string | null>(null);
   const [hoveredAiCard, setHoveredAiCard] = useState<string | null>(null);
   const [hoveredUsageCard, setHoveredUsageCard] = useState<string | null>(null);
+  const [activePopId, setActivePopId] = useState<string | null>(null);
+
+  const activePop = POP_NODES.find((p) => p.id === activePopId);
 
   // Split title and accent for Hero
   const titleParts = heroData.title.split('\n');
@@ -78,41 +90,43 @@ const ConnectFeature: React.FC = () => {
             <span className={classes.eyebrowText}>{heroData.subtitle}</span>
           </div>
 
-          {/* Heading */}
+          {/* Dynamic Two-Tone Title */}
           <h1 className={classes.heroTitle}>
-            {mainTitle} <span className={classes.heroTitleAccent}>{accentTitle}</span>
+            {mainTitle}{' '}
+            <span className={classes.heroTitleAccent}>{accentTitle}</span>
           </h1>
 
-          {/* Paragraph */}
+          {/* Subtitle */}
           <p className={classes.heroParagraph}>{heroData.content}</p>
 
-          {/* Primary CTA */}
-          <button className={classes.heroCtaButton}>
-            <span>{heroData.action[0]?.label || 'Deploy Team Chat'}</span>
-          </button>
+          {/* CTA Action */}
+          <div>
+            <button className={classes.heroCtaButton}>
+              {heroData.action[0]?.label || 'Deploy Team Chat'}
+            </button>
+          </div>
         </div>
 
-        {/* ───────────────────────────────────────────────────────────────── */}
-        {/* INTERACTIVE CONNECT WEB MOCKUP (REPRODUCING USER IMAGE FIDELITY) */}
-        {/* ───────────────────────────────────────────────────────────────── */}
+        {/* Interactive Desktop Canvas Mockup (Voice & Video Active Call) */}
         <div className={classes.mockupWrapper}>
           <ConnectMockup />
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* ─────────────────────────────────────────────────────────────────── */}
       {/* SECTION 1: INTERNET-SCALE INFRASTRUCTURE */}
       {/* ─────────────────────────────────────────────────────────────────── */}
       <section className={classes.sectionContainer}>
         <div className={classes.infraSplit}>
-          {/* Left Column: Cards */}
-          <div>
-            <div className={classes.kicker}>Internet-Scale Infrastructure</div>
-            <h2 className={classes.sectionTitle}>Built on the Backbone of the Modern Internet.</h2>
-            <p className={classes.sectionDescription} style={{ marginBottom: 28 }}>
-              A chat app is useless if it drops connections. We engineered our communications architecture on a global edge network to deliver flawless, uninterrupted reliability.
-            </p>
+          {/* Left Column: Header & Cards with clean alignment */}
+          <div className={classes.infraLeftCol}>
+            <div>
+              <div className={classes.kicker}>Internet-Scale Infrastructure</div>
+              <h2 className={classes.sectionTitle}>Built on the Backbone of the Modern Internet.</h2>
+              <p className={classes.sectionDescription} style={{ marginBottom: 28 }}>
+                A chat app is useless if it drops connections. We engineered our communications architecture on a global edge network to deliver flawless, uninterrupted reliability.
+              </p>
+            </div>
 
             <div className={classes.infraCardsList}>
               {/* Card 1: Edge Routing */}
@@ -122,7 +136,7 @@ const ConnectFeature: React.FC = () => {
                 onMouseLeave={() => setHoveredInfraCard(null)}
               >
                 <div className={classes.infraIconBox}>
-                  <GlobeIcon width={24} height={24} isHovered={hoveredInfraCard === 'edge'} />
+                  <EdgeRoutingIcon width={26} height={26} isHovered={hoveredInfraCard === 'edge'} />
                 </div>
                 <div>
                   <h3 className={classes.infraCardTitle}>Ultra-Low Latency Edge Routing</h3>
@@ -139,7 +153,7 @@ const ConnectFeature: React.FC = () => {
                 onMouseLeave={() => setHoveredInfraCard(null)}
               >
                 <div className={classes.infraIconBox}>
-                  <BoltIcon width={24} height={24} isHovered={hoveredInfraCard === 'simulcast'} />
+                  <SimulcastVideoIcon width={26} height={26} isHovered={hoveredInfraCard === 'simulcast'} />
                 </div>
                 <div>
                   <h3 className={classes.infraCardTitle}>Simulcast Video Scaling</h3>
@@ -156,7 +170,7 @@ const ConnectFeature: React.FC = () => {
                 onMouseLeave={() => setHoveredInfraCard(null)}
               >
                 <div className={classes.infraIconBox}>
-                  <FolderIcon width={24} height={24} isHovered={hoveredInfraCard === 'channels'} />
+                  <ProjectChannelsIcon width={26} height={26} isHovered={hoveredInfraCard === 'channels'} />
                 </div>
                 <div>
                   <h3 className={classes.infraCardTitle}>Zero-Setup Project Channels</h3>
@@ -168,20 +182,279 @@ const ConnectFeature: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Global Edge Topology Graphic */}
+          {/* Right Column: High Quality Animated Global Edge Network Graphic */}
           <div className={classes.networkGraphicCard}>
-            <div className={classes.networkAmbientPulse} />
-            <div className={classes.networkRingOuter} />
-            <div className={classes.networkRingInner} />
-
-            <div className={classes.networkCenterNode}>
-              <div className={classes.networkGlobeIconWrap}>
-                <GlobeIcon width={38} height={38} isHovered={true} />
+            {/* Top Telemetry Header */}
+            <div className={classes.networkHeaderRow}>
+              <div className={classes.networkLiveTag}>
+                <span className={classes.networkLiveDot} />
+                <span>Live Edge Fabric</span>
               </div>
-              <h3 className={classes.networkNodeTitle}>GLOBAL EDGE NETWORK</h3>
-              <span className={classes.networkNodeSubtitle}>WebSockets &amp; WebRTC Active</span>
+              <div className={classes.networkHeaderRight}>
+                {activePop ? (
+                  <span style={{ color: '#10B981' }}>
+                    {activePop.name} NODE &bull; {activePop.latency} ({activePop.region})
+                  </span>
+                ) : (
+                  <span>140+ Anycast PoPs Active</span>
+                )}
+              </div>
             </div>
 
+            {/* High-Tech Animated Telemetry Canvas */}
+            <div className={classes.networkCanvasWrap}>
+              <svg
+                viewBox="0 0 420 260"
+                style={{ width: '100%', height: '100%', overflow: 'visible' }}
+              >
+                <defs>
+                  {/* Subtle Grid Pattern */}
+                  <pattern id="telemetryGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#38BDF8" strokeWidth="0.5" strokeOpacity="0.08" />
+                  </pattern>
+
+                  {/* Radial Core Glow */}
+                  <radialGradient id="coreGlowGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.35" />
+                    <stop offset="60%" stopColor="#0284C7" stopOpacity="0.15" />
+                    <stop offset="100%" stopColor="#0B132B" stopOpacity="0" />
+                  </radialGradient>
+
+                  {/* Radar Scanner Sweep Gradient */}
+                  <radialGradient id="radarSweepGrad" cx="0%" cy="0%" r="100%">
+                    <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="#38BDF8" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+
+                <style>{`
+                  @keyframes radarSweepSpin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                  }
+                  @keyframes sonarPulse1 {
+                    0% { r: 35px; opacity: 0.8; }
+                    100% { r: 125px; opacity: 0; }
+                  }
+                  @keyframes sonarPulse2 {
+                    0% { r: 35px; opacity: 0.8; }
+                    100% { r: 125px; opacity: 0; }
+                  }
+                  @keyframes beamFlowDash {
+                    from { stroke-dashoffset: 24; }
+                    to { stroke-dashoffset: 0; }
+                  }
+                  @keyframes ringSpinCW {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                  }
+                  @keyframes ringSpinCCW {
+                    from { transform: rotate(360deg); }
+                    to { transform: rotate(0deg); }
+                  }
+                  @keyframes popPingAnim {
+                    0%, 100% { r: 4.5px; opacity: 0.8; }
+                    50% { r: 9px; opacity: 0.2; }
+                  }
+                  .radar-cone {
+                    transform-origin: 210px 130px;
+                    animation: radarSweepSpin 6s linear infinite;
+                  }
+                  .sonar-wave-1 {
+                    animation: sonarPulse1 4s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+                  }
+                  .sonar-wave-2 {
+                    animation: sonarPulse2 4s cubic-bezier(0.2, 0.8, 0.4, 1) 2s infinite;
+                  }
+                  .telemetry-beam {
+                    animation: beamFlowDash 1.2s linear infinite;
+                  }
+                  .center-ring-cw {
+                    transform-origin: 210px 130px;
+                    animation: ringSpinCW 18s linear infinite;
+                  }
+                  .center-ring-ccw {
+                    transform-origin: 210px 130px;
+                    animation: ringSpinCCW 24s linear infinite;
+                  }
+                  .pop-ping {
+                    animation: popPingAnim 2s ease-in-out infinite;
+                  }
+                  .pop-chip {
+                    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease;
+                    cursor: pointer;
+                  }
+                  .pop-chip:hover {
+                    transform: scale(1.08);
+                    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
+                  }
+                `}</style>
+
+                {/* Cybernetic Background Grid */}
+                <rect width="420" height="260" fill="url(#telemetryGrid)" />
+
+                {/* Radar Sweep Arc Beam */}
+                <path
+                  className="radar-cone"
+                  d="M 210 130 L 330 70 A 130 130 0 0 0 210 0 Z"
+                  fill="url(#radarSweepGrad)"
+                  pointerEvents="none"
+                />
+
+                {/* Expanding Sonar Radar Waves */}
+                <circle cx="210" cy="130" className="sonar-wave-1" fill="none" stroke="#38BDF8" strokeWidth="1" />
+                <circle cx="210" cy="130" className="sonar-wave-2" fill="none" stroke="#0072C4" strokeWidth="1" />
+
+                {/* Concentric Guide Orbit Rings */}
+                <circle cx="210" cy="130" r="50" fill="none" stroke="#1E3A8A" strokeWidth="1" strokeDasharray="3 4" opacity="0.6" />
+                <circle cx="210" cy="130" r="92" fill="none" stroke="#1E293B" strokeWidth="1" strokeDasharray="4 6" opacity="0.8" />
+                <circle cx="210" cy="130" r="126" fill="none" stroke="#1E293B" strokeWidth="1" opacity="0.4" />
+
+                {/* Central Halo Glow */}
+                <circle cx="210" cy="130" r="60" fill="url(#coreGlowGrad)" pointerEvents="none" />
+
+                {/* Telemetry Connecting Lines & Animated Beams */}
+                {POP_NODES.map((node) => {
+                  const isNodeActive = activePopId === node.id;
+                  return (
+                    <g key={node.id}>
+                      {/* Static Track */}
+                      <line
+                        x1="210"
+                        y1="130"
+                        x2={node.x}
+                        y2={node.y}
+                        stroke={isNodeActive ? '#38BDF8' : '#0284C7'}
+                        strokeWidth={isNodeActive ? 1.8 : 1}
+                        strokeOpacity={isNodeActive ? 0.9 : 0.25}
+                      />
+                      {/* Flowing Data Stream */}
+                      <line
+                        x1="210"
+                        y1="130"
+                        x2={node.x}
+                        y2={node.y}
+                        stroke={isNodeActive ? '#10B981' : '#38BDF8'}
+                        strokeWidth={isNodeActive ? 2.2 : 1.5}
+                        strokeDasharray="4 8"
+                        strokeOpacity={isNodeActive ? 1 : 0.75}
+                        className="telemetry-beam"
+                      />
+                    </g>
+                  );
+                })}
+
+                {/* Central Core (Global Edge Backbone) */}
+                <g>
+                  {/* Outer Dotted Tech Ring */}
+                  <circle
+                    cx="210"
+                    cy="130"
+                    r="34"
+                    fill="none"
+                    stroke="#0072C4"
+                    strokeWidth="1.2"
+                    strokeDasharray="2 4"
+                    className="center-ring-ccw"
+                  />
+                  {/* Inner Dashed Tech Ring */}
+                  <circle
+                    cx="210"
+                    cy="130"
+                    r="28"
+                    fill="none"
+                    stroke="#38BDF8"
+                    strokeWidth="1.5"
+                    strokeDasharray="6 4"
+                    className="center-ring-cw"
+                  />
+                  {/* Core Base Sphere */}
+                  <circle
+                    cx="210"
+                    cy="130"
+                    r="21"
+                    fill="#0B192C"
+                    stroke="#0072C4"
+                    strokeWidth="2"
+                    filter="drop-shadow(0 0 12px rgba(0, 114, 196, 0.6))"
+                  />
+                  {/* Center Globe Glyph */}
+                  <circle cx="210" cy="130" r="14" fill="none" stroke="#38BDF8" strokeWidth="1.2" />
+                  <ellipse cx="210" cy="130" rx="6.5" ry="14" fill="none" stroke="#38BDF8" strokeWidth="1.1" />
+                  <line x1="196" y1="130" x2="224" y2="130" stroke="#38BDF8" strokeWidth="1.1" />
+                </g>
+
+                {/* Global POP Nodes */}
+                {POP_NODES.map((node) => {
+                  const isNodeActive = activePopId === node.id;
+                  const chipX = node.x > 210 ? node.x - 6 : node.x - 48;
+                  const chipY = node.y > 130 ? node.y + 8 : node.y - 24;
+
+                  return (
+                    <g
+                      key={node.id}
+                      className="pop-chip"
+                      onMouseEnter={() => setActivePopId(node.id)}
+                      onMouseLeave={() => setActivePopId(null)}
+                    >
+                      {/* Pulsing Beacon Circle */}
+                      <circle
+                        cx={node.x}
+                        cy={node.y}
+                        r="6"
+                        fill="#10B981"
+                        fillOpacity="0.25"
+                        className="pop-ping"
+                      />
+                      <circle
+                        cx={node.x}
+                        cy={node.y}
+                        r="3.5"
+                        fill={isNodeActive ? '#FFFFFF' : '#10B981'}
+                        stroke="#050B18"
+                        strokeWidth="1.2"
+                        filter="drop-shadow(0 0 6px #10B981)"
+                      />
+
+                      {/* POP Label Badge */}
+                      <g transform={`translate(${chipX}, ${chipY})`}>
+                        <rect
+                          width="54"
+                          height="18"
+                          rx="4"
+                          fill={isNodeActive ? 'rgba(15, 23, 42, 0.95)' : 'rgba(11, 19, 43, 0.85)'}
+                          stroke={isNodeActive ? '#38BDF8' : 'rgba(255, 255, 255, 0.12)'}
+                          strokeWidth="1"
+                        />
+                        <text
+                          x="7"
+                          y="12.5"
+                          fill="#FFFFFF"
+                          fontSize="8.5"
+                          fontWeight="700"
+                          letterSpacing="0.04em"
+                          fontFamily="sans-serif"
+                        >
+                          {node.name}
+                        </text>
+                        <text
+                          x="29"
+                          y="12.5"
+                          fill={isNodeActive ? '#38BDF8' : '#10B981'}
+                          fontSize="8"
+                          fontWeight="700"
+                          fontFamily="sans-serif"
+                        >
+                          {node.latency}
+                        </text>
+                      </g>
+                    </g>
+                  );
+                })}
+              </svg>
+            </div>
+
+            {/* Bottom Telemetry HUD Metrics */}
             <div className={classes.networkMetricsGrid}>
               <div className={classes.networkMetricBox}>
                 <span className={classes.networkMetricVal}>18ms</span>
@@ -221,7 +494,7 @@ const ConnectFeature: React.FC = () => {
             <div>
               <div className={classes.aiCardHeader}>
                 <div className={classes.aiIconBox}>
-                  <BrainIcon width={28} height={28} isHovered={hoveredAiCard === 'code'} />
+                  <ConversionIcon width={28} height={28} isHovered={hoveredAiCard === 'code'} />
                 </div>
                 <h3 className={classes.aiCardTitle}>From Conversation to Code</h3>
               </div>
@@ -259,7 +532,7 @@ const ConnectFeature: React.FC = () => {
             <div>
               <div className={classes.aiCardHeader}>
                 <div className={classes.aiIconBoxEmerald}>
-                  <SearchIcon width={28} height={28} isHovered={hoveredAiCard === 'search'} />
+                  <SearchProofIcon width={28} height={28} isHovered={hoveredAiCard === 'search'} />
                 </div>
                 <h3 className={classes.aiCardTitle}>Smart Search &amp; Instant Proof</h3>
               </div>
@@ -341,7 +614,7 @@ const ConnectFeature: React.FC = () => {
                 borderColor: hoveredUsageCard === 'pip' ? '#0072C4' : '#E2E8F0',
               }}
             >
-              <TrendingUpIcon width={24} height={24} isHovered={hoveredUsageCard === 'pip'} />
+              <MonitorPipIcon width={24} height={24} isHovered={hoveredUsageCard === 'pip'} />
             </div>
             <h3 className={classes.usageCardTitle}>Picture-in-Picture</h3>
             <p className={classes.usageCardDesc}>
@@ -361,7 +634,7 @@ const ConnectFeature: React.FC = () => {
                 borderColor: hoveredUsageCard === 'recording' ? '#0072C4' : '#E2E8F0',
               }}
             >
-              <BoltIcon width={24} height={24} isHovered={hoveredUsageCard === 'recording'} />
+              <ScreenRecordIcon width={24} height={24} isHovered={hoveredUsageCard === 'recording'} />
             </div>
             <h3 className={classes.usageCardTitle}>Screen Recording</h3>
             <p className={classes.usageCardDesc}>
@@ -381,7 +654,7 @@ const ConnectFeature: React.FC = () => {
                 borderColor: hoveredUsageCard === 'privacy' ? '#0072C4' : '#E2E8F0',
               }}
             >
-              <BuildingIcon width={24} height={24} isHovered={hoveredUsageCard === 'privacy'} />
+              <BranchPrivacyIcon width={24} height={24} isHovered={hoveredUsageCard === 'privacy'} />
             </div>
             <h3 className={classes.usageCardTitle}>Branch Privacy</h3>
             <p className={classes.usageCardDesc}>
@@ -401,7 +674,7 @@ const ConnectFeature: React.FC = () => {
                 borderColor: hoveredUsageCard === 'retention' ? '#0072C4' : '#E2E8F0',
               }}
             >
-              <LockIcon width={24} height={24} isHovered={hoveredUsageCard === 'retention'} />
+              <DataRetentionIcon width={24} height={24} isHovered={hoveredUsageCard === 'retention'} />
             </div>
             <h3 className={classes.usageCardTitle}>Custom Retention</h3>
             <p className={classes.usageCardDesc}>

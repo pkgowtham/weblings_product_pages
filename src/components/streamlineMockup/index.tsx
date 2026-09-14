@@ -31,11 +31,177 @@ interface BacklogItem {
   checked: boolean;
 }
 
+interface MemberItem {
+  id: string;
+  name: string;
+  email: string;
+  dateAdded: string;
+  avatarColor: string;
+  initials: string;
+}
+
+interface StatusItem {
+  id: string;
+  name: string;
+}
+
+interface PriorityItem {
+  id: string;
+  name: string;
+  color: string;
+}
+
+interface TagItem {
+  id: string;
+  name: string;
+  bgColor: string;
+  textColor: string;
+  borderColor: string;
+}
+
+interface IssueTypeItem {
+  id: string;
+  name: string;
+  letter: string;
+  bgColor: string;
+}
+
 export const StreamlineMockup: React.FC = () => {
   const classes = useStyles();
 
   // Active top-level view tab
   const [activeTab, setActiveTab] = useState<'timeline' | 'backlog' | 'sprint' | 'board' | 'members' | 'settings'>('timeline');
+
+  // Members View State
+  const [memberSearchQuery, setMemberSearchQuery] = useState<string>('');
+  const [showNewMemberPopover, setShowNewMemberPopover] = useState<boolean>(false);
+  const [newMemberTab, setNewMemberTab] = useState<'invite' | 'add'>('invite');
+  const [inviteEmail, setInviteEmail] = useState<string>('');
+  const [inviteRole, setInviteRole] = useState<string>('Member');
+  const [addName, setAddName] = useState<string>('');
+  const [addEmail, setAddEmail] = useState<string>('');
+  const [inviteFeedback, setInviteFeedback] = useState<string | null>(null);
+
+  const [membersList, setMembersList] = useState<MemberItem[]>([
+    { id: 'm-1', name: 'Sara Cruz', email: 'sara.cruz@example.com', dateAdded: '21 Sep, 2020', avatarColor: '#0D9488', initials: 'SC' },
+    { id: 'm-2', name: 'Felicia Reid', email: 'felicia.reid@example.com', dateAdded: '22 Oct, 2020', avatarColor: '#0284C7', initials: 'FR' },
+    { id: 'm-3', name: 'Michael Mitchell', email: 'michael.mitc@example.com', dateAdded: '1 Feb, 2020', avatarColor: '#6366F1', initials: 'MM' },
+    { id: 'm-4', name: 'Jessica Hanson', email: 'jessica.hanson@example.com', dateAdded: '24 May, 2020', avatarColor: '#EC4899', initials: 'JH' },
+    { id: 'm-5', name: 'Michelle Rivera', email: 'michelle.rivera@example.com', dateAdded: '22 Oct, 2020', avatarColor: '#F59E0B', initials: 'MR' },
+    { id: 'm-6', name: 'Nevaeh Simmons', email: 'nevaeh.simmons@example.com', dateAdded: '17 Oct, 2020', avatarColor: '#10B981', initials: 'NS' },
+    { id: 'm-7', name: 'Jackson Graham', email: 'jackson.graham@example.com', dateAdded: '8 Sep, 2020', avatarColor: '#8B5CF6', initials: 'JG' },
+  ]);
+
+  // Settings View State (4 Operations: Status, Priority, Tags, Issues Type)
+  const [settingsTab, setSettingsTab] = useState<'status' | 'priority' | 'tags' | 'issues'>('status');
+  const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
+
+  const [statusList, setStatusList] = useState<StatusItem[]>([
+    { id: 'st-1', name: 'TO DO' },
+    { id: 'st-2', name: 'TO DO' },
+    { id: 'st-3', name: 'TO DO' },
+    { id: 'st-4', name: 'TO DO' },
+    { id: 'st-5', name: 'TO DO' },
+  ]);
+
+  const [priorityList, setPriorityList] = useState<PriorityItem[]>([
+    { id: 'pr-1', name: 'Urgent', color: '#EF4444' },
+    { id: 'pr-2', name: 'High', color: '#D97706' },
+    { id: 'pr-3', name: 'Normal', color: '#0072C4' },
+    { id: 'pr-4', name: 'Low', color: '#64748B' },
+  ]);
+
+  const [tagList, setTagList] = useState<TagItem[]>([
+    { id: 'tg-1', name: 'Tag', bgColor: '#EFF6FF', textColor: '#0284C7', borderColor: '#BAE6FD' },
+    { id: 'tg-2', name: 'Tag', bgColor: '#FDF2F8', textColor: '#DB2777', borderColor: '#FBCFE8' },
+    { id: 'tg-3', name: 'Tag', bgColor: '#FDF2F8', textColor: '#DB2777', borderColor: '#FBCFE8' },
+    { id: 'tg-4', name: 'Tag', bgColor: '#FDF2F8', textColor: '#DB2777', borderColor: '#FBCFE8' },
+  ]);
+
+  const [issueTypeList, setIssueTypeList] = useState<IssueTypeItem[]>([
+    { id: 'it-1', name: 'Epic', letter: 'E', bgColor: '#9333EA' },
+    { id: 'it-2', name: 'Story', letter: 'S', bgColor: '#16A34A' },
+    { id: 'it-3', name: 'Task', letter: 'T', bgColor: '#0072C4' },
+    { id: 'it-4', name: 'Bug', letter: 'B', bgColor: '#DC2626' },
+  ]);
+
+  // Handlers for Members and Settings
+  const handleRemoveMember = (id: string) => {
+    setMembersList((prev) => prev.filter((m) => m.id !== id));
+  };
+
+  const handleSendInvite = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inviteEmail.trim()) return;
+    const namePart = inviteEmail.split('@')[0];
+    const formattedName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+    setMembersList((prev) => [
+      ...prev,
+      {
+        id: `m-${Date.now()}`,
+        name: formattedName,
+        email: inviteEmail.trim(),
+        dateAdded: 'Today',
+        avatarColor: '#0072C4',
+        initials: formattedName.slice(0, 2).toUpperCase(),
+      },
+    ]);
+    setInviteEmail('');
+    setInviteFeedback('Invite sent successfully!');
+    setTimeout(() => {
+      setInviteFeedback(null);
+      setShowNewMemberPopover(false);
+    }, 1200);
+  };
+
+  const handleAddMemberDirect = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!addName.trim() || !addEmail.trim()) return;
+    setMembersList((prev) => [
+      ...prev,
+      {
+        id: `m-${Date.now()}`,
+        name: addName.trim(),
+        email: addEmail.trim(),
+        dateAdded: 'Today',
+        avatarColor: '#0D9488',
+        initials: addName.slice(0, 2).toUpperCase(),
+      },
+    ]);
+    setAddName('');
+    setAddEmail('');
+    setShowNewMemberPopover(false);
+  };
+
+  const handleNewStatus = () => {
+    setStatusList((prev) => [...prev, { id: `st-${Date.now()}`, name: 'NEW STATUS' }]);
+  };
+
+  const handleNewPriority = () => {
+    setPriorityList((prev) => [...prev, { id: `pr-${Date.now()}`, name: 'Custom', color: '#8B5CF6' }]);
+  };
+
+  const handleNewTag = () => {
+    setTagList((prev) => [...prev, { id: `tg-${Date.now()}`, name: 'Tag', bgColor: '#F0FDF4', textColor: '#16A34A', borderColor: '#BBF7D0' }]);
+  };
+
+  const handleNewIssueType = () => {
+    setIssueTypeList((prev) => [...prev, { id: `it-${Date.now()}`, name: 'Feature', letter: 'F', bgColor: '#F59E0B' }]);
+  };
+
+  const handleDeleteItem = (type: 'status' | 'priority' | 'tags' | 'issues', id: string) => {
+    if (type === 'status') setStatusList((prev) => prev.filter((i) => i.id !== id));
+    if (type === 'priority') setPriorityList((prev) => prev.filter((i) => i.id !== id));
+    if (type === 'tags') setTagList((prev) => prev.filter((i) => i.id !== id));
+    if (type === 'issues') setIssueTypeList((prev) => prev.filter((i) => i.id !== id));
+    setActiveMenuId(null);
+  };
+
+  const filteredMembers = membersList.filter(
+    (m) =>
+      m.name.toLowerCase().includes(memberSearchQuery.toLowerCase()) ||
+      m.email.toLowerCase().includes(memberSearchQuery.toLowerCase())
+  );
 
   // View mode switcher in timeline
   const [viewMode, setViewMode] = useState<'today' | 'week' | 'month' | 'quarter'>('month');
@@ -1077,15 +1243,485 @@ export const StreamlineMockup: React.FC = () => {
                 </div>
               </div>
             </div>
+          ) : activeTab === 'members' ? (
+            /* ─────────────────────────────────────────────────────────────
+               MEMBERS VIEW (MATCHING USER IMAGE 1)
+               ───────────────────────────────────────────────────────────── */
+            <div className={classes.membersContainer}>
+              {/* Header with Title and '+ New member' popover */}
+              <div className={classes.membersHeaderRow}>
+                <h2 className={classes.membersTitle}>Members</h2>
+
+                <div style={{ position: 'relative' }}>
+                  <button
+                    className={classes.newMemberBtn}
+                    onClick={() => setShowNewMemberPopover(!showNewMemberPopover)}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="8.5" cy="7" r="4" />
+                      <line x1="20" y1="8" x2="20" y2="14" />
+                      <line x1="17" y1="11" x2="23" y2="11" />
+                    </svg>
+                    <span>New member</span>
+                  </button>
+
+                  {/* Popover displaying 'Invite member' and 'Add member' tabs */}
+                  {showNewMemberPopover && (
+                    <div className={classes.newMemberPopover}>
+                      <div className={classes.popoverNavRow}>
+                        <div className={classes.popoverTabs}>
+                          <button
+                            className={newMemberTab === 'invite' ? classes.popoverTabBtnActive : classes.popoverTabBtn}
+                            onClick={() => setNewMemberTab('invite')}
+                          >
+                            Invite member
+                          </button>
+                          <button
+                            className={newMemberTab === 'add' ? classes.popoverTabBtnActive : classes.popoverTabBtn}
+                            onClick={() => setNewMemberTab('add')}
+                          >
+                            Add member
+                          </button>
+                        </div>
+                        <button
+                          className={classes.popoverCloseBtn}
+                          onClick={() => setShowNewMemberPopover(false)}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                          </svg>
+                        </button>
+                      </div>
+
+                      {inviteFeedback && (
+                        <div style={{ fontSize: 12, color: '#16A34A', fontWeight: 600, backgroundColor: '#F0FDF4', padding: '6px 10px', borderRadius: 6 }}>
+                          ✓ {inviteFeedback}
+                        </div>
+                      )}
+
+                      {newMemberTab === 'invite' ? (
+                        <form onSubmit={handleSendInvite} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                          <div className={classes.popoverInputGroup}>
+                            <label className={classes.popoverLabel}>Email Address</label>
+                            <input
+                              type="email"
+                              className={classes.popoverInput}
+                              placeholder="name@company.com"
+                              value={inviteEmail}
+                              onChange={(e) => setInviteEmail(e.target.value)}
+                              required
+                            />
+                          </div>
+
+                          <div className={classes.popoverInputGroup}>
+                            <label className={classes.popoverLabel}>Role</label>
+                            <select
+                              className={classes.popoverSelect}
+                              value={inviteRole}
+                              onChange={(e) => setInviteRole(e.target.value)}
+                            >
+                              <option value="Member">Member</option>
+                              <option value="Admin">Admin</option>
+                              <option value="Viewer">Viewer</option>
+                            </select>
+                          </div>
+
+                          <button type="submit" className={classes.popoverSubmitBtn}>
+                            Send Invite
+                          </button>
+                        </form>
+                      ) : (
+                        <form onSubmit={handleAddMemberDirect} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                          <div className={classes.popoverInputGroup}>
+                            <label className={classes.popoverLabel}>Full Name</label>
+                            <input
+                              type="text"
+                              className={classes.popoverInput}
+                              placeholder="e.g. Liam Foster"
+                              value={addName}
+                              onChange={(e) => setAddName(e.target.value)}
+                              required
+                            />
+                          </div>
+
+                          <div className={classes.popoverInputGroup}>
+                            <label className={classes.popoverLabel}>Email Address</label>
+                            <input
+                              type="email"
+                              className={classes.popoverInput}
+                              placeholder="e.g. liam@example.com"
+                              value={addEmail}
+                              onChange={(e) => setAddEmail(e.target.value)}
+                              required
+                            />
+                          </div>
+
+                          <button type="submit" className={classes.popoverSubmitBtn}>
+                            Add Member
+                          </button>
+                        </form>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Search Member Input Bar */}
+              <div className={classes.membersSearchBox}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2.5" strokeLinecap="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search Member"
+                  className={classes.membersSearchInput}
+                  value={memberSearchQuery}
+                  onChange={(e) => setMemberSearchQuery(e.target.value)}
+                />
+              </div>
+
+              {/* Table List of Members */}
+              <div className={classes.membersTableCard}>
+                <table className={classes.membersTable}>
+                  <thead>
+                    <tr>
+                      <th className={classes.membersTh} style={{ width: '25%' }}>Name</th>
+                      <th className={classes.membersTh} style={{ width: '40%' }}>Email</th>
+                      <th className={classes.membersTh} style={{ width: '25%' }}>Date Added</th>
+                      <th className={classes.membersTh} style={{ width: '10%', textAlign: 'center' }}>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredMembers.map((member) => (
+                      <tr key={member.id} className={classes.membersTr}>
+                        <td className={classes.membersTd}>
+                          <div className={classes.membersAvatarCell}>
+                            <div className={classes.membersAvatarCircle} style={{ backgroundColor: member.avatarColor }}>
+                              {member.initials}
+                            </div>
+                            <span className={classes.membersNameText}>{member.name}</span>
+                          </div>
+                        </td>
+                        <td className={classes.membersTd}>
+                          <span className={classes.membersEmailText}>{member.email}</span>
+                        </td>
+                        <td className={classes.membersTd}>
+                          <span className={classes.membersDateText}>{member.dateAdded}</span>
+                        </td>
+                        <td className={classes.membersTd} style={{ textAlign: 'center' }}>
+                          <button
+                            className={classes.membersDeleteBtn}
+                            onClick={() => handleRemoveMember(member.id)}
+                            title="Remove member"
+                          >
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                              <line x1="18" y1="6" x2="6" y2="18" />
+                              <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           ) : (
-            /* MEMBERS & SETTINGS VIEW */
-            <div className={classes.paneCard} style={{ padding: 24 }}>
-              <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0F172A', marginBottom: 8 }}>
-                {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Settings
-              </h3>
-              <p style={{ fontSize: 13, color: '#64748B' }}>
-                Manage sprint velocity targets, team permissions, and cross-suite Weblings integrations.
-              </p>
+            /* ─────────────────────────────────────────────────────────────
+               SETTINGS VIEW (MATCHING USER IMAGES 2, 3, 4, 5)
+               ───────────────────────────────────────────────────────────── */
+            <div>
+              {/* Secondary Sub-navigation Bar */}
+              <div className={classes.settingsSubTabsBar}>
+                {/* Status */}
+                <button
+                  className={settingsTab === 'status' ? classes.settingsSubTabBtnActive : classes.settingsSubTabBtn}
+                  onClick={() => { setSettingsTab('status'); setActiveMenuId(null); }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+                  </svg>
+                  <span>Status</span>
+                </button>
+
+                {/* Priority */}
+                <button
+                  className={settingsTab === 'priority' ? classes.settingsSubTabBtnActive : classes.settingsSubTabBtn}
+                  onClick={() => { setSettingsTab('priority'); setActiveMenuId(null); }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                    <line x1="4" y1="22" x2="4" y2="15" />
+                  </svg>
+                  <span>Priority</span>
+                </button>
+
+                {/* Tags */}
+                <button
+                  className={settingsTab === 'tags' ? classes.settingsSubTabBtnActive : classes.settingsSubTabBtn}
+                  onClick={() => { setSettingsTab('tags'); setActiveMenuId(null); }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                    <line x1="7" y1="7" x2="7.01" y2="7" />
+                  </svg>
+                  <span>Tags</span>
+                </button>
+
+                {/* Issues Type */}
+                <button
+                  className={settingsTab === 'issues' ? classes.settingsSubTabBtnActive : classes.settingsSubTabBtn}
+                  onClick={() => { setSettingsTab('issues'); setActiveMenuId(null); }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <line x1="9" y1="3" x2="9" y2="21" />
+                    <line x1="15" y1="3" x2="15" y2="21" />
+                  </svg>
+                  <span>Issues Type</span>
+                </button>
+              </div>
+
+              {/* Centered Settings Card */}
+              <div className={classes.settingsCardWrap}>
+                <div className={classes.settingsCard}>
+                  {/* Card Header */}
+                  <div className={classes.settingsCardHeader}>
+                    <h3 className={classes.settingsCardTitle}>
+                      {settingsTab === 'status' && 'Status'}
+                      {settingsTab === 'priority' && 'Priority'}
+                      {settingsTab === 'tags' && 'Tags'}
+                      {settingsTab === 'issues' && 'Issues Type'}
+                    </h3>
+
+                    {settingsTab === 'status' && (
+                      <button className={classes.settingsNewBtn} onClick={handleNewStatus}>
+                        New Status
+                      </button>
+                    )}
+                    {settingsTab === 'priority' && (
+                      <button className={classes.settingsNewBtn} onClick={handleNewPriority}>
+                        New Status
+                      </button>
+                    )}
+                  </div>
+
+                  {settingsTab === 'status' && (
+                    <p className={classes.settingsSubtitle}>
+                      Drag to rearrange : issues will be executed in the following order
+                    </p>
+                  )}
+
+                  {/* Settings Content Rows */}
+                  <div className={classes.settingsList}>
+                    {settingsTab === 'status' &&
+                      statusList.map((st, idx) => (
+                        <div key={st.id} className={classes.settingsRow}>
+                          <div className={classes.settingsRowLeft}>
+                            {idx === statusList.length - 1 && (
+                              <span className={classes.settingsDragHandle} title="Drag handle">
+                                ⋮⋮
+                              </span>
+                            )}
+                            <span className={classes.settingsStatusBadge}>{st.name}</span>
+                          </div>
+
+                          <div style={{ position: 'relative' }}>
+                            <button
+                              className={classes.settingsMoreBtn}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveMenuId(activeMenuId === st.id ? null : st.id);
+                              }}
+                            >
+                              ⋮
+                            </button>
+
+                            {activeMenuId === st.id && (
+                              <div className={classes.settingsActionMenu}>
+                                <button
+                                  className={classes.settingsActionMenuItem}
+                                  onClick={() => setActiveMenuId(null)}
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  className={classes.settingsActionMenuDelete}
+                                  onClick={() => handleDeleteItem('status', st.id)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+
+                    {settingsTab === 'priority' &&
+                      priorityList.map((pr) => (
+                        <div key={pr.id} className={classes.settingsRow}>
+                          <div className={classes.settingsRowLeft}>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={pr.color} strokeWidth="2.5" strokeLinecap="round">
+                              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                              <line x1="4" y1="22" x2="4" y2="15" />
+                            </svg>
+                            <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: pr.color }}>
+                              {pr.name}
+                            </span>
+                          </div>
+
+                          <div style={{ position: 'relative' }}>
+                            <button
+                              className={classes.settingsMoreBtn}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveMenuId(activeMenuId === pr.id ? null : pr.id);
+                              }}
+                            >
+                              ⋮
+                            </button>
+
+                            {activeMenuId === pr.id && (
+                              <div className={classes.settingsActionMenu}>
+                                <button
+                                  className={classes.settingsActionMenuItem}
+                                  onClick={() => setActiveMenuId(null)}
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  className={classes.settingsActionMenuDelete}
+                                  onClick={() => handleDeleteItem('priority', pr.id)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+
+                    {settingsTab === 'tags' &&
+                      tagList.map((tg) => (
+                        <div key={tg.id} className={classes.settingsRow}>
+                          <div className={classes.settingsRowLeft}>
+                            <span
+                              className={classes.settingsTagBadge}
+                              style={{
+                                backgroundColor: tg.bgColor,
+                                color: tg.textColor,
+                                borderColor: tg.borderColor,
+                              }}
+                            >
+                              {tg.name}
+                            </span>
+                          </div>
+
+                          <div style={{ position: 'relative' }}>
+                            <button
+                              className={classes.settingsMoreBtn}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveMenuId(activeMenuId === tg.id ? null : tg.id);
+                              }}
+                            >
+                              ⋮
+                            </button>
+
+                            {activeMenuId === tg.id && (
+                              <div className={classes.settingsActionMenu}>
+                                <button
+                                  className={classes.settingsActionMenuItem}
+                                  onClick={() => setActiveMenuId(null)}
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  className={classes.settingsActionMenuDelete}
+                                  onClick={() => handleDeleteItem('tags', tg.id)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+
+                    {settingsTab === 'issues' &&
+                      issueTypeList.map((it, idx) => (
+                        <div key={it.id} className={classes.settingsRow}>
+                          <div className={classes.settingsRowLeft}>
+                            {idx === issueTypeList.length - 1 && (
+                              <span className={classes.settingsDragHandle} title="Drag handle">
+                                ⋮⋮
+                              </span>
+                            )}
+                            <div className={classes.settingsIssueTypeBadge} style={{ backgroundColor: it.bgColor }}>
+                              {it.letter}
+                            </div>
+                          </div>
+
+                          <div style={{ position: 'relative' }}>
+                            <button
+                              className={classes.settingsMoreBtn}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveMenuId(activeMenuId === it.id ? null : it.id);
+                              }}
+                            >
+                              ⋮
+                            </button>
+
+                            {activeMenuId === it.id && (
+                              <div className={classes.settingsActionMenu}>
+                                <button
+                                  className={classes.settingsActionMenuItem}
+                                  onClick={() => setActiveMenuId(null)}
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  className={classes.settingsActionMenuDelete}
+                                  onClick={() => handleDeleteItem('issues', it.id)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+
+                  {/* Bottom Action Links */}
+                  <div>
+                    {settingsTab === 'status' && (
+                      <button className={classes.settingsBottomAddBtn} onClick={handleNewStatus}>
+                        New status
+                      </button>
+                    )}
+                    {settingsTab === 'priority' && (
+                      <button className={classes.settingsBottomAddBtn} onClick={handleNewPriority}>
+                        New priority
+                      </button>
+                    )}
+                    {settingsTab === 'tags' && (
+                      <button className={classes.settingsBottomAddBtn} onClick={handleNewTag}>
+                        New tag
+                      </button>
+                    )}
+                    {settingsTab === 'issues' && (
+                      <button className={classes.settingsBottomAddBtn} onClick={handleNewIssueType}>
+                        New issue type
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </main>

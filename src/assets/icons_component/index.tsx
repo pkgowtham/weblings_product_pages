@@ -42,3 +42,27 @@ export { default as SearchIcon } from "./SearchIcon";
 export { default as TagIcon } from "./TagIcon";
 export { default as UserIcon } from "./UserIcon";
 export { default as ShieldCheckIcon } from "./ShieldCheckIcon";
+
+// Animated Icon Components for Connect and WorkSuite Infrastructure
+export { default as EdgeRoutingIcon } from "./EdgeRoutingIcon";
+export { default as SimulcastVideoIcon } from "./SimulcastVideoIcon";
+export { default as ProjectChannelsIcon } from "./ProjectChannelsIcon";
+export { default as ConversionIcon } from "./ConversionIcon";
+export { default as VoiceToCodeIcon } from "./VoiceToCodeIcon";
+export { default as SearchProofIcon } from "./SearchProofIcon";
+export { default as MonitorPipIcon } from "./MonitorPipIcon";
+export { default as ScreenRecordIcon } from "./ScreenRecordIcon";
+export { default as BranchPrivacyIcon } from "./BranchPrivacyIcon";
+export { default as DataRetentionIcon } from "./DataRetentionIcon";
+export { default as TicketIcon } from "./TicketIcon";
+export { default as HumanVerificationIcon } from "./HumanVerificationIcon";
+export { default as InstantIntegrationIcon } from "./InstantIntegrationIcon";
+export { default as AiTicketIcon } from "./AiTicketIcon";
+export { default as GuestAccessIcon } from "./GuestAccessIcon";
+export { default as ImmutableHistoryIcon } from "./ImmutableHistoryIcon";
+export { default as BulkReassignIcon } from "./BulkReassignIcon";
+export { default as WorkflowConfigIcon } from "./WorkflowConfigIcon";
+export { default as HierarchyTreeIcon } from "./HierarchyTreeIcon";
+export { default as StarIcon } from "./StarIcon";
+export { default as GranularAccessIcon } from "./GranularAccessIcon";
+export { default as TimeBombLinkIcon } from "./TimeBombLinkIcon";

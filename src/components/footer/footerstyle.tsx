@@ -4,7 +4,6 @@ import { Theme } from "../../theme/themeType";
 export const usestyles = createUseStyles((theme: Theme) => ({
   Footer: {
     display: "flex",
-    marginTop: theme.spacing.s2000,
     flexDirection: "column",
     borderTop: `1px solid ${theme.light.neutral.border.light}`,
     alignItems: "center",

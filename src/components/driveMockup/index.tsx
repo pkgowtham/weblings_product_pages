@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useStyles } from './style';
-import { WeblogoIcon, BellAlertIcon } from '../../assets/icons_component';
+import { WeblogoIcon, BellAlertIcon, StarIcon, FolderIcon, DoneIcon } from '../../assets/icons_component';
 
 interface DriveFile {
   id: string;
@@ -221,7 +221,7 @@ export const DriveMockup: React.FC = () => {
           <WeblogoIcon width={24} height={24} />
           <span className={classes.brandTitle}>Weblings Drive</span>
           <div className={classes.workspacePill}>
-            <span>📁</span>
+            <FolderIcon width={13} height={13} style={{ color: '#0072C4', flexShrink: 0 }} />
             <span>Alpha Launch / Vendor Docs</span>
           </div>
         </div>
@@ -243,11 +243,11 @@ export const DriveMockup: React.FC = () => {
 
         <div className={classes.topBarRight}>
           {/* Storage Meter Pill */}
-          <div className={classes.storageMeterPill} title="Cloud Quota: 48.2 GB of 1 TB used">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+          <div className={classes.storageMeterPill} title="Cloud Quota: 488.2 GB of 1 TB used">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
             </svg>
-            <span>48.2 GB / 1 TB</span>
+            <span>488.2 GB / 1 TB</span>
           </div>
 
           {/* Notification Bell with interactive animation */}
@@ -441,7 +441,7 @@ export const DriveMockup: React.FC = () => {
           <div className={classes.sidebarStorageArea}>
             <div className={classes.storageTextRow}>
               <span>Storage Quota</span>
-              <strong>48.2 GB / 1 TB</strong>
+              <strong>488.2 GB / 1 TB</strong>
             </div>
             <div className={classes.storageBarTrack}>
               <div className={classes.storageBarFill} />
@@ -517,7 +517,7 @@ export const DriveMockup: React.FC = () => {
           {/* Upload Toast Feedback */}
           {showUploadToast && (
             <div style={{ backgroundColor: '#F0FDF4', border: '1px solid #BBF7D0', color: '#15803D', padding: '8px 12px', borderRadius: 6, fontSize: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span>✓</span>
+              <DoneIcon width={13} height={13} fill="#15803D" style={{ flexShrink: 0 }} />
               <span>Encrypted file chunk uploaded to isolated tenant storage vault. Document AI indexing initiated.</span>
             </div>
           )}
@@ -544,7 +544,10 @@ export const DriveMockup: React.FC = () => {
                   >
                     <div>
                       <div style={{ fontSize: 13, fontWeight: 700, color: '#0F172A', display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <span>🔗</span>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, color: '#0072C4' }}>
+                          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                        </svg>
                         <span>{link.url}</span>
                       </div>
                       <div style={{ fontSize: 11, color: '#64748B', marginTop: 3 }}>
@@ -656,7 +659,7 @@ export const DriveMockup: React.FC = () => {
                             }}
                             title="Ask Document AI about this file"
                           >
-                            <span>🪄</span>
+                            <StarIcon width={13} height={13} style={{ color: '#0072C4', flexShrink: 0 }} />
                             <span>Ask AI</span>
                           </button>
                         </td>
@@ -697,7 +700,10 @@ export const DriveMockup: React.FC = () => {
                   <div>{msg.text}</div>
                   {msg.citation && (
                     <div className={classes.citationBadge}>
-                      <span>📄</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                      </svg>
                       <span>{msg.citation}</span>
                     </div>
                   )}

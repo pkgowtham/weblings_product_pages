@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import { useStyles } from './style';
 import AppStoreButtons from '../../../../../components/appStoreButtons';
@@ -64,6 +64,22 @@ const MailFeature = () => {
   const [hoveredBenefitCard, setHoveredBenefitCard] = useState<number | null>(null);
   const [hoveredIntelligentCard, setHoveredIntelligentCard] = useState<string | null>(null);
 
+  // Interactive semantic vector search state
+  const [semanticQuery, setSemanticQuery] = useState<string>('');
+  const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className={classes.page}>
       {/* ─────────────────────────────────────────────────────────────
@@ -108,8 +124,8 @@ const MailFeature = () => {
               </div>
 
               <h2 className={classes.sectionTitle}>
-                From Offer Letter to Inbox in{' '}
-                <span className={classes.sectionTitleWavy}>3 Seconds</span>.
+                From Offer Letter to Inbox <br />
+                in <span className={classes.sectionTitleWavy}>3 Seconds</span>.
               </h2>
 
               <p className={classes.sectionSubtitle}>
@@ -349,6 +365,99 @@ const MailFeature = () => {
             <div className={classes.topologyHeaderRow}>
               <div className={classes.topologyHeaderLeft}>
                 <div className={classes.topologyIconBox}>
+                  <ShieldLockIcon width={22} height={22} />
+                </div>
+                <div>
+                  <h3 className={classes.topologyTitle}>Global Threat Defense Perimeter</h3>
+                  <p className={classes.topologySubtitle}>Autonomous zero-day threat interception across 340+ secure edge gateways</p>
+                </div>
+              </div>
+
+              <div className={classes.topologyBadgesRow}>
+                <span className={classes.complianceBadgePositive}>
+                  <ShieldLockIcon width={14} height={14} /> 99.99% Threat Interception
+                </span>
+                <span className={classes.complianceBadgeBrand}>
+                  <ShieldLockIcon width={14} height={14} /> Zero-Trust Sandboxing
+                </span>
+              </div>
+            </div>
+
+            {/* Edge Security Enforcement Nodes */}
+            <div className={classes.latencyMatrixGrid}>
+              {/* US-East */}
+              <div className={classes.edgeNodeCard}>
+                <div className={classes.edgeNodeHeader}>
+                  <span className={classes.edgeRegionName}>EDGE GATEWAY // US-EAST</span>
+                  <span className={classes.edgeStatusPulseDot} />
+                </div>
+                <div>
+                  <span className={classes.edgeLatencyBig}>
+                    99.99<span className={classes.edgeLatencyUnit}>%</span>
+                  </span>
+                  <div className={classes.progressBarBg}>
+                    <div className={classes.progressBarFill} style={{ width: '99%' }} />
+                  </div>
+                </div>
+                <span className={classes.edgeLocationSub}>Ashburn DC-11 • AI Threat Intercept</span>
+              </div>
+
+              {/* EU-Central */}
+              <div className={classes.edgeNodeCard}>
+                <div className={classes.edgeNodeHeader}>
+                  <span className={classes.edgeRegionName}>EDGE GATEWAY // EU-CENTRAL</span>
+                  <span className={classes.edgeStatusPulseDot} />
+                </div>
+                <div>
+                  <span className={classes.edgeLatencyBig}>
+                    100<span className={classes.edgeLatencyUnit}>%</span>
+                  </span>
+                  <div className={classes.progressBarBg}>
+                    <div className={classes.progressBarFill} style={{ width: '100%' }} />
+                  </div>
+                </div>
+                <span className={classes.edgeLocationSub}>Frankfurt FRA-02 • Sandboxed & Clean</span>
+              </div>
+
+              {/* AP-South */}
+              <div className={classes.edgeNodeCard}>
+                <div className={classes.edgeNodeHeader}>
+                  <span className={classes.edgeRegionName}>EDGE GATEWAY // AP-SOUTH</span>
+                  <span className={classes.edgeStatusPulseDot} />
+                </div>
+                <div>
+                  <span className={classes.edgeLatencyBig}>
+                    99.95<span className={classes.edgeLatencyUnit}>%</span>
+                  </span>
+                  <div className={classes.progressBarBg}>
+                    <div className={classes.progressBarFill} style={{ width: '96%' }} />
+                  </div>
+                </div>
+                <span className={classes.edgeLocationSub}>Singapore SIN-08 • Anti-Phish Shield</span>
+              </div>
+
+              {/* SA-East */}
+              <div className={classes.edgeNodeCard}>
+                <div className={classes.edgeNodeHeader}>
+                  <span className={classes.edgeRegionName}>EDGE GATEWAY // SA-EAST</span>
+                  <span className={classes.edgeStatusPulseDot} />
+                </div>
+                <div>
+                  <span className={classes.edgeLatencyBig}>
+                    100<span className={classes.edgeLatencyUnit}>%</span>
+                  </span>
+                  <div className={classes.progressBarBg}>
+                    <div className={classes.progressBarFill} style={{ width: '100%' }} />
+                  </div>
+                </div>
+                <span className={classes.edgeLocationSub}>São Paulo GRU-01 • DMARC / SPF Enforced</span>
+              </div>
+            </div>
+
+            {/* ── PREVIOUS ANYCAST ROUTING FABRIC CONTENT (SAVED FOR REUSE IN OTHER SCREENS) ──
+            <div className={classes.topologyHeaderRow}>
+              <div className={classes.topologyHeaderLeft}>
+                <div className={classes.topologyIconBox}>
                   <GlobeIcon width={22} height={22} />
                 </div>
                 <div>
@@ -367,9 +476,8 @@ const MailFeature = () => {
               </div>
             </div>
 
-            {/* Node Latency Matrix */}
             <div className={classes.latencyMatrixGrid}>
-              {/* US-East */}
+              // US-East
               <div className={classes.edgeNodeCard}>
                 <div className={classes.edgeNodeHeader}>
                   <span className={classes.edgeRegionName}>EDGE // US-EAST</span>
@@ -386,7 +494,7 @@ const MailFeature = () => {
                 <span className={classes.edgeLocationSub}>Ashburn DC-11 • Active</span>
               </div>
 
-              {/* EU-Central */}
+              // EU-Central
               <div className={classes.edgeNodeCard}>
                 <div className={classes.edgeNodeHeader}>
                   <span className={classes.edgeRegionName}>EDGE // EU-CENTRAL</span>
@@ -403,7 +511,7 @@ const MailFeature = () => {
                 <span className={classes.edgeLocationSub}>Frankfurt FRA-02 • Active</span>
               </div>
 
-              {/* AP-South */}
+              // AP-South
               <div className={classes.edgeNodeCard}>
                 <div className={classes.edgeNodeHeader}>
                   <span className={classes.edgeRegionName}>EDGE // AP-SOUTH</span>
@@ -420,7 +528,7 @@ const MailFeature = () => {
                 <span className={classes.edgeLocationSub}>Singapore SIN-08 • Active</span>
               </div>
 
-              {/* SA-East */}
+              // SA-East
               <div className={classes.edgeNodeCard}>
                 <div className={classes.edgeNodeHeader}>
                   <span className={classes.edgeRegionName}>EDGE // SA-EAST</span>
@@ -437,6 +545,7 @@ const MailFeature = () => {
                 <span className={classes.edgeLocationSub}>São Paulo GRU-01 • Active</span>
               </div>
             </div>
+            ── END PREVIOUS ANYCAST ROUTING FABRIC CONTENT ── */}
           </div>
 
           {/* 3 Supporting Security Pillar Cards */}
@@ -613,13 +722,74 @@ const MailFeature = () => {
                 </p>
               </div>
 
-              {/* UI Search Mockup */}
-              <div className={classes.searchMockupBar}>
-                <SearchIcon width={16} height={16} isHovered={hoveredIntelligentCard === 'a'} />
-                <span className={classes.searchQueryText}>
-                  &ldquo;that design file Sarah sent last week&rdquo;
-                </span>
-                <span className={classes.kbdShortcut}>⌘K</span>
+              {/* UI Search Mockup - Interactive */}
+              <div className={classes.searchMockupContainer}>
+                <div
+                  className={clsx(
+                    classes.searchMockupBar,
+                    isSearchFocused && classes.searchMockupBarFocused
+                  )}
+                  onClick={() => searchInputRef.current?.focus()}
+                >
+                  <SearchIcon
+                    width={16}
+                    height={16}
+                    isHovered={hoveredIntelligentCard === 'a' || isSearchFocused}
+                  />
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    className={classes.searchMockupInput}
+                    value={semanticQuery}
+                    onChange={(e) => setSemanticQuery(e.target.value)}
+                    onFocus={() => setIsSearchFocused(true)}
+                    onBlur={() => setIsSearchFocused(false)}
+                    placeholder="“that design file Sarah sent last week”"
+                  />
+                  {semanticQuery && (
+                    <button
+                      type="button"
+                      className={classes.searchClearButton}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSemanticQuery('');
+                        searchInputRef.current?.focus();
+                      }}
+                      title="Clear search"
+                    >
+                      ✕
+                    </button>
+                  )}
+                  <span
+                    className={classes.kbdShortcut}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      searchInputRef.current?.focus();
+                    }}
+                    title="Press ⌘K to focus search"
+                  >
+                    ⌘K
+                  </span>
+                </div>
+
+                {/* Interactive instant semantic vector feedback */}
+                {(isSearchFocused || semanticQuery) && (
+                  <div className={classes.searchInteractiveFeedback}>
+                    <span className={classes.searchFeedbackDot} />
+                    <span className={classes.searchFeedbackText}>
+                      {semanticQuery ? (
+                        <>
+                          <strong>Semantic Match:</strong> Found 3 threads for &ldquo;{semanticQuery}&rdquo;
+                        </>
+                      ) : (
+                        <>
+                          <strong>AI Vector Search:</strong> Type any natural language thought...
+                        </>
+                      )}
+                    </span>
+                    <span className={classes.searchFeedbackBadge}>Instant</span>
+                  </div>
+                )}
               </div>
             </div>
 

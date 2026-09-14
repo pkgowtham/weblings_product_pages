@@ -4,24 +4,63 @@ import React from "react";
 import { useStyles } from "./style";
 
 export const SvgApple: React.FC<{ width?: number; height?: number; className?: string }> = ({
-  width = 22,
-  height = 22,
+  width = 24,
+  height = 24,
   className,
 }) => (
-  <svg width={width} height={height} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.38c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.61 1.34-.55.63-1.03 1.68-.9 2.69 1 .08 2.03-.51 2.58-1.18z" />
+  <svg
+    width={width}
+    height={height}
+    viewBox="-52.01 0 560.035 560.035"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path d="M380.844 297.529c.787 84.752 74.349 112.955 75.164 113.314-.622 1.988-11.754 40.191-38.756 79.652-23.343 34.117-47.568 68.107-85.731 68.811-37.499.691-49.557-22.236-92.429-22.236-42.859 0-56.256 21.533-91.753 22.928-36.837 1.395-64.889-36.891-88.424-70.883-48.093-69.53-84.846-196.475-35.496-282.165 24.516-42.554 68.328-69.501 115.882-70.192 36.173-.69 70.315 24.336 92.429 24.336 22.1 0 63.59-30.096 107.208-25.676 18.26.76 69.517 7.376 102.429 55.552-2.652 1.644-61.159 35.704-60.523 106.559M310.369 89.418C329.926 65.745 343.089 32.79 339.498 0 311.308 1.133 277.22 18.785 257 42.445c-18.121 20.952-33.991 54.487-29.709 86.628 31.421 2.431 63.52-15.967 83.078-39.655" />
   </svg>
 );
 
 export const SvgAndroid: React.FC<{ width?: number; height?: number; className?: string }> = ({
-  width = 22,
-  height = 22,
+  width = 24,
+  height = 24,
   className,
 }) => (
-  <svg width={width} height={height} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0001s.4482-.9993.9993-.9993c.551 0 .9993.4478.9993.9993.0001.5515-.4482 1.0001-.9993 1.0001m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0001s.4482-.9993.9993-.9993c.5511 0 .9993.4478.9993.9993 0 .5515-.4482 1.0001-.9993 1.0001m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4126 13.8533 8.1 12 8.1s-3.5902.3126-5.1368.8497L4.8409 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396" />
+  <svg
+    width={width}
+    height={height}
+    viewBox="-29.45 0 466.9 466.9"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <defs>
+      <linearGradient id="play_store_grad_1" gradientUnits="userSpaceOnUse" y1="112.094" x2="261.746" y2="112.094">
+        <stop offset="0" stopColor="#63be6b" />
+        <stop offset="0.506" stopColor="#5bbc6a" />
+        <stop offset="1" stopColor="#4ab96a" />
+      </linearGradient>
+      <linearGradient id="play_store_grad_2" gradientUnits="userSpaceOnUse" x1="0.152" y1="223.393" x2="179.896" y2="223.393">
+        <stop offset="0" stopColor="#3ec6f2" />
+        <stop offset="1" stopColor="#45afe3" />
+      </linearGradient>
+      <linearGradient id="play_store_grad_3" gradientUnits="userSpaceOnUse" x1="179.896" y1="229.464" x2="407.976" y2="229.464">
+        <stop offset="0" stopColor="#faa51a" />
+        <stop offset="0.387" stopColor="#fab716" />
+        <stop offset="0.741" stopColor="#fac412" />
+        <stop offset="1" stopColor="#fac80f" />
+      </linearGradient>
+      <linearGradient id="play_store_grad_4" gradientUnits="userSpaceOnUse" x1="1.744" y1="345.521" x2="272.296" y2="345.521">
+        <stop offset="0" stopColor="#ec3b50" />
+        <stop offset="1" stopColor="#e7515b" />
+      </linearGradient>
+    </defs>
+    <path fill="url(#play_store_grad_1)" d="M261.7 142.3L15 1.3C11.9-.5 8-.4 5 1.4c-3.1 1.8-5 5-5 8.6 0 0 .1 13 .2 34.4l179.7 179.7 81.8-81.8z" />
+    <path fill="url(#play_store_grad_2)" d="M.2 44.4C.5 121.6 1.4 309 1.8 402.3L180 224.1.2 44.4z" />
+    <path fill="url(#play_store_grad_3)" d="M402.9 223l-141.2-80.7-81.9 81.8 92.4 92.4L403 240.3c3.1-1.8 5-5.1 5-8.6 0-3.6-2-6.9-5.1-8.7z" />
+    <path fill="url(#play_store_grad_4)" d="M1.7 402.3c.2 33.3.3 54.6.3 54.6 0 3.6 1.9 6.9 5 8.6 3.1 1.8 6.9 1.8 10 0l255.3-148.9-92.4-92.4L1.7 402.3z" />
   </svg>
 );
+
+export const SvgPlayStore = SvgAndroid;
 
 export const SvgStar: React.FC<{ width?: number; height?: number; className?: string }> = ({
   width = 18,
@@ -87,7 +126,7 @@ export const AppStoreButtons: React.FC<AppStoreButtonsProps> = ({
       </div>
 
       {/* Optional Social Proof Reviews Line */}
-      {showReviews && (
+      {/* {showReviews && (
         <div className={`${classes.reviewsRow} ${isCenter ? classes.reviewsRowCenter : ''} ${reviewsClassName || ""}`}>
           <div className={classes.starRatingGroup}>
             <div className={classes.starsGroup}>
@@ -101,7 +140,7 @@ export const AppStoreButtons: React.FC<AppStoreButtonsProps> = ({
           </div>
           <span className={classes.reviewsCountText}>{reviewCountText}</span>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

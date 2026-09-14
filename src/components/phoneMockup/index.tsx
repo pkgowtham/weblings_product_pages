@@ -139,23 +139,37 @@ const VideoOffSvgMobile: React.FC<{ size?: number; color?: string }> = ({ size =
 const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
   const classes = useStyles();
   const isAttendance = variant === "attendance" || variant === "dark";
-  const isMail = variant === "mail";
+  const isMailVariant = variant === "mail";
   const isConnect = variant === "connect";
-  const isStream = variant === "stream" || variant === "streamline";
-  const isDrive = variant === "drive";
+  const isStreamVariant = variant === "stream" || variant === "streamline";
+  const isDriveVariant = variant === "drive";
+
+  const getInitialTab = () => {
+    if (isDriveVariant) return "drive";
+    if (isStreamVariant) return "streamline";
+    if (isMailVariant) return "mail";
+    return "dashboard";
+  };
 
   // Interactive local states for high delight
   const [clockedIn, setClockedIn] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<string>(
-    isConnect ? "connect" : isStream ? "stream" : isDrive ? "drive" : isMail ? "mail" : isAttendance ? "eoffice" : "dash"
-  );
+  const [activeTab, setActiveTab] = useState<string>(getInitialTab);
+
+  React.useEffect(() => {
+    setActiveTab(getInitialTab());
+  }, [variant]);
+
+  const showDrive = activeTab === "drive";
+  const showStream = activeTab === "streamline" || activeTab === "stream";
+  const showMail = activeTab === "mail";
+  const showDashboard = !showDrive && !showStream && !showMail;
+
   const [activeDay, setActiveDay] = useState<number>(1); // Monday selected
   const [selectedEmail, setSelectedEmail] = useState<number>(0);
   const [isMicOn, setIsMicOn] = useState<boolean>(true);
   const [isVideoOn, setIsVideoOn] = useState<boolean>(false);
 
-  // Mobile Connect participants state (swappable active speaker, matching web)
-  const [mobileSpeakerId, setMobileSpeakerId] = useState<string>("speaker-1");
+  // Mobile Connect participants state (Alex Smith is permanent center speaker, matching web)
   const [mobileParticipants, setMobileParticipants] = useState([
     { id: "speaker-1", name: "Alex Smith", initials: "A", topPct: "50%", leftPct: "50%" },
     { id: "p-1", name: "Elena Rostova", initials: "A", topPct: "13%", leftPct: "50%" },
@@ -168,8 +182,15 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
     { id: "p-8", name: "Liam O'Connor", initials: "A", topPct: "23%", leftPct: "22%" },
   ]);
 
-  const activeMobileSpeaker = mobileParticipants.find((p) => p.id === mobileSpeakerId) || mobileParticipants[0];
-  const mobileSatellites = mobileParticipants.filter((p) => p.id !== mobileSpeakerId);
+  const activeMobileSpeaker = mobileParticipants.find((p) => p.id === "speaker-1") || mobileParticipants[0];
+  const mobileSatellites = mobileParticipants.filter((p) => p.id !== "speaker-1");
+
+  const handleToggleMobilePin = (id: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setMobileParticipants((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, isPinned: !p.isPinned } : p))
+    );
+  };
 
   return (
     <div className={classes.frame}>
@@ -226,8 +247,8 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
                     key={participant.id}
                     className={classes.connectSatNode}
                     style={{ top: participant.topPct, left: participant.leftPct }}
-                    onClick={() => setMobileSpeakerId(participant.id)}
-                    title={`Click to switch active speaker to ${participant.name}`}
+                    onClick={(e) => handleToggleMobilePin(participant.id, e)}
+                    title={`Click to pin/unpin ${participant.name}`}
                   >
                     {participant.isPinned ? (
                       <div className={classes.connectPinnedSplitAvatar}>
@@ -384,7 +405,7 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
               {/* ─────────────────────────────────────────────────────────────
                  SCREEN: WEBLINGS ENTERPRISE MAIL INBOX
                  ───────────────────────────────────────────────────────────── */}
-              {isDrive ? (
+              {showDrive ? (
                 <>
                   {/* App Bar */}
                   <div className={classes.mailAppHeader}>
@@ -529,7 +550,7 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
                     </div>
                   </div>
                 </>
-              ) : isStream ? (
+              ) : showStream ? (
                 <>
                   {/* App Bar */}
                   <div className={classes.mailAppHeader}>
@@ -655,7 +676,7 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
                     </div>
                   </div>
                 </>
-              ) : isMail ? (
+              ) : showMail ? (
                 <>
               {/* App Bar */}
               <div className={classes.mailAppHeader}>
@@ -1021,260 +1042,66 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
         </div>
 
         {/* ─────────────────────────────────────────────────────────────
-           STICKY BOTTOM WORKSUITE NAVIGATION WITH CENTER FAB
+           STICKY BOTTOM WORKSUITE NAVIGATION (Common across all pages)
            ───────────────────────────────────────────────────────────── */}
         <div className={classes.tabBarFixed}>
           <div className={classes.tabRow}>
-            {isDrive ? (
-              <>
-                {/* Drive Tab 1: Files */}
-                <div
-                  className={activeTab === "drive" || activeTab === "files" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("files")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-                  </svg>
-                  <span>Files</span>
-                </div>
+            {/* Tab 1: Dashboard */}
+            <div
+              className={showDashboard ? classes.tabItemActive : classes.tabItem}
+              onClick={() => setActiveTab("dashboard")}
+            >
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+              <span>Dashboard</span>
+            </div>
 
-                {/* Drive Tab 2: Shared */}
-                <div
-                  className={activeTab === "shared" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("shared")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                  </svg>
-                  <span>Shared</span>
-                </div>
+            {/* Tab 2: Mail */}
+            <div
+              className={showMail ? classes.tabItemActive : classes.tabItem}
+              onClick={() => setActiveTab("mail")}
+            >
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span>Mail</span>
+            </div>
 
-                {/* Center FAB: Upload New File */}
-                <div
-                  className={classes.centerFab}
-                  title="Upload Document"
-                  onClick={() => setActiveTab("files")}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </div>
+            {/* Tab 3: Center FAB (Profile - skip / keep as is) */}
+            <div
+              className={classes.centerFab}
+              title="Profile / Clock In"
+              onClick={() => setClockedIn(!clockedIn)}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              </svg>
+            </div>
 
-                {/* Drive Tab 3: Starred */}
-                <div
-                  className={activeTab === "starred" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("starred")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
-                  <span>Starred</span>
-                </div>
+            {/* Tab 4: Streamline */}
+            <div
+              className={showStream ? classes.tabItemActive : classes.tabItem}
+              onClick={() => setActiveTab("streamline")}
+            >
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+              <span>Streamline</span>
+            </div>
 
-                {/* Drive Tab 4: Vault */}
-                <div
-                  className={activeTab === "vault" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("vault")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                  </svg>
-                  <span>Vault</span>
-                </div>
-              </>
-            ) : isStream ? (
-              <>
-                {/* Stream Tab 1: Sprint */}
-                <div
-                  className={activeTab === "stream" || activeTab === "sprint" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("sprint")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                  </svg>
-                  <span>Sprint</span>
-                </div>
-
-                {/* Stream Tab 2: Board */}
-                <div
-                  className={activeTab === "board" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("board")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="7" height="9" />
-                    <rect x="14" y="3" width="7" height="5" />
-                    <rect x="14" y="12" width="7" height="9" />
-                    <rect x="3" y="16" width="7" height="5" />
-                  </svg>
-                  <span>Board</span>
-                </div>
-
-                {/* Center FAB: Add Ticket */}
-                <div
-                  className={classes.centerFab}
-                  title="Create Ticket"
-                  onClick={() => setActiveTab("sprint")}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </div>
-
-                {/* Stream Tab 3: Backlog */}
-                <div
-                  className={activeTab === "backlog" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("backlog")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="8" y1="6" x2="21" y2="6" />
-                    <line x1="8" y1="12" x2="21" y2="12" />
-                    <line x1="8" y1="18" x2="21" y2="18" />
-                    <line x1="3" y1="6" x2="3.01" y2="6" />
-                    <line x1="3" y1="12" x2="3.01" y2="12" />
-                    <line x1="3" y1="18" x2="3.01" y2="18" />
-                  </svg>
-                  <span>Backlog</span>
-                </div>
-
-                {/* Stream Tab 4: Roadmap */}
-                <div
-                  className={activeTab === "roadmap" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("roadmap")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
-                  </svg>
-                  <span>Roadmap</span>
-                </div>
-              </>
-            ) : isMail ? (
-              <>
-                {/* Mail Tab 1: Inbox */}
-                <div
-                  className={activeTab === "mail" || activeTab === "inbox" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("inbox")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                    <polyline points="22,6 12,13 2,6" />
-                  </svg>
-                  <span>Inbox</span>
-                </div>
-
-                {/* Mail Tab 2: Sent */}
-                <div
-                  className={activeTab === "sent" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("sent")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="22" y1="2" x2="11" y2="13" />
-                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                  </svg>
-                  <span>Sent</span>
-                </div>
-
-                {/* Center FAB: Compose */}
-                <div
-                  className={classes.centerFab}
-                  title="Compose Email"
-                  onClick={() => setActiveTab("inbox")}
-                >
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </div>
-
-                {/* Mail Tab 3: Drafts */}
-                <div
-                  className={activeTab === "drafts" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("drafts")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14 2 14 8 20 8" />
-                  </svg>
-                  <span>Drafts</span>
-                </div>
-
-                {/* Mail Tab 4: Starred */}
-                <div
-                  className={activeTab === "starred" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("starred")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
-                  <span>Starred</span>
-                </div>
-              </>
-            ) : (
-              <>
-                {/* Default Suite: Home */}
-                <div
-                  className={activeTab === "dash" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("dash")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                    <polyline points="9 22 9 12 15 12 15 22" />
-                  </svg>
-                  <span>Home</span>
-                </div>
-
-                {/* Chats */}
-                <div
-                  className={activeTab === "chats" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("chats")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                  </svg>
-                  <span>Chats</span>
-                </div>
-
-                {/* Center FAB */}
-                <div
-                  className={classes.centerFab}
-                  title="Profile / Clock In"
-                  onClick={() => setClockedIn(!clockedIn)}
-                >
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                  </svg>
-                </div>
-
-                {/* Tasks */}
-                <div
-                  className={activeTab === "stream" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("stream")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="9 11 12 14 22 4" />
-                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                  </svg>
-                  <span>Tasks</span>
-                </div>
-
-                {/* Office */}
-                <div
-                  className={activeTab === "eoffice" ? classes.tabItemActive : classes.tabItem}
-                  onClick={() => setActiveTab("eoffice")}
-                >
-                  <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
-                  </svg>
-                  <span>Office</span>
-                </div>
-              </>
-            )}
+            {/* Tab 5: Drive */}
+            <div
+              className={showDrive ? classes.tabItemActive : classes.tabItem}
+              onClick={() => setActiveTab("drive")}
+            >
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+              </svg>
+              <span>Drive</span>
+            </div>
           </div>
 
           {/* iOS Home Indicator Bar — safely nested inside tab bar */}

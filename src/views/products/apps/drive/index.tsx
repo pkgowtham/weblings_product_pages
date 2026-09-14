@@ -9,6 +9,8 @@ import {
   DriveIcon,
   LockIcon,
   ShieldLockIcon,
+  GranularAccessIcon,
+  TimeBombLinkIcon,
 } from "../../../../assets/icons_component";
 
 // Document icon matching original page
@@ -48,6 +50,7 @@ const SvgArchive: React.FC = () => (
 
 const DriveFeature: React.FC = () => {
   const classes = useStyles();
+  const [hoveredCapability, setHoveredCapability] = React.useState<string | null>(null);
 
   return (
     <div className={classes.page}>
@@ -155,9 +158,13 @@ const DriveFeature: React.FC = () => {
 
         <div className={classes.capabilityGrid}>
           {/* Capability 1 */}
-          <div className={classes.capability}>
+          <div
+            className={classes.capability}
+            onMouseEnter={() => setHoveredCapability('granular')}
+            onMouseLeave={() => setHoveredCapability(null)}
+          >
             <div className={classes.capabilityIcon}>
-              <LockIcon width={24} height={24} isHovered={true} />
+              <GranularAccessIcon width={26} height={26} isHovered={hoveredCapability === 'granular'} />
             </div>
             <h3 className={classes.capabilityTitle}>Granular Access Control</h3>
             <p className={classes.capabilityText}>
@@ -171,9 +178,13 @@ const DriveFeature: React.FC = () => {
           </div>
 
           {/* Capability 2 */}
-          <div className={classes.capability}>
+          <div
+            className={classes.capability}
+            onMouseEnter={() => setHoveredCapability('timebomb')}
+            onMouseLeave={() => setHoveredCapability(null)}
+          >
             <div className={classes.capabilityIcon} style={{ backgroundColor: '#FEF3C7', color: '#D97706' }}>
-              <SvgTimer />
+              <TimeBombLinkIcon width={26} height={26} isHovered={hoveredCapability === 'timebomb'} />
             </div>
             <h3 className={classes.capabilityTitle}>Time-Bomb Public Links</h3>
             <p className={classes.capabilityText}>

@@ -731,8 +731,14 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     fontSize: "1.125rem",
     lineHeight: 1,
     padding: "4px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "6px",
+    transition: "all 0.15s ease",
     "&:hover": {
       color: "#0F172A",
+      backgroundColor: "rgba(0, 0, 0, 0.05)",
     },
   },
   inspectorTitle: {
@@ -790,6 +796,10 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     fontWeight: 700,
     cursor: "pointer",
     boxShadow: "0 2px 6px rgba(0, 114, 196, 0.25)",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    transition: "all 0.2s ease",
     "&:hover": {
       backgroundColor: "#005a9e",
     },
@@ -852,6 +862,9 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     fontWeight: 600,
     color: "#475569",
     cursor: "pointer",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "4px",
     transition: "all 0.15s ease",
     "&:hover": {
       borderColor: "#0072C4",

@@ -18,13 +18,14 @@ export const StreamlineIcon: React.FC<IconProps> = ({
       height={height}
       viewBox="0 0 24 24"
       fill="none"
+      style={{ overflow: "visible" }}
       className={`streamline-icon ${isHovered ? "is-hovered" : ""} ${className}`}
       {...props}
     >
       <style>{`
         .rocket-fuselage {
-          transform-origin: 12px 12px;
-          transition: transform 0.38s cubic-bezier(0.34, 1.45, 0.64, 1);
+          transform-origin: 12px 13px;
+          transition: transform 0.35s cubic-bezier(0.34, 1.45, 0.64, 1);
         }
         .rocket-exhaust {
           transform-origin: 4px 20px;
@@ -33,11 +34,11 @@ export const StreamlineIcon: React.FC<IconProps> = ({
         }
         .streamline-icon:hover .rocket-fuselage,
         .streamline-icon.is-hovered .rocket-fuselage {
-          transform: translate(2px, -3px) rotate(-5deg);
+          transform: translate(1px, -1px) rotate(-4deg);
         }
         .streamline-icon:hover .rocket-exhaust,
         .streamline-icon.is-hovered .rocket-exhaust {
-          transform: scale(1.3) translate(-1px, 1px);
+          transform: scale(1.2) translate(-0.5px, 0.5px);
           opacity: 1;
         }
       `}</style>
@@ -49,8 +50,8 @@ export const StreamlineIcon: React.FC<IconProps> = ({
         strokeWidth={2}
         strokeLinecap="round"
       />
-      {/* Rocket Ship Body */}
-      <g className="rocket-fuselage">
+      {/* Rocket Ship Body - Shifted to stay strictly inside viewBox without clipping */}
+      <g className="rocket-fuselage" transform="translate(-0.5, 1.2)">
         <path
           d="M17.42 13.65C23.78 7.29 21.66 2.34 21.66 2.34s-4.95-2.12-11.31 4.24L7.86 6.08c-.65-.13-1.33.08-1.81.55L2 10.69l5 2.14 4.17 4.17 2.14 5 4.05-4.05c.47-.47.68-1.15.55-1.81l-.49-2.49z"
           stroke="currentColor"

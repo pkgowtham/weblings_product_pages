@@ -18,6 +18,18 @@ import {
   ShieldLockIcon,
   SettingsIcon,
   FolderIcon,
+  MicIcon,
+  ClipboardCheckIcon,
+  TicketIcon,
+  DoneIcon,
+  HumanVerificationIcon,
+  InstantIntegrationIcon,
+  AiTicketIcon,
+  GuestAccessIcon,
+  ImmutableHistoryIcon,
+  BulkReassignIcon,
+  WorkflowConfigIcon,
+  HierarchyTreeIcon,
 } from '../../../../../assets/icons_component';
 
 // Apple & Android Store SVGs
@@ -123,10 +135,10 @@ const StreamlineFeature: React.FC = () => {
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 <div className={classes.featureIconWrapper}>
-                  {card.id === 'reassignment' && <BoltIcon width={24} height={24} isHovered={isHovered} />}
-                  {card.id === 'guest' && <HandshakeIcon width={24} height={24} isHovered={isHovered} />}
-                  {card.id === 'workflow' && <SettingsIcon width={24} height={24} isHovered={isHovered} />}
-                  {card.id === 'hierarchy' && <FolderIcon width={24} height={24} isHovered={isHovered} />}
+                  {card.id === 'reassignment' && <BulkReassignIcon width={24} height={24} isHovered={isHovered} />}
+                  {card.id === 'guest' && <GuestAccessIcon width={24} height={24} isHovered={isHovered} />}
+                  {card.id === 'workflow' && <WorkflowConfigIcon width={24} height={24} isHovered={isHovered} />}
+                  {card.id === 'hierarchy' && <HierarchyTreeIcon width={24} height={24} isHovered={isHovered} />}
                 </div>
                 <h3 className={classes.cardTitle}>{card.title}</h3>
                 <p className={classes.cardDescription}>{card.description}</p>
@@ -151,99 +163,154 @@ const StreamlineFeature: React.FC = () => {
           </p>
         </div>
 
-        <div className={classes.splitGrid}>
-          {/* Left Column: Interactive Flow Graphic */}
+        <div className={classes.pipelineContainer}>
           <div className={classes.pipelineGraphicCard}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #EEF2F6', paddingBottom: 12 }}>
-              <span style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#0072C4' }}>
-                AI Scope-to-Sprint Pipeline
-              </span>
-              <span style={{ fontSize: 11, fontWeight: 700, color: '#16A34A', backgroundColor: '#F0FDF4', padding: '2px 8px', borderRadius: 12 }}>
-                Live Active
-              </span>
-            </div>
-
-            {/* Step 1 Graphic Button */}
-            <div
-              className={`${classes.pipelineFlowStep} ${activeStep === 1 ? classes.pipelineFlowStepActive : ''}`}
-              onMouseEnter={() => setActiveStep(1)}
-              onClick={() => setActiveStep(1)}
-              onTouchStart={() => setActiveStep(1)}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className={classes.pipelineStepIconBadge}>
-                <BrainIcon width={20} height={20} isHovered={activeStep === 1} />
+            {/* Pipeline Header Bar */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1.5px solid #EEF2F6', paddingBottom: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#0072C4', display: 'inline-block', boxShadow: '0 0 0 3px rgba(0, 114, 196, 0.2)' }} />
+                <span style={{ fontSize: 13, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.07em', color: '#0072C4' }}>
+                  AI Scope-to-Sprint Pipeline
+                </span>
               </div>
-              <div className={classes.pipelineStepText}>
-                <span className={classes.pipelineStepTitle}>1. Smart Detection</span>
-                <span className={classes.pipelineStepSub}>Extract new client requirements and cross-reference the project baseline.</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, backgroundColor: '#F0FDF4', color: '#15803D', padding: '4px 12px', borderRadius: 20, fontSize: 12, fontWeight: 700, border: '1px solid #BBF7D0' }}>
+                <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#16A34A', display: 'inline-block' }} />
+                <span>Live Active</span>
               </div>
             </div>
 
-            {/* Step 2 Graphic Button */}
-            <div
-              className={`${classes.pipelineFlowStep} ${activeStep === 2 ? classes.pipelineFlowStepActive : ''}`}
-              onMouseEnter={() => setActiveStep(2)}
-              onClick={() => setActiveStep(2)}
-              onTouchStart={() => setActiveStep(2)}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className={classes.pipelineStepIconBadge} style={{ color: '#9333EA', borderColor: '#E9D5FF' }}>
-                <TargetIcon width={20} height={20} isHovered={activeStep === 2} />
-              </div>
-              <div className={classes.pipelineStepText}>
-                <span className={classes.pipelineStepTitle}>2. Human Verification</span>
-                <span className={classes.pipelineStepSub}>Review the generated ticket and approve it as a formal Change of Request.</span>
-              </div>
-            </div>
-
-            {/* Step 3 Graphic Button */}
-            <div
-              className={`${classes.pipelineFlowStep} ${activeStep === 3 ? classes.pipelineFlowStepActive : ''}`}
-              onMouseEnter={() => setActiveStep(3)}
-              onClick={() => setActiveStep(3)}
-              onTouchStart={() => setActiveStep(3)}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className={classes.pipelineStepIconBadge} style={{ color: '#16A34A', borderColor: '#BBF7D0' }}>
-                <TrendingUpIcon width={20} height={20} isHovered={activeStep === 3} />
-              </div>
-              <div className={classes.pipelineStepText}>
-                <span className={classes.pipelineStepTitle}>3. Instant Integration</span>
-                <span className={classes.pipelineStepSub}>Drop the approved ticket into the sprint and notify the team in Chat.</span>
-              </div>
-            </div>
-
-            {/* Dynamic Step Detail Showcase based on hover/touch selection */}
-            {activeStep === 1 && (
-              <div style={{ backgroundColor: '#F8FAFC', borderRadius: 10, padding: '14px 16px', border: '1px solid #E2E8F0', marginTop: 4 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: '#0072C4' }}>🎙️ IN-CALL SPEECH STREAM</span>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: '#16A34A', backgroundColor: '#DCFCE7', padding: '1px 6px', borderRadius: 4 }}>99.4% Match</span>
+            {/* 3 Step Pipeline Cards */}
+            <div className={classes.pipelineStepsRow}>
+              {/* Step 1 */}
+              <div
+                className={`${classes.pipelineFlowStep} ${activeStep === 1 ? classes.pipelineFlowStepActive : ''}`}
+                onMouseEnter={() => setActiveStep(1)}
+                onClick={() => setActiveStep(1)}
+                onTouchStart={() => setActiveStep(1)}
+              >
+                <div className={classes.pipelineStepIconBadge}>
+                  <BrainIcon width={22} height={22} isHovered={activeStep === 1} />
                 </div>
-                <p style={{ fontSize: 12, color: '#334155', fontStyle: 'italic', margin: '0 0 10px 0' }}>
-                  &ldquo;Client: We need OAuth2 Single Sign-On and Okta integration before launch next month.&rdquo;
-                </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: '#0F172A', fontWeight: 600 }}>
-                  <span style={{ backgroundColor: '#0284C7', color: '#FFF', padding: '1px 5px', borderRadius: 3, fontSize: 10, fontWeight: 800 }}>T</span>
-                  <span>Draft Ticket Extracted: <strong>OAuth2 Single Sign-On Flow</strong></span>
+                <div className={classes.pipelineStepText}>
+                  <div className={classes.pipelineStepHeader}>
+                    <span className={classes.pipelineStepTag}>Step 01</span>
+                  </div>
+                  <h4 className={classes.pipelineStepTitle}>Smart Detection</h4>
+                  <p className={classes.pipelineStepSub}>
+                    Extract new client requirements and cross-reference the project baseline.
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div
+                className={`${classes.pipelineFlowStep} ${activeStep === 2 ? classes.pipelineFlowStepActive : ''}`}
+                onMouseEnter={() => setActiveStep(2)}
+                onClick={() => setActiveStep(2)}
+                onTouchStart={() => setActiveStep(2)}
+              >
+                <div className={classes.pipelineStepIconBadge} style={{ color: '#9333EA', borderColor: '#E9D5FF', backgroundColor: activeStep === 2 ? '#FAF5FF' : '#FFFFFF' }}>
+                  <HumanVerificationIcon width={22} height={22} isHovered={activeStep === 2} />
+                </div>
+                <div className={classes.pipelineStepText}>
+                  <div className={classes.pipelineStepHeader}>
+                    <span className={classes.pipelineStepTag} style={{ backgroundColor: '#F3E8FF', color: '#9333EA' }}>Step 02</span>
+                  </div>
+                  <h4 className={classes.pipelineStepTitle}>Human Verification</h4>
+                  <p className={classes.pipelineStepSub}>
+                    Review the generated ticket and approve it as a formal Change of Request.
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div
+                className={`${classes.pipelineFlowStep} ${activeStep === 3 ? classes.pipelineFlowStepActive : ''}`}
+                onMouseEnter={() => setActiveStep(3)}
+                onClick={() => setActiveStep(3)}
+                onTouchStart={() => setActiveStep(3)}
+              >
+                <div className={classes.pipelineStepIconBadge} style={{ color: '#16A34A', borderColor: '#BBF7D0', backgroundColor: activeStep === 3 ? '#F0FDF4' : '#FFFFFF' }}>
+                  <InstantIntegrationIcon width={22} height={22} isHovered={activeStep === 3} />
+                </div>
+                <div className={classes.pipelineStepText}>
+                  <div className={classes.pipelineStepHeader}>
+                    <span className={classes.pipelineStepTag} style={{ backgroundColor: '#DCFCE7', color: '#15803D' }}>Step 03</span>
+                  </div>
+                  <h4 className={classes.pipelineStepTitle}>Instant Integration</h4>
+                  <p className={classes.pipelineStepSub}>
+                    Drop the approved ticket into the sprint and notify the team in Chat.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Dynamic Step Detail Showcase */}
+            {activeStep === 1 && (
+              <div className={classes.pipelineShowcaseCard} style={{ backgroundColor: '#F8FAFC', borderColor: '#BFDBFE' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div style={{ width: 34, height: 34, borderRadius: 8, backgroundColor: '#EFF6FF', border: '1px solid #DBEAFE', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0072C4' }}>
+                      <MicIcon width={18} height={18} isHovered={true} />
+                    </div>
+                    <span style={{ fontSize: 13, fontWeight: 800, color: '#0072C4', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                      In-Call Speech Stream
+                    </span>
+                  </div>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#15803D', backgroundColor: '#DCFCE7', padding: '4px 12px', borderRadius: 20, display: 'flex', alignItems: 'center', gap: 6, border: '1px solid #BBF7D0' }}>
+                    <DoneIcon width={13} height={13} fill="#15803D" />
+                    99.4% Match
+                  </span>
+                </div>
+                <div style={{ backgroundColor: '#FFFFFF', borderRadius: 10, padding: '16px 20px', border: '1px solid #E2E8F0', marginBottom: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
+                  <p style={{ fontSize: 14, color: '#334155', fontStyle: 'italic', margin: 0, lineHeight: 1.6 }}>
+                    &ldquo;Client: We need OAuth2 Single Sign-On and Okta integration before launch next month.&rdquo;
+                  </p>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: '#0F172A', fontWeight: 600 }}>
+                    <div style={{ width: 30, height: 30, borderRadius: 6, backgroundColor: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF' }}>
+                      <TicketIcon width={17} height={17} />
+                    </div>
+                    <span>Draft Ticket Extracted: <strong style={{ color: '#0072C4' }}>OAuth2 Single Sign-On Flow</strong></span>
+                  </div>
+                  <span style={{ fontSize: 12, color: '#64748B', fontWeight: 600, backgroundColor: '#F1F5F9', padding: '4px 12px', borderRadius: 6 }}>
+                    Auto-Tagged: Security • +13 Pts
+                  </span>
                 </div>
               </div>
             )}
 
             {activeStep === 2 && (
-              <div style={{ backgroundColor: '#FAF5FF', borderRadius: 10, padding: '14px 16px', border: '1px solid #E9D5FF', marginTop: 4 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: '#9333EA' }}>📋 SCOPE CHANGE APPROVAL</span>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: '#6B21A8', backgroundColor: '#F3E8FF', padding: '1px 6px', borderRadius: 4 }}>Pending 1-Click Approval</span>
+              <div className={classes.pipelineShowcaseCard} style={{ backgroundColor: '#FAF5FF', borderColor: '#E9D5FF' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div style={{ width: 34, height: 34, borderRadius: 8, backgroundColor: '#F3E8FF', border: '1px solid #E9D5FF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9333EA' }}>
+                      <ClipboardCheckIcon width={18} height={18} isHovered={true} />
+                    </div>
+                    <span style={{ fontSize: 13, fontWeight: 800, color: '#9333EA', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                      Scope Change Approval
+                    </span>
+                  </div>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#6B21A8', backgroundColor: '#F3E8FF', padding: '4px 12px', borderRadius: 20, border: '1px solid #E9D5FF' }}>
+                    Pending 1-Click Approval
+                  </span>
                 </div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#0F172A', marginBottom: 4 }}>Change Request #CR-104: Enterprise SSO</div>
-                <div style={{ fontSize: 11, color: '#64748B', marginBottom: 10 }}>Scope delta: +13 Story Points • Assigned: @alex.smith</div>
-                <div style={{ display: 'flex', gap: 8 }}>
-                  <button style={{ backgroundColor: '#9333EA', color: '#FFF', border: 'none', borderRadius: 6, fontSize: 11, fontWeight: 700, padding: '5px 12px', cursor: 'pointer' }}>
-                    ✓ Approve &amp; Sync to Sprint
+                <div style={{ backgroundColor: '#FFFFFF', borderRadius: 10, padding: '16px 20px', border: '1px solid #E9D5FF', marginBottom: 16, boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: '#0F172A', marginBottom: 6 }}>
+                    Change Request #CR-104: Enterprise SSO
+                  </div>
+                  <div style={{ fontSize: 13, color: '#64748B' }}>
+                    Scope delta: <strong>+13 Story Points</strong> • Assigned: <strong>@alex.smith</strong> • Target: Sprint 2
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                  <button style={{ display: 'flex', alignItems: 'center', gap: 8, backgroundColor: '#9333EA', color: '#FFF', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 700, padding: '10px 20px', cursor: 'pointer', boxShadow: '0 4px 12px rgba(147, 51, 234, 0.25)' }}>
+                    <DoneIcon width={15} height={15} fill="#FFFFFF" />
+                    Approve &amp; Sync to Sprint
                   </button>
-                  <button style={{ backgroundColor: '#FFF', color: '#64748B', border: '1px solid #CBD5E1', borderRadius: 6, fontSize: 11, fontWeight: 600, padding: '5px 10px', cursor: 'pointer' }}>
+                  <button style={{ display: 'flex', alignItems: 'center', gap: 6, backgroundColor: '#FFF', color: '#64748B', border: '1px solid #CBD5E1', borderRadius: 8, fontSize: 13, fontWeight: 600, padding: '10px 18px', cursor: 'pointer' }}>
+                    <SettingsIcon width={15} height={15} />
                     Edit Scope
                   </button>
                 </div>
@@ -251,79 +318,48 @@ const StreamlineFeature: React.FC = () => {
             )}
 
             {activeStep === 3 && (
-              <div style={{ backgroundColor: '#F0FDF4', borderRadius: 10, padding: '14px 16px', border: '1px solid #BBF7D0', marginTop: 4 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: '#16A34A' }}>🚀 SPRINT BACKLOG SYNCED</span>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: '#15803D', backgroundColor: '#DCFCE7', padding: '1px 6px', borderRadius: 4 }}>Active in Sprint 2</span>
+              <div className={classes.pipelineShowcaseCard} style={{ backgroundColor: '#F0FDF4', borderColor: '#BBF7D0' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div style={{ width: 34, height: 34, borderRadius: 8, backgroundColor: '#DCFCE7', border: '1px solid #BBF7D0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#16A34A' }}>
+                      <StreamlineIcon width={18} height={18} isHovered={true} />
+                    </div>
+                    <span style={{ fontSize: 13, fontWeight: 800, color: '#16A34A', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                      Sprint Backlog Synced
+                    </span>
+                  </div>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#15803D', backgroundColor: '#DCFCE7', padding: '4px 12px', borderRadius: 20, border: '1px solid #BBF7D0' }}>
+                    Active in Sprint 2
+                  </span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                  <span style={{ backgroundColor: '#0284C7', color: '#FFF', padding: '1px 5px', borderRadius: 3, fontSize: 10, fontWeight: 800 }}>T</span>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#0F172A' }}>STR-112 OAuth2 Single Sign-On Flow</span>
+                <div style={{ backgroundColor: '#FFFFFF', borderRadius: 10, padding: '16px 20px', border: '1px solid #BBF7D0', marginBottom: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <div style={{ width: 30, height: 30, borderRadius: 6, backgroundColor: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF' }}>
+                        <TicketIcon width={17} height={17} />
+                      </div>
+                      <span style={{ fontSize: 14, fontWeight: 700, color: '#0F172A' }}>
+                        STR-112 OAuth2 Single Sign-On Flow
+                      </span>
+                    </div>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: '#0284C7', backgroundColor: '#E0F2FE', padding: '4px 10px', borderRadius: 6 }}>
+                      IN PROGRESS
+                    </span>
+                  </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 11, color: '#64748B' }}>
-                  <span>Owner: <strong>@alex.smith</strong></span>
-                  <span style={{ color: '#16A34A', fontWeight: 600 }}>Team Pings Dispatched ✓</span>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 13, color: '#64748B', flexWrap: 'wrap', gap: 8 }}>
+                  <span>Owner: <strong style={{ color: '#0F172A' }}>@alex.smith</strong></span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#16A34A', fontWeight: 700 }}>
+                    <DoneIcon width={15} height={15} fill="#16A34A" />
+                    Team Pings Dispatched
+                  </span>
                 </div>
               </div>
             )}
           </div>
-
-          {/* Right Column: Copy & Stepper */}
-          <div>
-            <h3 className={classes.sectionTitle}>Automated Scope-to-Sprint Pipeline</h3>
-            <p className={classes.sectionDescription} style={{ marginBottom: 24 }}>
-              When a client drops a new requirement, AI catches it, drafts the exact ticket, and queues it for one-click human approval.
-            </p>
-
-            <div className={classes.stepperList}>
-              <div
-                className={`${classes.stepItem} ${activeStep === 1 ? classes.stepItemActive : ''}`}
-                onMouseEnter={() => setActiveStep(1)}
-                onClick={() => setActiveStep(1)}
-                onTouchStart={() => setActiveStep(1)}
-              >
-                <div className={classes.stepNumberBadge}>1</div>
-                <div>
-                  <h4 className={classes.cardTitle} style={{ marginBottom: 4 }}>Smart Detection</h4>
-                  <p className={classes.cardDescription}>
-                    Extract new client requirements and cross-reference the project baseline.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                className={`${classes.stepItem} ${activeStep === 2 ? classes.stepItemActive : ''}`}
-                onMouseEnter={() => setActiveStep(2)}
-                onClick={() => setActiveStep(2)}
-                onTouchStart={() => setActiveStep(2)}
-              >
-                <div className={classes.stepNumberBadge} style={{ backgroundColor: '#9333EA' }}>2</div>
-                <div>
-                  <h4 className={classes.cardTitle} style={{ marginBottom: 4 }}>Human Verification</h4>
-                  <p className={classes.cardDescription}>
-                    Review the generated ticket and approve it as a formal Change of Request.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                className={`${classes.stepItem} ${activeStep === 3 ? classes.stepItemActive : ''}`}
-                onMouseEnter={() => setActiveStep(3)}
-                onClick={() => setActiveStep(3)}
-                onTouchStart={() => setActiveStep(3)}
-              >
-                <div className={classes.stepNumberBadge} style={{ backgroundColor: '#16A34A' }}>3</div>
-                <div>
-                  <h4 className={classes.cardTitle} style={{ marginBottom: 4 }}>Instant Integration</h4>
-                  <p className={classes.cardDescription}>
-                    Drop the approved ticket into the sprint and notify the team in Chat.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
+
 
       {/* ─────────────────────────────────────────────────────────────────── */}
       {/* SECTION 3: INTELLIGENT DISCOVERY & SEMANTIC VECTOR SEARCH */}
@@ -443,7 +479,7 @@ const StreamlineFeature: React.FC = () => {
             onMouseLeave={() => setHoveredIncludedCard(null)}
           >
             <div className={classes.featureIconWrapper}>
-              <BoltIcon width={22} height={22} isHovered={hoveredIncludedCard === 1} />
+              <AiTicketIcon width={22} height={22} isHovered={hoveredIncludedCard === 1} />
             </div>
             <h4 className={classes.cardTitle}>AI Auto-Ticket Creation</h4>
             <p className={classes.cardDescription}>Turn meeting requirements into assignable tickets.</p>
@@ -455,7 +491,7 @@ const StreamlineFeature: React.FC = () => {
             onMouseLeave={() => setHoveredIncludedCard(null)}
           >
             <div className={classes.featureIconWrapper}>
-              <HandshakeIcon width={22} height={22} isHovered={hoveredIncludedCard === 2} />
+              <GuestAccessIcon width={22} height={22} isHovered={hoveredIncludedCard === 2} />
             </div>
             <h4 className={classes.cardTitle}>Guest Access</h4>
             <p className={classes.cardDescription}>Collaborate with clients without extra seats.</p>
@@ -479,7 +515,7 @@ const StreamlineFeature: React.FC = () => {
             onMouseLeave={() => setHoveredIncludedCard(null)}
           >
             <div className={classes.featureIconWrapper}>
-              <ShieldLockIcon width={22} height={22} isHovered={hoveredIncludedCard === 4} />
+              <ImmutableHistoryIcon width={22} height={22} isHovered={hoveredIncludedCard === 4} />
             </div>
             <h4 className={classes.cardTitle}>Immutable History</h4>
             <p className={classes.cardDescription}>Keep every project change accountable.</p>
