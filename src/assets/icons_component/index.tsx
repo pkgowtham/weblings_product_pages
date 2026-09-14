@@ -4,6 +4,7 @@ export { default as ConnectIcon } from "./ConnectIcon";
 export { default as StreamlineIcon } from "./StreamlineIcon";
 export { default as EOfficeIcon } from "./EOfficeIcon";
 export { default as WorksuiteIcon } from "./WorksuiteIcon";
+export { default as DriveIcon } from "./DriveIcon";
 export { default as DoneIcon, DoneIcon as DoneIconNamed } from "./DoneIcon";
 export { default as WeblogoIcon } from "./WeblogoIcon";
 
@@ -26,3 +27,18 @@ export { default as HandshakeIcon } from "./HandshakeIcon";
 export { default as CloudServerIcon } from "./CloudServerIcon";
 export { default as ShieldLockIcon } from "./ShieldLockIcon";
 export { default as DoorOpenIcon } from "./DoorOpenIcon";
+
+// Animated Icon Components for Calendar and Mail
+export { default as PhoneCallIcon } from "./PhoneCallIcon";
+export { default as TargetIcon } from "./TargetIcon";
+export { default as UtensilsIcon } from "./UtensilsIcon";
+export { default as PlaneIcon } from "./PlaneIcon";
+export { default as SettingsIcon } from "./SettingsIcon";
+export { default as VirusShieldIcon } from "./VirusShieldIcon";
+export { default as InfinityIcon } from "./InfinityIcon";
+export { default as FolderZipIcon, default as FolderIcon } from "./FolderZipIcon";
+export { default as CartCheckIcon, default as CartIcon } from "./CartCheckIcon";
+export { default as SearchIcon } from "./SearchIcon";
+export { default as TagIcon } from "./TagIcon";
+export { default as UserIcon } from "./UserIcon";
+export { default as ShieldCheckIcon } from "./ShieldCheckIcon";

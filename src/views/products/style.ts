@@ -861,7 +861,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     "&:hover": {
       boxShadow: "0 20px 35px -5px rgba(0, 114, 196, 0.12), 0 10px 10px -5px rgba(15, 23, 42, 0.04)",
       "& .phone-body": {
-        animation: "dotToPhoneGrow 0.5s cubic-bezier(0.34, 1.45, 0.64, 1) forwards",
+        animation: "phoneTiltLeftRight 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards",
       },
       "& .trending-group": {
         animation: "growLeftRightChart 0.5s cubic-bezier(0.2, 0.9, 0.4, 1) forwards",

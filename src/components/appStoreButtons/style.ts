@@ -1,0 +1,117 @@
+import { createUseStyles } from "react-jss";
+import { Theme } from "../../theme/themeType";
+
+export const useStyles = createUseStyles((theme: Theme) => ({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  containerCenter: {
+    alignItems: "center",
+    textAlign: "center",
+    width: "100%",
+  },
+  downloadButtonsRow: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    gap: "16px",
+    marginTop: "28px",
+  },
+  downloadButtonsRowCenter: {
+    justifyContent: "center",
+  },
+  storeButton: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: "14px",
+    padding: "12px 22px",
+    borderRadius: "14px",
+    backgroundColor: "#0F172A",
+    color: "#FFFFFF",
+    textDecoration: "none",
+    boxShadow: "0 10px 25px -4px rgba(15, 23, 42, 0.18)",
+    border: "1px solid rgba(255, 255, 255, 0.12)",
+    transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
+    cursor: "pointer",
+    boxSizing: "border-box",
+    minWidth: "190px",
+    height: "56px",
+    "&:hover": {
+      backgroundColor: "#1E293B",
+      transform: "translateY(-3px)",
+      boxShadow: "0 16px 32px -4px rgba(0, 114, 196, 0.25)",
+      borderColor: "rgba(0, 114, 196, 0.4)",
+    },
+    "@media (max-width: 480px)": {
+      padding: "10px 18px",
+      gap: "12px",
+      minWidth: "160px",
+      height: "52px",
+    },
+  },
+  storeIcon: {
+    width: "24px",
+    height: "24px",
+    color: "#FFFFFF",
+    flexShrink: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  storeTextCol: {
+    display: "flex",
+    flexDirection: "column",
+    textAlign: "left",
+  },
+  storeSubtitle: {
+    fontSize: "0.6875rem",
+    textTransform: "uppercase",
+    letterSpacing: "0.06em",
+    opacity: 0.8,
+    fontWeight: 600,
+    lineHeight: 1.1,
+  },
+  storeTitle: {
+    fontSize: "0.9375rem",
+    fontWeight: 700,
+    lineHeight: 1.25,
+    marginTop: "2px",
+    color: "#FFFFFF",
+  },
+  reviewsRow: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    gap: "14px",
+    marginTop: "32px",
+    paddingTop: "24px",
+    borderTop: "1px solid #E2E8F0",
+  },
+  reviewsRowCenter: {
+    justifyContent: "center",
+    width: "100%",
+  },
+  starRatingGroup: {
+    display: "flex",
+    alignItems: "center",
+    gap: "4px",
+  },
+  starsGroup: {
+    display: "flex",
+    color: "#F59E0B",
+    gap: "2px",
+  },
+  ratingNumber: {
+    marginLeft: "6px",
+    fontSize: "1.125rem",
+    fontWeight: 800,
+    color: "#0F172A",
+  },
+  reviewsCountText: {
+    fontSize: "0.875rem",
+    color: "#64748B",
+    fontWeight: 500,
+  },
+}));

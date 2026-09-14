@@ -1,20 +1,26 @@
 'use client';
 
 import React, { useState } from 'react';
+import clsx from 'clsx';
 import { useStyles } from './style';
+import AppStoreButtons from '../../../../../components/appStoreButtons';
 import {
-  SvgMailIcon,
-  SvgShieldIcon,
-  SvgSettingsIcon,
-  SvgVirusIcon,
-  SvgInfinityIcon,
-  SvgFolderIcon,
-  SvgCartIcon,
-  SvgSearch,
-  SvgBrainIcon,
-  SvgTagIcon,
-  SvgUserIcon,
-} from '../../../../../components/svg/CustomIcons';
+  MailIcon,
+  ShieldLockIcon,
+  SettingsIcon,
+  VirusShieldIcon,
+  InfinityIcon,
+  FolderIcon,
+  CartIcon,
+  SearchIcon,
+  BrainIcon,
+  TagIcon,
+  UserIcon,
+  BoltIcon,
+  GlobeIcon,
+  MessageSquareIcon,
+  ClipboardCheckIcon,
+} from '../../../../../assets/icons_component';
 
 import WeblingsMailMockup from '../../../../../components/mailMockup/index';
 import PhoneMockup from '../../../../../components/phoneMockup/index';
@@ -22,33 +28,6 @@ import PhoneMockup from '../../../../../components/phoneMockup/index';
 /* ─────────────────────────────────────────────────────────────
    INLINE ACCENT SVG ICONS
    ───────────────────────────────────────────────────────────── */
-const SvgGlobe = ({ width = 22, height = 22 }: { width?: number; height?: number }) => (
-  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <line x1="2" y1="12" x2="22" y2="12" />
-    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-  </svg>
-);
-
-const SvgBolt = ({ width = 13, height = 13 }: { width?: number; height?: number }) => (
-  <svg width={width} height={height} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-  </svg>
-);
-
-const SvgChat = ({ width = 16, height = 16 }: { width?: number; height?: number }) => (
-  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-  </svg>
-);
-
-const SvgTask = ({ width = 16, height = 16 }: { width?: number; height?: number }) => (
-  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 11l3 3L22 4" />
-    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-  </svg>
-);
-
 const SvgArrowRight = ({ width = 15, height = 15 }: { width?: number; height?: number }) => (
   <svg width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
     <line x1="5" y1="12" x2="19" y2="12" />
@@ -80,6 +59,11 @@ const MailFeature = () => {
   // Interactive step selection state
   const [activeStep, setActiveStep] = useState<number>(2);
 
+  // Hover states for interactive card micro-animations
+  const [hoveredSecCard, setHoveredSecCard] = useState<number | null>(null);
+  const [hoveredBenefitCard, setHoveredBenefitCard] = useState<number | null>(null);
+  const [hoveredIntelligentCard, setHoveredIntelligentCard] = useState<string | null>(null);
+
   return (
     <div className={classes.page}>
       {/* ─────────────────────────────────────────────────────────────
@@ -89,7 +73,7 @@ const MailFeature = () => {
         <div className={classes.glow} />
         <div className={classes.heroContent}>
           <div className={classes.heroBadge}>
-            <SvgMailIcon width={16} height={16} /> Weblings Inbox
+            <MailIcon width={16} height={16} /> Weblings Inbox
           </div>
           <h1 className={classes.heroTitle}>
             Enterprise Email Hosting.
@@ -117,7 +101,7 @@ const MailFeature = () => {
         <div className={classes.container}>
           <div className={classes.splitGrid}>
             {/* Left Column: Narrative & Interactive Stepper Timeline */}
-            <div>
+            <div className={classes.gridCol}>
               <div className={classes.eyebrowPill}>
                 <span className={classes.pingDot} />
                 <span className={classes.eyebrowText}>ZERO-DAY ONBOARDING</span>
@@ -136,15 +120,52 @@ const MailFeature = () => {
               <div className={classes.timelineWrapper}>
                 <div className={classes.timelineLine} />
 
+                {/* Mobile Quick Step Selector Bar */}
+                <div className={classes.mobileQuickTabs}>
+                  <button
+                    type="button"
+                    className={activeStep === 1 ? classes.mobileQuickTabBtnActive : classes.mobileQuickTabBtn}
+                    onClick={() => setActiveStep(1)}
+                  >
+                    <span className={activeStep === 1 ? classes.mobileQuickTabNumActive : classes.mobileQuickTabNum}>1</span>
+                    <span>HR Profile</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={activeStep === 2 ? classes.mobileQuickTabBtnActive : classes.mobileQuickTabBtn}
+                    onClick={() => setActiveStep(2)}
+                  >
+                    <span className={activeStep === 2 ? classes.mobileQuickTabNumActive : classes.mobileQuickTabNum}>2</span>
+                    <span>Email</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={activeStep === 3 ? classes.mobileQuickTabBtnActive : classes.mobileQuickTabBtn}
+                    onClick={() => setActiveStep(3)}
+                  >
+                    <span className={activeStep === 3 ? classes.mobileQuickTabNumActive : classes.mobileQuickTabNum}>3</span>
+                    <span>Ready</span>
+                  </button>
+                </div>
+
                 {/* Step 1 */}
                 <div
                   className={classes.stepItem}
                   onClick={() => setActiveStep(1)}
+                  onMouseEnter={() => setActiveStep(1)}
                 >
                   <div className={activeStep === 1 ? classes.stepNumberCircleActive : classes.stepNumberCircle}>
                     1
                   </div>
                   <div className={activeStep === 1 ? classes.stepContentBoxActive : classes.stepContentBox}>
+                    {/* Mobile Header with integrated step badge */}
+                    <div className={classes.mobileCardHeader}>
+                      <div className={classes.mobileBadgeAndTitle}>
+                        <span className={activeStep === 1 ? classes.mobileStepBadgeActive : classes.mobileStepBadge}>1</span>
+                        <h3 className={classes.stepTitle}>HR Creates the Profile</h3>
+                      </div>
+                    </div>
+                    {/* Desktop Header */}
                     <div className={classes.stepTitleRow}>
                       <h3 className={classes.stepTitle}>HR Creates the Profile</h3>
                     </div>
@@ -154,15 +175,30 @@ const MailFeature = () => {
                   </div>
                 </div>
 
+                {/* Mobile Step Connector 1 -> 2 */}
+                <div className={classes.mobileStepConnector}>
+                  <div className={classes.mobileConnectorLine} />
+                </div>
+
                 {/* Step 2 */}
                 <div
                   className={classes.stepItem}
                   onClick={() => setActiveStep(2)}
+                  onMouseEnter={() => setActiveStep(2)}
                 >
                   <div className={activeStep === 2 ? classes.stepNumberCircleActive : classes.stepNumberCircle}>
                     2
                   </div>
                   <div className={activeStep === 2 ? classes.stepContentBoxActive : classes.stepContentBox}>
+                    {/* Mobile Header with integrated step badge */}
+                    <div className={classes.mobileCardHeader}>
+                      <div className={classes.mobileBadgeAndTitle}>
+                        <span className={activeStep === 2 ? classes.mobileStepBadgeActive : classes.mobileStepBadge}>2</span>
+                        <h3 className={classes.stepTitle}>Instant Email Allocation</h3>
+                      </div>
+                      <span className={classes.stepTag}>Auto-Provision</span>
+                    </div>
+                    {/* Desktop Header */}
                     <div className={classes.stepTitleRow}>
                       <h3 className={classes.stepTitle}>Instant Email Allocation</h3>
                       <span className={classes.stepTag}>Auto-Provision</span>
@@ -173,15 +209,29 @@ const MailFeature = () => {
                   </div>
                 </div>
 
+                {/* Mobile Step Connector 2 -> 3 */}
+                <div className={classes.mobileStepConnector}>
+                  <div className={classes.mobileConnectorLine} />
+                </div>
+
                 {/* Step 3 */}
                 <div
                   className={classes.stepItem}
                   onClick={() => setActiveStep(3)}
+                  onMouseEnter={() => setActiveStep(3)}
                 >
                   <div className={activeStep === 3 ? classes.stepNumberCircleActive : classes.stepNumberCircle}>
                     3
                   </div>
                   <div className={activeStep === 3 ? classes.stepContentBoxActive : classes.stepContentBox}>
+                    {/* Mobile Header with integrated step badge */}
+                    <div className={classes.mobileCardHeader}>
+                      <div className={classes.mobileBadgeAndTitle}>
+                        <span className={activeStep === 3 ? classes.mobileStepBadgeActive : classes.mobileStepBadge}>3</span>
+                        <h3 className={classes.stepTitle}>Ready to Work</h3>
+                      </div>
+                    </div>
+                    {/* Desktop Header */}
                     <div className={classes.stepTitleRow}>
                       <h3 className={classes.stepTitle}>Ready to Work</h3>
                     </div>
@@ -194,7 +244,7 @@ const MailFeature = () => {
             </div>
 
             {/* Right Column: Interactive Glass Showcase Card */}
-            <div>
+            <div className={classes.gridCol}>
               <div className={classes.glassShowcaseCard}>
                 {/* Window Chrome Bar */}
                 <div className={classes.glassWindowBar}>
@@ -209,38 +259,38 @@ const MailFeature = () => {
 
                 {/* Canvas Flow Nodes */}
                 <div className={classes.canvasFlow}>
-                  {/* Top Node */}
-                  <div className={classes.nodeRow}>
+                  {/* Top Node (Step 1) */}
+                  <div className={clsx(classes.nodeRow, activeStep === 1 && classes.nodeRowHighlighted)}>
                     <div className={classes.nodeLeft}>
-                      <div className={classes.nodeIconBox}>
-                        <SvgUserIcon width={16} height={16} />
+                      <div className={clsx(classes.nodeIconBox, activeStep === 1 && classes.nodeIconBoxBrand)}>
+                        <UserIcon width={16} height={16} isHovered={activeStep === 1} />
                       </div>
                       <span className={classes.nodeTitle}>Add Employee: Alex Smith</span>
                     </div>
-                    <span className={classes.nodeTag}>E-Office</span>
+                    <span className={clsx(classes.nodeTag, activeStep === 1 && classes.nodeTagActive)}>E-Office</span>
                   </div>
 
                   {/* Pulsing Connector */}
-                  <div className={classes.connectorPulsing}>
+                  <div className={clsx(classes.connectorPulsing, activeStep >= 2 && classes.connectorPulsingActive)}>
                     <span className={classes.connectorPingDot} />
                   </div>
 
-                  {/* Highlight Node */}
-                  <div className={classes.nodeRowHighlighted}>
+                  {/* Highlight Node (Step 2) */}
+                  <div className={clsx(classes.nodeRow, activeStep === 2 && classes.nodeRowHighlighted)}>
                     <div className={classes.nodeLeft}>
-                      <div className={classes.nodeIconBoxBrand}>
-                        <SvgMailIcon width={16} height={16} />
+                      <div className={clsx(classes.nodeIconBox, activeStep === 2 && classes.nodeIconBoxBrand)}>
+                        <MailIcon width={16} height={16} isHovered={activeStep === 2} />
                       </div>
                       <span className={classes.nodeEmailText}>alex@ny-branch.com</span>
                     </div>
                     <div className={classes.nodeSpeedBadge}>
-                      <SvgBolt />
+                      <BoltIcon width={13} height={13} isHovered={activeStep === 2} />
                       <span>0.4s</span>
                     </div>
                   </div>
 
                   {/* Branching Fork Connectors */}
-                  <div className={classes.branchingFork}>
+                  <div className={clsx(classes.branchingFork, activeStep === 3 && classes.branchingForkActive)}>
                     <div className={classes.forkTopStem} />
                     <div className={classes.forkBar} />
                     <div className={classes.forkBottomStems}>
@@ -249,14 +299,14 @@ const MailFeature = () => {
                     </div>
                   </div>
 
-                  {/* Bottom Output Nodes */}
+                  {/* Bottom Output Nodes (Step 3) */}
                   <div className={classes.bottomNodesGrid}>
-                    <div className={classes.bottomNodeCard}>
-                      <SvgChat width={15} height={15} />
+                    <div className={clsx(classes.bottomNodeCard, activeStep === 3 && classes.bottomNodeCardHighlighted)}>
+                      <MessageSquareIcon width={15} height={15} isHovered={activeStep === 3} />
                       <span>Added to Chat</span>
                     </div>
-                    <div className={classes.bottomNodeCard}>
-                      <SvgTask width={15} height={15} />
+                    <div className={clsx(classes.bottomNodeCard, activeStep === 3 && classes.bottomNodeCardHighlighted)}>
+                      <ClipboardCheckIcon width={15} height={15} isHovered={activeStep === 3} />
                       <span>Added to Streamline</span>
                     </div>
                   </div>
@@ -266,9 +316,11 @@ const MailFeature = () => {
                 <div className={classes.glassCardFooter}>
                   <span className={classes.footerStatusOk}>
                     <span className={classes.footerDotGreen} />
-                    Webhook dispatched
+                    {activeStep === 1 && "Profile synced • Branch NY selected"}
+                    {activeStep === 2 && "Auto-provisioned • alex@ny-branch.com"}
+                    {activeStep === 3 && "Webhook dispatched • Chat & Streamline ready"}
                   </span>
-                  <span>HTTP 201 OK</span>
+                  <span>{activeStep === 3 ? "HTTP 200 OK" : "HTTP 201 CREATED"}</span>
                 </div>
               </div>
             </div>
@@ -297,7 +349,7 @@ const MailFeature = () => {
             <div className={classes.topologyHeaderRow}>
               <div className={classes.topologyHeaderLeft}>
                 <div className={classes.topologyIconBox}>
-                  <SvgGlobe width={22} height={22} />
+                  <GlobeIcon width={22} height={22} />
                 </div>
                 <div>
                   <h3 className={classes.topologyTitle}>Anycast Routing Fabric</h3>
@@ -307,10 +359,10 @@ const MailFeature = () => {
 
               <div className={classes.topologyBadgesRow}>
                 <span className={classes.complianceBadgePositive}>
-                  <SvgShieldIcon width={14} height={14} /> TLS 1.3 / E2EE
+                  <ShieldLockIcon width={14} height={14} /> TLS 1.3 / E2EE
                 </span>
                 <span className={classes.complianceBadgeBrand}>
-                  <SvgShieldIcon width={14} height={14} /> Quantum-Resistant
+                  <ShieldLockIcon width={14} height={14} /> Quantum-Resistant
                 </span>
               </div>
             </div>
@@ -389,9 +441,13 @@ const MailFeature = () => {
 
           {/* 3 Supporting Security Pillar Cards */}
           <div className={classes.securityGridThree}>
-            <div className={classes.securityMiniCard}>
-              <div className={classes.securityIconBox}>
-                <SvgShieldIcon width={22} height={22} />
+            <div
+              className={classes.securityMiniCard}
+              onMouseEnter={() => setHoveredSecCard(1)}
+              onMouseLeave={() => setHoveredSecCard(null)}
+            >
+              <div className={clsx(classes.securityIconBox, classes.securityIconBlue)}>
+                <ShieldLockIcon width={22} height={22} isHovered={hoveredSecCard === 1} />
               </div>
               <h3 className={classes.securityCardTitle}>Advanced Anti-Phishing</h3>
               <p className={classes.securityCardText}>
@@ -399,9 +455,13 @@ const MailFeature = () => {
               </p>
             </div>
 
-            <div className={classes.securityMiniCard}>
-              <div className={classes.securityIconBox}>
-                <SvgSettingsIcon width={22} height={22} />
+            <div
+              className={classes.securityMiniCard}
+              onMouseEnter={() => setHoveredSecCard(2)}
+              onMouseLeave={() => setHoveredSecCard(null)}
+            >
+              <div className={clsx(classes.securityIconBox, classes.securityIconPurple)}>
+                <SettingsIcon width={22} height={22} isHovered={hoveredSecCard === 2} />
               </div>
               <h3 className={classes.securityCardTitle}>Zero-Headache DNS</h3>
               <p className={classes.securityCardText}>
@@ -409,9 +469,13 @@ const MailFeature = () => {
               </p>
             </div>
 
-            <div className={classes.securityMiniCard}>
-              <div className={classes.securityIconBox}>
-                <SvgVirusIcon width={22} height={22} />
+            <div
+              className={classes.securityMiniCard}
+              onMouseEnter={() => setHoveredSecCard(3)}
+              onMouseLeave={() => setHoveredSecCard(null)}
+            >
+              <div className={clsx(classes.securityIconBox, classes.securityIconRose)}>
+                <VirusShieldIcon width={22} height={22} isHovered={hoveredSecCard === 3} />
               </div>
               <h3 className={classes.securityCardTitle}>Edge-Level Antivirus</h3>
               <p className={classes.securityCardText}>
@@ -439,9 +503,13 @@ const MailFeature = () => {
 
           <div className={classes.fourCardsGrid}>
             {/* Card 1 */}
-            <div className={classes.featureBenefitCard}>
-              <div className={classes.featureBenefitIconBox}>
-                <SvgInfinityIcon width={24} height={24} />
+            <div
+              className={clsx(classes.featureBenefitCard, classes.benefitCardBlue)}
+              onMouseEnter={() => setHoveredBenefitCard(1)}
+              onMouseLeave={() => setHoveredBenefitCard(null)}
+            >
+              <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconBlue)}>
+                <InfinityIcon width={24} height={24} isHovered={hoveredBenefitCard === 1} />
               </div>
               <h3 className={classes.featureBenefitTitle}>Unlimited Addresses</h3>
               <p className={classes.featureBenefitText}>
@@ -454,9 +522,13 @@ const MailFeature = () => {
             </div>
 
             {/* Card 2 */}
-            <div className={classes.featureBenefitCard}>
-              <div className={classes.featureBenefitIconBox}>
-                <SvgFolderIcon width={24} height={24} />
+            <div
+              className={clsx(classes.featureBenefitCard, classes.benefitCardPurple)}
+              onMouseEnter={() => setHoveredBenefitCard(2)}
+              onMouseLeave={() => setHoveredBenefitCard(null)}
+            >
+              <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconPurple)}>
+                <FolderIcon width={24} height={24} isHovered={hoveredBenefitCard === 2} />
               </div>
               <h3 className={classes.featureBenefitTitle}>Massive 10GB Attachments</h3>
               <p className={classes.featureBenefitText}>
@@ -469,9 +541,13 @@ const MailFeature = () => {
             </div>
 
             {/* Card 3 */}
-            <div className={classes.featureBenefitCard}>
-              <div className={classes.featureBenefitIconBox}>
-                <SvgCartIcon width={24} height={24} />
+            <div
+              className={clsx(classes.featureBenefitCard, classes.benefitCardGreen)}
+              onMouseEnter={() => setHoveredBenefitCard(3)}
+              onMouseLeave={() => setHoveredBenefitCard(null)}
+            >
+              <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconGreen)}>
+                <CartIcon width={24} height={24} isHovered={hoveredBenefitCard === 3} />
               </div>
               <h3 className={classes.featureBenefitTitle}>In-App Domain Purchasing</h3>
               <p className={classes.featureBenefitText}>
@@ -484,9 +560,13 @@ const MailFeature = () => {
             </div>
 
             {/* Card 4 */}
-            <div className={classes.featureBenefitCard}>
-              <div className={classes.featureBenefitIconBox}>
-                <SvgSearch width={24} height={24} />
+            <div
+              className={clsx(classes.featureBenefitCard, classes.benefitCardAmber)}
+              onMouseEnter={() => setHoveredBenefitCard(4)}
+              onMouseLeave={() => setHoveredBenefitCard(null)}
+            >
+              <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconAmber)}>
+                <SearchIcon width={24} height={24} isHovered={hoveredBenefitCard === 4} />
               </div>
               <h3 className={classes.featureBenefitTitle}>Lightning Fast Indexing</h3>
               <p className={classes.featureBenefitText}>
@@ -518,10 +598,14 @@ const MailFeature = () => {
 
           <div className={classes.twoCardComparisonGrid}>
             {/* Card A: Semantic Vector Search */}
-            <div className={classes.intelligentCard}>
+            <div
+              className={classes.intelligentCard}
+              onMouseEnter={() => setHoveredIntelligentCard('a')}
+              onMouseLeave={() => setHoveredIntelligentCard(null)}
+            >
               <div>
-                <div className={classes.featureBenefitIconBox}>
-                  <SvgBrainIcon width={26} height={26} />
+                <div className={clsx(classes.featureBenefitIconBox, classes.intelligentIconPurple)}>
+                  <BrainIcon width={26} height={26} isHovered={hoveredIntelligentCard === 'a'} />
                 </div>
                 <h3 className={classes.featureBenefitTitle}>Semantic Vector Search</h3>
                 <p className={classes.featureBenefitText}>
@@ -531,7 +615,7 @@ const MailFeature = () => {
 
               {/* UI Search Mockup */}
               <div className={classes.searchMockupBar}>
-                <SvgSearch width={16} height={16} />
+                <SearchIcon width={16} height={16} isHovered={hoveredIntelligentCard === 'a'} />
                 <span className={classes.searchQueryText}>
                   &ldquo;that design file Sarah sent last week&rdquo;
                 </span>
@@ -540,10 +624,14 @@ const MailFeature = () => {
             </div>
 
             {/* Card B: Visual Color Tags */}
-            <div className={classes.intelligentCard}>
+            <div
+              className={classes.intelligentCard}
+              onMouseEnter={() => setHoveredIntelligentCard('b')}
+              onMouseLeave={() => setHoveredIntelligentCard(null)}
+            >
               <div>
-                <div className={classes.featureBenefitIconBox}>
-                  <SvgTagIcon width={26} height={26} />
+                <div className={clsx(classes.featureBenefitIconBox, classes.intelligentIconBlue)}>
+                  <TagIcon width={26} height={26} isHovered={hoveredIntelligentCard === 'b'} />
                 </div>
                 <h3 className={classes.featureBenefitTitle}>Visual Color Tags</h3>
                 <p className={classes.featureBenefitText}>
@@ -598,45 +686,8 @@ const MailFeature = () => {
                 You don&apos;t need a separate app for email, another for chat, and another for HR. The unified Weblings iOS and Android app puts your Enterprise Inbox right next to your Streamline tickets and Team Chat. Stay responsive to clients and collaborate seamlessly anywhere.
               </p>
 
-              {/* Download Buttons */}
-              <div className={classes.downloadButtonsRow}>
-                <a href="#ios" className={classes.storeButton}>
-                  <div className={classes.storeIcon}>
-                    <SvgApple />
-                  </div>
-                  <div className={classes.storeTextCol}>
-                    <span className={classes.storeSubtitle}>Download on</span>
-                    <span className={classes.storeTitle}>Download iOS</span>
-                  </div>
-                </a>
-
-                <a href="#android" className={classes.storeButton}>
-                  <div className={classes.storeIcon}>
-                    <SvgAndroid />
-                  </div>
-                  <div className={classes.storeTextCol}>
-                    <span className={classes.storeSubtitle}>Get it on</span>
-                    <span className={classes.storeTitle}>Download Android</span>
-                  </div>
-                </a>
-              </div>
-
-              {/* Social Proof Rating */}
-              <div className={classes.reviewsRow}>
-                <div className={classes.starRatingGroup}>
-                  <div className={classes.starsGroup}>
-                    <SvgStar />
-                    <SvgStar />
-                    <SvgStar />
-                    <SvgStar />
-                    <SvgStar />
-                  </div>
-                  <span className={classes.ratingNumber}>4.9</span>
-                </div>
-                <span className={classes.reviewsCountText}>
-                  Over 45,000+ active enterprise reviews
-                </span>
-              </div>
+              {/* Universal App Store & Play Store Buttons with Social Proof */}
+              <AppStoreButtons />
             </div>
           </div>
         </div>

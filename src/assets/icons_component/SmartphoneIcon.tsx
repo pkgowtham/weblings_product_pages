@@ -28,30 +28,30 @@ export const SmartphoneIcon: React.FC<IconProps> = ({
       <style>{`
         .phone-body {
           transform-origin: 12px 12px;
-          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+          transition: transform 0.35s ease;
         }
         .phone-icon:hover .phone-body,
         .phone-icon.is-hovered .phone-body {
-          animation: dotToPhoneGrow 0.5s cubic-bezier(0.34, 1.45, 0.64, 1) forwards;
+          animation: phoneTiltLeftRight 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
-        @keyframes dotToPhoneGrow {
+        @keyframes phoneTiltLeftRight {
           0% {
-            transform: scale(0.25);
-            opacity: 0.3;
+            transform: rotate(0deg);
           }
-          65% {
-            transform: scale(1.06);
-            opacity: 1;
+          28% {
+            transform: rotate(-18deg);
+          }
+          68% {
+            transform: rotate(18deg);
           }
           100% {
-            transform: scale(1);
-            opacity: 1;
+            transform: rotate(0deg);
           }
         }
       `}</style>
       <g className="phone-body">
-        <rect x="6" y="2" width="12" height="20" rx="2.5" ry="2.5" />
-        <line x1="11" y1="18" x2="13" y2="18" strokeWidth={2} />
+        <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" ry="2.5" />
+        <line x1="11" y1="18" x2="13" y2="18" strokeWidth={1.5} />
       </g>
     </svg>
   );
