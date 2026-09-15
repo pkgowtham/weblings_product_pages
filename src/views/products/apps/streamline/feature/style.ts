@@ -395,6 +395,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
     gap: "24px",
+    alignItems: "stretch",
   },
   featureCard: {
     backgroundColor: "rgba(255, 255, 255, 0.94)",
@@ -404,6 +405,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     padding: "32px 24px",
     display: "flex",
     flexDirection: "column",
+    height: "100%",
+    boxSizing: "border-box",
     textAlign: "left",
     boxShadow: theme.elevation.s,
     transition: "all 0.25s cubic-bezier(0.34, 1.45, 0.64, 1)",
@@ -431,6 +434,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: "20px",
+    flexShrink: 0,
   },
   cardTitle: {
     fontSize: "1.1875rem",
@@ -443,6 +447,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     lineHeight: 1.6,
     color: theme.light.neutral.onSurface.medium,
     margin: 0,
+    flex: 1,
   },
 
   /* ─────────────────────────────────────────────────────────────────────────────
@@ -815,6 +820,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
     gap: "20px",
     marginTop: "40px",
+    alignItems: "stretch",
   },
   includedCard: {
     backgroundColor: "#FFFFFF",
@@ -823,6 +829,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     padding: "24px 20px",
     display: "flex",
     flexDirection: "column",
+    height: "100%",
+    boxSizing: "border-box",
     textAlign: "left",
     boxShadow: theme.elevation.s,
     transition: "all 0.2s ease",

@@ -24,13 +24,15 @@ import {
 
 import WeblingsMailMockup from '../../../../../components/mailMockup/index';
 import PhoneMockup from '../../../../../components/phoneMockup/index';
+import { MailPaperPlaneAnimation } from '../../../../../components/ambientAnimations';
 
 // Vanilla Animate-On-Scroll Component
 const RevealOnScroll: React.FC<{
   children: React.ReactNode;
   className?: string;
   delay?: number;
-}> = ({ children, className, delay = 0 }) => {
+  style?: React.CSSProperties;
+}> = ({ children, className, delay = 0, style }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -63,6 +65,10 @@ const RevealOnScroll: React.FC<{
         transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
         transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
         willChange: 'opacity, transform',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        ...style,
       }}
     >
       {children}
@@ -390,26 +396,9 @@ const MailFeature = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION 2: GLOBAL ARCHITECTURE & COMPLIANCE (ANIMATED PART 1)
+          SECTION 2: GLOBAL ARCHITECTURE & COMPLIANCE
           ───────────────────────────────────────────────────────────── */}
       <section className={classes.sectionTwo}>
-        {/* Living Aerodynamic Ambient Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
-        <div className={classes.mailAmbientCanvas}>
-          <div className={classes.mailAeroPattern} />
-          <div className={classes.mailBlobBlue} />
-          <div className={classes.mailBlobLavender} />
-          <div className={classes.mailBlobCenter} />
-          <div className={classes.mailAeroTrack}>
-            <div className={classes.mailAeroLight} />
-          </div>
-          <div className={classes.mailAeroTrackBottom}>
-            <div className={classes.mailAeroLightBottom} />
-          </div>
-          <span className={`${classes.mailNodeDot} ${classes.mailNodeBlue1}`} />
-          <span className={`${classes.mailNodeDot} ${classes.mailNodeBlue2}`} />
-          <span className={`${classes.mailNodeDot} ${classes.mailNodeLavender1}`} />
-          <span className={`${classes.mailNodeDot} ${classes.mailNodeLavender2}`} />
-        </div>
         <div className={classes.container}>
           {/* Section Header */}
           <div className={classes.secTwoHeader}>
@@ -673,10 +662,8 @@ const MailFeature = () => {
           <div className={classes.mailAeroTrackBottom}>
             <div className={classes.mailAeroLightBottom} />
           </div>
-          <span className={`${classes.mailNodeDot} ${classes.mailNodeBlue1}`} />
-          <span className={`${classes.mailNodeDot} ${classes.mailNodeBlue2}`} />
-          <span className={`${classes.mailNodeDot} ${classes.mailNodeLavender1}`} />
-          <span className={`${classes.mailNodeDot} ${classes.mailNodeLavender2}`} />
+          <MailPaperPlaneAnimation style={{ opacity: 0.85 }} />
+          <MailPaperPlaneAnimation position="bottomLeft" style={{ opacity: 0.85 }} />
         </div>
         <div className={classes.secInner}>
           <RevealOnScroll>

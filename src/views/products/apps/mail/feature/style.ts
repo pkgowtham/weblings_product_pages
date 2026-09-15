@@ -1142,6 +1142,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
     gap: "24px",
     marginTop: "32px",
+    alignItems: "stretch",
     boxSizing: "border-box",
     "@media (max-width: 980px)": {
       gridTemplateColumns: "minmax(0, 1fr)",
@@ -1156,6 +1157,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     boxShadow: "0 4px 20px -2px rgba(15, 23, 42, 0.04)",
     display: "flex",
     flexDirection: "column",
+    height: "100%",
     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
     boxSizing: "border-box",
     "&:hover": {
@@ -1177,6 +1179,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: "18px",
+    flexShrink: 0,
   },
   securityIconBlue: {
     backgroundColor: "rgba(0, 114, 196, 0.08)",
@@ -1204,6 +1207,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     fontSize: "0.875rem",
     lineHeight: 1.65,
     color: "#64748B",
+    flex: 1,
   },
 
   /* ─────────────────────────────────────────────────────────────
@@ -1365,6 +1369,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
     gap: "22px",
     marginTop: "52px",
+    alignItems: "stretch",
     boxSizing: "border-box",
     "@media (max-width: 1080px)": {
       gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
@@ -1384,6 +1389,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     boxShadow: "0 4px 20px -2px rgba(15, 23, 42, 0.04)",
     display: "flex",
     flexDirection: "column",
+    height: "100%",
     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
     overflow: "hidden",
     boxSizing: "border-box",
@@ -1493,6 +1499,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
     gap: "32px",
     marginTop: "52px",
+    alignItems: "stretch",
     boxSizing: "border-box",
     "@media (max-width: 960px)": {
       gridTemplateColumns: "minmax(0, 1fr)",
@@ -1509,6 +1516,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    height: "100%",
     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
     boxSizing: "border-box",
     "&:hover": {

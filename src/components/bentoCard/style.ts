@@ -93,6 +93,8 @@ export const useStyles = createUseStyles((_theme: Theme) => {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
+      height: "100%",
+      boxSizing: "border-box",
       overflow: "hidden",
       "&:hover": {
         transform: "translateY(-3px)",
@@ -179,9 +181,12 @@ export const useStyles = createUseStyles((_theme: Theme) => {
       lineHeight: 1.7,
       marginBottom: "20px",
       margin: 0,
+      flexGrow: 1,
     },
     cardBody: {
       flexGrow: 1,
+      display: "flex",
+      flexDirection: "column",
     },
     footerDot: {
       width: "8px",

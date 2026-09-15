@@ -1171,6 +1171,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     width: "100%",
     maxWidth: "1200px",
     margin: "0 auto",
+    alignItems: "stretch",
     "@media (max-width: 860px)": {
       gridTemplateColumns: "minmax(0, 1fr)",
       gap: "24px",
@@ -1186,6 +1187,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    height: "100%",
     boxShadow: "0 4px 20px -2px rgba(15, 23, 42, 0.04)",
     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
     "&:hover": {

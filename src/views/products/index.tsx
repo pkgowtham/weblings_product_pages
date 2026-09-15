@@ -123,7 +123,8 @@ const RevealOnScroll: React.FC<{
   children: React.ReactNode;
   className?: string;
   delay?: number;
-}> = ({ children, className, delay = 0 }) => {
+  style?: React.CSSProperties;
+}> = ({ children, className, delay = 0, style }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -156,6 +157,10 @@ const RevealOnScroll: React.FC<{
         transform: isVisible ? "translateY(0)" : "translateY(24px)",
         transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
         willChange: "opacity, transform",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        ...style,
       }}
     >
       {children}

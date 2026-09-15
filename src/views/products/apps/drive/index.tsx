@@ -6,6 +6,10 @@ import DriveMockup from "../../../../components/driveMockup";
 import PhoneMockup from "../../../../components/phoneMockup";
 import AppStoreButtons from "../../../../components/appStoreButtons";
 import {
+  DriveVaultScanAnimation,
+  DriveCloudSyncAnimation,
+} from "../../../../components/ambientAnimations";
+import {
   DriveIcon,
   LockIcon,
   ShieldLockIcon,
@@ -53,7 +57,8 @@ const RevealOnScroll: React.FC<{
   children: React.ReactNode;
   className?: string;
   delay?: number;
-}> = ({ children, className, delay = 0 }) => {
+  style?: React.CSSProperties;
+}> = ({ children, className, delay = 0, style }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -86,6 +91,10 @@ const RevealOnScroll: React.FC<{
         transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
         transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
         willChange: 'opacity, transform',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        ...style,
       }}
     >
       {children}
@@ -133,26 +142,9 @@ const DriveFeature: React.FC = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION 1: AI DOCUMENT INTELLIGENCE (ANIMATED PART 1)
+          SECTION 1: AI DOCUMENT INTELLIGENCE
           ───────────────────────────────────────────────────────────── */}
-      <section className={`${classes.sectionWrapper} ${classes.sectionWrapperAnimated}`}>
-        {/* Living Cryptographic Ambient Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
-        <div className={classes.vaultAmbientCanvas}>
-          <div className={classes.vaultGridOverlay} />
-          <div className={classes.vaultBlobBlue} />
-          <div className={classes.vaultBlobPurple} />
-          <div className={classes.vaultBlobCenter} />
-          <div className={classes.vaultScanTrack}>
-            <div className={classes.vaultScanLight} />
-          </div>
-          <div className={classes.vaultScanTrackBottom}>
-            <div className={classes.vaultScanLightBottom} />
-          </div>
-          <span className={`${classes.vaultNodeDot} ${classes.vaultNodeBlue1}`} />
-          <span className={`${classes.vaultNodeDot} ${classes.vaultNodeBlue2}`} />
-          <span className={`${classes.vaultNodeDot} ${classes.vaultNodePurple1}`} />
-          <span className={`${classes.vaultNodeDot} ${classes.vaultNodePurple2}`} />
-        </div>
+      <section className={classes.sectionWrapper}>
         <div className={classes.sectionInner}>
           <div className={classes.splitGrid}>
             <RevealOnScroll>
@@ -226,10 +218,8 @@ const DriveFeature: React.FC = () => {
           <div className={classes.vaultScanTrackBottom}>
             <div className={classes.vaultScanLightBottom} />
           </div>
-          <span className={`${classes.vaultNodeDot} ${classes.vaultNodeBlue1}`} />
-          <span className={`${classes.vaultNodeDot} ${classes.vaultNodeBlue2}`} />
-          <span className={`${classes.vaultNodeDot} ${classes.vaultNodePurple1}`} />
-          <span className={`${classes.vaultNodeDot} ${classes.vaultNodePurple2}`} />
+          <DriveVaultScanAnimation style={{ opacity: 0.85 }} />
+          <DriveCloudSyncAnimation />
         </div>
         <div className={classes.sectionInner}>
           <RevealOnScroll>

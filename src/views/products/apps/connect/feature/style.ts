@@ -614,6 +614,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
     gap: "28px",
+    alignItems: "stretch",
     "@media (max-width: 860px)": {
       gridTemplateColumns: "1fr",
     },
@@ -629,6 +630,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    height: "100%",
+    boxSizing: "border-box",
     "&:hover": {
       transform: "translateY(-4px)",
       boxShadow: "0 16px 32px rgba(15, 23, 42, 0.08)",
@@ -773,6 +776,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "grid",
     gridTemplateColumns: "repeat(4, 1fr)",
     gap: "20px",
+    alignItems: "stretch",
     "@media (max-width: 960px)": {
       gridTemplateColumns: "repeat(2, 1fr)",
     },
@@ -788,6 +792,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     boxShadow: "0 2px 8px rgba(15, 23, 42, 0.03)",
     display: "flex",
     flexDirection: "column",
+    height: "100%",
+    boxSizing: "border-box",
     transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
     cursor: "default",
     "&:hover": {
@@ -807,6 +813,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     justifyContent: "center",
     color: "#0072C4",
     marginBottom: "16px",
+    flexShrink: 0,
     transition: "all 0.2s ease",
   },
   usageCardTitle: {
@@ -820,6 +827,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     lineHeight: 1.6,
     color: theme.light.neutral.onSurface.medium,
     margin: 0,
+    flex: 1,
   },
 
   /* ─────────────────────────────────────────────────────────────────────────────

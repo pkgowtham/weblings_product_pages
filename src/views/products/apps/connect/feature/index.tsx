@@ -7,6 +7,10 @@ import ConnectMockup from '../../../../../components/connectMockup';
 import PhoneMockup from '../../../../../components/phoneMockup';
 import AppStoreButtons from '../../../../../components/appStoreButtons';
 import {
+  ConnectSignalWaveAnimation,
+  ConnectPresenceAudioAnimation,
+} from '../../../../../components/ambientAnimations';
+import {
   ConnectIcon,
   EdgeRoutingIcon,
   SimulcastVideoIcon,
@@ -53,7 +57,8 @@ const RevealOnScroll: React.FC<{
   children: React.ReactNode;
   className?: string;
   delay?: number;
-}> = ({ children, className, delay = 0 }) => {
+  style?: React.CSSProperties;
+}> = ({ children, className, delay = 0, style }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -86,6 +91,10 @@ const RevealOnScroll: React.FC<{
         transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
         transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
         willChange: 'opacity, transform',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        ...style,
       }}
     >
       {children}
@@ -159,27 +168,9 @@ const ConnectFeature: React.FC = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* SECTION 1: INTERNET-SCALE INFRASTRUCTURE (ANIMATED PART 1) */}
+      {/* SECTION 1: INTERNET-SCALE INFRASTRUCTURE */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      <section className={`${classes.sectionContainer} ${classes.sectionContainerAnimated}`}>
-        {/* Living Acoustic Mesh Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
-        <div className={classes.signalAmbientCanvas}>
-          <div className={classes.signalMeshOverlay} />
-          <div className={classes.signalBlobCyan} />
-          <div className={classes.signalBlobEmerald} />
-          <div className={classes.signalBlobCenter} />
-          <div className={classes.signalPulseRing} />
-          <div className={classes.signalBeamTrack}>
-            <div className={classes.signalBeamLight} />
-          </div>
-          <div className={classes.signalBeamTrackBottom}>
-            <div className={classes.signalBeamLightBottom} />
-          </div>
-          <span className={`${classes.signalNodeDot} ${classes.signalNodeCyan1}`} />
-          <span className={`${classes.signalNodeDot} ${classes.signalNodeCyan2}`} />
-          <span className={`${classes.signalNodeDot} ${classes.signalNodeEmerald1}`} />
-          <span className={`${classes.signalNodeDot} ${classes.signalNodeEmerald2}`} />
-        </div>
+      <section className={classes.sectionContainer}>
         <div className={classes.sectionInner}>
           <div className={classes.infraSplit}>
           {/* Left Column: Header & Cards with clean alignment */}
@@ -555,10 +546,8 @@ const ConnectFeature: React.FC = () => {
           <div className={classes.signalBeamTrackBottom}>
             <div className={classes.signalBeamLightBottom} />
           </div>
-          <span className={`${classes.signalNodeDot} ${classes.signalNodeCyan1}`} />
-          <span className={`${classes.signalNodeDot} ${classes.signalNodeCyan2}`} />
-          <span className={`${classes.signalNodeDot} ${classes.signalNodeEmerald1}`} />
-          <span className={`${classes.signalNodeDot} ${classes.signalNodeEmerald2}`} />
+          <ConnectSignalWaveAnimation style={{ opacity: 0.85 }} />
+          <ConnectPresenceAudioAnimation />
         </div>
         <div className={classes.sectionInner}>
           <RevealOnScroll>

@@ -452,6 +452,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
     gap: "24px",
     width: "100%",
+    alignItems: "stretch",
     boxSizing: "border-box",
     "@media (max-width: 1024px)": {
       gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
@@ -466,6 +467,9 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     borderRadius: "16px",
     border: "1px solid #E2E8F0",
     padding: "28px 24px",
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
     boxShadow: "0 2px 8px rgba(15, 23, 42, 0.04)",
     transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
     position: "relative",
@@ -521,6 +525,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     lineHeight: 1.6,
     color: "#64748B",
     margin: 0,
+    flex: 1,
     "@media (max-width: 600px)": {
       fontSize: "0.85rem",
     },
@@ -1286,6 +1291,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)",
     gap: "24px",
+    alignItems: "stretch",
     "@media (max-width: 768px)": {
       gridTemplateColumns: "1fr",
       gap: "20px",
@@ -1299,6 +1305,9 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     border: "1px solid #E2E8F0",
     transition: "transform 0.2s ease, box-shadow 0.2s ease",
     boxSizing: "border-box",
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
     "&:hover": {
       transform: "translateY(-3px)",
       boxShadow: "0 12px 28px rgba(0, 0, 0, 0.06)",
@@ -1317,6 +1326,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: "16px",
+    flexShrink: 0,
   },
   capabilityTitle: {
     margin: "0 0 12px 0",
@@ -1329,6 +1339,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     color: "#475569",
     fontSize: "0.95rem",
     lineHeight: 1.7,
+    flex: 1,
   },
   pillRow: {
     display: "flex",

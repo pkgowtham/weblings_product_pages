@@ -7,6 +7,10 @@ import StreamlineMockup from '../../../../../components/streamlineMockup';
 import PhoneMockup from '../../../../../components/phoneMockup';
 import AppStoreButtons from '../../../../../components/appStoreButtons';
 import {
+  StreamlineSprintAnimation,
+  StreamlineKanbanFlowAnimation,
+} from '../../../../../components/ambientAnimations';
+import {
   StreamlineIcon,
   TargetIcon,
   BoltIcon,
@@ -56,7 +60,8 @@ const RevealOnScroll: React.FC<{
   children: React.ReactNode;
   className?: string;
   delay?: number;
-}> = ({ children, className, delay = 0 }) => {
+  style?: React.CSSProperties;
+}> = ({ children, className, delay = 0, style }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -89,6 +94,10 @@ const RevealOnScroll: React.FC<{
         transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
         transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
         willChange: 'opacity, transform',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        ...style,
       }}
     >
       {children}
@@ -175,10 +184,8 @@ const StreamlineFeature: React.FC = () => {
           <div className={classes.sprintTrackBeamBottom}>
             <div className={classes.sprintTrackLightBottom} />
           </div>
-          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeAmber1}`} />
-          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeAmber2}`} />
-          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeBlue1}`} />
-          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeBlue2}`} />
+          <StreamlineKanbanFlowAnimation position="topRight" />
+          <StreamlineSprintAnimation position="bottomLeft" />
         </div>
         <div className={classes.sectionInner}>
           <RevealOnScroll>
@@ -217,27 +224,9 @@ const StreamlineFeature: React.FC = () => {
 
       {/* ─────────────────────────────────────────────────────────────────── */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* SECTION 2: THE END OF MANUAL TICKET ENTRY (ANIMATED PART 2) */}
+      {/* SECTION 2: THE END OF MANUAL TICKET ENTRY */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      <section className={`${classes.sectionWrapper} ${classes.sectionWrapperAnimated}`}>
-        {/* Living Sprint Ambient Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
-        <div className={classes.sprintAmbientCanvas}>
-          <div className={classes.sprintTrackOverlay} />
-          <div className={classes.sprintBlobBlue} />
-          <div className={classes.sprintBlobAmber} />
-          <div className={classes.sprintBlobCenter} />
-          <div className={classes.sprintTrackBeam}>
-            <div className={classes.sprintTrackLight} />
-          </div>
-          <div className={classes.sprintTrackBeamBottom}>
-            <div className={classes.sprintTrackLightBottom} />
-          </div>
-          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeAmber1}`} />
-          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeAmber2}`} />
-          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeBlue1}`} />
-          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeBlue2}`} />
-        </div>
-
+      <section className={classes.sectionWrapper}>
         <div className={classes.sectionInner}>
           <RevealOnScroll>
             <div className={classes.sectionHeaderCenter}>

@@ -806,6 +806,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",
     gap: "24px",
+    alignItems: "stretch",
     "@media (max-width: 860px)": {
       gridTemplateColumns: "1fr",
     },
@@ -821,6 +822,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
     display: "flex",
     flexDirection: "column",
+    height: "100%",
+    boxSizing: "border-box",
     gap: "8px",
     "&:hover": {
       transform: "translateY(-4px)",
@@ -839,6 +842,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
     display: "flex",
     flexDirection: "column",
+    height: "100%",
+    boxSizing: "border-box",
     gap: "8px",
     "&:hover": {
       transform: "translateY(-4px)",
@@ -854,6 +859,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: "10px",
+    flexShrink: 0,
   },
   aiCardIconPurple: {
     backgroundColor: theme.light.info.surface.lighter,
@@ -876,6 +882,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     color: theme.light.neutral.onSurface.medium,
     lineHeight: 1.7,
     margin: 0,
+    flexGrow: 1,
   },
 
   /* Workflow / Pipeline Section */
@@ -1093,6 +1100,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    height: "100%",
+    boxSizing: "border-box",
     overflow: "hidden",
     "&:hover": {
       boxShadow: "0 20px 35px -5px rgba(0, 114, 196, 0.12), 0 10px 10px -5px rgba(15, 23, 42, 0.04)",
@@ -1406,6 +1415,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     gridTemplateColumns: "repeat(3, 1fr)",
     gap: "24px",
     marginBottom: "64px",
+    alignItems: "stretch",
     "@media (max-width: 900px)": {
       gridTemplateColumns: "repeat(2, 1fr)",
     },
@@ -1420,6 +1430,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     padding: "32px",
     border: "1px solid rgba(51, 65, 85, 0.8)",
     transition: "all 0.3s ease",
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    boxSizing: "border-box",
     "&:hover": {
       backgroundColor: "rgba(30, 41, 59, 0.9)",
       transform: "translateY(-4px)",
@@ -1451,6 +1465,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: "20px",
+    flexShrink: 0,
     transition: "transform 0.2s ease",
     "$migrationCard:hover &": {
       transform: "scale(1.05)",
@@ -1498,6 +1513,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     color: "#94A3B8",
     lineHeight: 1.7,
     margin: 0,
+    flexGrow: 1,
   },
   /* Floating CTA Card */
   migrationCTA: {
@@ -1758,6 +1774,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
     gap: "32px",
+    alignItems: "stretch",
     "@media (max-width: 768px)": {
       gridTemplateColumns: "1fr",
       gap: "24px",
@@ -1831,7 +1848,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     marginTop: "50px",
     height: "auto",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "stretch",
   },
   ValuesImgContainer: {
     display: "flex",
