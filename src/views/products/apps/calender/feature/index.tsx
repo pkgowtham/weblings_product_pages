@@ -95,6 +95,50 @@ interface CalendarEventItem {
   isPlane?: boolean;
 }
 
+const RevealOnScroll: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}> = ({ children, className, delay = 0 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange: 'opacity, transform',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
 const monthsList = ['August 2026', 'September 2026', 'October 2026'];
 
 const initialEvents: CalendarEventItem[] = [
@@ -850,68 +894,94 @@ const CalenderFeature = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* SECTION 2: ZERO DOUBLE-ENTRY */}
+      {/* SECTION 2: ZERO DOUBLE-ENTRY (ANIMATED CENTERPIECE) */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      <section className={classes.sectionContainer}>
-        <div className={classes.sectionHeaderCentered}>
-          <span className={classes.kicker}>{zeroDoubleEntry.kicker}</span>
-          <h2 className={classes.sectionTitle}>{zeroDoubleEntry.title}</h2>
-          <p className={classes.sectionDescription}>{zeroDoubleEntry.description}</p>
-        </div>
-
-        <div className={classes.twoCardGrid}>
-          {/* Card 1: Streamline Tickets */}
-          <div
-            className={`${classes.glassCard} ${classes.cardBorderIndigo}`}
-            onMouseEnter={() => setHoveredZeroCard('streamline')}
-            onMouseLeave={() => setHoveredZeroCard(null)}
-          >
-            <div>
-              <div className={classes.cardIconBox}>
-                <TargetIcon width={26} height={26} isHovered={hoveredZeroCard === 'streamline'} />
-              </div>
-              <h3 className={classes.cardTitle}>{zeroDoubleEntry.cards[0].title}</h3>
-              <p className={classes.cardParagraph}>{zeroDoubleEntry.cards[0].description}</p>
-            </div>
-
-            <div className={classes.cardChipContainer}>
-              <span className={classes.chipBadgeIndigo}>
-                {zeroDoubleEntry.cards[0].badge.code}
-              </span>
-              <span className={classes.chipTextIndigo}>
-                {zeroDoubleEntry.cards[0].badge.label}
-              </span>
-              <span style={{ fontSize: '0.75rem', color: '#10B981', fontWeight: 700 }}>
-                ● Auto-Synced
-              </span>
-            </div>
+      <section className={`${classes.sectionContainer} ${classes.sectionContainerAnimated}`}>
+        {/* Living Ambient Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
+        <div className={classes.chronoAmbientCanvas}>
+          <div className={classes.chronoGridOverlay} />
+          <div className={classes.chronoBlobBrand} />
+          <div className={classes.chronoBlobInfo} />
+          <div className={classes.chronoBlobCenter} />
+          <div className={classes.chronoTimelineTrack}>
+            <div className={classes.chronoTimelineBar} />
           </div>
+          <div className={classes.chronoTimelineTrackBottom}>
+            <div className={classes.chronoTimelineBarBottom} />
+          </div>
+          {/* Pulsating Precision Tech Nodes */}
+          <span className={`${classes.chronoNodeDot} ${classes.chronoNodeBrand1}`} />
+          <span className={`${classes.chronoNodeDot} ${classes.chronoNodeBrand2}`} />
+          <span className={`${classes.chronoNodeDot} ${classes.chronoNodeInfo1}`} />
+          <span className={`${classes.chronoNodeDot} ${classes.chronoNodeInfo2}`} />
+        </div>
+        <div className={classes.sectionInner}>
+          <RevealOnScroll>
+            <div className={classes.sectionHeaderCentered}>
+              <span className={classes.kicker}>{zeroDoubleEntry.kicker}</span>
+              <h2 className={classes.sectionTitle}>{zeroDoubleEntry.title}</h2>
+              <p className={classes.sectionDescription}>{zeroDoubleEntry.description}</p>
+            </div>
+          </RevealOnScroll>
 
-          {/* Card 2: Team Chat Calls */}
-          <div
-            className={`${classes.glassCard} ${classes.cardBorderRose}`}
-            onMouseEnter={() => setHoveredZeroCard('calls')}
-            onMouseLeave={() => setHoveredZeroCard(null)}
-          >
-            <div>
-              <div className={classes.cardIconBoxRose}>
-                <PhoneCallIcon width={26} height={26} isHovered={hoveredZeroCard === 'calls'} />
+          <div className={classes.twoCardGrid}>
+            {/* Card 1: Streamline Tickets */}
+            <RevealOnScroll delay={100}>
+              <div
+                className={`${classes.glassCard} ${classes.cardBorderIndigo}`}
+                onMouseEnter={() => setHoveredZeroCard('streamline')}
+                onMouseLeave={() => setHoveredZeroCard(null)}
+              >
+                <div>
+                  <div className={classes.cardIconBox}>
+                    <TargetIcon width={26} height={26} isHovered={hoveredZeroCard === 'streamline'} />
+                  </div>
+                  <h3 className={classes.cardTitle}>{zeroDoubleEntry.cards[0].title}</h3>
+                  <p className={classes.cardParagraph}>{zeroDoubleEntry.cards[0].description}</p>
+                </div>
+
+                <div className={classes.cardChipContainer}>
+                  <span className={classes.chipBadgeIndigo}>
+                    {zeroDoubleEntry.cards[0].badge.code}
+                  </span>
+                  <span className={classes.chipTextIndigo}>
+                    {zeroDoubleEntry.cards[0].badge.label}
+                  </span>
+                  <span style={{ fontSize: '0.75rem', color: '#10B981', fontWeight: 700 }}>
+                    ● Auto-Synced
+                  </span>
+                </div>
               </div>
-              <h3 className={classes.cardTitle}>{zeroDoubleEntry.cards[1].title}</h3>
-              <p className={classes.cardParagraph}>{zeroDoubleEntry.cards[1].description}</p>
-            </div>
+            </RevealOnScroll>
 
-            <div className={classes.cardChipContainer}>
-              <span className={classes.chipBadgeRose}>
-                {zeroDoubleEntry.cards[1].badge.code}
-              </span>
-              <span className={classes.chipTextRose}>
-                {zeroDoubleEntry.cards[1].badge.label}
-              </span>
-              <span style={{ fontSize: '0.75rem', color: '#E11D48', fontWeight: 700 }}>
-                ● Live Link
-              </span>
-            </div>
+            {/* Card 2: Team Chat Calls */}
+            <RevealOnScroll delay={220}>
+              <div
+                className={`${classes.glassCard} ${classes.cardBorderRose}`}
+                onMouseEnter={() => setHoveredZeroCard('chat')}
+                onMouseLeave={() => setHoveredZeroCard(null)}
+              >
+                <div>
+                  <div className={classes.cardIconBox} style={{ color: '#F43F5E', backgroundColor: '#FFF1F2' }}>
+                    <BoltIcon width={26} height={26} isHovered={hoveredZeroCard === 'chat'} />
+                  </div>
+                  <h3 className={classes.cardTitle}>{zeroDoubleEntry.cards[1].title}</h3>
+                  <p className={classes.cardParagraph}>{zeroDoubleEntry.cards[1].description}</p>
+                </div>
+
+                <div className={classes.cardChipContainer}>
+                  <span className={classes.chipBadgeRose}>
+                    {zeroDoubleEntry.cards[1].badge.code}
+                  </span>
+                  <span className={classes.chipTextRose}>
+                    {zeroDoubleEntry.cards[1].badge.label}
+                  </span>
+                  <span style={{ fontSize: '0.75rem', color: '#10B981', fontWeight: 700 }}>
+                    ● Auto-Synced
+                  </span>
+                </div>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
@@ -920,7 +990,8 @@ const CalenderFeature = () => {
       {/* SECTION 3: INTELLIGENT ORGANIZATION */}
       {/* ─────────────────────────────────────────────────────────────────── */}
       <section className={classes.sectionContainer}>
-        <div className={classes.splitSection}>
+        <div className={classes.sectionInner}>
+          <div className={classes.splitSection}>
           {/* Left Column: Numbered List */}
           <div className={classes.splitLeft}>
             <span className={classes.kicker}>{organization.kicker}</span>
@@ -1012,6 +1083,7 @@ const CalenderFeature = () => {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </section>
 

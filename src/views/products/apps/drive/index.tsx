@@ -48,6 +48,51 @@ const SvgArchive: React.FC = () => (
   </svg>
 );
 
+// Vanilla Animate-On-Scroll Component
+const RevealOnScroll: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}> = ({ children, className, delay = 0 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange: 'opacity, transform',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
 const DriveFeature: React.FC = () => {
   const classes = useStyles();
   const [hoveredCapability, setHoveredCapability] = React.useState<string | null>(null);
@@ -88,112 +133,160 @@ const DriveFeature: React.FC = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION 1: AI DOCUMENT INTELLIGENCE (ORIGINAL CONTENT)
+          SECTION 1: AI DOCUMENT INTELLIGENCE (ANIMATED PART 1)
           ───────────────────────────────────────────────────────────── */}
-      <section className={classes.sectionWrapper}>
-        <div className={classes.splitGrid}>
-          <div>
-            <span className={classes.kicker}>AI Document Intelligence</span>
-            <h2 className={classes.sectionTitle}>
-              Talk to Your Files.<br />Don&apos;t Just Store Them.
-            </h2>
-            <p className={classes.sectionDescription}>
-              Why spend two hours reading a 50-page vendor contract when AI can read it in two seconds? Weblings Drive changes how your team interacts with company data.
-            </p>
-
-            <div className={classes.points}>
-              <div className={classes.point}>
-                <span className={classes.pointNumber}>1</span>
-                <div>
-                  <h3 className={classes.pointTitle}>Instant Q&amp;A Extraction</h3>
-                  <p className={classes.pointText}>
-                    Ask direct questions about any shared document and get precise answers with page citations.
-                  </p>
-                </div>
-              </div>
-
-              <div className={classes.point}>
-                <span className={classes.pointNumber}>2</span>
-                <div>
-                  <h3 className={classes.pointTitle}>Project-Level Semantic Memory</h3>
-                  <p className={classes.pointText}>
-                    Keep critical documents searchable as a shared AI memory for developers and managers.
-                  </p>
-                </div>
-              </div>
-            </div>
+      <section className={`${classes.sectionWrapper} ${classes.sectionWrapperAnimated}`}>
+        {/* Living Cryptographic Ambient Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
+        <div className={classes.vaultAmbientCanvas}>
+          <div className={classes.vaultGridOverlay} />
+          <div className={classes.vaultBlobBlue} />
+          <div className={classes.vaultBlobPurple} />
+          <div className={classes.vaultBlobCenter} />
+          <div className={classes.vaultScanTrack}>
+            <div className={classes.vaultScanLight} />
           </div>
+          <div className={classes.vaultScanTrackBottom}>
+            <div className={classes.vaultScanLightBottom} />
+          </div>
+          <span className={`${classes.vaultNodeDot} ${classes.vaultNodeBlue1}`} />
+          <span className={`${classes.vaultNodeDot} ${classes.vaultNodeBlue2}`} />
+          <span className={`${classes.vaultNodeDot} ${classes.vaultNodePurple1}`} />
+          <span className={`${classes.vaultNodeDot} ${classes.vaultNodePurple2}`} />
+        </div>
+        <div className={classes.sectionInner}>
+          <div className={classes.splitGrid}>
+            <RevealOnScroll>
+              <div>
+                <span className={classes.kicker}>AI Document Intelligence</span>
+                <h2 className={classes.sectionTitle}>
+                  Talk to Your Files.<br />Don&apos;t Just Store Them.
+                </h2>
+                <p className={classes.sectionDescription}>
+                  Why spend two hours reading a 50-page vendor contract when AI can read it in two seconds? Weblings Drive changes how your team interacts with company data.
+                </p>
 
-          {/* Right Column: Original Demo Card */}
-          <div className={classes.demoCard}>
-            <div className={classes.demoFile}>
-              <div className={classes.demoFileTitle}>
-                <SvgFileDoc style={{ display: 'inline', verticalAlign: 'middle', marginRight: 8, color: '#DC2626' }} />
-                <span>Enterprise_SLA_Agreement.pdf</span>
+                <div className={classes.points}>
+                  <div className={classes.point}>
+                    <span className={classes.pointNumber}>1</span>
+                    <div>
+                      <h3 className={classes.pointTitle}>Instant Q&amp;A Extraction</h3>
+                      <p className={classes.pointText}>
+                        Ask direct questions about any shared document and get precise answers with page citations.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className={classes.point}>
+                    <span className={classes.pointNumber}>2</span>
+                    <div>
+                      <h3 className={classes.pointTitle}>Project-Level Semantic Memory</h3>
+                      <p className={classes.pointText}>
+                        Keep critical documents searchable as a shared AI memory for developers and managers.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className={classes.demoFileMeta}>62 Pages · Legal Department</div>
-            </div>
-            <div className={classes.chatBubbleAi}>
-              According to Section 8.2, the vendor must issue a <strong>15% service credit</strong> when uptime falls below 99.9%.
-              <br /><br />
-              <small style={{ color: '#0284C7', fontWeight: 600 }}>ⓘ Found on Page 12</small>
-            </div>
+            </RevealOnScroll>
+
+            {/* Right Column: Original Demo Card */}
+            <RevealOnScroll delay={160}>
+              <div className={classes.demoCard}>
+                <div className={classes.demoFile}>
+                  <div className={classes.demoFileTitle}>
+                    <SvgFileDoc style={{ display: 'inline', verticalAlign: 'middle', marginRight: 8, color: '#DC2626' }} />
+                    <span>Enterprise_SLA_Agreement.pdf</span>
+                  </div>
+                  <div className={classes.demoFileMeta}>62 Pages · Legal Department</div>
+                </div>
+                <div className={classes.chatBubbleAi}>
+                  According to Section 8.2, the vendor must issue a <strong>15% service credit</strong> when uptime falls below 99.9%.
+                  <br /><br />
+                  <small style={{ color: '#0284C7', fontWeight: 600 }}>ⓘ Found on Page 12</small>
+                </div>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION 2: MILITARY-GRADE PERIMETER (ORIGINAL CONTENT)
+          SECTION 2: MILITARY-GRADE PERIMETER (ANIMATED PART 2)
           ───────────────────────────────────────────────────────────── */}
-      <section className={classes.sectionWrapper}>
-        <div className={classes.sectionHeaderCenter}>
-          <span className={classes.kicker}>Military-Grade Perimeter</span>
-          <h2 className={classes.sectionTitle}>
-            Fort Knox Permissions &amp;<br />Self-Destructing Links.
-          </h2>
-          <p className={classes.sectionDescription}>
-            You decide exactly who sees your data, from company-wide folders to confidential one-to-one sharing.
-          </p>
-        </div>
-
-        <div className={classes.capabilityGrid}>
-          {/* Capability 1 */}
-          <div
-            className={classes.capability}
-            onMouseEnter={() => setHoveredCapability('granular')}
-            onMouseLeave={() => setHoveredCapability(null)}
-          >
-            <div className={classes.capabilityIcon}>
-              <GranularAccessIcon width={26} height={26} isHovered={hoveredCapability === 'granular'} />
-            </div>
-            <h3 className={classes.capabilityTitle}>Granular Access Control</h3>
-            <p className={classes.capabilityText}>
-              Share at organization, team, project, or individual level. Without explicit permission, nobody else can even see the file exists.
-            </p>
-            <div className={classes.pillRow}>
-              <span className={classes.pill}>ORG LEVEL</span>
-              <span className={classes.pill}>TEAM LEVEL</span>
-              <span className={classes.pill}>USER ONLY</span>
-            </div>
+      <section className={`${classes.sectionWrapper} ${classes.sectionWrapperAnimated}`}>
+        {/* Living Cryptographic Ambient Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
+        <div className={classes.vaultAmbientCanvas}>
+          <div className={classes.vaultGridOverlay} />
+          <div className={classes.vaultBlobPurple} />
+          <div className={classes.vaultBlobBlue} />
+          <div className={classes.vaultBlobCenter} />
+          <div className={classes.vaultScanTrack}>
+            <div className={classes.vaultScanLight} />
           </div>
+          <div className={classes.vaultScanTrackBottom}>
+            <div className={classes.vaultScanLightBottom} />
+          </div>
+          <span className={`${classes.vaultNodeDot} ${classes.vaultNodeBlue1}`} />
+          <span className={`${classes.vaultNodeDot} ${classes.vaultNodeBlue2}`} />
+          <span className={`${classes.vaultNodeDot} ${classes.vaultNodePurple1}`} />
+          <span className={`${classes.vaultNodeDot} ${classes.vaultNodePurple2}`} />
+        </div>
+        <div className={classes.sectionInner}>
+          <RevealOnScroll>
+            <div className={classes.sectionHeaderCenter}>
+              <span className={classes.kicker}>Military-Grade Perimeter</span>
+              <h2 className={classes.sectionTitle}>
+                Fort Knox Permissions &amp;<br />Self-Destructing Links.
+              </h2>
+              <p className={classes.sectionDescription}>
+                You decide exactly who sees your data, from company-wide folders to confidential one-to-one sharing.
+              </p>
+            </div>
+          </RevealOnScroll>
 
-          {/* Capability 2 */}
-          <div
-            className={classes.capability}
-            onMouseEnter={() => setHoveredCapability('timebomb')}
-            onMouseLeave={() => setHoveredCapability(null)}
-          >
-            <div className={classes.capabilityIcon} style={{ backgroundColor: '#FEF3C7', color: '#D97706' }}>
-              <TimeBombLinkIcon width={26} height={26} isHovered={hoveredCapability === 'timebomb'} />
-            </div>
-            <h3 className={classes.capabilityTitle}>Time-Bomb Public Links</h3>
-            <p className={classes.capabilityText}>
-              Create secure external links that automatically expire after a defined period, keeping sensitive files under control.
-            </p>
-            <div className={classes.taxonomyRow}>
-              <span style={{ fontFamily: 'monospace', fontSize: '0.84rem' }}>weblings.link/share/x89f...</span>
-              <span className={classes.taxonomyStatus}>Expires in 12h</span>
-            </div>
+          <div className={classes.capabilityGrid}>
+            {/* Capability 1 */}
+            <RevealOnScroll delay={100}>
+              <div
+                className={classes.capability}
+                onMouseEnter={() => setHoveredCapability('granular')}
+                onMouseLeave={() => setHoveredCapability(null)}
+              >
+                <div className={classes.capabilityIcon}>
+                  <GranularAccessIcon width={26} height={26} isHovered={hoveredCapability === 'granular'} />
+                </div>
+                <h3 className={classes.capabilityTitle}>Granular Access Control</h3>
+                <p className={classes.capabilityText}>
+                  Share at organization, team, project, or individual level. Without explicit permission, nobody else can even see the file exists.
+                </p>
+                <div className={classes.pillRow}>
+                  <span className={classes.pill}>ORG LEVEL</span>
+                  <span className={classes.pill}>TEAM LEVEL</span>
+                  <span className={classes.pill}>USER ONLY</span>
+                </div>
+              </div>
+            </RevealOnScroll>
+
+            {/* Capability 2 */}
+            <RevealOnScroll delay={220}>
+              <div
+                className={classes.capability}
+                onMouseEnter={() => setHoveredCapability('timebomb')}
+                onMouseLeave={() => setHoveredCapability(null)}
+              >
+                <div className={classes.capabilityIcon} style={{ backgroundColor: '#FEF3C7', color: '#D97706' }}>
+                  <TimeBombLinkIcon width={26} height={26} isHovered={hoveredCapability === 'timebomb'} />
+                </div>
+                <h3 className={classes.capabilityTitle}>Time-Bomb Public Links</h3>
+                <p className={classes.capabilityText}>
+                  Create secure external links that automatically expire after a defined period, keeping sensitive files under control.
+                </p>
+                <div className={classes.taxonomyRow}>
+                  <span style={{ fontFamily: 'monospace', fontSize: '0.84rem' }}>weblings.link/share/x89f...</span>
+                  <span className={classes.taxonomyStatus}>Expires in 12h</span>
+                </div>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
@@ -202,34 +295,40 @@ const DriveFeature: React.FC = () => {
           SECTION 3: ORGANIZED BY DESIGN (ORIGINAL CONTENT)
           ───────────────────────────────────────────────────────────── */}
       <section className={classes.sectionWrapper}>
-        <div className={classes.splitGrid}>
-          {/* Left Column: Taxonomy & Policies Card */}
-          <div className={classes.taxonomy}>
-            <h3 className={classes.capabilityTitle}>Custom File Taxonomy</h3>
-            <div className={classes.pillRow} style={{ marginTop: 12 }}>
-              <span className={classes.pill} style={{ backgroundColor: '#FEE2E2', color: '#B91C1C' }}>Legal &amp; Compliance</span>
-              <span className={classes.pill} style={{ backgroundColor: '#E0F2FE', color: '#0369A1' }}>Q3 Invoices</span>
-              <span className={classes.pill} style={{ backgroundColor: '#FEF3C7', color: '#B45309' }}>Raw Assets</span>
-            </div>
+        <div className={classes.sectionInner}>
+          <div className={classes.splitGrid}>
+            {/* Left Column: Taxonomy & Policies Card */}
+            <RevealOnScroll delay={100}>
+              <div className={classes.taxonomy}>
+                <h3 className={classes.capabilityTitle}>Custom File Taxonomy</h3>
+                <div className={classes.pillRow} style={{ marginTop: 12 }}>
+                  <span className={classes.pill} style={{ backgroundColor: '#FEE2E2', color: '#B91C1C' }}>Legal &amp; Compliance</span>
+                  <span className={classes.pill} style={{ backgroundColor: '#E0F2FE', color: '#0369A1' }}>Q3 Invoices</span>
+                  <span className={classes.pill} style={{ backgroundColor: '#FEF3C7', color: '#B45309' }}>Raw Assets</span>
+                </div>
 
-            <h3 className={classes.capabilityTitle} style={{ marginTop: 32 }}>Data Lifecycle Policies</h3>
-            <div className={classes.taxonomyRow} style={{ marginTop: 12 }}>
-              <span><SvgTrash /> Temp Build Files</span>
-              <span className={classes.taxonomyStatus} style={{ color: '#DC2626' }}>Auto-delete: 30 Days</span>
-            </div>
-            <div className={classes.taxonomyRow}>
-              <span><SvgArchive /> Signed Contracts</span>
-              <span className={classes.taxonomyStatus} style={{ color: '#16A34A' }}>Retain Forever</span>
-            </div>
-          </div>
+                <h3 className={classes.capabilityTitle} style={{ marginTop: 32 }}>Data Lifecycle Policies</h3>
+                <div className={classes.taxonomyRow} style={{ marginTop: 12 }}>
+                  <span><SvgTrash /> Temp Build Files</span>
+                  <span className={classes.taxonomyStatus} style={{ color: '#DC2626' }}>Auto-delete: 30 Days</span>
+                </div>
+                <div className={classes.taxonomyRow}>
+                  <span><SvgArchive /> Signed Contracts</span>
+                  <span className={classes.taxonomyStatus} style={{ color: '#16A34A' }}>Retain Forever</span>
+                </div>
+              </div>
+            </RevealOnScroll>
 
-          {/* Right Column: Narrative */}
-          <div>
-            <span className={classes.kicker}>Organized by Design</span>
-            <h2 className={classes.sectionTitle}>Your files, your rules.</h2>
-            <p className={classes.sectionDescription}>
-              Bring structure to every department with tags, lifecycle policies, and a workspace that keeps important information easy to find.
-            </p>
+            {/* Right Column: Narrative */}
+            <RevealOnScroll delay={220}>
+              <div>
+                <span className={classes.kicker}>Organized by Design</span>
+                <h2 className={classes.sectionTitle}>Your files, your rules.</h2>
+                <p className={classes.sectionDescription}>
+                  Bring structure to every department with tags, lifecycle policies, and a workspace that keeps important information easy to find.
+                </p>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>

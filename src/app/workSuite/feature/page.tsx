@@ -1,6 +1,6 @@
-import React from "react";
-import WorkSuiteFeature from "../../../views/products/apps/workSuite/feature/index";
+import { redirect } from "next/navigation";
 
 export default function WorkSuiteFeaturePage() {
-  return <WorkSuiteFeature />;
+  redirect("/");
 }
+

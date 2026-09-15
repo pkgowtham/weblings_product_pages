@@ -40,15 +40,18 @@ const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): Re
       {
         title: "Company",
         features: [
+          { label: "Docs", path: "#" },
+          { label: "Pricing", path: "/price" },
+          { label: "About", path: "/about" },
           { label: "Contact", path: "/contact" },
-          { label: "Price", path: "/workSuite/comparison" },
         ],
       },
       {
         title: "Product",
         features: [
+          { label: "Worksuite", path: "/" },
           { label: "Mail", path: "/mail/feature" },
-          { label: "Chat", path: "/connect/feature" },
+          { label: "Connect", path: "/connect/feature" },
           { label: "Calendar", path: "/calender/feature" },
           { label: "Streamline", path: "/streamline/feature" },
           { label: "eOffice", path: "/eoffice/feature" },

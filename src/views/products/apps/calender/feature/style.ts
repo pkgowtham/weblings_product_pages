@@ -2,6 +2,58 @@ import { createUseStyles } from "react-jss";
 import { Theme } from "../../../../../theme/themeType";
 
 export const useStyles = createUseStyles((theme: Theme) => ({
+  "@keyframes floatChrono1": {
+    "0%, 100%": {
+      transform: "translate(0, 0) scale(1)",
+    },
+    "50%": {
+      transform: "translate(24px, -20px) scale(1.06)",
+    },
+  },
+  "@keyframes floatChrono2": {
+    "0%, 100%": {
+      transform: "translate(0, 0) scale(1)",
+    },
+    "50%": {
+      transform: "translate(-20px, 22px) scale(0.95)",
+    },
+  },
+  "@keyframes pulseGlow": {
+    "0%, 100%": {
+      opacity: 0.35,
+      transform: "scale(1)",
+    },
+    "50%": {
+      opacity: 0.75,
+      transform: "scale(1.08)",
+    },
+  },
+  "@keyframes nodeBlink": {
+    "0%, 100%": {
+      opacity: 0.15,
+      transform: "scale(0.85)",
+    },
+    "50%": {
+      opacity: 0.95,
+      transform: "scale(1.3)",
+    },
+  },
+  "@keyframes timelineSweep": {
+    "0%": {
+      left: "-20%",
+      opacity: 0,
+    },
+    "15%": {
+      opacity: 0.8,
+    },
+    "85%": {
+      opacity: 0.8,
+    },
+    "100%": {
+      left: "120%",
+      opacity: 0,
+    },
+  },
   pageWrapper: {
     width: "100%",
     backgroundColor: theme.light.neutral.surface.lighter,
@@ -928,18 +980,155 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   },
 
   /* ─────────────────────────────────────────────────────────────────────────────
-     SECTION 2: ZERO DOUBLE-ENTRY
+     SECTION 2 & 3: CALENDAR AMBIENT & CONTENT
      ───────────────────────────────────────────────────────────────────────────── */
   sectionContainer: {
     padding: "96px 24px",
-    maxWidth: "1240px",
+    maxWidth: "100%",
+    width: "100%",
     margin: "0 auto",
-    borderTop: "1px solid #E2E8F0",
+    borderTop: `1px solid ${theme.light.neutral.border.light}`,
     boxSizing: "border-box",
     position: "relative",
+    overflow: "hidden",
     "@media (max-width: 768px)": {
       padding: "56px 16px",
     },
+  },
+  sectionContainerAnimated: {
+    backgroundColor: "#FAFBFD",
+    borderTop: "1px solid rgba(226, 232, 240, 0.7)",
+    borderBottom: "1px solid rgba(226, 232, 240, 0.7)",
+  },
+  sectionInner: {
+    position: "relative",
+    zIndex: 1,
+    maxWidth: "1240px",
+    margin: "0 auto",
+  },
+  chronoAmbientCanvas: {
+    position: "absolute",
+    inset: 0,
+    pointerEvents: "none",
+    overflow: "hidden",
+    zIndex: 0,
+  },
+  chronoGridOverlay: {
+    position: "absolute",
+    inset: 0,
+    backgroundImage: `
+      linear-gradient(to right, rgba(0, 114, 196, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(99, 102, 241, 0.04) 1px, transparent 1px)
+    `,
+    backgroundSize: "40px 40px",
+    maskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
+    WebkitMaskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
+  },
+  chronoBlobBrand: {
+    position: "absolute",
+    top: "30px",
+    left: "-60px",
+    width: "560px",
+    height: "560px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(0, 114, 196, 0.13) 0%, rgba(0, 114, 196, 0.035) 50%, transparent 70%)",
+    filter: "blur(75px)",
+    animation: "$floatChrono1 18s ease-in-out infinite",
+  },
+  chronoBlobInfo: {
+    position: "absolute",
+    bottom: "30px",
+    right: "-60px",
+    width: "560px",
+    height: "560px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0.035) 50%, transparent 70%)",
+    filter: "blur(75px)",
+    animation: "$floatChrono2 22s ease-in-out infinite",
+  },
+  chronoBlobCenter: {
+    position: "absolute",
+    top: "48%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "520px",
+    height: "380px",
+    borderRadius: "50%",
+    background: "radial-gradient(ellipse at center, rgba(0, 114, 196, 0.06) 0%, transparent 70%)",
+    filter: "blur(70px)",
+    animation: "$pulseGlow 8s ease-in-out infinite",
+  },
+  chronoTimelineTrack: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "1px",
+    background: "linear-gradient(90deg, transparent 0%, rgba(0, 114, 196, 0.25) 30%, rgba(99, 102, 241, 0.25) 70%, transparent 100%)",
+    overflow: "hidden",
+  },
+  chronoTimelineBar: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "160px",
+    height: "100%",
+    background: "linear-gradient(90deg, transparent 0%, rgba(0, 114, 196, 0.85) 50%, rgba(99, 102, 241, 0.95) 80%, transparent 100%)",
+    boxShadow: "0 0 6px rgba(0, 114, 196, 0.45)",
+    animation: "$timelineSweep 7s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+  },
+  chronoTimelineTrackBottom: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: "1px",
+    background: "linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.25) 30%, rgba(0, 114, 196, 0.25) 70%, transparent 100%)",
+    overflow: "hidden",
+  },
+  chronoTimelineBarBottom: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "160px",
+    height: "100%",
+    background: "linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.95) 40%, rgba(0, 114, 196, 0.85) 80%, transparent 100%)",
+    boxShadow: "0 0 6px rgba(99, 102, 241, 0.45)",
+    animation: "$timelineSweep 8s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.5s",
+  },
+  chronoNodeDot: {
+    position: "absolute",
+    width: "6px",
+    height: "6px",
+    borderRadius: "50%",
+    animation: "$nodeBlink 4s ease-in-out infinite",
+  },
+  chronoNodeBrand1: {
+    top: "22%",
+    left: "14%",
+    backgroundColor: "rgba(0, 114, 196, 0.75)",
+    boxShadow: "0 0 10px rgba(0, 114, 196, 0.8)",
+  },
+  chronoNodeBrand2: {
+    bottom: "28%",
+    left: "24%",
+    backgroundColor: "rgba(0, 114, 196, 0.75)",
+    boxShadow: "0 0 10px rgba(0, 114, 196, 0.8)",
+    animationDelay: "1.8s",
+  },
+  chronoNodeInfo1: {
+    top: "30%",
+    right: "16%",
+    backgroundColor: "rgba(99, 102, 241, 0.75)",
+    boxShadow: "0 0 10px rgba(99, 102, 241, 0.8)",
+    animationDelay: "1s",
+  },
+  chronoNodeInfo2: {
+    bottom: "20%",
+    right: "22%",
+    backgroundColor: "rgba(99, 102, 241, 0.75)",
+    boxShadow: "0 0 10px rgba(99, 102, 241, 0.8)",
+    animationDelay: "2.6s",
   },
   sectionHeaderCentered: {
     textAlign: "center",
@@ -988,7 +1177,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     },
   },
   glassCard: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "rgba(255, 255, 255, 0.94)",
+    backdropFilter: "blur(12px)",
     border: "1px solid #E2E8F0",
     borderRadius: "24px",
     padding: "36px",

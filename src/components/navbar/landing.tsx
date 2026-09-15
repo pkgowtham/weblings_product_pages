@@ -35,6 +35,15 @@ interface ProductItem {
 
 const productsList: ProductItem[] = [
   {
+    key: "Worksuite",
+    label: "Worksuite",
+    title: "All-in-One Smart Workspace",
+    description:
+      "Manage projects, tasks, team communications, digital office, and daily operations from a single unified platform.",
+    path: "/",
+    icon: <WorksuiteIcon />,
+  },
+  {
     key: "Mail",
     label: "Mail",
     title: "Fast & Secure Business Email",
@@ -88,15 +97,6 @@ const productsList: ProductItem[] = [
     path: "/drive",
     icon: <SvgCloud />,
   },
-  {
-    key: "Worksuite",
-    label: "Worksuite",
-    title: "All-in-One Smart Workspace",
-    description:
-      "Manage projects, tasks, team communications, digital office, and daily operations from a single unified platform.",
-    path: "/workSuite/feature",
-    icon: <WorksuiteIcon />,
-  },
 ];
 
 const Navbar = () => {
@@ -105,13 +105,40 @@ const Navbar = () => {
   const pathname = usePathname();
   const currentPath = pathname || "/";
 
-  const [activeItem, setActiveItem] = useState<ProductItem>(productsList[0]);
+  // Determine current active product based on the current page route
+  const getActiveProduct = () => {
+    if (currentPath === "/") {
+      return productsList.find((p) => p.path === "/") || productsList[0];
+    }
+    return (
+      productsList.find(
+        (p) =>
+          p.path !== "/" &&
+          (currentPath === p.path ||
+            currentPath.startsWith(p.path) ||
+            currentPath.includes(p.key.toLowerCase()))
+      ) || null
+    );
+  };
+
+  const currentProduct = getActiveProduct();
+  const [previewItem, setPreviewItem] = useState<ProductItem>(
+    currentProduct || productsList[0]
+  );
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isMobileProductOpen, setIsMobileProductOpen] = useState<boolean>(false);
 
   const navRef = useRef<HTMLInputElement>(null);
+
+  // Sync preview item when navigating or opening dropdown
+  useEffect(() => {
+    const active = getActiveProduct();
+    if (active) {
+      setPreviewItem(active);
+    }
+  }, [currentPath, isDropDownOpen]);
 
   // Handle responsive screen width check
   useEffect(() => {
@@ -155,9 +182,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${classes.NavBar} ${
-        isMenuOpen ? classes.NavBarOpen : ""
-      }`}
+      className={`${classes.NavBar} ${isMenuOpen ? classes.NavBarOpen : ""
+        }`}
       ref={navRef}
     >
       <div className={classes.NavText}>
@@ -171,17 +197,15 @@ const Navbar = () => {
             {/* Product with Dropdown */}
             <li className={classes.NavBarItem}>
               <div
-                className={`${classes.NavBarLink} ${
-                  isDropDownOpen || currentPath.includes("feature") ? classes.ActiveLink : ""
-                }`}
+                className={`${classes.NavBarLink} ${isDropDownOpen || (currentPath !== "/" && productsList.some((p) => p.path !== "/" && currentPath.startsWith(p.path))) ? classes.ActiveLink : ""
+                  }`}
                 onClick={toggleDropdown}
                 onMouseEnter={() => setIsDropDownOpen(true)}
               >
                 <span>Product</span>
                 <div
-                  className={`${classes.DropdownArrowIcon} ${
-                    isDropDownOpen ? classes.ArrowRotated : ""
-                  }`}
+                  className={`${classes.DropdownArrowIcon} ${isDropDownOpen ? classes.ArrowRotated : ""
+                    }`}
                 >
                   <SvgArrowDropDown />
                 </div>
@@ -194,30 +218,36 @@ const Navbar = () => {
                   onMouseLeave={() => setIsDropDownOpen(false)}
                 >
                   {/* Left Column: Product Options */}
-                  <div className={classes.SectionOne}>
+                  <div
+                    className={classes.SectionOne}
+                    onMouseLeave={() => {
+                      const active = getActiveProduct();
+                      if (active) {
+                        setPreviewItem(active);
+                      }
+                    }}
+                  >
                     {productsList.map((product) => {
-                      const isActive = activeItem.key === product.key;
+                      // Only mark as selected if the user has navigated to this page
+                      const isCurrentPage = currentProduct?.key === product.key;
                       return (
                         <div
                           key={product.key}
-                          className={`${classes.ProductLinkCard} ${
-                            isActive ? classes.ActiveProductCard : ""
-                          }`}
-                          onMouseEnter={() => setActiveItem(product)}
+                          className={`${classes.ProductLinkCard} ${isCurrentPage ? classes.ActiveProductCard : ""
+                            }`}
+                          onMouseEnter={() => setPreviewItem(product)}
                           onClick={() => handleProductNavigate(product.path)}
                         >
                           <div className={classes.ProductItemContent}>
                             <span
-                              className={`${classes.ProductIcon} ${
-                                isActive ? classes.ActiveProductIcon : ""
-                              }`}
+                              className={`${classes.ProductIcon} ${isCurrentPage ? classes.ActiveProductIcon : ""
+                                }`}
                             >
                               {product.icon}
                             </span>
                             <span
-                              className={`${classes.ProductLabel} ${
-                                isActive ? classes.ActiveProductLabel : ""
-                              }`}
+                              className={`${classes.ProductLabel} ${isCurrentPage ? classes.ActiveProductLabel : ""
+                                }`}
                             >
                               {product.label}
                             </span>
@@ -231,11 +261,11 @@ const Navbar = () => {
                   {/* Right Column: Active Preview Card */}
                   <div className={classes.SectionTwo}>
                     <div className={classes.PreviewHeader}>
-                      <Typography variant="HM" className={classes.PreviewTitle}>
-                        {activeItem.title}
+                      <Typography variant="TS" className={classes.PreviewTitle}>
+                        {previewItem.title}
                       </Typography>
                       <Typography variant="BM" className={classes.PreviewDescription}>
-                        {activeItem.description}
+                        {previewItem.description}
                       </Typography>
                     </div>
 
@@ -249,9 +279,9 @@ const Navbar = () => {
                       <Button
                         element="button"
                         brand
-                        onClick={() => handleProductNavigate(activeItem.path)}
+                        onClick={() => handleProductNavigate(previewItem.path)}
                       >
-                        Explore {activeItem.label}
+                        Explore {previewItem.label}
                       </Button>
                     </div>
                   </div>
@@ -259,29 +289,27 @@ const Navbar = () => {
               )}
             </li>
 
-            {/* About */}
+            {/* Docs */}
             <li className={classes.NavBarItem}>
               <Link
-                href="/about"
-                className={`${classes.NavBarLink} ${
-                  currentPath === "/about" ? classes.ActiveLink : ""
-                }`}
+                href="#"
+                className={`${classes.NavBarLink} ${currentPath === "/docs" ? classes.ActiveLink : ""
+                  }`}
                 onClick={() => setIsDropDownOpen(false)}
               >
-                About
+                Docs
               </Link>
             </li>
 
-            {/* Contact */}
+            {/* Pricing */}
             <li className={classes.NavBarItem}>
               <Link
-                href="/contact"
-                className={`${classes.NavBarLink} ${
-                  currentPath === "/contact" ? classes.ActiveLink : ""
-                }`}
+                href="/price"
+                className={`${classes.NavBarLink} ${currentPath === "/price" || currentPath === "/workSuite/comparison" ? classes.ActiveLink : ""
+                  }`}
                 onClick={() => setIsDropDownOpen(false)}
               >
-                Contact
+                Pricing
               </Link>
             </li>
           </ul>
@@ -316,9 +344,8 @@ const Navbar = () => {
             >
               <span>Product</span>
               <div
-                className={`${classes.DropdownArrowIcon} ${
-                  isMobileProductOpen ? classes.ArrowRotated : ""
-                }`}
+                className={`${classes.DropdownArrowIcon} ${isMobileProductOpen ? classes.ArrowRotated : ""
+                  }`}
               >
                 <SvgArrowDropDown />
               </div>
@@ -343,21 +370,21 @@ const Navbar = () => {
 
           <div className={classes.MobileNavItem}>
             <Link
-              href="/about"
+              href="#"
               className={classes.MobileNavLink}
               onClick={() => setIsMenuOpen(false)}
             >
-              About
+              Docs
             </Link>
           </div>
 
           <div className={classes.MobileNavItem}>
             <Link
-              href="/contact"
+              href="/price"
               className={classes.MobileNavLink}
               onClick={() => setIsMenuOpen(false)}
             >
-              Contact
+              Pricing
             </Link>
           </div>
 

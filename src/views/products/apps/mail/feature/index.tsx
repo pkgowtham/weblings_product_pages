@@ -25,6 +25,51 @@ import {
 import WeblingsMailMockup from '../../../../../components/mailMockup/index';
 import PhoneMockup from '../../../../../components/phoneMockup/index';
 
+// Vanilla Animate-On-Scroll Component
+const RevealOnScroll: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}> = ({ children, className, delay = 0 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange: 'opacity, transform',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
 /* ─────────────────────────────────────────────────────────────
    INLINE ACCENT SVG ICONS
    ───────────────────────────────────────────────────────────── */
@@ -345,9 +390,26 @@ const MailFeature = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION 2: GLOBAL ARCHITECTURE & COMPLIANCE
+          SECTION 2: GLOBAL ARCHITECTURE & COMPLIANCE (ANIMATED PART 1)
           ───────────────────────────────────────────────────────────── */}
       <section className={classes.sectionTwo}>
+        {/* Living Aerodynamic Ambient Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
+        <div className={classes.mailAmbientCanvas}>
+          <div className={classes.mailAeroPattern} />
+          <div className={classes.mailBlobBlue} />
+          <div className={classes.mailBlobLavender} />
+          <div className={classes.mailBlobCenter} />
+          <div className={classes.mailAeroTrack}>
+            <div className={classes.mailAeroLight} />
+          </div>
+          <div className={classes.mailAeroTrackBottom}>
+            <div className={classes.mailAeroLightBottom} />
+          </div>
+          <span className={`${classes.mailNodeDot} ${classes.mailNodeBlue1}`} />
+          <span className={`${classes.mailNodeDot} ${classes.mailNodeBlue2}`} />
+          <span className={`${classes.mailNodeDot} ${classes.mailNodeLavender1}`} />
+          <span className={`${classes.mailNodeDot} ${classes.mailNodeLavender2}`} />
+        </div>
         <div className={classes.container}>
           {/* Section Header */}
           <div className={classes.secTwoHeader}>
@@ -596,96 +658,123 @@ const MailFeature = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION 3: UNRESTRICTED EMAIL, FULLY INCLUDED
+          SECTION 3: UNRESTRICTED EMAIL, FULLY INCLUDED (ANIMATED PART 2)
           ───────────────────────────────────────────────────────────── */}
       <section className={classes.sectionThree}>
-        <div className={classes.container}>
-          <div className={classes.centerHeader}>
-            <div className={classes.eyebrowPill}>
-              <span className={classes.eyebrowText}>ENTERPRISE INCLUSIONS</span>
-            </div>
-            <h2 className={classes.sectionTitle}>Unrestricted Email, Fully Included.</h2>
-            <p className={classes.sectionSubtitle}>
-              Stop rationing out email addresses to save money on user licenses. Create as many custom inboxes as you need for contractors, support aliases, or new hires. It is 100% included in your flat Weblings Worksuite invoice.
-            </p>
+        {/* Living Aerodynamic Ambient Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
+        <div className={classes.mailAmbientCanvas}>
+          <div className={classes.mailAeroPattern} />
+          <div className={classes.mailBlobLavender} />
+          <div className={classes.mailBlobBlue} />
+          <div className={classes.mailBlobCenter} />
+          <div className={classes.mailAeroTrack}>
+            <div className={classes.mailAeroLight} />
           </div>
+          <div className={classes.mailAeroTrackBottom}>
+            <div className={classes.mailAeroLightBottom} />
+          </div>
+          <span className={`${classes.mailNodeDot} ${classes.mailNodeBlue1}`} />
+          <span className={`${classes.mailNodeDot} ${classes.mailNodeBlue2}`} />
+          <span className={`${classes.mailNodeDot} ${classes.mailNodeLavender1}`} />
+          <span className={`${classes.mailNodeDot} ${classes.mailNodeLavender2}`} />
+        </div>
+        <div className={classes.secInner}>
+          <RevealOnScroll>
+            <div className={classes.centerHeader}>
+              <div className={classes.eyebrowPill}>
+                <span className={classes.eyebrowText}>ENTERPRISE INCLUSIONS</span>
+              </div>
+              <h2 className={classes.sectionTitle}>Unrestricted Email, Fully Included.</h2>
+              <p className={classes.sectionSubtitle}>
+                Stop rationing out email addresses to save money on user licenses. Create as many custom inboxes as you need for contractors, support aliases, or new hires. It is 100% included in your flat Weblings Worksuite invoice.
+              </p>
+            </div>
+          </RevealOnScroll>
 
           <div className={classes.fourCardsGrid}>
             {/* Card 1 */}
-            <div
-              className={clsx(classes.featureBenefitCard, classes.benefitCardBlue)}
-              onMouseEnter={() => setHoveredBenefitCard(1)}
-              onMouseLeave={() => setHoveredBenefitCard(null)}
-            >
-              <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconBlue)}>
-                <InfinityIcon width={24} height={24} isHovered={hoveredBenefitCard === 1} />
+            <RevealOnScroll delay={100}>
+              <div
+                className={clsx(classes.featureBenefitCard, classes.benefitCardBlue)}
+                onMouseEnter={() => setHoveredBenefitCard(1)}
+                onMouseLeave={() => setHoveredBenefitCard(null)}
+              >
+                <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconBlue)}>
+                  <InfinityIcon width={24} height={24} isHovered={hoveredBenefitCard === 1} />
+                </div>
+                <h3 className={classes.featureBenefitTitle}>Unlimited Addresses</h3>
+                <p className={classes.featureBenefitText}>
+                  Create absolute unlimited aliases and standard inboxes. No extra per-user billing.
+                </p>
+                <div className={classes.hoverLink}>
+                  <span>Explore aliases</span>
+                  <SvgArrowRight />
+                </div>
               </div>
-              <h3 className={classes.featureBenefitTitle}>Unlimited Addresses</h3>
-              <p className={classes.featureBenefitText}>
-                Create absolute unlimited aliases and standard inboxes. No extra per-user billing.
-              </p>
-              <div className={classes.hoverLink}>
-                <span>Explore aliases</span>
-                <SvgArrowRight />
-              </div>
-            </div>
+            </RevealOnScroll>
 
             {/* Card 2 */}
-            <div
-              className={clsx(classes.featureBenefitCard, classes.benefitCardPurple)}
-              onMouseEnter={() => setHoveredBenefitCard(2)}
-              onMouseLeave={() => setHoveredBenefitCard(null)}
-            >
-              <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconPurple)}>
-                <FolderIcon width={24} height={24} isHovered={hoveredBenefitCard === 2} />
+            <RevealOnScroll delay={200}>
+              <div
+                className={clsx(classes.featureBenefitCard, classes.benefitCardPurple)}
+                onMouseEnter={() => setHoveredBenefitCard(2)}
+                onMouseLeave={() => setHoveredBenefitCard(null)}
+              >
+                <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconPurple)}>
+                  <FolderIcon width={24} height={24} isHovered={hoveredBenefitCard === 2} />
+                </div>
+                <h3 className={classes.featureBenefitTitle}>Shared Team Inboxes</h3>
+                <p className={classes.featureBenefitText}>
+                  Sales and support teams can collaborate directly on incoming client tickets without forwarding.
+                </p>
+                <div className={classes.hoverLink}>
+                  <span>Shared inbox workflow</span>
+                  <SvgArrowRight />
+                </div>
               </div>
-              <h3 className={classes.featureBenefitTitle}>Massive 10GB Attachments</h3>
-              <p className={classes.featureBenefitText}>
-                Standard 20MB native limits apply, but our Drive integration automatically swaps larger files for secure 10GB links.
-              </p>
-              <div className={classes.hoverLink}>
-                <span>Storage policy</span>
-                <SvgArrowRight />
-              </div>
-            </div>
+            </RevealOnScroll>
 
             {/* Card 3 */}
-            <div
-              className={clsx(classes.featureBenefitCard, classes.benefitCardGreen)}
-              onMouseEnter={() => setHoveredBenefitCard(3)}
-              onMouseLeave={() => setHoveredBenefitCard(null)}
-            >
-              <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconGreen)}>
-                <CartIcon width={24} height={24} isHovered={hoveredBenefitCard === 3} />
+            <RevealOnScroll delay={300}>
+              <div
+                className={clsx(classes.featureBenefitCard, classes.benefitCardGreen)}
+                onMouseEnter={() => setHoveredBenefitCard(3)}
+                onMouseLeave={() => setHoveredBenefitCard(null)}
+              >
+                <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconGreen)}>
+                  <CartIcon width={24} height={24} isHovered={hoveredBenefitCard === 3} />
+                </div>
+                <h3 className={classes.featureBenefitTitle}>In-App Domain Purchasing</h3>
+                <p className={classes.featureBenefitText}>
+                  Search, purchase, and route new domains directly within the Organization app natively.
+                </p>
+                <div className={classes.hoverLink}>
+                  <span>Domain registrar</span>
+                  <SvgArrowRight />
+                </div>
               </div>
-              <h3 className={classes.featureBenefitTitle}>In-App Domain Purchasing</h3>
-              <p className={classes.featureBenefitText}>
-                Search, purchase, and route new domains directly within the Organization app natively.
-              </p>
-              <div className={classes.hoverLink}>
-                <span>Domain registrar</span>
-                <SvgArrowRight />
-              </div>
-            </div>
+            </RevealOnScroll>
 
             {/* Card 4 */}
-            <div
-              className={clsx(classes.featureBenefitCard, classes.benefitCardAmber)}
-              onMouseEnter={() => setHoveredBenefitCard(4)}
-              onMouseLeave={() => setHoveredBenefitCard(null)}
-            >
-              <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconAmber)}>
-                <SearchIcon width={24} height={24} isHovered={hoveredBenefitCard === 4} />
+            <RevealOnScroll delay={400}>
+              <div
+                className={clsx(classes.featureBenefitCard, classes.benefitCardAmber)}
+                onMouseEnter={() => setHoveredBenefitCard(4)}
+                onMouseLeave={() => setHoveredBenefitCard(null)}
+              >
+                <div className={clsx(classes.featureBenefitIconBox, classes.benefitIconAmber)}>
+                  <SearchIcon width={24} height={24} isHovered={hoveredBenefitCard === 4} />
+                </div>
+                <h3 className={classes.featureBenefitTitle}>Lightning Fast Indexing</h3>
+                <p className={classes.featureBenefitText}>
+                  Instantly filter through years of indexed email history without browser lag or timeouts.
+                </p>
+                <div className={classes.hoverLink}>
+                  <span>Instant search tech</span>
+                  <SvgArrowRight />
+                </div>
               </div>
-              <h3 className={classes.featureBenefitTitle}>Lightning Fast Indexing</h3>
-              <p className={classes.featureBenefitText}>
-                Instantly filter through years of indexed email history without browser lag or timeouts.
-              </p>
-              <div className={classes.hoverLink}>
-                <span>Instant search tech</span>
-                <SvgArrowRight />
-              </div>
-            </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>

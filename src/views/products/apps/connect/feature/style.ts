@@ -2,6 +2,71 @@ import { createUseStyles } from "react-jss";
 import { Theme } from "../../../../../theme/themeType";
 
 export const useStyles = createUseStyles((theme: Theme) => ({
+  "@keyframes floatSignalCyan": {
+    "0%, 100%": {
+      transform: "translate(0, 0) scale(1)",
+    },
+    "50%": {
+      transform: "translate(24px, -20px) scale(1.06)",
+    },
+  },
+  "@keyframes floatSignalEmerald": {
+    "0%, 100%": {
+      transform: "translate(0, 0) scale(1)",
+    },
+    "50%": {
+      transform: "translate(-22px, 24px) scale(0.95)",
+    },
+  },
+  "@keyframes signalRipple": {
+    "0%": {
+      transform: "scale(0.8)",
+      opacity: 0.5,
+    },
+    "50%": {
+      opacity: 0.2,
+    },
+    "100%": {
+      transform: "scale(1.4)",
+      opacity: 0,
+    },
+  },
+  "@keyframes pulseGlow": {
+    "0%, 100%": {
+      opacity: 0.35,
+      transform: "scale(1)",
+    },
+    "50%": {
+      opacity: 0.75,
+      transform: "scale(1.08)",
+    },
+  },
+  "@keyframes nodeBlink": {
+    "0%, 100%": {
+      opacity: 0.15,
+      transform: "scale(0.85)",
+    },
+    "50%": {
+      opacity: 0.95,
+      transform: "scale(1.3)",
+    },
+  },
+  "@keyframes packetBeamSweep": {
+    "0%": {
+      left: "-25%",
+      opacity: 0,
+    },
+    "20%": {
+      opacity: 0.9,
+    },
+    "80%": {
+      opacity: 0.9,
+    },
+    "100%": {
+      left: "120%",
+      opacity: 0,
+    },
+  },
   pageWrapper: {
     width: "100%",
     backgroundColor: theme.light.neutral.surface.lighter,
@@ -171,14 +236,164 @@ export const useStyles = createUseStyles((theme: Theme) => ({
      COMMON SECTION HEADERS & CONTAINERS
      ───────────────────────────────────────────────────────────────────────────── */
   sectionContainer: {
-    maxWidth: "1280px",
+    width: "100%",
     margin: "0 auto",
     padding: "88px 24px",
     borderTop: `1px solid ${theme.light.neutral.border.light}`,
     boxSizing: "border-box",
+    position: "relative",
+    overflow: "hidden",
     "@media (max-width: 768px)": {
       padding: "56px 16px",
     },
+  },
+  sectionContainerAnimated: {
+    backgroundColor: "#FAFBFD",
+    borderTop: "1px solid rgba(226, 232, 240, 0.7)",
+    borderBottom: "1px solid rgba(226, 232, 240, 0.7)",
+  },
+  sectionInner: {
+    position: "relative",
+    zIndex: 1,
+    maxWidth: "1280px",
+    margin: "0 auto",
+  },
+  signalAmbientCanvas: {
+    position: "absolute",
+    inset: 0,
+    pointerEvents: "none",
+    overflow: "hidden",
+    zIndex: 0,
+  },
+  signalMeshOverlay: {
+    position: "absolute",
+    inset: 0,
+    backgroundImage: `
+      linear-gradient(to right, rgba(14, 165, 233, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(16, 185, 129, 0.04) 1px, transparent 1px)
+    `,
+    backgroundSize: "40px 40px",
+    maskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
+    WebkitMaskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
+  },
+  signalBlobCyan: {
+    position: "absolute",
+    top: "30px",
+    left: "-60px",
+    width: "560px",
+    height: "560px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(14, 165, 233, 0.13) 0%, rgba(56, 189, 248, 0.035) 50%, transparent 70%)",
+    filter: "blur(75px)",
+    animation: "$floatSignalCyan 18s ease-in-out infinite",
+  },
+  signalBlobEmerald: {
+    position: "absolute",
+    bottom: "30px",
+    right: "-60px",
+    width: "560px",
+    height: "560px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(52, 211, 153, 0.035) 50%, transparent 70%)",
+    filter: "blur(75px)",
+    animation: "$floatSignalEmerald 22s ease-in-out infinite",
+  },
+  signalBlobCenter: {
+    position: "absolute",
+    top: "48%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "520px",
+    height: "380px",
+    borderRadius: "50%",
+    background: "radial-gradient(ellipse at center, rgba(14, 165, 233, 0.06) 0%, transparent 70%)",
+    filter: "blur(70px)",
+    animation: "$pulseGlow 8s ease-in-out infinite",
+  },
+  signalPulseRing: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    width: "440px",
+    height: "440px",
+    marginTop: "-220px",
+    marginLeft: "-220px",
+    borderRadius: "50%",
+    border: "1.5px solid rgba(14, 165, 233, 0.18)",
+    animation: "$signalRipple 6s ease-out infinite",
+    pointerEvents: "none",
+  },
+  signalBeamTrack: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "1px",
+    background: "linear-gradient(90deg, transparent 0%, rgba(14, 165, 233, 0.25) 30%, rgba(16, 185, 129, 0.25) 70%, transparent 100%)",
+    overflow: "hidden",
+  },
+  signalBeamLight: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "160px",
+    height: "100%",
+    background: "linear-gradient(90deg, transparent 0%, rgba(14, 165, 233, 0.95) 40%, rgba(16, 185, 129, 0.85) 80%, transparent 100%)",
+    boxShadow: "0 0 6px rgba(14, 165, 233, 0.45)",
+    animation: "$packetBeamSweep 7s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+  },
+  signalBeamTrackBottom: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: "1px",
+    background: "linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.25) 30%, rgba(14, 165, 233, 0.25) 70%, transparent 100%)",
+    overflow: "hidden",
+  },
+  signalBeamLightBottom: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "160px",
+    height: "100%",
+    background: "linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.95) 40%, rgba(14, 165, 233, 0.85) 80%, transparent 100%)",
+    boxShadow: "0 0 6px rgba(16, 185, 129, 0.45)",
+    animation: "$packetBeamSweep 8s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.5s",
+  },
+  signalNodeDot: {
+    position: "absolute",
+    width: "6px",
+    height: "6px",
+    borderRadius: "50%",
+    animation: "$nodeBlink 4s ease-in-out infinite",
+  },
+  signalNodeCyan1: {
+    top: "24%",
+    left: "15%",
+    backgroundColor: "rgba(14, 165, 233, 0.8)",
+    boxShadow: "0 0 10px rgba(14, 165, 233, 0.85)",
+  },
+  signalNodeCyan2: {
+    bottom: "26%",
+    left: "22%",
+    backgroundColor: "rgba(14, 165, 233, 0.8)",
+    boxShadow: "0 0 10px rgba(14, 165, 233, 0.85)",
+    animationDelay: "1.8s",
+  },
+  signalNodeEmerald1: {
+    top: "28%",
+    right: "17%",
+    backgroundColor: "rgba(16, 185, 129, 0.8)",
+    boxShadow: "0 0 10px rgba(16, 185, 129, 0.85)",
+    animationDelay: "1s",
+  },
+  signalNodeEmerald2: {
+    bottom: "22%",
+    right: "24%",
+    backgroundColor: "rgba(16, 185, 129, 0.8)",
+    boxShadow: "0 0 10px rgba(16, 185, 129, 0.85)",
+    animationDelay: "2.6s",
   },
   sectionHeaderCentered: {
     textAlign: "center",
@@ -240,7 +455,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     marginTop: "8px",
   },
   infraCard: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "rgba(255, 255, 255, 0.94)",
+    backdropFilter: "blur(12px)",
     borderRadius: theme.borderRadius.b300,
     padding: "18px 22px",
     border: "1px solid #E2E8F0",
@@ -403,18 +619,20 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     },
   },
   glassCard: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "rgba(255, 255, 255, 0.94)",
+    backdropFilter: "blur(12px)",
     borderRadius: theme.borderRadius.b400,
     padding: "36px",
     border: "1px solid #E2E8F0",
     boxShadow: "0 4px 16px rgba(15, 23, 42, 0.04)",
+    transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
     "&:hover": {
       transform: "translateY(-4px)",
-      boxShadow: "0 16px 36px rgba(15, 23, 42, 0.08)",
+      boxShadow: "0 16px 32px rgba(15, 23, 42, 0.08)",
+      borderColor: "rgba(14, 165, 233, 0.35)",
     },
     "@media (max-width: 600px)": {
       padding: "24px",

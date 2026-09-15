@@ -2,6 +2,58 @@ import { createUseStyles } from "react-jss";
 import { Theme } from "../../../../../theme/themeType";
 
 export const useStyles = createUseStyles((theme: Theme) => ({
+  "@keyframes floatMailAero1": {
+    "0%, 100%": {
+      transform: "translate(0, 0) scale(1)",
+    },
+    "50%": {
+      transform: "translate(24px, -18px) scale(1.05)",
+    },
+  },
+  "@keyframes floatMailAero2": {
+    "0%, 100%": {
+      transform: "translate(0, 0) scale(1)",
+    },
+    "50%": {
+      transform: "translate(-20px, 22px) scale(0.96)",
+    },
+  },
+  "@keyframes pulseGlow": {
+    "0%, 100%": {
+      opacity: 0.35,
+      transform: "scale(1)",
+    },
+    "50%": {
+      opacity: 0.75,
+      transform: "scale(1.08)",
+    },
+  },
+  "@keyframes nodeBlink": {
+    "0%, 100%": {
+      opacity: 0.15,
+      transform: "scale(0.85)",
+    },
+    "50%": {
+      opacity: 0.95,
+      transform: "scale(1.3)",
+    },
+  },
+  "@keyframes aeroSweep": {
+    "0%": {
+      left: "-20%",
+      opacity: 0,
+    },
+    "20%": {
+      opacity: 0.9,
+    },
+    "80%": {
+      opacity: 0.9,
+    },
+    "100%": {
+      left: "120%",
+      opacity: 0,
+    },
+  },
   page: {
     backgroundColor: theme.light.neutral.surface.lighter,
     color: theme.light.neutral.onSurface.title,
@@ -1161,12 +1213,144 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     position: "relative",
     width: "100%",
     padding: "96px 24px",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#F9FAFC",
+    borderTop: `1px solid ${theme.light.neutral.border.light}`,
+    borderBottom: `1px solid ${theme.light.neutral.border.light}`,
     overflow: "hidden",
     boxSizing: "border-box",
     "@media (max-width: 768px)": {
       padding: "56px 16px",
     },
+  },
+  mailAmbientCanvas: {
+    position: "absolute",
+    inset: 0,
+    pointerEvents: "none",
+    overflow: "hidden",
+    zIndex: 0,
+  },
+  mailAeroPattern: {
+    position: "absolute",
+    inset: 0,
+    backgroundImage: `
+      linear-gradient(to right, rgba(37, 99, 235, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(139, 92, 246, 0.04) 1px, transparent 1px)
+    `,
+    backgroundSize: "40px 40px",
+    maskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
+    WebkitMaskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
+  },
+  mailBlobBlue: {
+    position: "absolute",
+    top: "30px",
+    left: "-60px",
+    width: "560px",
+    height: "560px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(37, 99, 235, 0.13) 0%, rgba(59, 130, 246, 0.035) 50%, transparent 70%)",
+    filter: "blur(75px)",
+    animation: "$floatMailAero1 18s ease-in-out infinite",
+  },
+  mailBlobLavender: {
+    position: "absolute",
+    bottom: "30px",
+    right: "-60px",
+    width: "560px",
+    height: "560px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(167, 139, 250, 0.035) 50%, transparent 70%)",
+    filter: "blur(75px)",
+    animation: "$floatMailAero2 22s ease-in-out infinite",
+  },
+  mailBlobCenter: {
+    position: "absolute",
+    top: "48%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "520px",
+    height: "380px",
+    borderRadius: "50%",
+    background: "radial-gradient(ellipse at center, rgba(37, 99, 235, 0.06) 0%, transparent 70%)",
+    filter: "blur(70px)",
+    animation: "$pulseGlow 8s ease-in-out infinite",
+  },
+  mailAeroTrack: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "1px",
+    background: "linear-gradient(90deg, transparent 0%, rgba(37, 99, 235, 0.25) 30%, rgba(139, 92, 246, 0.25) 70%, transparent 100%)",
+    overflow: "hidden",
+  },
+  mailAeroLight: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "160px",
+    height: "100%",
+    background: "linear-gradient(90deg, transparent 0%, rgba(37, 99, 235, 0.95) 40%, rgba(139, 92, 246, 0.85) 80%, transparent 100%)",
+    boxShadow: "0 0 6px rgba(37, 99, 235, 0.45)",
+    animation: "$aeroSweep 7s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+  },
+  mailAeroTrackBottom: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: "1px",
+    background: "linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.25) 30%, rgba(37, 99, 235, 0.25) 70%, transparent 100%)",
+    overflow: "hidden",
+  },
+  mailAeroLightBottom: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "160px",
+    height: "100%",
+    background: "linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.95) 40%, rgba(37, 99, 235, 0.85) 80%, transparent 100%)",
+    boxShadow: "0 0 6px rgba(139, 92, 246, 0.45)",
+    animation: "$aeroSweep 8s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.5s",
+  },
+  mailNodeDot: {
+    position: "absolute",
+    width: "6px",
+    height: "6px",
+    borderRadius: "50%",
+    animation: "$nodeBlink 4s ease-in-out infinite",
+  },
+  mailNodeBlue1: {
+    top: "22%",
+    left: "14%",
+    backgroundColor: "rgba(37, 99, 235, 0.75)",
+    boxShadow: "0 0 10px rgba(37, 99, 235, 0.8)",
+  },
+  mailNodeBlue2: {
+    bottom: "28%",
+    left: "24%",
+    backgroundColor: "rgba(37, 99, 235, 0.75)",
+    boxShadow: "0 0 10px rgba(37, 99, 235, 0.8)",
+    animationDelay: "1.8s",
+  },
+  mailNodeLavender1: {
+    top: "30%",
+    right: "16%",
+    backgroundColor: "rgba(139, 92, 246, 0.75)",
+    boxShadow: "0 0 10px rgba(139, 92, 246, 0.8)",
+    animationDelay: "1s",
+  },
+  mailNodeLavender2: {
+    bottom: "20%",
+    right: "22%",
+    backgroundColor: "rgba(139, 92, 246, 0.75)",
+    boxShadow: "0 0 10px rgba(139, 92, 246, 0.8)",
+    animationDelay: "2.6s",
+  },
+  secInner: {
+    position: "relative",
+    zIndex: 1,
+    maxWidth: "1240px",
+    margin: "0 auto",
   },
   centerHeader: {
     textAlign: "center",

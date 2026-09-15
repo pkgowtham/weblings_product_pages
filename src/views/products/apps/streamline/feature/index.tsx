@@ -51,6 +51,51 @@ const SvgStar: React.FC = () => (
   </svg>
 );
 
+// Zero-dependency Native Animate-On-Scroll Component
+const RevealOnScroll: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}> = ({ children, className, delay = 0 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange: 'opacity, transform',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
 const StreamlineFeature: React.FC = () => {
   const classes = useStyles();
 
@@ -115,72 +160,116 @@ const StreamlineFeature: React.FC = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* SECTION 1: ENTERPRISE ARCHITECTURE CARDS */}
+      {/* SECTION 1: ENTERPRISE ARCHITECTURE CARDS (ANIMATED PART 1) */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      <section className={classes.sectionWrapper}>
-        <div className={classes.sectionHeaderCenter}>
-          <span className={classes.kicker}>{usageData.subtitle}</span>
-          <h2 className={classes.sectionTitle}>{usageData.title}</h2>
-          <p className={classes.sectionDescription}>{usageData.description}</p>
+      <section className={`${classes.sectionWrapper} ${classes.sectionWrapperAnimated}`}>
+        {/* Living Sprint Ambient Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
+        <div className={classes.sprintAmbientCanvas}>
+          <div className={classes.sprintTrackOverlay} />
+          <div className={classes.sprintBlobAmber} />
+          <div className={classes.sprintBlobBlue} />
+          <div className={classes.sprintBlobCenter} />
+          <div className={classes.sprintTrackBeam}>
+            <div className={classes.sprintTrackLight} />
+          </div>
+          <div className={classes.sprintTrackBeamBottom}>
+            <div className={classes.sprintTrackLightBottom} />
+          </div>
+          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeAmber1}`} />
+          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeAmber2}`} />
+          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeBlue1}`} />
+          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeBlue2}`} />
         </div>
+        <div className={classes.sectionInner}>
+          <RevealOnScroll>
+            <div className={classes.sectionHeaderCenter}>
+              <span className={classes.kicker}>{usageData.subtitle}</span>
+              <h2 className={classes.sectionTitle}>{usageData.title}</h2>
+              <p className={classes.sectionDescription}>{usageData.description}</p>
+            </div>
+          </RevealOnScroll>
 
-        <div className={classes.cardGrid}>
-          {usageData.cards.map((card: any) => {
-            const isHovered = hoveredCard === card.id;
-            return (
-              <div
-                key={card.id}
-                className={`${classes.featureCard} ${isHovered ? classes.featureCardHovered : ''}`}
-                onMouseEnter={() => setHoveredCard(card.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className={classes.featureIconWrapper}>
-                  {card.id === 'reassignment' && <BulkReassignIcon width={24} height={24} isHovered={isHovered} />}
-                  {card.id === 'guest' && <GuestAccessIcon width={24} height={24} isHovered={isHovered} />}
-                  {card.id === 'workflow' && <WorkflowConfigIcon width={24} height={24} isHovered={isHovered} />}
-                  {card.id === 'hierarchy' && <HierarchyTreeIcon width={24} height={24} isHovered={isHovered} />}
-                </div>
-                <h3 className={classes.cardTitle}>{card.title}</h3>
-                <p className={classes.cardDescription}>{card.description}</p>
-              </div>
-            );
-          })}
+          <div className={classes.cardGrid}>
+            {usageData.cards.map((card: any, idx: number) => {
+              const isHovered = hoveredCard === card.id;
+              return (
+                <RevealOnScroll key={card.id} delay={idx * 80}>
+                  <div
+                    className={`${classes.featureCard} ${isHovered ? classes.featureCardHovered : ''}`}
+                    onMouseEnter={() => setHoveredCard(card.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <div className={classes.featureIconWrapper}>
+                      {card.id === 'reassignment' && <BulkReassignIcon width={24} height={24} isHovered={isHovered} />}
+                      {card.id === 'guest' && <GuestAccessIcon width={24} height={24} isHovered={isHovered} />}
+                      {card.id === 'workflow' && <WorkflowConfigIcon width={24} height={24} isHovered={isHovered} />}
+                      {card.id === 'hierarchy' && <HierarchyTreeIcon width={24} height={24} isHovered={isHovered} />}
+                    </div>
+                    <h3 className={classes.cardTitle}>{card.title}</h3>
+                    <p className={classes.cardDescription}>{card.description}</p>
+                  </div>
+                </RevealOnScroll>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────── */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* SECTION 2: THE END OF MANUAL TICKET ENTRY (SCOPE PIPELINE) */}
+      {/* SECTION 2: THE END OF MANUAL TICKET ENTRY (ANIMATED PART 2) */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      <section className={classes.sectionWrapper}>
-        <div className={classes.sectionHeaderCenter}>
-          <div className={classes.kicker}>The End of Manual Ticket Entry</div>
-          <h2 className={classes.sectionTitle}>
-            Streamline does not just track your work; it actively builds it.
-          </h2>
-          <p className={classes.sectionDescription}>
-            The AI Scope Engine listens to client calls, auto-generates sprint tickets, and lets you find exactly what you need in milliseconds.
-          </p>
+      <section className={`${classes.sectionWrapper} ${classes.sectionWrapperAnimated}`}>
+        {/* Living Sprint Ambient Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
+        <div className={classes.sprintAmbientCanvas}>
+          <div className={classes.sprintTrackOverlay} />
+          <div className={classes.sprintBlobBlue} />
+          <div className={classes.sprintBlobAmber} />
+          <div className={classes.sprintBlobCenter} />
+          <div className={classes.sprintTrackBeam}>
+            <div className={classes.sprintTrackLight} />
+          </div>
+          <div className={classes.sprintTrackBeamBottom}>
+            <div className={classes.sprintTrackLightBottom} />
+          </div>
+          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeAmber1}`} />
+          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeAmber2}`} />
+          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeBlue1}`} />
+          <span className={`${classes.sprintNodeDot} ${classes.sprintNodeBlue2}`} />
         </div>
 
-        <div className={classes.pipelineContainer}>
-          <div className={classes.pipelineGraphicCard}>
-            {/* Pipeline Header Bar */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1.5px solid #EEF2F6', paddingBottom: 16 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#0072C4', display: 'inline-block', boxShadow: '0 0 0 3px rgba(0, 114, 196, 0.2)' }} />
-                <span style={{ fontSize: 13, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.07em', color: '#0072C4' }}>
-                  AI Scope-to-Sprint Pipeline
-                </span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, backgroundColor: '#F0FDF4', color: '#15803D', padding: '4px 12px', borderRadius: 20, fontSize: 12, fontWeight: 700, border: '1px solid #BBF7D0' }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#16A34A', display: 'inline-block' }} />
-                <span>Live Active</span>
-              </div>
+        <div className={classes.sectionInner}>
+          <RevealOnScroll>
+            <div className={classes.sectionHeaderCenter}>
+              <div className={classes.kicker}>The End of Manual Ticket Entry</div>
+              <h2 className={classes.sectionTitle}>
+                Streamline does not just track your work; it actively builds it.
+              </h2>
+              <p className={classes.sectionDescription}>
+                The AI Scope Engine listens to client calls, auto-generates sprint tickets, and lets you find exactly what you need in milliseconds.
+              </p>
             </div>
+          </RevealOnScroll>
 
-            {/* 3 Step Pipeline Cards */}
-            <div className={classes.pipelineStepsRow}>
+          <RevealOnScroll delay={150}>
+            <div className={classes.pipelineContainer}>
+              <div className={classes.pipelineGraphicCard}>
+                {/* Pipeline Header Bar */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1.5px solid #EEF2F6', paddingBottom: 16 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#0072C4', display: 'inline-block', boxShadow: '0 0 0 3px rgba(0, 114, 196, 0.2)' }} />
+                    <span style={{ fontSize: 13, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.07em', color: '#0072C4' }}>
+                      AI Scope-to-Sprint Pipeline
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, backgroundColor: '#F0FDF4', color: '#15803D', padding: '4px 12px', borderRadius: 20, fontSize: 12, fontWeight: 700, border: '1px solid #BBF7D0' }}>
+                    <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#16A34A', display: 'inline-block' }} />
+                    <span>Live Active</span>
+                  </div>
+                </div>
+
+                {/* 3 Step Pipeline Cards */}
+                <div className={classes.pipelineStepsRow}>
               {/* Step 1 */}
               <div
                 className={`${classes.pipelineFlowStep} ${activeStep === 1 ? classes.pipelineFlowStepActive : ''}`}
@@ -356,47 +445,54 @@ const StreamlineFeature: React.FC = () => {
                 </div>
               </div>
             )}
-          </div>
+              </div>
+            </div>
+          </RevealOnScroll>
         </div>
       </section>
-
 
       {/* ─────────────────────────────────────────────────────────────────── */}
       {/* SECTION 3: INTELLIGENT DISCOVERY & SEMANTIC VECTOR SEARCH */}
       {/* ─────────────────────────────────────────────────────────────────── */}
       <section className={classes.sectionWrapper}>
-        <div className={classes.splitGrid}>
-          {/* Left: Interactive Vector Search Simulation Card */}
-          <div
-            className={classes.searchDemoCard}
-            onMouseEnter={() => setIsSearchHovered(true)}
-            onMouseLeave={() => setIsSearchHovered(false)}
-          >
-            <div className={classes.searchQueryBox}>
-              <SearchIcon width={18} height={18} isHovered={isSearchHovered} />
-              <span>&quot;What was the database error the client mentioned last month?&quot;</span>
-            </div>
+        <div className={classes.sectionInner}>
+          <div className={classes.splitGrid}>
+            {/* Left: Interactive Vector Search Simulation Card */}
+            <RevealOnScroll delay={100}>
+              <div
+                className={classes.searchDemoCard}
+                onMouseEnter={() => setIsSearchHovered(true)}
+                onMouseLeave={() => setIsSearchHovered(false)}
+              >
+                <div className={classes.searchQueryBox}>
+                  <SearchIcon width={18} height={18} isHovered={isSearchHovered} />
+                  <span>&quot;What was the database error the client mentioned last month?&quot;</span>
+                </div>
 
-            <div className={classes.searchResultCard}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: '#64748B', marginBottom: 4 }}>
-                STR-392 - Recorded Oct 14
+                <div className={classes.searchResultCard}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: '#64748B', marginBottom: 4 }}>
+                    STR-392 - Recorded Oct 14
+                  </div>
+                  <h4 style={{ fontSize: 15, fontWeight: 700, color: '#0F172A', margin: '0 0 6px 0' }}>
+                    Fix MongoDB timeout during checkout
+                  </h4>
+                  <p style={{ fontSize: 13, color: '#475569', lineHeight: 1.5, margin: 0 }}>
+                    &quot;The checkout kept timing out when writing to Mongo...&quot;
+                  </p>
+                </div>
               </div>
-              <h4 style={{ fontSize: 15, fontWeight: 700, color: '#0F172A', margin: '0 0 6px 0' }}>
-                Fix MongoDB timeout during checkout
-              </h4>
-              <p style={{ fontSize: 13, color: '#475569', lineHeight: 1.5, margin: 0 }}>
-                &quot;The checkout kept timing out when writing to Mongo...&quot;
-              </p>
-            </div>
-          </div>
+            </RevealOnScroll>
 
-          {/* Right: Original Description */}
-          <div>
-            <div className={classes.kicker}>Intelligent Discovery</div>
-            <h2 className={classes.sectionTitle}>Semantic Vector Search: Find Needles in a Haystack</h2>
-            <p className={classes.sectionDescription}>
-              Search thousands of tickets using natural human language. The AI understands context and meaning, retrieving the exact ticket, attachment, and comment history without rigid tags.
-            </p>
+            {/* Right: Original Description */}
+            <RevealOnScroll delay={200}>
+              <div>
+                <div className={classes.kicker}>Intelligent Discovery</div>
+                <h2 className={classes.sectionTitle}>Semantic Vector Search: Find Needles in a Haystack</h2>
+                <p className={classes.sectionDescription}>
+                  Search thousands of tickets using natural human language. The AI understands context and meaning, retrieving the exact ticket, attachment, and comment history without rigid tags.
+                </p>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
@@ -405,33 +501,39 @@ const StreamlineFeature: React.FC = () => {
       {/* SECTION 4: IMMUTABLE AUDIT TRAIL */}
       {/* ─────────────────────────────────────────────────────────────────── */}
       <section className={classes.sectionWrapper}>
-        <div className={classes.splitGrid}>
-          {/* Left: Original Description */}
-          <div>
-            <div className={classes.kicker}>Absolute Accountability</div>
-            <h2 className={classes.sectionTitle}>The Immutable Audit Trail</h2>
-            <p className={classes.sectionDescription}>
-              Every comment, attachment, and status change is permanently recorded. You always know who changed priority, reassigned a ticket, and when it happened.
-            </p>
-          </div>
-
-          {/* Right: Original Audit Rows */}
-          <div className={classes.auditCard}>
-            <div className={classes.auditRow}>
-              <div className={classes.auditAvatar}>JD</div>
-              <div className={classes.auditText}>
-                <strong>John Doe</strong> changed status from In Progress to <strong>Deployed</strong><br />
-                <small style={{ color: '#94A3B8' }}>Oct 14, 2026 - 10:42 AM</small>
+        <div className={classes.sectionInner}>
+          <div className={classes.splitGrid}>
+            {/* Left: Original Description */}
+            <RevealOnScroll delay={100}>
+              <div>
+                <div className={classes.kicker}>Absolute Accountability</div>
+                <h2 className={classes.sectionTitle}>The Immutable Audit Trail</h2>
+                <p className={classes.sectionDescription}>
+                  Every comment, attachment, and status change is permanently recorded. You always know who changed priority, reassigned a ticket, and when it happened.
+                </p>
               </div>
-            </div>
+            </RevealOnScroll>
 
-            <div className={classes.auditRow}>
-              <div className={classes.auditAvatar} style={{ backgroundColor: '#EFF6FF', color: '#0072C4' }}>SJ</div>
-              <div className={classes.auditText}>
-                <strong>Sarah J.</strong> attached final_specs_v2.pdf<br />
-                <small style={{ color: '#94A3B8' }}>Oct 13, 2026 - 4:15 PM</small>
+            {/* Right: Original Audit Rows */}
+            <RevealOnScroll delay={200}>
+              <div className={classes.auditCard}>
+                <div className={classes.auditRow}>
+                  <div className={classes.auditAvatar}>JD</div>
+                  <div className={classes.auditText}>
+                    <strong>John Doe</strong> changed status from In Progress to <strong>Deployed</strong><br />
+                    <small style={{ color: '#94A3B8' }}>Oct 14, 2026 - 10:42 AM</small>
+                  </div>
+                </div>
+
+                <div className={classes.auditRow}>
+                  <div className={classes.auditAvatar} style={{ backgroundColor: '#EFF6FF', color: '#0072C4' }}>SJ</div>
+                  <div className={classes.auditText}>
+                    <strong>Sarah J.</strong> attached final_specs_v2.pdf<br />
+                    <small style={{ color: '#94A3B8' }}>Oct 13, 2026 - 4:15 PM</small>
+                  </div>
+                </div>
               </div>
-            </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
@@ -442,22 +544,26 @@ const StreamlineFeature: React.FC = () => {
       <section className={classes.mobileSection}>
         <div className={classes.mobileSplit}>
           {/* Mobile Phone Mockup running Streamline */}
-          <div className={classes.mobilePhoneCol}>
-            <PhoneMockup variant="stream" />
-          </div>
+          <RevealOnScroll delay={100}>
+            <div className={classes.mobilePhoneCol}>
+              <PhoneMockup variant="stream" />
+            </div>
+          </RevealOnScroll>
 
           {/* Mobile Information Details */}
-          <div className={classes.mobileDetailsCol}>
-            <div>
-              <h2 className={classes.sectionTitle}>Your Team, In Your Pocket.</h2>
-              <p className={classes.sectionDescription} style={{ marginBottom: 28 }}>
-                Review client comments, transition tickets across columns, and track sprint progress from iOS and Android.
-              </p>
-            </div>
+          <RevealOnScroll delay={200}>
+            <div className={classes.mobileDetailsCol}>
+              <div>
+                <h2 className={classes.sectionTitle}>Your Team, In Your Pocket.</h2>
+                <p className={classes.sectionDescription} style={{ marginBottom: 28 }}>
+                  Review client comments, transition tickets across columns, and track sprint progress from iOS and Android.
+                </p>
+              </div>
 
-            {/* Universal App Store & Play Store Buttons */}
-            <AppStoreButtons reviewCountText="Over 45,000+ active enterprise professionals" />
-          </div>
+              {/* Universal App Store & Play Store Buttons */}
+              <AppStoreButtons reviewCountText="Over 45,000+ active enterprise professionals" />
+            </div>
+          </RevealOnScroll>
         </div>
       </section>
 
@@ -465,60 +571,72 @@ const StreamlineFeature: React.FC = () => {
       {/* SECTION 6: ENTERPRISE FEATURES, NO EXTRA INVOICE */}
       {/* ─────────────────────────────────────────────────────────────────── */}
       <section className={classes.sectionWrapper}>
-        <div className={classes.sectionHeaderCenter}>
-          <h2 className={classes.sectionTitle}>Enterprise Features, No Extra Invoice</h2>
-          <p className={classes.sectionDescription}>
-            Agile boards, AI ticket creation, guest access, and audit history are included in your Weblings Worksuite.
-          </p>
-        </div>
-
-        <div className={classes.includedGrid}>
-          <div
-            className={classes.includedCard}
-            onMouseEnter={() => setHoveredIncludedCard(1)}
-            onMouseLeave={() => setHoveredIncludedCard(null)}
-          >
-            <div className={classes.featureIconWrapper}>
-              <AiTicketIcon width={22} height={22} isHovered={hoveredIncludedCard === 1} />
+        <div className={classes.sectionInner}>
+          <RevealOnScroll>
+            <div className={classes.sectionHeaderCenter}>
+              <h2 className={classes.sectionTitle}>Enterprise Features, No Extra Invoice</h2>
+              <p className={classes.sectionDescription}>
+                Agile boards, AI ticket creation, guest access, and audit history are included in your Weblings Worksuite.
+              </p>
             </div>
-            <h4 className={classes.cardTitle}>AI Auto-Ticket Creation</h4>
-            <p className={classes.cardDescription}>Turn meeting requirements into assignable tickets.</p>
-          </div>
+          </RevealOnScroll>
 
-          <div
-            className={classes.includedCard}
-            onMouseEnter={() => setHoveredIncludedCard(2)}
-            onMouseLeave={() => setHoveredIncludedCard(null)}
-          >
-            <div className={classes.featureIconWrapper}>
-              <GuestAccessIcon width={22} height={22} isHovered={hoveredIncludedCard === 2} />
-            </div>
-            <h4 className={classes.cardTitle}>Guest Access</h4>
-            <p className={classes.cardDescription}>Collaborate with clients without extra seats.</p>
-          </div>
+          <div className={classes.includedGrid}>
+            <RevealOnScroll delay={50}>
+              <div
+                className={classes.includedCard}
+                onMouseEnter={() => setHoveredIncludedCard(1)}
+                onMouseLeave={() => setHoveredIncludedCard(null)}
+              >
+                <div className={classes.featureIconWrapper}>
+                  <AiTicketIcon width={22} height={22} isHovered={hoveredIncludedCard === 1} />
+                </div>
+                <h4 className={classes.cardTitle}>AI Auto-Ticket Creation</h4>
+                <p className={classes.cardDescription}>Turn meeting requirements into assignable tickets.</p>
+              </div>
+            </RevealOnScroll>
 
-          <div
-            className={classes.includedCard}
-            onMouseEnter={() => setHoveredIncludedCard(3)}
-            onMouseLeave={() => setHoveredIncludedCard(null)}
-          >
-            <div className={classes.featureIconWrapper}>
-              <SearchIcon width={22} height={22} isHovered={hoveredIncludedCard === 3} />
-            </div>
-            <h4 className={classes.cardTitle}>Semantic Search</h4>
-            <p className={classes.cardDescription}>Find historical project context instantly.</p>
-          </div>
+            <RevealOnScroll delay={120}>
+              <div
+                className={classes.includedCard}
+                onMouseEnter={() => setHoveredIncludedCard(2)}
+                onMouseLeave={() => setHoveredIncludedCard(null)}
+              >
+                <div className={classes.featureIconWrapper}>
+                  <GuestAccessIcon width={22} height={22} isHovered={hoveredIncludedCard === 2} />
+                </div>
+                <h4 className={classes.cardTitle}>Guest Access</h4>
+                <p className={classes.cardDescription}>Collaborate with clients without extra seats.</p>
+              </div>
+            </RevealOnScroll>
 
-          <div
-            className={classes.includedCard}
-            onMouseEnter={() => setHoveredIncludedCard(4)}
-            onMouseLeave={() => setHoveredIncludedCard(null)}
-          >
-            <div className={classes.featureIconWrapper}>
-              <ImmutableHistoryIcon width={22} height={22} isHovered={hoveredIncludedCard === 4} />
-            </div>
-            <h4 className={classes.cardTitle}>Immutable History</h4>
-            <p className={classes.cardDescription}>Keep every project change accountable.</p>
+            <RevealOnScroll delay={190}>
+              <div
+                className={classes.includedCard}
+                onMouseEnter={() => setHoveredIncludedCard(3)}
+                onMouseLeave={() => setHoveredIncludedCard(null)}
+              >
+                <div className={classes.featureIconWrapper}>
+                  <SearchIcon width={22} height={22} isHovered={hoveredIncludedCard === 3} />
+                </div>
+                <h4 className={classes.cardTitle}>Semantic Search</h4>
+                <p className={classes.cardDescription}>Find historical project context instantly.</p>
+              </div>
+            </RevealOnScroll>
+
+            <RevealOnScroll delay={260}>
+              <div
+                className={classes.includedCard}
+                onMouseEnter={() => setHoveredIncludedCard(4)}
+                onMouseLeave={() => setHoveredIncludedCard(null)}
+              >
+                <div className={classes.featureIconWrapper}>
+                  <ImmutableHistoryIcon width={22} height={22} isHovered={hoveredIncludedCard === 4} />
+                </div>
+                <h4 className={classes.cardTitle}>Immutable History</h4>
+                <p className={classes.cardDescription}>Keep every project change accountable.</p>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>

@@ -48,6 +48,51 @@ const POP_NODES = [
   { id: 'tyo', name: 'TYO', latency: '28ms', x: 68, y: 198, region: 'AP East' },
 ];
 
+// Vanilla Animate-On-Scroll Component
+const RevealOnScroll: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}> = ({ children, className, delay = 0 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange: 'opacity, transform',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
 const ConnectFeature: React.FC = () => {
   const classes = useStyles();
 
@@ -114,10 +159,29 @@ const ConnectFeature: React.FC = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* SECTION 1: INTERNET-SCALE INFRASTRUCTURE */}
+      {/* SECTION 1: INTERNET-SCALE INFRASTRUCTURE (ANIMATED PART 1) */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      <section className={classes.sectionContainer}>
-        <div className={classes.infraSplit}>
+      <section className={`${classes.sectionContainer} ${classes.sectionContainerAnimated}`}>
+        {/* Living Acoustic Mesh Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
+        <div className={classes.signalAmbientCanvas}>
+          <div className={classes.signalMeshOverlay} />
+          <div className={classes.signalBlobCyan} />
+          <div className={classes.signalBlobEmerald} />
+          <div className={classes.signalBlobCenter} />
+          <div className={classes.signalPulseRing} />
+          <div className={classes.signalBeamTrack}>
+            <div className={classes.signalBeamLight} />
+          </div>
+          <div className={classes.signalBeamTrackBottom}>
+            <div className={classes.signalBeamLightBottom} />
+          </div>
+          <span className={`${classes.signalNodeDot} ${classes.signalNodeCyan1}`} />
+          <span className={`${classes.signalNodeDot} ${classes.signalNodeCyan2}`} />
+          <span className={`${classes.signalNodeDot} ${classes.signalNodeEmerald1}`} />
+          <span className={`${classes.signalNodeDot} ${classes.signalNodeEmerald2}`} />
+        </div>
+        <div className={classes.sectionInner}>
+          <div className={classes.infraSplit}>
           {/* Left Column: Header & Cards with clean alignment */}
           <div className={classes.infraLeftCol}>
             <div>
@@ -471,95 +535,123 @@ const ConnectFeature: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* SECTION 2: BUILT-IN AI INTELLIGENCE */}
+      {/* SECTION 2: BUILT-IN AI INTELLIGENCE (ANIMATED PART 2) */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      <section className={classes.sectionContainer}>
-        <div className={classes.sectionHeaderCentered}>
-          <div className={classes.kicker}>Built-In AI Intelligence</div>
-          <h2 className={classes.sectionTitle}>
-            Stop the &quot;Telephone Game.&quot;<br />Protect Your Margins.
-          </h2>
-        </div>
-
-        <div className={classes.aiTwoCardGrid}>
-          {/* Card 1: Conversation to Code */}
-          <div
-            className={`${classes.glassCard} ${classes.cardBorderBrand}`}
-            onMouseEnter={() => setHoveredAiCard('code')}
-            onMouseLeave={() => setHoveredAiCard(null)}
-          >
-            <div>
-              <div className={classes.aiCardHeader}>
-                <div className={classes.aiIconBox}>
-                  <ConversionIcon width={28} height={28} isHovered={hoveredAiCard === 'code'} />
-                </div>
-                <h3 className={classes.aiCardTitle}>From Conversation to Code</h3>
-              </div>
-              <p className={classes.aiCardText}>
-                Our AI captures exact client requirements during the call and generates accurate, assignable tickets directly for your development team.
-              </p>
-            </div>
-
-            {/* Interactive Live Voice-to-Ticket Widget */}
-            <div className={classes.ticketPreviewBox}>
-              <div className={classes.transcriptQuote}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: '#E11D48' }}>● AUDIO CAPTURE</span>
-                  <span style={{ fontSize: 10, color: '#94A3B8' }}>10:42 AM</span>
-                </div>
-                <em>&quot;Yes, we&apos;ll definitely need the payment gateway updated by Tuesday.&quot;</em>
-              </div>
-
-              <div className={classes.ticketGeneratedRow}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span className={classes.ticketBadge}>STR-204</span>
-                  <span style={{ fontWeight: 600, color: '#0F172A' }}>Update Payment Gateway integration</span>
-                </div>
-                <span style={{ fontSize: '0.75rem', color: '#16A34A', fontWeight: 700 }}>Auto-Assigned</span>
-              </div>
-            </div>
+      <section className={`${classes.sectionContainer} ${classes.sectionContainerAnimated}`}>
+        {/* Living Acoustic Mesh Canvas with Floating Blooms, Pulse Core & Tech Nodes */}
+        <div className={classes.signalAmbientCanvas}>
+          <div className={classes.signalMeshOverlay} />
+          <div className={classes.signalBlobEmerald} />
+          <div className={classes.signalBlobCyan} />
+          <div className={classes.signalBlobCenter} />
+          <div className={classes.signalPulseRing} />
+          <div className={classes.signalBeamTrack}>
+            <div className={classes.signalBeamLight} />
           </div>
+          <div className={classes.signalBeamTrackBottom}>
+            <div className={classes.signalBeamLightBottom} />
+          </div>
+          <span className={`${classes.signalNodeDot} ${classes.signalNodeCyan1}`} />
+          <span className={`${classes.signalNodeDot} ${classes.signalNodeCyan2}`} />
+          <span className={`${classes.signalNodeDot} ${classes.signalNodeEmerald1}`} />
+          <span className={`${classes.signalNodeDot} ${classes.signalNodeEmerald2}`} />
+        </div>
+        <div className={classes.sectionInner}>
+          <RevealOnScroll>
+            <div className={classes.sectionHeaderCentered}>
+              <div className={classes.kicker}>Built-In AI Intelligence</div>
+              <h2 className={classes.sectionTitle}>
+                Stop the &quot;Telephone Game.&quot;<br />Protect Your Margins.
+              </h2>
+            </div>
+          </RevealOnScroll>
 
-          {/* Card 2: Smart Search & Instant Proof */}
-          <div
-            className={`${classes.glassCard} ${classes.cardBorderEmerald}`}
-            onMouseEnter={() => setHoveredAiCard('search')}
-            onMouseLeave={() => setHoveredAiCard(null)}
-          >
-            <div>
-              <div className={classes.aiCardHeader}>
-                <div className={classes.aiIconBoxEmerald}>
-                  <SearchProofIcon width={28} height={28} isHovered={hoveredAiCard === 'search'} />
+          <div className={classes.aiTwoCardGrid}>
+            {/* Card 1: Conversation to Code */}
+            <RevealOnScroll delay={100}>
+              <div
+                className={`${classes.glassCard} ${classes.cardBorderBrand}`}
+                onMouseEnter={() => setHoveredAiCard('code')}
+                onMouseLeave={() => setHoveredAiCard(null)}
+              >
+                <div>
+                  <div className={classes.aiCardHeader}>
+                    <div className={classes.aiIconBox}>
+                      <ConversionIcon width={28} height={28} isHovered={hoveredAiCard === 'code'} />
+                    </div>
+                    <h3 className={classes.aiCardTitle}>From Conversation to Code</h3>
+                  </div>
+                  <p className={classes.aiCardText}>
+                    Our AI captures exact client requirements during the call and generates accurate, assignable tickets directly for your development team.
+                  </p>
                 </div>
-                <h3 className={classes.aiCardTitle}>Smart Search &amp; Instant Proof</h3>
-              </div>
-              <p className={classes.aiCardText}>
-                Every meeting becomes searchable memory. Ask what a client requested and get the exact answer with its date, time, and words.
-              </p>
-            </div>
 
-            {/* Interactive Searchable Memory Widget */}
-            <div className={classes.searchPreviewBox}>
-              <div className={classes.searchBarMock}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth={2.5} strokeLinecap="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-                <span>What file format did the client approve for billing?</span>
-              </div>
+                {/* Interactive Live Voice-to-Ticket Widget */}
+                <div className={classes.ticketPreviewBox}>
+                  <div className={classes.transcriptQuote}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                      <span style={{ fontSize: 10, fontWeight: 700, color: '#E11D48' }}>● AUDIO CAPTURE</span>
+                      <span style={{ fontSize: 10, color: '#94A3B8' }}>10:42 AM</span>
+                    </div>
+                    <em>&quot;Yes, we&apos;ll definitely need the payment gateway updated by Tuesday.&quot;</em>
+                  </div>
 
-              <div className={classes.verifiedProofBadge}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth={2.5} strokeLinecap="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                <span>
-                  <strong>Verified Quote:</strong> &quot;Approved for PDF format&quot; &bull; <em>Huddle Sep 8, 11:15 AM (0.24s)</em>
-                </span>
+                  <div className={classes.ticketGeneratedRow}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <span className={classes.ticketBadge}>STR-204</span>
+                      <span style={{ fontWeight: 600, color: '#0F172A' }}>Update Payment Gateway integration</span>
+                    </div>
+                    <span style={{ fontSize: '0.75rem', color: '#16A34A', fontWeight: 700 }}>Auto-Assigned</span>
+                  </div>
+                </div>
               </div>
-            </div>
+            </RevealOnScroll>
+
+            {/* Card 2: Smart Search & Instant Proof */}
+            <RevealOnScroll delay={220}>
+              <div
+                className={`${classes.glassCard} ${classes.cardBorderEmerald}`}
+                onMouseEnter={() => setHoveredAiCard('search')}
+                onMouseLeave={() => setHoveredAiCard(null)}
+              >
+                <div>
+                  <div className={classes.aiCardHeader}>
+                    <div className={classes.aiIconBoxEmerald}>
+                      <SearchProofIcon width={28} height={28} isHovered={hoveredAiCard === 'search'} />
+                    </div>
+                    <h3 className={classes.aiCardTitle}>Smart Search &amp; Instant Proof</h3>
+                  </div>
+                  <p className={classes.aiCardText}>
+                    Every meeting becomes searchable memory. Ask what a client requested and get the exact answer with its date, time, and words.
+                  </p>
+                </div>
+
+                {/* Interactive Searchable Memory Widget */}
+                <div className={classes.searchPreviewBox}>
+                  <div className={classes.searchBarMock}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth={2.5} strokeLinecap="round">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <span>What file format did the client approve for billing?</span>
+                  </div>
+
+                  <div className={classes.verifiedProofBadge}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth={2.5} strokeLinecap="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    <div>
+                      <span style={{ fontWeight: 700, color: '#0F172A' }}>Verified in Call Recording: </span>
+                      <span style={{ color: '#475569' }}>&quot;PDF with raw CSV attachment only&quot; (Oct 14, 11:23 AM)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
@@ -594,92 +686,104 @@ const ConnectFeature: React.FC = () => {
       {/* SECTION 4: ENTERPRISE FEATURES, NO EXTRA INVOICE */}
       {/* ─────────────────────────────────────────────────────────────────── */}
       <section className={classes.sectionContainer}>
-        <div className={classes.sectionHeaderCentered}>
-          <h2 className={classes.sectionTitle}>Enterprise Features, No Extra Invoice</h2>
-          <p className={classes.sectionDescription}>
-            Unlimited calls, message history, screen recording, and organization-controlled retention are included in your Weblings Worksuite.
-          </p>
-        </div>
-
-        <div className={classes.enterpriseGrid}>
-          <div
-            className={classes.usageCard}
-            onMouseEnter={() => setHoveredUsageCard('pip')}
-            onMouseLeave={() => setHoveredUsageCard(null)}
-          >
-            <div
-              className={classes.usageIconWrap}
-              style={{
-                backgroundColor: hoveredUsageCard === 'pip' ? '#EBF5FF' : '#F8FAFC',
-                borderColor: hoveredUsageCard === 'pip' ? '#0072C4' : '#E2E8F0',
-              }}
-            >
-              <MonitorPipIcon width={24} height={24} isHovered={hoveredUsageCard === 'pip'} />
+        <div className={classes.sectionInner}>
+          <RevealOnScroll>
+            <div className={classes.sectionHeaderCentered}>
+              <h2 className={classes.sectionTitle}>Enterprise Features, No Extra Invoice</h2>
+              <p className={classes.sectionDescription}>
+                Unlimited calls, message history, screen recording, and organization-controlled retention are included in your Weblings Worksuite.
+              </p>
             </div>
-            <h3 className={classes.usageCardTitle}>Picture-in-Picture</h3>
-            <p className={classes.usageCardDesc}>
-              Keep video floating while browsing other modules and tickets.
-            </p>
-          </div>
+          </RevealOnScroll>
 
-          <div
-            className={classes.usageCard}
-            onMouseEnter={() => setHoveredUsageCard('recording')}
-            onMouseLeave={() => setHoveredUsageCard(null)}
-          >
-            <div
-              className={classes.usageIconWrap}
-              style={{
-                backgroundColor: hoveredUsageCard === 'recording' ? '#EBF5FF' : '#F8FAFC',
-                borderColor: hoveredUsageCard === 'recording' ? '#0072C4' : '#E2E8F0',
-              }}
-            >
-              <ScreenRecordIcon width={24} height={24} isHovered={hoveredUsageCard === 'recording'} />
-            </div>
-            <h3 className={classes.usageCardTitle}>Screen Recording</h3>
-            <p className={classes.usageCardDesc}>
-              Save native screen sharing and recordings to Drive.
-            </p>
-          </div>
+          <div className={classes.enterpriseGrid}>
+            <RevealOnScroll delay={80}>
+              <div
+                className={classes.usageCard}
+                onMouseEnter={() => setHoveredUsageCard('pip')}
+                onMouseLeave={() => setHoveredUsageCard(null)}
+              >
+                <div
+                  className={classes.usageIconWrap}
+                  style={{
+                    backgroundColor: hoveredUsageCard === 'pip' ? '#EBF5FF' : '#F8FAFC',
+                    borderColor: hoveredUsageCard === 'pip' ? '#0072C4' : '#E2E8F0',
+                  }}
+                >
+                  <MonitorPipIcon width={24} height={24} isHovered={hoveredUsageCard === 'pip'} />
+                </div>
+                <h3 className={classes.usageCardTitle}>Picture-in-Picture</h3>
+                <p className={classes.usageCardDesc}>
+                  Keep video floating while browsing other modules and tickets.
+                </p>
+              </div>
+            </RevealOnScroll>
 
-          <div
-            className={classes.usageCard}
-            onMouseEnter={() => setHoveredUsageCard('privacy')}
-            onMouseLeave={() => setHoveredUsageCard(null)}
-          >
-            <div
-              className={classes.usageIconWrap}
-              style={{
-                backgroundColor: hoveredUsageCard === 'privacy' ? '#EBF5FF' : '#F8FAFC',
-                borderColor: hoveredUsageCard === 'privacy' ? '#0072C4' : '#E2E8F0',
-              }}
-            >
-              <BranchPrivacyIcon width={24} height={24} isHovered={hoveredUsageCard === 'privacy'} />
-            </div>
-            <h3 className={classes.usageCardTitle}>Branch Privacy</h3>
-            <p className={classes.usageCardDesc}>
-              Keep regional teams in private workspaces.
-            </p>
-          </div>
+            <RevealOnScroll delay={160}>
+              <div
+                className={classes.usageCard}
+                onMouseEnter={() => setHoveredUsageCard('recording')}
+                onMouseLeave={() => setHoveredUsageCard(null)}
+              >
+                <div
+                  className={classes.usageIconWrap}
+                  style={{
+                    backgroundColor: hoveredUsageCard === 'recording' ? '#EBF5FF' : '#F8FAFC',
+                    borderColor: hoveredUsageCard === 'recording' ? '#0072C4' : '#E2E8F0',
+                  }}
+                >
+                  <ScreenRecordIcon width={24} height={24} isHovered={hoveredUsageCard === 'recording'} />
+                </div>
+                <h3 className={classes.usageCardTitle}>Screen Recording</h3>
+                <p className={classes.usageCardDesc}>
+                  Save native screen sharing and recordings to Drive.
+                </p>
+              </div>
+            </RevealOnScroll>
 
-          <div
-            className={classes.usageCard}
-            onMouseEnter={() => setHoveredUsageCard('retention')}
-            onMouseLeave={() => setHoveredUsageCard(null)}
-          >
-            <div
-              className={classes.usageIconWrap}
-              style={{
-                backgroundColor: hoveredUsageCard === 'retention' ? '#EBF5FF' : '#F8FAFC',
-                borderColor: hoveredUsageCard === 'retention' ? '#0072C4' : '#E2E8F0',
-              }}
-            >
-              <DataRetentionIcon width={24} height={24} isHovered={hoveredUsageCard === 'retention'} />
-            </div>
-            <h3 className={classes.usageCardTitle}>Custom Retention</h3>
-            <p className={classes.usageCardDesc}>
-              Preserve files and messages using your organization rules.
-            </p>
+            <RevealOnScroll delay={240}>
+              <div
+                className={classes.usageCard}
+                onMouseEnter={() => setHoveredUsageCard('privacy')}
+                onMouseLeave={() => setHoveredUsageCard(null)}
+              >
+                <div
+                  className={classes.usageIconWrap}
+                  style={{
+                    backgroundColor: hoveredUsageCard === 'privacy' ? '#EBF5FF' : '#F8FAFC',
+                    borderColor: hoveredUsageCard === 'privacy' ? '#0072C4' : '#E2E8F0',
+                  }}
+                >
+                  <BranchPrivacyIcon width={24} height={24} isHovered={hoveredUsageCard === 'privacy'} />
+                </div>
+                <h3 className={classes.usageCardTitle}>Branch Privacy</h3>
+                <p className={classes.usageCardDesc}>
+                  Keep regional teams in private workspaces.
+                </p>
+              </div>
+            </RevealOnScroll>
+
+            <RevealOnScroll delay={320}>
+              <div
+                className={classes.usageCard}
+                onMouseEnter={() => setHoveredUsageCard('retention')}
+                onMouseLeave={() => setHoveredUsageCard(null)}
+              >
+                <div
+                  className={classes.usageIconWrap}
+                  style={{
+                    backgroundColor: hoveredUsageCard === 'retention' ? '#EBF5FF' : '#F8FAFC',
+                    borderColor: hoveredUsageCard === 'retention' ? '#0072C4' : '#E2E8F0',
+                  }}
+                >
+                  <DataRetentionIcon width={24} height={24} isHovered={hoveredUsageCard === 'retention'} />
+                </div>
+                <h3 className={classes.usageCardTitle}>Custom Retention</h3>
+                <p className={classes.usageCardDesc}>
+                  Preserve files and messages using your organization rules.
+                </p>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>

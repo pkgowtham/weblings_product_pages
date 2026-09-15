@@ -128,13 +128,23 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     textDecoration: "none",
     transition: "all 0.2s ease",
     backgroundColor: "transparent",
+    border: "1px solid transparent",
     "&:hover": {
-      backgroundColor: "#F0F7FF",
+      backgroundColor: "#F4F8FC",
       transform: "translateX(3px)",
+      "& $ProductLabel": {
+        color: theme.light.brand.onSurface.default || "#0072C4",
+      },
+      "& $ProductIcon": {
+        backgroundColor: "#FFFFFF",
+        color: theme.light.brand.onSurface.default || "#0072C4",
+        boxShadow: "0 2px 6px rgba(0, 0, 0, 0.06)",
+      },
     },
   },
   ActiveProductCard: {
     backgroundColor: "#E6F2FF !important",
+    border: "1px solid #C2E0FF !important",
   },
   ProductItemContent: {
     display: "flex",

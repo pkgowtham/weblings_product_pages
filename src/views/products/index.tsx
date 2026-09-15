@@ -118,6 +118,51 @@ const bentoFooters = [
   ),
 ];
 
+// Vanilla Animate-On-Scroll Component (Zero external packages)
+const RevealOnScroll: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}> = ({ children, className, delay = 0 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(24px)",
+        transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange: "opacity, transform",
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
 // Interactive Card Helpers that forward hover states to icons
 const AiCardItem: React.FC<{
   cardClass: string;
@@ -327,59 +372,103 @@ const Products = () => {
       </div>
 
       {/* AI Dual-Engine Section */}
-      <div className={classes.aiSection}>
-        <div className={classes.aiHeader}>
-          <div className={classes.aiBadge}>
-            <span className={classes.aiBadgeDotPurple}></span>
-            <span className={classes.aiBadgeDotCyan}></span>
-            {data.aiEngine.badge}
+      <section className={classes.aiSectionWrapper}>
+        {/* Animated Living Ambient Canvas */}
+        <div className={classes.aiAmbientCanvas}>
+          <div className={classes.aiGridPattern} />
+          <div className={classes.aiOrbPurple} />
+          <div className={classes.aiOrbCyan} />
+          <div className={classes.aiOrbCenter} />
+          <div className={classes.aiBeamTrack}>
+            <div className={classes.aiBeamLight} />
           </div>
-          <h2 className={classes.aiTitle}>{data.aiEngine.title}</h2>
-          <p className={classes.aiDesc}>{data.aiEngine.description}</p>
+          <div className={classes.aiBeamTrackBottom}>
+            <div className={classes.aiBeamLightBottom} />
+          </div>
+          {/* Subtle pulsating precision tech nodes */}
+          <span className={clsx(classes.aiNodeDot, classes.aiNodePurple1)} />
+          <span className={clsx(classes.aiNodeDot, classes.aiNodePurple2)} />
+          <span className={clsx(classes.aiNodeDot, classes.aiNodeCyan1)} />
+          <span className={clsx(classes.aiNodeDot, classes.aiNodeCyan2)} />
         </div>
-        {/* Scope Defense */}
-        <div className={classes.aiFlowBlock}>
-          <div className={clsx(classes.aiFlowHeader, classes.purpleFlowText)}>
-            <span className={classes.flowBadgePurple}>{data.aiEngine.scopeDefense.badge}</span>
-            <span>{data.aiEngine.scopeDefense.title}</span>
+
+        <div className={classes.aiSection}>
+          <RevealOnScroll>
+            <div className={classes.aiHeader}>
+              <div className={classes.aiBadge}>
+                <span className={classes.aiBadgeDotPurple}></span>
+                <span className={classes.aiBadgeDotCyan}></span>
+                {data.aiEngine.badge}
+              </div>
+              <h2 className={classes.aiTitle}>{data.aiEngine.title}</h2>
+              <p className={classes.aiDesc}>{data.aiEngine.description}</p>
+            </div>
+          </RevealOnScroll>
+
+          {/* Scope Defense */}
+          <div className={classes.aiFlowBlock}>
+            <RevealOnScroll delay={80}>
+              <div className={clsx(classes.aiFlowHeader, classes.purpleFlowText)}>
+                <span className={classes.flowBadgePurple}>{data.aiEngine.scopeDefense.badge}</span>
+                <span>{data.aiEngine.scopeDefense.title}</span>
+              </div>
+            </RevealOnScroll>
+            <div className={classes.aiGrid}>
+              {data.aiEngine.scopeDefense.steps.map((step: any, index: number) => (
+                <RevealOnScroll key={index} delay={120 + index * 100}>
+                  <AiCardItem
+                    cardClass={classes.aiCardPurple}
+                    iconClass={clsx(classes.aiCardIcon, classes.aiCardIconPurple)}
+                    icon={aiIcons[step.id] || step.icon}
+                    title={step.title}
+                    description={step.description}
+                    titleClass={classes.aiCardTitle}
+                    descClass={classes.aiCardDesc}
+                  />
+                </RevealOnScroll>
+              ))}
+            </div>
           </div>
-          <div className={classes.aiGrid}>
-            {data.aiEngine.scopeDefense.steps.map((step: any, index: number) => (
-              <AiCardItem
-                key={index}
-                cardClass={classes.aiCardPurple}
-                iconClass={clsx(classes.aiCardIcon, classes.aiCardIconPurple)}
-                icon={aiIcons[step.id] || step.icon}
-                title={step.title}
-                description={step.description}
-                titleClass={classes.aiCardTitle}
-                descClass={classes.aiCardDesc}
-              />
-            ))}
+
+          {/* Interlock Bridge Divider */}
+          <RevealOnScroll delay={60}>
+            <div className={classes.aiFlowDivider}>
+              <span className={classes.aiDividerBadge}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="7 13 12 18 17 13" />
+                  <polyline points="7 6 12 11 17 6" />
+                </svg>
+                Engine Interlock Active
+              </span>
+            </div>
+          </RevealOnScroll>
+
+          {/* Code Adherence */}
+          <div className={classes.aiFlowBlock}>
+            <RevealOnScroll delay={80}>
+              <div className={clsx(classes.aiFlowHeader, classes.cyanFlowText)}>
+                <span className={classes.flowBadgeCyan}>{data.aiEngine.codeAdherence.badge}</span>
+                <span>{data.aiEngine.codeAdherence.title}</span>
+              </div>
+            </RevealOnScroll>
+            <div className={classes.aiGrid}>
+              {data.aiEngine.codeAdherence.steps.map((step: any, index: number) => (
+                <RevealOnScroll key={index} delay={120 + index * 100}>
+                  <AiCardItem
+                    cardClass={classes.aiCardCyan}
+                    iconClass={clsx(classes.aiCardIcon, classes.aiCardIconCyan)}
+                    icon={aiIcons[step.id] || step.icon}
+                    title={step.title}
+                    description={step.description}
+                    titleClass={classes.aiCardTitle}
+                    descClass={classes.aiCardDesc}
+                  />
+                </RevealOnScroll>
+              ))}
+            </div>
           </div>
         </div>
-        {/* Code Adherence */}
-        <div className={classes.aiFlowBlock}>
-          <div className={clsx(classes.aiFlowHeader, classes.cyanFlowText)}>
-            <span className={classes.flowBadgeCyan}>{data.aiEngine.codeAdherence.badge}</span>
-            <span>{data.aiEngine.codeAdherence.title}</span>
-          </div>
-          <div className={classes.aiGrid}>
-            {data.aiEngine.codeAdherence.steps.map((step: any, index: number) => (
-              <AiCardItem
-                key={index}
-                cardClass={classes.aiCardCyan}
-                iconClass={clsx(classes.aiCardIcon, classes.aiCardIconCyan)}
-                icon={aiIcons[step.id] || step.icon}
-                title={step.title}
-                description={step.description}
-                titleClass={classes.aiCardTitle}
-                descClass={classes.aiCardDesc}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+      </section>
 
       {/* ═══════════════════════════════════════════════════════
           WORKFLOW / PIPELINE SECTION — "How the Engine Runs Together"
@@ -457,31 +546,39 @@ const Products = () => {
           4-quadrant color-coded bento grid
           ═══════════════════════════════════════════════════════ */}
       <section className={classes.bentoSection}>
+        <div className={classes.bentoAmbientCanvas}>
+          <div className={classes.bentoDotPattern} />
+          <div className={classes.bentoOrbIndigo} />
+          <div className={classes.bentoOrbEmerald} />
+        </div>
         <div className={classes.bentoInner}>
           {/* Section Header */}
-          <div className={classes.bentoHeader}>
-            <div className={classes.bentoBadge}>
-              <span className={classes.bentoBadgeIcon}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-              </span>
-              Multi-Tenant Architecture
+          <RevealOnScroll>
+            <div className={classes.bentoHeader}>
+              <div className={classes.bentoBadge}>
+                <span className={classes.bentoBadgeIcon}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                </span>
+                Multi-Tenant Architecture
+              </div>
+              <h2 className={classes.bentoTitle}>{data.features.title}</h2>
+              <p className={classes.bentoSubtitle}>{data.features.description}</p>
             </div>
-            <h2 className={classes.bentoTitle}>{data.features.title}</h2>
-            <p className={classes.bentoSubtitle}>{data.features.description}</p>
-          </div>
+          </RevealOnScroll>
 
           {/* Bento Grid */}
           <div className={classes.bentoGrid}>
             {data.features.featureBox.map((feature: any, index: number) => (
-              <BentoCard
-                key={index}
-                colorScheme={bentoColors[index]}
-                icon={bentoIcons[index]}
-                badge={bentoBadges[index]}
-                title={feature.titleSubtext}
-                description={feature.titleSmallSubText}
-                footer={bentoFooters[index]}
-              />
+              <RevealOnScroll key={index} delay={index * 100}>
+                <BentoCard
+                  colorScheme={bentoColors[index]}
+                  icon={bentoIcons[index]}
+                  badge={bentoBadges[index]}
+                  title={feature.titleSubtext}
+                  description={feature.titleSmallSubText}
+                  footer={bentoFooters[index]}
+                />
+              </RevealOnScroll>
             ))}
           </div>
         </div>

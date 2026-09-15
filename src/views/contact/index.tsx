@@ -1,27 +1,23 @@
 'use client';
-import React, { useState } from "react";
-import "./contact.css";
-import { useStyle } from "./style";
-import Typography from "../../components/typography/component";
-import InputField from "../../components/input/main";
-import Input from "../../components/input/input";
-import Button from "../../components/button/button";
-import SvgMail from "../../components/svg/Mail";
-import SvgPhone from "../../components/svg/Phone";
-import SvgArrowDropDown from "../../components/svg/ArrowDropDown";
-import contactData from "../../data/contact.json";
 
-const Contact = () => {
+import React, { useState } from "react";
+import { useStyle } from "./style";
+import contactData from "../../data/contact.json";
+import { getSrc } from "../../utils/getSrc";
+import gowthamFounderImg from "../../assets/images/about/gowtham_founder.jpg";
+import MailIcon from "../../assets/icons_component/MailIcon";
+
+const Contact: React.FC = () => {
   const classes = useStyle();
+
   const [formData, setFormData] = useState({
-    subject: "",
-    category: "",
-    priority: contactData.enquireForm.fields.priority.default || "Medium",
-    message: "",
-    attachments: null as FileList | null,
+    name: "",
+    email: "",
+    painpoint: "",
   });
 
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -30,280 +26,253 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCategorySelect = (category: string) => {
-    setFormData((prev) => ({ ...prev, category }));
-    setIsCategoryOpen(false);
-  };
-
-  const handlePrioritySelect = (priority: string) => {
-    setFormData((prev) => ({ ...prev, priority }));
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFormData((prev) => ({ ...prev, attachments: e.target.files }));
-    }
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Enquiry Form Submitted:", formData);
+    if (!formData.name || !formData.email || !formData.painpoint) {
+      return;
+    }
+    setIsSubmitting(true);
+    // Simulate submission
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    }, 600);
   };
 
-  const handleCancel = () => {
+  const handleReset = () => {
     setFormData({
-      subject: "",
-      category: "",
-      priority: "Medium",
-      message: "",
-      attachments: null,
+      name: "",
+      email: "",
+      painpoint: "",
     });
+    setIsSubmitted(false);
   };
 
   return (
-    <div className={classes.mainSec}>
-      <div className={classes.contSec}>
-        {/* Top Header */}
-        <div className={classes.contHeadMain}>
-          <div className={classes.contHead}>
-            <Typography variant="HS" component={"h1"}>
-              {contactData.header.title}
-            </Typography>
-            <Typography variant="BM">
-              {contactData.header.subtitle}
-            </Typography>
-          </div>
+    <div className={classes.pageWrapper}>
+      {/* Animated Ambient Light Background */}
+      <div className={classes.ambientCanvas} aria-hidden="true">
+        <div className={classes.dotGridOverlay} />
+        <div className={classes.ambientBlob1} />
+        <div className={classes.ambientBlob2} />
+        <div className={classes.ambientBlob3} />
+      </div>
+
+      <div className={classes.contentContainer}>
+        {/* Top Hero Section */}
+        <div className={classes.badge}>
+          <span className={classes.badgePulseDot} />
+          <span>{contactData.badge}</span>
         </div>
 
-        {/* 1. TOP SECTION: Enquire Form Card */}
-        <div className={classes.enquireCard}>
-          <div className={classes.enquireHeader}>
-            <Typography variant="HM" component={"h2"} className={classes.enquireTitle}>
-              {contactData.enquireForm.title}
-            </Typography>
-            <Typography variant="BM" className={classes.enquireSubtitle}>
-              {contactData.enquireForm.subtitle}
-            </Typography>
-          </div>
+        <h1 className={classes.heroTitle}>
+          Skip the sales reps.<br />
+          Talk directly to the builders.
+        </h1>
 
-          <form onSubmit={handleSubmit} className={classes.enquireForm}>
-            {/* Subject */}
-            <InputField>
-              <Input
-                label={contactData.enquireForm.fields.subject.label}
-                name="subject"
-                placeholder={contactData.enquireForm.fields.subject.placeholder}
-                value={formData.subject}
-                onChange={handleInputChange}
-              />
-            </InputField>
+        <p className={classes.heroSubtitle}>
+          {contactData.header.subtitle}
+        </p>
 
-            {/* Category & Priority Row */}
-            <div className={classes.categoryPriorityRow}>
-              {/* Category Dropdown */}
-              <div className={classes.categoryWrapper}>
-                <label className={classes.fieldLabel}>
-                  {contactData.enquireForm.fields.category.label}
-                </label>
-                <div
-                  className={`${classes.selectTrigger} ${
-                    isCategoryOpen ? classes.selectTriggerActive : ""
-                  }`}
-                  onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                >
-                  <span
-                    className={
-                      formData.category
-                        ? classes.selectedCategoryText
-                        : classes.placeholderCategoryText
-                    }
+        {/* 2-Column Main Content */}
+        <div className={classes.mainGrid}>
+          {/* Left Column: The Founder Promise */}
+          <div className={classes.founderColumn}>
+            {/* Direct Line Card */}
+            <div className={classes.founderCard}>
+              <div className={classes.mailIconBox}>
+                <MailIcon width={22} height={22} />
+              </div>
+
+              <h2 className={classes.founderCardTitle}>
+                {contactData.directLine.title}
+              </h2>
+
+              <div className={classes.quoteContainer}>
+                <div className={classes.quoteMark}>"</div>
+                <p className={classes.quoteText}>
+                  Email me directly at{" "}
+                  <a
+                    href={`mailto:${contactData.directLine.email}`}
+                    className={classes.emailLink}
                   >
-                    {formData.category ||
-                      contactData.enquireForm.fields.category.placeholder}
-                  </span>
-                  <SvgArrowDropDown />
-                </div>
-                {isCategoryOpen && (
-                  <div className={classes.dropdownMenu}>
-                    {contactData.enquireForm.fields.category.options.map(
-                      (opt) => (
-                        <div
-                          key={opt}
-                          className={classes.dropdownItem}
-                          onClick={() => handleCategorySelect(opt)}
-                        >
-                          {opt}
-                        </div>
-                      )
-                    )}
-                  </div>
-                )}
+                    {contactData.directLine.email}
+                  </a>
+                  . I don't employ an offshore support desk or a team of quota-driven sales reps.
+                </p>
+                <p className={classes.quoteText}>
+                  When you email this address, you get direct access to the engineers actually writing the code. I check this inbox twice a day, and I will personally write you back.
+                </p>
               </div>
 
-              {/* Priority Level Selector */}
-              <div className={classes.priorityWrapper}>
-                <label className={classes.fieldLabel}>
-                  {contactData.enquireForm.fields.priority.label}
-                </label>
-                <div className={classes.priorityGroup}>
-                  {contactData.enquireForm.fields.priority.options.map(
-                    (p) => (
-                      <button
-                        type="button"
-                        key={p}
-                        className={`${classes.priorityBtn} ${
-                          formData.priority === p ? classes.priorityActive : ""
-                        }`}
-                        onClick={() => handlePrioritySelect(p)}
-                      >
-                        {p}
-                      </button>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Message */}
-            <div className={classes.textareaWrapper}>
-              <label className={classes.fieldLabel}>
-                {contactData.enquireForm.fields.message.label}
-              </label>
-              <textarea
-                name="message"
-                className={classes.textareaInput}
-                placeholder={
-                  contactData.enquireForm.fields.message.placeholder
-                }
-                value={formData.message}
-                onChange={handleInputChange}
-                rows={4}
-              />
-            </div>
-
-            {/* Attachments */}
-            <div className={classes.attachmentsWrapper}>
-              <label className={classes.fieldLabel}>
-                {contactData.enquireForm.fields.attachments.label}
-              </label>
-              <label className={classes.dropzone}>
-                <input
-                  type="file"
-                  multiple
-                  className={classes.fileInputHidden}
-                  onChange={handleFileChange}
+              <div className={classes.founderFooter}>
+                <img
+                  src={getSrc(gowthamFounderImg)}
+                  alt="Gowtham - Founder & Architect"
+                  className={classes.founderAvatar}
                 />
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={classes.uploadIcon}
-                >
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="17 8 12 3 7 8" />
-                  <line x1="12" y1="3" x2="12" y2="15" />
-                </svg>
-              </label>
-            </div>
-
-            {/* Form Divider & Actions */}
-            <div className={classes.cardDivider} />
-            <div className={classes.formActions}>
-              <Button
-                element="button"
-                brand
-                type="submit"
-                className={classes.submitBtn}
-              >
-                {contactData.enquireForm.buttons.submit}
-              </Button>
-              <button
-                type="button"
-                className={classes.cancelBtn}
-                onClick={handleCancel}
-              >
-                {contactData.enquireForm.buttons.cancel}
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* 2. MIDDLE SECTION: Our Office Details & Quick Contact */}
-        <div className={classes.officeSection}>
-          <Typography variant="HM" component={"h2"} className={classes.sectionHeading}>
-            {contactData.office.title}
-          </Typography>
-
-          <div className={classes.officeGrid}>
-            {/* Address Card */}
-            <div className={classes.officeCard}>
-              <Typography variant="LM" className={classes.officeCardTitle}>
-                {contactData.office.address.title}
-              </Typography>
-              <div className={classes.officeDetails}>
-                <Typography variant="BM">{contactData.office.address.company}</Typography>
-                <Typography variant="BM">{contactData.office.address.doorNo}</Typography>
-                <Typography variant="BM">{contactData.office.address.street}</Typography>
-                <Typography variant="BM">{contactData.office.address.cityState}</Typography>
-                <Typography variant="BM">{contactData.office.address.country}</Typography>
+                <div>
+                  <div className={classes.founderName}>
+                    {contactData.directLine.founder.name}
+                  </div>
+                  <div className={classes.founderRole}>
+                    {contactData.directLine.founder.role}
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Direct Email Card */}
-            <div className={classes.officeCard}>
-              <div className={classes.quickContactHeader}>
-                <SvgMail />
-                <Typography variant="LM" className={classes.officeCardTitle}>
-                  {contactData.quickContact[0].title}
-                </Typography>
-              </div>
-              <a
-                href={contactData.quickContact[0].link}
-                className={classes.quickContactLink}
-              >
-                {contactData.quickContact[0].value}
-              </a>
-            </div>
-
-            {/* Phone Support Card */}
-            <div className={classes.officeCard}>
-              <div className={classes.quickContactHeader}>
-                <SvgPhone />
-                <Typography variant="LM" className={classes.officeCardTitle}>
-                  {contactData.quickContact[1].title}
-                </Typography>
-              </div>
-              <a
-                href={contactData.quickContact[1].link}
-                className={classes.quickContactLink}
-              >
-                {contactData.quickContact[1].value}
-              </a>
+            {/* Trust Guarantees */}
+            <div className={classes.guaranteesCard}>
+              {contactData.directLine.guarantees.map((guarantee, idx) => (
+                <div key={idx} className={classes.guaranteeRow}>
+                  <div className={classes.checkBadge}>✓</div>
+                  <span className={classes.guaranteeText}>{guarantee}</span>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
 
-        {/* 3. BOTTOM SECTION: Full-Size Location Map */}
-        <div className={classes.mapSection}>
-          <Typography variant="HM" component={"h2"} className={classes.sectionHeading}>
-            {contactData.office.map.title}
-          </Typography>
-          <div className={classes.fullMapWrapper}>
-            <iframe
-              src={contactData.office.map.iframeSrc}
-              width="100%"
-              height="380"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              title="Office Location Map"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+          {/* Right Column: The Form */}
+          <div className={classes.formCard}>
+            {isSubmitted ? (
+              <div className={classes.successBox}>
+                <div className={classes.successIcon}>
+                  <svg
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <h3 className={classes.successTitle}>
+                  Note Sent Directly to Gowtham
+                </h3>
+                <p className={classes.successMessage}>
+                  Thanks {formData.name}. Your note has been delivered to Gowtham's personal inbox. He reviews every founder note and will write back to <strong>{formData.email}</strong> by the end of the day.
+                </p>
+                <button
+                  type="button"
+                  className={classes.resetBtn}
+                  onClick={handleReset}
+                >
+                  Send Another Note
+                </button>
+              </div>
+            ) : (
+              <>
+                <h2 className={classes.formTitle}>
+                  {contactData.form.title}
+                </h2>
+                <p className={classes.formSubtitle}>
+                  {contactData.form.subtitle}
+                </p>
+
+                <form onSubmit={handleSubmit} className={classes.form}>
+                  <div className={classes.formRow}>
+                    {/* Name Field */}
+                    <div className={classes.fieldGroup}>
+                      <label htmlFor="contact-name" className={classes.fieldLabel}>
+                        {contactData.form.fields.name.label}
+                      </label>
+                      <input
+                        id="contact-name"
+                        name="name"
+                        type="text"
+                        required
+                        placeholder={contactData.form.fields.name.placeholder}
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className={classes.input}
+                      />
+                    </div>
+
+                    {/* Email Field */}
+                    <div className={classes.fieldGroup}>
+                      <label htmlFor="contact-email" className={classes.fieldLabel}>
+                        {contactData.form.fields.email.label}
+                      </label>
+                      <input
+                        id="contact-email"
+                        name="email"
+                        type="email"
+                        required
+                        placeholder={contactData.form.fields.email.placeholder}
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className={classes.input}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Painpoint / Headache Field */}
+                  <div className={classes.fieldGroup}>
+                    <label htmlFor="contact-painpoint" className={classes.painpointLabel}>
+                      {contactData.form.fields.painpoint.label}
+                    </label>
+                    <textarea
+                      id="contact-painpoint"
+                      name="painpoint"
+                      required
+                      rows={5}
+                      placeholder={contactData.form.fields.painpoint.placeholder}
+                      value={formData.painpoint}
+                      onChange={handleInputChange}
+                      className={classes.textarea}
+                    />
+                    <div className={classes.fieldHint}>
+                      <svg
+                        width="13"
+                        height="13"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                      </svg>
+                      <span>{contactData.form.fields.painpoint.hint}</span>
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={classes.submitButton}
+                  >
+                    <span>
+                      {isSubmitting ? "Sending..." : contactData.form.buttonText}
+                    </span>
+                    <span className={classes.submitArrow}>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </span>
+                  </button>
+                </form>
+              </>
+            )}
           </div>
         </div>
       </div>

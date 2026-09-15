@@ -2,6 +2,58 @@ import { createUseStyles } from "react-jss";
 import { Theme } from "../../../../theme/themeType";
 
 export const useStyles = createUseStyles((theme: Theme) => ({
+  "@keyframes floatVaultOrb1": {
+    "0%, 100%": {
+      transform: "translate(0, 0) scale(1)",
+    },
+    "50%": {
+      transform: "translate(26px, -22px) scale(1.06)",
+    },
+  },
+  "@keyframes floatVaultOrb2": {
+    "0%, 100%": {
+      transform: "translate(0, 0) scale(1)",
+    },
+    "50%": {
+      transform: "translate(-24px, 24px) scale(0.95)",
+    },
+  },
+  "@keyframes pulseGlow": {
+    "0%, 100%": {
+      opacity: 0.35,
+      transform: "scale(1)",
+    },
+    "50%": {
+      opacity: 0.75,
+      transform: "scale(1.08)",
+    },
+  },
+  "@keyframes nodeBlink": {
+    "0%, 100%": {
+      opacity: 0.15,
+      transform: "scale(0.85)",
+    },
+    "50%": {
+      opacity: 0.95,
+      transform: "scale(1.3)",
+    },
+  },
+  "@keyframes perimeterScan": {
+    "0%": {
+      left: "-25%",
+      opacity: 0,
+    },
+    "20%": {
+      opacity: 0.9,
+    },
+    "80%": {
+      opacity: 0.9,
+    },
+    "100%": {
+      left: "120%",
+      opacity: 0,
+    },
+  },
   page: {
     backgroundColor: "#FFFFFF",
     color: "#0F172A",
@@ -196,18 +248,155 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   },
 
   /* ─────────────────────────────────────────────────────────────
-     SECTION 1: ARCHITECTURE HIGHLIGHT CARDS
+     SECTION: VAULT AMBIENT CANVAS & WRAPPER
      ───────────────────────────────────────────────────────────── */
   sectionWrapper: {
-    maxWidth: "1240px",
+    maxWidth: "100%",
     width: "100%",
     margin: "0 auto",
-    padding: "80px 24px",
+    padding: "88px 24px",
     position: "relative",
+    overflow: "hidden",
+    borderTop: `1px solid ${theme.light.neutral.border.light}`,
     boxSizing: "border-box",
     "@media (max-width: 768px)": {
-      padding: "44px 14px",
+      padding: "52px 14px",
     },
+  },
+  sectionWrapperAnimated: {
+    backgroundColor: "#FAFBFD",
+    borderTop: "1px solid rgba(226, 232, 240, 0.7)",
+    borderBottom: "1px solid rgba(226, 232, 240, 0.7)",
+  },
+  sectionInner: {
+    position: "relative",
+    zIndex: 1,
+    maxWidth: "1240px",
+    margin: "0 auto",
+  },
+  vaultAmbientCanvas: {
+    position: "absolute",
+    inset: 0,
+    pointerEvents: "none",
+    overflow: "hidden",
+    zIndex: 0,
+  },
+  vaultGridOverlay: {
+    position: "absolute",
+    inset: 0,
+    backgroundImage: `
+      linear-gradient(to right, rgba(0, 114, 196, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(147, 51, 234, 0.04) 1px, transparent 1px)
+    `,
+    backgroundSize: "40px 40px",
+    maskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
+    WebkitMaskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
+  },
+  vaultBlobBlue: {
+    position: "absolute",
+    top: "30px",
+    left: "-60px",
+    width: "560px",
+    height: "560px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(0, 114, 196, 0.13) 0%, rgba(2, 132, 199, 0.035) 50%, transparent 70%)",
+    filter: "blur(75px)",
+    animation: "$floatVaultOrb1 18s ease-in-out infinite",
+  },
+  vaultBlobPurple: {
+    position: "absolute",
+    bottom: "30px",
+    right: "-60px",
+    width: "560px",
+    height: "560px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(147, 51, 234, 0.12) 0%, rgba(168, 85, 247, 0.035) 50%, transparent 70%)",
+    filter: "blur(75px)",
+    animation: "$floatVaultOrb2 22s ease-in-out infinite",
+  },
+  vaultBlobCenter: {
+    position: "absolute",
+    top: "48%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "520px",
+    height: "380px",
+    borderRadius: "50%",
+    background: "radial-gradient(ellipse at center, rgba(0, 114, 196, 0.06) 0%, transparent 70%)",
+    filter: "blur(70px)",
+    animation: "$pulseGlow 8s ease-in-out infinite",
+  },
+  vaultScanTrack: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "1px",
+    background: "linear-gradient(90deg, transparent 0%, rgba(0, 114, 196, 0.25) 30%, rgba(147, 51, 234, 0.25) 70%, transparent 100%)",
+    overflow: "hidden",
+  },
+  vaultScanLight: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "160px",
+    height: "100%",
+    background: "linear-gradient(90deg, transparent 0%, rgba(0, 114, 196, 0.85) 50%, rgba(147, 51, 234, 0.95) 80%, transparent 100%)",
+    boxShadow: "0 0 6px rgba(0, 114, 196, 0.45)",
+    animation: "$perimeterScan 7s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+  },
+  vaultScanTrackBottom: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: "1px",
+    background: "linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.25) 30%, rgba(0, 114, 196, 0.25) 70%, transparent 100%)",
+    overflow: "hidden",
+  },
+  vaultScanLightBottom: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "160px",
+    height: "100%",
+    background: "linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.95) 40%, rgba(0, 114, 196, 0.85) 80%, transparent 100%)",
+    boxShadow: "0 0 6px rgba(147, 51, 234, 0.45)",
+    animation: "$perimeterScan 8s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.5s",
+  },
+  vaultNodeDot: {
+    position: "absolute",
+    width: "6px",
+    height: "6px",
+    borderRadius: "50%",
+    animation: "$nodeBlink 4s ease-in-out infinite",
+  },
+  vaultNodeBlue1: {
+    top: "22%",
+    left: "14%",
+    backgroundColor: "rgba(0, 114, 196, 0.75)",
+    boxShadow: "0 0 10px rgba(0, 114, 196, 0.8)",
+  },
+  vaultNodeBlue2: {
+    bottom: "28%",
+    left: "24%",
+    backgroundColor: "rgba(0, 114, 196, 0.75)",
+    boxShadow: "0 0 10px rgba(0, 114, 196, 0.8)",
+    animationDelay: "1.8s",
+  },
+  vaultNodePurple1: {
+    top: "30%",
+    right: "16%",
+    backgroundColor: "rgba(147, 51, 234, 0.75)",
+    boxShadow: "0 0 10px rgba(147, 51, 234, 0.8)",
+    animationDelay: "1s",
+  },
+  vaultNodePurple2: {
+    bottom: "20%",
+    right: "22%",
+    backgroundColor: "rgba(147, 51, 234, 0.75)",
+    boxShadow: "0 0 10px rgba(147, 51, 234, 0.8)",
+    animationDelay: "2.6s",
   },
   sectionHeaderCenter: {
     textAlign: "center",
@@ -1049,7 +1238,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   demoCard: {
     padding: "28px",
     borderRadius: "16px",
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "rgba(255, 255, 255, 0.94)",
+    backdropFilter: "blur(12px)",
     border: "1px solid #E2E8F0",
     boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.05)",
     boxSizing: "border-box",
@@ -1104,7 +1294,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   capability: {
     padding: "32px",
     borderRadius: "16px",
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "rgba(255, 255, 255, 0.94)",
+    backdropFilter: "blur(12px)",
     border: "1px solid #E2E8F0",
     transition: "transform 0.2s ease, box-shadow 0.2s ease",
     boxSizing: "border-box",

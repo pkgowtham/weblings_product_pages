@@ -1,83 +1,45 @@
 {
+  "badge": "Skip the Sales Pitch",
   "header": {
-    "title": "Get in Touch",
-    "subtitle": "Whether you have a question, need assistance, or want to schedule a demo, our team is here to help."
+    "title": "Skip the sales reps.\nTalk directly to the builders.",
+    "subtitle": "No gatekeepers. No annoying forms asking for your annual revenue or your mother's maiden name. Just lay out the biggest bottleneck in your current setup, and we'll tell you honestly if our tools are the right fit."
   },
-  "office": {
-    "title": "Our Office",
-    "address": {
-      "title": "Address:",
-      "company": "Weblings",
-      "doorNo": "Door No:8, K.M Nagar,",
-      "street": "3rd Street, Velliyankadu,",
-      "cityState": "Tirupur, Tamilnadu, 641604.",
-      "country": "India"
+  "directLine": {
+    "title": "The Direct Line",
+    "email": "founders@weblings.com",
+    "paragraphs": [
+      "Email me directly at founders@weblings.com. I don't employ an offshore support desk or a team of quota-driven sales reps.",
+      "When you email this address, you get direct access to the engineers actually writing the code. I check this inbox twice a day, and I will personally write you back."
+    ],
+    "founder": {
+      "name": "Gowtham",
+      "role": "Founder & Architect"
     },
-    "phone": {
-      "title": "Phone:",
-      "value": "97895 13198"
-    },
-    "email": {
-      "title": "Email:",
-      "value": "pkgowthamit@gmail.com"
-    },
-    "map": {
-      "title": "Location Map",
-      "iframeSrc": "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1030.6618979390794!2d77.35222260239145!3d11.08118816408997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1727780601175!5m2!1sen!2sin"
-    }
+    "guarantees": [
+      "You will always talk to a real human, never a chatbot.",
+      "Absolutely zero pressure—we aren't here to upsell you.",
+      "Honest advice: if our platform isn't the perfect fit, we will tell you upfront."
+    ]
   },
-  "enquireForm": {
-    "title": "Enquire",
-    "subtitle": "Have a question or need assistance? Fill out the form below and our dedicated team will get back to you within 24 hours.",
+  "form": {
+    "title": "Tell us what is driving your team crazy.",
+    "subtitle": "Dump your frustrations here. I'll personally read it by the end of the day.",
     "fields": {
-      "subject": {
-        "label": "Subject",
-        "placeholder": "Placeholder"
+      "name": {
+        "label": "Your Name",
+        "placeholder": "John Doe"
       },
-      "category": {
-        "label": "Category",
-        "placeholder": "Placeholder",
-        "options": [
-          "Technical support",
-          "Billing & Payments",
-          "Account Management",
-          "Feature Request",
-          "Onboarding",
-          "Free Trial",
-          "Security & Complaints",
-          "Other"
-        ]
+      "email": {
+        "label": "Work Email",
+        "placeholder": "john@company.com"
       },
-      "priority": {
-        "label": "Priority Level",
-        "options": ["Low", "Medium", "High"],
-        "default": "Medium"
-      },
-      "message": {
-        "label": "Message",
-        "placeholder": "Describe your query in detail..."
-      },
-      "attachments": {
-        "label": "Attachments"
+      "painpoint": {
+        "label": "What is the biggest headache right now?",
+        "placeholder": "e.g., 'My developers are working weekends because a client changed their mind on Friday, and half my team doesn't have the right Jira permissions...'",
+        "hint": "The more specific you are, the better we can tell if we are the right solution for you."
       }
     },
-    "buttons": {
-      "submit": "Send Enquire",
-      "cancel": "Cancel"
-    }
-  },
-  "quickContact": [
-    {
-      "id": "email",
-      "title": "Direct Email",
-      "value": "enquire@weblings.com",
-      "link": "mailto:enquire@weblings.com"
-    },
-    {
-      "id": "phone",
-      "title": "Phone support",
-      "value": "+91 98765 43210",
-      "link": "tel:+919876543210"
-    }
-  ]
+    "buttonText": "Send to Founders"
+  }
 }
+
