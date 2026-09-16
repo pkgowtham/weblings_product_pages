@@ -94,6 +94,9 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     alignItems: "center",
     justifyContent: "center",
     background: "linear-gradient(180deg, #CFDEF9 0%, #FFFFFF 100%)",
+    "@media (max-width: 1366px)": {
+      minHeight: "640px",
+    },
     "@media (max-width: 768px)": {
       width: "100%",
       height: "auto",
@@ -152,7 +155,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   HeaderSection: {
     position: "absolute",
-    top: "50%",
+    top: "calc(50% + 40px)",
     left: "50%",
     transform: "translate(-50%, -50%)",
     zIndex: 2,
@@ -167,9 +170,13 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     padding: "0 20px",
     boxSizing: "border-box",
     margin: 0,
-    "@media (max-width: 1200px)": {
-      top: "52%",
-      gap: "14px",
+    "@media (max-width: 1366px)": {
+      top: "calc(50% + 46px)",
+      gap: "13px",
+    },
+    "@media (max-width: 1024px)": {
+      top: "calc(50% + 42px)",
+      gap: "11px",
     },
     "@media (max-width: 768px)": {
       position: "relative",
@@ -195,6 +202,11 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     fontWeight: 600,
     border: "1px solid rgba(0, 114, 196, 0.25)",
     marginBottom: "4px",
+    "@media (max-width: 1366px)": {
+      marginBottom: "2px",
+      padding: "5px 14px",
+      fontSize: "12px",
+    },
   },
   pulseDot: {
     width: "8px",
@@ -212,6 +224,13 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     fontWeight: 700,
     lineHeight: 1.25,
     margin: 0,
+    "@media (max-width: 1366px)": {
+      fontSize: "2.1rem",
+      maxWidth: "740px",
+    },
+    "@media (max-width: 1024px)": {
+      fontSize: "1.85rem",
+    },
     "@media (max-width: 768px)": {
       fontSize: "1.75rem",
     },
@@ -221,7 +240,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "block",
     marginTop: "6px",
     fontSize: "24px",
-
+    "@media (max-width: 1366px)": {
+      fontSize: "22px",
+      marginTop: "4px",
+    },
   },
   headTitleDescription: {
     color: theme.light.neutral.onSurface.dark,

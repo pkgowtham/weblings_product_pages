@@ -331,7 +331,7 @@ const Products = () => {
           } else if (checkErr?.error) {
             errorText = checkErr.error;
           }
-        } catch {}
+        } catch { }
         setSubscribeError(errorText);
         return;
       }
