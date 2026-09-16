@@ -7,6 +7,9 @@ import { getSrc } from "../../utils/getSrc";
 import gowthamFounderImg from "../../assets/images/about/gowtham_founder.jpg";
 import MailIcon from "../../assets/icons_component/MailIcon";
 
+// Email regex: ensures proper structure, exactly one period after @, and at least 2 letters after the period
+const EMAIL_REGEX = /^[a-zA-Z0-9]+([._%+-][a-zA-Z0-9]+)*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+
 const Contact: React.FC = () => {
   const classes = useStyle();
 
@@ -32,8 +35,19 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.painpoint.trim()) {
+    if (!formData.name.trim() || !formData.painpoint.trim()) {
       setErrorMessage("Please complete all fields before sending.");
+      return;
+    }
+
+    const trimmedEmail = formData.email.trim();
+    if (!trimmedEmail) {
+      setErrorMessage("Email address is mandatory. Please enter your email.");
+      return;
+    }
+
+    if (!EMAIL_REGEX.test(trimmedEmail)) {
+      setErrorMessage("Invalid email entered. Please enter a valid email address.");
       return;
     }
 
@@ -48,7 +62,7 @@ const Contact: React.FC = () => {
       payload.append("description", formData.painpoint.trim());
 
       const response = await fetch(
-        "https://weblings-migration-dev.weblingsdev.workers.dev/enquireDetails",
+        "https://weblings-migration-dev.weblingsdev.workers.dev/V1/enquireDetails",
         {
           method: "POST",
           body: payload,
@@ -221,7 +235,7 @@ const Contact: React.FC = () => {
                   {contactData.form.subtitle}
                 </p>
 
-                <form onSubmit={handleSubmit} className={classes.form}>
+                <form noValidate onSubmit={handleSubmit} className={classes.form}>
                   <div className={classes.formRow}>
                     {/* Name Field */}
                     <div className={classes.fieldGroup}>

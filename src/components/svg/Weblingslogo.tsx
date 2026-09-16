@@ -3,6 +3,7 @@ import type { SVGProps } from "react";
 const SvgWeblingslogo = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 34 22"
     width={34}
     height={22}
     fill="none"

@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React, { useState } from "react";
 import Typography from "../../components/typography/component";
 import { usestyles } from "./style";
 import Button from "../../components/button/button";
@@ -12,6 +12,7 @@ import SvgNewsletter from "../../components/svg/Newsletter";
 import WorkspaceDashboardMockup from "../../components/dashboardMockup/index";
 import { useRouter } from "next/navigation";
 import SvgNewHero from "../../custom-icons/NewHero";
+import SvgWeblingslogo from "../../components/svg/Weblingslogo";
 import StorageGraphic from "../../components/svg/StorageGraphic";
 import PipelineStep from "../../components/pipelineStep/index";
 import PhoneMockup from "../../components/phoneMockup/index";
@@ -40,6 +41,9 @@ import {
 
 // Import static data from JSON
 import data from "../../data/home.json";
+
+// Email regex: ensures proper structure, exactly one period after @, and at least 2 letters after the period
+const EMAIL_REGEX = /^[a-zA-Z0-9]+([._%+-][a-zA-Z0-9]+)*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
 
 const aiIcons: Record<string, React.ReactNode> = {
   brain: <BrainIcon width={22} height={22} />,
@@ -285,6 +289,109 @@ const Products = () => {
   const router = useRouter();
   const classes = usestyles();
 
+  const [subscribeEmail, setSubscribeEmail] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [subscribeError, setSubscribeError] = useState<string | null>(null);
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSubscribeEmail(e.target.value);
+    if (subscribeError) {
+      setSubscribeError(null);
+    }
+  };
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmedEmail = subscribeEmail.trim();
+    if (!trimmedEmail) {
+      setSubscribeError("Email address is mandatory. Please enter your email.");
+      return;
+    }
+    if (!EMAIL_REGEX.test(trimmedEmail)) {
+      setSubscribeError("Invalid email entered. Please enter a valid email address.");
+      return;
+    }
+
+    setIsSubscribing(true);
+    setSubscribeError(null);
+
+    try {
+      // Step 1: Check if email is already subscribed
+      const checkResponse = await fetch(
+        `https://weblings-migration-dev.weblingsdev.workers.dev/V1/subscribe/checkEmail?email=${encodeURIComponent(trimmedEmail)}`
+      );
+
+      if (!checkResponse.ok) {
+        let errorText = "Unable to verify email status right now. Please try again.";
+        try {
+          const checkErr = await checkResponse.json();
+          if (checkErr?.message) {
+            errorText = checkErr.message;
+          } else if (checkErr?.error) {
+            errorText = checkErr.error;
+          }
+        } catch {}
+        setSubscribeError(errorText);
+        return;
+      }
+
+      const checkData = await checkResponse.json();
+
+      // If email is already subscribed, display message and do not call the POST API
+      if (checkData?.isSubscribed || checkData?.available === false) {
+        setSubscribeError(checkData?.message || "Email is already subscribed.");
+        return;
+      }
+
+      // Step 2: Email is available -> directly call the existing POST subscribe API
+      const response = await fetch(
+        "https://weblings-migration-dev.weblingsdev.workers.dev/V1/subscribe",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: trimmedEmail }),
+        }
+      );
+
+      if (!response.ok) {
+        let errorText = "Unable to subscribe right now. Please try again or reach out directly to founders@weblings.com.";
+        try {
+          const resData = await response.json();
+          if (resData?.message) {
+            errorText = resData.message;
+          } else if (resData?.error) {
+            errorText = resData.error;
+          }
+        } catch {
+          if (response.status === 404) {
+            errorText = "Subscription endpoint is temporarily unavailable (404). Please try again later.";
+          } else {
+            errorText = `Subscription failed (${response.status}). Please try again or contact founders@weblings.com.`;
+          }
+        }
+        setSubscribeError(errorText);
+      } else {
+        setIsSubscribed(true);
+        setSubscribeError(null);
+      }
+    } catch (err: any) {
+      setSubscribeError(
+        err?.message || "Network error. Please check your connection and try again."
+      );
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
+
+  const handleResetSubscribe = () => {
+    setSubscribeEmail("");
+    setIsSubscribed(false);
+    setSubscribeError(null);
+  };
+
   return (
     <div>
       {/* HeaderSection */}
@@ -333,19 +440,88 @@ const Products = () => {
         </div>
       </div>
 
-      {/* Tool Ticker Section */}
-      <div className={classes.tickerSection}>
-        <div className={classes.tickerInner}>
-          <div className={classes.tickerTitle}>{data.ticker.title}</div>
-          <div className={classes.tickerTools}>
-            {data.ticker.tools.map((tool: string, index: number) => (
-              <span key={index} className={classes.tickerItem}>
-                {tool}
+      {/* Tool Ticker / Fragmented Tool Stack Replacement Section */}
+      <section className={classes.tickerSection} aria-label="Tool stack replacement">
+        <div className={classes.tickerCard}>
+          {/* Subtle top gradient accent */}
+          <div className={classes.tickerTopAccent} />
+
+          <div className={classes.tickerInner}>
+            {/* Eyebrow Tag */}
+            <div className={classes.tickerEyebrow}>
+              <span className={classes.tickerEyebrowDot} />
+              <span className={classes.tickerEyebrowText}>
+                {data.ticker.title}
               </span>
-            ))}
+            </div>
+
+            {/* Main Headline */}
+            <h2 className={classes.tickerHeadline}>
+              {data.ticker.headline}{" "}
+              <span className={classes.tickerGradientText}>
+                {data.ticker.headlineHighlight}
+              </span>
+              .
+            </h2>
+
+            {/* Minimal Subtitle */}
+            <p className={classes.tickerSubtitle}>
+              {data.ticker.description}
+            </p>
+
+            {/* Conversion Strip: Replaced Tools -> Weblings Solution Badge */}
+            <div className={classes.tickerStrip}>
+              {/* Row of Legacy Replaced Tools */}
+              <div className={classes.tickerToolsRow}>
+                {data.ticker.tools.map((tool: string, index: number) => (
+                  <div key={index} className={classes.tickerToolBadge}>
+                    <span className={classes.tickerToolDot} />
+                    <span>{tool}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Convergence Connector Line with Arrow */}
+              <div className={classes.tickerConvergence}>
+                <div className={classes.tickerConvergenceLineLeft} />
+                <span className={classes.tickerConvergenceText}>
+                  <svg
+                    width={14}
+                    height={14}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={classes.tickerConvergenceArrow}
+                  >
+                    <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                  converged into
+                </span>
+                <div className={classes.tickerConvergenceLineRight} />
+              </div>
+
+              {/* Weblings Hero Solution Badge */}
+              <div className={classes.weblingsBadgeWrapper}>
+                <div className={classes.weblingsBadgeGlow} />
+                <div className={classes.weblingsBadge}>
+                  <SvgWeblingslogo
+                    width={26}
+                    height={17}
+                    viewBox="0 0 34 22"
+                    className={classes.weblingsBadgeIcon}
+                  />
+                  <span className={classes.weblingsBadgeTitle}>Weblings</span>
+                  <span className={classes.weblingsBadgeDivider} />
+                  <span className={classes.weblingsBadgeTag}>All-in-one suite</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Dashboard Preview Mockup Section */}
       <div className={classes.dashboardMockupContainer}>
@@ -367,7 +543,7 @@ const Products = () => {
               <span className={classes.windowLiveBadge}>● LIVE</span>
             </div>
             <div className={classes.windowActions}>
-              <span className={classes.windowActionTag}>Weblings OS</span>
+              <span className={classes.windowActionTag}>Weblings</span>
             </div>
           </div>
           <div className={classes.dashboardMockupScreen}>
@@ -663,17 +839,71 @@ const Products = () => {
                 {data.subscribe.description}
               </div>
             </div>
-            <div className={classes.InputDiv}>
-              <input
-                className={classes.InputText}
-                placeholder={data.subscribe.inputPlaceholder}
-                type="text"
-                defaultValue=""
-              />
-              <Button element="button" brand>
-                {data.subscribe.action.label}
-              </Button>
-            </div>
+            {isSubscribed ? (
+              <div className={classes.subscribeSuccessBox}>
+                <div className={classes.subscribeSuccessPill}>
+                  <span>✓</span>
+                  <span>Subscribed</span>
+                </div>
+                <div className={classes.subscribeSuccessTitle}>
+                  You're on the list!
+                </div>
+                <div className={classes.subscribeSuccessDesc}>
+                  Thank you for subscribing with <strong>{subscribeEmail}</strong>. We'll send you our latest updates, privacy tools, and product announcements.
+                </div>
+                <button
+                  type="button"
+                  className={classes.subscribeResetBtn}
+                  onClick={handleResetSubscribe}
+                >
+                  Subscribe another email
+                </button>
+              </div>
+            ) : (
+              <form noValidate onSubmit={handleSubscribe} className={classes.subscribeForm}>
+                <div className={classes.InputDiv}>
+                  <input
+                    className={classes.InputText}
+                    placeholder={data.subscribe.inputPlaceholder}
+                    type="email"
+                    required
+                    value={subscribeEmail}
+                    onChange={handleEmailChange}
+                    disabled={isSubscribing}
+                  />
+                  <Button
+                    element="button"
+                    brand
+                    disabled={isSubscribing}
+                    type="submit"
+                  >
+                    {isSubscribing ? "Subscribing..." : data.subscribe.action.label}
+                  </Button>
+                </div>
+
+                {subscribeError && (
+                  <div className={classes.subscribeErrorBox} role="alert">
+                    <span className={classes.subscribeErrorIcon}>
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                      </svg>
+                    </span>
+                    <span className={classes.subscribeErrorText}>{subscribeError}</span>
+                  </div>
+                )}
+              </form>
+            )}
           </div>
           <div className={classes.StorageGraphicRight}>
             <StorageGraphic />

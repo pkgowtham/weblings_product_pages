@@ -17,6 +17,9 @@
   },
   "ticker": {
     "title": "Replace your fragmented tool stack",
+    "headline": "One platform",
+    "headlineHighlight": "replaces them all",
+    "description": "Eliminate tool fatigue, disconnected workflows, and redundant licenses with a single unified operating system.",
     "tools": [
       "Slack",
       "Jira",
