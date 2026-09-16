@@ -4,29 +4,49 @@ import { Theme } from "../../../theme/themeType";
 export const useStyles = createUseStyles((theme: Theme) => ({
   "@keyframes twinkle": {
     "0%, 100%": { opacity: 0.2, transform: "scale(0.8)" },
-    "50%": { opacity: 0.85, transform: "scale(1.2)", filter: "drop-shadow(0 0 4px #FFFFFF)" },
+    "50%": {
+      opacity: 0.65,
+      transform: "scale(1.2)",
+      boxShadow: `0 0 6px ${theme.light.brand.surface.medium}`,
+    },
   },
 
   pageWrapper: {
     minHeight: "100vh",
     position: "relative",
-    background: "linear-gradient(to bottom, #070b19 0%, #172c5a 50%, #2e5c9a 100%)",
-    color: "#F8FAFC",
+    background: `linear-gradient(180deg, #F0F6FE 0%, ${theme.light.brand.surface.lighter} 18%, #FAFDFE 45%, ${theme.light.neutral.surface.lighter} 70%, #F0F6FE 100%)`,
+    color: theme.light.neutral.onSurface.title,
     overflow: "hidden",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    paddingTop: "120px",
+    paddingTop: "140px",
     paddingBottom: "80px",
     paddingLeft: "20px",
     paddingRight: "20px",
     boxSizing: "border-box",
+    fontFamily: "'Open Sans', sans-serif",
     "@media (max-width: 768px)": {
-      paddingTop: "100px",
+      paddingTop: "110px",
       paddingBottom: "60px",
       paddingLeft: "16px",
       paddingRight: "16px",
     },
+  },
+
+  // Soft Ambient Glow matching About page
+  ambientGlowTop: {
+    position: "absolute",
+    top: "-120px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "850px",
+    height: "550px",
+    background: `radial-gradient(ellipse at center, ${theme.light.brand.border.light} 0%, rgba(176, 214, 255, 0.18) 50%, transparent 75%)`,
+    filter: "blur(90px)",
+    opacity: 0.7,
+    pointerEvents: "none",
+    zIndex: 0,
   },
 
   starCanvas: {
@@ -39,8 +59,9 @@ export const useStyles = createUseStyles((theme: Theme) => ({
 
   star: {
     position: "absolute",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: theme.light.brand.surface.light,
     borderRadius: "50%",
+    opacity: 0.45,
     animation: "$twinkle 4s infinite ease-in-out",
   },
 
@@ -60,10 +81,11 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   title: {
     fontSize: "3rem",
     fontWeight: 800,
-    color: "#FFFFFF",
+    color: theme.light.brand.surface.darker,
     letterSpacing: "-0.02em",
     margin: "0 0 12px 0",
     lineHeight: 1.15,
+    fontFamily: "'Open Sans', sans-serif",
     "@media (max-width: 768px)": {
       fontSize: "2.15rem",
     },
@@ -71,44 +93,48 @@ export const useStyles = createUseStyles((theme: Theme) => ({
 
   lastUpdated: {
     fontSize: "0.95rem",
-    color: "#94A3B8",
+    color: theme.light.neutral.onSurface.medium,
     margin: 0,
   },
 
   glassPanel: {
-    backgroundColor: "rgba(15, 23, 42, 0.82)",
+    backgroundColor: theme.light.neutral.surface.lighter,
+    backgroundImage: "radial-gradient(rgba(0, 114, 196, 0.07) 1px, transparent 1px)",
+    backgroundSize: "24px 24px",
     backdropFilter: "blur(16px)",
-    borderRadius: "28px",
-    border: "1px solid rgba(255, 255, 255, 0.12)",
-    boxShadow: "0 25px 60px -15px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 114, 196, 0.15)",
+    borderRadius: `${theme.borderRadius.b500}px`,
+    border: `1px solid ${theme.light.brand.border.light}`,
+    boxShadow: "0 20px 60px -15px rgba(0, 68, 140, 0.10), 0 0 0 1px rgba(0, 114, 196, 0.06)",
     padding: "48px 56px",
     boxSizing: "border-box",
+    fontFamily: "'Open Sans', sans-serif",
     "@media (max-width: 768px)": {
-      padding: "32px 24px",
-      borderRadius: "20px",
+      padding: "32px 20px",
+      borderRadius: `${theme.borderRadius.b400}px`,
     },
   },
 
   introParagraph: {
     fontSize: "1.05rem",
     lineHeight: 1.8,
-    color: "#E2E8F0",
+    color: theme.light.neutral.onSurface.title,
     marginBottom: "28px",
+    fontWeight: 400,
   },
 
   sectionHeading: {
-    color: "#F8FAFC",
+    color: theme.light.brand.surface.darker,
     fontSize: "1.25rem",
     fontWeight: 700,
     marginTop: "36px",
     marginBottom: "14px",
-    borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+    borderBottom: `1px solid ${theme.light.brand.border.light}`,
     paddingBottom: "10px",
     letterSpacing: "-0.01em",
   },
 
   paragraph: {
-    color: "#CBD5E1",
+    color: theme.light.neutral.onSurface.medium,
     fontSize: "0.95rem",
     lineHeight: 1.75,
     marginBottom: "16px",
@@ -117,7 +143,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   list: {
     listStyleType: "disc",
     paddingLeft: "24px",
-    color: "#CBD5E1",
+    color: theme.light.neutral.onSurface.medium,
     fontSize: "0.95rem",
     lineHeight: 1.75,
     marginBottom: "16px",
@@ -126,19 +152,19 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   listItem: {
     marginBottom: "8px",
     "& strong": {
-      color: "#F8FAFC",
+      color: theme.light.neutral.onSurface.title,
       fontWeight: 600,
     },
   },
 
   strong: {
-    color: "#F8FAFC",
+    color: theme.light.neutral.onSurface.title,
     fontWeight: 600,
   },
 
   grievanceBox: {
-    backgroundColor: "rgba(2, 6, 23, 0.65)",
-    border: "1px solid rgba(51, 65, 85, 0.85)",
+    backgroundColor: theme.light.brand.surface.lighter,
+    border: `1px solid ${theme.light.brand.border.light}`,
     borderRadius: "14px",
     padding: "20px 24px",
     marginTop: "20px",
@@ -150,24 +176,24 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   grievanceRow: {
     margin: 0,
     fontSize: "0.95rem",
-    color: "#CBD5E1",
+    color: theme.light.neutral.onSurface.medium,
     lineHeight: 1.6,
   },
 
   grievanceNote: {
     margin: "4px 0 0 0",
     fontSize: "0.85rem",
-    color: "#64748B",
+    color: theme.light.neutral.onSurface.dark,
     lineHeight: 1.5,
   },
 
   link: {
-    color: "#38BDF8",
+    color: theme.light.brand.surface.medium,
     textDecoration: "none",
-    fontWeight: 500,
+    fontWeight: 600,
     transition: "color 0.2s ease, text-decoration 0.2s ease",
     "&:hover": {
-      color: "#60A5FA",
+      color: theme.light.brand.surface.darker,
       textDecoration: "underline",
     },
   },

@@ -25,6 +25,9 @@ const TermsAndConditionsView: React.FC = () => {
 
   return (
     <div className={classes.pageWrapper}>
+      {/* Soft Ambient Background Glow */}
+      <div className={classes.ambientGlowTop} aria-hidden="true" />
+
       {/* Decorative Starry Field */}
       <div className={classes.starCanvas} aria-hidden="true">
         {starsData.map((star, index) => (
