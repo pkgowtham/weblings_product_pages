@@ -41,6 +41,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Company & Information
     { path: "/about", changeFrequency: "monthly", priority: 0.8 },
     { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/privacy-policy", changeFrequency: "monthly", priority: 0.7 },
+    { path: "/terms-and-conditions", changeFrequency: "monthly", priority: 0.7 },
 
     // Comparison Pages
     { path: "/mail/comparison", changeFrequency: "monthly", priority: 0.7 },

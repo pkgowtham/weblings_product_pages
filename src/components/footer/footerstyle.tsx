@@ -98,7 +98,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   },
   SecondSection: {
     display: "flex",
-    width: "120px",
+    minWidth: "120px",
+    width: "auto",
     maxWidth: "100%",
     flexDirection: "column",
     alignItems: "flex-start",

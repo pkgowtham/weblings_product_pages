@@ -38,15 +38,6 @@ const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): Re
   const footer: { sections: FooterSection[] } = {
     sections: [
       {
-        title: "Company",
-        features: [
-          { label: "Docs", path: "#" },
-          { label: "Pricing", path: "/price" },
-          { label: "About", path: "/about" },
-          { label: "Contact", path: "/contact" },
-        ],
-      },
-      {
         title: "Product",
         features: [
           { label: "Worksuite", path: "/" },
@@ -56,6 +47,22 @@ const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): Re
           { label: "Streamline", path: "/streamline/feature" },
           { label: "eOffice", path: "/eoffice/feature" },
           { label: "Drive", path: "/drive" },
+        ],
+      },
+      {
+        title: "Company",
+        features: [
+          { label: "Docs", path: "#" },
+          { label: "Pricing", path: "/price" },
+          { label: "About", path: "/about" },
+          { label: "Contact", path: "/contact" },
+        ],
+      },
+      {
+        title: "Legal",
+        features: [
+          { label: "Privacy Policy", path: "/privacy-policy" },
+          { label: "Terms & Conditions", path: "/terms-and-conditions" },
         ],
       },
     ],
