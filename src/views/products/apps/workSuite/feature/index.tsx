@@ -122,8 +122,8 @@ const WorkSuiteFeature: React.FC = () => {
                               module.badgeType === "active"
                                 ? classes.sidebarPillActive
                                 : module.badgeType === "red"
-                                ? classes.sidebarPillRed
-                                : classes.sidebarPill
+                                  ? classes.sidebarPillRed
+                                  : classes.sidebarPill
                             }
                           >
                             {module.badge}

@@ -40,7 +40,10 @@ const About: React.FC = () => {
 
   return (
     <div className={classes.aboutPageWrapper}>
-      {/* Decorative Starry Field */}
+      {/* Soft Ambient Background Glow */}
+      <div className={classes.ambientGlowTop} aria-hidden="true" />
+
+      {/* Decorative Sparkling Accent Field */}
       <div className={classes.starCanvas} aria-hidden="true">
         {starsData.map((star, index) => (
           <span

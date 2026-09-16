@@ -28,6 +28,54 @@ export const useStyle = createUseStyles((theme: Theme) => ({
       transform: "scale(0.8)",
     },
   },
+  "@keyframes checkmarkDraw": {
+    "0%": {
+      strokeDashoffset: 48,
+    },
+    "100%": {
+      strokeDashoffset: 0,
+    },
+  },
+  "@keyframes successRipple": {
+    "0%": {
+      boxShadow: "0 0 0 0 rgba(16, 185, 129, 0.45)",
+    },
+    "70%": {
+      boxShadow: "0 0 0 16px rgba(16, 185, 129, 0)",
+    },
+    "100%": {
+      boxShadow: "0 0 0 0 rgba(16, 185, 129, 0)",
+    },
+  },
+  "@keyframes popIn": {
+    "0%": {
+      opacity: 0,
+      transform: "scale(0.9) translateY(12px)",
+    },
+    "100%": {
+      opacity: 1,
+      transform: "scale(1) translateY(0)",
+    },
+  },
+  "@keyframes errorShake": {
+    "0%, 100%": {
+      transform: "translateX(0)",
+    },
+    "20%, 60%": {
+      transform: "translateX(-4px)",
+    },
+    "40%, 80%": {
+      transform: "translateX(4px)",
+    },
+  },
+  "@keyframes spin": {
+    "0%": {
+      transform: "rotate(0deg)",
+    },
+    "100%": {
+      transform: "rotate(360deg)",
+    },
+  },
 
   pageWrapper: {
     width: "100%",
@@ -491,6 +539,12 @@ export const useStyle = createUseStyles((theme: Theme) => ({
     "&:active": {
       transform: "translateY(0)",
     },
+    "&:disabled": {
+      opacity: 0.7,
+      cursor: "not-allowed",
+      transform: "none !important",
+      boxShadow: "none !important",
+    },
   },
 
   submitArrow: {
@@ -499,30 +553,101 @@ export const useStyle = createUseStyles((theme: Theme) => ({
     alignItems: "center",
   },
 
-  // Submission Confirmation View
+  spinner: {
+    width: "16px",
+    height: "16px",
+    border: "2px solid rgba(255, 255, 255, 0.35)",
+    borderTopColor: "#FFFFFF",
+    borderRadius: "50%",
+    animation: "$spin 0.7s linear infinite",
+    display: "inline-block",
+    flexShrink: 0,
+  },
+
+  // Error Message Box (rendered directly above submit button on API failure)
+  errorBox: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "10px",
+    padding: "12px 14px",
+    borderRadius: "10px",
+    backgroundColor: "#FEF2F2",
+    border: "1px solid #FECACA",
+    color: "#991B1B",
+    fontSize: "13px",
+    lineHeight: 1.45,
+    animation: "$errorShake 0.4s ease, $popIn 0.3s ease",
+  },
+
+  errorIcon: {
+    color: "#DC2626",
+    flexShrink: 0,
+    marginTop: "2px",
+    display: "flex",
+  },
+
+  errorText: {
+    color: "#991B1B",
+    fontWeight: 500,
+  },
+
+  // Submission Confirmation View with Success Animation
   successBox: {
-    padding: "36px 20px",
+    padding: "44px 20px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     textAlign: "center",
     gap: "16px",
+    animation: "$popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
   },
 
-  successIcon: {
-    width: "56px",
-    height: "56px",
-    borderRadius: "50%",
+  successBadgePill: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    padding: "4px 14px",
+    borderRadius: "999px",
     backgroundColor: "#ECFDF5",
     border: "1px solid #A7F3D0",
     color: "#059669",
+    fontSize: "12px",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.05em",
+  },
+
+  successIconWrapper: {
+    position: "relative",
+    width: "72px",
+    height: "72px",
+    borderRadius: "50%",
+    backgroundColor: "#ECFDF5",
+    border: "2px solid #10B981",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    animation: "$successRipple 2s infinite ease-out",
+    margin: "8px 0",
+  },
+
+  successCheckmarkSvg: {
+    width: "36px",
+    height: "36px",
+    stroke: "#059669",
+    strokeWidth: 3,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    fill: "none",
+    "& path": {
+      strokeDasharray: 48,
+      strokeDashoffset: 48,
+      animation: "$checkmarkDraw 0.7s 0.2s cubic-bezier(0.65, 0, 0.45, 1) forwards",
+    },
   },
 
   successTitle: {
-    fontSize: "1.4rem",
+    fontSize: "1.45rem",
     fontWeight: 700,
     color: "#0F172A",
   },

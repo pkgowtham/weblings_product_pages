@@ -18,25 +18,71 @@ const Contact: React.FC = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errorMessage) {
+      setErrorMessage(null);
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.painpoint) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.painpoint.trim()) {
+      setErrorMessage("Please complete all fields before sending.");
       return;
     }
+
     setIsSubmitting(true);
-    // Simulate submission
-    setTimeout(() => {
+    setErrorMessage(null);
+
+    try {
+      // Prepare multipart/form-data payload with name, email, description
+      const payload = new FormData();
+      payload.append("name", formData.name.trim());
+      payload.append("email", formData.email.trim());
+      payload.append("description", formData.painpoint.trim());
+
+      const response = await fetch(
+        "https://weblings-migration-dev.weblingsdev.workers.dev/enquireDetails",
+        {
+          method: "POST",
+          body: payload,
+        }
+      );
+
+      if (!response.ok) {
+        let errorText = "Unable to send your note right now. Please try again or reach out to founders@weblings.com directly.";
+        try {
+          const data = await response.json();
+          if (data?.message) {
+            errorText = data.message;
+          } else if (data?.error) {
+            errorText = data.error;
+          }
+        } catch {
+          if (response.status === 404) {
+            errorText = "Endpoint unavailable (404). Please try again or reach out directly to founders@weblings.com.";
+          } else {
+            errorText = `Submission failed (${response.status}). Please try again or contact founders@weblings.com.`;
+          }
+        }
+        setErrorMessage(errorText);
+      } else {
+        setIsSubmitted(true);
+        setErrorMessage(null);
+      }
+    } catch (err: any) {
+      setErrorMessage(
+        err?.message || "Network error. Please check your connection and try again."
+      );
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 600);
+    }
   };
 
   const handleReset = () => {
@@ -45,6 +91,7 @@ const Contact: React.FC = () => {
       email: "",
       painpoint: "",
     });
+    setErrorMessage(null);
     setIsSubmitted(false);
   };
 
@@ -137,25 +184,25 @@ const Contact: React.FC = () => {
           <div className={classes.formCard}>
             {isSubmitted ? (
               <div className={classes.successBox}>
-                <div className={classes.successIcon}>
+                <div className={classes.successBadgePill}>
+                  <span>✓</span>
+                  <span>Delivered to Gowtham</span>
+                </div>
+
+                <div className={classes.successIconWrapper}>
                   <svg
-                    width="28"
-                    height="28"
+                    className={classes.successCheckmarkSvg}
                     viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
                   >
-                    <polyline points="20 6 9 17 4 12" />
+                    <path d="M20 6L9 17L4 12" />
                   </svg>
                 </div>
+
                 <h3 className={classes.successTitle}>
-                  Note Sent Directly to Gowtham
+                  Note Delivered Directly to Gowtham
                 </h3>
                 <p className={classes.successMessage}>
-                  Thanks {formData.name}. Your note has been delivered to Gowtham's personal inbox. He reviews every founder note and will write back to <strong>{formData.email}</strong> by the end of the day.
+                  Thanks <strong>{formData.name}</strong>. Your note has been delivered straight to Gowtham's personal inbox. He reviews every founder note and will reply back to <strong>{formData.email}</strong> by the end of the day.
                 </p>
                 <button
                   type="button"
@@ -245,30 +292,60 @@ const Contact: React.FC = () => {
                     </div>
                   </div>
 
+                  {/* Error Message displayed directly above the submit button if API fails */}
+                  {errorMessage && (
+                    <div className={classes.errorBox} role="alert">
+                      <span className={classes.errorIcon}>
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <line x1="12" y1="8" x2="12" y2="12" />
+                          <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                      </span>
+                      <span className={classes.errorText}>{errorMessage}</span>
+                    </div>
+                  )}
+
                   {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className={classes.submitButton}
                   >
-                    <span>
-                      {isSubmitting ? "Sending..." : contactData.form.buttonText}
-                    </span>
-                    <span className={classes.submitArrow}>
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </span>
+                    {isSubmitting ? (
+                      <>
+                        <span className={classes.spinner} />
+                        <span>Sending to Founder...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>{contactData.form.buttonText}</span>
+                        <span className={classes.submitArrow}>
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                          </svg>
+                        </span>
+                      </>
+                    )}
                   </button>
                 </form>
               </>
