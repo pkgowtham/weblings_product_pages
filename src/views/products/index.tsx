@@ -18,6 +18,7 @@ import PipelineStep from "../../components/pipelineStep/index";
 import PhoneMockup from "../../components/phoneMockup/index";
 import BentoCard from "../../components/bentoCard/index";
 import { SvgApple, SvgAndroid } from "../../components/appStoreButtons";
+import StatusModal, { StatusModalType } from "../../components/statusModal";
 import {
   BrainIcon,
   MicIcon,
@@ -291,30 +292,51 @@ const Products = () => {
 
   const [subscribeEmail, setSubscribeEmail] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [subscribeError, setSubscribeError] = useState<string | null>(null);
+  const [modalState, setModalState] = useState<{
+    isOpen: boolean;
+    type: StatusModalType;
+    badge?: string;
+    title: string;
+    message: React.ReactNode;
+    primaryBtnText?: string;
+  }>({
+    isOpen: false,
+    type: "success",
+    title: "",
+    message: "",
+  });
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubscribeEmail(e.target.value);
-    if (subscribeError) {
-      setSubscribeError(null);
-    }
   };
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     const trimmedEmail = subscribeEmail.trim();
     if (!trimmedEmail) {
-      setSubscribeError("Email address is mandatory. Please enter your email.");
+      setModalState({
+        isOpen: true,
+        type: "warning",
+        badge: "EMAIL REQUIRED",
+        title: "Email Address Required",
+        message: "Email address is mandatory. Please enter your email to subscribe.",
+        primaryBtnText: "Got It",
+      });
       return;
     }
     if (!EMAIL_REGEX.test(trimmedEmail)) {
-      setSubscribeError("Invalid email entered. Please enter a valid email address.");
+      setModalState({
+        isOpen: true,
+        type: "warning",
+        badge: "INVALID EMAIL",
+        title: "Invalid Email Address",
+        message: "Please enter a valid email address (e.g. name@company.com).",
+        primaryBtnText: "Got It",
+      });
       return;
     }
 
     setIsSubscribing(true);
-    setSubscribeError(null);
 
     try {
       // Step 1: Check if email is already subscribed
@@ -332,7 +354,14 @@ const Products = () => {
             errorText = checkErr.error;
           }
         } catch { }
-        setSubscribeError(errorText);
+        setModalState({
+          isOpen: true,
+          type: "error",
+          badge: "NOTICE",
+          title: "Subscription Notice",
+          message: errorText,
+          primaryBtnText: "Close",
+        });
         return;
       }
 
@@ -340,7 +369,16 @@ const Products = () => {
 
       // If email is already subscribed, display message and do not call the POST API
       if (checkData?.isSubscribed || checkData?.available === false) {
-        setSubscribeError(checkData?.message || "Email is already subscribed.");
+        setModalState({
+          isOpen: true,
+          type: "warning",
+          badge: "FAVOURITE LIST",
+          title: "You're Already in Our Favourite List!",
+          message:
+            checkData?.message ||
+            "This email is already part of our favorite community! You're all set to receive upcoming updates.",
+          primaryBtnText: "Understood",
+        });
         return;
       }
 
@@ -372,24 +410,43 @@ const Products = () => {
             errorText = `Subscription failed (${response.status}). Please try again or contact founders@weblings.com.`;
           }
         }
-        setSubscribeError(errorText);
+        setModalState({
+          isOpen: true,
+          type: "error",
+          badge: "NOTICE",
+          title: "Subscription Notice",
+          message: errorText,
+          primaryBtnText: "Close",
+        });
       } else {
-        setIsSubscribed(true);
-        setSubscribeError(null);
+        const savedEmail = trimmedEmail;
+        setSubscribeEmail("");
+        setModalState({
+          isOpen: true,
+          type: "success",
+          badge: "SUBSCRIBED",
+          title: "Welcome to Weblings!",
+          message: (
+            <>
+              Thank you for subscribing with <strong>{savedEmail}</strong>. We'll send you our latest updates, privacy tools, and product announcements.
+            </>
+          ),
+          primaryBtnText: "Great, thanks!",
+        });
       }
     } catch (err: any) {
-      setSubscribeError(
-        err?.message || "Network error. Please check your connection and try again."
-      );
+      setModalState({
+        isOpen: true,
+        type: "error",
+        badge: "NOTICE",
+        title: "Subscription Notice",
+        message:
+          err?.message || "Network error. Please check your connection and try again.",
+        primaryBtnText: "Close",
+      });
     } finally {
       setIsSubscribing(false);
     }
-  };
-
-  const handleResetSubscribe = () => {
-    setSubscribeEmail("");
-    setIsSubscribed(false);
-    setSubscribeError(null);
   };
 
   return (
@@ -839,77 +896,44 @@ const Products = () => {
                 {data.subscribe.description}
               </div>
             </div>
-            {isSubscribed ? (
-              <div className={classes.subscribeSuccessBox}>
-                <div className={classes.subscribeSuccessPill}>
-                  <span>✓</span>
-                  <span>Subscribed</span>
-                </div>
-                <div className={classes.subscribeSuccessTitle}>
-                  You're on the list!
-                </div>
-                <div className={classes.subscribeSuccessDesc}>
-                  Thank you for subscribing with <strong>{subscribeEmail}</strong>. We'll send you our latest updates, privacy tools, and product announcements.
-                </div>
-                <button
-                  type="button"
-                  className={classes.subscribeResetBtn}
-                  onClick={handleResetSubscribe}
+            <form noValidate onSubmit={handleSubscribe} className={classes.subscribeForm}>
+              <div className={classes.InputDiv}>
+                <input
+                  className={classes.InputText}
+                  placeholder={data.subscribe.inputPlaceholder}
+                  type="email"
+                  required
+                  value={subscribeEmail}
+                  onChange={handleEmailChange}
+                  disabled={isSubscribing}
+                />
+                <Button
+                  element="button"
+                  brand
+                  disabled={isSubscribing}
+                  type="submit"
                 >
-                  Subscribe another email
-                </button>
+                  {isSubscribing ? "Subscribing..." : data.subscribe.action.label}
+                </Button>
               </div>
-            ) : (
-              <form noValidate onSubmit={handleSubscribe} className={classes.subscribeForm}>
-                <div className={classes.InputDiv}>
-                  <input
-                    className={classes.InputText}
-                    placeholder={data.subscribe.inputPlaceholder}
-                    type="email"
-                    required
-                    value={subscribeEmail}
-                    onChange={handleEmailChange}
-                    disabled={isSubscribing}
-                  />
-                  <Button
-                    element="button"
-                    brand
-                    disabled={isSubscribing}
-                    type="submit"
-                  >
-                    {isSubscribing ? "Subscribing..." : data.subscribe.action.label}
-                  </Button>
-                </div>
-
-                {subscribeError && (
-                  <div className={classes.subscribeErrorBox} role="alert">
-                    <span className={classes.subscribeErrorIcon}>
-                      <svg
-                        width="15"
-                        height="15"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="12" y1="8" x2="12" y2="12" />
-                        <line x1="12" y1="16" x2="12.01" y2="16" />
-                      </svg>
-                    </span>
-                    <span className={classes.subscribeErrorText}>{subscribeError}</span>
-                  </div>
-                )}
-              </form>
-            )}
+            </form>
           </div>
           <div className={classes.StorageGraphicRight}>
             <StorageGraphic />
           </div>
         </div>
       </div>
+
+      {/* Centered Status Popup Modal */}
+      <StatusModal
+        isOpen={modalState.isOpen}
+        type={modalState.type}
+        badge={modalState.badge}
+        title={modalState.title}
+        message={modalState.message}
+        primaryBtnText={modalState.primaryBtnText}
+        onClose={() => setModalState((prev) => ({ ...prev, isOpen: false }))}
+      />
     </div>
   );
 };

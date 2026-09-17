@@ -6,6 +6,7 @@ import contactData from "../../data/contact.json";
 import { getSrc } from "../../utils/getSrc";
 import gowthamFounderImg from "../../assets/images/about/gowtham_founder.jpg";
 import MailIcon from "../../assets/icons_component/MailIcon";
+import StatusModal, { StatusModalType } from "../../components/statusModal";
 
 // Email regex: ensures proper structure, exactly one period after @, and at least 2 letters after the period
 const EMAIL_REGEX = /^[a-zA-Z0-9]+([._%+-][a-zA-Z0-9]+)*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
@@ -19,40 +20,68 @@ const Contact: React.FC = () => {
     painpoint: "",
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [modalState, setModalState] = useState<{
+    isOpen: boolean;
+    type: StatusModalType;
+    badge?: string;
+    title: string;
+    message: React.ReactNode;
+    primaryBtnText?: string;
+  }>({
+    isOpen: false,
+    type: "success",
+    title: "",
+    message: "",
+  });
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errorMessage) {
-      setErrorMessage(null);
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.painpoint.trim()) {
-      setErrorMessage("Please complete all fields before sending.");
+      setModalState({
+        isOpen: true,
+        type: "warning",
+        badge: "MISSING INFO",
+        title: "Please Complete All Fields",
+        message: "Please enter your name and describe your question or requirements before sending.",
+        primaryBtnText: "Got It",
+      });
       return;
     }
 
     const trimmedEmail = formData.email.trim();
     if (!trimmedEmail) {
-      setErrorMessage("Email address is mandatory. Please enter your email.");
+      setModalState({
+        isOpen: true,
+        type: "warning",
+        badge: "EMAIL REQUIRED",
+        title: "Email Address Required",
+        message: "Email address is mandatory. Please enter your email address.",
+        primaryBtnText: "Got It",
+      });
       return;
     }
 
     if (!EMAIL_REGEX.test(trimmedEmail)) {
-      setErrorMessage("Invalid email entered. Please enter a valid email address.");
+      setModalState({
+        isOpen: true,
+        type: "warning",
+        badge: "INVALID EMAIL",
+        title: "Invalid Email Address",
+        message: "Please enter a valid email address so Gowtham can reply back to you.",
+        primaryBtnText: "Got It",
+      });
       return;
     }
 
     setIsSubmitting(true);
-    setErrorMessage(null);
 
     try {
       // Prepare multipart/form-data payload with name, email, description
@@ -85,28 +114,48 @@ const Contact: React.FC = () => {
             errorText = `Submission failed (${response.status}). Please try again or contact founders@weblings.com.`;
           }
         }
-        setErrorMessage(errorText);
+        setModalState({
+          isOpen: true,
+          type: "error",
+          badge: "SUBMISSION NOTICE",
+          title: "Submission Notice",
+          message: errorText,
+          primaryBtnText: "Close",
+        });
       } else {
-        setIsSubmitted(true);
-        setErrorMessage(null);
+        const submittedName = formData.name.trim();
+        const submittedEmail = formData.email.trim();
+        setFormData({
+          name: "",
+          email: "",
+          painpoint: "",
+        });
+        setModalState({
+          isOpen: true,
+          type: "success",
+          badge: "QUESTION SUBMITTED",
+          title: "Your Question Has Been Submitted!",
+          message: (
+            <>
+              Thanks <strong>{submittedName}</strong>! Your note has been delivered straight to Gowtham's personal inbox. He reviews every founder note and will reply back to <strong>{submittedEmail}</strong> shortly.
+            </>
+          ),
+          primaryBtnText: "Done",
+        });
       }
     } catch (err: any) {
-      setErrorMessage(
-        err?.message || "Network error. Please check your connection and try again."
-      );
+      setModalState({
+        isOpen: true,
+        type: "error",
+        badge: "SUBMISSION NOTICE",
+        title: "Submission Notice",
+        message:
+          err?.message || "Network error. Please check your connection and try again.",
+        primaryBtnText: "Close",
+      });
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleReset = () => {
-    setFormData({
-      name: "",
-      email: "",
-      painpoint: "",
-    });
-    setErrorMessage(null);
-    setIsSubmitted(false);
   };
 
   return (
@@ -192,181 +241,133 @@ const Contact: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Right Column: The Form */}
+          </div>          {/* Right Column: The Form */}
           <div className={classes.formCard}>
-            {isSubmitted ? (
-              <div className={classes.successBox}>
-                <div className={classes.successBadgePill}>
-                  <span>✓</span>
-                  <span>Delivered to Gowtham</span>
+            <h2 className={classes.formTitle}>
+              {contactData.form.title}
+            </h2>
+            <p className={classes.formSubtitle}>
+              {contactData.form.subtitle}
+            </p>
+
+            <form noValidate onSubmit={handleSubmit} className={classes.form}>
+              <div className={classes.formRow}>
+                {/* Name Field */}
+                <div className={classes.fieldGroup}>
+                  <label htmlFor="contact-name" className={classes.fieldLabel}>
+                    {contactData.form.fields.name.label}
+                  </label>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder={contactData.form.fields.name.placeholder}
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className={classes.input}
+                  />
                 </div>
 
-                <div className={classes.successIconWrapper}>
-                  <svg
-                    className={classes.successCheckmarkSvg}
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20 6L9 17L4 12" />
-                  </svg>
+                {/* Email Field */}
+                <div className={classes.fieldGroup}>
+                  <label htmlFor="contact-email" className={classes.fieldLabel}>
+                    {contactData.form.fields.email.label}
+                  </label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder={contactData.form.fields.email.placeholder}
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className={classes.input}
+                  />
                 </div>
-
-                <h3 className={classes.successTitle}>
-                  Note Delivered Directly to Gowtham
-                </h3>
-                <p className={classes.successMessage}>
-                  Thanks <strong>{formData.name}</strong>. Your note has been delivered straight to Gowtham's personal inbox. He reviews every founder note and will reply back to <strong>{formData.email}</strong> by the end of the day.
-                </p>
-                <button
-                  type="button"
-                  className={classes.resetBtn}
-                  onClick={handleReset}
-                >
-                  Send Another Note
-                </button>
               </div>
-            ) : (
-              <>
-                <h2 className={classes.formTitle}>
-                  {contactData.form.title}
-                </h2>
-                <p className={classes.formSubtitle}>
-                  {contactData.form.subtitle}
-                </p>
 
-                <form noValidate onSubmit={handleSubmit} className={classes.form}>
-                  <div className={classes.formRow}>
-                    {/* Name Field */}
-                    <div className={classes.fieldGroup}>
-                      <label htmlFor="contact-name" className={classes.fieldLabel}>
-                        {contactData.form.fields.name.label}
-                      </label>
-                      <input
-                        id="contact-name"
-                        name="name"
-                        type="text"
-                        required
-                        placeholder={contactData.form.fields.name.placeholder}
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className={classes.input}
-                      />
-                    </div>
+              {/* Painpoint / Headache Field */}
+              <div className={classes.fieldGroup}>
+                <label htmlFor="contact-painpoint" className={classes.painpointLabel}>
+                  {contactData.form.fields.painpoint.label}
+                </label>
+                <textarea
+                  id="contact-painpoint"
+                  name="painpoint"
+                  required
+                  rows={5}
+                  placeholder={contactData.form.fields.painpoint.placeholder}
+                  value={formData.painpoint}
+                  onChange={handleInputChange}
+                  className={classes.textarea}
+                />
+                <div className={classes.fieldHint}>
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                  <span>{contactData.form.fields.painpoint.hint}</span>
+                </div>
+              </div>
 
-                    {/* Email Field */}
-                    <div className={classes.fieldGroup}>
-                      <label htmlFor="contact-email" className={classes.fieldLabel}>
-                        {contactData.form.fields.email.label}
-                      </label>
-                      <input
-                        id="contact-email"
-                        name="email"
-                        type="email"
-                        required
-                        placeholder={contactData.form.fields.email.placeholder}
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className={classes.input}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Painpoint / Headache Field */}
-                  <div className={classes.fieldGroup}>
-                    <label htmlFor="contact-painpoint" className={classes.painpointLabel}>
-                      {contactData.form.fields.painpoint.label}
-                    </label>
-                    <textarea
-                      id="contact-painpoint"
-                      name="painpoint"
-                      required
-                      rows={5}
-                      placeholder={contactData.form.fields.painpoint.placeholder}
-                      value={formData.painpoint}
-                      onChange={handleInputChange}
-                      className={classes.textarea}
-                    />
-                    <div className={classes.fieldHint}>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={classes.submitButton}
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className={classes.spinner} />
+                    <span>Sending to Founder...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{contactData.form.buttonText}</span>
+                    <span className={classes.submitArrow}>
                       <svg
-                        width="13"
-                        height="13"
+                        width="16"
+                        height="16"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        strokeWidth="2"
+                        strokeWidth="2.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       >
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="12" y1="16" x2="12" y2="12" />
-                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
                       </svg>
-                      <span>{contactData.form.fields.painpoint.hint}</span>
-                    </div>
-                  </div>
-
-                  {/* Error Message displayed directly above the submit button if API fails */}
-                  {errorMessage && (
-                    <div className={classes.errorBox} role="alert">
-                      <span className={classes.errorIcon}>
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <circle cx="12" cy="12" r="10" />
-                          <line x1="12" y1="8" x2="12" y2="12" />
-                          <line x1="12" y1="16" x2="12.01" y2="16" />
-                        </svg>
-                      </span>
-                      <span className={classes.errorText}>{errorMessage}</span>
-                    </div>
-                  )}
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={classes.submitButton}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <span className={classes.spinner} />
-                        <span>Sending to Founder...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>{contactData.form.buttonText}</span>
-                        <span className={classes.submitArrow}>
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                          </svg>
-                        </span>
-                      </>
-                    )}
-                  </button>
-                </form>
-              </>
-            )}
+                    </span>
+                  </>
+                )}
+              </button>
+            </form>
           </div>
         </div>
       </div>
+
+      {/* Centered Status Popup Modal */}
+      <StatusModal
+        isOpen={modalState.isOpen}
+        type={modalState.type}
+        badge={modalState.badge}
+        title={modalState.title}
+        message={modalState.message}
+        primaryBtnText={modalState.primaryBtnText}
+        onClose={() => setModalState((prev) => ({ ...prev, isOpen: false }))}
+      />
     </div>
   );
 };
