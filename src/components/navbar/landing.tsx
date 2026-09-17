@@ -20,8 +20,44 @@ import {
   StreamlineIcon,
   EOfficeIcon,
   WorksuiteIcon,
+  SearchIcon,
+  ShieldLockIcon,
+  FolderIcon,
+  ClipboardCheckIcon,
+  SettingsIcon,
 } from "../../assets/icons_component/index";
 import { SvgCloud } from "../svg/CustomIcons";
+
+// Minimal inline SVG icons for micro-preview use
+const ClockIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0072C4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+const SearchMiniIcon = () => (
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6 }}>
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </svg>
+);
+const ShieldMiniIcon = () => (
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0284C7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    <polyline points="9 12 11 14 15 10" />
+  </svg>
+);
+const FolderMiniIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0284C7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+  </svg>
+);
+const GearMiniIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0072C4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="3" />
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+  </svg>
+);
 
 interface ProductItem {
   key: string;
@@ -153,28 +189,28 @@ const ProductMicroPreview: React.FC<{
           </div>
           <div className={classes.WorksuiteModulesGrid}>
             <div className={classes.WorksuiteModuleCard}>
-              <span className={classes.WorksuiteModuleIcon}>✉️</span>
+              <span className={classes.WorksuiteModuleIcon}><MailIcon width={14} height={14} stroke="#0072C4" /></span>
               <div>
                 <div className={classes.MicroTitle}>Mail</div>
                 <div className={classes.MicroSubtitle}>3 unread threads</div>
               </div>
             </div>
             <div className={classes.WorksuiteModuleCard}>
-              <span className={classes.WorksuiteModuleIcon}>⚡</span>
+              <span className={classes.WorksuiteModuleIcon} style={{ color: "#0072C4" }}><StreamlineIcon width={14} height={14} /></span>
               <div>
                 <div className={classes.MicroTitle}>Streamline</div>
                 <div className={classes.MicroSubtitle}>12 active tickets</div>
               </div>
             </div>
             <div className={classes.WorksuiteModuleCard}>
-              <span className={classes.WorksuiteModuleIcon}>📅</span>
+              <span className={classes.WorksuiteModuleIcon}><CalendarIcon width={14} height={14} stroke="#0072C4" /></span>
               <div>
                 <div className={classes.MicroTitle}>Calendar</div>
                 <div className={classes.MicroSubtitle}>Sprint Review @ 2 PM</div>
               </div>
             </div>
             <div className={classes.WorksuiteModuleCard}>
-              <span className={classes.WorksuiteModuleIcon}>💬</span>
+              <span className={classes.WorksuiteModuleIcon}><ConnectIcon width={14} height={14} stroke="#0072C4" /></span>
               <div>
                 <div className={classes.MicroTitle}>Connect</div>
                 <div className={classes.MicroSubtitle}>4 in video huddle</div>
@@ -194,7 +230,7 @@ const ProductMicroPreview: React.FC<{
       return (
         <div className={classes.MailPreview}>
           <div className={classes.MicroSearchBar}>
-            <span style={{ fontSize: 11, opacity: 0.6 }}>🔍</span>
+            <SearchMiniIcon />
             <span className={classes.MicroSearchPlaceholder}>Search threads with semantic AI...</span>
           </div>
           <div className={classes.MailItemActive}>
@@ -319,7 +355,11 @@ const ProductMicroPreview: React.FC<{
                 <div className={classes.KanbanCardTitle}>STR-102: Edge DNS Routing</div>
                 <div className={classes.MicroRowBetween}>
                   <span className={classes.KanbanTagDone}>Infra</span>
-                  <span className={classes.KanbanCheck}>✓</span>
+                  <span className={classes.KanbanCheck}>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
                 </div>
               </div>
             </div>
@@ -332,7 +372,7 @@ const ProductMicroPreview: React.FC<{
         <div className={classes.DrivePreview}>
           <div className={classes.MicroRowBetween}>
             <span className={classes.MicroTextMuted}>2.4 TB Stored • Infinite Retention</span>
-            <span className={classes.DriveVaultShield}>🛡️ AES-256</span>
+            <span className={classes.DriveVaultShield}><ShieldMiniIcon /> AES-256</span>
           </div>
           <div className={classes.DriveFileList}>
             <div className={classes.DriveFileItem}>
@@ -344,7 +384,7 @@ const ProductMicroPreview: React.FC<{
               <span className={classes.DriveAiPill}>AI Summary</span>
             </div>
             <div className={classes.DriveFileItem}>
-              <span className={classes.DriveFileIconFolder}>📁</span>
+              <span className={classes.DriveFileIconFolder}><FolderMiniIcon /></span>
               <div className={classes.DriveFileInfo}>
                 <span className={classes.DriveFileName}>Engineering Architecture SSOT</span>
                 <span className={classes.DriveFileSize}>14 files • Shared with Team</span>
@@ -365,14 +405,14 @@ const ProductMicroPreview: React.FC<{
           </div>
           <div className={classes.EofficeCardsRow}>
             <div className={classes.EofficeCard}>
-              <span className={classes.EofficeIcon}>⏱️</span>
+              <span className={classes.EofficeIcon}><ClockIcon /></span>
               <div>
                 <div className={classes.MicroTitle}>Attendance</div>
                 <div className={classes.MicroSubtitle}>Checked in at 09:30 AM</div>
               </div>
             </div>
             <div className={classes.EofficeCard}>
-              <span className={classes.EofficeIcon}>📋</span>
+              <span className={classes.EofficeIcon}><ClipboardCheckIcon width={14} height={14} stroke="#0072C4" /></span>
               <div>
                 <div className={classes.MicroTitle}>Leave Balance</div>
                 <div className={classes.MicroSubtitle}>18 days available</div>
@@ -380,7 +420,8 @@ const ProductMicroPreview: React.FC<{
             </div>
           </div>
           <div className={classes.EofficeNoteBanner}>
-            <span>⚙️ Full module in active progress</span>
+            <GearMiniIcon />
+            <span style={{ marginLeft: 4 }}>Full module in active progress</span>
           </div>
         </div>
       );
@@ -572,9 +613,9 @@ const Navbar = () => {
                       <div className={classes.PreviewTagList}>
                         {previewItem.tags.map((tag, idx) => (
                           <span key={idx} className={classes.PreviewTag}>
-                            <span style={{ color: previewItem.accentColor, fontSize: "10px", fontWeight: 700 }}>
-                              ✓
-                            </span>
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke={previewItem.accentColor} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
                             {tag}
                           </span>
                         ))}

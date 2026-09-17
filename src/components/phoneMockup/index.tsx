@@ -18,7 +18,7 @@ interface PhoneFeed {
 }
 
 interface PhoneMockupProps {
-  variant?: "dashboard" | "attendance" | "light" | "dark" | "mail" | "connect" | "stream" | "streamline" | "drive";
+  variant?: "dashboard" | "attendance" | "light" | "dark" | "mail" | "connect" | "stream" | "streamline" | "drive" | "eoffice";
   notification?: PhoneNotification;
   feed?: PhoneFeed;
 }
@@ -143,11 +143,13 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
   const isConnect = variant === "connect";
   const isStreamVariant = variant === "stream" || variant === "streamline";
   const isDriveVariant = variant === "drive";
+  const isEofficeVariant = variant === "eoffice";
 
   const getInitialTab = () => {
     if (isDriveVariant) return "drive";
     if (isStreamVariant) return "streamline";
     if (isMailVariant) return "mail";
+    if (isEofficeVariant) return "eoffice";
     return "dashboard";
   };
 
@@ -162,7 +164,8 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
   const showDrive = activeTab === "drive";
   const showStream = activeTab === "streamline" || activeTab === "stream";
   const showMail = activeTab === "mail";
-  const showDashboard = !showDrive && !showStream && !showMail;
+  const showEoffice = activeTab === "eoffice";
+  const showDashboard = !showDrive && !showStream && !showMail && !showEoffice;
 
   const [activeDay, setActiveDay] = useState<number>(1); // Monday selected
   const [selectedEmail, setSelectedEmail] = useState<number>(0);
@@ -765,7 +768,7 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
                 </button>
               </div>
             </>
-          ) : isAttendance ? (
+          ) : showEoffice || isAttendance ? (
             /* ─────────────────────────────────────────────────────────────
                SCREEN 1: ATTENDANCE & E-OFFICE (From User Image 1)
                ───────────────────────────────────────────────────────────── */
@@ -1070,15 +1073,16 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
               <span>Mail</span>
             </div>
 
-            {/* Tab 3: Center FAB (Profile - skip / keep as is) */}
+            {/* Tab 3: Center FAB (E-Office) */}
             <div
-              className={classes.centerFab}
-              title="Profile / Clock In"
-              onClick={() => setClockedIn(!clockedIn)}
+              className={showEoffice ? classes.tabItemActive : classes.tabItem}
+              title="E-Office"
+              onClick={() => setActiveTab("eoffice")}
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              <svg className={classes.tabIcon} viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path d="M12 7V3H2v18h20V7H12ZM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
               </svg>
+              <span>E-Office</span>
             </div>
 
             {/* Tab 4: Streamline */}
