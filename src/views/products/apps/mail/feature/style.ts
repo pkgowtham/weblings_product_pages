@@ -1756,6 +1756,322 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   },
 
   /* ─────────────────────────────────────────────────────────────
+     CTO TRUST SECTIONS: DELIVERABILITY GUARANTEE & AI PRIVACY
+     ───────────────────────────────────────────────────────────── */
+  deliverabilitySection: {
+    position: "relative",
+    width: "100%",
+    padding: "96px 24px 64px 24px",
+    backgroundColor: theme.light.neutral.surface.lighter,
+    overflow: "hidden",
+    boxSizing: "border-box",
+    borderTop: `1px solid ${theme.light.neutral.border.light}`,
+    "@media (max-width: 768px)": {
+      padding: "56px 16px 40px 16px",
+    },
+  },
+  deliverabilityContainer: {
+    maxWidth: "1240px",
+    margin: "0 auto",
+    width: "100%",
+    boxSizing: "border-box",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  deliverabilityHeader: {
+    textAlign: "center",
+    maxWidth: "768px",
+    margin: "0 auto 64px auto",
+    "@media (max-width: 768px)": {
+      marginBottom: "40px",
+    },
+  },
+  deliverabilityKicker: {
+    fontSize: "0.8125rem",
+    fontWeight: 800,
+    color: theme.light.positive.surface.dark,
+    textTransform: "uppercase",
+    letterSpacing: "0.1em",
+    marginBottom: "12px",
+    display: "inline-block",
+  },
+  deliverabilityTitle: {
+    fontSize: "2.75rem",
+    fontWeight: 800,
+    lineHeight: 1.2,
+    color: theme.light.neutral.onSurface.title,
+    margin: "0 0 16px 0",
+    letterSpacing: "-0.03em",
+    "@media (max-width: 768px)": {
+      fontSize: "2rem",
+    },
+  },
+  deliverabilityDescription: {
+    fontSize: "1.125rem",
+    lineHeight: 1.7,
+    color: theme.light.neutral.onSurface.medium,
+    margin: 0,
+    "@media (max-width: 768px)": {
+      fontSize: "1rem",
+    },
+  },
+  deliverabilityGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "28px",
+    width: "100%",
+    boxSizing: "border-box",
+    "@media (max-width: 960px)": {
+      gridTemplateColumns: "1fr",
+      gap: "24px",
+      maxWidth: "540px",
+    },
+  },
+  deliverabilityCard: {
+    backgroundColor: theme.light.neutral.surface.lighter,
+    borderRadius: "24px",
+    padding: "36px 32px",
+    border: `1px solid ${theme.light.neutral.border.light}`,
+    boxShadow: "0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02)",
+    display: "flex",
+    flexDirection: "column",
+    boxSizing: "border-box",
+    transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+    position: "relative",
+    overflow: "hidden",
+    height: "100%",
+    "&:hover": {
+      transform: "translateY(-5px)",
+      boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.09), 0 4px 12px -2px rgba(0, 0, 0, 0.04)",
+      borderColor: theme.light.neutral.border.medium,
+    },
+    "@media (max-width: 600px)": {
+      padding: "28px 24px",
+    },
+  },
+  cardDnsBorder: {
+    borderTop: `3px solid ${theme.light.positive.surface.medium}`,
+  },
+  cardSpamBorder: {
+    borderTop: `3px solid ${theme.light.brand.surface.medium}`,
+  },
+  cardMigrationBorder: {
+    borderTop: `3px solid ${theme.light.negative.surface.medium}`,
+  },
+  deliverabilityIcon: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "14px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "24px",
+    transition: "transform 0.3s ease",
+  },
+  iconDns: {
+    backgroundColor: theme.light.positive.surface.lighter,
+    border: `1px solid ${theme.light.positive.border.light}`,
+    color: theme.light.positive.surface.medium,
+  },
+  iconSpam: {
+    backgroundColor: theme.light.brand.surface.lighter,
+    border: `1px solid ${theme.light.brand.border.light}`,
+    color: theme.light.brand.surface.medium,
+  },
+  iconMigration: {
+    backgroundColor: theme.light.negative.surface.lighter,
+    border: `1px solid ${theme.light.negative.border.light}`,
+    color: theme.light.negative.surface.medium,
+  },
+  deliverabilityCardTitle: {
+    fontSize: "1.25rem",
+    fontWeight: 700,
+    color: theme.light.neutral.onSurface.title,
+    margin: "0 0 12px 0",
+    letterSpacing: "-0.01em",
+  },
+  deliverabilityCardText: {
+    fontSize: "0.875rem",
+    lineHeight: 1.65,
+    color: theme.light.neutral.onSurface.medium,
+    margin: 0,
+  },
+
+  /* AI Privacy Banner */
+  aiPrivacySection: {
+    width: "100%",
+    padding: "0 24px 80px 24px",
+    backgroundColor: theme.light.neutral.surface.lighter,
+    boxSizing: "border-box",
+    "@media (max-width: 768px)": {
+      padding: "0 16px 56px 16px",
+    },
+  },
+  aiPrivacyContainer: {
+    maxWidth: "1080px",
+    margin: "0 auto",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  aiPrivacyCard: {
+    backgroundColor: theme.light.neutral.surface.light,
+    border: `1px solid ${theme.light.neutral.border.light}`,
+    borderRadius: "24px",
+    padding: "44px 40px",
+    boxShadow: "0 12px 32px -8px rgba(0, 0, 0, 0.05)",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: "28px",
+    position: "relative",
+    overflow: "hidden",
+    boxSizing: "border-box",
+    "@media (max-width: 768px)": {
+      flexDirection: "column",
+      padding: "28px 20px",
+      gap: "20px",
+    },
+  },
+  aiPrivacyGlow: {
+    position: "absolute",
+    bottom: "-40px",
+    left: "-40px",
+    width: "220px",
+    height: "220px",
+    background: theme.light.negative.surface.lighter,
+    filter: "blur(60px)",
+    borderRadius: "50%",
+    pointerEvents: "none",
+  },
+  aiPrivacyIconBox: {
+    width: "60px",
+    height: "60px",
+    borderRadius: "16px",
+    backgroundColor: theme.light.neutral.surface.lighter,
+    border: `1px solid ${theme.light.neutral.border.light}`,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: theme.light.neutral.onSurface.title,
+    flexShrink: 0,
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.04)",
+  },
+  aiPrivacyContent: {
+    flex: 1,
+    position: "relative",
+    zIndex: 1,
+  },
+  aiPrivacyTitle: {
+    fontSize: "1.5rem",
+    fontWeight: 800,
+    color: theme.light.neutral.onSurface.title,
+    margin: "0 0 12px 0",
+    letterSpacing: "-0.02em",
+  },
+  aiPrivacyText: {
+    fontSize: "0.9375rem",
+    lineHeight: 1.68,
+    color: theme.light.neutral.onSurface.medium,
+    margin: "0 0 12px 0",
+  },
+  aiPrivacyGuarantee: {
+    color: theme.light.neutral.onSurface.title,
+    fontWeight: 700,
+  },
+
+  /* Unrestricted Email Grid */
+  unrestrictedSection: {
+    width: "100%",
+    padding: "0 24px 96px 24px",
+    backgroundColor: theme.light.neutral.surface.lighter,
+    boxSizing: "border-box",
+    borderBottom: `1px solid ${theme.light.neutral.border.light}`,
+    "@media (max-width: 768px)": {
+      padding: "0 16px 56px 16px",
+    },
+  },
+  unrestrictedContainer: {
+    maxWidth: "1240px",
+    margin: "0 auto",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  unrestrictedHeader: {
+    textAlign: "center",
+    maxWidth: "768px",
+    margin: "0 auto 48px auto",
+  },
+  unrestrictedTitle: {
+    fontSize: "2rem",
+    fontWeight: 800,
+    color: theme.light.neutral.onSurface.title,
+    margin: "0 0 12px 0",
+    letterSpacing: "-0.02em",
+    "@media (max-width: 768px)": {
+      fontSize: "1.625rem",
+    },
+  },
+  unrestrictedDescription: {
+    fontSize: "1rem",
+    lineHeight: 1.65,
+    color: theme.light.neutral.onSurface.medium,
+    margin: 0,
+  },
+  unrestrictedGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: "24px",
+    width: "100%",
+    boxSizing: "border-box",
+    "@media (max-width: 1040px)": {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    },
+    "@media (max-width: 580px)": {
+      gridTemplateColumns: "1fr",
+    },
+  },
+  unrestrictedCard: {
+    backgroundColor: theme.light.neutral.surface.lighter,
+    border: `1px solid ${theme.light.neutral.border.light}`,
+    borderRadius: "18px",
+    padding: "28px 24px",
+    boxSizing: "border-box",
+    transition: "all 0.25s ease",
+    display: "flex",
+    flexDirection: "column",
+    "&:hover": {
+      borderColor: theme.light.brand.surface.medium,
+      transform: "translateY(-3px)",
+      boxShadow: "0 12px 24px -6px rgba(0, 114, 196, 0.08)",
+    },
+  },
+  unrestrictedCardIcon: {
+    width: "44px",
+    height: "44px",
+    borderRadius: "12px",
+    backgroundColor: theme.light.brand.surface.lighter,
+    border: `1px solid ${theme.light.brand.border.light}`,
+    color: theme.light.brand.surface.medium,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "16px",
+  },
+  unrestrictedCardTitle: {
+    fontSize: "1.0625rem",
+    fontWeight: 700,
+    color: theme.light.neutral.onSurface.title,
+    margin: "0 0 8px 0",
+  },
+  unrestrictedCardText: {
+    fontSize: "0.8125rem",
+    lineHeight: 1.6,
+    color: theme.light.neutral.onSurface.medium,
+    margin: 0,
+  },
+
+  /* ─────────────────────────────────────────────────────────────
      SECTION 5: UNIFIED MOBILE EXPERIENCE
      ───────────────────────────────────────────────────────────── */
   sectionFive: {

@@ -52,6 +52,35 @@
         "showSparkle": true
       }
     ],
+    "enterpriseRealities": {
+      "kicker": "Enterprise Realities",
+      "title": "Because you don't work in a vacuum.",
+      "description": "A great communication tool must allow seamless collaboration with the outside world, protect your developers' focus, and satisfy legal compliance—without charging you extra for the privilege.",
+      "cards": [
+        {
+          "id": "guest_access",
+          "icon": "handshake",
+          "title": "Zero-Friction Guest Access",
+          "description": "Stop paying full-seat licenses just to invite a vendor to a single chat channel. Weblings Connect allows you to invite external clients, freelancers, and partners to specific channels instantly via email—at absolutely zero extra cost. They see their channel; your internal IP stays perfectly isolated.",
+          "badge": "Unlimited Free Guest Accounts"
+        },
+        {
+          "id": "deep_work",
+          "icon": "headphones",
+          "title": "Developer 'Deep Work' Mode",
+          "description": "Chat apps are notorious interruption engines. Connect features a native \"Deep Work\" mode that suppresses non-urgent @mentions, batches updates, and auto-notifies the team when a developer is in the zone. Stop the pings, protect the focus, ship faster.",
+          "badge": "Notifications Paused",
+          "isNotification": true
+        },
+        {
+          "id": "ediscovery",
+          "icon": "scales",
+          "title": "Immutable eDiscovery",
+          "description": "When a client disputes a decision made 14 months ago, you need absolute proof. Connect offers infinite retention policies and instant semantic search across all historical text chats and AI video transcripts, providing legal-grade audit trails for your business protection.",
+          "badge": "Infinite Retention & Instant Search"
+        }
+      ]
+    },
     "usage": {
       "subtitle": "Enterprise Usage",
       "title": "Enterprise Features, No Extra Invoice",

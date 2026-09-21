@@ -20,7 +20,11 @@ import {
   GlobeIcon,
   MessageSquareIcon,
   ClipboardCheckIcon,
+  ShieldCheckIcon,
+  ConversionIcon,
+  LockIcon,
 } from '../../../../../assets/icons_component';
+import mailDataJson from '../../../../../data/mail.json';
 
 import WorkspaceDashboardMockup from '../../../../../components/dashboardMockup/index';
 import PhoneMockup from '../../../../../components/phoneMockup/index';
@@ -113,6 +117,13 @@ const MailFeature = () => {
   // Hover states for interactive card micro-animations
   const [hoveredSecCard, setHoveredSecCard] = useState<number | null>(null);
   const [hoveredBenefitCard, setHoveredBenefitCard] = useState<number | null>(null);
+  const [hoveredDeliverabilityCard, setHoveredDeliverabilityCard] = useState<string | null>(null);
+  const [hoveredUsageCard, setHoveredUsageCard] = useState<string | null>(null);
+
+  // CTO edition data from mail.json
+  const deliverabilityGuarantee = (mailDataJson.feature as any).deliverabilityGuarantee;
+  const aiPrivacy = (mailDataJson.feature as any).aiPrivacy;
+  const usage = mailDataJson.feature.usage;
   const [hoveredIntelligentCard, setHoveredIntelligentCard] = useState<string | null>(null);
 
   // Interactive semantic vector search state
@@ -908,6 +919,145 @@ const MailFeature = () => {
           </div>
         </div>
       </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          CTO TRUST SECTION: THE DELIVERABILITY GUARANTEE
+          ───────────────────────────────────────────────────────────── */}
+      {deliverabilityGuarantee && (
+        <section className={classes.deliverabilitySection}>
+          <div className={classes.deliverabilityContainer}>
+            <RevealOnScroll delay={0}>
+              <div className={classes.deliverabilityHeader}>
+                <span className={classes.deliverabilityKicker}>{deliverabilityGuarantee.kicker}</span>
+                <h2 className={classes.deliverabilityTitle}>{deliverabilityGuarantee.title}</h2>
+                <p className={classes.deliverabilityDescription}>{deliverabilityGuarantee.description}</p>
+              </div>
+            </RevealOnScroll>
+
+            <div className={classes.deliverabilityGrid}>
+              {/* Card 1: Automated DNS Protocols */}
+              <RevealOnScroll delay={100}>
+                <div
+                  className={`${classes.deliverabilityCard} ${classes.cardDnsBorder}`}
+                  onMouseEnter={() => setHoveredDeliverabilityCard('dns')}
+                  onMouseLeave={() => setHoveredDeliverabilityCard(null)}
+                >
+                  <div className={`${classes.deliverabilityIcon} ${classes.iconDns}`}>
+                    <SettingsIcon width={26} height={26} isHovered={hoveredDeliverabilityCard === 'dns'} />
+                  </div>
+                  <h3 className={classes.deliverabilityCardTitle}>Automated DNS Protocols</h3>
+                  <p className={classes.deliverabilityCardText}>
+                    Stop fighting with cryptic TXT records. When you link a domain, we automatically configure strict SPF, DKIM, and DMARC policies. Your domain reputation stays pristine, and Google/Microsoft instantly trust your outbound traffic.
+                  </p>
+                </div>
+              </RevealOnScroll>
+
+              {/* Card 2: Edge Spam Defense */}
+              <RevealOnScroll delay={200}>
+                <div
+                  className={`${classes.deliverabilityCard} ${classes.cardSpamBorder}`}
+                  onMouseEnter={() => setHoveredDeliverabilityCard('spam')}
+                  onMouseLeave={() => setHoveredDeliverabilityCard(null)}
+                >
+                  <div className={`${classes.deliverabilityIcon} ${classes.iconSpam}`}>
+                    <ShieldCheckIcon width={26} height={26} isHovered={hoveredDeliverabilityCard === 'spam'} />
+                  </div>
+                  <h3 className={classes.deliverabilityCardTitle}>Edge Spam Defense</h3>
+                  <p className={classes.deliverabilityCardText}>
+                    Malicious payloads and phishing attempts are caught and dropped at the global edge network before they ever touch our servers or your employees&apos; inboxes. Pure, clean traffic only.
+                  </p>
+                </div>
+              </RevealOnScroll>
+
+              {/* Card 3: Zero-Downtime Migration */}
+              <RevealOnScroll delay={300}>
+                <div
+                  className={`${classes.deliverabilityCard} ${classes.cardMigrationBorder}`}
+                  onMouseEnter={() => setHoveredDeliverabilityCard('migration')}
+                  onMouseLeave={() => setHoveredDeliverabilityCard(null)}
+                >
+                  <div className={`${classes.deliverabilityIcon} ${classes.iconMigration}`}>
+                    <ConversionIcon width={26} height={26} isHovered={hoveredDeliverabilityCard === 'migration'} />
+                  </div>
+                  <h3 className={classes.deliverabilityCardTitle}>Zero-Downtime Migration</h3>
+                  <p className={classes.deliverabilityCardText}>
+                    Terrified of losing historical data? Our automated IMAP migration tool ports over years of emails, folders, and attachments from Google Workspace or Office 365 in the background, with absolutely zero downtime.
+                  </p>
+                </div>
+              </RevealOnScroll>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ─────────────────────────────────────────────────────────────
+          CTO TRUST SECTION: IRONCLAD AI PRIVACY
+          ───────────────────────────────────────────────────────────── */}
+      {aiPrivacy && (
+        <section className={classes.aiPrivacySection}>
+          <div className={classes.aiPrivacyContainer}>
+            <RevealOnScroll delay={150}>
+              <div className={classes.aiPrivacyCard}>
+                <div className={classes.aiPrivacyGlow} />
+                <div className={classes.aiPrivacyIconBox}>
+                  <LockIcon width={30} height={30} isHovered={true} />
+                </div>
+                <div className={classes.aiPrivacyContent}>
+                  <h3 className={classes.aiPrivacyTitle}>{aiPrivacy.title}</h3>
+                  <p className={classes.aiPrivacyText}>
+                    {aiPrivacy.p1}{' '}
+                    <strong className={classes.aiPrivacyGuarantee}>{aiPrivacy.guarantee}</strong>
+                  </p>
+                  <p className={classes.aiPrivacyText}>{aiPrivacy.p2}</p>
+                </div>
+              </div>
+            </RevealOnScroll>
+          </div>
+        </section>
+      )}
+
+      {/* ─────────────────────────────────────────────────────────────
+          CTO TRUST SECTION: UNRESTRICTED EMAIL, FULLY INCLUDED
+          ───────────────────────────────────────────────────────────── */}
+      {usage && (
+        <section className={classes.unrestrictedSection}>
+          <div className={classes.unrestrictedContainer}>
+            <RevealOnScroll delay={0}>
+              <div className={classes.unrestrictedHeader}>
+                <h2 className={classes.unrestrictedTitle}>{usage.title}</h2>
+                <p className={classes.unrestrictedDescription}>
+                  {usage.description}{' '}
+                  <strong className={classes.aiPrivacyGuarantee}>{usage.highlightText}</strong>
+                </p>
+              </div>
+            </RevealOnScroll>
+
+            <div className={classes.unrestrictedGrid}>
+              {usage.cards.map((card: any, idx: number) => {
+                const isCardHovered = hoveredUsageCard === card.id;
+                return (
+                  <RevealOnScroll key={card.id} delay={100 * (idx + 1)}>
+                    <div
+                      className={classes.unrestrictedCard}
+                      onMouseEnter={() => setHoveredUsageCard(card.id)}
+                      onMouseLeave={() => setHoveredUsageCard(null)}
+                    >
+                      <div className={classes.unrestrictedCardIcon}>
+                        {card.id === 'unlimited' && <InfinityIcon width={22} height={22} isHovered={isCardHovered} />}
+                        {card.id === 'attachment' && <FolderIcon width={22} height={22} isHovered={isCardHovered} />}
+                        {card.id === 'domain' && <CartIcon width={22} height={22} isHovered={isCardHovered} />}
+                        {card.id === 'context' && <BoltIcon width={22} height={22} isHovered={isCardHovered} />}
+                      </div>
+                      <h4 className={classes.unrestrictedCardTitle}>{card.title}</h4>
+                      <p className={classes.unrestrictedCardText}>{card.description}</p>
+                    </div>
+                  </RevealOnScroll>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─────────────────────────────────────────────────────────────
           SECTION 5: UNIFIED MOBILE EXPERIENCE

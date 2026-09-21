@@ -66,6 +66,33 @@
         { "name": "Show Team Calls", "active": false }
       ]
     },
+    "realityCheck": {
+      "kicker": "The Reality Check",
+      "title": "We are not an isolated island.",
+      "description": "We know you don't work in a vacuum. Your clients use Google Workspace. Your vendors use Outlook. We built Weblings Calendar to sync flawlessly with the outside world.",
+      "cards": [
+        {
+          "id": "sync",
+          "title": "2-Way External Sync",
+          "description": "Full, native integration with external providers. If a client sends a Google Meet invite to your Weblings Inbox, it instantly renders on this calendar. If you generate a meeting here, it sends a perfectly formatted `.ics` payload that works beautifully in Outlook.",
+          "badges": ["Google Calendar", "Outlook / M365"]
+        },
+        {
+          "id": "timezone",
+          "title": "Global Timezone Intelligence",
+          "description": "Scheduling across distributed engineering teams is a nightmare. Our engine automatically normalizes all data. If a PM in London schedules a sprint kickoff for 10:00 AM GMT, your developers in India will see it perfectly rendered at 3:30 PM IST on their localized dashboards.",
+          "codeLabel": "Auto-Convert:",
+          "codeUtc": "UTC",
+          "codeLocal": "Local Client Time"
+        },
+        {
+          "id": "hr-collision",
+          "title": "HR & Sprint Collision",
+          "description": "Because E-Office (HRMS) shares the same database, approved leaves are fed directly into the calendar. If you try to schedule a critical Streamline Epic for a week when your lead backend engineer is on PTO, the calendar issues an immediate collision warning.",
+          "warningText": "CAPACITY WARNING: Assignee on leave."
+        }
+      ]
+    },
     "mobile": {
       "title": "Your Schedule, In Your Pocket.",
       "description": "Available on both iOS and Android. Whether you are traveling between branches or stepping away from your desk, your unified timeline is always perfectly in sync. Join video calls or review upcoming sprint deadlines directly from your phone.",

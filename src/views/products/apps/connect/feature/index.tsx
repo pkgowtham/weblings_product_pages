@@ -21,7 +21,59 @@ import {
   ScreenRecordIcon,
   BranchPrivacyIcon,
   DataRetentionIcon,
+  HandshakeIcon,
 } from '../../../../../assets/icons_component';
+
+const HeadphonesIcon: React.FC<{ width?: number; height?: number; isHovered?: boolean }> = ({
+  width = 24,
+  height = 24,
+  isHovered = false,
+}) => (
+  <svg
+    width={width}
+    height={height}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{
+      transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      transform: isHovered ? 'scale(1.12)' : 'scale(1)',
+    }}
+  >
+    <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+  </svg>
+);
+
+const ScalesIcon: React.FC<{ width?: number; height?: number; isHovered?: boolean }> = ({
+  width = 24,
+  height = 24,
+  isHovered = false,
+}) => (
+  <svg
+    width={width}
+    height={height}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{
+      transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      transform: isHovered ? 'scale(1.12)' : 'scale(1)',
+    }}
+  >
+    <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+    <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+    <path d="M7 21h10" />
+    <path d="M12 3v18" />
+    <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" />
+  </svg>
+);
 
 // Apple & Android Store SVGs
 const SvgApple: React.FC = () => (
@@ -118,7 +170,10 @@ const ConnectFeature: React.FC = () => {
   const [hoveredInfraCard, setHoveredInfraCard] = useState<string | null>(null);
   const [hoveredAiCard, setHoveredAiCard] = useState<string | null>(null);
   const [hoveredUsageCard, setHoveredUsageCard] = useState<string | null>(null);
+  const [hoveredRealityCard, setHoveredRealityCard] = useState<string | null>(null);
   const [activePopId, setActivePopId] = useState<string | null>(null);
+
+  const enterpriseRealities = (chatDataJson.feature as any).enterpriseRealities;
 
   const activePop = POP_NODES.find((p) => p.id === activePopId);
 
@@ -644,6 +699,98 @@ const ConnectFeature: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* ─────────────────────────────────────────────────────────────────── */}
+      {/* SECTION: ENTERPRISE REALITIES (CTO TRUST BLOCKS) */}
+      {/* ─────────────────────────────────────────────────────────────────── */}
+      {enterpriseRealities && (
+        <section className={classes.enterpriseRealitiesSection}>
+          <div className={classes.enterpriseRealitiesContainer}>
+            <RevealOnScroll delay={0}>
+              <div className={classes.enterpriseRealitiesHeader}>
+                <span className={classes.enterpriseRealitiesKicker}>{enterpriseRealities.kicker}</span>
+                <h2 className={classes.enterpriseRealitiesTitle}>{enterpriseRealities.title}</h2>
+                <p className={classes.enterpriseRealitiesDescription}>{enterpriseRealities.description}</p>
+              </div>
+            </RevealOnScroll>
+
+            <div className={classes.enterpriseRealitiesGrid}>
+              {/* Card 1: Zero-Friction Guest Access */}
+              <RevealOnScroll delay={100}>
+                <div
+                  className={`${classes.realityCard} ${classes.cardGuestBorder}`}
+                  onMouseEnter={() => setHoveredRealityCard('guest_access')}
+                  onMouseLeave={() => setHoveredRealityCard(null)}
+                >
+                  <div className={classes.realityCardContentTop}>
+                    <div className={`${classes.realityIconContainer} ${classes.iconGuest}`}>
+                      <HandshakeIcon width={24} height={24} isHovered={hoveredRealityCard === 'guest_access'} />
+                    </div>
+                    <h3 className={classes.realityCardTitle}>Zero-Friction Guest Access</h3>
+                    <p className={classes.realityCardDescription}>
+                      Stop paying full-seat licenses just to invite a vendor to a single chat channel. Weblings Connect allows you to invite external clients, freelancers, and partners to specific channels instantly via email—at absolutely zero extra cost. They see their channel; your internal IP stays perfectly isolated.
+                    </p>
+                  </div>
+                  <div className={classes.realityCardBottom}>
+                    <div className={classes.guestBadge}>
+                      Unlimited Free Guest Accounts
+                    </div>
+                  </div>
+                </div>
+              </RevealOnScroll>
+
+              {/* Card 2: Developer 'Deep Work' Mode */}
+              <RevealOnScroll delay={200}>
+                <div
+                  className={`${classes.realityCard} ${classes.cardDeepWorkBorder}`}
+                  onMouseEnter={() => setHoveredRealityCard('deep_work')}
+                  onMouseLeave={() => setHoveredRealityCard(null)}
+                >
+                  <div className={classes.realityCardContentTop}>
+                    <div className={`${classes.realityIconContainer} ${classes.iconDeepWork}`}>
+                      <HeadphonesIcon width={24} height={24} isHovered={hoveredRealityCard === 'deep_work'} />
+                    </div>
+                    <h3 className={classes.realityCardTitle}>Developer &apos;Deep Work&apos; Mode</h3>
+                    <p className={classes.realityCardDescription}>
+                      Chat apps are notorious interruption engines. Connect features a native &quot;Deep Work&quot; mode that suppresses non-urgent @mentions, batches updates, and auto-notifies the team when a developer is in the zone. Stop the pings, protect the focus, ship faster.
+                    </p>
+                  </div>
+                  <div className={classes.realityCardBottom}>
+                    <div className={classes.deepWorkBadge}>
+                      <span className={classes.deepWorkDot} />
+                      <span>Notifications Paused</span>
+                    </div>
+                  </div>
+                </div>
+              </RevealOnScroll>
+
+              {/* Card 3: Immutable eDiscovery */}
+              <RevealOnScroll delay={300}>
+                <div
+                  className={`${classes.realityCard} ${classes.cardEdiscoveryBorder}`}
+                  onMouseEnter={() => setHoveredRealityCard('ediscovery')}
+                  onMouseLeave={() => setHoveredRealityCard(null)}
+                >
+                  <div className={classes.realityCardContentTop}>
+                    <div className={`${classes.realityIconContainer} ${classes.iconEdiscovery}`}>
+                      <ScalesIcon width={24} height={24} isHovered={hoveredRealityCard === 'ediscovery'} />
+                    </div>
+                    <h3 className={classes.realityCardTitle}>Immutable eDiscovery</h3>
+                    <p className={classes.realityCardDescription}>
+                      When a client disputes a decision made 14 months ago, you need absolute proof. Connect offers infinite retention policies and instant semantic search across all historical text chats and AI video transcripts, providing legal-grade audit trails for your business protection.
+                    </p>
+                  </div>
+                  <div className={classes.realityCardBottom}>
+                    <div className={classes.ediscoveryBadge}>
+                      Infinite Retention &amp; Instant Search
+                    </div>
+                  </div>
+                </div>
+              </RevealOnScroll>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─────────────────────────────────────────────────────────────────── */}
       {/* SECTION 3: UNIFIED MOBILE EXPERIENCE */}

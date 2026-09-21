@@ -18,6 +18,9 @@ import {
   SmartphoneIcon,
   TrendingUpIcon,
   BoltIcon,
+  ConversionIcon,
+  GlobeIcon,
+  ShieldCheckIcon,
 } from '../../../../../assets/icons_component';
 
 // Apple & Android Store SVGs
@@ -154,6 +157,7 @@ const CalenderFeature = () => {
   const hero = calendarDataJson.feature.hero;
   const zeroDoubleEntry = calendarDataJson.feature.zeroDoubleEntry;
   const organization = calendarDataJson.feature.organization;
+  const realityCheck = (calendarDataJson.feature as any).realityCheck;
   const mobile = calendarDataJson.feature.mobile;
 
   // Intelligent Organization active view layer interactive toggles
@@ -163,6 +167,7 @@ const CalenderFeature = () => {
   // Card hover states for triggering icon micro-animations on card hover
   const [hoveredZeroCard, setHoveredZeroCard] = useState<string | null>(null);
   const [hoveredMobileCard, setHoveredMobileCard] = useState<string | null>(null);
+  const [hoveredRealityCard, setHoveredRealityCard] = useState<string | null>(null);
 
   // Interactive tag filters state in Section 3
   const [activeTags, setActiveTags] = useState<Record<string, boolean>>({
@@ -409,6 +414,102 @@ const CalenderFeature = () => {
         </div>
         </div>
       </section>
+
+      {/* ─────────────────────────────────────────────────────────────────── */}
+      {/* SECTION: THE REALITY CHECK (CTO TRUST BLOCKS) */}
+      {/* ─────────────────────────────────────────────────────────────────── */}
+      {realityCheck && (
+        <section className={classes.realityCheckSection}>
+          <div className={classes.realityCheckContainer}>
+            <RevealOnScroll delay={0}>
+              <div className={classes.realityCheckHeader}>
+                <span className={classes.realityCheckKicker}>{realityCheck.kicker}</span>
+                <h2 className={classes.realityCheckTitle}>{realityCheck.title}</h2>
+                <p className={classes.realityCheckDescription}>{realityCheck.description}</p>
+              </div>
+            </RevealOnScroll>
+
+            <div className={classes.realityCheckGrid}>
+              {/* Card 1: 2-Way External Sync */}
+              <RevealOnScroll delay={100}>
+                <div
+                  className={`${classes.realityCard} ${classes.realityCardSyncBorder}`}
+                  onMouseEnter={() => setHoveredRealityCard('sync')}
+                  onMouseLeave={() => setHoveredRealityCard(null)}
+                >
+                  <div className={classes.realityCardContentTop}>
+                    <div className={`${classes.realityIconContainer} ${classes.realityIconSync}`}>
+                      <ConversionIcon width={24} height={24} isHovered={hoveredRealityCard === 'sync'} />
+                    </div>
+                    <h3 className={classes.realityCardTitle}>2-Way External Sync</h3>
+                    <p className={classes.realityCardDescription}>
+                      Full, native integration with external providers. If a client sends a Google Meet invite to your Weblings Inbox, it instantly renders on this calendar. If you generate a meeting here, it sends a perfectly formatted <span className={classes.realityIcsCode}>.ics</span> payload that works beautifully in Outlook.
+                    </p>
+                  </div>
+                  <div className={classes.realityCardBottom}>
+                    <div className={classes.realityBadgesRow}>
+                      <span className={classes.realityBadge}>Google Calendar</span>
+                      <span className={classes.realityBadge}>Outlook / M365</span>
+                    </div>
+                  </div>
+                </div>
+              </RevealOnScroll>
+
+              {/* Card 2: Global Timezone Intelligence */}
+              <RevealOnScroll delay={200}>
+                <div
+                  className={`${classes.realityCard} ${classes.realityCardTzBorder}`}
+                  onMouseEnter={() => setHoveredRealityCard('timezone')}
+                  onMouseLeave={() => setHoveredRealityCard(null)}
+                >
+                  <div className={classes.realityCardContentTop}>
+                    <div className={`${classes.realityIconContainer} ${classes.realityIconTz}`}>
+                      <GlobeIcon width={24} height={24} isHovered={hoveredRealityCard === 'timezone'} />
+                    </div>
+                    <h3 className={classes.realityCardTitle}>Global Timezone Intelligence</h3>
+                    <p className={classes.realityCardDescription}>
+                      Scheduling across distributed engineering teams is a nightmare. Our engine automatically normalizes all data. If a PM in London schedules a sprint kickoff for 10:00 AM GMT, your developers in India will see it perfectly rendered at 3:30 PM IST on their localized dashboards.
+                    </p>
+                  </div>
+                  <div className={classes.realityCardBottom}>
+                    <div className={classes.realityTimezoneBox}>
+                      <span>Auto-Convert:</span>
+                      <span className={classes.realityUtcText}>UTC</span>
+                      <span className={classes.realityArrow}>→</span>
+                      <span className={classes.realityLocalText}>Local Client Time</span>
+                    </div>
+                  </div>
+                </div>
+              </RevealOnScroll>
+
+              {/* Card 3: HR & Sprint Collision */}
+              <RevealOnScroll delay={300}>
+                <div
+                  className={`${classes.realityCard} ${classes.realityCardHrBorder}`}
+                  onMouseEnter={() => setHoveredRealityCard('hr-collision')}
+                  onMouseLeave={() => setHoveredRealityCard(null)}
+                >
+                  <div className={classes.realityCardContentTop}>
+                    <div className={`${classes.realityIconContainer} ${classes.realityIconHr}`}>
+                      <ShieldCheckIcon width={24} height={24} isHovered={hoveredRealityCard === 'hr-collision'} />
+                    </div>
+                    <h3 className={classes.realityCardTitle}>HR & Sprint Collision</h3>
+                    <p className={classes.realityCardDescription}>
+                      Because E-Office (HRMS) shares the same database, approved leaves are fed directly into the calendar. If you try to schedule a critical Streamline Epic for a week when your lead backend engineer is on PTO, the calendar issues an immediate collision warning.
+                    </p>
+                  </div>
+                  <div className={classes.realityCardBottom}>
+                    <div className={classes.realityWarningBox}>
+                      <span className={classes.realityWarningIcon}>⚠️</span>
+                      <span>CAPACITY WARNING: Assignee on leave.</span>
+                    </div>
+                  </div>
+                </div>
+              </RevealOnScroll>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─────────────────────────────────────────────────────────────────── */}
       {/* SECTION 4: MOBILE APP */}

@@ -66,30 +66,66 @@
         "imagePosition": "fullWidth"
       }
     ],
+    "deliverabilityGuarantee": {
+      "kicker": "The Deliverability Guarantee",
+      "title": "Emails that actually reach the primary inbox.",
+      "description": "A single misconfigured MX record can send a $50,000 inbound lead straight to the spam folder. We engineered out the risk.",
+      "cards": [
+        {
+          "id": "automated-dns",
+          "icon": "settings",
+          "title": "Automated DNS Protocols",
+          "description": "Stop fighting with cryptic TXT records. When you link a domain, we automatically configure strict SPF, DKIM, and DMARC policies. Your domain reputation stays pristine, and Google/Microsoft instantly trust your outbound traffic."
+        },
+        {
+          "id": "edge-spam",
+          "icon": "shield",
+          "title": "Edge Spam Defense",
+          "description": "Malicious payloads and phishing attempts are caught and dropped at the global edge network before they ever touch our servers or your employees' inboxes. Pure, clean traffic only."
+        },
+        {
+          "id": "zero-downtime",
+          "icon": "conversion",
+          "title": "Zero-Downtime Migration",
+          "description": "Terrified of losing historical data? Our automated IMAP migration tool ports over years of emails, folders, and attachments from Google Workspace or Office 365 in the background, with absolutely zero downtime."
+        }
+      ]
+    },
+    "aiPrivacy": {
+      "title": "Ironclad AI Privacy & Zero-Knowledge Architecture",
+      "p1": "We know you are sending investor updates, sensitive HR data, and financial reports through your inbox.",
+      "guarantee": "We guarantee that our AI models are never trained on your private email data.",
+      "p2": "The Weblings AI only parses email context when you explicitly hit the \"Convert to Ticket\" or \"Summarize\" buttons, and that temporary processing happens in isolated, ephemeral containers. Your data is yours. Period."
+    },
     "usage": {
       "subtitle": "Enterprise Features",
       "title": "Unrestricted Email, Fully Included.",
-      "description": "Stop rationing out email addresses to save money on user licenses. Create as many custom inboxes as you need for contractors, support aliases, or new hires. It is 100% included in your flat Weblings Worksuite invoice.",
+      "description": "Stop rationing out email addresses to save money on user licenses. Create as many custom inboxes as you need for contractors, support aliases, or new hires.",
+      "highlightText": "It is 100% included in your flat Weblings Worksuite invoice.",
       "cards": [
         {
           "id": "unlimited",
-          "title": "Unlimited Addresses",
-          "description": "Create absolute unlimited aliases and standard inboxes. No extra per-user billing."
+          "icon": "infinity",
+          "title": "Unlimited Aliases",
+          "description": "Route billing@ and support@ directly to your main inbox. Zero extra costs."
         },
         {
           "id": "attachment",
-          "title": "Massive 10GB Attachments",
-          "description": "Standard 20MB native limits apply, but our Drive integration automatically swaps larger files for secure 10GB links."
+          "icon": "folder",
+          "title": "10GB Attachments",
+          "description": "Bypass the 20MB limit. Massive files automatically swap for secure Drive links."
         },
         {
           "id": "domain",
-          "title": "In-App Domain Purchasing",
-          "description": "Search, purchase, and route new domains directly within the Organization app natively."
+          "icon": "cart",
+          "title": "In-App DNS Setup",
+          "description": "Purchase and route domains directly within the app natively without touching Cloudflare."
         },
         {
-          "id": "search",
-          "title": "Lightning Fast Indexing",
-          "description": "Instantly filter through years of indexed email history without browser lag or timeouts."
+          "id": "context",
+          "icon": "bolt",
+          "title": "Context Switch Killer",
+          "description": "One-click conversion of email threads directly into Streamline developer tickets."
         }
       ]
     },

@@ -827,6 +827,203 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   },
 
   /* ─────────────────────────────────────────────────────────────────────────────
+     ENTERPRISE REALITIES: CTO TRUST BLOCKS
+     ───────────────────────────────────────────────────────────────────────────── */
+  enterpriseRealitiesSection: {
+    position: "relative",
+    width: "100%",
+    padding: "96px 24px",
+    backgroundColor: theme.light.neutral.surface.lighter,
+    overflow: "hidden",
+    boxSizing: "border-box",
+    borderTop: `1px solid ${theme.light.neutral.border.light}`,
+    "@media (max-width: 768px)": {
+      padding: "56px 16px",
+    },
+  },
+  enterpriseRealitiesContainer: {
+    maxWidth: "1240px",
+    margin: "0 auto",
+    width: "100%",
+    boxSizing: "border-box",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  enterpriseRealitiesHeader: {
+    textAlign: "center",
+    maxWidth: "768px",
+    margin: "0 auto 64px auto",
+    "@media (max-width: 768px)": {
+      marginBottom: "40px",
+    },
+  },
+  enterpriseRealitiesKicker: {
+    fontSize: "0.8125rem",
+    fontWeight: 800,
+    color: theme.light.negative.surface.dark,
+    textTransform: "uppercase",
+    letterSpacing: "0.1em",
+    marginBottom: "12px",
+    display: "inline-block",
+  },
+  enterpriseRealitiesTitle: {
+    fontSize: "2.75rem",
+    fontWeight: 800,
+    lineHeight: 1.2,
+    color: theme.light.neutral.onSurface.title,
+    margin: "0 0 16px 0",
+    letterSpacing: "-0.03em",
+    "@media (max-width: 768px)": {
+      fontSize: "2rem",
+    },
+  },
+  enterpriseRealitiesDescription: {
+    fontSize: "1.125rem",
+    lineHeight: 1.7,
+    color: theme.light.neutral.onSurface.medium,
+    margin: 0,
+    "@media (max-width: 768px)": {
+      fontSize: "1rem",
+    },
+  },
+  enterpriseRealitiesGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "28px",
+    width: "100%",
+    boxSizing: "border-box",
+    "@media (max-width: 960px)": {
+      gridTemplateColumns: "1fr",
+      gap: "24px",
+      maxWidth: "540px",
+    },
+  },
+  realityCard: {
+    backgroundColor: theme.light.neutral.surface.lighter,
+    borderRadius: "24px",
+    padding: "36px 32px",
+    border: `1px solid ${theme.light.neutral.border.light}`,
+    boxShadow: "0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    boxSizing: "border-box",
+    transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+    position: "relative",
+    overflow: "hidden",
+    height: "100%",
+    "&:hover": {
+      transform: "translateY(-5px)",
+      boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.09), 0 4px 12px -2px rgba(0, 0, 0, 0.04)",
+      borderColor: theme.light.neutral.border.medium,
+    },
+    "@media (max-width: 600px)": {
+      padding: "28px 24px",
+    },
+  },
+  cardGuestBorder: {
+    borderTop: `3px solid ${theme.light.warning.surface.medium}`,
+  },
+  cardDeepWorkBorder: {
+    borderTop: `3px solid ${theme.light.brand.surface.medium}`,
+  },
+  cardEdiscoveryBorder: {
+    borderTop: `3px solid ${theme.light.positive.surface.medium}`,
+  },
+  realityCardContentTop: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
+  realityIconContainer: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "14px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "24px",
+    transition: "transform 0.3s ease",
+  },
+  iconGuest: {
+    backgroundColor: theme.light.warning.surface.lighter,
+    border: `1px solid ${theme.light.warning.border.light}`,
+    color: theme.light.warning.surface.dark,
+  },
+  iconDeepWork: {
+    backgroundColor: theme.light.brand.surface.lighter,
+    border: `1px solid ${theme.light.brand.border.light}`,
+    color: theme.light.brand.surface.medium,
+  },
+  iconEdiscovery: {
+    backgroundColor: theme.light.positive.surface.lighter,
+    border: `1px solid ${theme.light.positive.border.light}`,
+    color: theme.light.positive.surface.medium,
+  },
+  realityCardTitle: {
+    fontSize: "1.25rem",
+    fontWeight: 700,
+    color: theme.light.neutral.onSurface.title,
+    margin: "0 0 12px 0",
+    letterSpacing: "-0.01em",
+  },
+  realityCardDescription: {
+    fontSize: "0.875rem",
+    lineHeight: 1.65,
+    color: theme.light.neutral.onSurface.medium,
+    margin: "0 0 28px 0",
+  },
+  realityCardBottom: {
+    marginTop: "auto",
+    width: "100%",
+  },
+  guestBadge: {
+    backgroundColor: theme.light.warning.surface.lighter,
+    border: `1px solid ${theme.light.warning.border.light}`,
+    color: theme.light.warning.surface.dark,
+    fontSize: "0.75rem",
+    fontWeight: 700,
+    padding: "9px 14px",
+    borderRadius: "8px",
+    textAlign: "center",
+    display: "block",
+    letterSpacing: "0.02em",
+  },
+  deepWorkBadge: {
+    backgroundColor: theme.light.neutral.surface.light,
+    border: `1px solid ${theme.light.neutral.border.light}`,
+    color: theme.light.neutral.onSurface.title,
+    fontSize: "0.75rem",
+    fontWeight: 700,
+    padding: "9px 14px",
+    borderRadius: "8px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    letterSpacing: "0.02em",
+  },
+  deepWorkDot: {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    backgroundColor: theme.light.negative.surface.medium,
+  },
+  ediscoveryBadge: {
+    backgroundColor: theme.light.positive.surface.lighter,
+    border: `1px solid ${theme.light.positive.border.light}`,
+    color: theme.light.positive.surface.dark,
+    fontSize: "0.75rem",
+    fontWeight: 700,
+    padding: "9px 14px",
+    borderRadius: "8px",
+    textAlign: "center",
+    display: "block",
+    letterSpacing: "0.02em",
+  },
+
+  /* ─────────────────────────────────────────────────────────────────────────────
      SECTION 4: UNIFIED MOBILE EXPERIENCE
      ───────────────────────────────────────────────────────────────────────────── */
   mobileSection: {
