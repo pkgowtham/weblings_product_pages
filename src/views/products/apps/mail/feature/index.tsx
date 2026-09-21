@@ -22,7 +22,7 @@ import {
   ClipboardCheckIcon,
 } from '../../../../../assets/icons_component';
 
-import WeblingsMailMockup from '../../../../../components/mailMockup/index';
+import WorkspaceDashboardMockup from '../../../../../components/dashboardMockup/index';
 import PhoneMockup from '../../../../../components/phoneMockup/index';
 import { MailPaperPlaneAnimation } from '../../../../../components/ambientAnimations';
 
@@ -154,7 +154,7 @@ const MailFeature = () => {
 
         {/* Authentic Weblings Mail App Mockup — Interactive Embedded Web Area */}
         <div className={classes.webMockupWrapper}>
-          <WeblingsMailMockup />
+          <WorkspaceDashboardMockup variant="mail" />
         </div>
       </section>
 

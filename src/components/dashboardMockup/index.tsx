@@ -4,6 +4,11 @@ import React from 'react';
 import { useStyles } from './style';
 import { getSrc } from '../../utils/getSrc';
 import gowthamImg from '../../assets/images/about/gowtham_founder.jpg';
+import StreamlineMockup from '../streamlineMockup';
+import WeblingsMailMockup from '../mailMockup';
+import ConnectMockup from '../connectMockup';
+import CalendarMockup from '../calendarMockup';
+import DriveMockup from '../driveMockup';
 
 // SVG Icons tailored for the dashboard mockup to match the exact image
 const SvgWeblingsLogoMark = () => (
@@ -71,6 +76,12 @@ const SvgCalendar = () => (
     <line x1="16" y1="2" x2="16" y2="6" />
     <line x1="8" y1="2" x2="8" y2="6" />
     <line x1="3" y1="10" x2="21" y2="10" />
+  </svg>
+);
+
+const SvgFolder = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
   </svg>
 );
 
@@ -182,25 +193,120 @@ const AvatarWithFallback: React.FC<AvatarProps> = ({ src, alt, label, bg = '#E0F
   );
 };
 
-export const WorkspaceDashboardMockup: React.FC = () => {
+export type MockupAppKey = 'workspace' | 'streamline' | 'mail' | 'connect' | 'calendar' | 'drive';
+
+export interface WorkspaceDashboardMockupProps {
+  variant?: 'dashboard' | 'workspace' | 'eoffice' | 'streamline' | 'stream' | 'mail' | 'connect' | 'calendar' | 'calender' | 'drive';
+}
+
+function getNormalizedApp(variant?: string): MockupAppKey {
+  if (!variant) return 'workspace';
+  if (variant === 'stream' || variant === 'streamline') return 'streamline';
+  if (variant === 'mail') return 'mail';
+  if (variant === 'connect') return 'connect';
+  if (variant === 'calendar' || variant === 'calender') return 'calendar';
+  if (variant === 'drive') return 'drive';
+  return 'workspace';
+}
+
+export const WorkspaceDashboardMockup: React.FC<WorkspaceDashboardMockupProps> = ({ variant = 'dashboard' }) => {
   const classes = useStyles();
-  const [activeSideCol1, setActiveSideCol1] = React.useState(4); // default chat
-  const [activeSideCol2, setActiveSideCol2] = React.useState(4); // default gear
+  const [activeApp, setActiveApp] = React.useState<MockupAppKey>(() => getNormalizedApp(variant));
+  const [activeSideCol2, setActiveSideCol2] = React.useState(0);
   const [clockedIn, setClockedIn] = React.useState(true);
   const [activeMailIndex, setActiveMailIndex] = React.useState(0);
   const [selectedCells, setSelectedCells] = React.useState<number[]>([2, 5]);
   const [notifActive, setNotifActive] = React.useState(true);
+  const [showProfileMenu, setShowProfileMenu] = React.useState(false);
+  const profileRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    setActiveApp(getNormalizedApp(variant));
+  }, [variant]);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+        setShowProfileMenu(false);
+      }
+    };
+    if (showProfileMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showProfileMenu]);
+
+  const appTabs: { key: MockupAppKey; title: string; icon: React.ReactNode; url: string }[] = [
+    {
+      key: 'workspace',
+      title: 'Workspace / E-Office',
+      icon: <SvgBriefcase />,
+      url: 'weblings.org/dashboard',
+    },
+    {
+      key: 'streamline',
+      title: 'Streamline',
+      icon: <SvgPresentation />,
+      url: 'weblings.org/streamline',
+    },
+    {
+      key: 'mail',
+      title: 'Mail',
+      icon: <SvgMail />,
+      url: 'weblings.org/mail',
+    },
+    {
+      key: 'connect',
+      title: 'Connect',
+      icon: <SvgChatBubble />,
+      url: 'weblings.org/connect',
+    },
+    {
+      key: 'calendar',
+      title: 'Calendar',
+      icon: <SvgCalendar />,
+      url: 'weblings.org/calendar',
+    },
+    {
+      key: 'drive',
+      title: 'Drive',
+      icon: <SvgFolder />,
+      url: 'weblings.org/drive',
+    },
+  ];
+
+  const currentUrl = appTabs.find((t) => t.key === activeApp)?.url || 'weblings.org/dashboard';
 
   return (
     <div className={classes.dashboardRoot}>
       {/* Top Application Bar */}
       <div className={classes.topBar}>
         <div className={classes.topBarLeft}>
+          <div className={classes.windowDots}>
+            <span className={classes.dotRed} />
+            <span className={classes.dotYellow} />
+            <span className={classes.dotGreen} />
+          </div>
           <div className={classes.weblingsBrandLogo}>
             <SvgWeblingsLogoMark />
           </div>
         </div>
-        <div className={classes.topBarRight}>
+
+        <div className={classes.urlBar}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#64748B', flexShrink: 0 }}>
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          <span className={classes.urlText}>{currentUrl}</span>
+          <span className={classes.liveBadge}>
+            <span className={classes.liveDot} />
+            LIVE
+          </span>
+        </div>
+
+        <div className={classes.topBarRight} ref={profileRef}>
           <div
             className={classes.iconBtn}
             onClick={() => setNotifActive(!notifActive)}
@@ -209,82 +315,117 @@ export const WorkspaceDashboardMockup: React.FC = () => {
             <SvgBell />
             {notifActive && <span className={classes.notifDot} />}
           </div>
-          <div className={classes.userAvatarCircle} title="Profile Settings">A</div>
+          <div
+            className={`${classes.userAvatarCircle} ${showProfileMenu ? classes.userAvatarCircleActive : ''}`}
+            title="Alex Smith (Click to view profile)"
+            onClick={() => setShowProfileMenu(!showProfileMenu)}
+            role="button"
+            tabIndex={0}
+          >
+            A
+          </div>
+
+          {showProfileMenu && (
+            <div className={classes.profileDropdown}>
+              <div className={classes.profileDropdownHeader}>
+                <div className={classes.profileDropdownAvatar}>A</div>
+                <div className={classes.profileDropdownInfo}>
+                  <div className={classes.profileDropdownName}>Alex Smith</div>
+                  <div className={classes.profileDropdownEmail}>alex.smith@weblings.org</div>
+                </div>
+              </div>
+              <div className={classes.profileDropdownDivider} />
+              <div className={classes.profileDropdownItem}>
+                <span>Workspace Settings</span>
+                <span className={classes.profileRoleBadge}>ADMIN</span>
+              </div>
+              <div className={classes.profileDropdownItem}>
+                <span>Account Preferences</span>
+              </div>
+              <div className={classes.profileDropdownDivider} />
+              <div
+                className={`${classes.profileDropdownItem} ${classes.profileDropdownSignOut}`}
+                onClick={() => setShowProfileMenu(false)}
+              >
+                <span>Sign Out</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       {/* Main Body */}
       <div className={classes.bodyLayout}>
-        {/* Sidebar 1 (Far Left) */}
+        {/* Sidebar 1 (Far Left - 6 App Tabs) */}
         <aside className={classes.sidebarCol1}>
           <span className={classes.sideChevron} title="Collapse sidebar">›</span>
           <div className={classes.sideAvatar}>A</div>
-          {[
-            { icon: <SvgBriefcase />, title: "Workspace" },
-            { icon: <SvgMegaphone />, title: "Announcements" },
-            { icon: <SvgPresentation />, title: "Presentations" },
-            { icon: <SvgMail />, title: "Mail" },
-            { icon: <SvgChatBubble />, title: "Team Chat" },
-            { icon: <SvgCalendar />, title: "Calendar" },
-          ].map((item, idx) => (
-            <div
-              key={idx}
-              className={`${classes.sideIcon} ${activeSideCol1 === idx ? classes.sideIconActiveBox : ""}`}
-              onClick={() => setActiveSideCol1(idx)}
-              title={item.title}
-            >
-              {item.icon}
-            </div>
-          ))}
+          {appTabs.map((tab) => {
+            const isActive = activeApp === tab.key;
+            return (
+              <div
+                key={tab.key}
+                className={`${classes.sideIcon} ${isActive ? classes.sideIconActiveBox : ""}`}
+                onClick={() => setActiveApp(tab.key)}
+                title={tab.title}
+              >
+                {tab.icon}
+              </div>
+            );
+          })}
           <div className={classes.sidebarSpacer} />
           <div
-            className={`${classes.sideIcon} ${activeSideCol1 === 6 ? classes.sideIconActiveBox : ""}`}
-            onClick={() => setActiveSideCol1(6)}
+            className={classes.sideIcon}
+            onClick={() => {}}
             title="Settings"
           >
             <SvgGear />
           </div>
           <div
-            className={`${classes.sideIcon} ${activeSideCol1 === 7 ? classes.sideIconActiveBox : ""}`}
-            onClick={() => setActiveSideCol1(7)}
+            className={classes.sideIcon}
+            onClick={() => {}}
             title="Help"
           >
             <SvgHelp />
           </div>
         </aside>
 
-        {/* Sidebar 2 (Inner Left) */}
-        <aside className={classes.sidebarCol2}>
-          <span className={classes.sideChevron} title="Collapse sub-panel">›</span>
-          <div className={classes.sideAvatar}>A</div>
-          {[
-            { icon: <SvgBriefcase />, title: "Files" },
-            { icon: <SvgMail />, title: "Inbox" },
-            { icon: <SvgChatBubble />, title: "Channels" },
-            { icon: <SvgCalendar />, title: "Schedules" },
-            { icon: <SvgGear />, title: "Configurations" },
-          ].map((item, idx) => (
-            <div
-              key={idx}
-              className={`${classes.sideIcon} ${activeSideCol2 === idx ? classes.sideIconActiveBar : ""}`}
-              onClick={() => setActiveSideCol2(idx)}
-              title={item.title}
-            >
-              {item.icon}
-            </div>
-          ))}
-          <div className={classes.sidebarSpacer} />
-          <div
-            className={`${classes.sideIcon} ${activeSideCol2 === 5 ? classes.sideIconActiveBar : ""}`}
-            onClick={() => setActiveSideCol2(5)}
-            title="Support"
-          >
-            <SvgHelp />
-          </div>
-        </aside>
+        {/* Dynamic App Stage */}
+        <div className={classes.appStageWrapper}>
+          {activeApp === 'workspace' && (
+            <div style={{ display: 'flex', width: '100%', minHeight: '100%' }}>
+              {/* Sidebar 2 (Inner Left - Contextual to Workspace) */}
+              <aside className={classes.sidebarCol2}>
+                <span className={classes.sideChevron} title="Collapse sub-panel">›</span>
+                <div className={classes.sideAvatar}>A</div>
+                {[
+                  { icon: <SvgBriefcase />, title: "Files" },
+                  { icon: <SvgMail />, title: "Inbox" },
+                  { icon: <SvgChatBubble />, title: "Channels" },
+                  { icon: <SvgCalendar />, title: "Schedules" },
+                  { icon: <SvgGear />, title: "Configurations" },
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className={`${classes.sideIcon} ${activeSideCol2 === idx ? classes.sideIconActiveBar : ""}`}
+                    onClick={() => setActiveSideCol2(idx)}
+                    title={item.title}
+                  >
+                    {item.icon}
+                  </div>
+                ))}
+                <div className={classes.sidebarSpacer} />
+                <div
+                  className={`${classes.sideIcon} ${activeSideCol2 === 5 ? classes.sideIconActiveBar : ""}`}
+                  onClick={() => setActiveSideCol2(5)}
+                  title="Support"
+                >
+                  <SvgHelp />
+                </div>
+              </aside>
 
-        {/* Content Area */}
-        <main className={classes.contentArea}>
+              {/* Content Area */}
+              <main className={classes.contentArea}>
           {/* Header Banner */}
           <div className={classes.banner}>
             <div className={classes.bannerCurve} />
@@ -696,7 +837,16 @@ export const WorkspaceDashboardMockup: React.FC = () => {
           </div>
         </main>
       </div>
+    )}
+
+      {activeApp === 'streamline' && <StreamlineMockup embedded={true} />}
+      {activeApp === 'mail' && <WeblingsMailMockup embedded={true} />}
+      {activeApp === 'connect' && <ConnectMockup embedded={true} />}
+      {activeApp === 'calendar' && <CalendarMockup embedded={true} />}
+      {activeApp === 'drive' && <DriveMockup embedded={true} />}
     </div>
+  </div>
+</div>
   );
 };
 

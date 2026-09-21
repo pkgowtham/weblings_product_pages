@@ -95,6 +95,18 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   Icons: {
     display: "flex",
     gap: theme.spacing.s600,
+    alignItems: "center",
+  },
+  socialLink: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textDecoration: "none",
+    transition: "transform 0.2s ease, opacity 0.2s ease",
+    "&:hover": {
+      transform: "translateY(-2px)",
+      opacity: 0.7,
+    },
   },
   SecondSection: {
     display: "flex",

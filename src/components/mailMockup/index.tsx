@@ -227,7 +227,11 @@ const SAMPLE_EMAILS: EmailItem[] = [
   },
 ];
 
-export const WeblingsMailMockup: React.FC = () => {
+export interface WeblingsMailMockupProps {
+  embedded?: boolean;
+}
+
+export const WeblingsMailMockup: React.FC<WeblingsMailMockupProps> = ({ embedded = false }) => {
   const classes = useStyles();
 
   const [activeFolder, setActiveFolder] = useState<string>('inbox');
@@ -260,26 +264,28 @@ export const WeblingsMailMockup: React.FC = () => {
   });
 
   return (
-    <div className={classes.mockupFrame}>
+    <div className={`${classes.mockupFrame} ${embedded ? classes.mockupFrameEmbedded : ''}`}>
       {/* ── Top Window Bar (macOS Style Chrome) ──────────────────────────── */}
-      <div className={classes.windowBar}>
-        <div className={classes.windowDots}>
-          <span className={classes.dotRed} />
-          <span className={classes.dotYellow} />
-          <span className={classes.dotGreen} />
-        </div>
+      {!embedded && (
+        <div className={classes.windowBar}>
+          <div className={classes.windowDots}>
+            <span className={classes.dotRed} />
+            <span className={classes.dotYellow} />
+            <span className={classes.dotGreen} />
+          </div>
 
-        <div className={classes.addressBar}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-          </svg>
-          <span>mail.weblings.com/inbox</span>
-          <span className={classes.authenticatedBadge}>● AUTHENTICATED</span>
-        </div>
+          <div className={classes.addressBar}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            <span>mail.weblings.com/inbox</span>
+            <span className={classes.authenticatedBadge}>● AUTHENTICATED</span>
+          </div>
 
-        <div className={classes.windowActionBadge}>Weblings Mail</div>
-      </div>
+          <div className={classes.windowActionBadge}>Weblings Mail</div>
+        </div>
+      )}
 
       {/* ── 3-Pane Body Layout (Sidebar, List, Reader) ─────────────────────── */}
       <div className={classes.bodyLayout}>

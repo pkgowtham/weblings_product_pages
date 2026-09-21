@@ -66,3 +66,5 @@ export { default as HierarchyTreeIcon } from "./HierarchyTreeIcon";
 export { default as StarIcon } from "./StarIcon";
 export { default as GranularAccessIcon } from "./GranularAccessIcon";
 export { default as TimeBombLinkIcon } from "./TimeBombLinkIcon";
+export { default as DatabaseShieldIcon } from "./DatabaseShieldIcon";
+export { default as ScrollDownIcon } from "./ScrollDownIcon";

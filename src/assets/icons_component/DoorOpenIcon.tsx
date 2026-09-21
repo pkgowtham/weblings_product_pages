@@ -27,22 +27,26 @@ export const DoorOpenIcon: React.FC<IconProps> = ({
     >
       <style>{`
         .door-shackle {
-          transform-origin: 8px 12px;
+          transform-origin: 8px 13px;
           transition: transform 0.38s cubic-bezier(0.34, 1.45, 0.64, 1);
         }
         .dooropen-icon:hover .door-shackle,
         .dooropen-icon.is-hovered .door-shackle {
-          transform: translateY(-1.5px) rotate(-24deg);
+          transform: translateY(-2.5px) rotate(-26deg);
+        }
+        .door-body {
+          transition: transform 0.3s ease;
         }
       `}</style>
       {/* Left leg anchored as hinge pin, right leg swings open with angle */}
       <path
         className="door-shackle"
-        d="M8 12V8a4 4 0 0 1 8 0v4"
+        d="M8 13V7.5a4 4 0 0 1 8 0v4.5"
       />
       {/* Lock body lowered with ample ceiling headroom */}
-      <rect x="6" y="12" width="12" height="9" rx="2" ry="2" />
-      <path d="M12 15v3" />
+      <rect className="door-body" x="6" y="12" width="12" height="9" rx="2" ry="2" />
+      <circle cx="12" cy="15.5" r="0.85" fill="currentColor" />
+      <path d="M12 16.5v2" />
     </svg>
   );
 };

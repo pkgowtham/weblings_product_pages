@@ -6,9 +6,9 @@
     "title": "One workspace. Six apps. One simple invoice.\nWith built-in AI to manage your client specs and enforce developer code standards.",
     "titleDescription": "The all-in-one business workspace uniting your HRMS, agile ticketing, team chat, shared calendar, cloud drive, and webmail from a single secure dashboard. We've combined enterprise-grade scalability, fraction-of-the-cost pricing, and a built-in AI engine that automatically turns client calls into tickets—ensuring your developers build exactly what was promised.",
     "action": {
-      "label": "Start Free Trial",
+      "label": "Join Now",
       "subtext": "No credit card required.",
-      "link": "/"
+      "link": "/agreement"
     },
     "secondaryAction": {
       "label": "Watch Demo",

@@ -67,7 +67,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
      HERO SECTION WITH EMBEDDED INTERACTIVE WEB APP MOCKUP
      ───────────────────────────────────────────────────────────── */
   hero: {
-    maxWidth: "1240px",
+    maxWidth: "1280px",
     margin: "0 auto",
     padding: "56px 24px 80px",
     textAlign: "center",

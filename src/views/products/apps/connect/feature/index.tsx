@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useStyles } from './style';
 import chatDataJson from '../../../../../data/chat.json';
-import ConnectMockup from '../../../../../components/connectMockup';
+import WorkspaceDashboardMockup from '../../../../../components/dashboardMockup';
 import PhoneMockup from '../../../../../components/phoneMockup';
 import AppStoreButtons from '../../../../../components/appStoreButtons';
 import {
@@ -163,7 +163,7 @@ const ConnectFeature: React.FC = () => {
 
         {/* Interactive Desktop Canvas Mockup (Voice & Video Active Call) */}
         <div className={classes.mockupWrapper}>
-          <ConnectMockup />
+          <WorkspaceDashboardMockup variant="connect" />
         </div>
       </section>
 

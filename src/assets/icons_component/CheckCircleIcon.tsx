@@ -27,25 +27,23 @@ export const CheckCircleIcon: React.FC<IconProps> = ({
     >
       <style>{`
         .checkcircle-tick {
-          transform-origin: 11px 13px;
+          transform-origin: 12px 12px;
+          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .checkcircle-icon:hover .checkcircle-tick,
         .checkcircle-icon.is-hovered .checkcircle-tick {
-          animation: tickTurnLeft 0.5s ease-in-out;
+          transform: scale(1.18);
         }
-        @keyframes tickTurnLeft {
-          0% {
-            transform: rotate(0deg);
-          }
-          50% {
-            transform: rotate(-15deg);
-          }
-          100% {
-            transform: rotate(0deg);
-          }
+        .checkcircle-ring {
+          transform-origin: 12px 12px;
+          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .checkcircle-icon:hover .checkcircle-ring,
+        .checkcircle-icon.is-hovered .checkcircle-ring {
+          transform: scale(1.04);
         }
       `}</style>
-      <circle cx="12" cy="12" r="9" />
+      <circle className="checkcircle-ring" cx="12" cy="12" r="9" />
       <path className="checkcircle-tick" d="m9 12 2 2 4-4" />
     </svg>
   );

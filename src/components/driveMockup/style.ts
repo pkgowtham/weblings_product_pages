@@ -19,6 +19,15 @@ export const useStyles = createUseStyles({
     textAlign: "left",
     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   },
+  mockupFrameEmbedded: {
+    maxWidth: "100%",
+    margin: "0 !important",
+    borderRadius: "0 !important",
+    border: "none !important",
+    boxShadow: "none !important",
+    width: "100%",
+    height: "100%",
+  },
 
   /* ─────────────────────────────────────────────────────────────
      TOP APPLICATION BAR

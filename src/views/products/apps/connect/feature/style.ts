@@ -223,13 +223,9 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   mockupWrapper: {
     position: "relative",
     zIndex: 2,
-    maxWidth: "1140px",
+    width: "100%",
+    maxWidth: "1280px",
     margin: "0 auto",
-    borderRadius: theme.borderRadius.b400,
-    boxShadow: "0 24px 64px -12px rgba(15, 23, 42, 0.14)",
-    overflow: "hidden",
-    border: `1px solid ${theme.light.neutral.border.light}`,
-    backgroundColor: "#FFFFFF",
   },
 
   /* ─────────────────────────────────────────────────────────────────────────────

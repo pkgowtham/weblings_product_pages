@@ -995,32 +995,34 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ variant = "dashboard" }) => {
 
                 <div className={classes.gaugeArea}>
                   <div className={classes.gaugeContainer}>
-                    {/* SVG Circular Ring Gauge */}
-                    <svg className={classes.gaugeRingSvg} viewBox="0 0 44 44">
-                      <circle
-                        cx="22"
-                        cy="22"
-                        r="18"
-                        fill="none"
-                        stroke="#E2E8F0"
-                        strokeWidth="4"
-                      />
-                      <circle
-                        cx="22"
-                        cy="22"
-                        r="18"
-                        fill="none"
-                        stroke="#10B981"
-                        strokeWidth="4"
-                        strokeDasharray="113.1"
-                        strokeDashoffset="34"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                    <span style={{ fontSize: "14px", fontWeight: 800, color: "#0F172A", marginTop: "-42px" }}>
-                      16
-                    </span>
-                    <span className={classes.gaugeSubText} style={{ marginTop: "24px" }}>
+                    {/* SVG Circular Ring Gauge with centered value */}
+                    <div style={{ position: "relative", width: "48px", height: "48px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg className={classes.gaugeRingSvg} viewBox="0 0 44 44">
+                        <circle
+                          cx="22"
+                          cy="22"
+                          r="18"
+                          fill="none"
+                          stroke="#E2E8F0"
+                          strokeWidth="4"
+                        />
+                        <circle
+                          cx="22"
+                          cy="22"
+                          r="18"
+                          fill="none"
+                          stroke="#10B981"
+                          strokeWidth="4"
+                          strokeDasharray="113.1"
+                          strokeDashoffset="34"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", fontWeight: 800, color: "#0F172A", lineHeight: 1 }}>
+                        16
+                      </span>
+                    </div>
+                    <span className={classes.gaugeSubText} style={{ marginTop: "4px" }}>
                       sick leave
                     </span>
                   </div>

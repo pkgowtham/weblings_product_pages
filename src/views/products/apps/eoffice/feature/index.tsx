@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useStyles } from "./style";
 
-import EofficeMockup from "../../../../../components/eofficeMockup";
+import WorkspaceDashboardMockup from "../../../../../components/dashboardMockup";
 import PhoneMockup from "../../../../../components/phoneMockup";
 import AppStoreButtons from "../../../../../components/appStoreButtons";
 import { EOfficeOrgPulseAnimation } from "../../../../../components/ambientAnimations";
@@ -473,7 +473,7 @@ const EofficeFeaturePage: React.FC = () => {
 
         {/* Interactive High-Fidelity Web App Mockup */}
         <div className={classes.mockupWrapper}>
-          <EofficeMockup />
+          <WorkspaceDashboardMockup variant="eoffice" />
         </div>
       </section>
 

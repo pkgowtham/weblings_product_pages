@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useStyles } from "./style";
-import DriveMockup from "../../../../components/driveMockup";
+import WorkspaceDashboardMockup from "../../../../components/dashboardMockup";
 import PhoneMockup from "../../../../components/phoneMockup";
 import AppStoreButtons from "../../../../components/appStoreButtons";
 import {
@@ -137,7 +137,7 @@ const DriveFeature: React.FC = () => {
 
         {/* Embedded Interactive Web App Mockup */}
         <div className={classes.mockupWrapper}>
-          <DriveMockup />
+          <WorkspaceDashboardMockup variant="drive" />
         </div>
       </section>
 

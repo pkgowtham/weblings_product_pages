@@ -133,7 +133,7 @@ const TermsAndConditionsView: React.FC = () => {
                 <strong className={classes.strong}>No Refunds:</strong> All subscription payments (monthly or annual) made to Weblings are final and non-refundable. We do not provide prorated refunds for mid-cycle cancellations. If your account is terminated due to a violation of our Terms of Service, no refunds will be issued.
               </li>
               <li className={classes.listItem}>
-                <strong className={classes.strong}>Tax &amp; Pricing Changes:</strong> All subscription fees are exclusive of taxes. An 18% GST will be applied to all payments as mandated by Indian law. We reserve the right to transition beta users to paid plans or adjust server usage fees with prior notice.
+                <strong className={classes.strong}>Tax &amp; Pricing Changes:</strong> All subscription fees are exclusive of taxes. An additional tax will be applied to all payments as mandated by Indian law. We reserve the right to transition beta users to paid plans or adjust server usage fees with prior notice.
               </li>
               <li className={classes.listItem} style={{ marginBottom: 0 }}>
                 <strong className={classes.strong}>Cancellation &amp; Data Export:</strong> You may cancel your subscription at any time. Upon cancellation, you will retain access to the platform until the end of your current paid billing cycle. Weblings guarantees data portability; you may export your data out of our system at any time without hurdles.

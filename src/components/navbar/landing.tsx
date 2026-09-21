@@ -696,8 +696,8 @@ const Navbar = () => {
 
       {/* Desktop Action Button */}
       <div className={classes.DesktopOnly}>
-        <Button element="button" brand onClick={() => router.push("/contact")}>
-          Try Now
+        <Button element="button" brand onClick={() => router.push("/agreement")}>
+          Join Now
         </Button>
       </div>
 
@@ -772,10 +772,10 @@ const Navbar = () => {
               brand
               onClick={() => {
                 setIsMenuOpen(false);
-                router.push("/contact");
+                router.push("/agreement");
               }}
             >
-              Try Now
+              Join Now
             </Button>
           </div>
         </div>

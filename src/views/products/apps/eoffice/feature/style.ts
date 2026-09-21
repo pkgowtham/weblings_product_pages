@@ -42,9 +42,9 @@ export const useStyles = createUseStyles((theme: Theme) => ({
      HERO SECTION
      ───────────────────────────────────────────────────────────── */
   hero: {
-    maxWidth: "1320px",
+    maxWidth: "1280px",
     margin: "0 auto",
-    padding: "60px 24px 80px",
+    padding: "56px 24px 80px",
     textAlign: "center",
     position: "relative",
     zIndex: 1,
@@ -150,7 +150,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     position: "relative",
     zIndex: 2,
     width: "100%",
-    maxWidth: "1160px",
+    maxWidth: "1280px",
     margin: "0 auto",
   },
 

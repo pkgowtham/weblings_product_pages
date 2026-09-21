@@ -9,6 +9,7 @@ export { default as Boxes } from "./Boxes";
 export { default as ChevronRight } from "./ChevronRight";
 export { default as Close } from "./Close";
 export { default as Facebook } from "./Facebook";
+export { default as Threads } from "./Threads";
 export { default as Feature1 } from "./Feature1";
 export { default as Feature2 } from "./Feature2";
 export { default as Feature3 } from "./Feature3";

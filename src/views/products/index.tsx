@@ -37,6 +37,7 @@ import {
   HandshakeIcon,
   CloudServerIcon,
   ShieldLockIcon,
+  DatabaseShieldIcon,
   DoorOpenIcon,
 } from "../../assets/icons_component";
 
@@ -71,7 +72,7 @@ const migrationSvgIcons = [
   <MessageSquareIcon key="mc2" width={24} height={24} />,
   <HandshakeIcon key="mc3" width={24} height={24} />,
   <CloudServerIcon key="mc4" width={24} height={24} />,
-  <ShieldLockIcon key="mc5" width={24} height={24} />,
+  <DatabaseShieldIcon key="mc5" width={24} height={24} />,
   <DoorOpenIcon key="mc6" width={24} height={24} />,
 ];
 
@@ -428,7 +429,7 @@ const Products = () => {
           title: "Welcome to Weblings!",
           message: (
             <>
-              Thank you for subscribing with <strong>{savedEmail}</strong>. We'll send you our latest updates, privacy tools, and product announcements.
+              Thank you for subscribing with <strong>{savedEmail}</strong>. We'll send you our latest updates, privacy tools, and product announcements. We respect your privacy — we will never share your email address, and we won't send you spam.
             </>
           ),
           primaryBtnText: "Great, thanks!",
@@ -476,16 +477,16 @@ const Products = () => {
                 brand
                 className={classes.heroPrimaryBtn}
                 rightIcon={<SvgChevronRight className={classes.rightIcon} />}
-                onClick={() => router.push(data.headSection.action.link || "/")}
+                onClick={() => router.push(data.headSection.action.link || "/agreement")}
               >
                 {data.headSection.action.label}
               </Button>
-              <button
+              {/* <button
                 className={classes.heroSecondaryBtn}
                 onClick={() => router.push(data.headSection.secondaryAction?.link || "/")}
               >
                 {data.headSection.secondaryAction?.label || "Watch Demo"}
-              </button>
+              </button> */}
             </div>
             <span className={classes.heroSubtext}>
               {data.headSection.action.subtext}
@@ -583,30 +584,7 @@ const Products = () => {
       {/* Dashboard Preview Mockup Section */}
       <div className={classes.dashboardMockupContainer}>
         <div className={classes.dashboardMockupGlow} />
-        <div className={classes.dashboardMockupFrame}>
-          <div className={classes.dashboardMockupHeader}>
-            <div className={classes.windowControls}>
-              <span className={classes.windowDotRed} />
-              <span className={classes.windowDotYellow} />
-              <span className={classes.windowDotGreen} />
-            </div>
-            <div className={classes.browserNavIcons}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}><polyline points="15 18 9 12 15 6" /></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.3 }}><polyline points="9 18 15 12 9 6" /></svg>
-            </div>
-            <div className={classes.windowUrlBar}>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={classes.lockIcon}><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-              <span className={classes.windowUrlText}>app.weblings.com/workspace/dashboard</span>
-              <span className={classes.windowLiveBadge}>● LIVE</span>
-            </div>
-            <div className={classes.windowActions}>
-              <span className={classes.windowActionTag}>Weblings</span>
-            </div>
-          </div>
-          <div className={classes.dashboardMockupScreen}>
-            <WorkspaceDashboardMockup />
-          </div>
-        </div>
+        <WorkspaceDashboardMockup variant="dashboard" />
       </div>
 
       {/* AI Dual-Engine Section */}

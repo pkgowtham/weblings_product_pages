@@ -22,6 +22,7 @@ import {
   HandshakeIcon,
   CloudServerIcon,
   ShieldLockIcon,
+  DatabaseShieldIcon,
   DoorOpenIcon,
 } from "../../../../../assets/icons_component";
 
@@ -74,7 +75,7 @@ const WorkSuiteFeature: React.FC = () => {
           <div className={classes.heroBtnRow}>
             <div className={classes.primaryBtnWrapper}>
               <button className={classes.primaryBtn}>
-                <span>Start Free Trial</span>
+                <span>Join Now</span>
               </button>
               <span className={classes.primaryBtnSubtext}>No credit card required.</span>
             </div>
@@ -598,7 +599,7 @@ const WorkSuiteFeature: React.FC = () => {
             onMouseLeave={() => setHoveredMigrationCard(null)}
           >
             <div className={classes.migrationCardTitleRow}>
-              <span className={classes.migrationBadgeIcon}><ShieldLockIcon width={22} height={22} isHovered={hoveredMigrationCard === 'shieldlock'} /></span>
+              <span className={classes.migrationBadgeIcon}><DatabaseShieldIcon width={22} height={22} isHovered={hoveredMigrationCard === 'shieldlock'} /></span>
               <h4 className={classes.migrationCardTitle}>Absolute DB Isolation</h4>
             </div>
             <p className={classes.migrationCardText}>

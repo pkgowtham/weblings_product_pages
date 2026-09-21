@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useStyles } from './style';
 import streamlineDataJson from '../../../../../data/streamline.json';
-import StreamlineMockup from '../../../../../components/streamlineMockup';
+import WorkspaceDashboardMockup from '../../../../../components/dashboardMockup';
 import PhoneMockup from '../../../../../components/phoneMockup';
 import AppStoreButtons from '../../../../../components/appStoreButtons';
 import {
@@ -164,7 +164,7 @@ const StreamlineFeature: React.FC = () => {
         {/* INTERACTIVE STREAMLINE MOCKUP (TIMELINE, BACKLOGS, SPRINTS, BOARD) */}
         {/* ───────────────────────────────────────────────────────────────── */}
         <div className={classes.mockupWrapper}>
-          <StreamlineMockup />
+          <WorkspaceDashboardMockup variant="streamline" />
         </div>
       </section>
 

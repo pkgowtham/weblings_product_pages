@@ -7,7 +7,7 @@ import Typography from "../typography/component";
 import SvgTwitter from "../svg/Twitter";
 import SvgLinkedin from "../svg/Linkedin";
 import SvgYoutube from "../svg/Youtube";
-import SvgFacebook from "../svg/Facebook";
+import SvgThreads from "../svg/Threads";
 import SvgInsta from "../svg/Insta";
 import SvgPhone from "../svg/Phone";
 import SvgMail from "../svg/Mail";
@@ -78,11 +78,51 @@ const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): Re
             </Link>
           </div>
           <div className={classes.Icons}>
-            <SvgTwitter />
-            <SvgLinkedin />
-            <SvgYoutube />
-            <SvgFacebook />
-            <SvgInsta />
+            <a
+              href="https://x.com/weblingsdev"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Weblings on X"
+              className={classes.socialLink}
+            >
+              <SvgTwitter />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/145175910/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Weblings on LinkedIn"
+              className={classes.socialLink}
+            >
+              <SvgLinkedin />
+            </a>
+            <a
+              href="https://www.youtube.com/@weblingsdev"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Subscribe to Weblings on YouTube"
+              className={classes.socialLink}
+            >
+              <SvgYoutube />
+            </a>
+            <a
+              href="https://www.threads.com/@weblingsdev"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Weblings on Threads"
+              className={classes.socialLink}
+            >
+              <SvgThreads />
+            </a>
+            <a
+              href="https://www.instagram.com/weblingsdev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Weblings on Instagram"
+              className={classes.socialLink}
+            >
+              <SvgInsta />
+            </a>
           </div>
         </div>
 

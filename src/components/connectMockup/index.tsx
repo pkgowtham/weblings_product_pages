@@ -161,7 +161,11 @@ const VideoOffSvg: React.FC<{ size?: number; color?: string }> = ({ size = 16, c
   </svg>
 );
 
-export const ConnectMockup: React.FC = () => {
+export interface ConnectMockupProps {
+  embedded?: boolean;
+}
+
+export const ConnectMockup: React.FC<ConnectMockupProps> = ({ embedded = false }) => {
   const classes = useStyles();
 
 
@@ -231,42 +235,45 @@ export const ConnectMockup: React.FC = () => {
   };
 
   return (
-    <div className={classes.mockupFrame}>
+    <div className={embedded ? classes.mockupFrameEmbedded : classes.mockupFrame}>
       {/* ─────────────────────────────────────────────────────────────
           1. TOP APPLICATION BAR
           ───────────────────────────────────────────────────────────── */}
-      <header className={classes.topBar}>
-        <div className={classes.topBarLeft}>
-          <WeblogoIcon width={30} height={30} />
-        </div>
-
-        <div className={classes.topBarRight}>
-          <button
-            type="button"
-            className={classes.bellBtn}
-            title="Notifications"
-            onClick={() => {}}
-          >
-            {/* Bell SVG */}
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-            </svg>
-            <span className={classes.bellDot} />
-          </button>
-
-          <div className={classes.topProfileAvatar} title="Profile (Alex Smith)">
-            A
+      {!embedded && (
+        <header className={classes.topBar}>
+          <div className={classes.topBarLeft}>
+            <WeblogoIcon width={30} height={30} />
           </div>
-        </div>
-      </header>
+
+          <div className={classes.topBarRight}>
+            <button
+              type="button"
+              className={classes.bellBtn}
+              title="Notifications"
+              onClick={() => {}}
+            >
+              {/* Bell SVG */}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+              <span className={classes.bellDot} />
+            </button>
+
+            <div className={classes.topProfileAvatar} title="Profile (Alex Smith)">
+              A
+            </div>
+          </div>
+        </header>
+      )}
 
       {/* ─────────────────────────────────────────────────────────────
           2. WORKSPACE BODY (LEFT RAIL + CENTER STAGE + RIGHT SIDEBAR)
           ───────────────────────────────────────────────────────────── */}
       <div className={classes.mainBody}>
         {/* LEFT ICON RAIL */}
-        <aside className={classes.leftRail}>
+        {!embedded && (
+          <aside className={classes.leftRail}>
           <button type="button" className={classes.railChevronBtn} title="Expand menu">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
               <polyline points="9 18 15 12 9 6" />
@@ -390,6 +397,7 @@ export const ConnectMockup: React.FC = () => {
             </button>
           </div>
         </aside>
+        )}
 
         {/* ─────────────────────────────────────────────────────────────
             CENTER MEETING STAGE

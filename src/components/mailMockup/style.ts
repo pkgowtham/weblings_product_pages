@@ -16,7 +16,15 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     boxSizing: "border-box",
     lineHeight: 1.45,
     fontSize: "12px",
-    color: "#1E293B",
+  },
+  mockupFrameEmbedded: {
+    maxWidth: "100%",
+    margin: "0 !important",
+    borderRadius: "0 !important",
+    border: "none !important",
+    boxShadow: "none !important",
+    width: "100%",
+    height: "100%",
   },
 
   // Window Top Title Bar

@@ -17,6 +17,22 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     userSelect: "none",
     position: "relative",
   },
+  mockupFrameEmbedded: {
+    width: "100%",
+    backgroundColor: "#FFFFFF",
+    borderRadius: "0",
+    border: "none",
+    boxShadow: "none",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
+    minHeight: "720px",
+    textAlign: "left",
+    userSelect: "none",
+    position: "relative",
+  },
+
 
   /* ─────────────────────────────────────────────────────────────
      TOP APPLICATION BAR

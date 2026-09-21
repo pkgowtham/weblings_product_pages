@@ -17,6 +17,23 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     userSelect: "none",
     position: "relative",
   },
+  mockupFrameEmbedded: {
+    width: "100%",
+    backgroundColor: "#FFFFFF",
+    borderRadius: "0",
+    border: "none",
+    boxShadow: "none",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
+    height: "100%",
+    minHeight: "680px",
+    textAlign: "left",
+    userSelect: "none",
+    position: "relative",
+  },
+
 
   /* ─────────────────────────────────────────────────────────────
      TOP APPLICATION BAR
@@ -92,7 +109,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
      ───────────────────────────────────────────────────────────── */
   mainBody: {
     display: "flex",
-    minHeight: "580px",
+    flex: 1,
+    minHeight: 0,
     backgroundColor: "#FFFFFF",
     position: "relative",
     overflow: "hidden",
@@ -207,7 +225,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   /* BLUE-BORDERED MEETING BOX (CENTER PIECE) */
   meetingCanvas: {
     flex: 1,
-    minHeight: "480px",
+    minHeight: 0,
     backgroundColor: "#FFFFFF",
     borderRadius: "12px",
     border: "2px solid #0072C4",
@@ -476,7 +494,8 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     flexDirection: "column",
     gap: "14px",
     overflowY: "auto",
-    maxHeight: "500px",
+    flex: 1,
+    minHeight: 0,
   },
   inviteRow: {
     display: "flex",

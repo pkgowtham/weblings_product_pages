@@ -601,7 +601,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   dashboardMockupContainer: {
     position: "relative",
     width: "100%",
-    maxWidth: "1080px",
+    maxWidth: "1280px",
     margin: "48px auto 72px",
     padding: "0 24px",
     boxSizing: "border-box",
