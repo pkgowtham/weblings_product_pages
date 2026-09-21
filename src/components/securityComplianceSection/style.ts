@@ -12,8 +12,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
      ───────────────────────────────────────────────────────────── */
   section: {
     position: "relative",
-    backgroundColor: "#F8FAFC",
-    background: "linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 50%, #F8FAFC 100%)",
+    backgroundColor: "#FFFFFF",
     padding: "96px 24px",
     overflow: "hidden",
     fontFamily: "'Inter', sans-serif",
@@ -23,15 +22,17 @@ export const useStyles = createUseStyles((theme: Theme) => ({
       padding: "64px 16px",
     },
   },
-  ambientGlowTop: {
+  centerGradient: {
     position: "absolute",
-    top: 0,
+    top: "50%",
     left: "50%",
-    transform: "translateX(-50%)",
-    width: "700px",
-    height: "280px",
-    background: "radial-gradient(ellipse at top, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0) 70%)",
+    transform: "translate(-50%, -50%)",
+    width: "950px",
+    height: "100%",
+    maxWidth: "85vw",
+    background: "radial-gradient(ellipse at center, #DCFCE7 0%, rgba(240, 253, 244, 0.7) 40%, rgba(255, 255, 255, 0) 70%)",
     pointerEvents: "none",
+    zIndex: 1,
   },
   inner: {
     maxWidth: "1240px",
@@ -127,10 +128,15 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   iconWrapper: {
     width: "44px",
     height: "44px",
+    borderRadius: "12px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     marginBottom: "20px",
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    "$card:hover &": {
+      transform: "scale(1.06)",
+    },
   },
   cardTitle: {
     fontSize: "1.125rem",

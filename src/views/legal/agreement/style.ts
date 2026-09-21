@@ -113,126 +113,106 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     },
   },
 
-  // Top Content Section (seamlessly inside the scroll container)
-  topSection: {
-    marginBottom: "28px",
+  // Page Header Outside The Box (Matching pricing page design)
+  pageHeader: {
+    maxWidth: "820px",
+    margin: "0 auto 48px",
+    textAlign: "center",
   },
-
-  badgeRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    marginBottom: "14px",
-    flexWrap: "wrap",
-  },
-
-  headerBadge: {
+  eyebrow: {
     display: "inline-flex",
-    alignItems: "center",
-    gap: "6px",
-    backgroundColor: "rgba(0, 114, 196, 0.08)",
+    padding: "7px 16px",
+    marginBottom: "18px",
+    border: `1px solid ${theme.light.brand.border.light || "#B0D6FF"}`,
+    borderRadius: "24px",
+    backgroundColor: theme.light.brand.surface.lighter || "#F0F6FE",
     color: theme.light.brand.surface.darker || "#004B82",
-    fontSize: "0.78rem",
-    fontWeight: 700,
-    letterSpacing: "0.06em",
-    textTransform: "uppercase",
-    padding: "5px 12px",
-    borderRadius: "20px",
-    border: "1px solid rgba(0, 114, 196, 0.18)",
-  },
-
-  badgeGreen: {
-    backgroundColor: "rgba(46, 125, 50, 0.09)",
-    color: "#2E7D32",
-    borderColor: "rgba(46, 125, 50, 0.22)",
-  },
-
-  mainHeading: {
-    fontSize: "2.1rem",
+    fontSize: "0.76rem",
     fontWeight: 800,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+  },
+  title: {
+    margin: "0 0 16px",
     color: theme.light.brand.surface.darker || "#00325A",
-    margin: "0 0 8px 0",
-    letterSpacing: "-0.02em",
-    lineHeight: 1.2,
+    fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
+    lineHeight: 1.14,
+    fontWeight: 800,
     fontFamily: "'Open Sans', sans-serif",
-    "@media (max-width: 768px)": {
-      fontSize: "1.6rem",
-    },
+    letterSpacing: "-0.02em",
   },
-
-  mainSubtitle: {
-    fontSize: "0.95rem",
-    color: theme.light.neutral.onSurface.medium,
-    margin: "0 0 20px 0",
-    lineHeight: 1.6,
+  intro: {
+    margin: "0 0 28px",
+    color: theme.light.neutral.onSurface.medium || "#4A607A",
+    fontSize: "1.06rem",
+    lineHeight: 1.75,
   },
-
-  // Beta & Database Highlight Cards Grid
-  highlightGrid: {
+  betaDetailsGrid: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
-    gap: "14px",
+    gap: "32px",
+    textAlign: "left",
+    marginTop: "24px",
+    paddingTop: "24px",
+    borderTop: `1px solid rgba(0, 114, 196, 0.12)`,
     "@media (max-width: 720px)": {
       gridTemplateColumns: "1fr",
-      gap: "10px",
+      gap: "20px",
     },
   },
-
-  highlightItem: {
-    backgroundColor: "rgba(245, 250, 255, 0.75)",
-    border: "1px solid rgba(0, 114, 196, 0.16)",
-    borderRadius: "14px",
-    padding: "16px 18px",
+  betaDetailItem: {
     display: "flex",
-    gap: "12px",
     alignItems: "flex-start",
-    boxShadow: "0 4px 12px rgba(0, 68, 140, 0.03)",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease",
-    "&:hover": {
-      transform: "translateY(-2px)",
-      borderColor: "rgba(0, 114, 196, 0.35)",
-      boxShadow: "0 6px 18px rgba(0, 114, 196, 0.08)",
-    },
+    gap: "14px",
   },
-
-  highlightIconWrapper: {
-    width: "38px",
-    height: "38px",
+  betaDetailIcon: {
+    width: "36px",
+    height: "36px",
     borderRadius: "10px",
-    backgroundColor: "rgba(0, 114, 196, 0.10)",
+    backgroundColor: "rgba(0, 114, 196, 0.08)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color: "#0072C4",
     flexShrink: 0,
+    marginTop: "2px",
   },
-
-  highlightContent: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "3px",
-  },
-
-  highlightTitle: {
-    margin: 0,
+  betaDetailTitle: {
+    margin: "0 0 6px",
+    fontSize: "1.05rem",
     fontWeight: 700,
-    fontSize: "0.92rem",
-    color: theme.light.brand.surface.darker,
+    color: theme.light.brand.surface.darker || "#00325A",
     letterSpacing: "-0.01em",
   },
-
-  highlightDesc: {
+  betaDetailDesc: {
     margin: 0,
-    fontSize: "0.84rem",
-    color: theme.light.neutral.onSurface.medium,
-    lineHeight: 1.5,
+    fontSize: "0.9rem",
+    color: theme.light.neutral.onSurface.medium || "#5E718D",
+    lineHeight: 1.62,
   },
 
-  // Subtle divider between top content and terms
-  sectionDivider: {
-    height: "1px",
-    background: `linear-gradient(90deg, transparent 0%, ${theme.light.brand.border.light || "#B0D6FF"} 20%, ${theme.light.brand.border.light || "#B0D6FF"} 80%, transparent 100%)`,
-    margin: "24px 0 28px 0",
+  // Terms Document Header Inside The Box
+  termsDocHeader: {
+    marginBottom: "24px",
+    paddingBottom: "20px",
+    borderBottom: `1px solid ${theme.light.brand.border.light || "#B0D6FF"}`,
+  },
+  termsDocTitle: {
+    fontSize: "1.65rem",
+    fontWeight: 800,
+    color: theme.light.brand.surface.darker || "#00325A",
+    margin: "0 0 8px 0",
+    letterSpacing: "-0.01em",
+    lineHeight: 1.25,
+    fontFamily: "'Open Sans', sans-serif",
+    "@media (max-width: 768px)": {
+      fontSize: "1.35rem",
+    },
+  },
+  termsDocSubtitle: {
+    fontSize: "0.95rem",
+    color: theme.light.neutral.onSurface.medium,
+    margin: 0,
+    lineHeight: 1.6,
   },
 
   // Terms Body Styles
@@ -262,52 +242,9 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     marginBottom: "16px",
   },
 
-  list: {
-    listStyleType: "disc",
-    paddingLeft: "24px",
-    color: theme.light.neutral.onSurface.medium,
-    fontSize: "0.95rem",
-    lineHeight: 1.75,
-    marginBottom: "16px",
-  },
-
-  listItem: {
-    marginBottom: "12px",
-    "& strong": {
-      color: theme.light.neutral.onSurface.title,
-      fontWeight: 600,
-    },
-  },
-
   strong: {
     color: theme.light.neutral.onSurface.title,
     fontWeight: 600,
-  },
-
-  refundBox: {
-    backgroundColor: theme.light.brand.surface.lighter,
-    border: `1px solid ${theme.light.brand.border.light}`,
-    borderRadius: "16px",
-    padding: "26px 28px",
-    marginTop: "32px",
-    marginBottom: "16px",
-    "@media (max-width: 768px)": {
-      padding: "20px 16px",
-    },
-  },
-
-  refundTitle: {
-    color: theme.light.brand.surface.darker,
-    fontSize: "1.22rem",
-    fontWeight: 700,
-    margin: "0 0 6px 0",
-    letterSpacing: "-0.01em",
-  },
-
-  refundSubtitle: {
-    fontSize: "0.9rem",
-    color: theme.light.neutral.onSurface.medium,
-    margin: "0 0 16px 0",
   },
 
   endDocumentMarker: {
@@ -372,19 +309,26 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   },
 
   agreeButton: {
-    padding: "13px 40px",
+    padding: "13px 36px",
     fontSize: "0.98rem",
     fontWeight: 700,
+    color: "#FFFFFF",
+    backgroundColor: theme.light.brand.surface.medium || "#0072C4",
+    background: `linear-gradient(90deg, ${theme.light.brand.surface.medium || "#0072C4"} 0%, ${theme.light.brand.surface.dark || "#005ea6"} 100%)`,
     borderRadius: "12px",
+    border: "none",
     cursor: "pointer",
     whiteSpace: "nowrap",
     boxShadow: "0 8px 22px rgba(0, 114, 196, 0.28)",
     transition: "all 0.25s ease-in-out",
     display: "inline-flex",
     alignItems: "center",
-    gap: "8px",
+    gap: "10px",
     justifyContent: "center",
+    lineHeight: 1,
+    fontFamily: "'Open Sans', sans-serif",
     "&:hover": {
+      backgroundColor: theme.light.brand.surface.dark || "#005ea6",
       transform: "translateY(-2px)",
       boxShadow: "0 12px 28px rgba(0, 114, 196, 0.38)",
     },
@@ -393,6 +337,17 @@ export const useStyles = createUseStyles((theme: Theme) => ({
       textAlign: "center",
       justifyContent: "center",
       padding: "13px 20px",
+    },
+  },
+
+  agreeButtonIcon: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    lineHeight: 0,
+    flexShrink: 0,
+    "& svg": {
+      display: "block",
     },
   },
 

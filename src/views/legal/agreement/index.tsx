@@ -1,11 +1,9 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import Button from '../../../components/button/button';
 import { useStyles } from './style';
 import {
   DatabaseShieldIcon,
-  ShieldCheckIcon,
   SettingsIcon,
   CheckCircleIcon,
   LockIcon,
@@ -81,9 +79,47 @@ const AgreementView: React.FC = () => {
       </div>
 
       <main className={classes.container}>
-        {/* ONE SINGLE UNIFIED CARD */}
+        {/* OUTSIDE HEADER (Matching pricing page design) */}
+        <header className={classes.pageHeader}>
+          <span className={classes.eyebrow}>We are in Beta now</span>
+          <h1 className={classes.title}>
+            Dedicated Database Isolation. Continuous Beta Evolution.
+          </h1>
+          <p className={classes.intro}>
+            Weblings Worksuite is currently in an active beta testing phase scheduled through December 2026. You get full early access to our platform while we continuously optimize performance, roll out new apps, and fine-tune stability. Throughout this beta and beyond, your workspace is safeguarded by dedicated database isolation—your company data is strictly private and never pooled or shared.
+          </p>
+
+          {/* Heading and description outside the box */}
+          <div className={classes.betaDetailsGrid}>
+            <div className={classes.betaDetailItem}>
+              <div className={classes.betaDetailIcon}>
+                <DatabaseShieldIcon width={20} height={20} stroke="#0072C4" />
+              </div>
+              <div>
+                <h2 className={classes.betaDetailTitle}>Isolated Company Database</h2>
+                <p className={classes.betaDetailDesc}>
+                  Your workspace data is stored in a separate, dedicated database. It is strictly private and will never be shared, pooled, or leaked anywhere.
+                </p>
+              </div>
+            </div>
+
+            <div className={classes.betaDetailItem}>
+              <div className={classes.betaDetailIcon}>
+                <SettingsIcon width={20} height={20} stroke="#0072C4" />
+              </div>
+              <div>
+                <h2 className={classes.betaDetailTitle}>Active Beta &amp; Improvements</h2>
+                <p className={classes.betaDetailDesc}>
+                  Weblings Worksuite is in active beta. You may encounter occasional bugs or minor imperfections as we continuously optimize performance and deploy upgrades.
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* ONE SINGLE UNIFIED CARD (THE TERMS BOX) */}
         <div className={classes.unifiedCard} role="region" aria-label="Terms of Service and Agreement">
-          {/* Scrollable container containing both top content and terms seamlessly */}
+          {/* Scrollable container containing terms */}
           <div
             className={classes.scrollContainer}
             ref={scrollRef}
@@ -92,53 +128,13 @@ const AgreementView: React.FC = () => {
             role="region"
             aria-label="Scrollable Agreement Document"
           >
-            {/* Top Content Section */}
-            <div className={classes.topSection}>
-              <div className={classes.badgeRow}>
-                <div className={classes.headerBadge}>
-                  <ShieldCheckIcon width={16} height={16} stroke="#0072C4" />
-                  <span>Beta Access Program</span>
-                </div>
-                <div className={`${classes.headerBadge} ${classes.badgeGreen}`}>
-                  <DatabaseShieldIcon width={16} height={16} stroke="#2E7D32" />
-                  <span>Isolated Database Guarantee</span>
-                </div>
-              </div>
-
-              <h1 className={classes.mainHeading}>Review &amp; Accept Terms of Service</h1>
-              <p className={classes.mainSubtitle}>
+            {/* Terms Document Header Inside The Box */}
+            <div className={classes.termsDocHeader}>
+              <h2 className={classes.termsDocTitle}>Review &amp; Accept Terms of Service</h2>
+              <p className={classes.termsDocSubtitle}>
                 Please review our terms of service below. To join Weblings, you must review and accept our beta terms and data privacy conditions.
               </p>
-
-              <div className={classes.highlightGrid}>
-                <div className={classes.highlightItem}>
-                  <div className={classes.highlightIconWrapper}>
-                    <DatabaseShieldIcon width={22} height={22} stroke="#0072C4" />
-                  </div>
-                  <div className={classes.highlightContent}>
-                    <h2 className={classes.highlightTitle}>Isolated Company Database</h2>
-                    <p className={classes.highlightDesc}>
-                      Your workspace data is stored in a <strong>separate, dedicated database</strong>. It is strictly private and will <strong>never be shared, pooled, or leaked</strong> anywhere.
-                    </p>
-                  </div>
-                </div>
-
-                <div className={classes.highlightItem}>
-                  <div className={classes.highlightIconWrapper}>
-                    <SettingsIcon width={22} height={22} stroke="#0072C4" />
-                  </div>
-                  <div className={classes.highlightContent}>
-                    <h2 className={classes.highlightTitle}>Active Beta &amp; Improvements</h2>
-                    <p className={classes.highlightDesc}>
-                      Weblings Worksuite is in active beta. You may encounter occasional bugs or minor imperfections as we continuously optimize performance and deploy upgrades.
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
-
-            {/* Subtle Divider */}
-            <div className={classes.sectionDivider} />
 
             {/* Terms and Conditions Content */}
             <p className={classes.introParagraph}>
@@ -213,22 +209,7 @@ const AgreementView: React.FC = () => {
               These Terms shall be governed by the laws of India. Any disputes arising from the use of Weblings shall be subject to the exclusive jurisdiction of the courts located in <strong className={classes.strong}>Tiruppur, Tamil Nadu</strong>.
             </p>
 
-            <div className={classes.refundBox}>
-              <h3 className={classes.refundTitle}>Refund &amp; Cancellation Policy</h3>
-              <p className={classes.refundSubtitle}>Please read our payment and cancellation terms carefully.</p>
 
-              <ul className={classes.list} style={{ marginBottom: 0 }}>
-                <li className={classes.listItem}>
-                  <strong className={classes.strong}>No Refunds:</strong> All subscription payments (monthly or annual) made to Weblings are final and non-refundable. We do not provide prorated refunds for mid-cycle cancellations. If your account is terminated due to a violation of our Terms of Service, no refunds will be issued.
-                </li>
-                <li className={classes.listItem}>
-                  <strong className={classes.strong}>Tax &amp; Pricing Changes:</strong> All subscription fees are exclusive of taxes. An additional tax will be applied to all payments as mandated by Indian law. We reserve the right to transition beta users to paid plans or adjust server usage fees with prior notice.
-                </li>
-                <li className={classes.listItem} style={{ marginBottom: 0 }}>
-                  <strong className={classes.strong}>Cancellation &amp; Data Export:</strong> You may cancel your subscription at any time. Upon cancellation, you will retain access to the platform until the end of your current paid billing cycle. Weblings guarantees data portability; you may export your data out of our system at any time without hurdles.
-                </li>
-              </ul>
-            </div>
 
             {/* End of Document Confirmation */}
             <div className={classes.endDocumentMarker}>
@@ -260,20 +241,21 @@ const AgreementView: React.FC = () => {
               </p>
             </div>
 
-            <Button
-              element="button"
-              brand
+            <button
+              type="button"
               className={`${classes.agreeButton} ${!hasScrolledToBottom ? classes.agreeButtonDisabled : ''}`}
               disabled={!hasScrolledToBottom}
               onClick={handleAgree}
             >
-              {hasScrolledToBottom ? (
-                <CheckCircleIcon width={18} height={18} stroke="#FFFFFF" />
-              ) : (
-                <LockIcon width={16} height={16} stroke="#FFFFFF" />
-              )}
+              <span className={classes.agreeButtonIcon}>
+                {hasScrolledToBottom ? (
+                  <CheckCircleIcon width={18} height={18} stroke="#FFFFFF" />
+                ) : (
+                  <LockIcon width={16} height={16} stroke="#FFFFFF" />
+                )}
+              </span>
               <span>Agree &amp; Continue</span>
-            </Button>
+            </button>
           </div>
         </div>
       </main>

@@ -68,3 +68,9 @@ export { default as GranularAccessIcon } from "./GranularAccessIcon";
 export { default as TimeBombLinkIcon } from "./TimeBombLinkIcon";
 export { default as DatabaseShieldIcon } from "./DatabaseShieldIcon";
 export { default as ScrollDownIcon } from "./ScrollDownIcon";
+
+// Outlined Security & Compliance Icons
+export { default as IsolatedDatabaseIcon } from "./IsolatedDatabaseIcon";
+export { default as EdgeThreatProtectionIcon } from "./EdgeThreatProtectionIcon";
+export { default as EndToEndEncryptionIcon } from "./EndToEndEncryptionIcon";
+export { default as DpdpComplianceIcon } from "./DpdpComplianceIcon";
