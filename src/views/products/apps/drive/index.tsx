@@ -324,6 +324,80 @@ const DriveFeature: React.FC = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
+          ENTERPRISE RESILIENCE SECTION (DARK)
+          ───────────────────────────────────────────────────────────── */}
+      <section className={classes.resilienceSection}>
+        <div className={classes.resilienceInner}>
+          {/* Header */}
+          <div className={classes.resilienceHeader}>
+            <span className={classes.resilienceEyebrow}>Enterprise Resilience</span>
+            <h2 className={classes.resilienceTitle}>Built for scale. Secured against disasters.</h2>
+            <p className={classes.resilienceSubtitle}>
+              A web UI is nice, but your engineering and design teams move terabytes of data daily. We built Weblings Drive to integrate directly with their local OS while maintaining ironclad data immutability in the cloud.
+            </p>
+          </div>
+
+          {/* 3-Card Grid */}
+          <div className={classes.resilienceGrid}>
+            {/* Card 1: Infinite Version History */}
+            <div className={classes.resilienceCard}>
+              <div
+                className={classes.resilienceIconBox}
+                style={{ backgroundColor: '#EFF6FF', color: '#2563EB' }}
+              >
+                <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx={12} cy={12} r={10} />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <h3 className={classes.resilienceCardTitle}>Infinite Version History</h3>
+              <p className={classes.resilienceCardDesc}>
+                Did an intern accidentally overwrite the master design file? Did a script corrupt a folder? One click restores any file or directory to any previous point in time. Our append-only object storage guarantees you never lose historical data.
+              </p>
+              <div className={classes.resilienceTerminal}>Restore to: 14:02 PM Yesterday</div>
+            </div>
+
+            {/* Card 2: Desktop Smart Sync */}
+            <div className={classes.resilienceCard}>
+              <div
+                className={classes.resilienceIconBox}
+                style={{ backgroundColor: '#F1F5F9', color: '#475569' }}
+              >
+                <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                  <rect x={2} y={3} width={20} height={14} rx={2} ry={2} />
+                  <line x1={8} y1={21} x2={16} y2={21} />
+                  <line x1={12} y1={17} x2={12} y2={21} />
+                </svg>
+              </div>
+              <h3 className={classes.resilienceCardTitle}>Desktop Smart Sync</h3>
+              <p className={classes.resilienceCardDesc}>
+                Don&apos;t force your designers to drag and drop 50GB Premiere Pro files into a web browser. Install the Weblings Desktop app for macOS or Windows. Files map securely to their local file explorer but only download exactly when opened, saving hard drive space.
+              </p>
+              <span className={classes.resiliencePill}>macOS &amp; Windows Native</span>
+            </div>
+
+            {/* Card 3: Encryption at Rest */}
+            <div className={classes.resilienceCard}>
+              <div
+                className={classes.resilienceIconBox}
+                style={{ backgroundColor: '#FFFBEB', color: '#D97706' }}
+              >
+                <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                  <rect x={3} y={11} width={18} height={11} rx={2} ry={2} />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+              </div>
+              <h3 className={classes.resilienceCardTitle}>Encryption at Rest</h3>
+              <p className={classes.resilienceCardDesc}>
+                Pass your compliance audits (SOC2, DPDP, GDPR) without breaking a sweat. All raw storage objects are encrypted at rest using AES-256 block-level encryption. Need absolute control? Contact us for Enterprise Bring Your Own Key (BYOK) architecture.
+              </p>
+              <div className={classes.resilienceTerminal}>Encryption: AES-256 (At Rest)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
           SECTION 4: UNIFIED MOBILE EXPERIENCE (WITH MOBILE MOCKUP)
           ───────────────────────────────────────────────────────────── */}
       <section className={classes.mobileSectionWrapper}>
