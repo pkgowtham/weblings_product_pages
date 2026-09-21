@@ -75,7 +75,7 @@ const WorkSuiteFeature: React.FC = () => {
           <div className={classes.heroBtnRow}>
             <div className={classes.primaryBtnWrapper}>
               <button className={classes.primaryBtn}>
-                <span>Join Now</span>
+                <span>Claim Your Beta Spot</span>
               </button>
               <span className={classes.primaryBtnSubtext}>No credit card required.</span>
             </div>
@@ -628,8 +628,21 @@ const WorkSuiteFeature: React.FC = () => {
           <button className={classes.bottomCtaBtn}>
             Deploy Your Custom Workspace Today
           </button>
-          <div className={classes.bottomCtaSub}>
-            Takes less than 60 seconds. No credit card required.
+          <div className={classes.socialProofRow}>
+            <div className={classes.socialAvatarStack}>
+              <div className={classes.socialAvatar}>JD</div>
+              <div className={classes.socialAvatar}>AS</div>
+              <div className={classes.socialAvatar}>MJ</div>
+              <div className={classes.socialAvatarPlus}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </div>
+            </div>
+            <span className={classes.socialProofText}>
+              Join our team in the early access beta.
+            </span>
           </div>
         </div>
       </section>

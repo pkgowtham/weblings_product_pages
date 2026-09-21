@@ -157,7 +157,8 @@ export const useStyles = createUseStyles({
      ───────────────────────────────────────────────────────────── */
   mainBody: {
     display: "flex",
-    minHeight: "600px",
+    flex: 1,
+    minHeight: 0,
     backgroundColor: "#FFFFFF",
     position: "relative",
     overflow: "hidden",

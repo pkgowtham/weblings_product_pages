@@ -268,7 +268,7 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   // Dashboard Main Body (Sidebar + Content)
   bodyLayout: {
     display: "flex",
-    minHeight: "680px",
+    minHeight: "560px",
     backgroundColor: "#FFFFFF",
   },
   appStageWrapper: {

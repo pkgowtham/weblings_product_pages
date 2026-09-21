@@ -9,6 +9,17 @@ import WeblingsMailMockup from '../mailMockup';
 import ConnectMockup from '../connectMockup';
 import CalendarMockup from '../calendarMockup';
 import DriveMockup from '../driveMockup';
+import EofficeAttendanceView from './EofficeAttendanceView';
+import {
+  WorksuiteIcon,
+  MailIcon,
+  CalendarIcon,
+  ConnectIcon,
+  StreamlineIcon,
+  EOfficeIcon,
+  DriveIcon,
+  SettingsIcon,
+} from '../../assets/icons_component';
 
 // SVG Icons tailored for the dashboard mockup to match the exact image
 const SvgWeblingsLogoMark = () => (
@@ -193,7 +204,7 @@ const AvatarWithFallback: React.FC<AvatarProps> = ({ src, alt, label, bg = '#E0F
   );
 };
 
-export type MockupAppKey = 'workspace' | 'streamline' | 'mail' | 'connect' | 'calendar' | 'drive';
+export type MockupAppKey = 'workspace' | 'mail' | 'calendar' | 'connect' | 'eoffice' | 'streamline' | 'drive';
 
 export interface WorkspaceDashboardMockupProps {
   variant?: 'dashboard' | 'workspace' | 'eoffice' | 'streamline' | 'stream' | 'mail' | 'connect' | 'calendar' | 'calender' | 'drive';
@@ -205,6 +216,7 @@ function getNormalizedApp(variant?: string): MockupAppKey {
   if (variant === 'mail') return 'mail';
   if (variant === 'connect') return 'connect';
   if (variant === 'calendar' || variant === 'calender') return 'calendar';
+  if (variant === 'eoffice') return 'eoffice';
   if (variant === 'drive') return 'drive';
   return 'workspace';
 }
@@ -241,38 +253,44 @@ export const WorkspaceDashboardMockup: React.FC<WorkspaceDashboardMockupProps> =
   const appTabs: { key: MockupAppKey; title: string; icon: React.ReactNode; url: string }[] = [
     {
       key: 'workspace',
-      title: 'Workspace / E-Office',
-      icon: <SvgBriefcase />,
+      title: 'Workspace',
+      icon: <WorksuiteIcon width={16} height={16} />,
       url: 'weblings.org/dashboard',
-    },
-    {
-      key: 'streamline',
-      title: 'Streamline',
-      icon: <SvgPresentation />,
-      url: 'weblings.org/streamline',
     },
     {
       key: 'mail',
       title: 'Mail',
-      icon: <SvgMail />,
+      icon: <MailIcon width={16} height={16} />,
       url: 'weblings.org/mail',
-    },
-    {
-      key: 'connect',
-      title: 'Connect',
-      icon: <SvgChatBubble />,
-      url: 'weblings.org/connect',
     },
     {
       key: 'calendar',
       title: 'Calendar',
-      icon: <SvgCalendar />,
+      icon: <CalendarIcon width={16} height={16} />,
       url: 'weblings.org/calendar',
+    },
+    {
+      key: 'connect',
+      title: 'Connect',
+      icon: <ConnectIcon width={16} height={16} />,
+      url: 'weblings.org/connect',
+    },
+    {
+      key: 'eoffice',
+      title: 'E-Office',
+      icon: <EOfficeIcon width={16} height={16} />,
+      url: 'weblings.org/eoffice',
+    },
+    {
+      key: 'streamline',
+      title: 'Streamline',
+      icon: <StreamlineIcon width={16} height={16} />,
+      url: 'weblings.org/streamline',
     },
     {
       key: 'drive',
       title: 'Drive',
-      icon: <SvgFolder />,
+      icon: <DriveIcon width={16} height={16} />,
       url: 'weblings.org/drive',
     },
   ];
@@ -379,7 +397,7 @@ export const WorkspaceDashboardMockup: React.FC<WorkspaceDashboardMockupProps> =
             onClick={() => {}}
             title="Settings"
           >
-            <SvgGear />
+            <SettingsIcon width={16} height={16} />
           </div>
           <div
             className={classes.sideIcon}
@@ -394,36 +412,6 @@ export const WorkspaceDashboardMockup: React.FC<WorkspaceDashboardMockupProps> =
         <div className={classes.appStageWrapper}>
           {activeApp === 'workspace' && (
             <div style={{ display: 'flex', width: '100%', minHeight: '100%' }}>
-              {/* Sidebar 2 (Inner Left - Contextual to Workspace) */}
-              <aside className={classes.sidebarCol2}>
-                <span className={classes.sideChevron} title="Collapse sub-panel">›</span>
-                <div className={classes.sideAvatar}>A</div>
-                {[
-                  { icon: <SvgBriefcase />, title: "Files" },
-                  { icon: <SvgMail />, title: "Inbox" },
-                  { icon: <SvgChatBubble />, title: "Channels" },
-                  { icon: <SvgCalendar />, title: "Schedules" },
-                  { icon: <SvgGear />, title: "Configurations" },
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className={`${classes.sideIcon} ${activeSideCol2 === idx ? classes.sideIconActiveBar : ""}`}
-                    onClick={() => setActiveSideCol2(idx)}
-                    title={item.title}
-                  >
-                    {item.icon}
-                  </div>
-                ))}
-                <div className={classes.sidebarSpacer} />
-                <div
-                  className={`${classes.sideIcon} ${activeSideCol2 === 5 ? classes.sideIconActiveBar : ""}`}
-                  onClick={() => setActiveSideCol2(5)}
-                  title="Support"
-                >
-                  <SvgHelp />
-                </div>
-              </aside>
-
               {/* Content Area */}
               <main className={classes.contentArea}>
           {/* Header Banner */}
@@ -843,6 +831,7 @@ export const WorkspaceDashboardMockup: React.FC<WorkspaceDashboardMockupProps> =
       {activeApp === 'mail' && <WeblingsMailMockup embedded={true} />}
       {activeApp === 'connect' && <ConnectMockup embedded={true} />}
       {activeApp === 'calendar' && <CalendarMockup embedded={true} />}
+      {activeApp === 'eoffice' && <EofficeAttendanceView />}
       {activeApp === 'drive' && <DriveMockup embedded={true} />}
     </div>
   </div>

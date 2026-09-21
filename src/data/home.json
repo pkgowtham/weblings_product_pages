@@ -6,7 +6,7 @@
     "title": "One workspace. Six apps. One simple invoice.\nWith built-in AI to manage your client specs and enforce developer code standards.",
     "titleDescription": "The all-in-one business workspace uniting your HRMS, agile ticketing, team chat, shared calendar, cloud drive, and webmail from a single secure dashboard. We've combined enterprise-grade scalability, fraction-of-the-cost pricing, and a built-in AI engine that automatically turns client calls into tickets—ensuring your developers build exactly what was promised.",
     "action": {
-      "label": "Join Now",
+      "label": "Claim Your Beta Spot",
       "subtext": "No credit card required.",
       "link": "/agreement"
     },
@@ -192,18 +192,18 @@
         "id": "trendingUp",
         "title": "Real-Time Oversight on the Go",
         "target": "For Founders & Executives",
-        "description": "Stay tuned to company operations without checking a laptop. Monitor employee attendance logs, department headcounts, organizational hierarchies, and shift telemetry across every branch right on your phone.",
+        "description": "Stay tuned to company operations without checking a laptop. Monitor multi-unit business hubs, client rosters, active project deliveries, organization details, and enterprise billing right on your phone.",
         "badges": ["iOS App", "Android App"],
-        "phoneVariant": "attendance",
+        "phoneVariant": "businessHub",
         "phoneNotification": {
           "icon": "⚡",
-          "title": "Branch Telemetry Normal",
-          "subtitle": "4 Active Locations • 99.99% Uptime",
+          "title": "Business Hub Active",
+          "subtitle": "24 Projects • 18 Clients Live",
           "time": "Live Feed"
         },
         "phoneFeed": {
-          "text": "Cluster Latency",
-          "time": "18ms (Global CDN)"
+          "text": "142 of 156 on Duty",
+          "time": "Weblings Unit 1"
         }
       }
     ]
@@ -277,7 +277,7 @@
     ],
     "action": {
       "label": "Deploy Your Custom Workspace Today",
-      "subtext": "Takes less than 60 seconds. No credit card required.",
+      "subtext": "Join our team in the early access beta.",
       "link": "/"
     }
   },

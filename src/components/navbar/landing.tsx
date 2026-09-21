@@ -697,7 +697,7 @@ const Navbar = () => {
       {/* Desktop Action Button */}
       <div className={classes.DesktopOnly}>
         <Button element="button" brand onClick={() => router.push("/agreement")}>
-          Join Now
+          Claim Your Beta Spot
         </Button>
       </div>
 
@@ -775,7 +775,7 @@ const Navbar = () => {
                 router.push("/agreement");
               }}
             >
-              Join Now
+              Claim Your Beta Spot
             </Button>
           </div>
         </div>

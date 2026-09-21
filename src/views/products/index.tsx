@@ -19,6 +19,7 @@ import PhoneMockup from "../../components/phoneMockup/index";
 import BentoCard from "../../components/bentoCard/index";
 import { SvgApple, SvgAndroid } from "../../components/appStoreButtons";
 import StatusModal, { StatusModalType } from "../../components/statusModal";
+import SecurityComplianceSection from "../../components/securityComplianceSection";
 import {
   BrainIcon,
   MicIcon,
@@ -801,6 +802,12 @@ const Products = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
+          ENTERPRISE-GRADE SECURITY & COMPLIANCE SECTION
+          4-card dark grid with animated icons matching Image 1
+          ═══════════════════════════════════════════════════════ */}
+      <SecurityComplianceSection />
+
+      {/* ═══════════════════════════════════════════════════════
           MIGRATION / TRUST SECTION — "Terrified of Migrating?"
           Dark slate-900 section with colored-border hover cards
           ═══════════════════════════════════════════════════════ */}
@@ -845,7 +852,7 @@ const Products = () => {
             })}
           </div>
 
-          {/* Floating CTA */}
+          {/* Floating CTA with Social Proof Avatar Stack */}
           <div className={classes.migrationCTA}>
             <div className={classes.ctaGlowOverlay} />
             <div className={classes.ctaContent}>
@@ -855,7 +862,24 @@ const Products = () => {
               >
                 {data.migration.action.label}
               </button>
-              <p className={classes.migrationSubtext}>{data.migration.action.subtext}</p>
+              
+              {/* Social Proof Avatar Stack & Text (Matching Image 2) */}
+              <div className={classes.socialProofRow}>
+                <div className={classes.socialAvatarStack}>
+                  <div className={classes.socialAvatar}>JD</div>
+                  <div className={classes.socialAvatar}>AS</div>
+                  <div className={classes.socialAvatar}>MJ</div>
+                  <div className={classes.socialAvatarPlus}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                  </div>
+                </div>
+                <span className={classes.socialProofText}>
+                  Join our team in the early access beta.
+                </span>
+              </div>
             </div>
           </div>
         </div>
