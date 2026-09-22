@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scene 1: Domain Claim & 5-Min IT Bypass</title>
+  <style>
+    /* Reset and Base Constraints */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden; /* Critical Anti-Deformation Constraint */
+      background-color: #F4F6F9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #0F172A;
+    }
+
+    /* Master Timeline Controller Canvas */
+    #canvas-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      perspective: 1400px; /* Camera Rig */
+      transform-style: preserve-3d;
+    }
+
+    /* The World Stage - larger than viewport to prevent empty background edge during pan/zoom */
+    #world-stage {
+      position: absolute;
+      top: -50vh;
+      left: -50vw;
+      width: 300vw;
+      height: 200vh;
+      transform-style: preserve-3d;
+      transform-origin: 50% 50%;
+      will-change: transform, filter;
+    }
+
+    /* Virtual Cursor */
+    #cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Design Tokens */
+    :root {
+      --brand-blue: #0072C4;
+      --surface-lighter: #E6F2FF;
+      --slate-navy: #0F172A;
+      --bg-light: #F4F6F9;
+      --green-accent: #10B981;
+      --white: #ffffff;
+      --gray-border: #d9d9d9;
+    }
+
+    /* Layout Positioning of Sections */
+    .section-wrapper {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    #domain-section {
+      left: 100vw; /* Center of initial view (50vw screen + 50vw offset) */
+      top: 100vh;
+      width: 800px;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    #eoffice-section {
+      left: 200vw; /* To the right */
+      top: 100vh;
+      width: 1000px;
+      transform: translate(-50%, -50%) rotateY(-15deg);
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.05);
+      padding: 40px;
+      opacity: 0; /* Hidden initially */
+    }
+
+    /* Modals Container (attached to viewport so they are overlay) */
+    #modals-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: scale(0.9);
+      display: none;
+    }
+
+    /* Specific Elements */
+
+    /* Domain Section */
+    h1 {
+      font-size: 48px;
+      margin-bottom: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .search-bar {
+      display: flex;
+      background: var(--white);
+      border-radius: 8px;
+      padding: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid var(--gray-border);
+    }
+
+    .input-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+    }
+
+    .domain-prefix {
+      color: #8c8c8c;
+      font-size: 18px;
+      margin-right: 4px;
+    }
+
+    #typed-domain {
+      font-size: 18px;
+      color: var(--slate-navy);
+      font-weight: 500;
+      min-width: 2px;
+      border-right: 2px solid var(--slate-navy);
+      animation: blink 1s step-end infinite;
+      white-space: pre;
+    }
+
+    @keyframes blink { 50% { border-color: transparent; } }
+    .typing-done { animation: none !important; border-color: transparent !important; }
+
+    #claim-btn, #create-employee-btn {
+      background: var(--brand-blue);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transform-origin: center;
+    }
+
+    /* E-Office Section */
+    .eoffice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .eoffice-header h2 {
+      font-size: 32px;
+    }
+
+    .directory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .employee-row {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--gray-border);
+      border-radius: 8px;
+      background: var(--surface-lighter);
+    }
+
+    .employee-row.new-employee {
+      background: #eaf6ec; /* Positive Surface Lighter */
+      border-color: var(--green-accent);
+      opacity: 0; /* Hidden initially */
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--brand-blue);
+      color: var(--white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      margin-right: 16px;
+    }
+
+    .employee-info { flex: 1; }
+    .employee-name { font-weight: 600; font-size: 18px; margin-bottom: 4px; }
+    .employee-email { color: #595959; font-size: 14px; }
+
+    .badge {
+      margin-left: auto;
+      background: var(--green-accent);
+      color: var(--white);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Modals */
+    #confetti-modal {
+      text-align: center;
+      max-width: 400px;
+    }
+
+    #confetti-modal h3 {
+      font-size: 24px;
+      color: var(--brand-blue);
+      margin-bottom: 12px;
+    }
+
+    #confetti-modal p {
+      font-size: 16px;
+      color: #595959;
+    }
+
+    #bypass-modal {
+      width: 480px;
+    }
+
+    #bypass-modal h3 {
+      font-size: 24px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--gray-border);
+      padding-bottom: 12px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 16px;
+      color: #595959;
+    }
+
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-border);
+      margin-right: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .check-icon svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: white;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+    }
+
+    .checklist-item.resolved .check-icon {
+      background: var(--green-accent);
+      border-color: var(--green-accent);
+    }
+    .checklist-item.resolved .check-icon svg {
+      opacity: 1;
+    }
+    .checklist-item.resolved .item-text {
+      color: var(--slate-navy);
+      font-weight: 500;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Virtual Cursor -->
+  <svg id="cursor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5.5 3L18.5 11L12.5 13L9.5 21L5.5 3Z" fill="white" stroke="#0F172A" stroke-width="1.5" stroke-linejoin="round"/>
+  </svg>
+
+  <div id="canvas-container">
+    <div id="world-stage">
+
+      <!-- Domain Claim Section -->
+      <div id="domain-section" class="section-wrapper">
+        <h1>Claim your digital HQ</h1>
+        <div class="search-bar">
+          <div class="input-wrapper">
+            <span class="domain-prefix">https://</span>
+            <span id="typed-domain"></span>
+          </div>
+          <button id="claim-btn">Search & Claim</button>
+        </div>
+      </div>
+
+      <!-- E-Office (HRMS) Section -->
+      <div id="eoffice-section" class="section-wrapper">
+        <div class="eoffice-header">
+          <h2>E-Office Directory</h2>
+          <button id="create-employee-btn">+ Create Employee</button>
+        </div>
+
+        <div class="directory-list">
+          <!-- Existing Employee -->
+          <div class="employee-row">
+            <div class="avatar" style="background:#8133f1;">SJ</div>
+            <div class="employee-info">
+              <div class="employee-name">Sarah Jenkins</div>
+              <div class="employee-email">sarah@acme.io</div>
+            </div>
+          </div>
+          <div class="employee-row">
+            <div class="avatar" style="background:#b78af7;">MR</div>
+            <div class="employee-info">
+              <div class="employee-name">Mike Ross</div>
+              <div class="employee-email">mike@acme.io</div>
+            </div>
+          </div>
+
+          <!-- New Employee to be revealed -->
+          <div class="employee-row new-employee" id="new-employee-row">
+            <div class="avatar">AT</div>
+            <div class="employee-info">
+              <div class="employee-name">Alex Turner</div>
+              <div class="employee-email">alex@acme.io</div>
+            </div>
+            <div class="badge">All 6 Apps Provisioned</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modals Layer -->
+  <div id="modals-container">
+    <!-- Confetti Modal -->
+    <div id="confetti-modal" class="modal">
+      <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
+      <h3>Domain Secured in 24 hrs</h3>
+      <p>Zero Lock-in Guarantee</p>
+    </div>
+
+    <!-- 5-Minute IT Bypass Modal -->
+    <div id="bypass-modal" class="modal">
+      <h3>The 5-Minute IT Bypass</h3>
+
+      <div class="checklist-item" id="chk-email">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <div class="item-text">Auto-generates alex@acme.io</div>
+      </div>
+
+      <div class="checklist-item" id="chk-chat">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <div class="item-text">Provisions chat</div>
+      </div>
+
+      <div class="checklist-item" id="chk-boards">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <div class="item-text">Agile boards</div>
+      </div>
+
+      <div class="checklist-item" id="chk-calendar">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <div class="item-text">Calendar</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+  <script>
+    // Initialize GSAP and plugins
+    gsap.registerPlugin(TextPlugin);
+
+    // Initial setup
+    const worldStage = document.getElementById('world-stage');
+    const cursor = document.getElementById('cursor');
+    const claimBtn = document.getElementById('claim-btn');
+    const createBtn = document.getElementById('create-employee-btn');
+    const confettiModal = document.getElementById('confetti-modal');
+    const bypassModal = document.getElementById('bypass-modal');
+    const newEmployeeRow = document.getElementById('new-employee-row');
+
+    // Make sure modals have display block but opacity 0 initially so GSAP can animate them
+    gsap.set([confettiModal, bypassModal], { display: 'block', autoAlpha: 0, scale: 0.9 });
+
+    // Initial Cursor Position
+    gsap.set(cursor, { x: window.innerWidth * 0.8, y: window.innerHeight * 0.8 });
+
+    // Master Timeline (25 seconds total)
+    const masterTl = gsap.timeline({
+      paused: false // Set to false to auto-play, or true if you want to trigger it manually
+    });
+
+    // Helper: get center coordinates of an element
+    function getCenter(el) {
+      const rect = el.getBoundingClientRect();
+      return {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2
+      };
+    }
+
+    // --- [0:00 - 0:05] The Claim ---
+    masterTl.addLabel("start")
+      // Move cursor to input bar
+      .to(cursor, {
+        duration: 1.5,
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+        ease: "power3.inOut"
+      }, "start")
+      // Type "acme.io"
+      .to("#typed-domain", {
+        duration: 1.5,
+        text: "acme.io",
+        ease: "none",
+        onComplete: () => document.getElementById('typed-domain').classList.add('typing-done')
+      }, "start+=1.5")
+      // Move cursor to "Search & Claim" button
+      .to(cursor, {
+        duration: 1,
+        x: () => getCenter(claimBtn).x,
+        y: () => getCenter(claimBtn).y,
+        ease: "power3.inOut"
+      }, "start+=3")
+      // Click button (scale down and up)
+      .to(claimBtn, {
+        duration: 0.1,
+        scale: 0.95,
+        ease: "power1.inOut"
+      }, "start+=4.5")
+      .to(claimBtn, {
+        duration: 0.1,
+        scale: 1,
+        ease: "power1.inOut"
+      }, "start+=4.6");
+
+    // --- [0:05 - 0:10] The Success ---
+    masterTl.addLabel("success", "start+=5")
+      // Pop up Confetti modal
+      .to(confettiModal, {
+        duration: 0.6,
+        autoAlpha: 1,
+        scale: 1,
+        ease: "back.out(1.7)"
+      }, "success")
+      // Camera zooms in (scale 1.1) and blurs background
+      .to(worldStage, {
+        duration: 1.5,
+        scale: 1.1,
+        filter: "blur(8px)",
+        ease: "power2.inOut"
+      }, "success");
+
+    // --- [0:10 - 0:15] The 3D Transition ---
+    masterTl.addLabel("transition", "success+=5")
+      // Close Confetti modal
+      .to(confettiModal, {
+        duration: 0.4,
+        autoAlpha: 0,
+        scale: 0.9,
+        ease: "power2.in"
+      }, "transition")
+      // Reveal E-Office section before panning
+      .set("#eoffice-section", { opacity: 1 }, "transition+=0.2")
+      // Pan and tilt camera (translate and rotate world stage)
+      .to(worldStage, {
+        duration: 3,
+        x: "-100vw", // Pan left (moving world left moves camera right)
+        rotateY: 15,  // Straighten out the E-office which is rotated -15deg
+        scale: 1,     // Reset zoom
+        filter: "blur(0px)", // Remove blur
+        ease: "power3.inOut"
+      }, "transition+=0.4")
+      // Move cursor over towards the new section
+      .to(cursor, {
+        duration: 2,
+        x: window.innerWidth * 0.6,
+        y: window.innerHeight * 0.6,
+        ease: "power2.inOut"
+      }, "transition+=1");
+
+    // --- [0:15 - 0:20] The Bypass Trigger ---
+    masterTl.addLabel("bypass", "transition+=5")
+      // Wait for layout/transform to settle, then get Create Employee button pos
+      // Since world stage moved, we need dynamic positioning or relative values.
+      // E-office is at left: 150vw. We shifted world x by -100vw.
+      // It's roughly centered now.
+      .to(cursor, {
+        duration: 1.5,
+        x: () => {
+           // We need to calculate this dynamically based on screen after movement
+           const rect = createBtn.getBoundingClientRect();
+           return rect.left + rect.width / 2;
+        },
+        y: () => {
+           const rect = createBtn.getBoundingClientRect();
+           return rect.top + rect.height / 2;
+        },
+        ease: "power3.inOut"
+      }, "bypass")
+      // Click "+ Create Employee"
+      .to(createBtn, {
+        duration: 0.1,
+        scale: 0.95,
+        ease: "power1.inOut"
+      }, "bypass+=1.5")
+      .to(createBtn, {
+        duration: 0.1,
+        scale: 1,
+        ease: "power1.inOut"
+      }, "bypass+=1.6")
+      // Show Bypass Modal
+      .to(bypassModal, {
+        duration: 0.6,
+        autoAlpha: 1,
+        scale: 1,
+        ease: "back.out(1.7)"
+      }, "bypass+=1.8")
+      // Camera zoom to 1.18x and blur background
+      .to(worldStage, {
+        duration: 1.5,
+        scale: 1.18,
+        filter: "blur(10px)",
+        ease: "power2.inOut"
+      }, "bypass+=1.8");
+
+    // --- [0:20 - 0:25] The Rapid Resolution ---
+    masterTl.addLabel("resolution", "bypass+=3.5")
+      // Resolve checklist items one by one
+      .to("#chk-email", { duration: 0.2, onStart: () => document.getElementById('chk-email').classList.add('resolved') }, "resolution")
+      .to("#chk-chat", { duration: 0.2, onStart: () => document.getElementById('chk-chat').classList.add('resolved') }, "resolution+=0.4")
+      .to("#chk-boards", { duration: 0.2, onStart: () => document.getElementById('chk-boards').classList.add('resolved') }, "resolution+=0.8")
+      .to("#chk-calendar", { duration: 0.2, onStart: () => document.getElementById('chk-calendar').classList.add('resolved') }, "resolution+=1.2")
+      // Close modal
+      .to(bypassModal, {
+        duration: 0.4,
+        autoAlpha: 0,
+        scale: 0.9,
+        ease: "power2.in"
+      }, "resolution+=2")
+      // Remove blur and unzoom slightly to reveal new employee
+      .to(worldStage, {
+        duration: 1,
+        scale: 1,
+        filter: "blur(0px)",
+        ease: "power2.inOut"
+      }, "resolution+=2.2")
+      // Reveal Alex Turner with badge
+      .to(newEmployeeRow, {
+        duration: 0.5,
+        autoAlpha: 1,
+        y: -10, // slight slide up
+        ease: "back.out(1.5)"
+      }, "resolution+=2.8")
+      .to(newEmployeeRow, {
+        duration: 0.2,
+        y: 0,
+        ease: "power1.out"
+      }, "resolution+=3.3");
+
+  </script>
+</body>
+</html>
