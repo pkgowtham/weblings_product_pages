@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weblings Worksuite - Trailer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+    <style>
+        :root {
+            --brand-blue: #0072C4;
+            --surface-lighter: #e6f2ff;
+            --surface-inverse: #262626;
+            --green-accent: #10B981;
+            --slate-navy: #0F172A;
+            --purple: #9333EA;
+            --bg-light: #F4F6F9;
+            --surface-white: #ffffff;
+            --border-light: #d9d9d9;
+            --positive-medium: #53b96a;
+
+            --text-dark: #262626;
+            --text-light: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        #viewport {
+            width: 100vw;
+            height: 100vh;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #world-stage {
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* Start with slightly pulled back for camera effect, actual movement will be animated */
+        }
+
+        /* Ambient Background */
+        #ambient-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200vw;
+            height: 200vh;
+            transform: translate(-50%, -50%) translateZ(-3000px);
+            background: radial-gradient(circle, var(--brand-blue) 0%, var(--purple) 50%, rgba(0,0,0,1) 100%);
+            opacity: 0;
+            border-radius: 50%;
+            filter: blur(100px);
+        }
+
+        /* Beat 1: Intro Text */
+        #intro-text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-light);
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            text-align: center;
+            opacity: 0;
+            white-space: nowrap;
+            text-shadow: 0 0 40px rgba(0, 114, 196, 0.8);
+        }
+
+        /* Beat 2: Domain Claim Bar */
+        #domain-scene {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            transform-style: preserve-3d;
+            display: none;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 40px;
+        }
+
+        #domain-bar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .input-wrapper {
+            flex-grow: 1;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 16px 24px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        #domain-input-text {
+            color: var(--surface-lighter);
+        }
+
+        #cursor-pipe {
+            width: 2px;
+            height: 1.5rem;
+            background: var(--brand-blue);
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        #claim-btn {
+            background: var(--brand-blue);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 114, 196, 0.4);
+            transform-style: preserve-3d;
+        }
+
+        #cursor-svg {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            z-index: 1000;
+            top: 200px;
+            left: 400px;
+            opacity: 0;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+        }
+
+        #success-modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 400px;
+            text-align: center;
+            opacity: 0;
+            display: none;
+            background: rgba(15, 23, 42, 0.85); /* Slate navy */
+            border: 1px solid rgba(16, 185, 129, 0.3); /* Green accent border */
+        }
+
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--green-accent);
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Beat 3: Dashboard */
+        #dashboard-scene {
+            position: absolute;
+            /* Starts way off to the right, will be brought in via camera whip */
+            top: 50%;
+            left: 150%;
+            transform: translate(-50%, -50%);
+            width: 1440px;
+            height: 900px;
+            transform-style: preserve-3d;
+            display: none;
+        }
+
+        #dashboard-backplate {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-light);
+            border-radius: 20px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+            opacity: 0;
+        }
+
+        /* Internal Dashboard Elements - layered */
+        .dash-sidebar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100%;
+            background: var(--surface-white);
+            border-right: 1px solid var(--border-light);
+            border-radius: 20px 0 0 20px;
+            padding: 40px 20px;
+            opacity: 0;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-item {
+            height: 40px;
+            background: var(--surface-lighter);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            width: 100%;
+            opacity: 0.5;
+        }
+
+        .sidebar-item:first-child {
+            background: var(--brand-blue);
+            opacity: 1;
+        }
+
+        .dash-header {
+            position: absolute;
+            top: 0;
+            left: 280px;
+            width: calc(100% - 280px);
+            height: 100px;
+            background: var(--surface-white);
+            border-bottom: 1px solid var(--border-light);
+            border-radius: 0 20px 0 0;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            opacity: 0;
+        }
+
+        .header-title {
+            width: 200px;
+            height: 30px;
+            background: var(--border-light);
+            border-radius: 4px;
+        }
+
+        #create-emp-btn {
+            background: var(--brand-blue);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 114, 196, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dash-content {
+            position: absolute;
+            top: 100px;
+            left: 280px;
+            width: calc(100% - 280px);
+            height: calc(100% - 100px);
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: min-content;
+            gap: 30px;
+            transform-style: preserve-3d;
+        }
+
+        .data-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 30px;
+            height: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-light);
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card-line {
+            height: 12px;
+            background: var(--surface-lighter);
+            border-radius: 6px;
+            width: 100%;
+        }
+        .card-line.short { width: 60%; }
+        .card-line.title { height: 24px; width: 40%; background: var(--brand-blue); margin-bottom: 10px;}
+
+        /* Beat 4: Deep Zoom & Bypass Modal */
+        #bypass-modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 50px 150px rgba(0,0,0,0.2);
+            z-index: 2000;
+            display: none;
+        }
+
+        .bypass-title {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin: 0 0 30px 0;
+            text-align: center;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+
+        .check-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .check-circle svg {
+            width: 16px;
+            height: 16px;
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            opacity: 0;
+        }
+
+        /* Beat 5: Badge */
+        #alex-badge {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            background: var(--surface-white);
+            border: 2px solid var(--green-accent);
+            border-radius: 100px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+            opacity: 0;
+            z-index: 100;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--brand-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .badge-text {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Utility */
+        .dash-layer { transform-style: preserve-3d; }
+    </style>
+</head>
+<body>
+    <div id="viewport">
+        <!-- Ambient Glowing Orb -->
+        <div id="ambient-bg"></div>
+
+        <div id="world-stage">
+
+            <!-- Beat 1 -->
+            <div id="intro-text-container">
+                <div id="intro-text">Weblings Worksuite</div>
+            </div>
+
+            <!-- Beat 2 -->
+            <div id="domain-scene">
+                <div id="domain-bar" class="glass-panel">
+                    <div class="input-wrapper">
+                        <span style="color: rgba(255,255,255,0.5)">https://</span>
+                        <span id="domain-input-text"></span>
+                        <div id="cursor-pipe"></div>
+                    </div>
+                    <button id="claim-btn">Claim Domain</button>
+                </div>
+
+                <div id="success-modal" class="glass-panel">
+                    <div class="success-icon">✓</div>
+                    <h2>Domain Verified</h2>
+                    <p style="color: rgba(255,255,255,0.7)">acme.io is now connected.</p>
+                </div>
+            </div>
+
+            <!-- Global Cursor -->
+            <svg id="cursor-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 01.35-.15h6.44c.45 0 .67-.54.35-.85L6.35 3.21a.5.5 0 00-.85.35z" fill="white" stroke="black" stroke-width="1.5"/>
+            </svg>
+
+            <!-- Beat 3, 4, 5 -->
+            <div id="dashboard-scene">
+                <div id="dashboard-backplate"></div>
+
+                <div class="dash-sidebar dash-layer">
+                    <div style="font-size: 1.5rem; font-weight: 900; color: var(--brand-blue); margin-bottom: 40px;">W.</div>
+                    <div class="sidebar-item"></div>
+                    <div class="sidebar-item"></div>
+                    <div class="sidebar-item"></div>
+                    <div class="sidebar-item"></div>
+                    <div class="sidebar-item"></div>
+                </div>
+
+                <div class="dash-header dash-layer">
+                    <div class="header-title"></div>
+                    <div id="create-emp-btn">
+                        <span>+</span> Create Employee
+                    </div>
+                </div>
+
+                <div class="dash-content">
+                    <div class="data-card dash-layer">
+                        <div class="card-line title"></div>
+                        <div class="card-line"></div>
+                        <div class="card-line short"></div>
+                    </div>
+                    <div class="data-card dash-layer">
+                        <div class="card-line title"></div>
+                        <div class="card-line"></div>
+                        <div class="card-line short"></div>
+                    </div>
+                    <div class="data-card dash-layer">
+                        <div class="card-line title"></div>
+                        <div class="card-line"></div>
+                        <div class="card-line short"></div>
+                    </div>
+                    <div class="data-card dash-layer">
+                        <div class="card-line title"></div>
+                        <div class="card-line"></div>
+                        <div class="card-line short"></div>
+                    </div>
+                     <div class="data-card dash-layer">
+                        <div class="card-line title"></div>
+                        <div class="card-line"></div>
+                        <div class="card-line short"></div>
+                    </div>
+                </div>
+
+                <div id="alex-badge" class="dash-layer">
+                    <div class="avatar">AT</div>
+                    <div class="badge-text">Alex Turner - Active</div>
+                </div>
+
+                <!-- Bypass Modal (inside dashboard for relative coords, but high Z) -->
+                <div id="bypass-modal">
+                    <h2 class="bypass-title">5-Minute IT Bypass</h2>
+                    <div class="checklist">
+                        <div class="checklist-item" id="check-1">
+                            <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+                            <div>Identity Provisioned</div>
+                        </div>
+                        <div class="checklist-item" id="check-2">
+                            <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+                            <div>Workspace Allocated</div>
+                        </div>
+                        <div class="checklist-item" id="check-3">
+                            <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+                            <div>Hardware Dispatched</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        gsap.registerPlugin(TextPlugin);
+
+        // Initial setup
+        gsap.set("#world-stage", { transformOrigin: "center center" });
+        gsap.set(".dash-layer", { z: 0 }); // ensure base is set
+
+        const tl = gsap.timeline({
+            defaults: { ease: "power2.out" }
+        });
+
+        // -------------------------------------------------------------
+        // Beat 1: The Ambient Hook (0.0s - 3.0s)
+        // -------------------------------------------------------------
+        tl.addLabel("start", 0)
+          .to("#ambient-bg", {
+              opacity: 0.4,
+              scale: 1.2,
+              duration: 3.0,
+              ease: "power1.inOut"
+          }, "start")
+          .fromTo("#intro-text-container",
+              { scale: 0.8, opacity: 0, letterSpacing: "-10px" },
+              { scale: 1, opacity: 1, letterSpacing: "-2px", duration: 2.5, ease: "power3.out" },
+              "start+=0.5"
+          );
+
+        // -------------------------------------------------------------
+        // Beat 2: The Domain Snap-In (3.0s - 8.0s)
+        // -------------------------------------------------------------
+        tl.addLabel("domainSnap", 3.0)
+          // Shatter intro text
+          .to("#intro-text-container", {
+              scale: 1.5,
+              opacity: 0,
+              filter: "blur(20px)",
+              duration: 0.8,
+              ease: "power2.in"
+          }, "domainSnap")
+
+          // Show domain scene
+          .set("#domain-scene", { display: "block" }, "domainSnap+=0.2")
+
+          // Domain bar flies in
+          .from("#domain-bar", {
+              z: -2000,
+              rotationX: 45,
+              opacity: 0,
+              duration: 1.5,
+              ease: "back.out(1.5)"
+          }, "domainSnap+=0.5")
+
+          // Cursor sweeps in
+          .to("#cursor-svg", {
+              opacity: 1,
+              left: 450, // relative to viewport/input
+              top: window.innerHeight/2 + 20,
+              duration: 0.8,
+              ease: "power3.out"
+          }, "domainSnap+=1.5")
+
+          // Typing
+          .to("#domain-input-text", {
+              text: "acme.io",
+              duration: 0.6,
+              ease: "none"
+          }, "domainSnap+=2.3")
+
+          // Cursor moves to claim button
+          .to("#cursor-svg", {
+              left: window.innerWidth/2 + 150, // rough claim btn pos
+              top: window.innerHeight/2 + 20,
+              duration: 0.6,
+              ease: "power3.inOut"
+          }, "domainSnap+=3.0")
+
+          // Click down
+          .to("#claim-btn", { scale: 0.95, duration: 0.1 }, "domainSnap+=3.7")
+          // Click up, flash
+          .to("#claim-btn", {
+              scale: 1,
+              boxShadow: "0 0 50px rgba(0, 114, 196, 1)",
+              duration: 0.3,
+              ease: "back.out(2)"
+          }, "domainSnap+=3.8")
+
+          // Success Modal pops up, background blurs slightly
+          .set("#success-modal", { display: "block" }, "domainSnap+=4.0")
+          .fromTo("#success-modal",
+              { scale: 0, opacity: 0, y: 50 },
+              { scale: 1, opacity: 1, y: 0, duration: 0.8, ease: "back.out(1.5)" },
+              "domainSnap+=4.0"
+          )
+          .to("#domain-bar", { opacity: 0.3, filter: "blur(5px)", duration: 0.5 }, "domainSnap+=4.0");
+
+        // -------------------------------------------------------------
+        // Beat 3: The 3D UI Cascade (8.0s - 14.0s)
+        // -------------------------------------------------------------
+        tl.addLabel("uiCascade", 8.0)
+          // Hide domain scene fast
+          .to("#domain-scene", { opacity: 0, duration: 0.3 }, "uiCascade")
+          .set("#domain-scene", { display: "none" }, "uiCascade+=0.3")
+
+          // Setup dashboard display
+          .set("#dashboard-scene", { display: "block" }, "uiCascade")
+
+          // Camera whips right
+          .to("#world-stage", {
+              x: "-=100vw", // Move stage left so camera effectively goes right
+              rotationY: 15,
+              duration: 1.2,
+              ease: "expo.out"
+          }, "uiCascade")
+
+          // Dashboard backplate lands
+          .fromTo("#dashboard-backplate",
+              { x: 500, z: -1000, opacity: 0, rotationY: 45 },
+              { x: 0, z: 0, opacity: 1, rotationY: 0, duration: 1.5, ease: "expo.out" },
+              "uiCascade+=0.2"
+          )
+
+          // UI Elements cascade in
+          .fromTo([".dash-sidebar", ".dash-header", ".data-card"],
+              { z: 500, rotationY: -20, opacity: 0, x: -100 },
+              { z: 0, rotationY: 0, opacity: 1, x: 0, duration: 1.2, stagger: 0.05, ease: "back.out(1.2)" },
+              "uiCascade+=0.6"
+          )
+
+          // Normalize stage rotation smoothly after cascade
+          .to("#world-stage", {
+              rotationY: 0,
+              duration: 2.0,
+              ease: "power2.out"
+          }, "uiCascade+=1.5");
+
+        // -------------------------------------------------------------
+        // Beat 4: The Deep Zoom & Bypass (14.0s - 20.0s)
+        // -------------------------------------------------------------
+        tl.addLabel("deepZoom", 14.0)
+          // Cursor moves to "+ Create Employee" btn
+          .to("#cursor-svg", {
+              left: window.innerWidth/2 + 720 - 150, // rough coords right side of dash header
+              top: window.innerHeight/2 - 400 + 50,
+              duration: 1.0,
+              ease: "power3.inOut"
+          }, "deepZoom")
+
+          // Click
+          .to("#create-emp-btn", { scale: 0.9, duration: 0.1 }, "deepZoom+=1.1")
+          .to("#create-emp-btn", { scale: 1, duration: 0.2, ease: "back.out(2)" }, "deepZoom+=1.2")
+
+          // Deep Zoom Camera plunge
+          .to("#world-stage", {
+              scale: 2.2,
+              z: 500, // Move closer in Z as well
+              x: "-=10vw", // Center a bit on the action
+              duration: 1.5,
+              ease: "expo.out"
+          }, "deepZoom+=1.4")
+
+          // Violently blur background UI
+          .to(["#dashboard-backplate", ".dash-sidebar", ".dash-header", ".dash-content"], {
+              filter: "blur(12px)",
+              opacity: 0.4,
+              duration: 0.8
+          }, "deepZoom+=1.4")
+
+          // Bypass modal scales up
+          .set("#bypass-modal", { display: "block" }, "deepZoom+=1.5")
+          .fromTo("#bypass-modal",
+              { scale: 0, opacity: 0, z: -200 },
+              { scale: 1, opacity: 1, z: 0, duration: 1.0, ease: "back.out(1.7)" },
+              "deepZoom+=1.5"
+          )
+
+          // Checklist items resolve (rapid-fire)
+          .to("#check-1 .check-circle", {
+              background: "var(--green-accent)", borderColor: "var(--green-accent)", duration: 0.2
+          }, "deepZoom+=2.8")
+          .to("#check-1 svg", { opacity: 1, duration: 0.2 }, "deepZoom+=2.8")
+
+          .to("#check-2 .check-circle", {
+              background: "var(--green-accent)", borderColor: "var(--green-accent)", duration: 0.2
+          }, "deepZoom+=3.1")
+          .to("#check-2 svg", { opacity: 1, duration: 0.2 }, "deepZoom+=3.1")
+
+          .to("#check-3 .check-circle", {
+              background: "var(--green-accent)", borderColor: "var(--green-accent)", duration: 0.2
+          }, "deepZoom+=3.4")
+          .to("#check-3 svg", { opacity: 1, duration: 0.2 }, "deepZoom+=3.4");
+
+        // -------------------------------------------------------------
+        // Beat 5: The Cinematic Float (20.0s - 25.0s)
+        // -------------------------------------------------------------
+        tl.addLabel("finalFloat", 20.0)
+          // Modal closes
+          .to("#bypass-modal", {
+              scale: 0.8,
+              opacity: 0,
+              y: -50,
+              duration: 0.6,
+              ease: "power2.in"
+          }, "finalFloat")
+          .set("#bypass-modal", { display: "none" }, "finalFloat+=0.6")
+
+          // Unblur Dashboard
+          .to(["#dashboard-backplate", ".dash-sidebar", ".dash-header", ".dash-content"], {
+              filter: "blur(0px)",
+              opacity: 1,
+              duration: 1.5,
+              ease: "power2.out"
+          }, "finalFloat+=0.2")
+
+          // Camera pulls back
+          .to("#world-stage", {
+              scale: 1,
+              z: 0,
+              x: "-=100vw", // Return to centered view of dashboard
+              duration: 2.5,
+              ease: "power4.inOut"
+          }, "finalFloat+=0.2")
+
+          // Cursor fades out
+          .to("#cursor-svg", { opacity: 0, duration: 0.5 }, "finalFloat+=0.5")
+
+          // Alex badge glows and appears
+          .fromTo("#alex-badge",
+              { scale: 0, opacity: 0, y: 50 },
+              { scale: 1, opacity: 1, y: 0, duration: 1.0, ease: "back.out(1.5)" },
+              "finalFloat+=1.5"
+          )
+
+          // UI Breaks apart on Z-axis
+          .to(".dash-layer", {
+              z: (i) => (i + 1) * 20, // Stagger depth based on index
+              boxShadow: "0 20px 50px rgba(0,0,0,0.2)",
+              duration: 2.0,
+              ease: "power3.out"
+          }, "finalFloat+=2.0")
+
+          // Infinite float
+          .to("#world-stage", {
+              y: -15,
+              rotationX: 2,
+              rotationY: -2,
+              duration: 3,
+              yoyo: true,
+              repeat: -1,
+              ease: "sine.inOut"
+          }, "finalFloat+=3.0");
+
+    </script>
+</body>
+</html>
