@@ -509,6 +509,10 @@ const Navbar = () => {
     router.push(path);
   };
 
+  if (currentPath === "/docs" || currentPath.startsWith("/docs/")) {
+    return null;
+  }
+
   return (
     <nav
       className={`${classes.NavBar} ${isMenuOpen ? classes.NavBarOpen : ""
@@ -549,33 +553,27 @@ const Navbar = () => {
                   {/* Left Column: Product Options */}
                   <div
                     className={classes.SectionOne}
-                    onMouseLeave={() => {
-                      const active = getActiveProduct();
-                      if (active) {
-                        setPreviewItem(active);
-                      }
-                    }}
                   >
                     {productsList.map((product) => {
-                      // Only mark as selected if the user has navigated to this page
-                      const isCurrentPage = currentProduct?.key === product.key;
+                      // Mark as active if it's the currently previewed item
+                      const isSelected = previewItem?.key === product.key;
                       return (
                         <div
                           key={product.key}
-                          className={`${classes.ProductLinkCard} ${isCurrentPage ? classes.ActiveProductCard : ""
+                          className={`${classes.ProductLinkCard} ${isSelected ? classes.ActiveProductCard : ""
                             }`}
                           onMouseEnter={() => setPreviewItem(product)}
                           onClick={() => handleProductNavigate(product.path)}
                         >
                           <div className={classes.ProductItemContent}>
                             <span
-                              className={`${classes.ProductIcon} ${isCurrentPage ? classes.ActiveProductIcon : ""
+                              className={`${classes.ProductIcon} ${isSelected ? classes.ActiveProductIcon : ""
                                 }`}
                             >
                               {product.icon}
                             </span>
                             <span
-                              className={`${classes.ProductLabel} ${isCurrentPage ? classes.ActiveProductLabel : ""
+                              className={`${classes.ProductLabel} ${isSelected ? classes.ActiveProductLabel : ""
                                 }`}
                             >
                               {product.label}
@@ -670,8 +668,8 @@ const Navbar = () => {
             {/* Docs */}
             <li className={classes.NavBarItem}>
               <Link
-                href="#"
-                className={`${classes.NavBarLink} ${currentPath === "/docs" ? classes.ActiveLink : ""
+                href="/docs"
+                className={`${classes.NavBarLink} ${currentPath === "/docs" || currentPath.startsWith("/docs/") ? classes.ActiveLink : ""
                   }`}
                 onClick={() => setIsDropDownOpen(false)}
               >
@@ -748,7 +746,7 @@ const Navbar = () => {
 
           <div className={classes.MobileNavItem}>
             <Link
-              href="#"
+              href="/docs"
               className={classes.MobileNavLink}
               onClick={() => setIsMenuOpen(false)}
             >

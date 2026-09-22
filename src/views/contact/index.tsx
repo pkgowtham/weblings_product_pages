@@ -208,7 +208,8 @@ const Contact: React.FC = () => {
                   >
                     {contactData.directLine.email}
                   </a>
-                  . I don't employ an offshore support desk or a team of quota-driven sales reps.
+
+                  {" "}I don't employ an offshore support desk or a team of quota-driven sales reps.
                 </p>
                 <p className={classes.quoteText}>
                   When you email this address, you get direct access to the engineers actually writing the code. I check this inbox twice a day, and I will personally write you back.

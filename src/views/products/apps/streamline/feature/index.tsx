@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useStyles } from './style';
 import streamlineDataJson from '../../../../../data/streamline.json';
 import WorkspaceDashboardMockup from '../../../../../components/dashboardMockup';
@@ -107,6 +108,7 @@ const RevealOnScroll: React.FC<{
 
 const StreamlineFeature: React.FC = () => {
   const classes = useStyles();
+  const router = useRouter();
 
   // JSON Data extracts
   const heroData = streamlineDataJson.feature.main;
@@ -155,7 +157,10 @@ const StreamlineFeature: React.FC = () => {
           <p className={classes.heroParagraph}>{heroData.content}</p>
 
           {/* Primary CTA */}
-          <button className={classes.heroCtaButton}>
+          <button
+            className={classes.heroCtaButton}
+            onClick={() => router.push('/agreement')}
+          >
             <span>{heroData.action[0]?.label || 'Deploy Streamline'}</span>
           </button>
         </div>

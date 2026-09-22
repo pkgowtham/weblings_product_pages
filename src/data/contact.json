@@ -6,9 +6,9 @@
   },
   "directLine": {
     "title": "The Direct Line",
-    "email": "founders@weblings.com",
+    "email": "founders@weblings.dev",
     "paragraphs": [
-      "Email me directly at founders@weblings.com. I don't employ an offshore support desk or a team of quota-driven sales reps.",
+      "Email me directly at founders@weblings.dev I don't employ an offshore support desk or a team of quota-driven sales reps.",
       "When you email this address, you get direct access to the engineers actually writing the code. I check this inbox twice a day, and I will personally write you back."
     ],
     "founder": {
@@ -42,4 +42,3 @@
     "buttonText": "Send to Founders"
   }
 }
-

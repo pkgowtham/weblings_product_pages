@@ -858,11 +858,11 @@ const Products = () => {
             <div className={classes.ctaContent}>
               <button
                 className={classes.migrationBtn}
-                onClick={() => router.push(data.migration.action.link || "/")}
+                onClick={() => router.push('/agreement')}
               >
                 {data.migration.action.label}
               </button>
-              
+
               {/* Social Proof Avatar Stack & Text (Matching Image 2) */}
               <div className={classes.socialProofRow}>
                 <div className={classes.socialAvatarStack}>

@@ -1,6 +1,7 @@
 'use client';
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useStyles } from "./style";
 import WorkspaceDashboardMockup from "../../../../components/dashboardMockup";
 import PhoneMockup from "../../../../components/phoneMockup";
@@ -104,6 +105,7 @@ const RevealOnScroll: React.FC<{
 
 const DriveFeature: React.FC = () => {
   const classes = useStyles();
+  const router = useRouter();
   const [hoveredCapability, setHoveredCapability] = React.useState<string | null>(null);
 
   return (
@@ -131,7 +133,12 @@ const DriveFeature: React.FC = () => {
           </p>
 
           <div className={classes.heroBtnRow}>
-            <button className={classes.primaryButton}>Deploy Enterprise Drive</button>
+            <button
+              className={classes.primaryButton}
+              onClick={() => router.push('/agreement')}
+            >
+              Deploy Enterprise Drive
+            </button>
           </div>
         </div>
 

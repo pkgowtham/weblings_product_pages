@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { usestyles } from "../footer/footerstyle";
 import Typography from "../typography/component";
 import SvgTwitter from "../svg/Twitter";
@@ -31,9 +32,14 @@ export interface FooterProps {
   className?: string;
 }
 
-const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): React.ReactElement => {
+const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): React.ReactElement | null => {
+  const pathname = usePathname();
   const classes = usestyles();
   const effectiveIconColor = iconColor || brandColor;
+
+  if (pathname === "/docs" || pathname?.startsWith("/docs/")) {
+    return null;
+  }
 
   const footer: { sections: FooterSection[] } = {
     sections: [
@@ -52,7 +58,7 @@ const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): Re
       {
         title: "Company",
         features: [
-          { label: "Docs", path: "#" },
+          { label: "Docs", path: "/docs" },
           { label: "Pricing", path: "/price" },
           { label: "About", path: "/about" },
           { label: "Contact", path: "/contact" },

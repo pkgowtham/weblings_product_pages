@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useStyles } from './style';
 import chatDataJson from '../../../../../data/chat.json';
 import WorkspaceDashboardMockup from '../../../../../components/dashboardMockup';
@@ -156,6 +157,7 @@ const RevealOnScroll: React.FC<{
 
 const ConnectFeature: React.FC = () => {
   const classes = useStyles();
+  const router = useRouter();
 
   // JSON Data extracts
   const heroData = chatDataJson.feature.main;
@@ -210,7 +212,10 @@ const ConnectFeature: React.FC = () => {
 
           {/* CTA Action */}
           <div>
-            <button className={classes.heroCtaButton}>
+            <button
+              className={classes.heroCtaButton}
+              onClick={() => router.push('/agreement')}
+            >
               {heroData.action[0]?.label || 'Deploy Team Chat'}
             </button>
           </div>
@@ -391,11 +396,10 @@ const ConnectFeature: React.FC = () => {
                     animation: popPingAnim 2s ease-in-out infinite;
                   }
                   .pop-chip {
-                    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease;
+                    transition: filter 0.2s ease;
                     cursor: pointer;
                   }
                   .pop-chip:hover {
-                    transform: scale(1.08);
                     filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
                   }
                 `}</style>

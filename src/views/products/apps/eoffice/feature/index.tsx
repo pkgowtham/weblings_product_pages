@@ -1,13 +1,19 @@
 'use client';
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useStyles } from "./style";
 
 import WorkspaceDashboardMockup from "../../../../../components/dashboardMockup";
 import PhoneMockup from "../../../../../components/phoneMockup";
 import AppStoreButtons from "../../../../../components/appStoreButtons";
 import { EOfficeOrgPulseAnimation } from "../../../../../components/ambientAnimations";
-import { EOfficeIcon } from "../../../../../assets/icons_component";
+import {
+  EOfficeIcon,
+  ShieldLockIcon,
+  InstantIntegrationIcon,
+  ImmutableHistoryIcon,
+} from "../../../../../assets/icons_component";
 
 /* ─────────────────────────────────────────────────────────────
    ANIMATED VECTOR SVG ICONS FOR CARDS
@@ -443,9 +449,11 @@ const RevealOnScroll: React.FC<{
    ───────────────────────────────────────────────────────────── */
 const EofficeFeaturePage: React.FC = () => {
   const classes = useStyles();
+  const router = useRouter();
 
   // Hover states for interactive card SVGs
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [hoveredEdiCard, setHoveredEdiCard] = useState<string | null>(null);
 
   return (
     <div className={classes.page}>
@@ -467,7 +475,12 @@ const EofficeFeaturePage: React.FC = () => {
             Handle shift timings, track hybrid attendance, audit physical assets, and build a great company culture—all from one unified dashboard that does the heavy lifting for you.
           </p>
           <div className={classes.heroBtnRow}>
-            <button className={classes.primaryButton}>Deploy E-Office Now</button>
+            <button
+              className={classes.primaryButton}
+              onClick={() => router.push('/agreement')}
+            >
+              Deploy E-Office Now
+            </button>
           </div>
         </div>
 
@@ -851,7 +864,12 @@ const EofficeFeaturePage: React.FC = () => {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION 5: MOBILE SECTION
+          SECTION 5: ENTERPRISE DATA INTEGRITY
+          ───────────────────────────────────────────────────────────── */}
+
+
+      {/* ─────────────────────────────────────────────────────────────
+          SECTION 6: MOBILE SECTION
           ───────────────────────────────────────────────────────────── */}
       <section className={classes.mobileSectionWrapper}>
         <div className={classes.mobileGrid}>

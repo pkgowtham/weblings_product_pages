@@ -30,6 +30,11 @@ export default function MainContent({
 }) {
   const pathname = usePathname();
 
+  const isDocs = pathname === "/docs" || pathname?.startsWith("/docs/");
+  if (isDocs) {
+    return <>{children}</>;
+  }
+
   const isProductPage = PRODUCT_ROUTES.some((route) => {
     const lowerPath = pathname?.toLowerCase() || "";
     const lowerRoute = route.toLowerCase();

@@ -1909,9 +1909,9 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     },
   },
   aiPrivacyContainer: {
-    maxWidth: "1080px",
-    margin: "0 auto",
+    maxWidth: "100%",
     width: "100%",
+    marginTop: "32px",
     boxSizing: "border-box",
   },
   aiPrivacyCard: {
@@ -1983,12 +1983,12 @@ export const useStyles = createUseStyles((theme: Theme) => ({
   /* Unrestricted Email Grid */
   unrestrictedSection: {
     width: "100%",
-    padding: "0 24px 96px 24px",
+    padding: "48px 24px 96px 24px",
     backgroundColor: theme.light.neutral.surface.lighter,
     boxSizing: "border-box",
     borderBottom: `1px solid ${theme.light.neutral.border.light}`,
     "@media (max-width: 768px)": {
-      padding: "0 16px 56px 16px",
+      padding: "24px 16px 56px 16px",
     },
   },
   unrestrictedContainer: {

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
 import { useStyles } from './style';
 import AppStoreButtons from '../../../../../components/appStoreButtons';
@@ -110,6 +111,7 @@ const SvgStar = () => (
 
 const MailFeature = () => {
   const classes = useStyles();
+  const router = useRouter();
 
   // Interactive step selection state
   const [activeStep, setActiveStep] = useState<number>(2);
@@ -160,7 +162,12 @@ const MailFeature = () => {
           <p className={classes.heroDescription}>
             Stop paying extra every time you hire a new employee. Get unlimited custom domain email addresses, edge-network spam protection, and the ability to send massive 10GB attachments—all fully included in your Weblings Worksuite.
           </p>
-          <button className={classes.heroPrimaryButton}>Deploy Enterprise Inbox</button>
+          <button
+            className={classes.heroPrimaryButton}
+            onClick={() => router.push('/agreement')}
+          >
+            Deploy Enterprise Inbox
+          </button>
         </div>
 
         {/* Authentic Weblings Mail App Mockup — Interactive Embedded Web Area */}
@@ -917,6 +924,28 @@ const MailFeature = () => {
               </div>
             </div>
           </div>
+
+          {/* Ironclad AI Privacy & Zero-Knowledge Architecture Card */}
+          {aiPrivacy && (
+            <div className={classes.aiPrivacyContainer}>
+              <RevealOnScroll delay={150}>
+                <div className={classes.aiPrivacyCard}>
+                  <div className={classes.aiPrivacyGlow} />
+                  <div className={classes.aiPrivacyIconBox}>
+                    <LockIcon width={30} height={30} isHovered={true} />
+                  </div>
+                  <div className={classes.aiPrivacyContent}>
+                    <h3 className={classes.aiPrivacyTitle}>{aiPrivacy.title}</h3>
+                    <p className={classes.aiPrivacyText}>
+                      {aiPrivacy.p1}{' '}
+                      <strong className={classes.aiPrivacyGuarantee}>{aiPrivacy.guarantee}</strong>
+                    </p>
+                    <p className={classes.aiPrivacyText}>{aiPrivacy.p2}</p>
+                  </div>
+                </div>
+              </RevealOnScroll>
+            </div>
+          )}
         </div>
       </section>
 
@@ -986,32 +1015,6 @@ const MailFeature = () => {
                 </div>
               </RevealOnScroll>
             </div>
-          </div>
-        </section>
-      )}
-
-      {/* ─────────────────────────────────────────────────────────────
-          CTO TRUST SECTION: IRONCLAD AI PRIVACY
-          ───────────────────────────────────────────────────────────── */}
-      {aiPrivacy && (
-        <section className={classes.aiPrivacySection}>
-          <div className={classes.aiPrivacyContainer}>
-            <RevealOnScroll delay={150}>
-              <div className={classes.aiPrivacyCard}>
-                <div className={classes.aiPrivacyGlow} />
-                <div className={classes.aiPrivacyIconBox}>
-                  <LockIcon width={30} height={30} isHovered={true} />
-                </div>
-                <div className={classes.aiPrivacyContent}>
-                  <h3 className={classes.aiPrivacyTitle}>{aiPrivacy.title}</h3>
-                  <p className={classes.aiPrivacyText}>
-                    {aiPrivacy.p1}{' '}
-                    <strong className={classes.aiPrivacyGuarantee}>{aiPrivacy.guarantee}</strong>
-                  </p>
-                  <p className={classes.aiPrivacyText}>{aiPrivacy.p2}</p>
-                </div>
-              </div>
-            </RevealOnScroll>
           </div>
         </section>
       )}

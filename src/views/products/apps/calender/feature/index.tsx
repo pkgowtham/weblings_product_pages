@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useStyles } from './style';
 import AppStoreButtons from '../../../../../components/appStoreButtons';
 import WorkspaceDashboardMockup from '../../../../../components/dashboardMockup';
@@ -154,6 +155,7 @@ const RevealOnScroll: React.FC<{
 
 const CalenderFeature = () => {
   const classes = useStyles();
+  const router = useRouter();
   const hero = calendarDataJson.feature.hero;
   const zeroDoubleEntry = calendarDataJson.feature.zeroDoubleEntry;
   const organization = calendarDataJson.feature.organization;
@@ -211,7 +213,10 @@ const CalenderFeature = () => {
           <p className={classes.heroParagraph}>{hero.content}</p>
 
           {/* Primary CTA */}
-          <button className={classes.heroCtaButton}>
+          <button
+            className={classes.heroCtaButton}
+            onClick={() => router.push('/agreement')}
+          >
             <span>{hero.cta}</span>
           </button>
         </div>
