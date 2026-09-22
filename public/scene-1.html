@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weblings Worksuite - Trailer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        :root {
+            --brand-blue: #0072C4;
+            --surface-lighter: #E6F2FF;
+            --surface-inverse: #262626;
+            --green-accent: #10B981; 
+            --slate-navy: #0F172A; 
+            --purple: #9333EA; 
+            --bg-light: #F4F6F9; 
+            --surface-white: #ffffff;
+            --border-light: #d9d9d9;
+            --text-dark: #262626;
+            --text-gray: #595959;
+        }
+
+        * { box-sizing: border-box; }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-light) !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        .overlay, .mask, body::before, body::after, #world-stage::before, #world-stage::after {
+            display: none !important;
+        }
+
+        #viewport {
+            width: 100vw;
+            height: 100vh;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #world-stage {
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        /* 1. Light Theme & Mild Gradient */
+        #ambient-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150vw;
+            height: 150vh;
+            transform: translate(-50%, -50%);
+            /* Mild, subtle radial gradient: #E6F2FF and a 5% opacity hint of #0072C4 */
+            background: radial-gradient(circle at center, var(--surface-lighter) 0%, rgba(0, 114, 196, 0.05) 50%, transparent 100%);
+            opacity: 0; /* Will be animated in */
+            border-radius: 50%;
+            filter: blur(80px);
+            will-change: opacity, transform;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .animated-layer {
+            will-change: transform, opacity;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="viewport">
+        <div id="ambient-bg"></div>
+        <div id="world-stage">
+            <!-- Layers to follow -->
+            <!-- 4. Stacked Cards -->
+            <div id="stacked-cards-container">
+                <div class="stacked-card card-1"><div class="sc-line sc-title"></div><div class="sc-line"></div></div>
+                <div class="stacked-card card-2"><div class="sc-line sc-title" style="background: var(--green-accent)"></div><div class="sc-line"></div></div>
+                <div class="stacked-card card-3"><div class="sc-line sc-title" style="background: var(--purple)"></div><div class="sc-line"></div></div>
+            </div>
+            <!-- 5. Bypass Modal -->
+            <div id="bypass-modal">
+                <h2 class="bypass-title">5-Minute IT Bypass</h2>
+                <div class="checklist">
+                    <div class="checklist-item" id="check-1">
+                        <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+                        <div>Identity Provisioned</div>
+                    </div>
+                    <div class="checklist-item" id="check-2">
+                        <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+                        <div>Workspace Allocated</div>
+                    </div>
+                    <div class="checklist-item" id="check-3">
+                        <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+                        <div>Hardware Dispatched</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 3. E-Office Scroll Replica -->
+            <div id="eoffice-wrapper">
+                <iframe id="real-app-frame" src="http://localhost:3000/eoffice/feature" style="width: 1440px; height: 2500px; border: none; pointer-events: none; transform-origin: top center;"></iframe>
+            </div>
+            <div id="intro-scene">
+                <div class="word-mask"><span class="intro-word" id="word-1">Weblings</span></div>
+                <div class="word-mask"><span class="intro-word" id="word-2">Worksuite</span></div>
+            </div>
+        </div>
+    </div>
+<style>
+        /* 2. Intro Text */
+        #intro-scene {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .word-mask {
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .intro-word {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+</style>
+<style>
+        /* 3. E-Office Scroll Replica */
+        #eoffice-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateZ(0); /* Start centered, 0 depth for active view */
+            width: 1440px;
+            height: 900px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.15);
+            overflow: hidden;
+            z-index: 20;
+            opacity: 0;
+            display: none;
+            will-change: transform, opacity;
+        }
+        
+        #real-app-frame {
+            will-change: transform;
+        }
+</style>
+<style>
+        /* 4. Stacked Cards */
+        #stacked-cards-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            will-change: opacity, transform;
+            /* Negative gap to overlap */
+            gap: -80px; 
+        }
+
+        .stacked-card {
+            width: 100px;
+            height: 120px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            will-change: width, transform, opacity;
+            margin-top: -60px; /* Force stack */
+            display: flex;
+            padding: 20px;
+            flex-direction: column;
+            gap: 15px;
+            overflow: hidden;
+        }
+
+        .stacked-card:first-child { margin-top: 0; }
+
+        .sc-line {
+            height: 12px;
+            background: var(--surface-lighter);
+            border-radius: 6px;
+            width: 200px; /* Wider than initial card width to show clip */
+        }
+        .sc-title { background: var(--brand-blue); height: 20px; width: 150px; }
+</style>
+<style>
+        /* 5. Checkmark Modal */
+        #bypass-modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 50px 150px rgba(0,0,0,0.15);
+            z-index: 40;
+            display: none;
+            will-change: transform, opacity;
+        }
+
+        .bypass-title {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin: 0 0 30px 0;
+            text-align: center;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+
+        .check-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            will-change: transform, background-color, border-color;
+        }
+
+        .check-circle svg {
+            width: 16px;
+            height: 16px;
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            opacity: 0;
+            will-change: opacity;
+        }
+</style>
+    <script>
+        gsap.set("#world-stage", { transformOrigin: "center center" });
+        
+        const tl = gsap.timeline({
+            defaults: { ease: "power2.out" },
+            paused: true
+        });
+
+        // 1. Ambient Background In
+        tl.addLabel("start", 0)
+          .to("#ambient-bg", {
+              opacity: 1,
+              scale: 1.1,
+              duration: 3.0,
+              ease: "power2.inOut"
+          }, "start");
+
+        // 2. Intro Text (Lag-free)
+        tl.addLabel("intro", 0.5)
+          .to(".intro-word", {
+              y: "0%",
+              opacity: 1,
+              duration: 1.5,
+              stagger: 0.2,
+              ease: "expo.out"
+          }, "intro")
+          .to("#intro-scene", {
+              scale: 1.5,
+              opacity: 0,
+              filter: "blur(10px)",
+              duration: 0.8,
+              ease: "power2.in"
+          }, "intro+=2.5")
+          .set("#intro-scene", { display: "none" }, "intro+=3.3");
+
+        // 3. E-Office Scroll Replica
+        tl.addLabel("replica", 3.5)
+          .set("#eoffice-wrapper", { display: "block" }, "replica")
+          .fromTo("#eoffice-wrapper",
+              { scale: 0.8, opacity: 0, y: 100, rotationX: 10 },
+              { scale: 1, opacity: 1, y: 0, rotationX: 0, duration: 1.2, ease: "expo.out" },
+              "replica"
+          )
+          // Simulate scroll - natural speed, reaching bottom
+          .to("#real-app-frame", {
+              y: -800,
+              duration: 4.5,
+              ease: "power1.inOut" // smooth, natural scroll
+          }, "replica+=1.0");
+
+        // 4. Stacked Cards Transition
+        // replica starts at 3.5. intro is 1.2s. scroll starts at 4.5 (replica+1.0).
+        // scroll duration is 4.5s. finishes at 9.0s.
+        // wait 0.5s before cards = 9.5s.
+        tl.addLabel("cards", 9.5) 
+          // NO dimming or blurring of background as requested
+          // Bring in stack
+          .to("#stacked-cards-container", { opacity: 1, duration: 0.5 }, "cards")
+          .fromTo(".stacked-card",
+              { y: 200, opacity: 0, scale: 0.8 },
+              { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.1, ease: "back.out(1.2)" },
+              "cards+=0.2"
+          )
+          // Expand width to 700px and unstack
+          .to(".stacked-card", {
+              width: 700,
+              marginTop: 20, // Override negative margin to spread them
+              duration: 1.2,
+              ease: "back.out(1.2)"
+          }, "cards+=1.2")
+          // Sweep off screen right
+          .to(".stacked-card", {
+              x: 1500,
+              opacity: 0,
+              duration: 0.8,
+              stagger: 0.05,
+              ease: "power4.in"
+          }, "cards+=3.5"); // 1.5s hold (1.2 + 0.8 + 1.5 = 3.5)
+
+        // 5. Final Checkmark Resolution
+        // cards start at 9.5s. sweep off finishes at 9.5 + 3.5 + 0.8 + stagger = ~14.0
+        tl.addLabel("bypass", 14.0)
+          .set("#bypass-modal", { display: "block" }, "bypass")
+          .fromTo("#bypass-modal",
+              { scale: 0.5, opacity: 0 },
+              { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)" },
+              "bypass"
+          )
+          // Rapid checkmarks pop
+          .to(".check-circle", {
+              backgroundColor: "var(--green-accent)",
+              borderColor: "var(--green-accent)",
+              duration: 0.2,
+              stagger: 0.1
+          }, "bypass+=0.8")
+          .to(".check-circle svg", {
+              opacity: 1,
+              duration: 0.2,
+              stagger: 0.1
+          }, "bypass+=0.8")
+          // Scale pop effect on circles (0.5 to 1.2 to 1)
+          .fromTo(".check-circle", 
+              { scale: 0.5 },
+              {
+                  scale: 1.2,
+                  duration: 0.15,
+                  stagger: 0.1,
+                  ease: "power2.out"
+              }, "bypass+=0.8")
+          .to(".check-circle", {
+              scale: 1,
+              duration: 0.1,
+              stagger: 0.1,
+              ease: "power2.in"
+          }, "bypass+=0.95");
+
+        // Gentle float at the end
+        tl.addLabel("end", 16.0)
+          .to("#world-stage", {
+              y: -15,
+              rotationX: 2,
+              rotationY: -2,
+              duration: 3,
+              yoyo: true,
+              repeat: -1,
+              ease: "sine.inOut"
+          }, "end");
+          
+        window.onload = () => {
+            setTimeout(() => {
+                tl.play();
+            }, 3500);
+        };
+
+    </script>
+</body>\n</html>
