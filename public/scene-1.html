@@ -72,26 +72,6 @@
       transform: translateY(-50%);
     }
 
-    #domain-section {
-      left: 100vw; /* Center of initial view (50vw screen + 50vw offset) */
-      top: 100vh;
-      width: 800px;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-
-    #eoffice-section {
-      left: 200vw; /* To the right */
-      top: 100vh;
-      width: 1000px;
-      transform: translate(-50%, -50%) rotateY(-15deg);
-      background: var(--white);
-      border-radius: 16px;
-      box-shadow: 0 24px 48px rgba(0,0,0,0.05);
-      padding: 40px;
-      opacity: 0; /* Hidden initially */
-    }
-
     /* Modals Container (attached to viewport so they are overlay) */
     #modals-container {
       position: fixed;
@@ -112,135 +92,6 @@
       opacity: 0;
       transform: scale(0.9);
       display: none;
-    }
-
-    /* Specific Elements */
-
-    /* Domain Section */
-    h1 {
-      font-size: 48px;
-      margin-bottom: 24px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .search-bar {
-      display: flex;
-      background: var(--white);
-      border-radius: 8px;
-      padding: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      border: 1px solid var(--gray-border);
-    }
-
-    .input-wrapper {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-    }
-
-    .domain-prefix {
-      color: #8c8c8c;
-      font-size: 18px;
-      margin-right: 4px;
-    }
-
-    #typed-domain {
-      font-size: 18px;
-      color: var(--slate-navy);
-      font-weight: 500;
-      min-width: 2px;
-      border-right: 2px solid var(--slate-navy);
-      animation: blink 1s step-end infinite;
-      white-space: pre;
-    }
-
-    @keyframes blink { 50% { border-color: transparent; } }
-    .typing-done { animation: none !important; border-color: transparent !important; }
-
-    #claim-btn, #create-employee-btn {
-      background: var(--brand-blue);
-      color: var(--white);
-      border: none;
-      border-radius: 6px;
-      padding: 12px 24px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transform-origin: center;
-    }
-
-    /* E-Office Section */
-    .eoffice-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 32px;
-    }
-
-    .eoffice-header h2 {
-      font-size: 32px;
-    }
-
-    .directory-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .employee-row {
-      display: flex;
-      align-items: center;
-      padding: 16px;
-      border: 1px solid var(--gray-border);
-      border-radius: 8px;
-      background: var(--surface-lighter);
-    }
-
-
-    .cascade-item {
-      opacity: 0;
-      transform: translateY(40px) translateZ(-100px) rotateX(-20deg);
-      transform-origin: center top;
-      transform-style: preserve-3d;
-    }
-
-    .employee-row.new-employee {
-
-      background: #eaf6ec; /* Positive Surface Lighter */
-      border-color: var(--green-accent);
-      opacity: 0; /* Hidden initially */
-    }
-
-    .avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--brand-blue);
-      color: var(--white);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: 700;
-      margin-right: 16px;
-    }
-
-    .employee-info { flex: 1; }
-    .employee-name { font-weight: 600; font-size: 18px; margin-bottom: 4px; }
-    .employee-email { color: #595959; font-size: 14px; }
-
-    .badge {
-      margin-left: auto;
-      background: var(--green-accent);
-      color: var(--white);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
     }
 
     /* Modals */
@@ -314,6 +165,65 @@
       font-weight: 500;
     }
 
+    /* Iframe constraints per directive */
+    .ui-screen {
+      width: 1440px;
+      height: 900px;
+      border: none;
+      pointer-events: none;
+      transform-origin: center center;
+    }
+
+    /* Scroll simulation constraints */
+    .scroll-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1440px;
+      height: 900px;
+      overflow: hidden;
+      transform: translate(-50%, -50%);
+      transform-style: preserve-3d;
+      border-radius: 16px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    }
+
+    .scroll-wrapper iframe {
+      height: 2000px; /* Taller for scroll simulation */
+    }
+
+    #domain-section {
+      left: 100vw;
+      top: 100vh;
+    }
+
+    /* Secondary iframes for cascade */
+    #eoffice-section {
+      position: absolute;
+      top: 100vh;
+      left: 200vw;
+      width: 1440px;
+      height: 900px;
+      transform: translate(-50%, -50%) rotateY(-15deg);
+      transform-style: preserve-3d;
+    }
+
+    .cascade-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(40px) translateZ(-100px) rotateX(-20deg);
+      transform-origin: center top;
+      transform-style: preserve-3d;
+    }
+
+    /* Hide scrollbars */
+    ::-webkit-scrollbar {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -326,53 +236,16 @@
   <div id="canvas-container">
     <div id="world-stage">
 
-      <!-- Domain Claim Section -->
-      <div id="domain-section" class="section-wrapper">
-        <h1>Claim your digital HQ</h1>
-        <div class="search-bar">
-          <div class="input-wrapper">
-            <span class="domain-prefix">https://</span>
-            <span id="typed-domain"></span>
-          </div>
-          <button id="claim-btn">Search & Claim</button>
-        </div>
+      <!-- Base Main Screen (Scroll wrapper simulating the Claim section) -->
+      <div class="scroll-wrapper section-wrapper" id="domain-section">
+        <iframe src="http://localhost:3000/" class="ui-screen" id="scrolling-iframe"></iframe>
       </div>
 
-      <!-- E-Office (HRMS) Section -->
+      <!-- Cascading Screens replacing E-Office Section -->
       <div id="eoffice-section" class="section-wrapper">
-        <div class="eoffice-header cascade-item">
-          <h2>E-Office Directory</h2>
-          <button id="create-employee-btn">+ Create Employee</button>
-        </div>
-
-        <div class="directory-list">
-          <!-- Existing Employee -->
-          <div class="employee-row cascade-item">
-            <div class="avatar" style="background:#8133f1;">SJ</div>
-            <div class="employee-info">
-              <div class="employee-name">Sarah Jenkins</div>
-              <div class="employee-email">sarah@acme.io</div>
-            </div>
-          </div>
-          <div class="employee-row cascade-item">
-            <div class="avatar" style="background:#b78af7;">MR</div>
-            <div class="employee-info">
-              <div class="employee-name">Mike Ross</div>
-              <div class="employee-email">mike@acme.io</div>
-            </div>
-          </div>
-
-          <!-- New Employee to be revealed -->
-          <div class="employee-row new-employee" id="new-employee-row">
-            <div class="avatar">AT</div>
-            <div class="employee-info">
-              <div class="employee-name">Alex Turner</div>
-              <div class="employee-email">alex@acme.io</div>
-            </div>
-            <div class="badge">All 6 Apps Provisioned</div>
-          </div>
-
-        </div>
+        <iframe src="http://localhost:3000/eoffice" class="ui-screen cascade-iframe cascade-item" id="cascade-1" style="z-index: 1;"></iframe>
+        <iframe src="http://localhost:3000/connect" class="ui-screen cascade-iframe cascade-item" id="cascade-2" style="z-index: 2;"></iframe>
+        <iframe src="http://localhost:3000/calendar" class="ui-screen cascade-iframe cascade-item" id="cascade-3" style="z-index: 3;"></iframe>
       </div>
 
     </div>
@@ -416,20 +289,15 @@
 
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
 
   <script>
     // Initialize GSAP and plugins
-    gsap.registerPlugin(TextPlugin);
-
-    // Initial setup
     const worldStage = document.getElementById('world-stage');
     const cursor = document.getElementById('cursor');
-    const claimBtn = document.getElementById('claim-btn');
-    const createBtn = document.getElementById('create-employee-btn');
     const confettiModal = document.getElementById('confetti-modal');
     const bypassModal = document.getElementById('bypass-modal');
-    const newEmployeeRow = document.getElementById('new-employee-row');
+    const scrollingIframe = document.getElementById('scrolling-iframe');
+    const cascadeItems = document.querySelectorAll('.cascade-item');
 
     // Make sure modals have display block but opacity 0 initially so GSAP can animate them
     gsap.set([confettiModal, bypassModal], { display: 'block', autoAlpha: 0, scale: 0.9 });
@@ -437,51 +305,33 @@
     // Initial Cursor Position
     gsap.set(cursor, { x: window.innerWidth * 0.8, y: window.innerHeight * 0.8 });
 
-    // Master Timeline (25 seconds total)
+    // Master Timeline
     const masterTl = gsap.timeline({
-      paused: false // Set to false to auto-play, or true if you want to trigger it manually
+      paused: false // Set to false to auto-play
     });
 
-    // Helper: get center coordinates of an element
-    function getCenter(el) {
-      const rect = el.getBoundingClientRect();
-      return {
-        x: rect.left + rect.width / 2,
-        y: rect.top + rect.height / 2
-      };
-    }
-
-
-    // --- [0:00 - 0:02] The Claim (Compressed) ---
+    // --- [0:00 - 0:02] The Claim (Compressed) & Simulated Scroll ---
     masterTl.addLabel("start")
-      // Move cursor to input bar while typing
+      // Animate the iframe's translateY to simulate smooth scrolling
+      .to(scrollingIframe, {
+        duration: 4,
+        y: -1000,
+        ease: "power2.inOut"
+      }, "start")
+      // Move cursor simultaneously while camera is zooming/panning slightly
       .to(cursor, {
         duration: 1,
         x: window.innerWidth / 2,
         y: window.innerHeight / 2,
         ease: "power3.inOut"
       }, "start")
-      // Type "acme.io" rapidly
-      .to("#typed-domain", {
-        duration: 0.8,
-        text: "acme.io",
-        ease: "none",
-        onComplete: () => document.getElementById('typed-domain').classList.add('typing-done')
-      }, "start+=0.2")
-      // Move cursor to "Search & Claim" button (overlapping)
+      // Simulate click
       .to(cursor, {
-        duration: 0.8,
-        x: () => getCenter(claimBtn).x,
-        y: () => getCenter(claimBtn).y,
-        ease: "power3.inOut"
-      }, "start+=0.8")
-      // Click button (scale down and up) with snappy spring
-      .to(claimBtn, {
         duration: 0.1,
-        scale: 0.9,
+        scale: 0.8,
         ease: "power1.inOut"
       }, "start+=1.5")
-      .to(claimBtn, {
+      .to(cursor, {
         duration: 0.3,
         scale: 1,
         ease: "back.out(1.7)"
@@ -519,50 +369,44 @@
         duration: 1.2,
         x: "-100vw", // Pan left (moving world left moves camera right)
         rotateY: 15,  // Straighten out the E-office which is rotated -15deg
-        scale: 1,     // Reset zoom
+        scale: 0.8,     // Reset zoom slightly out
         filter: "blur(0px)", // Remove blur
         ease: "expo.out"
       }, "transition")
       // Cursor anticipates target and starts moving during the pan
       .to(cursor, {
         duration: 1.5,
-        x: window.innerWidth * 0.65, // Approximating Create button pos
+        x: window.innerWidth * 0.65, // Approximating button pos on the new section
         y: window.innerHeight * 0.45,
         ease: "power3.inOut"
       }, "transition+=0.2")
-      // 3D Cascading Reveal of E-Office items (overlapping the pan)
-      .to(".cascade-item", {
-        duration: 0.8,
+      // 3D Cascading Reveal of Iframes (overlapping the pan)
+      .to(cascadeItems, {
+        duration: 1.2,
         autoAlpha: 1,
         y: 0,
-        z: 0,
+        z: (i) => i * 150 + 100, // Stagger in 3D depth
         rotateX: 0,
-        stagger: 0.08,
-        ease: "back.out(1.5)"
+        stagger: 0.05,
+        ease: "back.out(1.7)"
       }, "transition+=0.3");
 
     // --- [0:07 - 0:10] The Bypass Trigger ---
     masterTl.addLabel("bypass", "transition+=1.5")
-      // Final precision cursor adjustment to Create Button
+      // Final precision cursor adjustment to a fake target on the iframe
       .to(cursor, {
         duration: 0.4,
-        x: () => {
-           const rect = createBtn.getBoundingClientRect();
-           return rect.left + rect.width / 2;
-        },
-        y: () => {
-           const rect = createBtn.getBoundingClientRect();
-           return rect.top + rect.height / 2;
-        },
+        x: window.innerWidth * 0.7,
+        y: window.innerHeight * 0.3,
         ease: "power2.out"
       }, "bypass")
-      // Click "+ Create Employee"
-      .to(createBtn, {
+      // Click action
+      .to(cursor, {
         duration: 0.1,
-        scale: 0.9,
+        scale: 0.8,
         ease: "power1.inOut"
       }, "bypass+=0.4")
-      .to(createBtn, {
+      .to(cursor, {
         duration: 0.3,
         scale: 1,
         ease: "back.out(1.7)"
@@ -598,24 +442,10 @@
       // Unzoom sharply
       .to(worldStage, {
         duration: 0.8,
-        scale: 1,
+        scale: 0.8,
         filter: "blur(0px)",
         ease: "expo.out"
-      }, "resolution+=0.8")
-      // Reveal Alex Turner with badge (springy pop)
-      .to(newEmployeeRow, {
-        duration: 0.6,
-        autoAlpha: 1,
-        scale: 1,
-        y: -10,
-        ease: "back.out(2)"
-      }, "resolution+=1")
-      .to(newEmployeeRow, {
-        duration: 0.3,
-        y: 0,
-        ease: "power2.out"
-      }, "resolution+=1.6");
-
+      }, "resolution+=0.8");
 
   </script>
 </body>
