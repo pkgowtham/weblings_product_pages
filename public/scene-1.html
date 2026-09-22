@@ -28,8 +28,12 @@
             overflow: hidden;
             width: 100vw;
             height: 100vh;
-            background-color: var(--bg-light);
+            background: var(--bg-light) !important;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .overlay, .mask, body::before, body::after, #world-stage::before, #world-stage::after {
+            display: none !important;
         }
 
         #viewport {
@@ -105,47 +109,7 @@
             </div>
             <!-- 3. E-Office Scroll Replica -->
             <div id="eoffice-wrapper">
-                <div id="eoffice-content">
-                    <div class="replica-nav">
-                        <div class="nav-logo"></div>
-                        <div class="nav-links">
-                            <div class="nav-link"></div>
-                            <div class="nav-link"></div>
-                            <div class="nav-link"></div>
-                        </div>
-                    </div>
-                    <div class="replica-hero">
-                        <div class="hero-title"></div>
-                        <div class="hero-subtitle"></div>
-                        <div class="hero-graphic"></div>
-                    </div>
-                    <div class="replica-features">
-                        <div class="feature-block">
-                            <div class="feature-icon"></div>
-                            <h3 class="feature-title">Global Directory</h3>
-                            <p class="feature-desc">Instantly search and connect with colleagues across all international branches. Complete with org charts and timezone alignment.</p>
-                        </div>
-                        <div class="feature-block">
-                            <div class="feature-icon" style="background: var(--green-accent);"></div>
-                            <h3 class="feature-title">One-Click Provisioning</h3>
-                            <p class="feature-desc">Onboard new hires in seconds. Automatically deploy software licenses, allocate cloud workspaces, and dispatch hardware.</p>
-                        </div>
-                        <div class="feature-block">
-                            <div class="feature-icon" style="background: var(--purple);"></div>
-                            <h3 class="feature-title">Asset Tracking</h3>
-                            <p class="feature-desc">Maintain a real-time, global ledger of all company devices and software licenses assigned to your workforce.</p>
-                        </div>
-                    </div>
-                    <div class="replica-content-section">
-                        <div class="content-text">
-                            <div class="feature-line" style="height: 30px; width: 80%; background: var(--text-dark); margin-bottom: 30px;"></div>
-                            <div class="feature-line"></div>
-                            <div class="feature-line"></div>
-                            <div class="feature-line" style="width:50%"></div>
-                        </div>
-                        <div class="content-img"></div>
-                    </div>
-                </div>
+                <iframe id="real-app-frame" src="http://localhost:3000/eoffice/feature" style="width: 1440px; height: 2500px; border: none; pointer-events: none; transform-origin: top center;"></iframe>
             </div>
             <div id="intro-scene">
                 <div class="word-mask"><span class="intro-word" id="word-1">Weblings</span></div>
@@ -201,136 +165,8 @@
             will-change: transform, opacity;
         }
 
-        #eoffice-content {
-            width: 100%;
-            /* Make it much taller to simulate scroll */
-            height: 2500px;
-            position: relative;
+        #real-app-frame {
             will-change: transform;
-            padding: 0;
-            margin: 0;
-        }
-
-        /* Replica UI Elements */
-        .replica-nav {
-            height: 80px;
-            width: 100%;
-            border-bottom: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            padding: 0 40px;
-            background: rgba(255,255,255,0.9);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            backdrop-filter: blur(10px);
-        }
-        .nav-logo {
-            width: 120px;
-            height: 30px;
-            background: var(--brand-blue);
-            border-radius: 4px;
-        }
-        .nav-links {
-            margin-left: auto;
-            display: flex;
-            gap: 20px;
-        }
-        .nav-link {
-            width: 60px;
-            height: 20px;
-            background: var(--border-light);
-            border-radius: 4px;
-        }
-
-        .replica-hero {
-            padding: 80px 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            border-bottom: 1px solid var(--border-light);
-        }
-        .hero-title {
-            width: 600px;
-            height: 60px;
-            background: var(--text-dark);
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .hero-subtitle {
-            width: 400px;
-            height: 20px;
-            background: var(--text-gray);
-            border-radius: 4px;
-            margin-bottom: 40px;
-        }
-        .hero-graphic {
-            width: 1000px;
-            height: 400px;
-            background: var(--bg-light);
-            border-radius: 20px;
-            border: 1px solid var(--border-light);
-        }
-
-        .replica-features {
-            padding: 80px 40px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-        }
-        .feature-block {
-            height: 300px;
-            background: white;
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            padding: 30px;
-        }
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--brand-blue);
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-        .feature-title {
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            margin: 0 0 10px 0;
-            font-weight: 600;
-        }
-        .feature-desc {
-            font-size: 1rem;
-            color: var(--text-gray);
-            line-height: 1.5;
-            margin: 0;
-        }
-        .feature-line {
-            height: 15px;
-            background: var(--border-light);
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-
-        .replica-content-section {
-            padding: 80px 40px;
-            background: var(--bg-light);
-            display: flex;
-            gap: 60px;
-            align-items: center;
-            height: 600px;
-        }
-        .content-text {
-            flex: 1;
-        }
-        .content-img {
-            flex: 1;
-            height: 400px;
-            background: white;
-            border-radius: 16px;
-            border: 1px solid var(--border-light);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
         }
 </style>
 <style>
@@ -440,7 +276,8 @@
         gsap.set("#world-stage", { transformOrigin: "center center" });
 
         const tl = gsap.timeline({
-            defaults: { ease: "power2.out" }
+            defaults: { ease: "power2.out" },
+            paused: true
         });
 
         // 1. Ambient Background In
@@ -479,7 +316,7 @@
               "replica"
           )
           // Simulate scroll - natural speed, reaching bottom
-          .to("#eoffice-content", {
+          .to("#real-app-frame", {
               y: -800,
               duration: 4.5,
               ease: "power1.inOut" // smooth, natural scroll
@@ -562,6 +399,12 @@
               repeat: -1,
               ease: "sine.inOut"
           }, "end");
+
+        window.onload = () => {
+            setTimeout(() => {
+                tl.play();
+            }, 3500);
+        };
 
     </script>
 </body>\n</html>
