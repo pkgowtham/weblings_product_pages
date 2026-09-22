@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weblings Worksuite - Trailer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
     <style>
         :root {
             --brand-blue: #0072C4;
-            --surface-lighter: #e6f2ff;
+            --surface-lighter: #E6F2FF;
             --surface-inverse: #262626;
             --green-accent: #10B981;
             --slate-navy: #0F172A;
@@ -17,10 +16,8 @@
             --bg-light: #F4F6F9;
             --surface-white: #ffffff;
             --border-light: #d9d9d9;
-            --positive-medium: #53b96a;
-
             --text-dark: #262626;
-            --text-light: #ffffff;
+            --text-gray: #595959;
         }
 
         * { box-sizing: border-box; }
@@ -31,7 +28,7 @@
             overflow: hidden;
             width: 100vw;
             height: 100vh;
-            background-color: var(--surface-white);
+            background-color: var(--bg-light);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
@@ -51,277 +48,312 @@
             position: absolute;
             top: 0;
             left: 0;
-            /* Start with slightly pulled back for camera effect, actual movement will be animated */
         }
 
-        /* Ambient Background */
+        /* 1. Light Theme & Mild Gradient */
         #ambient-bg {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 200vw;
-            height: 200vh;
-            transform: translate(-50%, -50%) translateZ(-3000px);
-            background: radial-gradient(circle, var(--surface-lighter) 0%, var(--surface-white) 50%, var(--surface-white) 100%);
-            opacity: 0;
+            width: 150vw;
+            height: 150vh;
+            transform: translate(-50%, -50%);
+            /* Mild, subtle radial gradient: #E6F2FF and a 5% opacity hint of #0072C4 */
+            background: radial-gradient(circle at center, var(--surface-lighter) 0%, rgba(0, 114, 196, 0.05) 50%, transparent 100%);
+            opacity: 0; /* Will be animated in */
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(80px);
+            will-change: opacity, transform;
+            z-index: 1;
+            pointer-events: none;
         }
 
-        /* Beat 1: Intro Text */
-        #intro-text-container {
+        .animated-layer {
+            will-change: transform, opacity;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="viewport">
+        <div id="ambient-bg"></div>
+        <div id="world-stage">
+            <!-- Layers to follow -->
+            <!-- 4. Stacked Cards -->
+            <div id="stacked-cards-container">
+                <div class="stacked-card card-1"><div class="sc-line sc-title"></div><div class="sc-line"></div></div>
+                <div class="stacked-card card-2"><div class="sc-line sc-title" style="background: var(--green-accent)"></div><div class="sc-line"></div></div>
+                <div class="stacked-card card-3"><div class="sc-line sc-title" style="background: var(--purple)"></div><div class="sc-line"></div></div>
+            </div>
+            <!-- 5. Bypass Modal -->
+            <div id="bypass-modal">
+                <h2 class="bypass-title">5-Minute IT Bypass</h2>
+                <div class="checklist">
+                    <div class="checklist-item" id="check-1">
+                        <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+                        <div>Identity Provisioned</div>
+                    </div>
+                    <div class="checklist-item" id="check-2">
+                        <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+                        <div>Workspace Allocated</div>
+                    </div>
+                    <div class="checklist-item" id="check-3">
+                        <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+                        <div>Hardware Dispatched</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 3. E-Office Scroll Replica -->
+            <div id="eoffice-wrapper">
+                <div id="eoffice-content">
+                    <div class="replica-nav">
+                        <div class="nav-logo"></div>
+                        <div class="nav-links">
+                            <div class="nav-link"></div>
+                            <div class="nav-link"></div>
+                            <div class="nav-link"></div>
+                        </div>
+                    </div>
+                    <div class="replica-hero">
+                        <div class="hero-title"></div>
+                        <div class="hero-subtitle"></div>
+                        <div class="hero-graphic"></div>
+                    </div>
+                    <div class="replica-features">
+                        <div class="feature-block"><div class="feature-icon"></div><div class="feature-line"></div><div class="feature-line" style="width:70%"></div></div>
+                        <div class="feature-block"><div class="feature-icon"></div><div class="feature-line"></div><div class="feature-line" style="width:70%"></div></div>
+                        <div class="feature-block"><div class="feature-icon"></div><div class="feature-line"></div><div class="feature-line" style="width:70%"></div></div>
+                    </div>
+                    <div class="replica-content-section">
+                        <div class="content-text">
+                            <div class="feature-line" style="height: 30px; width: 80%; background: var(--text-dark); margin-bottom: 30px;"></div>
+                            <div class="feature-line"></div>
+                            <div class="feature-line"></div>
+                            <div class="feature-line" style="width:50%"></div>
+                        </div>
+                        <div class="content-img"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="intro-scene">
+                <div class="word-mask"><span class="intro-word" id="word-1">Weblings</span></div>
+                <div class="word-mask"><span class="intro-word" id="word-2">Worksuite</span></div>
+            </div>
+        </div>
+    </div>
+<style>
+        /* 2. Intro Text */
+        #intro-scene {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate3d(-50%, -50%, 0); will-change: transform, opacity;
-            color: var(--text-dark);
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: flex;
+            gap: 15px;
             font-size: 5rem;
             font-weight: 800;
-            letter-spacing: -2px;
+            color: var(--text-dark);
             text-align: center;
-            opacity: 0;
-            white-space: nowrap;
-            text-shadow: none;
         }
 
-        /* Beat 2: Domain Claim Bar */
-        #domain-scene {
+        .word-mask {
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .intro-word {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+</style>
+<style>
+        /* 3. E-Office Scroll Replica */
+        #eoffice-wrapper {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate3d(-50%, -50%, 0); will-change: transform, opacity;
-            width: 600px;
-            height: 400px;
-            transform-style: preserve-3d;
-            display: none;
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 40px;
-        }
-
-        #domain-bar {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate3d(-50%, -50%, 0); will-change: transform, opacity;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .input-wrapper {
-            flex-grow: 1;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 12px;
-            padding: 16px 24px;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        #domain-input-text {
-            color: var(--surface-lighter);
-        }
-
-        #cursor-pipe {
-            width: 2px;
-            height: 1.5rem;
-            background: var(--brand-blue);
-            margin-left: 4px;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        #claim-btn {
-            background: var(--brand-blue);
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0, 114, 196, 0.4);
-            transform-style: preserve-3d;
-        }
-
-        #cursor-svg {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            z-index: 1000;
-            top: 200px;
-            left: 400px;
-            opacity: 0;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-        }
-
-        #success-modal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            width: 400px;
-            text-align: center;
-            opacity: 0;
-            display: none;
-            background: rgba(15, 23, 42, 0.85); /* Slate navy */
-            border: 1px solid rgba(16, 185, 129, 0.3); /* Green accent border */
-        }
-
-        .success-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--green-accent);
-            border-radius: 50%;
-            margin: 0 auto 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
-        }
-
-        /* Beat 3: Dashboard */
-        #dashboard-scene {
-            position: absolute;
-            /* Starts way off to the right, will be brought in via camera whip */
-            top: 50%;
-            left: 150%;
-            transform: translate3d(-50%, -50%, 0); will-change: transform, opacity;
+            transform: translate(-50%, -50%) translateZ(0); /* Start centered, 0 depth for active view */
             width: 1440px;
             height: 900px;
-            transform-style: preserve-3d;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.15);
+            overflow: hidden;
+            z-index: 20;
+            opacity: 0;
             display: none;
+            will-change: transform, opacity;
         }
 
-        #dashboard-backplate {
-            position: absolute;
-            top: 0;
-            left: 0;
+        #eoffice-content {
             width: 100%;
-            height: 100%;
-            background: var(--bg-light);
-            border-radius: 20px;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.4);
-            opacity: 0;
+            /* Make it much taller to simulate scroll */
+            height: 2500px;
+            position: relative;
+            will-change: transform;
+            padding: 0;
+            margin: 0;
         }
 
-        /* Internal Dashboard Elements - layered */
-        .dash-sidebar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 280px;
-            height: 100%;
-            background: var(--surface-white);
-            border-right: 1px solid var(--border-light);
-            border-radius: 20px 0 0 20px;
-            padding: 40px 20px;
-            opacity: 0;
-            box-shadow: 10px 0 30px rgba(0,0,0,0.05);
-        }
-
-        .sidebar-item {
-            height: 40px;
-            background: var(--surface-lighter);
-            border-radius: 8px;
-            margin-bottom: 16px;
+        /* Replica UI Elements */
+        .replica-nav {
+            height: 80px;
             width: 100%;
-            opacity: 0.5;
-        }
-
-        .sidebar-item:first-child {
-            background: var(--brand-blue);
-            opacity: 1;
-        }
-
-        .dash-header {
-            position: absolute;
-            top: 0;
-            left: 280px;
-            width: calc(100% - 280px);
-            height: 100px;
-            background: var(--surface-white);
             border-bottom: 1px solid var(--border-light);
-            border-radius: 0 20px 0 0;
-            padding: 0 40px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            opacity: 0;
+            padding: 0 40px;
+            background: rgba(255,255,255,0.9);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
         }
-
-        .header-title {
-            width: 200px;
+        .nav-logo {
+            width: 120px;
             height: 30px;
+            background: var(--brand-blue);
+            border-radius: 4px;
+        }
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            gap: 20px;
+        }
+        .nav-link {
+            width: 60px;
+            height: 20px;
             background: var(--border-light);
             border-radius: 4px;
         }
 
-        #create-emp-btn {
-            background: var(--brand-blue);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 114, 196, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .dash-content {
-            position: absolute;
-            top: 100px;
-            left: 280px;
-            width: calc(100% - 280px);
-            height: calc(100% - 100px);
-            padding: 40px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: min-content;
-            gap: 30px;
-            transform-style: preserve-3d;
-        }
-
-        .data-card {
-            background: var(--surface-white);
-            border-radius: 16px;
-            padding: 30px;
-            height: 200px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            border: 1px solid var(--border-light);
-            opacity: 0;
+        .replica-hero {
+            padding: 80px 40px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .hero-title {
+            width: 600px;
+            height: 60px;
+            background: var(--text-dark);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .hero-subtitle {
+            width: 400px;
+            height: 20px;
+            background: var(--text-gray);
+            border-radius: 4px;
+            margin-bottom: 40px;
+        }
+        .hero-graphic {
+            width: 1000px;
+            height: 400px;
+            background: var(--bg-light);
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
         }
 
-        .card-line {
+        .replica-features {
+            padding: 80px 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .feature-block {
+            height: 300px;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 30px;
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--brand-blue);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .feature-line {
+            height: 15px;
+            background: var(--border-light);
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .replica-content-section {
+            padding: 80px 40px;
+            background: var(--bg-light);
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            height: 600px;
+        }
+        .content-text {
+            flex: 1;
+        }
+        .content-img {
+            flex: 1;
+            height: 400px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+</style>
+<style>
+        /* 4. Stacked Cards */
+        #stacked-cards-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            will-change: opacity, transform;
+            /* Negative gap to overlap */
+            gap: -80px;
+        }
+
+        .stacked-card {
+            width: 100px;
+            height: 120px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            will-change: width, transform, opacity;
+            margin-top: -60px; /* Force stack */
+            display: flex;
+            padding: 20px;
+            flex-direction: column;
+            gap: 15px;
+            overflow: hidden;
+        }
+
+        .stacked-card:first-child { margin-top: 0; }
+
+        .sc-line {
             height: 12px;
             background: var(--surface-lighter);
             border-radius: 6px;
-            width: 100%;
+            width: 200px; /* Wider than initial card width to show clip */
         }
-        .card-line.short { width: 60%; }
-        .card-line.title { height: 24px; width: 40%; background: var(--brand-blue); margin-bottom: 10px;}
-
-        /* Beat 4: Deep Zoom & Bypass Modal */
+        .sc-title { background: var(--brand-blue); height: 20px; width: 150px; }
+</style>
+<style>
+        /* 5. Checkmark Modal */
         #bypass-modal {
             position: absolute;
             top: 50%;
@@ -330,12 +362,14 @@
             width: 500px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-light);
             border-radius: 24px;
             padding: 50px;
-            box-shadow: 0 50px 150px rgba(0,0,0,0.2);
-            z-index: 2000;
+            box-shadow: 0 50px 150px rgba(0,0,0,0.15);
+            z-index: 40;
             display: none;
+            will-change: transform, opacity;
         }
 
         .bypass-title {
@@ -363,6 +397,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            will-change: transform, background-color, border-color;
         }
 
         .check-circle svg {
@@ -374,348 +409,136 @@
             stroke-linejoin: round;
             fill: none;
             opacity: 0;
+            will-change: opacity;
         }
-
-        /* Beat 5: Badge */
-        #alex-badge {
-            position: absolute;
-            bottom: 40px;
-            right: 40px;
-            background: var(--surface-white);
-            border: 2px solid var(--green-accent);
-            border-radius: 100px;
-            padding: 12px 24px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
-            opacity: 0;
-            z-index: 100;
-        }
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--brand-blue);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-
-        .badge-text {
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-
-        #iframe-container {
-            width: 1440px;
-            height: 900px;
-            border-radius: 12px;
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.1);
-            overflow: hidden;
-            position: absolute;
-            top: 0; left: 0;
-            opacity: 0;
-            transform-style: preserve-3d;
-        }
-        #eoffice-iframe {
-            width: 1440px;
-            height: 2000px;
-            border: none;
-            pointer-events: none;
-            transform-origin: center center;
-        }
-        #eoffice-iframe::-webkit-scrollbar { display: none; }
-
-        #stacked-cards-container {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            gap: -80px; /* Stacked */
-            opacity: 0;
-            z-index: 1500;
-        }
-        .stacked-card {
-            width: 100px;
-            height: 60px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-light);
-            margin-top: -40px;
-        }
-
-        /* Utility */
-        .dash-layer { transform-style: preserve-3d; }
-
-        /* Preloader */
-        #preloader {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: var(--slate-navy);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease;
-        }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-    </style>
-</head>
-<body>
-
-    <div id="preloader">
-        <div class="spinner"></div>
-    </div>
-    <div id="viewport">
-
-        <!-- Ambient Glowing Orb -->
-        <div id="ambient-bg"></div>
-
-        <div id="world-stage">
-
-            <!-- Beat 1 -->
-            <div id="intro-text-container">
-                <div id="intro-text">Weblings Worksuite</div>
-            </div>
-
-            <!-- Beat 2 -->
-            <div id="domain-scene">
-                <div id="domain-bar" class="glass-panel">
-                    <div class="input-wrapper">
-                        <span style="color: rgba(255,255,255,0.5)">https://</span>
-                        <span id="domain-input-text"></span>
-                        <div id="cursor-pipe"></div>
-                    </div>
-                    <button id="claim-btn">Claim Domain</button>
-                </div>
-
-                <div id="success-modal" class="glass-panel">
-                    <div class="success-icon">✓</div>
-                    <h2>Domain Verified</h2>
-                    <p style="color: rgba(255,255,255,0.7)">acme.io is now connected.</p>
-                </div>
-            </div>
-
-            <!-- Global Cursor -->
-            <svg id="cursor-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 01.35-.15h6.44c.45 0 .67-.54.35-.85L6.35 3.21a.5.5 0 00-.85.35z" fill="white" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
-            </svg>
-
-            <!-- Beat 3, 4, 5 -->
-
-            <!-- Beat 3, 4, 5 -->
-            <div id="dashboard-scene">
-                <div id="iframe-container">
-                    <iframe id="eoffice-iframe" src="/eoffice/feature" frameborder="0"></iframe>
-                </div>
-                <!-- Stacked cards for transition -->
-                <div id="stacked-cards-container">
-                    <div class="stacked-card"></div>
-                    <div class="stacked-card"></div>
-                    <div class="stacked-card"></div>
-                </div>
-
-                <!-- Bypass Modal (inside dashboard for relative coords, but high Z) -->
-                <div id="bypass-modal">
-                    <h2 class="bypass-title">5-Minute IT Bypass</h2>
-                    <div class="checklist">
-                        <div class="checklist-item" id="check-1">
-                            <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-                            <div>Identity Provisioned</div>
-                        </div>
-                        <div class="checklist-item" id="check-2">
-                            <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-                            <div>Workspace Allocated</div>
-                        </div>
-                        <div class="checklist-item" id="check-3">
-                            <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-                            <div>Hardware Dispatched</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
+</style>
     <script>
-        gsap.registerPlugin(TextPlugin);
-
-        // Initial setup
         gsap.set("#world-stage", { transformOrigin: "center center" });
-        gsap.set(".dash-layer", { z: 0 });
 
-        const initAnimation = () => {
-            gsap.to("#preloader", { opacity: 0, duration: 0.5, onComplete: () => document.getElementById("preloader").style.display = 'none' });
+        const tl = gsap.timeline({
+            defaults: { ease: "power2.out" }
+        });
 
-            const tl = gsap.timeline({
-                defaults: { ease: "power2.out" }
-            });
+        // 1. Ambient Background In
+        tl.addLabel("start", 0)
+          .to("#ambient-bg", {
+              opacity: 1,
+              scale: 1.1,
+              duration: 3.0,
+              ease: "power2.inOut"
+          }, "start");
 
-            // Beat 1: The Ambient Hook
-            tl.addLabel("start", 0)
-            .to("#ambient-bg", {
-                opacity: 0.8,
-                scale: 1.2,
-                duration: 3.0,
-                ease: "power1.inOut"
-            }, "start")
-            .fromTo("#intro-text-container",
-                { scale: 0.8, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 2.5, ease: "power3.out" },
-                "start+=0.5"
-            );
+        // 2. Intro Text (Lag-free)
+        tl.addLabel("intro", 0.5)
+          .to(".intro-word", {
+              y: "0%",
+              opacity: 1,
+              duration: 1.5,
+              stagger: 0.2,
+              ease: "expo.out"
+          }, "intro")
+          .to("#intro-scene", {
+              scale: 1.5,
+              opacity: 0,
+              filter: "blur(10px)",
+              duration: 0.8,
+              ease: "power2.in"
+          }, "intro+=2.5")
+          .set("#intro-scene", { display: "none" }, "intro+=3.3");
 
-            // Beat 2: Domain Snap
-            tl.addLabel("domainSnap", 3.0)
-            .to("#intro-text-container", {
-                scale: 1.5, opacity: 0, filter: "blur(20px)", duration: 0.8, ease: "power2.in"
-            }, "domainSnap")
-            .set("#domain-scene", { display: "block" }, "domainSnap+=0.2")
-            .from("#domain-bar", {
-                z: -2000, rotationX: 45, opacity: 0, duration: 1.5, ease: "back.out(1.5)"
-            }, "domainSnap+=0.5")
-            .to("#cursor-svg", {
-                opacity: 1, left: 450, top: window.innerHeight/2 + 20, duration: 0.8, ease: "power3.out"
-            }, "domainSnap+=1.5")
-            .to("#domain-input-text", {
-                text: "acme.io", duration: 0.6, ease: "none"
-            }, "domainSnap+=2.3")
-            .to("#cursor-svg", {
-                left: window.innerWidth/2 + 150, top: window.innerHeight/2 + 20, duration: 0.6, ease: "power3.inOut"
-            }, "domainSnap+=3.0")
-            .to("#claim-btn", { scale: 0.95, duration: 0.1 }, "domainSnap+=3.7")
-            .to("#claim-btn", {
-                scale: 1, boxShadow: "0 0 50px rgba(0, 114, 196, 0.4)", duration: 0.3, ease: "back.out(2)"
-            }, "domainSnap+=3.8")
-            .set("#success-modal", { display: "block" }, "domainSnap+=4.0")
-            .fromTo("#success-modal",
-                { scale: 0, opacity: 0, y: 50 },
-                { scale: 1, opacity: 1, y: 0, duration: 0.8, ease: "back.out(1.5)" },
-                "domainSnap+=4.0"
-            )
-            .to("#domain-bar", { opacity: 0.3, filter: "blur(5px)", duration: 0.5 }, "domainSnap+=4.0");
+        // 3. E-Office Scroll Replica
+        tl.addLabel("replica", 3.5)
+          .set("#eoffice-wrapper", { display: "block" }, "replica")
+          .fromTo("#eoffice-wrapper",
+              { scale: 0.8, opacity: 0, y: 100, rotationX: 10 },
+              { scale: 1, opacity: 1, y: 0, rotationX: 0, duration: 1.2, ease: "expo.out" },
+              "replica"
+          )
+          // Simulate scroll
+          .to("#eoffice-content", {
+              y: -800,
+              duration: 3.0,
+              ease: "power3.inOut"
+          }, "replica+=1.0");
 
-            // Beat 3: Iframe Reveal (replacing UI Cascade)
-            tl.addLabel("uiCascade", 8.0)
-            .to("#domain-scene", { opacity: 0, duration: 0.3 }, "uiCascade")
-            .set("#domain-scene", { display: "none" }, "uiCascade+=0.3")
-            .set("#dashboard-scene", { display: "block" }, "uiCascade")
-            .to("#world-stage", {
-                x: "-=100vw", rotationY: 15, duration: 1.2, ease: "expo.out"
-            }, "uiCascade")
-            .fromTo("#iframe-container",
-                { x: 500, z: -1000, opacity: 0, rotationY: 45 },
-                { x: 0, z: 0, opacity: 1, rotationY: 0, duration: 1.5, ease: "expo.out" },
-                "uiCascade+=0.2"
-            )
-            .to("#world-stage", {
-                rotationY: 0, duration: 2.0, ease: "power2.out"
-            }, "uiCascade+=1.5")
-            // Simulate iframe scroll
-            .to("#eoffice-iframe", {
-                y: -300, duration: 3.0, ease: "power2.inOut"
-            }, "uiCascade+=2.0");
+        // 4. Stacked Cards Transition
+        tl.addLabel("cards", 5.5) // Starts during the scroll
+          // Blur background
+          .to("#eoffice-wrapper", {
+              filter: "blur(8px)",
+              opacity: 0.6,
+              duration: 0.8
+          }, "cards")
+          // Bring in stack
+          .to("#stacked-cards-container", { opacity: 1, duration: 0.5 }, "cards")
+          .fromTo(".stacked-card",
+              { y: 200, opacity: 0, scale: 0.8 },
+              { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.1, ease: "back.out(1.2)" },
+              "cards+=0.2"
+          )
+          // Expand width to 700px and unstack
+          .to(".stacked-card", {
+              width: 700,
+              marginTop: 20, // Override negative margin to spread them
+              duration: 1.2,
+              ease: "back.out(1.2)"
+          }, "cards+=1.2")
+          // Sweep off screen right
+          .to(".stacked-card", {
+              x: 1500,
+              opacity: 0,
+              duration: 0.8,
+              stagger: 0.05,
+              ease: "power4.in"
+          }, "cards+=3.5"); // 1.5s hold (1.2 + 0.8 + 1.5 = 3.5)
 
-            // Beat 4: Stacked Cards Transition & Deep Zoom & Bypass
-            tl.addLabel("deepZoom", 14.0)
-            // Bring in stacked cards
-            .to("#stacked-cards-container", { opacity: 1, duration: 0.5 }, "deepZoom")
-            .fromTo(".stacked-card",
-                { y: 100, opacity: 0 },
-                { y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: "back.out(1.5)" },
-                "deepZoom"
-            )
-            // Animate width to 700px
-            .to(".stacked-card", {
-                width: 700, duration: 1.0, ease: "power3.inOut"
-            }, "deepZoom+=1.0")
-            // Disappear smoothly in one direction (right)
-            .to(".stacked-card", {
-                x: 1500, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power2.in"
-            }, "deepZoom+=2.5")
+        // 5. Final Checkmark Resolution
+        tl.addLabel("bypass", 9.8) // After cards sweep
+          .set("#bypass-modal", { display: "block" }, "bypass")
+          .fromTo("#bypass-modal",
+              { scale: 0.5, opacity: 0 },
+              { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)" },
+              "bypass"
+          )
+          // Rapid checkmarks pop
+          .to(".check-circle", {
+              backgroundColor: "var(--green-accent)",
+              borderColor: "var(--green-accent)",
+              duration: 0.2,
+              stagger: 0.1
+          }, "bypass+=0.8")
+          .to(".check-circle svg", {
+              opacity: 1,
+              duration: 0.2,
+              stagger: 0.1
+          }, "bypass+=0.8")
+          // Scale pop effect on circles (0.5 to 1.2 to 1)
+          .fromTo(".check-circle",
+              { scale: 0.5 },
+              {
+                  scale: 1.2,
+                  duration: 0.15,
+                  stagger: 0.1,
+                  ease: "power2.out"
+              }, "bypass+=0.8")
+          .to(".check-circle", {
+              scale: 1,
+              duration: 0.1,
+              stagger: 0.1,
+              ease: "power2.in"
+          }, "bypass+=0.95");
 
-            // Deep Zoom while cards transition
-            .to("#world-stage", {
-                scale: 2.2, z: 500, x: "-=10vw", duration: 1.5, ease: "expo.out"
-            }, "deepZoom+=1.4")
-            .to("#iframe-container", {
-                filter: "blur(12px)", opacity: 0.4, duration: 0.8
-            }, "deepZoom+=1.4")
-
-            // Bypass modal scales up
-            .set("#bypass-modal", { display: "block" }, "deepZoom+=3.0")
-            .fromTo("#bypass-modal",
-                { scale: 0, opacity: 0, z: -200 },
-                { scale: 1, opacity: 1, z: 0, duration: 1.0, ease: "back.out(1.7)" },
-                "deepZoom+=3.0"
-            )
-
-            // Checklist items resolve
-            .to("#check-1 .check-circle", {
-                background: "var(--green-accent)", borderColor: "var(--green-accent)", duration: 0.2
-            }, "deepZoom+=4.3")
-            .to("#check-1 svg", { opacity: 1, duration: 0.2 }, "deepZoom+=4.3")
-
-            .to("#check-2 .check-circle", {
-                background: "var(--green-accent)", borderColor: "var(--green-accent)", duration: 0.2
-            }, "deepZoom+=4.6")
-            .to("#check-2 svg", { opacity: 1, duration: 0.2 }, "deepZoom+=4.6")
-
-            .to("#check-3 .check-circle", {
-                background: "var(--green-accent)", borderColor: "var(--green-accent)", duration: 0.2
-            }, "deepZoom+=4.9")
-            .to("#check-3 svg", { opacity: 1, duration: 0.2 }, "deepZoom+=4.9");
-
-            // Beat 5: Final Float
-            tl.addLabel("finalFloat", 20.0)
-            .to("#bypass-modal", {
-                scale: 0.8, opacity: 0, y: -50, duration: 0.6, ease: "power2.in"
-            }, "finalFloat")
-            .set("#bypass-modal", { display: "none" }, "finalFloat+=0.6")
-            .to("#iframe-container", {
-                filter: "blur(0px)", opacity: 1, duration: 1.5, ease: "power2.out"
-            }, "finalFloat+=0.2")
-            .to("#world-stage", {
-                scale: 1, z: 0, x: "-=100vw", duration: 2.5, ease: "power4.inOut"
-            }, "finalFloat+=0.2")
-            .to("#cursor-svg", { opacity: 0, duration: 0.5 }, "finalFloat+=0.5")
-            .to("#world-stage", {
-                y: -15, rotationX: 2, rotationY: -2, duration: 3, yoyo: true, repeat: -1, ease: "sine.inOut"
-            }, "finalFloat+=3.0");
-        };
-
-        // Initialize when iframe loads
-        const iframeEl = document.getElementById('eoffice-iframe');
-        if(iframeEl) {
-            iframeEl.addEventListener('load', initAnimation);
-            // Fallback just in case
-            setTimeout(initAnimation, 3000);
-        } else {
-            initAnimation();
-        }
+        // Gentle float at the end
+        tl.addLabel("end", 11.0)
+          .to("#world-stage", {
+              y: -15,
+              rotationX: 2,
+              rotationY: -2,
+              duration: 3,
+              yoyo: true,
+              repeat: -1,
+              ease: "sine.inOut"
+          }, "end");
 
     </script>
-</body>
-</html>
+</body>\n</html>
