@@ -120,9 +120,21 @@
                         <div class="hero-graphic"></div>
                     </div>
                     <div class="replica-features">
-                        <div class="feature-block"><div class="feature-icon"></div><div class="feature-line"></div><div class="feature-line" style="width:70%"></div></div>
-                        <div class="feature-block"><div class="feature-icon"></div><div class="feature-line"></div><div class="feature-line" style="width:70%"></div></div>
-                        <div class="feature-block"><div class="feature-icon"></div><div class="feature-line"></div><div class="feature-line" style="width:70%"></div></div>
+                        <div class="feature-block">
+                            <div class="feature-icon"></div>
+                            <h3 class="feature-title">Global Directory</h3>
+                            <p class="feature-desc">Instantly search and connect with colleagues across all international branches. Complete with org charts and timezone alignment.</p>
+                        </div>
+                        <div class="feature-block">
+                            <div class="feature-icon" style="background: var(--green-accent);"></div>
+                            <h3 class="feature-title">One-Click Provisioning</h3>
+                            <p class="feature-desc">Onboard new hires in seconds. Automatically deploy software licenses, allocate cloud workspaces, and dispatch hardware.</p>
+                        </div>
+                        <div class="feature-block">
+                            <div class="feature-icon" style="background: var(--purple);"></div>
+                            <h3 class="feature-title">Asset Tracking</h3>
+                            <p class="feature-desc">Maintain a real-time, global ledger of all company devices and software licenses assigned to your workforce.</p>
+                        </div>
                     </div>
                     <div class="replica-content-section">
                         <div class="content-text">
@@ -281,6 +293,18 @@
             background: var(--brand-blue);
             border-radius: 12px;
             margin-bottom: 20px;
+        }
+        .feature-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+        .feature-desc {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+            margin: 0;
         }
         .feature-line {
             height: 15px;
@@ -454,21 +478,19 @@
               { scale: 1, opacity: 1, y: 0, rotationX: 0, duration: 1.2, ease: "expo.out" },
               "replica"
           )
-          // Simulate scroll
+          // Simulate scroll - natural speed, reaching bottom
           .to("#eoffice-content", {
               y: -800,
-              duration: 3.0,
-              ease: "power3.inOut"
+              duration: 4.5,
+              ease: "power1.inOut" // smooth, natural scroll
           }, "replica+=1.0");
 
         // 4. Stacked Cards Transition
-        tl.addLabel("cards", 5.5) // Starts during the scroll
-          // Blur background
-          .to("#eoffice-wrapper", {
-              filter: "blur(8px)",
-              opacity: 0.6,
-              duration: 0.8
-          }, "cards")
+        // replica starts at 3.5. intro is 1.2s. scroll starts at 4.5 (replica+1.0).
+        // scroll duration is 4.5s. finishes at 9.0s.
+        // wait 0.5s before cards = 9.5s.
+        tl.addLabel("cards", 9.5)
+          // NO dimming or blurring of background as requested
           // Bring in stack
           .to("#stacked-cards-container", { opacity: 1, duration: 0.5 }, "cards")
           .fromTo(".stacked-card",
@@ -493,7 +515,8 @@
           }, "cards+=3.5"); // 1.5s hold (1.2 + 0.8 + 1.5 = 3.5)
 
         // 5. Final Checkmark Resolution
-        tl.addLabel("bypass", 9.8) // After cards sweep
+        // cards start at 9.5s. sweep off finishes at 9.5 + 3.5 + 0.8 + stagger = ~14.0
+        tl.addLabel("bypass", 14.0)
           .set("#bypass-modal", { display: "block" }, "bypass")
           .fromTo("#bypass-modal",
               { scale: 0.5, opacity: 0 },
@@ -529,7 +552,7 @@
           }, "bypass+=0.95");
 
         // Gentle float at the end
-        tl.addLabel("end", 11.0)
+        tl.addLabel("end", 16.0)
           .to("#world-stage", {
               y: -15,
               rotationX: 2,
