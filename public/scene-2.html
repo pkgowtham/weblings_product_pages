@@ -146,8 +146,6 @@
             <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.94c.45 0 .67-.54.35-.85L5.85 2.86a.5.5 0 0 0-.85.35Z" fill="#111827" stroke="#ffffff" stroke-width="2"/>
         </svg>
     </div>
-</body>
-</html>
 <style>
         /* Iframe Styles */
         .iframe-wrapper {
@@ -170,10 +168,11 @@
 
         .iframe-content {
             width: 1440px;
-            height: 900px;
+            height: 2500px;
             border: none;
             pointer-events: none;
             transform-origin: center center;
+            will-change: transform;
         }
 
         .iframe-content::-webkit-scrollbar {
@@ -364,6 +363,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // --- BEAT 2: The Unified Alias Cascade (4.0s - 9.0s) ---
         tl.addLabel("aliasCascade", 4.0)
+          // Start Mail Scroll
+          .to("#mail-frame", {
+              y: -600,
+              duration: 8,
+              ease: "power1.inOut"
+          }, "aliasCascade")
           // Fly in
           .to([".badge-alex", ".badge-billing", ".badge-support"], {
               opacity: 1,
@@ -465,6 +470,13 @@ document.addEventListener("DOMContentLoaded", () => {
               ease: "power2.out"
           }, "contextFlip+=3.3")
 
+          // Start Agile Board Scroll
+          .to("#agile-frame", {
+              y: -800,
+              duration: 5,
+              ease: "power2.inOut"
+          }, "contextFlip+=3.8")
+
           // Cinematic Float for the remainder
           .to("#scene-container", {
               y: 20,
@@ -477,3 +489,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 </script>
+</body>
+</html>
