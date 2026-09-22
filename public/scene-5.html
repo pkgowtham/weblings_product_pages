@@ -149,63 +149,71 @@
             letter-spacing: 1px;
         }
 
-        /* Ecosystem Sync Badges */
-        .sync-badge {
+        /* Timezone Clocks */
+        .tz-clock {
             position: absolute;
             top: 50%;
             left: 50%;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
             border-radius: 16px;
-            padding: 16px 32px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--text-dark);
+            padding: 24px 32px;
+            text-align: center;
             z-index: 40;
             opacity: 0;
             transform: scale(0) translateZ(-500px); /* Start small and deep */
             will-change: transform, opacity;
         }
 
-        #badge-google {
-            margin-top: -30px;
-            margin-left: -350px;
+        #clock-utc {
+            margin-top: -50px;
+            margin-left: -400px;
         }
 
-        #badge-outlook {
-            margin-top: -30px;
+        #clock-local {
+            margin-top: -50px;
             margin-left: 100px;
         }
 
-        /* SVG Pulse Line */
-        .sync-line-container {
+        .tz-label {
+            font-size: 1rem;
+            color: var(--text-gray);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .tz-time {
+            font-family: monospace;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            min-width: 200px; /* Prevent jitter during slot spin */
+        }
+
+        /* Auto-Converted Badge */
+        .tz-badge {
             position: absolute;
-            top: 50%; left: 50%;
-            margin-top: -10px;
-            margin-left: -150px; /* Bridge the gap between badges */
-            width: 250px;
-            height: 20px;
-            z-index: 35;
+            top: 50%;
+            left: 50%;
+            margin-top: -20px;
+            margin-left: -110px; /* Center between clocks */
+            background: var(--green-accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.5);
+            z-index: 45;
             opacity: 0;
-            transform: translateZ(200px);
-        }
-
-        .sync-line {
-            stroke: var(--green-accent);
-            stroke-width: 4;
-            stroke-linecap: round;
-            stroke-dasharray: 10 10;
-            animation: dash 1s linear infinite;
-            filter: drop-shadow(0 0 10px var(--green-accent));
-        }
-
-        @keyframes dash {
-            to {
-                stroke-dashoffset: -20;
-            }
+            transform: scale(0) translateZ(100px);
+            white-space: nowrap;
+            will-change: transform, opacity;
         }
 
     </style>
@@ -229,14 +237,18 @@
                     <div class="warning-text">HR CAPACITY WARNING<br><span style="font-size: 1.2rem; font-weight: 600; color: #B91C1C;">Assignee on leave</span></div>
                 </div>
 
-                <!-- Ecosystem Sync -->
-                <div class="sync-badge" id="badge-google">Google Calendar</div>
+                <!-- Timezone Intelligence -->
+                <div class="tz-clock" id="clock-utc">
+                    <div class="tz-label">UTC</div>
+                    <div class="tz-time">10:00 AM</div>
+                </div>
 
-                <svg class="sync-line-container" id="sync-pulse" viewBox="0 0 250 20">
-                    <line x1="0" y1="10" x2="250" y2="10" class="sync-line" />
-                </svg>
+                <div class="tz-badge" id="tz-badge">Auto-Converted</div>
 
-                <div class="sync-badge" id="badge-outlook">Outlook / M365</div>
+                <div class="tz-clock" id="clock-local">
+                    <div class="tz-label">Local Client Time</div>
+                    <div class="tz-time" id="local-time-text">--:-- --</div>
+                </div>
 
             </div>
 
@@ -288,53 +300,69 @@
               ease: "sine.inOut"
           }, "hrScroll+=4.0");
 
-        // --- BEAT 3: The Ecosystem Sync (12.0s - 20.0s) ---
-        tl.addLabel("ecosystemSync", 12.0)
+        // --- BEAT 3: The Timezone Normalization (12.0s - 20.0s) ---
+        tl.addLabel("timezoneSync", 12.0)
           // Warning shield flies off
           .to("#warning-shield", {
               y: -1000,
               opacity: 0,
               duration: 0.8,
               ease: "power3.in"
-          }, "ecosystemSync")
+          }, "timezoneSync")
           // Remove blur
-          .to("#calendar-wrapper", { filter: "blur(0px)", duration: 0.5 }, "ecosystemSync")
+          .to("#calendar-wrapper", { filter: "blur(0px)", duration: 0.5 }, "timezoneSync")
 
-          // Scroll to "Reality Check" (2-Way External Sync)
+          // Scroll to Timezone Intelligence
           .to("#calendar-frame", {
               y: -1200,
               duration: 2.5,
               ease: "power2.inOut"
-          }, "ecosystemSync+=0.5")
+          }, "timezoneSync+=0.5")
 
           // Camera zooms tightly
           .to("#world-stage", {
               scale: 1.15,
               duration: 2.0,
               ease: "power2.inOut"
-          }, "ecosystemSync+=1.0")
+          }, "timezoneSync+=1.0")
 
-          // Badges fly out toward camera
-          .fromTo(["#badge-google", "#badge-outlook"],
+          // Clocks fly out toward camera
+          .fromTo(["#clock-utc", "#clock-local"],
               { scale: 0, opacity: 0, z: -500 },
               { scale: 1, opacity: 1, z: 200, duration: 1.5, stagger: 0.2, ease: "back.out(1.5)" },
-              "ecosystemSync+=2.5"
-          )
+              "timezoneSync+=2.5"
+          );
 
-          // Pulse line appears
-          .to("#sync-pulse", {
+          // Slot machine spin for local time
+          const localTimeEl = document.getElementById("local-time-text");
+          const spins = 10;
+          for(let i=0; i<spins; i++) {
+              tl.call(() => {
+                  localTimeEl.innerText = `${Math.floor(Math.random()*12+1)}:${Math.floor(Math.random()*60).toString().padStart(2, '0')} ${Math.random() > 0.5 ? 'AM' : 'PM'}`;
+              }, null, `timezoneSync+=${2.7 + i*0.1}`);
+          }
+
+          // Lock onto final time
+          tl.call(() => {
+              localTimeEl.innerText = "3:30 PM";
+          }, null, `timezoneSync+=${2.7 + spins*0.1}`);
+
+          // Badge pops in
+          tl.to("#tz-badge", {
+              scale: 1,
               opacity: 1,
-              duration: 0.5
-          }, "ecosystemSync+=3.5")
+              duration: 0.8,
+              ease: "back.out(2)"
+          }, `timezoneSync+=${2.8 + spins*0.1}`);
 
           // Infinite Float
-          .to("#world-stage", {
+          tl.to("#world-stage", {
               y: -15,
               duration: 3,
               yoyo: true,
               repeat: -1,
               ease: "sine.inOut"
-          }, "ecosystemSync+=4.0");
+          }, `timezoneSync+=${3.5 + spins*0.1}`);
     };
     </script>
 </body>
