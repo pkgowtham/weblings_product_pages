@@ -149,39 +149,63 @@
             letter-spacing: 1px;
         }
 
-        /* Glowing Neon Highlight Box */
-        .highlight-box {
+        /* Ecosystem Sync Badges */
+        .sync-badge {
             position: absolute;
-            /* Approximate location of "Weblings Worksuite ₹400" column after scroll to -1600 */
-            /* We will place it statically near center, assuming the scroll centers the table */
-            top: 50%; left: 50%;
-            margin-top: -150px;
-            margin-left: 100px; /* offset to the right column */
-            width: 0px;
-            height: 0px;
-            border: 4px solid transparent;
-            border-radius: 12px;
+            top: 50%;
+            left: 50%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-radius: 16px;
+            padding: 16px 32px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--text-dark);
             z-index: 40;
             opacity: 0;
-            transform: translateZ(100px);
-            will-change: width, height, border-color, box-shadow, opacity;
+            transform: scale(0) translateZ(-500px); /* Start small and deep */
+            will-change: transform, opacity;
         }
 
-        .highlight-badge {
+        #badge-google {
+            margin-top: -30px;
+            margin-left: -350px;
+        }
+
+        #badge-outlook {
+            margin-top: -30px;
+            margin-left: 100px;
+        }
+
+        /* SVG Pulse Line */
+        .sync-line-container {
             position: absolute;
-            top: -20px;
-            right: -20px;
-            background: var(--green-accent);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
+            top: 50%; left: 50%;
+            margin-top: -10px;
+            margin-left: -150px; /* Bridge the gap between badges */
+            width: 250px;
+            height: 20px;
+            z-index: 35;
             opacity: 0;
-            transform: scale(0) translateZ(50px);
-            white-space: nowrap;
-            will-change: transform, opacity;
+            transform: translateZ(200px);
+        }
+
+        .sync-line {
+            stroke: var(--green-accent);
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 10 10;
+            animation: dash 1s linear infinite;
+            filter: drop-shadow(0 0 10px var(--green-accent));
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -20;
+            }
         }
 
     </style>
@@ -205,10 +229,14 @@
                     <div class="warning-text">HR CAPACITY WARNING<br><span style="font-size: 1.2rem; font-weight: 600; color: #B91C1C;">Assignee on leave</span></div>
                 </div>
 
-                <!-- Price Highlight Box -->
-                <div class="highlight-box" id="price-highlight">
-                    <div class="highlight-badge" id="price-badge">Save up to 50%</div>
-                </div>
+                <!-- Ecosystem Sync -->
+                <div class="sync-badge" id="badge-google">Google Calendar</div>
+
+                <svg class="sync-line-container" id="sync-pulse" viewBox="0 0 250 20">
+                    <line x1="0" y1="10" x2="250" y2="10" class="sync-line" />
+                </svg>
+
+                <div class="sync-badge" id="badge-outlook">Outlook / M365</div>
 
             </div>
 
@@ -260,60 +288,53 @@
               ease: "sine.inOut"
           }, "hrScroll+=4.0");
 
-        // --- BEAT 3: The Price Comparison Drop (12.0s - 20.0s) ---
-        tl.addLabel("priceDrop", 12.0)
+        // --- BEAT 3: The Ecosystem Sync (12.0s - 20.0s) ---
+        tl.addLabel("ecosystemSync", 12.0)
           // Warning shield flies off
           .to("#warning-shield", {
               y: -1000,
               opacity: 0,
               duration: 0.8,
               ease: "power3.in"
-          }, "priceDrop")
+          }, "ecosystemSync")
           // Remove blur
-          .to("#calendar-wrapper", { filter: "blur(0px)", duration: 0.5 }, "priceDrop")
+          .to("#calendar-wrapper", { filter: "blur(0px)", duration: 0.5 }, "ecosystemSync")
 
-          // Scroll further to pricing table
+          // Scroll to "Reality Check" (2-Way External Sync)
           .to("#calendar-frame", {
-              y: -1600,
+              y: -1200,
               duration: 2.5,
               ease: "power2.inOut"
-          }, "priceDrop+=0.5")
+          }, "ecosystemSync+=0.5")
 
           // Camera zooms tightly
           .to("#world-stage", {
               scale: 1.15,
               duration: 2.0,
               ease: "power2.inOut"
-          }, "priceDrop+=1.0")
+          }, "ecosystemSync+=1.0")
 
-          // Draw Glowing Neon Box
-          .set("#price-highlight", { borderColor: "var(--green-accent)", opacity: 1 }, "priceDrop+=2.5")
-          .to("#price-highlight", {
-              width: 250,
-              height: 350,
-              boxShadow: "0 0 40px rgba(16, 185, 129, 0.4)",
-              duration: 1.0,
-              ease: "power2.out"
-          }, "priceDrop+=2.5")
+          // Badges fly out toward camera
+          .fromTo(["#badge-google", "#badge-outlook"],
+              { scale: 0, opacity: 0, z: -500 },
+              { scale: 1, opacity: 1, z: 200, duration: 1.5, stagger: 0.2, ease: "back.out(1.5)" },
+              "ecosystemSync+=2.5"
+          )
 
-          // Drop badge
-          .to("#price-badge", {
-              scale: 1,
+          // Pulse line appears
+          .to("#sync-pulse", {
               opacity: 1,
-              duration: 0.8,
-              ease: "back.out(2)"
-          }, "priceDrop+=3.2")
+              duration: 0.5
+          }, "ecosystemSync+=3.5")
 
           // Infinite Float
           .to("#world-stage", {
-              z: 30, // move forward slightly to enhance depth
-              rotationX: 2,
-              rotationY: -1,
-              duration: 4,
+              y: -15,
+              duration: 3,
               yoyo: true,
               repeat: -1,
               ease: "sine.inOut"
-          }, "priceDrop+=4.0");
+          }, "ecosystemSync+=4.0");
     };
     </script>
 </body>
