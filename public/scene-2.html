@@ -193,21 +193,6 @@
             will-change: transform, opacity;
         }
 
-        /* Blur Backdrop for Beats 4 & 5 */
-        .blur-backdrop {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120vw; height: 100vh;
-            background: rgba(244, 246, 249, 0.4);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 15;
-            opacity: 0;
-            pointer-events: none;
-            will-change: opacity;
-        }
-
         /* Beat 2: Heavy Attachment Drop */
         .heavy-attachment {
             position: absolute;
@@ -386,9 +371,10 @@
                 <iframe id="mail-frame" class="iframe-content" src="http://localhost:3000/mail"></iframe>
             </div>
 
-            <div class="overlay-layer">
+            <!-- Global Master Blur Overlay -->
+            <div id="master-blur-overlay" style="position: absolute; inset: 0; width: 100vw; height: 100vh; background: rgba(244, 246, 249, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 10; opacity: 0; visibility: hidden; pointer-events: none;"></div>
 
-                <div class="blur-backdrop" id="blur-backdrop"></div>
+            <div class="overlay-layer">
 
                 <!-- Beat 1: Unlimited Aliases -->
                 <div class="glass alias-badge" id="ab-1">alex@acme.io</div>
@@ -537,6 +523,8 @@
                   { scale: 1, y: 0, duration: 2.0, ease: "power2.out" },
                   "inboxAliases"
               )
+              // Fade in Master Blur for Beat 1
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.5 }, "inboxAliases")
 
               // 6 Aliases cascade in from Z-space
               .to(".alias-badge", {
@@ -559,8 +547,8 @@
                   opacity: 1, scale: 1, duration: 0.8, ease: "back.out(2)"
               }, "inboxAliases+=4.2")
 
-              // Fade out Unified Badge
-              .to("#unified-badge", { opacity: 0, scale: 0.8, duration: 0.5, ease: "power2.in" }, "inboxAliases+=5.5");
+              // Fade out Unified Badge and Blur
+              .to(["#unified-badge", "#master-blur-overlay"], { autoAlpha: 0, scale: 0.8, duration: 0.5, ease: "power2.in" }, "inboxAliases+=5.5");
 
             // --- BEAT 2: The 10GB Attachment Drop (6.0s - 9.0s) ---
             tl.addLabel("heavyDrop", 6.0)
@@ -610,7 +598,7 @@
               }, "edgeNet")
 
               // Fade in glassmorphic background blur
-              .to("#blur-backdrop", { opacity: 1, duration: 0.5 }, "edgeNet+=1.5")
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.5 }, "edgeNet+=2.0")
 
               // Edge Container Appears
               .to("#edge-container", { opacity: 1, duration: 0.5 }, "edgeNet+=1.5")
@@ -628,19 +616,18 @@
                   scale: 1.1, boxShadow: "0 0 80px rgba(0, 114, 196, 1)", duration: 0.5, yoyo: true, repeat: 1
               }, "edgeNet+=3.0")
 
-              // Fade out Edge
-              .to("#edge-container", { opacity: 0, scale: 0.8, duration: 0.5, ease: "power2.in" }, "edgeNet+=4.5");
+              // Fade out Edge and Blur
+              .to(["#edge-container", "#master-blur-overlay"], { autoAlpha: 0, scale: 0.8, duration: 0.5, ease: "power2.in" }, "edgeNet+=4.5");
 
             // --- BEAT 5: Semantic Vector Search (21.0s - 27.0s) ---
             tl.addLabel("semanticSearch", 21.0)
-              // Keep blur backdrop visible
-
               // Scroll down
               .to("#mail-frame", {
                   y: SCROLL.searchSection, duration: 2.0, ease: "power2.inOut"
               }, "semanticSearch")
 
-              // Search Bar scales up
+              // Search Bar scales up and Blur fades in
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.5 }, "semanticSearch+=1.5")
               .to("#search-bar", {
                   opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.5)"
               }, "semanticSearch+=1.5")
@@ -667,9 +654,9 @@
                   opacity: 1, y: 0, scale: 1.1, z: 200, duration: 1.0, ease: "elastic.out(1, 0.6)"
               }, "semanticSearch+=4.8")
 
-              // Fade Search Elements out
-              .to(["#search-bar", "#search-doc", "#virtual-cursor", "#blur-backdrop"], {
-                  opacity: 0, scale: 0.8, duration: 0.5, ease: "power2.in"
+              // Fade Search Elements and Blur out
+              .to(["#search-bar", "#search-doc", "#virtual-cursor", "#master-blur-overlay"], {
+                  autoAlpha: 0, scale: 0.8, duration: 0.5, ease: "power2.in"
               }, "semanticSearch+=5.5");
 
             // --- BEAT 6: The Deliverability Finale (27.0s - 32.0s) ---
