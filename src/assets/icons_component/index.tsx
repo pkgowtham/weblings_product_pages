@@ -74,3 +74,5 @@ export { default as IsolatedDatabaseIcon } from "./IsolatedDatabaseIcon";
 export { default as EdgeThreatProtectionIcon } from "./EdgeThreatProtectionIcon";
 export { default as EndToEndEncryptionIcon } from "./EndToEndEncryptionIcon";
 export { default as DpdpComplianceIcon } from "./DpdpComplianceIcon";
+export { default as Basic } from "./Basic";
+export { default as BasicCssAnimation } from "./BasicCssAnimation";

@@ -1,5 +1,4 @@
 import { createUseStyles } from "react-jss";
-import principle_background from "../../assets/icons/background.svg";
 import { Theme } from "../../theme/themeType";
 
 export const usestyles = createUseStyles((theme: Theme) => ({
@@ -822,8 +821,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
       linear-gradient(to bottom, rgba(99, 102, 241, 0.045) 1px, transparent 1px)
     `,
     backgroundSize: "40px 40px",
-    maskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
-    WebkitMaskImage: "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
+    maskImage:
+      "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
+    WebkitMaskImage:
+      "radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 90%)",
   },
   aiOrbPurple: {
     position: "absolute",
@@ -832,7 +833,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "560px",
     height: "560px",
     borderRadius: "50%",
-    background: "radial-gradient(circle, rgba(147, 51, 234, 0.12) 0%, rgba(168, 85, 247, 0.035) 50%, transparent 70%)",
+    background:
+      "radial-gradient(circle, rgba(147, 51, 234, 0.12) 0%, rgba(168, 85, 247, 0.035) 50%, transparent 70%)",
     filter: "blur(75px)",
     animation: "$floatOrbPurple 18s ease-in-out infinite",
   },
@@ -843,7 +845,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "560px",
     height: "560px",
     borderRadius: "50%",
-    background: "radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(14, 165, 233, 0.035) 50%, transparent 70%)",
+    background:
+      "radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(14, 165, 233, 0.035) 50%, transparent 70%)",
     filter: "blur(75px)",
     animation: "$floatOrbCyan 22s ease-in-out infinite",
   },
@@ -855,7 +858,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "520px",
     height: "380px",
     borderRadius: "50%",
-    background: "radial-gradient(ellipse at center, rgba(99, 102, 241, 0.06) 0%, transparent 70%)",
+    background:
+      "radial-gradient(ellipse at center, rgba(99, 102, 241, 0.06) 0%, transparent 70%)",
     filter: "blur(70px)",
     animation: "$pulseGlow 8s ease-in-out infinite",
   },
@@ -865,7 +869,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     left: 0,
     right: 0,
     height: "1px",
-    background: "linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.25) 30%, rgba(6, 182, 212, 0.25) 70%, transparent 100%)",
+    background:
+      "linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.25) 30%, rgba(6, 182, 212, 0.25) 70%, transparent 100%)",
     overflow: "hidden",
   },
   aiBeamLight: {
@@ -874,7 +879,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     left: 0,
     width: "160px",
     height: "100%",
-    background: "linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.85) 50%, rgba(6, 182, 212, 0.95) 80%, transparent 100%)",
+    background:
+      "linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.85) 50%, rgba(6, 182, 212, 0.95) 80%, transparent 100%)",
     boxShadow: "0 0 6px rgba(6, 182, 212, 0.45)",
     animation: "$beamScan 6s cubic-bezier(0.4, 0, 0.2, 1) infinite",
   },
@@ -884,7 +890,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     left: 0,
     right: 0,
     height: "1px",
-    background: "linear-gradient(90deg, transparent 0%, rgba(6, 182, 212, 0.25) 30%, rgba(147, 51, 234, 0.25) 70%, transparent 100%)",
+    background:
+      "linear-gradient(90deg, transparent 0%, rgba(6, 182, 212, 0.25) 30%, rgba(147, 51, 234, 0.25) 70%, transparent 100%)",
     overflow: "hidden",
   },
   aiBeamLightBottom: {
@@ -893,7 +900,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     left: 0,
     width: "160px",
     height: "100%",
-    background: "linear-gradient(90deg, transparent 0%, rgba(6, 182, 212, 0.95) 40%, rgba(147, 51, 234, 0.85) 80%, transparent 100%)",
+    background:
+      "linear-gradient(90deg, transparent 0%, rgba(6, 182, 212, 0.95) 40%, rgba(147, 51, 234, 0.85) 80%, transparent 100%)",
     boxShadow: "0 0 6px rgba(147, 51, 234, 0.45)",
     animation: "$beamScan 7s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.5s",
   },
@@ -902,7 +910,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "100%",
     height: "1px",
     margin: "44px 0 48px",
-    background: "linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.2) 20%, rgba(99, 102, 241, 0.3) 50%, rgba(6, 182, 212, 0.2) 80%, transparent 100%)",
+    background:
+      "linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.2) 20%, rgba(99, 102, 241, 0.3) 50%, rgba(6, 182, 212, 0.2) 80%, transparent 100%)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -1083,7 +1092,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     border: `1px solid rgba(226, 232, 240, 0.9)`,
     borderTop: `3px solid ${theme.light.info.surface.medium}`,
     boxShadow: "0 4px 20px -2px rgba(0, 0, 0, 0.04)",
-    transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
+    transition:
+      "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
     display: "flex",
     flexDirection: "column",
     height: "100%",
@@ -1103,7 +1113,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     border: `1px solid rgba(226, 232, 240, 0.9)`,
     borderTop: `3px solid ${theme.light.brand.surface.medium}`,
     boxShadow: "0 4px 20px -2px rgba(0, 0, 0, 0.04)",
-    transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
+    transition:
+      "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
     display: "flex",
     flexDirection: "column",
     height: "100%",
@@ -1267,12 +1278,12 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     display: "none",
   },
 
-
   /* Mobile Experience Section */
   mobileSection: {
     width: "100%",
     padding: "96px 0",
-    background: "linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 50%, #FFFFFF 100%)",
+    background:
+      "linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 50%, #FFFFFF 100%)",
     borderBottom: `1px solid ${theme.light.neutral.border.light}`,
     position: "relative",
     overflow: "hidden",
@@ -1359,7 +1370,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     borderRadius: "24px",
     padding: "32px 36px",
     border: `1px solid ${theme.light.neutral.border.light}`,
-    boxShadow: "0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02)",
+    boxShadow:
+      "0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02)",
     transition: "all 0.3s ease",
     display: "flex",
     flexDirection: "column",
@@ -1368,12 +1380,15 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     boxSizing: "border-box",
     overflow: "hidden",
     "&:hover": {
-      boxShadow: "0 20px 35px -5px rgba(0, 114, 196, 0.12), 0 10px 10px -5px rgba(15, 23, 42, 0.04)",
+      boxShadow:
+        "0 20px 35px -5px rgba(0, 114, 196, 0.12), 0 10px 10px -5px rgba(15, 23, 42, 0.04)",
       "& .phone-body": {
-        animation: "phoneTiltLeftRight 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+        animation:
+          "phoneTiltLeftRight 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards",
       },
       "& .trending-group": {
-        animation: "growLeftRightChart 0.5s cubic-bezier(0.2, 0.9, 0.4, 1) forwards",
+        animation:
+          "growLeftRightChart 0.5s cubic-bezier(0.2, 0.9, 0.4, 1) forwards",
       },
     },
     "@media (max-width: 768px)": {
@@ -1799,7 +1814,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   ctaGlowOverlay: {
     position: "absolute",
     inset: 0,
-    background: "linear-gradient(90deg, rgba(14, 165, 233, 0.08) 0%, rgba(59, 130, 246, 0.08) 50%, rgba(99, 102, 241, 0.08) 100%)",
+    background:
+      "linear-gradient(90deg, rgba(14, 165, 233, 0.08) 0%, rgba(59, 130, 246, 0.08) 50%, rgba(99, 102, 241, 0.08) 100%)",
     pointerEvents: "none",
   },
   ctaContent: {
@@ -2001,10 +2017,13 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   bentoDotPattern: {
     position: "absolute",
     inset: 0,
-    backgroundImage: "radial-gradient(rgba(99, 102, 241, 0.08) 1.2px, transparent 1.2px)",
+    backgroundImage:
+      "radial-gradient(rgba(99, 102, 241, 0.08) 1.2px, transparent 1.2px)",
     backgroundSize: "28px 28px",
-    maskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, #000 40%, transparent 95%)",
-    WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, #000 40%, transparent 95%)",
+    maskImage:
+      "radial-gradient(ellipse 80% 70% at 50% 50%, #000 40%, transparent 95%)",
+    WebkitMaskImage:
+      "radial-gradient(ellipse 80% 70% at 50% 50%, #000 40%, transparent 95%)",
     opacity: 0.75,
   },
   bentoOrbIndigo: {
@@ -2014,7 +2033,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "500px",
     height: "500px",
     borderRadius: "50%",
-    background: "radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)",
+    background:
+      "radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)",
     filter: "blur(80px)",
     animation: "$floatOrbPurple 20s ease-in-out infinite",
   },
@@ -2025,7 +2045,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "520px",
     height: "520px",
     borderRadius: "50%",
-    background: "radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%)",
+    background:
+      "radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%)",
     filter: "blur(80px)",
     animation: "$floatOrbEmerald 24s ease-in-out infinite",
   },
@@ -2122,7 +2143,6 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     paddingBottom: "3vw",
     boxSizing: "border-box",
     marginTop: theme.spacing.s2000,
-    backgroundImage: `url(${(principle_background as any)?.src || principle_background})`,
     backgroundSize: "100% auto",
     backgroundPosition: "top center",
     backgroundRepeat: "no-repeat",

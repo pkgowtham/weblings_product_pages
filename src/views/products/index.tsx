@@ -11,7 +11,6 @@ import SvgFrame from "../../components/svg/Frame";
 import SvgNewsletter from "../../components/svg/Newsletter";
 import WorkspaceDashboardMockup from "../../components/dashboardMockup/index";
 import { useRouter } from "next/navigation";
-import SvgNewHero from "../../custom-icons/NewHero";
 import SvgWeblingslogo from "../../components/svg/Weblingslogo";
 import StorageGraphic from "../../components/svg/StorageGraphic";
 import PipelineStep from "../../components/pipelineStep/index";
@@ -44,6 +43,7 @@ import {
 
 // Import static data from JSON
 import data from "../../data/home.json";
+import SvgNewHero from "@/assets/icons_component/NewHero";
 
 // Email regex: ensures proper structure, exactly one period after @, and at least 2 letters after the period
 const EMAIL_REGEX = /^[a-zA-Z0-9]+([._%+-][a-zA-Z0-9]+)*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
