@@ -207,62 +207,57 @@
             will-change: transform, opacity;
         }
 
-        /* Beat 3: HR to Inbox Automation */
-        .hr-auto-container {
+        /* Beat 3: Vertical HR Pipeline UI */
+        .hr-pipeline-container {
             position: absolute;
             top: 50%; left: 50%;
-            width: 800px; height: 400px;
-            margin-top: -200px; margin-left: -400px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 500px; height: 400px;
+            margin-top: -200px; margin-left: -250px;
+            display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
             opacity: 0; z-index: 20;
         }
 
-        .employee-card {
-            padding: 20px 40px;
-            border-radius: 12px;
-            font-size: 1.4rem;
+        .pipeline-step {
+            display: flex; align-items: center; gap: 20px;
+            opacity: 0; transform: translateX(-20px);
+            will-change: transform, opacity;
+        }
+
+        .pl-circle {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--brand-blue);
+            color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 1.2rem;
+            box-shadow: 0 10px 20px rgba(0, 114, 196, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        .pl-text {
+            font-size: 1.3rem;
             font-weight: bold;
             color: var(--text-dark);
-            margin-bottom: 30px;
-            transform: scale(0);
-            will-change: transform;
-        }
-
-        .progress-line-track {
-            width: 400px; height: 4px;
-            background: rgba(0,0,0,0.1);
-            border-radius: 2px;
-            position: relative;
-            margin-bottom: 40px;
-            overflow: hidden;
-            opacity: 0;
-        }
-
-        .progress-line-fill {
-            position: absolute; top: 0; left: 0;
-            height: 100%; width: 0%;
-            background: var(--green-accent);
-            box-shadow: 0 0 10px var(--green-accent);
-        }
-
-        .progress-text {
-            position: absolute; top: -25px; left: 50%; transform: translateX(-50%);
-            font-size: 0.9rem; font-weight: bold; color: var(--green-accent);
-        }
-
-        .success-badges {
-            display: flex; gap: 20px;
-        }
-
-        .success-badge {
-            background: var(--surface-lighter);
-            color: var(--brand-blue);
-            border: 1px solid rgba(0, 114, 196, 0.2);
+            background: rgba(255,255,255,0.9);
             padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1rem;
-            opacity: 0; transform: translateY(20px);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .pl-connector {
+            width: 4px; height: 50px;
+            background: rgba(0, 114, 196, 0.2);
+            margin-left: 18px; /* align with 40px circle */
+            position: relative;
+            z-index: 1;
+        }
+
+        .pl-connector-fill {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 0%;
+            background: var(--brand-blue);
+            will-change: height;
         }
 
         /* Beat 4: Global Edge Network */
@@ -385,17 +380,29 @@
                     </div>
                 </div>
 
-                <!-- Beat 3: HR to Inbox Automation -->
-                <div class="hr-auto-container" id="hr-auto">
-                    <div class="glass employee-card" id="emp-card">E-Office: Add Employee (Alex Smith)</div>
-                    <div class="progress-line-track" id="prog-track">
-                        <div class="progress-line-fill" id="prog-fill"></div>
-                        <div class="progress-text" id="prog-text">Provisioning...</div>
+                <!-- Beat 3: HR to Inbox Vertical Pipeline -->
+                <div class="hr-pipeline-container" id="hr-pipeline">
+                    <div class="pipeline-step" id="pl-step-1">
+                        <div class="pl-circle">1</div>
+                        <div class="pl-text">HR Creates Profile (Alex Smith)</div>
                     </div>
-                    <div class="success-badges">
-                        <div class="success-badge" id="sb-1">alex@ny-branch.com Created</div>
-                        <div class="success-badge" id="sb-2">Added to Chat</div>
-                        <div class="success-badge" id="sb-3">Added to Streamline</div>
+
+                    <div class="pl-connector">
+                        <div class="pl-connector-fill" id="pl-conn-1"></div>
+                    </div>
+
+                    <div class="pipeline-step" id="pl-step-2">
+                        <div class="pl-circle">2</div>
+                        <div class="pl-text">Instant Email Allocation (0.4s)</div>
+                    </div>
+
+                    <div class="pl-connector">
+                        <div class="pl-connector-fill" id="pl-conn-2"></div>
+                    </div>
+
+                    <div class="pipeline-step" id="pl-step-3">
+                        <div class="pl-circle" style="background: var(--green-accent); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);">3</div>
+                        <div class="pl-text">Ready to Work (Added to Chat & Streamline)</div>
                     </div>
                 </div>
 
@@ -449,6 +456,14 @@
     </div>
 
     <script>
+    // CONFIGURATION: Adjust these exact numbers to perfectly align the scroll to your local iframe layout.
+    const SCROLL_POSITIONS = {
+        hr: -800,
+        edge: -1400,
+        search: -2000,
+        deliverability: -2600
+    };
+
     document.addEventListener("DOMContentLoaded", () => {
         gsap.registerPlugin(CustomEase, TextPlugin);
 
@@ -531,33 +546,35 @@
             tl.addLabel("hrAuto", 9.0)
               // Scroll iframe down
               .to("#mail-frame", {
-                  y: -800, duration: 2.0, ease: "power2.inOut"
+                  y: SCROLL_POSITIONS.hr, duration: 2.0, ease: "power2.inOut"
               }, "hrAuto")
 
               // Container appears
-              .to("#hr-auto", { opacity: 1, duration: 0.5 }, "hrAuto+=1.5")
+              .to("#hr-pipeline", { opacity: 1, duration: 0.5 }, "hrAuto+=1.5")
 
-              // Employee Card Pops
-              .to("#emp-card", { scale: 1, duration: 0.8, ease: "back.out(1.5)" }, "hrAuto+=1.8")
+              // Node 1
+              .to("#pl-step-1", { opacity: 1, x: 0, duration: 0.6, ease: "back.out(1.5)" }, "hrAuto+=1.8")
 
-              // Progress Line
-              .to("#prog-track", { opacity: 1, duration: 0.3 }, "hrAuto+=2.5")
-              .to("#prog-fill", { width: "100%", duration: 0.4, ease: "none" }, "hrAuto+=2.8")
-              .to("#prog-text", { text: "Complete: 0.4s", color: "var(--brand-blue)", duration: 0.1 }, "hrAuto+=3.2")
+              // Connector 1
+              .to("#pl-conn-1", { height: "100%", duration: 0.4, ease: "none" }, "hrAuto+=2.4")
 
-              // Success Badges Pop out
-              .to(".success-badge", {
-                  opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "back.out(1.5)"
-              }, "hrAuto+=3.4")
+              // Node 2
+              .to("#pl-step-2", { opacity: 1, x: 0, duration: 0.6, ease: "back.out(1.5)" }, "hrAuto+=2.8")
+
+              // Connector 2
+              .to("#pl-conn-2", { height: "100%", duration: 0.4, ease: "none" }, "hrAuto+=3.4")
+
+              // Node 3
+              .to("#pl-step-3", { opacity: 1, x: 0, duration: 0.6, ease: "back.out(1.5)" }, "hrAuto+=3.8")
 
               // Fade out container
-              .to("#hr-auto", { opacity: 0, scale: 0.9, duration: 0.6, ease: "power2.in" }, "hrAuto+=6.0");
+              .to("#hr-pipeline", { opacity: 0, scale: 0.9, duration: 0.6, ease: "power2.in" }, "hrAuto+=6.0");
 
             // --- BEAT 4: Global Edge Network (16.0s - 21.0s) ---
             tl.addLabel("edgeNet", 16.0)
               // Scroll further down
               .to("#mail-frame", {
-                  y: -1400, duration: 2.0, ease: "power2.inOut"
+                  y: SCROLL_POSITIONS.edge, duration: 2.0, ease: "power2.inOut"
               }, "edgeNet")
 
               // Edge Container Appears
@@ -583,7 +600,7 @@
             tl.addLabel("semanticSearch", 21.0)
               // Scroll down
               .to("#mail-frame", {
-                  y: -2000, duration: 2.0, ease: "power2.inOut"
+                  y: SCROLL_POSITIONS.search, duration: 2.0, ease: "power2.inOut"
               }, "semanticSearch")
 
               // Search Bar scales up
@@ -622,7 +639,7 @@
             tl.addLabel("finale", 27.0)
               // Scroll to absolute bottom
               .to("#mail-frame", {
-                  y: -2600, duration: 2.0, ease: "power2.inOut"
+                  y: SCROLL_POSITIONS.deliverability, duration: 2.0, ease: "power2.inOut"
               }, "finale")
 
               // Camera pushes in deeply
