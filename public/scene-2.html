@@ -177,17 +177,35 @@
             top: 50%; left: 50%;
             margin-top: -30px;
             margin-left: -200px; /* approx center */
-            background: linear-gradient(135deg, var(--brand-blue) 0%, #0054A6 100%);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 114, 196, 0.4);
+            color: var(--text-dark);
+            padding: 24px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
             font-size: 1.4rem;
             font-weight: bold;
-            box-shadow: 0 20px 50px rgba(0, 114, 196, 0.4);
             display: none;
             opacity: 0;
             white-space: nowrap;
             will-change: transform, opacity;
+        }
+
+        /* Blur Backdrop for Beats 4 & 5 */
+        .blur-backdrop {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120vw; height: 100vh;
+            background: rgba(244, 246, 249, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 15;
+            opacity: 0;
+            pointer-events: none;
+            will-change: opacity;
         }
 
         /* Beat 2: Heavy Attachment Drop */
@@ -273,12 +291,14 @@
             position: absolute; top: 50%; left: 50%;
             width: 120px; height: 140px;
             margin-top: -70px; margin-left: -60px;
-            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--purple) 100%);
-            clip-path: polygon(50% 0%, 100% 20%, 100% 70%, 50% 100%, 0% 70%, 0% 20%);
-            box-shadow: 0 0 40px rgba(0, 114, 196, 0.6);
             display: flex; align-items: center; justify-content: center;
-            font-size: 3rem; color: white;
             transform: scale(0);
+            color: var(--brand-blue);
+            filter: drop-shadow(0 0 20px rgba(0, 114, 196, 0.8));
+        }
+
+        .edge-shield svg {
+            width: 100%; height: 100%;
         }
 
         .edge-path {
@@ -310,10 +330,16 @@
             position: absolute;
             top: 55%; left: 50%;
             margin-left: -150px;
-            width: 300px; padding: 20px;
+            width: 300px; max-width: 100%;
+            box-sizing: border-box; padding: 20px 24px;
             border-radius: 12px;
-            display: flex; align-items: center; gap: 15px;
+            display: flex; align-items: center; gap: 12px;
             z-index: 45; opacity: 0; transform: translateY(-50px);
+        }
+
+        .search-doc-text {
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; max-width: 300px;
+            font-weight: bold; color: var(--text-dark);
         }
 
         /* Beat 6: Deliverability Highlight Boxes */
@@ -361,6 +387,8 @@
             </div>
 
             <div class="overlay-layer">
+
+                <div class="blur-backdrop" id="blur-backdrop"></div>
 
                 <!-- Beat 1: Unlimited Aliases -->
                 <div class="glass alias-badge" id="ab-1">alex@acme.io</div>
@@ -418,7 +446,9 @@
                         <path d="M 300 300 C 400 300, 400 100, 500 100" class="edge-path" id="ep-5"/>
                         <path d="M 300 300 C 400 300, 400 500, 500 500" class="edge-path" id="ep-6"/>
                     </svg>
-                    <div class="edge-shield" id="edge-shield">🛡️</div>
+                    <div class="edge-shield" id="edge-shield">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
                 </div>
 
                 <!-- Beat 5: Semantic Vector Search -->
@@ -430,8 +460,8 @@
 
                 <div class="glass search-doc" id="search-doc">
                     <div style="font-size: 2rem; color: var(--red-badge); font-weight: bold;">PDF</div>
-                    <div>
-                        <div style="font-weight: bold; color: var(--text-dark);">Colleague_Attachment.pdf</div>
+                    <div style="overflow: hidden;">
+                        <span class="search-doc-text">Colleague_Attachment.pdf</span>
                         <div style="font-size: 0.85rem; color: var(--text-gray);">Found in 0.12s</div>
                     </div>
                 </div>
@@ -456,12 +486,14 @@
     </div>
 
     <script>
-    // CONFIGURATION: Adjust these exact numbers to perfectly align the scroll to your local iframe layout.
-    const SCROLL_POSITIONS = {
-        hr: -800,
-        edge: -1400,
-        search: -2000,
-        deliverability: -2600
+    // ==========================================
+    // 🛠️ SCROLL CALIBRATION HUB 🛠️
+    // ==========================================
+    const SCROLL = {
+        hrSection: -1340,      // Beat 3: From Offer Letter to Inbox
+        edgeSection: -2170,    // Beat 4: Global Edge Network
+        searchSection: -3980,  // Beat 5: Find Anything / Semantic Search
+        deliverability: -5120  // Beat 6: Deliverability Guarantee
     };
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -546,7 +578,7 @@
             tl.addLabel("hrAuto", 9.0)
               // Scroll iframe down
               .to("#mail-frame", {
-                  y: SCROLL_POSITIONS.hr, duration: 2.0, ease: "power2.inOut"
+                  y: SCROLL.hrSection, duration: 2.0, ease: "power2.inOut"
               }, "hrAuto")
 
               // Container appears
@@ -574,8 +606,11 @@
             tl.addLabel("edgeNet", 16.0)
               // Scroll further down
               .to("#mail-frame", {
-                  y: SCROLL_POSITIONS.edge, duration: 2.0, ease: "power2.inOut"
+                  y: SCROLL.edgeSection, duration: 2.0, ease: "power2.inOut"
               }, "edgeNet")
+
+              // Fade in glassmorphic background blur
+              .to("#blur-backdrop", { opacity: 1, duration: 0.5 }, "edgeNet+=1.5")
 
               // Edge Container Appears
               .to("#edge-container", { opacity: 1, duration: 0.5 }, "edgeNet+=1.5")
@@ -598,9 +633,11 @@
 
             // --- BEAT 5: Semantic Vector Search (21.0s - 27.0s) ---
             tl.addLabel("semanticSearch", 21.0)
+              // Keep blur backdrop visible
+
               // Scroll down
               .to("#mail-frame", {
-                  y: SCROLL_POSITIONS.search, duration: 2.0, ease: "power2.inOut"
+                  y: SCROLL.searchSection, duration: 2.0, ease: "power2.inOut"
               }, "semanticSearch")
 
               // Search Bar scales up
@@ -631,7 +668,7 @@
               }, "semanticSearch+=4.8")
 
               // Fade Search Elements out
-              .to(["#search-bar", "#search-doc", "#virtual-cursor"], {
+              .to(["#search-bar", "#search-doc", "#virtual-cursor", "#blur-backdrop"], {
                   opacity: 0, scale: 0.8, duration: 0.5, ease: "power2.in"
               }, "semanticSearch+=5.5");
 
@@ -639,7 +676,7 @@
             tl.addLabel("finale", 27.0)
               // Scroll to absolute bottom
               .to("#mail-frame", {
-                  y: SCROLL_POSITIONS.deliverability, duration: 2.0, ease: "power2.inOut"
+                  y: SCROLL.deliverability, duration: 2.0, ease: "power2.inOut"
               }, "finale")
 
               // Camera pushes in deeply
