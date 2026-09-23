@@ -327,24 +327,65 @@
             font-weight: bold; color: var(--text-dark);
         }
 
-        /* Beat 6: Deliverability Highlight Boxes */
-        .highlight-boxes {
+        /* Beat 6: Deliverability Highlight Cards */
+        .deliverability-container {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; z-index: 50;
+            top: 40%; left: 50%;
+            width: 1000px;
+            margin-left: -500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 50;
+            gap: 20px;
         }
 
-        .hb {
-            position: absolute;
-            border: 3px solid transparent;
+        .deliv-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 16px;
-            will-change: transform, border-color, box-shadow;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            flex: 1;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(100px);
+            will-change: transform, opacity;
         }
 
-        /* Fixed pixel offsets to lock highlight boxes over the 1440px iframe relative to the center */
-        #hb-1 { top: 40%; left: 50%; margin-left: -500px; width: 300px; height: 200px; }
-        #hb-2 { top: 40%; left: 50%; margin-left: -150px; width: 300px; height: 200px; }
-        #hb-3 { top: 40%; left: 50%; margin-left: 200px; width: 300px; height: 200px; }
+        .deliv-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .deliv-card:nth-child(1) .deliv-icon { background: var(--green-accent); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); }
+        .deliv-card:nth-child(2) .deliv-icon { background: var(--brand-blue); box-shadow: 0 10px 20px rgba(0, 114, 196, 0.3); }
+        .deliv-card:nth-child(3) .deliv-icon { background: #F97316; /* Orange/Red */ box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3); }
+
+        .deliv-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .deliv-sub {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
 
         /* Virtual Cursor */
         #virtual-cursor {
@@ -372,7 +413,7 @@
             </div>
 
             <!-- Global Master Blur Overlay -->
-            <div id="master-blur-overlay" style="position: absolute; inset: 0; width: 100vw; height: 100vh; background: rgba(244, 246, 249, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 10; opacity: 0; visibility: hidden; pointer-events: none;"></div>
+            <div id="master-blur-overlay" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; margin: 0; padding: 0; border: none; transform: none; z-index: 10; opacity: 0; visibility: hidden; pointer-events: none; background: rgba(244, 246, 249, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);"></div>
 
             <div class="overlay-layer">
 
@@ -452,12 +493,23 @@
                     </div>
                 </div>
 
-                <!-- Beat 6: Deliverability Highlights -->
-                <div class="highlight-boxes" id="hl-container">
-                    <!-- Adjusted positions slightly to look like framing elements within iframe content -->
-                    <div class="hb" id="hb-1" style="border-color: var(--brand-blue); box-shadow: 0 0 30px rgba(0, 114, 196, 0.4);"></div>
-                    <div class="hb" id="hb-2" style="border-color: var(--purple); box-shadow: 0 0 30px rgba(147, 51, 234, 0.4);"></div>
-                    <div class="hb" id="hb-3" style="border-color: var(--green-accent); box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);"></div>
+                <!-- Beat 6: Deliverability Override Cards -->
+                <div class="deliverability-container" id="deliv-container">
+                    <div class="deliv-card">
+                        <div class="deliv-icon">🛡️</div>
+                        <div class="deliv-title">Automated DNS Protocols</div>
+                        <div class="deliv-sub">SPF, DKIM, & DMARC set up instantly.</div>
+                    </div>
+                    <div class="deliv-card">
+                        <div class="deliv-icon">🔍</div>
+                        <div class="deliv-title">Edge Spam Defense</div>
+                        <div class="deliv-sub">Filters 99% of malicious inbound mail.</div>
+                    </div>
+                    <div class="deliv-card">
+                        <div class="deliv-icon">⚡</div>
+                        <div class="deliv-title">Zero-Downtime Migration</div>
+                        <div class="deliv-sub">Migrate millions of emails without a blip.</div>
+                    </div>
                 </div>
 
             </div>
@@ -523,8 +575,6 @@
                   { scale: 1, y: 0, duration: 2.0, ease: "power2.out" },
                   "inboxAliases"
               )
-              // Fade in Master Blur for Beat 1
-              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.5 }, "inboxAliases")
 
               // 6 Aliases cascade in from Z-space
               .to(".alias-badge", {
@@ -540,6 +590,9 @@
               .to(".alias-badge", {
                   top: "50%", left: "50%", xPercent: -50, yPercent: -50, z: 0, opacity: 0, duration: 0.8, ease: "power4.in"
               }, "inboxAliases+=3.5")
+
+              // Fade in Master Blur for Beat 1 as they collapse
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.5 }, "inboxAliases+=3.5")
 
               // Unified Badge Pops
               .set("#unified-badge", { display: "block" }, "inboxAliases+=4.2")
@@ -671,18 +724,10 @@
                   scale: 1.15, duration: 2.5, ease: "power2.inOut"
               }, "finale+=0.5")
 
-              // Highlight boxes appear
-              .to("#hl-container", { opacity: 1, duration: 0.5 }, "finale+=2.0")
-              .fromTo(".hb",
-                  { scale: 0.9, opacity: 0 },
-                  { scale: 1, opacity: 1, duration: 1.0, stagger: 0.2, ease: "back.out(1.5)" },
-                  "finale+=2.0"
-              )
-
-              // Highlight boxes gently pulse
-              .to(".hb", {
-                  scale: 1.05, duration: 1.0, yoyo: true, repeat: -1, ease: "sine.inOut"
-              }, "finale+=3.5")
+              // New Overlay Cards appear
+              .to(".deliv-card", {
+                  y: 0, opacity: 1, duration: 1.0, stagger: 0.15, ease: "back.out(1.2)"
+              }, "finale+=2.0")
 
               // Scene enters smooth 3D float
               .to("#world-stage", {
