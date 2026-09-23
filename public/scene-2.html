@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weblings Worksuite - Scene 2 (Mail Ecosystem Overhaul)</title>
+    <!-- GSAP via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <style>
+        :root {
+            --brand-blue: #0072C4;
+            --surface-lighter: #E6F2FF;
+            --surface-inverse: #262626;
+            --green-accent: #10B981;
+            --slate-navy: #0F172A;
+            --purple: #9333EA;
+            --bg-light: #F4F6F9;
+            --surface-white: #ffffff;
+            --border-light: #d9d9d9;
+            --text-dark: #111827;
+            --text-gray: #4B5563;
+            --red-badge: #EF4444;
+            --red-bg: #FEF2F2;
+        }
+
+        * { box-sizing: border-box; }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-light) !important;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .overlay, .mask, body::before, body::after, #world-stage::before, #world-stage::after {
+            display: none !important;
+        }
+
+        #viewport {
+            width: 100vw;
+            height: 100vh;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #ambient-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150vw;
+            height: 150vh;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle at center, var(--surface-lighter) 0%, rgba(0, 114, 196, 0.05) 50%, transparent 100%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #world-stage {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-style: preserve-3d;
+            z-index: 10;
+            will-change: transform;
+        }
+
+        /* Iframe Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--slate-navy);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            will-change: opacity;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Iframe Styles */
+        .iframe-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1440px;
+            height: 900px;
+            margin-top: -450px;
+            margin-left: -720px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.2);
+            overflow: hidden;
+            background: var(--surface-white);
+            will-change: filter, transform;
+            transform-style: preserve-3d;
+        }
+
+        .iframe-content {
+            width: 1440px;
+            height: 3500px; /* Taller for 5 sections */
+            border: none;
+            pointer-events: none;
+            transform-origin: center center;
+            will-change: transform;
+            transform: translateY(0);
+        }
+
+        .iframe-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 3D Overlays Layer */
+        .overlay-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            transform-style: preserve-3d;
+        }
+
+        /* Premium Glassmorphism Utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.3);
+        }
+
+        /* Beat 1: Unlimited Aliases */
+        .alias-badge {
+            position: absolute;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            opacity: 0;
+            transform: translateZ(500px);
+            will-change: transform, opacity;
+        }
+
+        #ab-1 { top: 20%; left: 30%; }
+        #ab-2 { top: 30%; left: 60%; }
+        #ab-3 { top: 40%; left: 20%; }
+        #ab-4 { top: 50%; left: 70%; }
+        #ab-5 { top: 60%; left: 35%; }
+        #ab-6 { top: 70%; left: 55%; }
+
+        .unified-badge {
+            position: absolute;
+            top: 50%; left: 50%;
+            margin-top: -30px;
+            margin-left: -200px; /* approx center */
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 114, 196, 0.4);
+            color: var(--text-dark);
+            padding: 24px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: none;
+            opacity: 0;
+            white-space: nowrap;
+            will-change: transform, opacity;
+        }
+
+        /* Beat 2: Heavy Attachment Drop */
+        .heavy-attachment {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 400px;
+            margin-left: -200px;
+            margin-top: -60px;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transform: translateY(-1000px) translateZ(300px);
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        /* Beat 3: Vertical HR Pipeline UI */
+        .hr-pipeline-container {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 500px; height: 400px;
+            margin-top: -200px; margin-left: -250px;
+            display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+            opacity: 0; z-index: 20;
+        }
+
+        .pipeline-step {
+            display: flex; align-items: center; gap: 20px;
+            opacity: 0; transform: translateX(-20px);
+            will-change: transform, opacity;
+        }
+
+        .pl-circle {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--brand-blue);
+            color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 1.2rem;
+            box-shadow: 0 10px 20px rgba(0, 114, 196, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        .pl-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .pl-connector {
+            width: 4px; height: 50px;
+            background: rgba(0, 114, 196, 0.2);
+            margin-left: 18px; /* align with 40px circle */
+            position: relative;
+            z-index: 1;
+        }
+
+        .pl-connector-fill {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 0%;
+            background: var(--brand-blue);
+            will-change: height;
+        }
+
+        /* Beat 4: Global Edge Network */
+        .edge-container {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 600px; height: 600px;
+            margin-top: -300px; margin-left: -300px;
+            opacity: 0; z-index: 30;
+        }
+
+        .edge-shield {
+            position: absolute; top: 50%; left: 50%;
+            width: 120px; height: 140px;
+            margin-top: -70px; margin-left: -60px;
+            display: flex; align-items: center; justify-content: center;
+            transform: scale(0);
+            color: var(--brand-blue);
+            filter: drop-shadow(0 0 20px rgba(0, 114, 196, 0.8));
+        }
+
+        .edge-shield svg {
+            width: 100%; height: 100%;
+        }
+
+        .edge-path {
+            stroke: var(--brand-blue);
+            stroke-width: 3;
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            fill: none;
+            stroke-linecap: round;
+            filter: drop-shadow(0 0 5px var(--brand-blue));
+        }
+
+        /* Beat 5: Semantic Vector Search */
+        .search-bar-s5 {
+            position: absolute;
+            top: 40%; left: 50%;
+            margin-left: -400px;
+            width: 800px; height: 70px;
+            border-radius: 35px;
+            display: flex; align-items: center; padding: 0 30px;
+            font-size: 1.4rem; font-weight: 500; color: var(--text-dark);
+            z-index: 40; opacity: 0; transform: scale(0.8) translateZ(100px);
+        }
+
+        .search-icon-s5 { margin-right: 15px; color: var(--text-gray); }
+        .sparkle-icon { position: absolute; right: 20px; font-size: 1.5rem; opacity: 0; }
+
+        .search-doc {
+            position: absolute;
+            top: 55%; left: 50%;
+            margin-left: -150px;
+            width: 300px; max-width: 100%;
+            box-sizing: border-box; padding: 20px 24px;
+            border-radius: 12px;
+            display: flex; align-items: center; gap: 12px;
+            z-index: 45; opacity: 0; transform: translateY(-50px);
+        }
+
+        .search-doc-text {
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; max-width: 300px;
+            font-weight: bold; color: var(--text-dark);
+        }
+
+        /* Beat 6: Deliverability Highlight Cards */
+        .deliverability-container {
+            position: absolute;
+            top: 40%; left: 50%;
+            width: 1000px;
+            margin-left: -500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 50;
+            gap: 20px;
+        }
+
+        .deliv-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            flex: 1;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(100px);
+            will-change: transform, opacity;
+        }
+
+        .deliv-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .deliv-card:nth-child(1) .deliv-icon { background: var(--green-accent); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); }
+        .deliv-card:nth-child(2) .deliv-icon { background: var(--brand-blue); box-shadow: 0 10px 20px rgba(0, 114, 196, 0.3); }
+        .deliv-card:nth-child(3) .deliv-icon { background: #F97316; /* Orange/Red */ box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3); }
+
+        .deliv-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .deliv-sub {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+
+        /* Virtual Cursor */
+        #virtual-cursor {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            z-index: 999;
+            opacity: 0;
+            transform: translate(100vw, 100vh);
+            will-change: transform, opacity;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader"><div class="spinner"></div></div>
+
+    <div id="viewport">
+        <div id="ambient-bg"></div>
+
+        <div id="world-stage">
+
+            <div id="mail-wrapper" class="iframe-wrapper">
+                <iframe id="mail-frame" class="iframe-content" src="http://localhost:3000/mail"></iframe>
+            </div>
+
+            <!-- Global Master Blur Overlay -->
+            <div id="master-blur-overlay" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; margin: 0; padding: 0; border: none; transform: none; z-index: 10; opacity: 0; visibility: hidden; pointer-events: none; background: rgba(244, 246, 249, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);"></div>
+
+            <div class="overlay-layer">
+
+                <!-- Beat 1: Unlimited Aliases -->
+                <div class="glass alias-badge" id="ab-1">alex@acme.io</div>
+                <div class="glass alias-badge" id="ab-2">billing@acme.io</div>
+                <div class="glass alias-badge" id="ab-3">support@acme.io</div>
+                <div class="glass alias-badge" id="ab-4">hr@acme.io</div>
+                <div class="glass alias-badge" id="ab-5">sales@acme.io</div>
+                <div class="glass alias-badge" id="ab-6">info@acme.io</div>
+                <div class="unified-badge" id="unified-badge">Unlimited Email Creation. Unified Login.</div>
+
+                <!-- Beat 2: Heavy Attachment Drop -->
+                <div class="glass heavy-attachment" id="heavy-attachment">
+                    <div style="font-size:36px">🎥</div>
+                    <div>
+                        <div style="font-size: 1.2rem; font-weight: bold; color: var(--text-dark);">4.2GB RAW Video.mp4</div>
+                        <div style="font-size: 0.9rem; color: var(--text-gray);">Uploaded instantly via Edge</div>
+                    </div>
+                </div>
+
+                <!-- Beat 3: HR to Inbox Vertical Pipeline -->
+                <div class="hr-pipeline-container" id="hr-pipeline">
+                    <div class="pipeline-step" id="pl-step-1">
+                        <div class="pl-circle">1</div>
+                        <div class="pl-text">HR Creates Profile (Alex Smith)</div>
+                    </div>
+
+                    <div class="pl-connector">
+                        <div class="pl-connector-fill" id="pl-conn-1"></div>
+                    </div>
+
+                    <div class="pipeline-step" id="pl-step-2">
+                        <div class="pl-circle">2</div>
+                        <div class="pl-text">Instant Email Allocation (0.4s)</div>
+                    </div>
+
+                    <div class="pl-connector">
+                        <div class="pl-connector-fill" id="pl-conn-2"></div>
+                    </div>
+
+                    <div class="pipeline-step" id="pl-step-3">
+                        <div class="pl-circle" style="background: var(--green-accent); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);">3</div>
+                        <div class="pl-text">Ready to Work (Added to Chat & Streamline)</div>
+                    </div>
+                </div>
+
+                <!-- Beat 4: Global Edge Network -->
+                <div class="edge-container" id="edge-container">
+                    <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                        <!-- Left lines routing in -->
+                        <path d="M 0 300 C 150 300, 150 300, 300 300" class="edge-path" id="ep-1"/>
+                        <path d="M 100 100 C 200 100, 200 300, 300 300" class="edge-path" id="ep-2"/>
+                        <path d="M 100 500 C 200 500, 200 300, 300 300" class="edge-path" id="ep-3"/>
+                        <!-- Right lines routing out -->
+                        <path d="M 300 300 C 450 300, 450 300, 600 300" class="edge-path" id="ep-4"/>
+                        <path d="M 300 300 C 400 300, 400 100, 500 100" class="edge-path" id="ep-5"/>
+                        <path d="M 300 300 C 400 300, 400 500, 500 500" class="edge-path" id="ep-6"/>
+                    </svg>
+                    <div class="edge-shield" id="edge-shield">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                </div>
+
+                <!-- Beat 5: Semantic Vector Search -->
+                <div class="glass search-bar-s5" id="search-bar">
+                    <span class="search-icon-s5">🔍</span>
+                    <span id="search-text"></span>
+                    <span class="sparkle-icon" id="sparkle">✨</span>
+                </div>
+
+                <div class="glass search-doc" id="search-doc">
+                    <div style="font-size: 2rem; color: var(--red-badge); font-weight: bold;">PDF</div>
+                    <div style="overflow: hidden;">
+                        <span class="search-doc-text">Colleague_Attachment.pdf</span>
+                        <div style="font-size: 0.85rem; color: var(--text-gray);">Found in 0.12s</div>
+                    </div>
+                </div>
+
+                <!-- Beat 6: Deliverability Override Cards -->
+                <div class="deliverability-container" id="deliv-container">
+                    <div class="deliv-card">
+                        <div class="deliv-icon">🛡️</div>
+                        <div class="deliv-title">Automated DNS Protocols</div>
+                        <div class="deliv-sub">SPF, DKIM, & DMARC set up instantly.</div>
+                    </div>
+                    <div class="deliv-card">
+                        <div class="deliv-icon">🔍</div>
+                        <div class="deliv-title">Edge Spam Defense</div>
+                        <div class="deliv-sub">Filters 99% of malicious inbound mail.</div>
+                    </div>
+                    <div class="deliv-card">
+                        <div class="deliv-icon">⚡</div>
+                        <div class="deliv-title">Zero-Downtime Migration</div>
+                        <div class="deliv-sub">Migrate millions of emails without a blip.</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Virtual Cursor -->
+        <svg id="virtual-cursor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.94c.45 0 .67-.54.35-.85L5.85 2.86a.5.5 0 0 0-.85.35Z" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        </svg>
+
+    </div>
+
+    <script>
+    // ==========================================
+    // 🛠️ SCROLL CALIBRATION HUB 🛠️
+    // ==========================================
+    const SCROLL = {
+        hrSection: -1340,      // Beat 3: From Offer Letter to Inbox
+        edgeSection: -2170,    // Beat 4: Global Edge Network
+        searchSection: -3980,  // Beat 5: Find Anything / Semantic Search
+        deliverability: -5120  // Beat 6: Deliverability Guarantee
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(CustomEase, TextPlugin);
+
+        const frame = document.getElementById("mail-frame");
+
+        // Iframe Preloader
+        const loadPromise = new Promise(resolve => {
+            if (frame.contentDocument && frame.contentDocument.readyState === 'complete') {
+                resolve();
+            } else {
+                frame.addEventListener('load', resolve, { once: true });
+                frame.addEventListener('error', resolve, { once: true });
+            }
+        });
+
+        loadPromise.then(() => {
+            // 3.5s Hydration Delay
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                gsap.to(preloader, {
+                    opacity: 0,
+                    duration: 0.5,
+                    onComplete: () => {
+                        preloader.style.display = 'none';
+                        startAnimation();
+                    }
+                });
+            }, 3500);
+        });
+
+        function startAnimation() {
+            const tl = gsap.timeline();
+
+            // --- BEAT 1: The Inbox & Unlimited Aliases (0.0s - 6.0s) ---
+            tl.addLabel("inboxAliases", 0)
+              // Camera sweeps in
+              .fromTo("#world-stage",
+                  { scale: 0.95, y: -20 },
+                  { scale: 1, y: 0, duration: 2.0, ease: "power2.out" },
+                  "inboxAliases"
+              )
+
+              // 6 Aliases cascade in from Z-space
+              .to(".alias-badge", {
+                  opacity: 1, z: 150, duration: 1.2, stagger: 0.1, ease: "back.out(1.5)"
+              }, "inboxAliases+=0.5")
+
+              // Small float
+              .to(".alias-badge", {
+                  y: "-=10", duration: 1.5, yoyo: true, repeat: 1, ease: "sine.inOut"
+              }, "inboxAliases+=1.5")
+
+              // Rapidly collapse into one center badge
+              .to(".alias-badge", {
+                  top: "50%", left: "50%", xPercent: -50, yPercent: -50, z: 0, opacity: 0, duration: 0.8, ease: "power4.in"
+              }, "inboxAliases+=3.5")
+
+              // Fade in Master Blur for Beat 1 as they collapse
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.5 }, "inboxAliases+=3.5")
+
+              // Unified Badge Pops
+              .set("#unified-badge", { display: "block" }, "inboxAliases+=4.2")
+              .to("#unified-badge", {
+                  opacity: 1, scale: 1, duration: 0.8, ease: "back.out(2)"
+              }, "inboxAliases+=4.2")
+
+              // Fade out Unified Badge and Blur
+              .to(["#unified-badge", "#master-blur-overlay"], { autoAlpha: 0, scale: 0.8, duration: 0.5, ease: "power2.in" }, "inboxAliases+=5.5");
+
+            // --- BEAT 2: The 10GB Attachment Drop (6.0s - 9.0s) ---
+            tl.addLabel("heavyDrop", 6.0)
+              // Drop in smoothly (no camera shake as requested)
+              .to("#heavy-attachment", {
+                  y: 0, opacity: 1, duration: 1.2, ease: "back.out(1.2)"
+              }, "heavyDrop")
+
+              // Fade out attachment
+              .to("#heavy-attachment", {
+                  opacity: 0, y: 100, duration: 0.6, ease: "power2.in"
+              }, "heavyDrop+=2.2");
+
+            // --- BEAT 3: HR to Inbox Automation (9.0s - 16.0s) ---
+            tl.addLabel("hrAuto", 9.0)
+              // Scroll iframe down
+              .to("#mail-frame", {
+                  y: SCROLL.hrSection, duration: 2.0, ease: "power2.inOut"
+              }, "hrAuto")
+
+              // Container appears
+              .to("#hr-pipeline", { opacity: 1, duration: 0.5 }, "hrAuto+=1.5")
+
+              // Node 1
+              .to("#pl-step-1", { opacity: 1, x: 0, duration: 0.6, ease: "back.out(1.5)" }, "hrAuto+=1.8")
+
+              // Connector 1
+              .to("#pl-conn-1", { height: "100%", duration: 0.4, ease: "none" }, "hrAuto+=2.4")
+
+              // Node 2
+              .to("#pl-step-2", { opacity: 1, x: 0, duration: 0.6, ease: "back.out(1.5)" }, "hrAuto+=2.8")
+
+              // Connector 2
+              .to("#pl-conn-2", { height: "100%", duration: 0.4, ease: "none" }, "hrAuto+=3.4")
+
+              // Node 3
+              .to("#pl-step-3", { opacity: 1, x: 0, duration: 0.6, ease: "back.out(1.5)" }, "hrAuto+=3.8")
+
+              // Fade out container
+              .to("#hr-pipeline", { opacity: 0, scale: 0.9, duration: 0.6, ease: "power2.in" }, "hrAuto+=6.0");
+
+            // --- BEAT 4: Global Edge Network (16.0s - 21.0s) ---
+            tl.addLabel("edgeNet", 16.0)
+              // Scroll further down
+              .to("#mail-frame", {
+                  y: SCROLL.edgeSection, duration: 2.0, ease: "power2.inOut"
+              }, "edgeNet")
+
+              // Fade in glassmorphic background blur
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.5 }, "edgeNet+=2.0")
+
+              // Edge Container Appears
+              .to("#edge-container", { opacity: 1, duration: 0.5 }, "edgeNet+=1.5")
+
+              // Shield Pops
+              .to("#edge-shield", { scale: 1, duration: 1.0, ease: "elastic.out(1, 0.5)" }, "edgeNet+=1.8")
+
+              // Data lines routing securely (dashoffset animation)
+              .to(".edge-path", {
+                  strokeDashoffset: 0, duration: 1.5, ease: "power1.inOut"
+              }, "edgeNet+=2.0")
+
+              // Pulse shield
+              .to("#edge-shield", {
+                  scale: 1.1, boxShadow: "0 0 80px rgba(0, 114, 196, 1)", duration: 0.5, yoyo: true, repeat: 1
+              }, "edgeNet+=3.0")
+
+              // Fade out Edge and Blur
+              .to(["#edge-container", "#master-blur-overlay"], { autoAlpha: 0, scale: 0.8, duration: 0.5, ease: "power2.in" }, "edgeNet+=4.5");
+
+            // --- BEAT 5: Semantic Vector Search (21.0s - 27.0s) ---
+            tl.addLabel("semanticSearch", 21.0)
+              // Scroll down
+              .to("#mail-frame", {
+                  y: SCROLL.searchSection, duration: 2.0, ease: "power2.inOut"
+              }, "semanticSearch")
+
+              // Search Bar scales up and Blur fades in
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.5 }, "semanticSearch+=1.5")
+              .to("#search-bar", {
+                  opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.5)"
+              }, "semanticSearch+=1.5")
+
+              // Cursor sweeps in to type
+              .to("#virtual-cursor", {
+                  x: window.innerWidth/2, y: window.innerHeight/2 - 50, opacity: 1, duration: 1.0, ease: "power2.out"
+              }, "semanticSearch+=1.0")
+
+              // Rapid typing natural query
+              .to("#search-text", {
+                  text: "My colleague sent me an attachment six months back can you find it",
+                  duration: 2.0,
+                  ease: "none"
+              }, "semanticSearch+=2.5")
+
+              // AI Sparkle activates
+              .to("#sparkle", {
+                  opacity: 1, rotation: 360, duration: 0.5, ease: "power2.inOut"
+              }, "semanticSearch+=4.5")
+
+              // Document snaps out to forefront
+              .to("#search-doc", {
+                  opacity: 1, y: 0, scale: 1.1, z: 200, duration: 1.0, ease: "elastic.out(1, 0.6)"
+              }, "semanticSearch+=4.8")
+
+              // Fade Search Elements and Blur out
+              .to(["#search-bar", "#search-doc", "#virtual-cursor", "#master-blur-overlay"], {
+                  autoAlpha: 0, scale: 0.8, duration: 0.5, ease: "power2.in"
+              }, "semanticSearch+=5.5");
+
+            // --- BEAT 6: The Deliverability Finale (27.0s - 32.0s) ---
+            tl.addLabel("finale", 27.0)
+              // Scroll to absolute bottom
+              .to("#mail-frame", {
+                  y: SCROLL.deliverability, duration: 2.0, ease: "power2.inOut"
+              }, "finale")
+
+              // Camera pushes in deeply
+              .to("#world-stage", {
+                  scale: 1.15, duration: 2.5, ease: "power2.inOut"
+              }, "finale+=0.5")
+
+              // New Overlay Cards appear
+              .to(".deliv-card", {
+                  y: 0, opacity: 1, duration: 1.0, stagger: 0.15, ease: "back.out(1.2)"
+              }, "finale+=2.0")
+
+              // Scene enters smooth 3D float
+              .to("#world-stage", {
+                  y: -15, duration: 3, yoyo: true, repeat: -1, ease: "sine.inOut"
+              }, "finale+=3.0");
+        }
+    });
+    </script>
+</body>
+</html>
