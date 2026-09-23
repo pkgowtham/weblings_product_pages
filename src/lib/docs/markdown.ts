@@ -31,37 +31,20 @@ function getCleanSlugSegments(relativePath: string): string[] {
 }
 
 /**
- * Copies image files from src/content to public/docs-images preserving directory paths & filenames
+ * Copies image files from src/content to public/docs-images
  */
-export function syncImages(dir = contentDirectory, relativePath = ''): void {
+export function syncImages(dir = contentDirectory): void {
   if (!fs.existsSync(dir)) return;
   try {
     const items = fs.readdirSync(dir, { withFileTypes: true });
 
     for (const item of items) {
       const fullPath = path.join(dir, item.name);
-      const relPath = path.join(relativePath, item.name);
 
       if (item.isDirectory()) {
-        syncImages(fullPath, relPath);
+        syncImages(fullPath);
       } else if (item.isFile() && /\.(png|jpg|jpeg|gif|svg|webp)$/i.test(item.name)) {
-        const parts = relPath.split(/[/\\]/).filter(Boolean);
-        const cleanedParts = parts.map((p) => slugify(cleanNotionName(p)));
-        if (cleanedParts.length > 1 && cleanedParts[0].startsWith('web-documentation')) {
-          parts.shift();
-        }
-        const cleanRelPath = parts.join('/');
-        const destRelPath = path.join(publicImagesDirectory, cleanRelPath);
-        const destRelDir = path.dirname(destRelPath);
-
-        if (!fs.existsSync(destRelDir)) {
-          fs.mkdirSync(destRelDir, { recursive: true });
-        }
-        if (!fs.existsSync(destRelPath)) {
-          fs.copyFileSync(fullPath, destRelPath);
-        }
-
-        // Also save flat filename copy for direct references
+        // Save flat filename copy for DocViewer references (/docs-images/${filename})
         const flatDestPath = path.join(publicImagesDirectory, item.name);
         if (!fs.existsSync(flatDestPath)) {
           fs.copyFileSync(fullPath, flatDestPath);
