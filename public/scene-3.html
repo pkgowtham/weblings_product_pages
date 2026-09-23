@@ -7,6 +7,7 @@
     <!-- GSAP via CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     
     <style>
         :root {
@@ -21,6 +22,9 @@
             --border-light: #d9d9d9;
             --text-dark: #262626;
             --text-gray: #595959;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
         }
 
         * { box-sizing: border-box; }
@@ -33,6 +37,7 @@
             height: 100vh;
             background: var(--bg-light) !important;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         .overlay, .mask, body::before, body::after, #world-stage::before, #world-stage::after {
@@ -55,7 +60,7 @@
             width: 150vw;
             height: 150vh;
             transform: translate(-50%, -50%);
-            background: radial-gradient(circle at center, var(--surface-lighter) 0%, rgba(0, 114, 196, 0.05) 50%, transparent 100%);
+            background: radial-gradient(circle at center, var(--surface-lighter) 0%, rgba(147, 51, 234, 0.05) 50%, transparent 100%);
             border-radius: 50%;
             filter: blur(80px);
             z-index: 0;
@@ -71,6 +76,20 @@
             transform-style: preserve-3d;
             z-index: 10;
             will-change: transform;
+        }
+
+        #master-blur-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            z-index: 50; /* Above iframe, below popups */
+            background: rgba(244, 246, 249, 0.2);
+            will-change: opacity, visibility;
         }
 
         /* Iframe Preloader */
@@ -121,7 +140,7 @@
             height: 2500px;
             border: none;
             pointer-events: none;
-            transform-origin: center center;
+            transform-origin: center top;
             will-change: transform;
         }
         
@@ -135,154 +154,286 @@
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             transform-style: preserve-3d;
+            z-index: 100;
         }
 
-        /* Ticket Replica */
-        .ticket-replica {
+        /* ---------------------------------------------------- */
+        /* BEAT 1 OVERLAYS */
+        /* ---------------------------------------------------- */
+        #b1-pipeline-container {
             position: absolute;
             top: 50%; left: 50%;
-            width: 380px;
-            margin-top: -60px;
-            margin-left: -190px;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--border-light);
-            padding: 20px;
-            opacity: 0;
-            transform: translateZ(50px);
-            will-change: transform, opacity, box-shadow;
+            transform: translate(-50%, -50%) translateZ(100px);
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-
-        .ticket-header {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
+            opacity: 0;
+            visibility: hidden;
         }
 
-        .ticket-id {
-            font-size: 0.9rem;
-            color: var(--text-gray);
-            font-weight: 600;
-        }
-        
-        .ticket-status {
-            background: var(--surface-lighter);
-            color: var(--brand-blue);
-            font-size: 0.8rem;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-weight: bold;
+        .pipeline-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--slate-navy);
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            background: var(--surface-white);
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: var(--glass-shadow);
         }
 
-        .ticket-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--text-dark);
-        }
-
-        /* Pipeline Assembly */
-        .pipeline-container {
-            position: absolute;
-            top: 40%; left: 50%;
-            margin-top: -50px;
-            margin-left: -300px;
-            width: 600px;
-            height: 100px;
+        .pipeline-steps {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transform-style: preserve-3d;
-            transform: translateZ(200px);
-            z-index: 20;
+            gap: 20px;
+            margin-bottom: 2rem;
         }
 
-        .node {
-            width: 100px;
-            height: 100px;
-            background: rgba(15, 23, 42, 0.8); /* Slate Navy Glass */
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 50%;
+        .step-box {
+            width: 120px;
+            height: 80px;
+            background: var(--surface-white);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            opacity: 0;
-            will-change: transform, opacity, background-color;
-            position: relative;
-            z-index: 2;
+            color: var(--text-gray);
+            border: 2px solid var(--border-light);
+            transition: all 0.3s;
+        }
+        
+        .step-box.active {
+            border-color: var(--brand-blue);
+            color: var(--brand-blue);
+            box-shadow: 0 10px 30px rgba(0, 114, 196, 0.2);
+            transform: scale(1.05);
         }
 
-        /* SVG Line */
-        .pipeline-line-container {
-            position: absolute;
-            top: 50%; left: 50px;
+        /* Morphing Panel */
+        #b1-morph-panel {
             width: 500px;
-            height: 4px;
-            margin-top: -2px;
-            z-index: 1;
-            opacity: 0;
+            height: 200px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
         }
 
-        .pipeline-line {
+        .panel-face {
+            position: absolute;
             width: 100%;
             height: 100%;
-            stroke: var(--slate-navy);
-            stroke-width: 4;
-            stroke-dasharray: 500;
-            stroke-dashoffset: 500; /* Hidden initially */
-            will-change: stroke-dashoffset;
-        }
-
-        /* Terminal Window */
-        .terminal-window {
-            position: absolute;
-            top: 60%; left: 50%;
-            margin-left: -350px;
-            width: 700px;
-            height: 250px;
-            background: rgba(15, 23, 42, 0.95); /* Slate Navy */
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            padding: 20px;
-            color: #10B981; /* Green accent text */
-            font-family: monospace;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            opacity: 0;
-            transform: translateY(-1000px) translateZ(100px);
-            will-change: transform, opacity;
-            overflow: hidden;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
-        
-        .term-header {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 10px;
-        }
-        
-        .term-dot {
-            width: 12px; height: 12px; border-radius: 50%;
-        }
-        .term-dot.red { background: #EF4444; }
-        .term-dot.yellow { background: #F59E0B; }
-        .term-dot.green { background: #10B981; }
 
-        .term-line {
+        #face-front {
+            /* Speech Stream */
+            transform: rotateY(0deg);
+        }
+
+        #face-back {
+            /* Approval Panel */
+            transform: rotateY(180deg);
+            background: var(--surface-white);
+        }
+
+        #face-success {
+            /* Success State */
+            transform: rotateY(360deg); /* We'll animate to this */
+            background: var(--green-accent);
+            color: white;
+            display: none; /* Initially hidden until needed */
+        }
+
+        .panel-subtitle {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        .speech-text {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .approve-btn {
+            background: var(--purple);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 10px 20px rgba(147, 51, 234, 0.3);
+        }
+
+        #b1-cursor {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="%23111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>');
+            background-size: cover;
+            z-index: 1000;
             opacity: 0;
-            will-change: opacity;
+            transform: translateZ(150px);
+        }
+
+        /* ---------------------------------------------------- */
+        /* BEAT 2 OVERLAYS */
+        /* ---------------------------------------------------- */
+        .b2-badge-container {
+            position: absolute;
+            transform-style: preserve-3d;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #b2-reassign-container {
+            top: 30%;
+            left: 30%;
+            transform: translate(-50%, -50%) translateZ(80px);
+        }
+
+        #b2-guest-container {
+            top: 60%;
+            left: 70%;
+            transform: translate(-50%, -50%) translateZ(80px);
+        }
+
+        .pop-badge {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light);
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--slate-navy);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+
+        .pop-badge.green-state {
+            background: var(--green-accent);
+            color: white;
+            border-color: rgba(255,255,255,0.5);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
+        }
+
+        .guest-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .guest-fee {
+            margin-top: 10px;
+            background: var(--green-accent);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transform: translateY(20px) scale(0.8);
+            opacity: 0;
+        }
+
+        #b2-cursor {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="%23111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>');
+            background-size: cover;
+            z-index: 1000;
+            opacity: 0;
+            top: 30%; left: 30%; /* Start position */
+            transform: translateZ(150px);
+        }
+
+        /* ---------------------------------------------------- */
+        /* BEAT 3 OVERLAYS */
+        /* ---------------------------------------------------- */
+        #b3-audit-log {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%) translateY(200px) translateZ(120px);
+            width: 600px;
+            background: rgba(15, 23, 42, 0.95); /* Sleek dark mode */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            padding: 24px;
+            color: var(--surface-white);
+            font-family: monospace;
+            opacity: 0;
+            visibility: hidden;
+            will-change: transform, opacity;
+        }
+        
+        .audit-header {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--surface-white);
+            font-family: -apple-system, sans-serif;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+        
+        .log-entries {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 100px;
+        }
+
+        .log-line {
+            font-size: 1rem;
+            color: #A7F3D0; /* Light green */
+        }
+
+        .log-user {
+            color: #60A5FA; /* Blue */
+        }
+
+        #b3-padlock {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 60px;
+            height: 60px;
+            background: var(--slate-navy);
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transform: scale(3) rotate(30deg);
+            opacity: 0;
         }
 
     </style>
@@ -294,57 +445,80 @@
         <div id="ambient-bg"></div>
         <div id="world-stage">
             
-            <!-- Background Streamline App -->
             <div id="streamline-wrapper" class="iframe-wrapper">
                 <iframe id="streamline-frame" class="iframe-content" src="http://localhost:3000/streamline"></iframe>
             </div>
             
+            <div id="master-blur-overlay"></div>
+
             <div class="overlay-layer">
-                <!-- Ticket Replica -->
-                <div class="ticket-replica" id="ticket">
-                    <div class="ticket-header">
-                        <span class="ticket-id">PROJ-409</span>
-                        <span class="ticket-status">In Progress</span>
+
+                <!-- Beat 1 Elements -->
+                <div id="b1-pipeline-container">
+                    <div class="pipeline-title">AI SCOPE-TO-SPRINT PIPELINE</div>
+                    <div class="pipeline-steps">
+                        <div class="step-box active" id="step-01">Step 01</div>
+                        <div class="step-box" id="step-02">Step 02</div>
+                        <div class="step-box" id="step-03">Step 03</div>
                     </div>
-                    <div class="ticket-title">Implement Stripe Gateway</div>
-                </div>
 
-                <!-- Pipeline Nodes and Line -->
-                <div class="pipeline-container">
-                    <div class="node node-build" id="node-build">Build</div>
-                    
-                    <svg class="pipeline-line-container" id="pipe-line" preserveAspectRatio="none" viewBox="0 0 500 4">
-                        <line x1="0" y1="2" x2="500" y2="2" class="pipeline-line" id="svg-line"/>
-                    </svg>
-
-                    <div class="node node-test" id="node-test">Test</div>
-                    <div class="node node-deploy" id="node-deploy">Deploy</div>
-                </div>
-
-                <!-- Terminal -->
-                <div class="terminal-window" id="terminal">
-                    <div class="term-header">
-                        <div class="term-dot red"></div>
-                        <div class="term-dot yellow"></div>
-                        <div class="term-dot green"></div>
+                    <div id="b1-morph-panel">
+                        <div class="panel-face" id="face-front">
+                            <div class="panel-subtitle">In-Call Speech Stream</div>
+                            <div class="speech-text" id="b1-speech"></div>
+                        </div>
+                        <div class="panel-face" id="face-back">
+                            <div class="panel-subtitle">Scope Change Approval</div>
+                            <div class="speech-text">Pending 1-Click Approval</div>
+                            <div class="approve-btn" id="b1-approve">Approve & Sync to Sprint</div>
+                        </div>
+                        <div class="panel-face" id="face-success">
+                            <div class="panel-subtitle" style="color: rgba(255,255,255,0.8)">Sprint Backlog Synced</div>
+                            <div class="speech-text" style="color: white; font-weight: bold;">STR-112 OAuth2 Single Sign-On Flow</div>
+                        </div>
                     </div>
-                    <div class="term-line">> Starting pipeline for PROJ-409...</div>
-                    <div class="term-line">> Running unit tests (452/452 passed)</div>
-                    <div class="term-line">> Compiling assets and bundling...</div>
-                    <div class="term-line">> Deploying to production cluster...</div>
-                    <div class="term-line" style="color: #ffffff;">> Success! Gateway is live.</div>
                 </div>
+                <div id="b1-cursor"></div>
+
+                <!-- Beat 2 Elements -->
+                <div class="b2-badge-container" id="b2-reassign-container">
+                    <div class="pop-badge" id="b2-reassign-badge">
+                        <span>50 Open Tickets</span>
+                    </div>
+                </div>
+
+                <div class="b2-badge-container" id="b2-guest-container">
+                    <div class="pop-badge guest-profile" id="b2-guest-badge">
+                        <span>External Client: Viewing Access</span>
+                        <div class="guest-fee" id="b2-guest-fee">$0 Extra Seat Fee</div>
+                    </div>
+                </div>
+                <div id="b2-cursor"></div>
+
+                <!-- Beat 3 Elements -->
+                <div id="b3-audit-log">
+                    <div class="audit-header">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Security Audit Log
+                    </div>
+                    <div class="log-entries" id="b3-log-entries">
+                        <!-- Entries typed via JS -->
+                    </div>
+                    <div id="b3-padlock">🔒</div>
+                </div>
+
             </div>
-
         </div>
     </div>
 
     <script>
+    const SCROLL = { aiScope: -400, architecture: -1200, auditTrail: -2000 };
+
     document.addEventListener("DOMContentLoaded", () => {
-        gsap.registerPlugin(CustomEase);
+        gsap.registerPlugin(CustomEase, TextPlugin);
 
         // Initial setup
-        gsap.set("#world-stage", { scale: 0.8 }); // Start slightly zoomed out
+        gsap.set("#world-stage", { scale: 0.8 });
         
         const frame = document.getElementById("streamline-frame");
         
@@ -376,116 +550,108 @@
         function startAnimation() {
             const tl = gsap.timeline();
             
-            // --- BEAT 1: The Streamline Scroll & Ticket Hover (0.0s - 5.0s) ---
-            tl.addLabel("streamlineScroll", 0)
-              // Scroll the iframe
-              .to("#streamline-frame", {
-                  y: -500,
-                  duration: 5,
-                  ease: "none"
-              }, "streamlineScroll")
-              // Zoom deeply in at 4.0s
-              .to("#world-stage", {
-                  scale: 1.8,
-                  duration: 1.5,
-                  ease: "power3.inOut"
-              }, "streamlineScroll+=4");
-
-            // --- BEAT 2: The Ticket Extraction & Blur (5.0s - 9.0s) ---
-            tl.addLabel("ticketExtract", 5.0)
-              // Blur background aggressively
-              .to("#streamline-wrapper", {
-                  filter: "blur(15px)",
-                  duration: 1.5,
-                  ease: "power2.inOut"
-              }, "ticketExtract")
-              // Extract ticket
-              .to("#ticket", {
-                  opacity: 1,
-                  scale: 1.5,
-                  z: 300,
-                  boxShadow: "0 50px 100px rgba(0,0,0,0.3)",
-                  duration: 1.5,
-                  ease: "back.out(1.5)"
-              }, "ticketExtract");
-
-            // --- BEAT 3: The 3D Pipeline Assembly (9.0s - 15.0s) ---
-            tl.addLabel("pipelineAssemble", 9.0)
-              // Ticket morphs/shrinks to reveal Build node
-              .to("#ticket", {
-                  scale: 0,
-                  opacity: 0,
-                  duration: 0.8,
-                  ease: "power3.in"
-              }, "pipelineAssemble")
-              .to("#node-build", {
-                  opacity: 1,
-                  duration: 0.8,
-                  ease: "back.out(1.5)"
-              }, "pipelineAssemble+=0.4")
+            // --- BEAT 1: The AI Scope Engine (0.0s - 12.0s) ---
+            tl.addLabel("beat1", 0)
+              // Scroll to SCROLL.aiScope
+              .to("#streamline-frame", { y: SCROLL.aiScope, duration: 2, ease: "power2.inOut" }, "beat1")
+              // Blur background
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 1 }, "beat1+=1")
               
-              // Test and Deploy shoot in from right
-              .fromTo(["#node-test", "#node-deploy"], 
-                  { x: 1000, opacity: 0 },
-                  { x: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: "back.out(1.5)" },
-                  "pipelineAssemble+=0.6"
-              )
+              // Step 1: Smart Detection
+              .to("#b1-pipeline-container", { autoAlpha: 1, duration: 0.5 }, "beat1+=1.5")
+              .to("#b1-speech", { text: "Client: We need OAuth2 Single Sign-On...", duration: 2, ease: "none" }, "beat1+=2")
               
-              // Line draws itself
-              .to("#pipe-line", { opacity: 1, duration: 0.1 }, "pipelineAssemble+=1.2")
-              .to("#svg-line", {
-                  strokeDashoffset: 0,
-                  duration: 1.0,
-                  ease: "power2.inOut"
-              }, "pipelineAssemble+=1.2")
+              // Step 2: Human Verification
+              .to("#step-01", { className: "step-box", duration: 0.3 }, "beat1+=4.5")
+              .to("#step-02", { className: "step-box active", duration: 0.3 }, "beat1+=4.5")
 
-              // Terminal violent drop in
-              .to("#terminal", {
-                  y: 0,
-                  rotationX: 0, // from -45 set in CSS, but wait CSS doesn't have rotationX, let's set it here
-                  opacity: 1,
-                  duration: 1.2,
-                  ease: "bounce.out"
-              }, "pipelineAssemble+=1.5");
+              // Flip Panel to Approval
+              .to("#face-front", { rotationY: -180, duration: 0.8, ease: "back.out(1.2)" }, "beat1+=4.8")
+              .to("#face-back", { rotationY: 0, duration: 0.8, ease: "back.out(1.2)" }, "beat1+=4.8")
+
+              // Cursor moves in and clicks approve
+              .set("#b1-cursor", { x: 300, y: 500, opacity: 0 }, "beat1")
+              .to("#b1-cursor", { autoAlpha: 1, duration: 0.3 }, "beat1+=5.5")
+              .to("#b1-cursor", { x: "-=300", y: "-=250", duration: 1, ease: "power2.out" }, "beat1+=5.8")
+              .to("#b1-approve", { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 }, "beat1+=6.8") // click
+
+              // Step 3: Instant Integration
+              .to("#step-02", { className: "step-box", duration: 0.3 }, "beat1+=7.2")
+              .to("#step-03", { className: "step-box active", duration: 0.3 }, "beat1+=7.2")
+
+              // Flip Panel to Success
+              .set("#face-success", { display: "flex", rotationY: 180 }, "beat1+=7.2")
+              .to("#face-back", { rotationY: -180, duration: 0.8, ease: "back.out(1.2)" }, "beat1+=7.5")
+              .to("#face-success", { rotationY: 0, duration: 0.8, ease: "back.out(1.2)" }, "beat1+=7.5")
+              .to("#b1-cursor", { autoAlpha: 0, duration: 0.3 }, "beat1+=7.8")
               
-            // Make sure terminal starts with rotationX -45 for the drop effect
-            gsap.set("#terminal", { rotationX: -45 });
+              // Cleanup Beat 1
+              .to("#b1-pipeline-container", { scale: 0.8, autoAlpha: 0, duration: 0.8, ease: "power2.in" }, "beat1+=10")
+              .to("#master-blur-overlay", { autoAlpha: 0, duration: 1 }, "beat1+=10.5");
 
-            // Terminal lines appear
-            tl.to(".term-line", {
-                opacity: 1,
-                duration: 0.2,
-                stagger: 0.4
-            }, "pipelineAssemble+=2.5");
 
-            // --- BEAT 4: The Green Resolution (15.0s - 20.0s) ---
-            tl.addLabel("greenResolution", 15.0)
-              // Nodes turn green sequentially
-              .to("#node-build", { backgroundColor: "var(--green-accent)", borderColor: "var(--green-accent)", duration: 0.4 }, "greenResolution")
-              .to("#node-test", { backgroundColor: "var(--green-accent)", borderColor: "var(--green-accent)", duration: 0.4 }, "greenResolution+=0.8")
-              .to("#node-deploy", { backgroundColor: "var(--green-accent)", borderColor: "var(--green-accent)", duration: 0.4 }, "greenResolution+=1.6")
+            // --- BEAT 2: Architecture & Guest Access (12.0s - 20.0s) ---
+            tl.addLabel("beat2", 12.0)
+              // Scroll to SCROLL.architecture
+              .to("#streamline-frame", { y: SCROLL.architecture, duration: 2.5, ease: "power3.inOut" }, "beat2")
               
-              // Line turns green smoothly
-              .to("#svg-line", { stroke: "var(--green-accent)", duration: 1.6 }, "greenResolution")
+              // 1-Click Reassignment
+              .to("#b2-reassign-container", { autoAlpha: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, "beat2+=3")
+              .set("#b2-cursor", { x: -100, y: 200, opacity: 0 }, "beat2")
+              .to("#b2-cursor", { autoAlpha: 1, duration: 0.3 }, "beat2+=3.5")
+              .to("#b2-cursor", { x: 50, y: -20, duration: 1, ease: "power2.out" }, "beat2+=3.8")
+              .to("#b2-reassign-badge", { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 }, "beat2+=4.8") // click
+              .to("#b2-reassign-badge", { className: "pop-badge green-state", duration: 0.2 }, "beat2+=4.9")
+              .to("#b2-reassign-badge", { innerHTML: "<span>0 Tickets - Reassigned</span>", duration: 0.1 }, "beat2+=4.9")
 
-              // Pulse deploy node
-              .to("#node-deploy", {
-                  scale: 1.1,
-                  boxShadow: "0 0 30px rgba(16, 185, 129, 0.8)",
-                  duration: 0.3,
-                  yoyo: true,
-                  repeat: 1
-              }, "greenResolution+=2.0")
+              // External Guests
+              .to("#b2-cursor", { x: 550, y: 280, duration: 1.5, ease: "power2.inOut" }, "beat2+=5.2")
+              .to("#b2-guest-container", { autoAlpha: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, "beat2+=6")
+              .to("#b2-guest-fee", { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "elastic.out(1, 0.6)" }, "beat2+=6.5")
 
-              // Gentle 3D float
-              .to("#world-stage", {
-                  y: -15,
-                  rotationY: 2,
-                  duration: 3,
-                  yoyo: true,
-                  repeat: -1,
-                  ease: "sine.inOut"
-              }, "greenResolution+=2.0");
+              // Cleanup Beat 2
+              .to("#b2-cursor", { autoAlpha: 0, duration: 0.3 }, "beat2+=7.5")
+              .to(".b2-badge-container", { autoAlpha: 0, scale: 0.8, duration: 0.5, ease: "power2.in" }, "beat2+=7.8");
+
+
+            // --- BEAT 3: The Immutable Audit Trail (20.0s - 28.0s) ---
+            tl.addLabel("beat3", 20.0)
+              // Scroll to bottom
+              .to("#streamline-frame", { y: SCROLL.auditTrail, duration: 2.5, ease: "power3.inOut" }, "beat3")
+              // Camera pushes in deeply
+              .to("#world-stage", { scale: 1.15, duration: 3, ease: "power2.inOut" }, "beat3")
+              // Darken/blur background
+              .to("#master-blur-overlay", { autoAlpha: 1, backgroundColor: "rgba(15, 23, 42, 0.4)", duration: 2 }, "beat3+=0.5")
+
+              // Panel slides in
+              .to("#b3-audit-log", { autoAlpha: 1, y: 0, duration: 1.2, ease: "expo.out" }, "beat3+=1.5")
+
+              // Typing out log entries sequentially
+              .add(() => {
+                  const logEl = document.getElementById("b3-log-entries");
+                  logEl.innerHTML += `<div class="log-line" id="log1"></div>`;
+                  gsap.to("#log1", { text: "[14:02:01] Priority upgraded to CRITICAL by <span class='log-user'>@alex</span>", duration: 1.5, ease: "none" });
+              }, "beat3+=2.5")
+
+              .add(() => {
+                  const logEl = document.getElementById("b3-log-entries");
+                  logEl.innerHTML += `<div class="log-line" id="log2"></div>`;
+                  gsap.to("#log2", { text: "[14:05:33] Specs_v2.pdf attached by <span class='log-user'>@sarah</span>", duration: 1.5, ease: "none" });
+              }, "beat3+=4.0")
+
+              .add(() => {
+                  const logEl = document.getElementById("b3-log-entries");
+                  logEl.innerHTML += `<div class="log-line" id="log3"></div>`;
+                  gsap.to("#log3", { text: "[14:10:00] Ticket reassigned to <span class='log-user'>@dev_team</span>", duration: 1.5, ease: "none" });
+              }, "beat3+=5.5")
+
+              // The Lock Stamps
+              .to("#b3-padlock", { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2)" }, "beat3+=7.5")
+              .to("#b3-padlock", { boxShadow: "0 0 30px rgba(239, 68, 68, 0.8)", borderColor: "#EF4444", duration: 0.5, yoyo: true, repeat: 3 }, "beat3+=7.8")
+
+              // Infinite Float
+              .to("#world-stage", { y: -15, yoyo: true, repeat: -1, duration: 4, ease: "sine.inOut" }, "beat3+=8");
+
         }
     });
     </script>
