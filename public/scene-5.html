@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weblings Worksuite - Scene 5 (Combo Finale)</title>
+    <title>Weblings Worksuite - Scene 5</title>
     <!-- GSAP via CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
 
     <style>
         :root {
             --brand-blue: #0072C4;
-            --surface-lighter: #E6F2FF;
+            --surface-lighter: #ffffff;
             --surface-inverse: #262626;
-            --green-accent: #10B981;
+            --green-accent: #53b96a;
             --slate-navy: #0F172A;
             --purple: #9333EA;
             --bg-light: #F4F6F9;
             --surface-white: #ffffff;
             --border-light: #d9d9d9;
-            --text-dark: #262626;
-            --text-gray: #595959;
+            --text-dark: #111827;
+            --text-gray: #4B5563;
             --red-badge: #EF4444;
             --red-bg: #FEF2F2;
         }
@@ -34,11 +35,8 @@
             width: 100vw;
             height: 100vh;
             background: var(--bg-light) !important;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        .overlay, .mask, body::before, body::after, #world-stage::before, #world-stage::after {
-            display: none !important;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         #viewport {
@@ -75,6 +73,32 @@
             will-change: transform;
         }
 
+        /* Iframe Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--slate-navy);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            will-change: opacity;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         /* Iframe Styles */
         .iframe-wrapper {
             position: absolute;
@@ -95,243 +119,50 @@
 
         .iframe-content {
             width: 1440px;
-            height: 2500px;
+            height: 4000px;
             border: none;
             pointer-events: none;
             transform-origin: center center;
             will-change: transform;
+            transform: translateY(0);
         }
 
         .iframe-content::-webkit-scrollbar {
             display: none;
         }
 
-        /* 3D Overlays Layer */
+        /* Master Blur Overlay */
+        #master-blur-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(244, 246, 249, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            z-index: 20;
+            will-change: opacity, visibility;
+        }
+
         .overlay-layer {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             transform-style: preserve-3d;
-        }
-
-        /* Sprint Block Overlay */
-        .sprint-block {
-            position: absolute;
-            top: 40%;
-            left: 30%;
-            width: 300px;
-            height: 70px;
-            background: var(--purple);
-            color: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.4);
-            z-index: 20;
-            will-change: transform, box-shadow, opacity;
-        }
-
-        /* HR Warning Modal */
-        .hr-modal {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 600px;
-            margin-top: -150px;
-            margin-left: -300px;
-            background: rgba(254, 242, 242, 0.95);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--red-badge);
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(239, 68, 68, 0.5), 0 0 50px rgba(239, 68, 68, 0.3);
-            z-index: 50;
-            opacity: 0;
-            transform: scale(0) translateZ(300px);
-            will-change: transform, opacity;
-        }
-
-        .warning-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-        }
-
-        .hr-text {
-            color: #7F1D1D;
-            font-size: 1.5rem;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        /* Timezone Badge Overlay */
-        .tz-badge {
-            position: absolute;
-            top: -40px; /* Above the sprint block */
-            left: 50%;
-            margin-left: -125px; /* Centers 250px width */
-            width: 250px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--border-light);
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             z-index: 30;
-            opacity: 0;
-            transform: scale(0);
-            will-change: transform, opacity, box-shadow;
-            overflow: hidden;
         }
 
-        .tz-slot-container {
-            height: 24px; /* match line height */
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-        }
-
-        .tz-slots {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            top: 0; left: 0; width: 100%;
-            text-align: center;
-            will-change: transform;
-        }
-
-        .tz-slot {
-            height: 24px;
-            line-height: 24px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: var(--text-dark);
-            white-space: nowrap;
-        }
-
-        /* AI Flipper Container */
-        .ai-flipper-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 450px;
-            height: 180px;
-            margin-top: -90px;
-            margin-left: -225px;
-            perspective: 1200px;
-            z-index: 60;
-            opacity: 0;
-            transform: scale(0) translateZ(200px);
-            will-change: transform, opacity;
-        }
-
-        .ai-flipper {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            will-change: transform;
-        }
-
-        .face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 16px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-        }
-
-        /* Front: Transcript Bubble */
-        .face-front {
-            background: rgba(255, 255, 255, 0.95);
+        /* Premium Glassmorphism Utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 30px 40px;
-            display: flex;
-            align-items: center;
-        }
-
-        .transcript-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            line-height: 1.4;
-            position: relative;
-            z-index: 2;
-        }
-
-        .ai-sparkle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 32px;
-            height: 32px;
-            fill: var(--purple);
-            opacity: 0;
-            z-index: 3;
-            will-change: transform, opacity;
-        }
-
-        .ai-scan-line {
-            position: absolute;
-            top: 0;
-            left: -100px;
-            width: 100px;
-            height: 100%;
-            background: linear-gradient(to right, transparent, rgba(147, 51, 234, 0.4), transparent);
-            filter: blur(5px);
-            z-index: 1;
-            transform: skewX(-20deg);
-        }
-
-        /* Back: Agile Ticket */
-        .face-back {
-            background: white;
-            border: 1px solid var(--border-light);
-            transform: rotateY(180deg);
-            padding: 25px 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .ticket-header-ai {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .ticket-id-ai {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            font-weight: 600;
-        }
-
-        .ticket-badge-ai {
-            background: var(--surface-lighter);
-            color: var(--green-accent);
-            font-size: 0.9rem;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        .ticket-title-ai {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            line-height: 1.2;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.3);
         }
 
         /* Virtual Cursor */
@@ -346,9 +177,228 @@
             pointer-events: none;
         }
 
+        /* Specific elements defined for beats */
+
+        /* Beat 1 Elements */
+        .cal-grid {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 500px;
+            border-radius: 20px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 10px;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 31;
+        }
+
+        .cal-slot {
+            border: 1px dashed rgba(0,0,0,0.1);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.5);
+            position: relative;
+        }
+
+        .cal-item {
+            position: absolute;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            z-index: 32;
+        }
+
+        #ticket-item {
+            background: var(--brand-blue);
+            width: 140px; height: 100px;
+            transform: translateX(-500px) translateY(-50px) rotate(-15deg);
+        }
+
+        #chat-item {
+            background: var(--purple);
+            width: 140px; height: 100px;
+            transform: translateX(500px) translateY(50px) rotate(15deg);
+        }
+
+        /* Beat 2 Elements */
+        .clutter-grid {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 500px;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 33;
+        }
+
+        .gray-block {
+            position: absolute;
+            background: #E5E7EB;
+            color: #9CA3AF;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid #D1D5DB;
+        }
+
+        .bright-block {
+            position: absolute;
+            background: var(--brand-blue);
+            color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 114, 196, 0.3);
+            top: 40%; left: 40%; width: 200px; height: 120px;
+        }
+
+        .filter-panel {
+            position: absolute;
+            top: 20%; right: 10%;
+            width: 250px;
+            padding: 20px;
+            border-radius: 16px;
+            opacity: 0;
+            transform: translateX(100px);
+            z-index: 34;
+        }
+
+        .toggle-switch {
+            width: 50px; height: 26px;
+            background: #ccc;
+            border-radius: 13px;
+            position: relative;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .toggle-knob {
+            width: 22px; height: 22px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px; left: 2px;
+            transition: all 0.3s;
+        }
+
+        .toggle-switch.active { background: var(--green-accent); }
+        .toggle-switch.active .toggle-knob { left: 26px; }
+
+        /* Beat 3 Elements */
+        .island-container {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            z-index: 35;
+            pointer-events: none;
+        }
+
+        .sprint-block {
+            position: absolute;
+            top: 50%; left: 50%;
+            margin-top: -60px; margin-left: -120px;
+            width: 240px; height: 120px;
+            background: white;
+            border-left: 6px solid var(--purple);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transform: scale(0.8);
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            z-index: 36;
+        }
+
+        .hr-modal {
+            position: absolute;
+            top: 50%; left: 50%;
+            margin-top: -80px; margin-left: -200px;
+            width: 400px;
+            background: var(--red-bg);
+            border: 2px solid var(--red-badge);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 30px 60px rgba(239, 68, 68, 0.3);
+            opacity: 0;
+            transform: scale(0);
+            z-index: 37;
+        }
+
+        .hr-modal .icon {
+            font-size: 2rem;
+        }
+
+        .hr-modal .text {
+            color: var(--red-badge);
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .tz-badge {
+            position: absolute;
+            bottom: -20px; right: -20px;
+            background: var(--surface-inverse);
+            color: white;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: scale(0);
+            overflow: hidden;
+            height: 36px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .tz-slots {
+            display: flex;
+            flex-direction: column;
+            will-change: transform;
+        }
+
+        .tz-slot {
+            height: 20px;
+            line-height: 20px;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
+    <div id="preloader"><div class="spinner"></div></div>
 
     <div id="viewport">
         <div id="ambient-bg"></div>
@@ -356,13 +406,47 @@
         <div id="world-stage">
 
             <div id="calendar-wrapper" class="iframe-wrapper">
-                <iframe id="calendar-frame" class="iframe-content" src="http://localhost:3000/calendar"></iframe>
+                <iframe id="calendar-frame" class="iframe-content" src="http://localhost:3000/calender"></iframe>
+            </div>
 
-                <!-- Sprint Block inside wrapper -->
-                <div class="sprint-block" id="sprint-block">
-                    STR-104: Sprint Block
-                    <div class="tz-badge" id="tz-badge">
-                        <div class="tz-slot-container">
+            <div id="master-blur-overlay"></div>
+
+            <div class="overlay-layer">
+
+                <!-- Beat 1 Elements -->
+                <div class="glass cal-grid" id="cal-grid">
+                    <!-- 20 slots -->
+                    <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+                    <div class="cal-slot"></div><div class="cal-slot" id="slot-ticket"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+                    <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot" id="slot-chat"></div><div class="cal-slot"></div>
+                    <div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div><div class="cal-slot"></div>
+                </div>
+
+                <div class="cal-item" id="ticket-item">STR-410: Gateway</div>
+                <div class="cal-item" id="chat-item">Sync: Design Team</div>
+
+                <!-- Beat 2 Elements -->
+                <div class="clutter-grid" id="clutter-grid">
+                    <div class="gray-block" style="top: 10%; left: 10%; width: 150px; height: 80px;">Review Docs</div>
+                    <div class="gray-block" style="top: 20%; left: 60%; width: 120px; height: 100px;">Quick Chat</div>
+                    <div class="gray-block" style="top: 60%; left: 15%; width: 180px; height: 60px;">Admin Tasks</div>
+                    <div class="gray-block" style="top: 70%; left: 70%; width: 140px; height: 90px;">Follow-up</div>
+                    <div class="bright-block" id="focus-block">One-on-One Event:<br>Client Review</div>
+                </div>
+
+                <div class="glass filter-panel" id="filter-panel">
+                    <div style="font-weight: bold; margin-bottom: 10px;">Custom View Filters</div>
+                    <div style="font-size: 0.9rem; color: var(--text-gray);">Strict Focus Mode</div>
+                    <div class="toggle-switch" id="focus-toggle">
+                        <div class="toggle-knob"></div>
+                    </div>
+                </div>
+
+                <!-- Beat 3 Elements -->
+                <div class="island-container">
+                    <div class="sprint-block" id="sprint-block">
+                        STR-104
+                        <div class="tz-badge" id="tz-badge">
                             <div class="tz-slots" id="tz-slots">
                                 <div class="tz-slot">10:00 AM (IST)</div>
                                 <div class="tz-slot">04:30 AM (GMT)</div>
@@ -370,35 +454,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="overlay-layer">
-
-                <!-- Specific HR Warning Modal -->
-                <div class="hr-modal" id="hr-modal">
-                    <div class="warning-icon">⚠️</div>
-                    <div class="hr-text">Warning: Lead Dev Alex Turner is on approved PTO from Oct 12–15 (Synced from E-Office)</div>
-                </div>
-
-                <!-- AI Flipper -->
-                <div class="ai-flipper-container" id="ai-container">
-                    <div class="ai-flipper" id="ai-flipper">
-                        <div class="face face-front">
-                            <div class="ai-scan-line" id="ai-scan"></div>
-                            <svg class="ai-sparkle" id="sparkle" viewBox="0 0 24 24">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                            <div class="transcript-text">"Client: We need to upgrade the payment gateway."</div>
-                        </div>
-
-                        <div class="face face-back">
-                            <div class="ticket-header-ai">
-                                <span class="ticket-id-ai">STR-410</span>
-                                <span class="ticket-badge-ai">Auto-Generated</span>
-                            </div>
-                            <div class="ticket-title-ai">Upgrade Payment Gateway</div>
-                        </div>
+                    <div class="hr-modal" id="hr-modal">
+                        <div class="icon">⛔</div>
+                        <div class="text">Warning: Lead Dev Alex Turner is on approved PTO (Synced from E-Office)</div>
                     </div>
                 </div>
 
@@ -414,166 +473,227 @@
     </div>
 
     <script>
-    window.onload = () => {
-        gsap.registerPlugin(CustomEase);
+    const SCROLL = { unified: -800, filter: -1600, island: -2400 };
 
-        const tl = gsap.timeline();
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(CustomEase, TextPlugin);
 
-        // --- BEAT 1: The Scroll & Sprint Drag (0.0s - 5.0s) ---
-        tl.addLabel("sprintDrag", 0)
-          // Instantly animate calendar to y: -600
-          .to("#calendar-frame", {
-              y: -600,
-              duration: 2.0,
-              ease: "power2.inOut"
-          }, "sprintDrag")
+        const frame = document.getElementById("calendar-frame");
 
-          // Cursor sweeps in to center of block
-          .to("#virtual-cursor", {
-              x: window.innerWidth/2 - 720 + (1440 * 0.3) + 150,
-              y: window.innerHeight/2 - 450 + (900 * 0.4) + 35,
-              opacity: 1,
-              duration: 1.5,
-              ease: "power2.out"
-          }, "sprintDrag+=2.0")
+        // Iframe Preloader
+        const loadPromise = new Promise(resolve => {
+            if (frame.contentDocument && frame.contentDocument.readyState === 'complete') {
+                resolve();
+            } else {
+                frame.addEventListener('load', resolve, { once: true });
+                frame.addEventListener('error', resolve, { once: true });
+            }
+        });
 
-          // Click block
-          .to("#virtual-cursor", { scale: 0.9, duration: 0.1 }, "sprintDrag+=3.6")
-          .to("#sprint-block", { scale: 1.05, boxShadow: "0 20px 50px rgba(147, 51, 234, 0.6)", z: 50, duration: 0.1 }, "sprintDrag+=3.6")
+        loadPromise.then(() => {
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                gsap.to(preloader, {
+                    opacity: 0,
+                    duration: 0.5,
+                    onComplete: () => {
+                        preloader.style.display = 'none';
+                        startAnimation();
+                    }
+                });
+            }, 3500);
+        });
 
-          // Drag across screen horizontally
-          .to(["#virtual-cursor", "#sprint-block"], {
-              x: "+=400", // Drag right
-              duration: 1.2,
-              ease: "power2.inOut"
-          }, "sprintDrag+=3.8")
+        function startAnimation() {
+            window.tl = gsap.timeline(); const tl = window.tl;
 
-          // Drop block
-          .to("#virtual-cursor", { scale: 1, duration: 0.1 }, "sprintDrag+=5.0")
-          .to("#sprint-block", { scale: 1, boxShadow: "0 10px 30px rgba(147, 51, 234, 0.4)", z: 0, duration: 0.1 }, "sprintDrag+=5.0");
+            // --- BEAT 1: The Unified Timeline (0.0s - 8.0s) ---
+            tl.addLabel("unifiedTimeline", 0)
+              // Instantly scroll to SCROLL.unified
+              .set("#calendar-frame", { y: SCROLL.unified }, "unifiedTimeline")
 
-        // --- BEAT 2: Specific HR Warning & Timezone Toggle (5.0s - 12.0s) ---
-        tl.addLabel("hrCollision", 5.0)
-          // Cursor moves away
-          .to("#virtual-cursor", { x: "+=100", y: "+=100", opacity: 0, duration: 1.0 }, "hrCollision")
+              // Fade in master blur overlay and Cal Grid
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.8 }, "unifiedTimeline")
+              .to("#cal-grid", { autoAlpha: 1, duration: 0.8 }, "unifiedTimeline")
 
-          // Iframe blurs aggressively
-          .to("#calendar-wrapper", {
-              filter: "blur(8px)",
-              duration: 0.5,
-              ease: "power2.out"
-          }, "hrCollision")
+              // Fly in Ticket
+              .to("#ticket-item", {
+                  opacity: 1,
+                  x: window.innerWidth / 2 - 250, // rough position mapping to grid
+                  y: window.innerHeight / 2 - 50,
+                  rotation: 0,
+                  duration: 1.2,
+                  ease: "back.out(1.2)"
+              }, "unifiedTimeline+=1.0")
 
-          // Modal violently scales up
-          .fromTo("#hr-modal",
-              { scale: 0, opacity: 0 },
-              { scale: 1, opacity: 1, duration: 1.2, ease: "elastic.out(1, 0.5)" },
-              "hrCollision+=0.2"
-          )
+              // Fly in Chat
+              .to("#chat-item", {
+                  opacity: 1,
+                  x: window.innerWidth / 2 + 100,
+                  y: window.innerHeight / 2 + 50,
+                  rotation: 0,
+                  duration: 1.2,
+                  ease: "back.out(1.2)"
+              }, "unifiedTimeline+=1.2")
 
-          // Timezone Toggle Sequence (Starts at 8.0s roughly)
-          // Red warning modal dissolves
-          .to("#hr-modal", {
-              scale: 0.8,
-              opacity: 0,
-              duration: 0.8,
-              ease: "power2.in"
-          }, "hrCollision+=3.0")
+              // Snap into slots & Glow Green
+              .to(["#ticket-item", "#chat-item"], {
+                  scale: 0.95,
+                  backgroundColor: "var(--green-accent)",
+                  boxShadow: "0 0 30px rgba(83, 185, 106, 0.8)",
+                  duration: 0.5,
+                  ease: "power2.out"
+              }, "unifiedTimeline+=2.5")
 
-          // Iframe unblurs
-          .to("#calendar-wrapper", {
-              filter: "blur(0px)",
-              duration: 0.8,
-              ease: "power2.out"
-          }, "hrCollision+=3.0")
+              // Cleanup
+              .to(["#cal-grid", "#ticket-item", "#chat-item", "#master-blur-overlay"], {
+                  autoAlpha: 0,
+                  duration: 0.8,
+                  ease: "power2.in"
+              }, "unifiedTimeline+=6.0");
 
-          // Timezone badge scales up
-          .to("#tz-badge", {
-              scale: 1,
-              opacity: 1,
-              duration: 0.8,
-              ease: "back.out(1.5)"
-          }, "hrCollision+=3.5")
 
-          // Cycle to GMT
-          .to("#tz-slots", {
-              y: -24,
-              duration: 0.4,
-              ease: "back.inOut(1.5)"
-          }, "hrCollision+=4.5")
+            // --- BEAT 2: Filter out the noise (8.0s - 16.0s) ---
+            tl.addLabel("filterNoise", 8.0)
+              // Scroll to SCROLL.filter
+              .to("#calendar-frame", { y: SCROLL.filter, duration: 1.5, ease: "power2.inOut" }, "filterNoise")
 
-          // Cycle to EST
-          .to("#tz-slots", {
-              y: -48,
-              duration: 0.4,
-              ease: "back.inOut(1.5)"
-          }, "hrCollision+=5.5")
+              // Fade in Blur, Clutter Grid, Filter Panel
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.8 }, "filterNoise+=1.5")
+              .to("#clutter-grid", { autoAlpha: 1, duration: 0.8 }, "filterNoise+=1.5")
+              .to("#filter-panel", { opacity: 1, x: 0, duration: 1.0, ease: "back.out(1.2)" }, "filterNoise+=1.8")
 
-          // Glow on EST
-          .to("#tz-badge", {
-              boxShadow: "0 0 20px rgba(16, 185, 129, 0.6)",
-              borderColor: "var(--green-accent)",
-              duration: 1.0,
-              ease: "power2.out"
-          }, "hrCollision+=5.9");
+              // Cursor moves to toggle switch
+              .to("#virtual-cursor", {
+                  x: window.innerWidth * 0.9 - 100, // Approximate position of switch
+                  y: window.innerHeight * 0.2 + 80,
+                  opacity: 1,
+                  duration: 1.2,
+                  ease: "power2.out"
+              }, "filterNoise+=2.5")
 
-        // --- BEAT 3: The AI Meeting-to-Ticket Reveal (12.0s - 22.0s) ---
-        tl.addLabel("aiGen", 12.0)
-          // Sprint block fades
-          .to("#sprint-block", {
-              opacity: 0,
-              duration: 0.5
-          }, "aiGen")
+              // Click toggle switch
+              .to("#virtual-cursor", { scale: 0.9, duration: 0.1 }, "filterNoise+=3.8")
+              .set("#focus-toggle", { className: "toggle-switch active" }, "filterNoise+=3.9")
+              .to("#virtual-cursor", { scale: 1, duration: 0.1 }, "filterNoise+=4.0")
 
-          // Scroll deeper down
-          .to("#calendar-frame", {
-              y: -1200,
-              duration: 2.0,
-              ease: "power2.inOut"
-          }, "aiGen+=0.5")
+              // Gray clutter disintegrates
+              .to(".gray-block", {
+                  opacity: 0,
+                  scale: 0.5,
+                  y: "+=50",
+                  stagger: 0.1,
+                  duration: 0.6,
+                  ease: "power3.in"
+              }, "filterNoise+=4.2")
 
-          // Bubble scales up
-          .fromTo("#ai-container",
-              { scale: 0, opacity: 0 },
-              { scale: 1, opacity: 1, duration: 1.2, ease: "back.out(1.5)" },
-              "aiGen+=2.5"
-          )
+              // Focus block glows
+              .to("#focus-block", {
+                  scale: 1.1,
+                  boxShadow: "0 0 40px rgba(0, 114, 196, 0.8)",
+                  duration: 0.8,
+                  ease: "back.out(1.2)"
+              }, "filterNoise+=4.8")
 
-          // Sparkle appears & spins
-          .to("#sparkle", {
-              opacity: 1,
-              rotation: 360,
-              duration: 1.0,
-              ease: "power1.inOut"
-          }, "aiGen+=3.0")
+              // Cursor leaves
+              .to("#virtual-cursor", { opacity: 0, x: "+=100", duration: 0.5 }, "filterNoise+=5.0")
 
-          // Scan line sweeps across
-          .to("#ai-scan", {
-              left: "500px",
-              duration: 1.2,
-              ease: "power2.inOut"
-          }, "aiGen+=3.2")
+              // Cleanup
+              .to(["#clutter-grid", "#filter-panel", "#master-blur-overlay"], {
+                  autoAlpha: 0,
+                  duration: 0.8,
+                  ease: "power2.in"
+              }, "filterNoise+=7.0");
 
-          // Sparkle fades
-          .to("#sparkle", { opacity: 0, duration: 0.3 }, "aiGen+=4.2")
 
-          // Violently flip on Y axis
-          .to("#ai-flipper", {
-              rotationY: 180,
-              duration: 0.8,
-              ease: "back.out(1.2)"
-          }, "aiGen+=4.4")
+            // --- BEAT 3: The Isolated Island (HR & Timezones) (16.0s - 26.0s) ---
+            tl.addLabel("islandTime", 16.0)
+              // Scroll to SCROLL.island & camera push
+              .to("#calendar-frame", { y: SCROLL.island, duration: 1.5, ease: "power2.inOut" }, "islandTime")
+              .to("#world-stage", { scale: 1.1, duration: 1.5, ease: "power2.inOut" }, "islandTime")
 
-          // Gentle 3D float
-          .to("#world-stage", {
-              y: -15,
-              duration: 3,
-              yoyo: true,
-              repeat: -1,
-              ease: "sine.inOut"
-          }, "aiGen+=5.2");
+              // Fade in Master Blur
+              .to("#master-blur-overlay", { autoAlpha: 1, duration: 0.8 }, "islandTime+=1.5")
 
-    };
+              // Part A: Floating Sprint Block
+              .to("#sprint-block", {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 1.0,
+                  ease: "back.out(1.2)"
+              }, "islandTime+=2.0")
+
+              // Cursor drags block (simulate drag/drop)
+              .fromTo("#virtual-cursor",
+                  { x: window.innerWidth/2, y: window.innerHeight/2 + 100, opacity: 0 },
+                  { x: window.innerWidth/2, y: window.innerHeight/2, opacity: 1, duration: 0.8, ease: "power2.out" },
+                  "islandTime+=2.5"
+              )
+              .to("#virtual-cursor", { scale: 0.9, duration: 0.1 }, "islandTime+=3.4")
+              .to(["#sprint-block", "#virtual-cursor"], {
+                  y: "-=50",
+                  x: "+=50",
+                  duration: 0.8,
+                  ease: "power2.inOut"
+              }, "islandTime+=3.5")
+              .to("#virtual-cursor", { scale: 1, opacity: 0, duration: 0.2 }, "islandTime+=4.3")
+
+              // HR Warning Modal violently scales up
+              .to("#hr-modal", {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.8,
+                  ease: "back.out(1.5)"
+              }, "islandTime+=4.5")
+
+              // Dissolve Modal
+              .to("#hr-modal", {
+                  opacity: 0,
+                  scale: 0.8,
+                  duration: 0.6,
+                  ease: "power2.in"
+              }, "islandTime+=6.5")
+
+              // Part B: Timezone Intelligence
+              .to("#tz-badge", {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.8,
+                  ease: "back.out(1.5)"
+              }, "islandTime+=6.8")
+
+              // Slot machine cycle
+              .to("#tz-slots", {
+                  y: -20, // GMT
+                  duration: 0.3,
+                  ease: "power1.inOut"
+              }, "islandTime+=7.5")
+
+              .to("#tz-slots", {
+                  y: -40, // EST
+                  duration: 0.4,
+                  ease: "power1.inOut"
+              }, "islandTime+=8.0")
+
+              // Lock onto EST and pulse green
+              .to("#tz-badge", {
+                  borderColor: "var(--green-accent)",
+                  boxShadow: "0 0 20px rgba(83, 185, 106, 0.8)",
+                  duration: 0.5,
+                  ease: "power2.out"
+              }, "islandTime+=8.5")
+
+              // Hold & Float
+              .to("#sprint-block", {
+                  y: "-=15",
+                  duration: 2.5,
+                  yoyo: true,
+                  repeat: -1,
+                  ease: "sine.inOut"
+              }, "islandTime+=9.0");
+
+        }
+    });
     </script>
 </body>
 </html>
