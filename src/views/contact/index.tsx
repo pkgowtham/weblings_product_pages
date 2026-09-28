@@ -90,8 +90,9 @@ const Contact: React.FC = () => {
       payload.append("email", formData.email.trim());
       payload.append("description", formData.painpoint.trim());
 
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://weblings-migration-dev.weblingsdev.workers.dev/V1";
       const response = await fetch(
-        "https://weblings-migration-dev.weblingsdev.workers.dev/V1/enquireDetails",
+        `${apiUrl}/enquireDetails`,
         {
           method: "POST",
           body: payload,
