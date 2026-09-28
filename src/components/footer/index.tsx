@@ -10,7 +10,7 @@ import SvgLinkedin from "../svg/Linkedin";
 import SvgYoutube from "../svg/Youtube";
 import SvgThreads from "../svg/Threads";
 import SvgInsta from "../svg/Insta";
-import SvgPhone from "../svg/Phone";
+import SvgWhatsapp from "../svg/Whatsapp";
 import SvgMail from "../svg/Mail";
 import SvgLocation from "../svg/Location";
 import weblingslogo from "../../assets/images/weblings_logo.svg";
@@ -159,17 +159,17 @@ const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): Re
           </div>
           <ul className={classes.ul}>
             <li className={classes.li}>
-              <SvgPhone className={classes.contactIcon} stroke={effectiveIconColor} />
-              <Typography variant="LXS">97895 13198</Typography>
+              <SvgWhatsapp className={classes.contactIcon} stroke={effectiveIconColor} />
+              <Typography variant="LXS">98943 01147 </Typography>
             </li>
             <li className={classes.li}>
               <SvgMail className={classes.contactIcon} stroke={effectiveIconColor} />
-              <Typography variant="LXS">pkgowthamit@gmail.com</Typography>
+              <Typography variant="LXS">hello@weblings.dev</Typography>
             </li>
             <li className={classes.li}>
               <SvgLocation className={classes.contactIcon} stroke={effectiveIconColor} />
               <Typography variant="LXS">
-                Weblings No:8, K.M Nagar,3rd Street, Velliyankadu, Tirupur,
+                Weblings, Velliyankadu, Tirupur,
                 Tamilnadu, 641604. India
               </Typography>
             </li>

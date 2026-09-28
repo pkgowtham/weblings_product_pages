@@ -42,6 +42,7 @@ export { default as Weblingslogo } from "./Weblingslogo";
 export { default as Weblingssuit } from "./Weblingssuit";
 export { default as Weblogo } from "./Weblogo";
 export { default as Youtube } from "./Youtube";
+export { default as Whatsapp } from "./Whatsapp";
 export { default as CalendarSticky } from "./CalendarSticky";
 export { default as EofficeSticky } from "./EofficeSticky";
 export { default as PrincipleBackground } from "./PrincipleBackground";

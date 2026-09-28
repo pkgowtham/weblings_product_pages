@@ -688,6 +688,17 @@ const Navbar = () => {
                 Pricing
               </Link>
             </li>
+
+            <li className={classes.NavBarItem}>
+              <Link
+                href="/contact"
+                className={`${classes.NavBarLink} ${currentPath === "/contact" || currentPath === "/workSuite/contact" ? classes.ActiveLink : ""
+                  }`}
+                onClick={() => setIsDropDownOpen(false)}
+              >
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

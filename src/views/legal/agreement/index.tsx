@@ -9,8 +9,8 @@ import {
   LockIcon,
 } from '../../../assets/icons_component';
 
-// Target URL for redirect after agreeing (configurable)
-const REDIRECT_URL = 'https://sparkling-band-cfb2.weblingsdev.workers.dev/docs/streamline';
+// Target URL for redirect after agreeing
+const REDIRECT_URL = 'https://org.weblings.dev';
 
 // Pre-defined twinkling star coordinates for smooth cosmic starry background
 const starsData = [
