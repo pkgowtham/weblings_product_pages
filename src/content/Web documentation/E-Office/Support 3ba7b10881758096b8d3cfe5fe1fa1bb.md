@@ -1,7 +1,7 @@
 
 # Support
 
-![support view screen (2).png](Support/support_view_screen_(2).png)
+![Support](Support/e-office-support.png)
 
 The **Support** screen allows you to submit technical inquiries, feature requests, or account questions directly to our support team. It also provides quick access to self-help modules and Frequently Asked Questions (FAQ) to help resolve common issues without waiting for a response.
 

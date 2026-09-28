@@ -1,6 +1,6 @@
 # Asset Category
 
-![Screenshot 2026-08-06 at 3.36.43 PM.png](Asset%20Category/Screenshot_2026-08-06_at_3.36.43_PM.png)
+![Asset Category](Asset%20Category/e-office-asset-asset-category.png)
 
 The **Asset Categories** screen allows you to create and manage categories for organizing your organization's assets. Categorizing assets helps simplify asset tracking, reporting, and inventory management.
 
@@ -32,7 +32,7 @@ Use the **Search Asset Category** box to quickly locate an asset category by ent
 
 # Create a New Asset Category
 
-![Screenshot 2026-08-06 at 3.36.58 PM.png](Asset%20Category/Screenshot_2026-08-06_at_3.36.58_PM.png)
+![Create a New Asset Category](Asset%20Category/e-office-asset-asset-category_create-a-new-asset-category.png)
 
 To create a new asset category, click **Add Asset Category**.
 
@@ -88,7 +88,7 @@ Click **Cancel** to return to the previous screen without saving.
 
 # View Asset Category
 
-![Screenshot 2026-08-06 at 3.37.18 PM.png](Asset%20Category/Screenshot_2026-08-06_at_3.37.18_PM.png)
+![View Asset Category](Asset%20Category/e-office-asset-asset-category_view-asset-category.png)
 
 To view an asset category:
 
@@ -111,7 +111,7 @@ This page is for viewing information only.
 
 # Edit an Asset Category
 
-![Screenshot 2026-08-06 at 3.37.32 PM.png](Asset%20Category/Screenshot_2026-08-06_at_3.37.32_PM.png)
+![Edit an Asset Category](Asset%20Category/e-office-asset-asset-category_edit-an-asset-category.png)
 
 To modify an existing asset category:
 
@@ -130,7 +130,7 @@ If you do not wish to save your changes, click **Cancel**.
 
 # Delete an Asset Category
 
-![Screenshot 2026-08-06 at 3.37.45 PM.png](Asset%20Category/Screenshot_2026-08-06_at_3.37.45_PM.png)
+![Delete an Asset Category](Asset%20Category/e-office-asset-asset-category_delete-an-asset-category.png)
 
 To remove an asset category:
 

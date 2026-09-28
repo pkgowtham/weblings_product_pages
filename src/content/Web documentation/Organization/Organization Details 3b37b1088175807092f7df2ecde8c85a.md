@@ -1,7 +1,7 @@
 
 # Organization Details
 
-![Orginfo-company info (2).png](Organization%20Details/Orginfo-company_info_(2).png)
+![Organization Details](Organization%20Details/organization-organization-details.png)
 
 Before you can start using the platform, you need to create your organization. The Organization Setup wizard guides you through all the required steps.
 
@@ -84,7 +84,7 @@ After completing all required fields, click **Next**.
 
 # Step 2: Domain Setup
 
-![Preference_.png](Organization%20Details/Preference_.png)
+![Step 2: Domain Setup](Organization%20Details/organization-organization-details_step-2-domain-setup.png)
 
 A domain gives your organization a unique web address for accessing the platform.
 
@@ -173,7 +173,7 @@ You can choose:
 
 ## Step 2
 
-![Buy New Domain.png](Organization%20Details/Buy_New_Domain.png)
+![Step 2](Organization%20Details/organization-organization-details_step-2.png)
 
 Search for your preferred domain name.
 
@@ -199,7 +199,7 @@ Proceed with the purchase.
 
 # Step 3: Choose a Plan
 
-![Choose plan.png](Organization%20Details/Choose_plan.png)
+![Step 3: Choose a Plan](Organization%20Details/organization-organization-details_step-3-choose-a-plan.png)
 
 Select the subscription plan that best meets your organization's needs.
 
@@ -238,7 +238,7 @@ Click **Next** to continue.
 
 # Review & Checkout
 
-![Review and check out.png](Organization%20Details/Review_and_check_out.png)
+![Review & Checkout](Organization%20Details/organization-organization-details_review-checkout.png)
 
 Before completing your purchase, review your order.
 
@@ -293,7 +293,7 @@ Click **Finish** to open your organization's dashboard.
 
 # Accounts
 
-![Admin-account-org details (1).png](Organization%20Details/Admin-account-org_details_(1).png)
+![Accounts](Organization%20Details/organization-organization-details_accounts.png)
 
 After you complete the **Organization Setup**, the **Accounts** section becomes available in the sidebar.
 
@@ -360,7 +360,7 @@ Click **Edit** to save any changes.
 
 # Billing
 
-![Admin-Billing-Upcomiing bills.png](Organization%20Details/Admin-Billing-Upcomiing_bills.png)
+![Billing](Organization%20Details/organization-organization-details_billing.png)
 
 The **Billing** section helps you manage your organization's billing information and payment records.
 

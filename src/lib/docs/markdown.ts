@@ -6,8 +6,6 @@ import { cleanNotionName, slugify } from './utils';
 export { cleanNotionName, slugify };
 
 const contentDirectory = path.join(process.cwd(), 'src/content');
-const publicImagesDirectory = path.join(process.cwd(), 'public/docs-images');
-
 /**
  * Helper to process path parts: cleans Notion hashes and strips root wrapper directory
  */
@@ -31,29 +29,10 @@ function getCleanSlugSegments(relativePath: string): string[] {
 }
 
 /**
- * Copies image files from src/content to public/docs-images
+ * Image synchronization no-op (images are hosted on Cloudflare R2 object storage)
  */
-export function syncImages(dir = contentDirectory): void {
-  if (!fs.existsSync(dir)) return;
-  try {
-    const items = fs.readdirSync(dir, { withFileTypes: true });
-
-    for (const item of items) {
-      const fullPath = path.join(dir, item.name);
-
-      if (item.isDirectory()) {
-        syncImages(fullPath);
-      } else if (item.isFile() && /\.(png|jpg|jpeg|gif|svg|webp)$/i.test(item.name)) {
-        // Save flat filename copy for DocViewer references (/docs-images/${filename})
-        const flatDestPath = path.join(publicImagesDirectory, item.name);
-        if (!fs.existsSync(flatDestPath)) {
-          fs.copyFileSync(fullPath, flatDestPath);
-        }
-      }
-    }
-  } catch (err) {
-    console.error('Error syncing images:', err);
-  }
+export function syncImages(): void {
+  // All documentation images are hosted on Cloudflare R2 object storage.
 }
 
 interface MarkdownFileInfo {

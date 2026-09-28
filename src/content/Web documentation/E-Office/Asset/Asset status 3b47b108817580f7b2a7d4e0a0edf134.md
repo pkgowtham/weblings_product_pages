@@ -1,6 +1,6 @@
 # Asset status
 
-![Screenshot 2026-08-06 at 3.41.02 PM.png](Asset%20status/Screenshot_2026-08-06_at_3.41.02_PM.png)
+![Asset status](Asset%20status/e-office-asset-asset-status.png)
 
 The **Asset Status** screen allows you to create and manage the different statuses assigned to organizational assets. Asset statuses help track the current lifecycle stage of an asset, such as whether it is available, assigned, under maintenance, or retired.
 
@@ -31,7 +31,7 @@ Use the **Search Asset Status** box to quickly locate an asset status by enterin
 
 # Create a New Asset Status
 
-![Screenshot 2026-08-06 at 3.41.15 PM.png](Asset%20status/Screenshot_2026-08-06_at_3.41.15_PM.png)
+![Create a New Asset Status](Asset%20status/e-office-asset-asset-status_create-a-new-asset-status.png)
 
 To create a new asset status, click **Add Asset Status**.
 
@@ -77,7 +77,7 @@ Click **Cancel** to return to the previous screen without saving.
 
 # View Asset Status
 
-![Screenshot 2026-08-06 at 3.41.34 PM.png](Asset%20status/Screenshot_2026-08-06_at_3.41.34_PM.png)
+![View Asset Status](Asset%20status/e-office-asset-asset-status_view-asset-status.png)
 
 To view an asset status:
 
@@ -99,7 +99,7 @@ This page is for viewing information only.
 
 # Edit an Asset Status
 
-![Screenshot 2026-08-06 at 3.41.52 PM.png](Asset%20status/Screenshot_2026-08-06_at_3.41.52_PM.png)
+![Edit an Asset Status](Asset%20status/e-office-asset-asset-status_edit-an-asset-status.png)
 
 To modify an existing asset status:
 
@@ -117,7 +117,7 @@ If you do not wish to save your changes, click **Cancel**.
 
 # Delete an Asset Status
 
-![Screenshot 2026-08-06 at 3.42.22 PM.png](Asset%20status/Screenshot_2026-08-06_at_3.42.22_PM.png)
+![Delete an Asset Status](Asset%20status/e-office-asset-asset-status_delete-an-asset-status.png)
 
 To remove an asset status:
 

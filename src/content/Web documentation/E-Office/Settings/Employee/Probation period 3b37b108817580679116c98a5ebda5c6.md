@@ -1,6 +1,6 @@
 # Probation period
 
-![Screenshot 2026-08-05 at 6.23.53 PM.png](Probation%20period/Screenshot_2026-08-05_at_6.23.53_PM.png)
+![Probation period](Probation%20period/e-office-settings-employee-probation-period.png)
 
 # Probation
 

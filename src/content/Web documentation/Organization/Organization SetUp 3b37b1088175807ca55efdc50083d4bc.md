@@ -1,6 +1,6 @@
 # Organization SetUp
 
-![Org setup (8).png](Organization%20SetUp/Org_setup_(8).png)
+![Organization SetUp](Organization%20SetUp/organization-organization-setup.png)
 
 After creating your organization, the next step is to set up your business units and their locations. This helps you organize different departments, branches, or offices under your organization.
 
@@ -34,7 +34,7 @@ Your business unit will be added to the list.
 
 # Business Unit List
 
-![Org setup (9).png](Organization%20SetUp/Org_setup_(9).png)
+![Business Unit List](Organization%20SetUp/organization-organization-setup_business-unit-list.png)
 
 After a business unit is created, it will appear on the screen with its basic information.
 
@@ -49,7 +49,7 @@ Click **Create Location** to continue.
 
 # Step 2: Create a Business Location
 
-![Org setup (10).png](Organization%20SetUp/Org_setup_(10).png)
+![Step 2: Create a Business Location](Organization%20SetUp/organization-organization-setup_step-2-create-a-business-location.png)
 
 A business location represents a physical office, branch, warehouse, factory, or any workplace that belongs to the selected business unit.
 
@@ -72,7 +72,7 @@ You can create multiple locations under the same business unit whenever needed.
 
 # View Login Credentials
 
-![Org setup (11).png](Organization%20SetUp/Org_setup_(11).png)
+![View Login Credentials](Organization%20SetUp/organization-organization-setup_view-login-credentials.png)
 
 Once a business location is created, the system automatically creates login credentials for that location.
 
@@ -89,7 +89,7 @@ These credentials can be used to log in to eOffice.
 
 # Edit Login Credentials
 
-![Org setup (12).png](Organization%20SetUp/Org_setup_(12).png)
+![Edit Login Credentials](Organization%20SetUp/organization-organization-setup_edit-login-credentials.png)
 
 If you need to update the login credentials for a business location, click the **Edit** icon.
 

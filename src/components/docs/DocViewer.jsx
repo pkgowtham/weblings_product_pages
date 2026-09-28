@@ -49,6 +49,10 @@ function enhanceMarkdownImageCaptions(markdownText) {
   return processedLines.join('\n')
 }
 
+import docsImagesData from '../../data/docs-images.json'
+
+const R2_BASE_URL = 'https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/docs-images/'
+
 export default function DocViewer({
   pageTitle,
   content,
@@ -56,6 +60,7 @@ export default function DocViewer({
   activePage,
   onSelectPage,
   isLoading,
+  imagesMap = docsImagesData.images,
 }) {
   const [lightboxImg, setLightboxImg] = useState(null)
 
@@ -83,7 +88,7 @@ export default function DocViewer({
     return enhanceMarkdownImageCaptions(withoutTitle)
   }, [content])
 
-  // Resolve relative exported Notion image paths to public /docs-images/ directory
+  // Resolve relative exported Notion image paths to Cloudflare R2 object storage URL from parent
   const resolveImageSrc = (src) => {
     if (!src) return ''
     if (src.startsWith('http://') || src.startsWith('https://')) {
@@ -98,12 +103,19 @@ export default function DocViewer({
     }
     cleaned = parts.join('/')
 
-    if (cleaned.startsWith('/docs-images/')) return cleaned
-    if (cleaned.startsWith('docs-images/')) return `/${cleaned}`
-
     // Extract filename for direct lookup
     const filename = cleaned.split('/').pop()
-    return `/docs-images/${filename}`
+
+    // 1. Lookup from parent imagesMap or unified JSON
+    const lookup = imagesMap || docsImagesData.images
+    if (lookup) {
+      if (typeof lookup[filename] === 'string') return lookup[filename]
+      if (lookup[filename]?.url) return lookup[filename].url
+      if (lookup.images && typeof lookup.images[filename] === 'string') return lookup.images[filename]
+    }
+
+    // 2. Default Cloudflare R2 object storage URL
+    return `${R2_BASE_URL}${filename}`
   }
 
   const components = {

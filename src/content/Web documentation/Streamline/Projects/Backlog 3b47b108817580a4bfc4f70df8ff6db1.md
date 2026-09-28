@@ -2,7 +2,7 @@
 
 # Backlog & Sprint Management
 
-![Screenshot 2026-08-07 at 3.17.47 PM.png](Backlog/Screenshot_2026-08-07_at_3.17.47_PM.png)
+![Backlog & Sprint Management](Backlog/streamline-projects-backlog_backlog-sprint-management.png)
 
 The Backlog screen helps you organize, filter, and plan work items for your project. It split-screens your unassigned work (**Backlogs**) alongside your active and planned development cycles (**Sprints**). You can use this screen to prepare issues, group them into sprints, and manage sprint lifecycles.
 
@@ -17,7 +17,7 @@ The screen displays two main sections:
 
 ### 1. Creating a New Sprint
 
-![Screenshot 2026-08-07 at 3.20.05 PM.png](Backlog/Screenshot_2026-08-07_at_3.20.05_PM.png)
+![1. Creating a New Sprint](Backlog/streamline-projects-backlog_1-creating-a-new-sprint.png)
 
 1. Click the **New Sprint** button located at the top-right of the Sprints panel.
 2. The **New sprint** modal will appear. Fill in the details:
@@ -36,7 +36,7 @@ The screen displays two main sections:
 
 ### 4. Editing a Sprint
 
-![Screenshot 2026-08-07 at 3.21.34 PM.png](Backlog/Screenshot_2026-08-07_at_3.21.34_PM.png)
+![4. Editing a Sprint](Backlog/streamline-projects-backlog_4-editing-a-sprint.png)
 
 - Click the three-dot menu icon (`⋮`) next to **Start Sprint** on any sprint card and select **Edit** to modify the sprint's name or date range.
 
@@ -67,7 +67,7 @@ At the top of the Backlog view, you can use the search bar and filter controls t
 
 ## Creating an Issue
 
-![Screenshot 2026-08-07 at 3.21.50 PM.png](Backlog/Screenshot_2026-08-07_at_3.21.50_PM.png)
+![Creating an Issue](Backlog/streamline-projects-backlog_creating-an-issue.png)
 
 To create a new task or epic:
 

@@ -1,6 +1,6 @@
 # Holiday
 
-![Screenshot 2026-08-06 at 11.48.57 AM.png](Holiday/Screenshot_2026-08-06_at_11.48.57_AM.png)
+![Holiday](Holiday/e-office-settings-leave-holiday.png)
 
 # Holiday
 
@@ -17,7 +17,7 @@ You can also use the **Search Holiday** bar to quickly find a holiday plan by en
 
 # Create a New Holiday Plan
 
-![Screenshot 2026-08-06 at 12.01.39 PM.png](Holiday/Screenshot_2026-08-06_at_12.01.39_PM.png)
+![Create a New Holiday Plan](Holiday/e-office-settings-leave-holiday_create-a-new-holiday-plan.png)
 
 To create a new holiday plan, click the **Add Holiday** button in the top-right corner of the screen.
 
@@ -71,7 +71,7 @@ Click **Cancel** to return to the previous screen without saving.
 
 # View Holiday Plan
 
-![Screenshot 2026-08-06 at 12.01.10 PM.png](Holiday/Screenshot_2026-08-06_at_12.01.10_PM.png)
+![View Holiday Plan](Holiday/e-office-settings-leave-holiday_view-holiday-plan.png)
 
 To view a holiday plan:
 
@@ -92,7 +92,7 @@ This page is for viewing information only and cannot be edited.
 
 # Edit a Holiday Plan
 
-![Screenshot 2026-08-06 at 12.00.53 PM.png](Holiday/Screenshot_2026-08-06_at_12.00.53_PM.png)
+![Edit a Holiday Plan](Holiday/e-office-settings-leave-holiday_edit-a-holiday-plan.png)
 
 To update an existing holiday plan:
 

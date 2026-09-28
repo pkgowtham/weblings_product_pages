@@ -1,6 +1,6 @@
 # Organization Tree
 
-![Screenshot 2026-08-06 at 1.29.56 PM.png](Organization%20Tree/Screenshot_2026-08-06_at_1.29.56_PM.png)
+![Organization Tree](Organization%20Tree/e-office-hierarchy-organization-tree.png)
 
 The **Organization Tree** tab allows you to build and manage your organization's employee reporting structure based on the roles created in the **Role Hierarchy** module.
 
@@ -21,7 +21,7 @@ You can:
 
 # Add a Level 1 Employee
 
-![Screenshot 2026-08-06 at 1.30.12 PM.png](Organization%20Tree/Screenshot_2026-08-06_at_1.30.12_PM.png)
+![Add a Level 1 Employee](Organization%20Tree/e-office-hierarchy-organization-tree_add-a-level-1-employee.png)
 
 To create the first employee in the organization tree, click the **Add Level 1** button.
 
@@ -103,7 +103,7 @@ You can continue adding employees until your organization structure is complete.
 
 # Edit an Employee Assignment
 
-![Screenshot 2026-08-06 at 1.30.31 PM.png](Organization%20Tree/Screenshot_2026-08-06_at_1.30.31_PM.png)
+![Edit an Employee Assignment](Organization%20Tree/e-office-hierarchy-organization-tree_edit-an-employee-assignment.png)
 
 To change the employee assigned to a role:
 
@@ -139,7 +139,7 @@ Closes the dialog without saving changes.
 
 # Delete an Employee from the Organization Tree
 
-![Screenshot 2026-08-06 at 1.30.48 PM.png](Organization%20Tree/Screenshot_2026-08-06_at_1.30.48_PM.png)
+![Delete an Employee from the Organization Tree](Organization%20Tree/e-office-hierarchy-organization-tree_delete-an-employee-from-the-organization-tree.png)
 
 To remove an employee:
 
@@ -167,7 +167,7 @@ Choose one of the following options before deleting the employee.
 
 ### Option 1 — Move All to Another Manager
 
-![Screenshot 2026-08-06 at 1.31.01 PM.png](Organization%20Tree/Screenshot_2026-08-06_at_1.31.01_PM.png)
+![Option 1 — Move All to Another Manager](Organization%20Tree/e-office-hierarchy-organization-tree_option-1-move-all-to-another-manager.png)
 
 All direct reports will be reassigned to another existing manager.
 
@@ -180,7 +180,7 @@ After selecting this option:
 
 ### Option 2 — Assign New Manager First
 
-![Screenshot 2026-08-06 at 1.31.13 PM.png](Organization%20Tree/Screenshot_2026-08-06_at_1.31.13_PM.png)
+![Option 2 — Assign New Manager First](Organization%20Tree/e-office-hierarchy-organization-tree_option-2-assign-new-manager-first.png)
 
 Assign a replacement manager before removing the current employee.
 
@@ -194,7 +194,7 @@ All direct reports will be transferred automatically.
 
 ### Option 3 — Delete All Sub-Members
 
-![Screenshot 2026-08-06 at 1.31.26 PM.png](Organization%20Tree/Screenshot_2026-08-06_at_1.31.26_PM.png)
+![Option 3 — Delete All Sub-Members](Organization%20Tree/e-office-hierarchy-organization-tree_option-3-delete-all-sub-members.png)
 
 This option removes the selected employee along with all employees reporting under them.
 
