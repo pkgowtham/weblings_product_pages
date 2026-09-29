@@ -264,181 +264,181 @@ const StreamlineFeature: React.FC = () => {
 
                 {/* 3 Step Pipeline Cards */}
                 <div className={classes.pipelineStepsRow}>
-              {/* Step 1 */}
-              <div
-                className={`${classes.pipelineFlowStep} ${activeStep === 1 ? classes.pipelineFlowStepActive : ''}`}
-                onMouseEnter={() => setActiveStep(1)}
-                onClick={() => setActiveStep(1)}
-                onTouchStart={() => setActiveStep(1)}
-              >
-                <div className={classes.pipelineStepIconBadge}>
-                  <BrainIcon width={22} height={22} isHovered={activeStep === 1} />
-                </div>
-                <div className={classes.pipelineStepText}>
-                  <div className={classes.pipelineStepHeader}>
-                    <span className={classes.pipelineStepTag}>Step 01</span>
-                  </div>
-                  <h4 className={classes.pipelineStepTitle}>Smart Detection</h4>
-                  <p className={classes.pipelineStepSub}>
-                    Extract new client requirements and cross-reference the project baseline.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div
-                className={`${classes.pipelineFlowStep} ${activeStep === 2 ? classes.pipelineFlowStepActive : ''}`}
-                onMouseEnter={() => setActiveStep(2)}
-                onClick={() => setActiveStep(2)}
-                onTouchStart={() => setActiveStep(2)}
-              >
-                <div className={classes.pipelineStepIconBadge} style={{ color: '#9333EA', borderColor: '#E9D5FF', backgroundColor: activeStep === 2 ? '#FAF5FF' : '#FFFFFF' }}>
-                  <HumanVerificationIcon width={22} height={22} isHovered={activeStep === 2} />
-                </div>
-                <div className={classes.pipelineStepText}>
-                  <div className={classes.pipelineStepHeader}>
-                    <span className={classes.pipelineStepTag} style={{ backgroundColor: '#F3E8FF', color: '#9333EA' }}>Step 02</span>
-                  </div>
-                  <h4 className={classes.pipelineStepTitle}>Human Verification</h4>
-                  <p className={classes.pipelineStepSub}>
-                    Review the generated ticket and approve it as a formal Change of Request.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div
-                className={`${classes.pipelineFlowStep} ${activeStep === 3 ? classes.pipelineFlowStepActive : ''}`}
-                onMouseEnter={() => setActiveStep(3)}
-                onClick={() => setActiveStep(3)}
-                onTouchStart={() => setActiveStep(3)}
-              >
-                <div className={classes.pipelineStepIconBadge} style={{ color: '#16A34A', borderColor: '#BBF7D0', backgroundColor: activeStep === 3 ? '#F0FDF4' : '#FFFFFF' }}>
-                  <InstantIntegrationIcon width={22} height={22} isHovered={activeStep === 3} />
-                </div>
-                <div className={classes.pipelineStepText}>
-                  <div className={classes.pipelineStepHeader}>
-                    <span className={classes.pipelineStepTag} style={{ backgroundColor: '#DCFCE7', color: '#15803D' }}>Step 03</span>
-                  </div>
-                  <h4 className={classes.pipelineStepTitle}>Instant Integration</h4>
-                  <p className={classes.pipelineStepSub}>
-                    Drop the approved ticket into the sprint and notify the team in Chat.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Dynamic Step Detail Showcase */}
-            {activeStep === 1 && (
-              <div className={classes.pipelineShowcaseCard} style={{ backgroundColor: '#F8FAFC', borderColor: '#BFDBFE' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <div style={{ width: 34, height: 34, borderRadius: 8, backgroundColor: '#EFF6FF', border: '1px solid #DBEAFE', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0072C4' }}>
-                      <MicIcon width={18} height={18} isHovered={true} />
+                  {/* Step 1 */}
+                  <div
+                    className={`${classes.pipelineFlowStep} ${activeStep === 1 ? classes.pipelineFlowStepActive : ''}`}
+                    onMouseEnter={() => setActiveStep(1)}
+                    onClick={() => setActiveStep(1)}
+                    onTouchStart={() => setActiveStep(1)}
+                  >
+                    <div className={classes.pipelineStepIconBadge}>
+                      <BrainIcon width={22} height={22} isHovered={activeStep === 1} />
                     </div>
-                    <span style={{ fontSize: 13, fontWeight: 800, color: '#0072C4', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                      In-Call Speech Stream
-                    </span>
-                  </div>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#15803D', backgroundColor: '#DCFCE7', padding: '4px 12px', borderRadius: 20, display: 'flex', alignItems: 'center', gap: 6, border: '1px solid #BBF7D0' }}>
-                    <DoneIcon width={13} height={13} fill="#15803D" />
-                    99.4% Match
-                  </span>
-                </div>
-                <div style={{ backgroundColor: '#FFFFFF', borderRadius: 10, padding: '16px 20px', border: '1px solid #E2E8F0', marginBottom: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
-                  <p style={{ fontSize: 14, color: '#334155', fontStyle: 'italic', margin: 0, lineHeight: 1.6 }}>
-                    &ldquo;Client: We need OAuth2 Single Sign-On and Okta integration before launch next month.&rdquo;
-                  </p>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: '#0F172A', fontWeight: 600 }}>
-                    <div style={{ width: 30, height: 30, borderRadius: 6, backgroundColor: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF' }}>
-                      <TicketIcon width={17} height={17} />
-                    </div>
-                    <span>Draft Ticket Extracted: <strong style={{ color: '#0072C4' }}>OAuth2 Single Sign-On Flow</strong></span>
-                  </div>
-                  <span style={{ fontSize: 12, color: '#64748B', fontWeight: 600, backgroundColor: '#F1F5F9', padding: '4px 12px', borderRadius: 6 }}>
-                    Auto-Tagged: Security • +13 Pts
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {activeStep === 2 && (
-              <div className={classes.pipelineShowcaseCard} style={{ backgroundColor: '#FAF5FF', borderColor: '#E9D5FF' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <div style={{ width: 34, height: 34, borderRadius: 8, backgroundColor: '#F3E8FF', border: '1px solid #E9D5FF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9333EA' }}>
-                      <ClipboardCheckIcon width={18} height={18} isHovered={true} />
-                    </div>
-                    <span style={{ fontSize: 13, fontWeight: 800, color: '#9333EA', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                      Scope Change Approval
-                    </span>
-                  </div>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#6B21A8', backgroundColor: '#F3E8FF', padding: '4px 12px', borderRadius: 20, border: '1px solid #E9D5FF' }}>
-                    Pending 1-Click Approval
-                  </span>
-                </div>
-                <div style={{ backgroundColor: '#FFFFFF', borderRadius: 10, padding: '16px 20px', border: '1px solid #E9D5FF', marginBottom: 16, boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: '#0F172A', marginBottom: 6 }}>
-                    Change Request #CR-104: Enterprise SSO
-                  </div>
-                  <div style={{ fontSize: 13, color: '#64748B' }}>
-                    Scope delta: <strong>+13 Story Points</strong> • Assigned: <strong>@alex.smith</strong> • Target: Sprint 2
-                  </div>
-                </div>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <button style={{ display: 'flex', alignItems: 'center', gap: 8, backgroundColor: '#9333EA', color: '#FFF', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 700, padding: '10px 20px', cursor: 'pointer', boxShadow: '0 4px 12px rgba(147, 51, 234, 0.25)' }}>
-                    <DoneIcon width={15} height={15} fill="#FFFFFF" />
-                    Approve &amp; Sync to Sprint
-                  </button>
-                  <button style={{ display: 'flex', alignItems: 'center', gap: 6, backgroundColor: '#FFF', color: '#64748B', border: '1px solid #CBD5E1', borderRadius: 8, fontSize: 13, fontWeight: 600, padding: '10px 18px', cursor: 'pointer' }}>
-                    <SettingsIcon width={15} height={15} />
-                    Edit Scope
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {activeStep === 3 && (
-              <div className={classes.pipelineShowcaseCard} style={{ backgroundColor: '#F0FDF4', borderColor: '#BBF7D0' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <div style={{ width: 34, height: 34, borderRadius: 8, backgroundColor: '#DCFCE7', border: '1px solid #BBF7D0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#16A34A' }}>
-                      <StreamlineIcon width={18} height={18} isHovered={true} />
-                    </div>
-                    <span style={{ fontSize: 13, fontWeight: 800, color: '#16A34A', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                      Sprint Backlog Synced
-                    </span>
-                  </div>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#15803D', backgroundColor: '#DCFCE7', padding: '4px 12px', borderRadius: 20, border: '1px solid #BBF7D0' }}>
-                    Active in Sprint 2
-                  </span>
-                </div>
-                <div style={{ backgroundColor: '#FFFFFF', borderRadius: 10, padding: '16px 20px', border: '1px solid #BBF7D0', marginBottom: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <div style={{ width: 30, height: 30, borderRadius: 6, backgroundColor: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF' }}>
-                        <TicketIcon width={17} height={17} />
+                    <div className={classes.pipelineStepText}>
+                      <div className={classes.pipelineStepHeader}>
+                        <span className={classes.pipelineStepTag}>Step 01</span>
                       </div>
-                      <span style={{ fontSize: 14, fontWeight: 700, color: '#0F172A' }}>
-                        STR-112 OAuth2 Single Sign-On Flow
+                      <h4 className={classes.pipelineStepTitle}>Smart Detection</h4>
+                      <p className={classes.pipelineStepSub}>
+                        Extract new client requirements and cross-reference the project baseline.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div
+                    className={`${classes.pipelineFlowStep} ${activeStep === 2 ? classes.pipelineFlowStepActive : ''}`}
+                    onMouseEnter={() => setActiveStep(2)}
+                    onClick={() => setActiveStep(2)}
+                    onTouchStart={() => setActiveStep(2)}
+                  >
+                    <div className={classes.pipelineStepIconBadge} style={{ color: '#9333EA', borderColor: '#E9D5FF', backgroundColor: activeStep === 2 ? '#FAF5FF' : '#FFFFFF' }}>
+                      <HumanVerificationIcon width={22} height={22} isHovered={activeStep === 2} />
+                    </div>
+                    <div className={classes.pipelineStepText}>
+                      <div className={classes.pipelineStepHeader}>
+                        <span className={classes.pipelineStepTag} style={{ backgroundColor: '#F3E8FF', color: '#9333EA' }}>Step 02</span>
+                      </div>
+                      <h4 className={classes.pipelineStepTitle}>Human Verification</h4>
+                      <p className={classes.pipelineStepSub}>
+                        Review the generated ticket and approve it as a formal Change of Request.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div
+                    className={`${classes.pipelineFlowStep} ${activeStep === 3 ? classes.pipelineFlowStepActive : ''}`}
+                    onMouseEnter={() => setActiveStep(3)}
+                    onClick={() => setActiveStep(3)}
+                    onTouchStart={() => setActiveStep(3)}
+                  >
+                    <div className={classes.pipelineStepIconBadge} style={{ color: '#16A34A', borderColor: '#BBF7D0', backgroundColor: activeStep === 3 ? '#F0FDF4' : '#FFFFFF' }}>
+                      <InstantIntegrationIcon width={22} height={22} isHovered={activeStep === 3} />
+                    </div>
+                    <div className={classes.pipelineStepText}>
+                      <div className={classes.pipelineStepHeader}>
+                        <span className={classes.pipelineStepTag} style={{ backgroundColor: '#DCFCE7', color: '#15803D' }}>Step 03</span>
+                      </div>
+                      <h4 className={classes.pipelineStepTitle}>Instant Integration</h4>
+                      <p className={classes.pipelineStepSub}>
+                        Drop the approved ticket into the sprint and notify the team in Chat.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dynamic Step Detail Showcase */}
+                {activeStep === 1 && (
+                  <div className={classes.pipelineShowcaseCard} style={{ backgroundColor: '#F8FAFC', borderColor: '#BFDBFE' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div style={{ width: 34, height: 34, borderRadius: 8, backgroundColor: '#EFF6FF', border: '1px solid #DBEAFE', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0072C4' }}>
+                          <MicIcon width={18} height={18} isHovered={true} />
+                        </div>
+                        <span style={{ fontSize: 13, fontWeight: 800, color: '#0072C4', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                          In-Call Speech Stream
+                        </span>
+                      </div>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: '#15803D', backgroundColor: '#DCFCE7', padding: '4px 12px', borderRadius: 20, display: 'flex', alignItems: 'center', gap: 6, border: '1px solid #BBF7D0' }}>
+                        <DoneIcon width={13} height={13} fill="#15803D" />
+                        99.4% Match
                       </span>
                     </div>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: '#0284C7', backgroundColor: '#E0F2FE', padding: '4px 10px', borderRadius: 6 }}>
-                      IN PROGRESS
-                    </span>
+                    <div style={{ backgroundColor: '#FFFFFF', borderRadius: 10, padding: '16px 20px', border: '1px solid #E2E8F0', marginBottom: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
+                      <p style={{ fontSize: 14, color: '#334155', fontStyle: 'italic', margin: 0, lineHeight: 1.6 }}>
+                        &ldquo;Client: We need OAuth2 Single Sign-On and Okta integration before launch next month.&rdquo;
+                      </p>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: '#0F172A', fontWeight: 600 }}>
+                        <div style={{ width: 30, height: 30, borderRadius: 6, backgroundColor: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF' }}>
+                          <TicketIcon width={17} height={17} />
+                        </div>
+                        <span>Draft Ticket Extracted: <strong style={{ color: '#0072C4' }}>OAuth2 Single Sign-On Flow</strong></span>
+                      </div>
+                      <span style={{ fontSize: 12, color: '#64748B', fontWeight: 600, backgroundColor: '#F1F5F9', padding: '4px 12px', borderRadius: 6 }}>
+                        Auto-Tagged: Security • +13 Pts
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 13, color: '#64748B', flexWrap: 'wrap', gap: 8 }}>
-                  <span>Owner: <strong style={{ color: '#0F172A' }}>@alex.smith</strong></span>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#16A34A', fontWeight: 700 }}>
-                    <DoneIcon width={15} height={15} fill="#16A34A" />
-                    Team Pings Dispatched
-                  </span>
-                </div>
-              </div>
-            )}
+                )}
+
+                {activeStep === 2 && (
+                  <div className={classes.pipelineShowcaseCard} style={{ backgroundColor: '#FAF5FF', borderColor: '#E9D5FF' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div style={{ width: 34, height: 34, borderRadius: 8, backgroundColor: '#F3E8FF', border: '1px solid #E9D5FF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9333EA' }}>
+                          <ClipboardCheckIcon width={18} height={18} isHovered={true} />
+                        </div>
+                        <span style={{ fontSize: 13, fontWeight: 800, color: '#9333EA', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                          Scope Change Approval
+                        </span>
+                      </div>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: '#6B21A8', backgroundColor: '#F3E8FF', padding: '4px 12px', borderRadius: 20, border: '1px solid #E9D5FF' }}>
+                        Pending 1-Click Approval
+                      </span>
+                    </div>
+                    <div style={{ backgroundColor: '#FFFFFF', borderRadius: 10, padding: '16px 20px', border: '1px solid #E9D5FF', marginBottom: 16, boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
+                      <div style={{ fontSize: 15, fontWeight: 700, color: '#0F172A', marginBottom: 6 }}>
+                        Change Request #CR-104: Enterprise SSO
+                      </div>
+                      <div style={{ fontSize: 13, color: '#64748B' }}>
+                        Scope delta: <strong>+13 Story Points</strong> • Assigned: <strong>@alex.smith</strong> • Target: Sprint 2
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                      <button style={{ display: 'flex', alignItems: 'center', gap: 8, backgroundColor: '#9333EA', color: '#FFF', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 700, padding: '10px 20px', cursor: 'pointer', boxShadow: '0 4px 12px rgba(147, 51, 234, 0.25)' }}>
+                        <DoneIcon width={15} height={15} fill="#FFFFFF" />
+                        Approve &amp; Sync to Sprint
+                      </button>
+                      <button style={{ display: 'flex', alignItems: 'center', gap: 6, backgroundColor: '#FFF', color: '#64748B', border: '1px solid #CBD5E1', borderRadius: 8, fontSize: 13, fontWeight: 600, padding: '10px 18px', cursor: 'pointer' }}>
+                        <SettingsIcon width={15} height={15} />
+                        Edit Scope
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {activeStep === 3 && (
+                  <div className={classes.pipelineShowcaseCard} style={{ backgroundColor: '#F0FDF4', borderColor: '#BBF7D0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div style={{ width: 34, height: 34, borderRadius: 8, backgroundColor: '#DCFCE7', border: '1px solid #BBF7D0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#16A34A' }}>
+                          <StreamlineIcon width={18} height={18} isHovered={true} />
+                        </div>
+                        <span style={{ fontSize: 13, fontWeight: 800, color: '#16A34A', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                          Sprint Backlog Synced
+                        </span>
+                      </div>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: '#15803D', backgroundColor: '#DCFCE7', padding: '4px 12px', borderRadius: 20, border: '1px solid #BBF7D0' }}>
+                        Active in Sprint 2
+                      </span>
+                    </div>
+                    <div style={{ backgroundColor: '#FFFFFF', borderRadius: 10, padding: '16px 20px', border: '1px solid #BBF7D0', marginBottom: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                          <div style={{ width: 30, height: 30, borderRadius: 6, backgroundColor: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF' }}>
+                            <TicketIcon width={17} height={17} />
+                          </div>
+                          <span style={{ fontSize: 14, fontWeight: 700, color: '#0F172A' }}>
+                            STR-112 OAuth2 Single Sign-On Flow
+                          </span>
+                        </div>
+                        <span style={{ fontSize: 11, fontWeight: 700, color: '#0284C7', backgroundColor: '#E0F2FE', padding: '4px 10px', borderRadius: 6 }}>
+                          IN PROGRESS
+                        </span>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 13, color: '#64748B', flexWrap: 'wrap', gap: 8 }}>
+                      <span>Owner: <strong style={{ color: '#0F172A' }}>@alex.smith</strong></span>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#16A34A', fontWeight: 700 }}>
+                        <DoneIcon width={15} height={15} fill="#16A34A" />
+                        Team Pings Dispatched
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </RevealOnScroll>
@@ -555,7 +555,7 @@ const StreamlineFeature: React.FC = () => {
               </div>
 
               {/* Universal App Store & Play Store Buttons */}
-              <AppStoreButtons reviewCountText="Over 45,000+ active enterprise professionals" />
+              <AppStoreButtons />
             </div>
           </RevealOnScroll>
         </div>

@@ -1505,12 +1505,18 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     color: "#FFFFFF",
     fontSize: "12px",
     fontWeight: 600,
+    fontFamily: "inherit",
     border: "none",
     cursor: "pointer",
-    transition: "background-color 0.2s ease",
+    transition: "all 0.2s ease",
     boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
     "&:hover": {
       backgroundColor: "#1E293B",
+      transform: "translateY(-1px)",
+      boxShadow: "0 4px 8px rgba(0,0,0,0.15)",
+    },
+    "&:active": {
+      transform: "translateY(0)",
     },
   },
   androidBtn: {
@@ -1523,6 +1529,7 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     color: "#0F172A",
     fontSize: "12px",
     fontWeight: 600,
+    fontFamily: "inherit",
     border: `1px solid ${theme.light.neutral.border.light}`,
     cursor: "pointer",
     transition: "all 0.2s ease",
@@ -1530,6 +1537,11 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     "&:hover": {
       backgroundColor: "#F8FAFC",
       borderColor: theme.light.neutral.border.medium,
+      transform: "translateY(-1px)",
+      boxShadow: "0 4px 8px rgba(0,0,0,0.08)",
+    },
+    "&:active": {
+      transform: "translateY(0)",
     },
   },
 

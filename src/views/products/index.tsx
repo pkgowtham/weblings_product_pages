@@ -18,6 +18,7 @@ import PhoneMockup from "../../components/phoneMockup/index";
 import BentoCard from "../../components/bentoCard/index";
 import { SvgApple, SvgAndroid } from "../../components/appStoreButtons";
 import StatusModal, { StatusModalType } from "../../components/statusModal";
+import MobileAppModal from "../../components/mobileAppModal";
 import SecurityComplianceSection from "../../components/securityComplianceSection";
 import {
   BrainIcon,
@@ -232,7 +233,8 @@ const PersonaCardItem: React.FC<{
   card: any;
   isSky: boolean;
   classes: any;
-}> = ({ card, isSky, classes }) => {
+  onAppClick: (platform: string) => void;
+}> = ({ card, isSky, classes, onAppClick }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
@@ -272,13 +274,24 @@ const PersonaCardItem: React.FC<{
 
       {/* Download Actions */}
       <div className={classes.downloadFooter}>
-        <span className={classes.downloadLabel}>Available on all mobile platforms:</span>
+        {/* Formerly: Available on all mobile platforms: */}
+        <span className={classes.downloadLabel}>Mobile Apps Coming in November:</span>
         <div className={classes.downloadBtns}>
-          <button className={classes.iosBtn}>
+          <button
+            type="button"
+            className={classes.iosBtn}
+            onClick={() => onAppClick('iOS')}
+            aria-label="Download Apple iOS App - Available in November"
+          >
             <SvgApple width={16} height={16} />
             iOS App
           </button>
-          <button className={classes.androidBtn}>
+          <button
+            type="button"
+            className={classes.androidBtn}
+            onClick={() => onAppClick('Android')}
+            aria-label="Download Google Android App - Available in November"
+          >
             <SvgAndroid width={16} height={16} />
             Android App
           </button>
@@ -307,6 +320,8 @@ const Products = () => {
     title: "",
     message: "",
   });
+  const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
+  const [selectedMobilePlatform, setSelectedMobilePlatform] = useState<string>("all");
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubscribeEmail(e.target.value);
@@ -752,6 +767,10 @@ const Products = () => {
                 card={card}
                 isSky={index === 0}
                 classes={classes}
+                onAppClick={(platform) => {
+                  setSelectedMobilePlatform(platform);
+                  setIsMobileModalOpen(true);
+                }}
               />
             ))}
           </div>
@@ -935,6 +954,13 @@ const Products = () => {
         message={modalState.message}
         primaryBtnText={modalState.primaryBtnText}
         onClose={() => setModalState((prev) => ({ ...prev, isOpen: false }))}
+      />
+
+      {/* Reassuring Explanatory Modal For November Mobile Apps Launch */}
+      <MobileAppModal
+        isOpen={isMobileModalOpen}
+        onClose={() => setIsMobileModalOpen(false)}
+        platform={selectedMobilePlatform}
       />
     </div>
   );

@@ -36,13 +36,19 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
     cursor: "pointer",
     boxSizing: "border-box",
-    minWidth: "190px",
+    minWidth: "195px",
     height: "56px",
+    fontFamily: "inherit",
+    outline: "none",
+    textAlign: "left",
     "&:hover": {
       backgroundColor: "#1E293B",
       transform: "translateY(-3px)",
       boxShadow: "0 16px 32px -4px rgba(0, 114, 196, 0.25)",
       borderColor: "rgba(0, 114, 196, 0.4)",
+    },
+    "&:active": {
+      transform: "translateY(-1px)",
     },
     "@media (max-width: 480px)": {
       padding: "10px 18px",
@@ -69,9 +75,10 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     fontSize: "0.6875rem",
     textTransform: "uppercase",
     letterSpacing: "0.06em",
-    opacity: 0.8,
+    opacity: 0.85,
     fontWeight: 600,
     lineHeight: 1.1,
+    whiteSpace: "nowrap",
   },
   storeTitle: {
     fontSize: "0.9375rem",

@@ -1,7 +1,8 @@
 'use client';
 
-import React from "react";
+import React, { useState } from "react";
 import { useStyles } from "./style";
+import MobileAppModal from "../mobileAppModal";
 
 export const SvgApple: React.FC<{ width?: number; height?: number; className?: string }> = ({
   width = 24,
@@ -76,72 +77,120 @@ export interface AppStoreButtonsProps {
   align?: 'left' | 'center';
   iosHref?: string;
   androidHref?: string;
+  iosSubtitle?: string;
+  iosTitle?: string;
+  androidSubtitle?: string;
+  androidTitle?: string;
   showReviews?: boolean;
   rating?: string;
   reviewCountText?: string;
   className?: string;
   buttonsClassName?: string;
   reviewsClassName?: string;
+  onButtonClick?: (platform: 'ios' | 'android') => void;
+  productName?: string;
 }
 
 export const AppStoreButtons: React.FC<AppStoreButtonsProps> = ({
   align = 'left',
   iosHref = "#ios",
   androidHref = "#android",
+  iosSubtitle,
+  iosTitle,
+  androidSubtitle,
+  androidTitle,
   showReviews = true,
   rating = "4.9",
   reviewCountText = "Over 45,000+ active enterprise reviews",
   className,
   buttonsClassName,
   reviewsClassName,
+  onButtonClick,
+  productName,
 }) => {
   const classes = useStyles();
   const isCenter = align === 'center';
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState<'all' | 'ios' | 'android'>('all');
+
+  const handleButtonClick = (e: React.MouseEvent, platform: 'ios' | 'android') => {
+    e.preventDefault();
+    if (onButtonClick) {
+      onButtonClick(platform);
+    } else {
+      setSelectedPlatform(platform);
+      setIsModalOpen(true);
+    }
+  };
 
   return (
-    <div className={`${classes.container} ${isCenter ? classes.containerCenter : ''} ${className || ""}`}>
-      {/* Equal-Sized Universal App Store Buttons */}
-      <div className={`${classes.downloadButtonsRow} ${isCenter ? classes.downloadButtonsRowCenter : ''} ${buttonsClassName || ""}`}>
-        {/* iOS Button */}
-        <a href={iosHref} className={classes.storeButton} aria-label="Download on iOS">
-          <div className={classes.storeIcon}>
-            <SvgApple />
-          </div>
-          <div className={classes.storeTextCol}>
-            <span className={classes.storeSubtitle}>DOWNLOAD ON</span>
-            <span className={classes.storeTitle}>Download iOS</span>
-          </div>
-        </a>
+    <>
+      <div className={`${classes.container} ${isCenter ? classes.containerCenter : ''} ${className || ""}`}>
+        {/* Equal-Sized Universal App Store Buttons */}
+        <div className={`${classes.downloadButtonsRow} ${isCenter ? classes.downloadButtonsRowCenter : ''} ${buttonsClassName || ""}`}>
+          {/* iOS Button */}
+          <button
+            type="button"
+            onClick={(e) => handleButtonClick(e, 'ios')}
+            className={classes.storeButton}
+            aria-label="Download Apple iOS App - Coming in Nov"
+          >
+            <div className={classes.storeIcon}>
+              <SvgApple />
+            </div>
+            <div className={classes.storeTextCol}>
+              {/* Formerly: DOWNLOAD ON */}
+              <span className={classes.storeSubtitle}>{iosSubtitle || "COMING IN NOV"}</span>
+              {/* Formerly: Download iOS */}
+              <span className={classes.storeTitle}>{iosTitle || "Apple iOS"}</span>
+            </div>
+          </button>
 
-        {/* Android Button */}
-        <a href={androidHref} className={classes.storeButton} aria-label="Download on Android">
-          <div className={classes.storeIcon}>
-            <SvgAndroid />
+          {/* Android Button */}
+          <button
+            type="button"
+            onClick={(e) => handleButtonClick(e, 'android')}
+            className={classes.storeButton}
+            aria-label="Download Google Android App - Coming in Nov"
+          >
+            <div className={classes.storeIcon}>
+              <SvgAndroid />
+            </div>
+            <div className={classes.storeTextCol}>
+              {/* Formerly: GET IT ON */}
+              <span className={classes.storeSubtitle}>{androidSubtitle || "COMING IN NOV"}</span>
+              {/* Formerly: Download Android */}
+              <span className={classes.storeTitle}>{androidTitle || "Google Android"}</span>
+            </div>
+          </button>
+        </div>
+
+        {/* Optional Social Proof Reviews Line */}
+        {/* {showReviews && (
+          <div className={`${classes.reviewsRow} ${isCenter ? classes.reviewsRowCenter : ''} ${reviewsClassName || ""}`}>
+            <div className={classes.starRatingGroup}>
+              <div className={classes.starsGroup}>
+                <SvgStar />
+                <SvgStar />
+                <SvgStar />
+                <SvgStar />
+                <SvgStar />
+              </div>
+              <span className={classes.ratingNumber}>{rating}</span>
+            </div>
+            <span className={classes.reviewsCountText}>{reviewCountText}</span>
           </div>
-          <div className={classes.storeTextCol}>
-            <span className={classes.storeSubtitle}>GET IT ON</span>
-            <span className={classes.storeTitle}>Download Android</span>
-          </div>
-        </a>
+        )} */}
       </div>
 
-      {/* Optional Social Proof Reviews Line */}
-      {/* {showReviews && (
-        <div className={`${classes.reviewsRow} ${isCenter ? classes.reviewsRowCenter : ''} ${reviewsClassName || ""}`}>
-          <div className={classes.starRatingGroup}>
-            <div className={classes.starsGroup}>
-              <SvgStar />
-              <SvgStar />
-              <SvgStar />
-              <SvgStar />
-              <SvgStar />
-            </div>
-            <span className={classes.ratingNumber}>{rating}</span>
-          </div>
-          <span className={classes.reviewsCountText}>{reviewCountText}</span>
-        </div>
-      )} */}
-    </div>
+      {/* Explanatory Modal For November App Store Launch */}
+      <MobileAppModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        platform={selectedPlatform}
+        productName={productName}
+      />
+    </>
   );
 };
 
