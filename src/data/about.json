@@ -1,57 +1,67 @@
 {
-  "journey": {
-    "title": "Our Journey",
-    "description": "Founded in insert founding year, we set out to simplify business operations by creating an all-in-one platform for HR, scheduling, and communication. What began as a small idea has grown into a trusted solution for companies of all sizes. Despite challenges, our commitment to innovation drives us forward, with a clear vision to make work life simpler and more efficient for businesses worldwide."
+  "hero": {
+    "badge": "Our Story & Mission",
+    "title": "We built the software\nwe always wished we had.",
+    "subtitle": "No corporate fluff. No exaggerated claims. This is just an honest letter from one founder to another about why we exist, who we are, and how we treat the people who trust us with their business."
   },
-  "foundation": {
-    "title": "Our Foundation",
-    "items": [
-      {
-        "id": "idea",
-        "title": "Innovative Solutions",
-        "description": "We deliver advanced solutions that simplify works"
-      },
-      {
-        "id": "heart",
-        "title": "User-Centric",
-        "description": "User first-tailored solutions and exceptional support."
-      },
-      {
-        "id": "lock",
-        "title": "Transparency",
-        "description": "We ensure honesty, transparency, and accountability in all actions."
-      },
-      {
-        "id": "team",
-        "title": "Teamwork",
-        "description": "We value teamwork and diverse perspectives for better solutions."
-      }
-    ]
+  "founder": {
+    "name": "Gowtham",
+    "caption": "Gowtham",
+    "title": "Gowtham - Founder, Weblings"
   },
-  "team": {
-    "title": "Our Team",
-    "description": "At weblings, we combine innovation and expertise to revolutionize business operations. Our diverse team collaborates to deliver impactful, cutting-edge solutions.",
-    "members": [
+  "letter": {
+    "quote": "“Why do developers point fingers when a feature breaks? Why does a 10-hour task always stretch past 30? Why is the client still frustrated after 14-hour workdays?”",
+    "paragraphs": [
       {
-        "id": "asief",
-        "name": "Mohammed Asief",
-        "role": "Designer"
+        "lead": "We Are Developers First.",
+        "text": "Before we were founders, we were developers. We have lived the exact frustrations your team deals with every single day. We know exactly what it feels like to spend weeks building a feature exactly to spec, only for the client to change their mind on a Friday afternoon and say, “That’s not what I meant.”"
       },
       {
-        "id": "praveen",
-        "name": "Praveen",
-        "role": "Developer"
+        "text": "We know the crushing feeling of unbilled scope creep, vague project briefs, and the dreaded “telephone game” between clients and engineers."
       },
       {
-        "id": "ragul",
-        "name": "Rathinavel",
-        "role": "Developer"
+        "text": "But apart from undocumented client changes, the real enemy is miscommunication. A request passes through three layers of middle management, gets twisted, the wrong feature is built, and the toxic blame game starts."
       },
       {
-        "id": "diwagar",
-        "name": "Diwagar",
-        "role": "Developer"
+        "text": "Loyal, talented people don’t leave over paychecks; they leave toxic environments. Most developers would happily take a fair salary in a peaceful, joyful workspace over a massive paycheck in a daily warzone."
+      },
+      {
+        "lead": "The Broken Ecosystem.",
+        "text": "We also got tired of watching small and mid-sized companies get bled dry by fragmented software. Paying a “per-seat” tax for Jira, another for Slack, and another for HR software is exhausting."
+      },
+      {
+        "text": "But the real nightmare isn’t just the monthly subscriptions. It is the hidden cost of managing users across half a dozen different platforms."
+      },
+      {
+        "text": "Setting up multi-layer sign-ins is an IT nightmare, and migrating simple data between them requires expensive middleman tools like Zapier just to keep the lights on. It felt completely broken."
+      },
+      {
+        "text": "That frustration is the exact reason we built the AI Scope Engine and this unified platform. We didn’t build it to jump on an AI hype train; we built it to solve a very real, very painful problem that we have personally suffered through. We build tools that protect your margins and your sanity."
+      },
+      {
+        "lead": "Partnerships, Not Support Tickets.",
+        "text": "Because we are a smaller, focused team, we value relationships over raw profit margins. When you join Weblings, you aren’t just an account number in a database."
+      },
+      {
+        "text": "If you have an issue, you will never be trapped in a 5-tier support hierarchy. You won’t be bounced from one middle manager to another who views your support request as a mere disturbance in their day."
+      },
+      {
+        "text": "If something goes wrong, we take it personally. You get direct access to real humans who understand the codebase."
+      },
+      {
+        "text": "If the situation demands it, our founders will intervene directly to fix the problem and ensure the architecture is updated so it never happens again. We view you as a partner in this ecosystem, and your success is directly tied to ours."
       }
-    ]
+    ],
+    "signature": {
+      "name": "Gowtham",
+      "role": "Founder, Weblings Hub"
+    }
+  },
+  "cta": {
+    "text": "We’d love to show you around the platform. Let’s grab a virtual coffee, chat about your workflow, and see if we can make your team’s day a little brighter.",
+    "primaryBtn": {
+      "text": "Get in touch",
+      "href": "/contact"
+    }
   }
 }

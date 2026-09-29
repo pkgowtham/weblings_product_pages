@@ -123,6 +123,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Caveat:wght@600&family=Great+Vibes&family=Herr+Von+Muellerhoff&display=swap"
+          rel="stylesheet"
+        />
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />
       </head>

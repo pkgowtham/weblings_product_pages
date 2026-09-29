@@ -6,7 +6,7 @@ import { usestyles } from './style';
 import { getSrc } from '../../utils/getSrc';
 import { SvgChevronRight } from '../../components/svg/CustomIcons';
 import gowthamFounderImg from '../../assets/images/about/gowtham_founder.jpg';
-import chennaiHqImg from '../../assets/images/about/chennai_hq.jpg';
+import data from '../../data/about.json';
 
 // Pre-defined twinkling star coordinates for consistency without re-renders
 const starsData = [
@@ -69,20 +69,21 @@ const About: React.FC = () => {
           tabIndex={0}
         >
           <span className={classes.pulseDot} />
-          <span>Our Story &amp; Mission</span>
+          <span>{data.hero.badge}</span>
           <SvgChevronRight width={12} height={12} style={{ marginLeft: '4px' }} />
         </div>
 
         <h1 className={classes.heroTitle}>
-          We built the software
-          <br />
-          we always wished we had.
+          {data.hero.title.split('\n').map((line, i) => (
+            <React.Fragment key={i}>
+              {line}
+              {i === 0 && <br />}
+            </React.Fragment>
+          ))}
         </h1>
 
         <p className={classes.heroSubtitle}>
-          No corporate fluff. No exaggerated claims. This is just an honest
-          letter from one founder to another about why we exist, who we are, and
-          how we treat the people who trust us with their business.
+          {data.hero.subtitle}
         </p>
 
         {/* Bouncing Down Arrow Indicator */}
@@ -107,52 +108,31 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Mobile Polaroids (Displayed neatly on small screens) */}
+      {/* Mobile Polaroid (Displayed neatly on small screens) */}
       <div className={classes.mobilePolaroidsRow}>
         <div className={classes.mobilePolaroidCard}>
           <img
             src={getSrc(gowthamFounderImg)}
-            alt="Gowtham, Founder"
+            alt={data.founder.title}
             className={classes.polaroidImg}
           />
-          <div className={classes.polaroidCaption}>Gowtham</div>
-        </div>
-        <div className={classes.mobilePolaroidCard}>
-          <img
-            src={getSrc(chennaiHqImg)}
-            alt="Chennai HQ Office"
-            className={classes.polaroidImg}
-          />
-          <div className={classes.polaroidCaption}>Chennai HQ</div>
+          <div className={classes.polaroidCaption}>{data.founder.caption}</div>
         </div>
       </div>
 
-      {/* Founder Letter Section with Floating Polaroids */}
+      {/* Founder Letter Section with Floating Polaroid */}
       <section id="founder-letter" className={classes.letterWrapper}>
-        {/* Floating Polaroid 1: Founder (Desktop) */}
+        {/* Floating Polaroid: Founder (Desktop) */}
         <div
           className={classes.polaroidLeft}
-          title="Gowtham - Founder, Weblings"
+          title={data.founder.title}
         >
           <img
             src={getSrc(gowthamFounderImg)}
-            alt="Gowtham - Founder, Weblings"
+            alt={data.founder.title}
             className={classes.polaroidImg}
           />
-          <div className={classes.polaroidCaption}>Gowtham</div>
-        </div>
-
-        {/* Floating Polaroid 2: Chennai HQ (Desktop) */}
-        <div
-          className={classes.polaroidRight}
-          title="Weblings Chennai HQ"
-        >
-          <img
-            src={getSrc(chennaiHqImg)}
-            alt="Weblings Chennai HQ"
-            className={classes.polaroidImg}
-          />
-          <div className={classes.polaroidCaption}>Chennai HQ</div>
+          <div className={classes.polaroidCaption}>{data.founder.caption}</div>
         </div>
 
         {/* The Paper Letter Card */}
@@ -161,98 +141,17 @@ const About: React.FC = () => {
 
           {/* Letter Opening Quote */}
           <blockquote className={classes.letterQuote}>
-            &ldquo;Why do developers point fingers when a feature breaks? Why
-            does a 10-hour task always stretch past 30? Why is the client still
-            frustrated after 14-hour workdays?&rdquo;
+            {data.letter.quote}
           </blockquote>
 
           {/* Letter Content */}
           <div className={classes.letterBody}>
-            <p className={classes.letterParagraph}>
-              <span className={classes.boldLead}>We Are Developers First.</span>
-              Before we were founders, we were developers. We have lived the exact
-              frustrations your team deals with every single day. We know
-              exactly what it feels like to spend weeks building a feature
-              exactly to spec, only for the client to change their mind on a
-              Friday afternoon and say, &ldquo;That&rsquo;s not what I
-              meant.&rdquo;
-            </p>
-
-            <p className={classes.letterParagraph}>
-              We know the crushing feeling of unbilled scope creep, vague project
-              briefs, and the dreaded &ldquo;telephone game&rdquo; between
-              clients and engineers.
-            </p>
-
-            <p className={classes.letterParagraph}>
-              But apart from undocumented client changes, the real enemy is
-              miscommunication. A request passes through three layers of middle
-              management, gets twisted, the wrong feature is built, and the
-              toxic blame game starts.
-            </p>
-
-            <p className={classes.letterParagraph}>
-              Loyal, talented people don&rsquo;t leave over paychecks; they leave
-              toxic environments. Most developers would happily take a fair
-              salary in a peaceful, joyful workspace over a massive paycheck in a
-              daily warzone.
-            </p>
-
-            <p className={classes.letterParagraph}>
-              <span className={classes.boldLead}>The Broken Ecosystem.</span>
-              We also got tired of watching small and mid-sized companies get
-              bled dry by fragmented software. Paying a &ldquo;per-seat&rdquo;
-              tax for Jira, another for Slack, and another for HR software is
-              exhausting.
-            </p>
-
-            <p className={classes.letterParagraph}>
-              But the real nightmare isn&rsquo;t just the monthly
-              subscriptions. It is the hidden cost of managing users across half
-              a dozen different platforms.
-            </p>
-
-            <p className={classes.letterParagraph}>
-              Setting up multi-layer sign-ins is an IT nightmare, and migrating
-              simple data between them requires expensive middleman tools like
-              Zapier just to keep the lights on. It felt completely broken.
-            </p>
-
-            <p className={classes.letterParagraph}>
-              That frustration is the exact reason we built the AI Scope Engine
-              and this unified platform. We didn&rsquo;t build it to jump on an
-              AI hype train; we built it to solve a very real, very painful
-              problem that we have personally suffered through. We build tools
-              that protect your margins and your sanity.
-            </p>
-
-            <p className={classes.letterParagraph}>
-              <span className={classes.boldLead}>
-                Partnerships, Not Support Tickets.
-              </span>
-              Because we are a smaller, focused team, we value relationships over
-              raw profit margins. When you join Weblings, you aren&rsquo;t just
-              an account number in a database.
-            </p>
-
-            <p className={classes.letterParagraph}>
-              If you have an issue, you will never be trapped in a 5-tier support
-              hierarchy. You won&rsquo;t be bounced from one middle manager to
-              another who views your support request as a mere disturbance in
-              their day.
-            </p>
-
-            <p className={classes.letterParagraph}>
-              If something goes wrong, we take it personally. You get direct
-              access to real humans who understand the codebase.
-            </p>
-
-            <p className={classes.letterParagraph}>
-              If the situation demands it, our founders will intervene directly
-              to fix the problem and ensure the architecture is updated so it
-              never happens again. We view you as a partner in this ecosystem,
-              and your success is directly tied to ours.
-            </p>
+            {data.letter.paragraphs.map((p, idx) => (
+              <p key={idx} className={classes.letterParagraph}>
+                {p.lead && <span className={classes.boldLead}>{p.lead}</span>}
+                {p.text}
+              </p>
+            ))}
 
             {/* Signature Block with Architectural Watermark */}
             <div className={classes.signatureArea}>
@@ -268,9 +167,9 @@ const About: React.FC = () => {
                 />
               </svg>
 
-              <div className={classes.signatureName}>Gowtham</div>
+              <div className={classes.signatureName}>{data.letter.signature.name}</div>
               <div className={classes.signatureRole}>
-                Founder, Weblings Worksuite
+                {data.letter.signature.role}
               </div>
             </div>
           </div>
@@ -280,9 +179,7 @@ const About: React.FC = () => {
       {/* Closing CTA Section */}
       <section className={classes.ctaSection}>
         <p className={classes.ctaText}>
-          We&rsquo;d love to show you around the platform. Let&rsquo;s grab a
-          virtual coffee, chat about your workflow, and see if we can make your
-          team&rsquo;s day a little brighter.
+          {data.cta.text}
         </p>
 
         <div className={classes.ctaButtons}>
@@ -290,7 +187,7 @@ const About: React.FC = () => {
             className={classes.ctaPrimaryBtn}
             onClick={() => router.push('/contact')}
           >
-            <span>Get in touch</span>
+            <span>{data.cta.primaryBtn.text}</span>
             <svg
               width="18"
               height="18"
@@ -303,13 +200,6 @@ const About: React.FC = () => {
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </button>
-
-          <button
-            className={classes.ctaSecondaryBtn}
-            onClick={() => router.push('/workSuite/comparison')}
-          >
-            Compare Plans
           </button>
         </div>
       </section>

@@ -232,19 +232,17 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     lineHeight: 1.2,
   },
 
-  // Responsive Polaroids Showcase (Displayed when side space is limited, cleanly above letter)
+  // Responsive Polaroid Showcase (Displayed when side space is limited, cleanly above letter)
   mobilePolaroidsRow: {
     display: "none",
     justifyContent: "center",
     alignItems: "center",
-    gap: theme.spacing.s600,
     marginBottom: "36px",
     position: "relative",
     zIndex: 3,
     padding: `0 ${theme.spacing.s400}`,
     "@media (max-width: 1240px)": {
       display: "flex",
-      flexWrap: "wrap",
     },
   },
   mobilePolaroidCard: {
@@ -254,13 +252,8 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     boxShadow: "0 12px 30px rgba(0, 68, 140, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04)",
     border: `1px solid ${theme.light.brand.border.light}`,
     borderRadius: `${theme.borderRadius.b100}px`,
+    transform: "rotate(-2deg)",
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    "&:first-child": {
-      transform: "rotate(-3deg)",
-    },
-    "&:last-child": {
-      transform: "rotate(3deg)",
-    },
     "&:hover": {
       transform: "rotate(0deg) scale(1.05)",
       boxShadow: "0 18px 36px rgba(0, 68, 140, 0.18)",
@@ -366,13 +359,17 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     color: theme.light.brand.surface.medium,
   },
   signatureName: {
-    fontFamily: "'Caveat', cursive",
-    fontSize: "50px",
-    fontWeight: 600,
-    color: theme.light.brand.surface.darker,
-    transform: "rotate(-2.5deg)",
+    fontFamily: "'Herr Von Muellerhoff', 'Alex Brush', cursive",
+    fontSize: "66px",
+    fontWeight: 400,
+    color: "#0B2545",
+    transform: "rotate(-3deg)",
+    transformOrigin: "left center",
+    display: "inline-block",
     lineHeight: 1,
-    marginBottom: "4px",
+    marginBottom: "8px",
+    letterSpacing: "0.02em",
+    userSelect: "none",
   },
   signatureRole: {
     fontFamily: "'Open Sans', sans-serif",
@@ -417,12 +414,12 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     backgroundColor: theme.light.brand.surface.medium,
     color: theme.light.neutral.onSurface.inverse,
     border: "none",
-    padding: "14px 34px",
-    borderRadius: `${theme.borderRadius.b2500}px`,
+    padding: "14px 32px",
+    borderRadius: "12px",
     fontSize: "15px",
     fontWeight: 600,
     cursor: "pointer",
-    boxShadow: "0 8px 24px rgba(0, 114, 196, 0.25)",
+    boxShadow: "0 8px 20px -4px rgba(0, 114, 196, 0.35)",
     transition: `all ${theme.duration.d4}s ease`,
     display: "inline-flex",
     alignItems: "center",
@@ -430,25 +427,10 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     "&:hover": {
       backgroundColor: theme.light.brand.surface.darker,
       transform: "translateY(-2px)",
-      boxShadow: "0 12px 28px rgba(0, 114, 196, 0.35)",
+      boxShadow: "0 12px 28px -4px rgba(0, 114, 196, 0.45)",
     },
-  },
-  ctaSecondaryBtn: {
-    fontFamily: "'Open Sans', sans-serif",
-    backgroundColor: theme.light.neutral.surface.lighter,
-    color: theme.light.brand.surface.darker,
-    border: `1px solid ${theme.light.brand.border.medium}`,
-    padding: "14px 30px",
-    borderRadius: `${theme.borderRadius.b2500}px`,
-    fontSize: "15px",
-    fontWeight: 600,
-    cursor: "pointer",
-    transition: `all ${theme.duration.d4}s ease`,
-    boxShadow: "0 2px 8px rgba(0, 52, 107, 0.06)",
-    "&:hover": {
-      backgroundColor: theme.light.brand.surface.lighter,
-      borderColor: theme.light.brand.surface.medium,
-      transform: "translateY(-2px)",
+    "&:active": {
+      transform: "translateY(0)",
     },
   },
 }));
