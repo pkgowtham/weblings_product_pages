@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useStyles } from "./style";
 
@@ -13,6 +13,10 @@ import {
   ShieldLockIcon,
   InstantIntegrationIcon,
   ImmutableHistoryIcon,
+  MailIcon,
+  ConnectIcon,
+  StreamlineIcon,
+  DriveIcon,
 } from "../../../../../assets/icons_component";
 
 /* ─────────────────────────────────────────────────────────────
@@ -445,6 +449,195 @@ const RevealOnScroll: React.FC<{
 };
 
 /* ─────────────────────────────────────────────────────────────
+   PROVISIONING SVG ANIMATION ICONS & PIPELINE
+   ───────────────────────────────────────────────────────────── */
+
+// High-tech circular spinning SVG with pulsing center
+const SvgProvisionSpinner: React.FC<{ size?: number }> = ({ size = 18 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    style={{ display: "inline-block", verticalAlign: "middle" }}
+  >
+    <circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.25)" strokeWidth="2.5" />
+    <circle
+      cx="12"
+      cy="12"
+      r="9"
+      stroke="#FFFFFF"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeDasharray="20 38"
+    >
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="0 12 12"
+        to="360 12 12"
+        dur="0.85s"
+        repeatCount="indefinite"
+      />
+    </circle>
+    <circle cx="12" cy="12" r="2.5" fill="#38BDF8">
+      <animate attributeName="r" values="2;3.2;2" dur="0.9s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+  </svg>
+);
+
+// Glowing checkmark burst icon
+const SvgSuccessBurst: React.FC<{ size?: number }> = ({ size = 18 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    style={{ display: "inline-block", verticalAlign: "middle" }}
+  >
+    <circle cx="12" cy="12" r="9.5" fill="#FFFFFF" />
+    <circle cx="12" cy="12" r="9.5" stroke="#10B981" strokeWidth="2" />
+    <polyline
+      points="8,12 11,15 16.5,9.5"
+      stroke="#10B981"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <circle cx="12" cy="12" r="10" stroke="#FFFFFF" strokeWidth="1.5" opacity="0.6">
+      <animate attributeName="r" values="9.5;13;9.5" dur="1.2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.8;0;0.8" dur="1.2s" repeatCount="indefinite" />
+    </circle>
+  </svg>
+);
+
+// Interactive Provisioning Pipeline utilizing existing Mail, Connect, Streamline, and Drive icons
+interface ProvisioningPipelineProps {
+  stage: number;
+  isCompleted: boolean;
+  classes: ReturnType<typeof useStyles>;
+}
+
+const ProvisioningPipeline: React.FC<ProvisioningPipelineProps> = ({
+  stage,
+  isCompleted,
+  classes,
+}) => {
+  const nodes = [
+    {
+      id: 1,
+      name: "Mail",
+      renderIcon: (color: string, isCurrent: boolean) => (
+        <MailIcon width={17} height={17} stroke={color} isHovered={isCurrent} />
+      ),
+    },
+    {
+      id: 2,
+      name: "Connect",
+      renderIcon: (color: string) => (
+        <ConnectIcon width={17} height={17} fill={color} />
+      ),
+    },
+    {
+      id: 3,
+      name: "Streamline",
+      renderIcon: (color: string, isCurrent: boolean) => (
+        <StreamlineIcon width={17} height={17} style={{ color }} isHovered={isCurrent} />
+      ),
+    },
+    {
+      id: 4,
+      name: "Drive",
+      renderIcon: (color: string, isCurrent: boolean) => (
+        <DriveIcon width={17} height={17} style={{ color }} isHovered={isCurrent} />
+      ),
+    },
+  ];
+
+  const statusMessage = isCompleted
+    ? "✓ All 4 Workspaces Generated & Active!"
+    : stage === 1
+    ? "Deploying alex@ny-branch.com Mailbox..."
+    : stage === 2
+    ? "Binding Connect Team Chat & Channels..."
+    : stage === 3
+    ? "Configuring Streamline Boards & Roles..."
+    : stage === 4
+    ? "Allocating Encrypted Cloud Drive Storage..."
+    : "Initializing Provisioning Sequence...";
+
+  const progressPercent =
+    stage === 0 ? 0 : stage === 1 ? 0 : stage === 2 ? 33.3 : stage === 3 ? 66.6 : 100;
+
+  return (
+    <div className={classes.pipelineContainer}>
+      <div
+        className={`${classes.pipelineStatusRow} ${
+          isCompleted ? classes.pipelineStatusRowCompleted : ""
+        }`}
+      >
+        <span
+          className={`${classes.pipelineStatusDot} ${
+            isCompleted ? classes.pipelineStatusDotCompleted : ""
+          }`}
+        />
+        <span>{statusMessage}</span>
+      </div>
+
+      <div className={classes.pipelineTrackWrapper}>
+        <div className={classes.pipelineConnectingLineBg}>
+          <div
+            className={classes.pipelineConnectingLineFill}
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
+
+        {nodes.map((node) => {
+          const isReached = stage >= node.id || isCompleted;
+          const isCurrent = stage === node.id && !isCompleted;
+          const iconColor = isCompleted
+            ? "#059669"
+            : isReached
+            ? "#0072C4"
+            : "#94A3B8";
+
+          return (
+            <div key={node.id} className={classes.pipelineNode}>
+              <div
+                className={`${classes.pipelineIconCircle} ${
+                  isCompleted
+                    ? classes.pipelineIconCircleCompleted
+                    : isCurrent
+                    ? classes.pipelineIconCircleCurrent
+                    : isReached
+                    ? classes.pipelineIconCircleReached
+                    : ""
+                }`}
+              >
+                {node.renderIcon(iconColor, isCurrent)}
+                {isReached && <span className={classes.pipelineCheckBadge}>✓</span>}
+              </div>
+              <span
+                className={`${classes.pipelineNodeLabel} ${
+                  isCompleted
+                    ? classes.pipelineNodeLabelCompleted
+                    : isReached
+                    ? classes.pipelineNodeLabelActive
+                    : ""
+                }`}
+              >
+                {node.name}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    MAIN COMPONENT: EOFFICE FEATURE PAGE
    ───────────────────────────────────────────────────────────── */
 const EofficeFeaturePage: React.FC = () => {
@@ -454,6 +647,45 @@ const EofficeFeaturePage: React.FC = () => {
   // Hover states for interactive card SVGs
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [hoveredEdiCard, setHoveredEdiCard] = useState<string | null>(null);
+
+  // Interactive Provisioning Animation State
+  const [provisionState, setProvisionState] = useState<'idle' | 'provisioning' | 'completed'>('idle');
+  const [provisionStage, setProvisionStage] = useState<number>(0);
+  const timersRef = useRef<NodeJS.Timeout[]>([]);
+
+  useEffect(() => {
+    return () => {
+      timersRef.current.forEach((t) => clearTimeout(t));
+    };
+  }, []);
+
+  const handleProvisionClick = () => {
+    if (provisionState !== 'idle') return;
+
+    timersRef.current.forEach((t) => clearTimeout(t));
+    timersRef.current = [];
+
+    setProvisionState('provisioning');
+    setProvisionStage(1);
+
+    // Staggered activation of the 4 workspace apps
+    timersRef.current.push(setTimeout(() => setProvisionStage(2), 650));
+    timersRef.current.push(setTimeout(() => setProvisionStage(3), 1300));
+    timersRef.current.push(setTimeout(() => setProvisionStage(4), 1950));
+    timersRef.current.push(
+      setTimeout(() => {
+        setProvisionState('completed');
+      }, 2600)
+    );
+
+    // Revert button and animation drawer smoothly back to original position
+    timersRef.current.push(
+      setTimeout(() => {
+        setProvisionState('idle');
+        setProvisionStage(0);
+      }, 4300)
+    );
+  };
 
   return (
     <div className={classes.page}>
@@ -604,8 +836,50 @@ const EofficeFeaturePage: React.FC = () => {
                     <span className={classes.configLeavePlanCount}>26 Total Leaves / Yr</span>
                   </div>
                 </div>
-                <button className={classes.configProvisionBtn}>
-                  Provision Employee &amp; Generate Apps
+                {/* Dynamic SVG App Generation Pipeline Drawer */}
+                <div
+                  className={`${classes.configProvisionDrawer} ${
+                    provisionState !== 'idle' ? classes.configProvisionDrawerOpen : ''
+                  }`}
+                  aria-live="polite"
+                >
+                  <div className={classes.configProvisionPipelineCard}>
+                    <ProvisioningPipeline
+                      stage={provisionStage}
+                      isCompleted={provisionState === 'completed'}
+                      classes={classes}
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className={`${classes.configProvisionBtn} ${
+                    provisionState === 'provisioning'
+                      ? classes.configProvisionBtnProcessing
+                      : provisionState === 'completed'
+                      ? classes.configProvisionBtnSuccess
+                      : ''
+                  }`}
+                  onClick={handleProvisionClick}
+                  disabled={provisionState !== 'idle'}
+                  aria-label="Provision Employee and Generate Apps"
+                >
+                  <span className={classes.configProvisionBtnInner}>
+                    {provisionState === 'provisioning' ? (
+                      <>
+                        <SvgProvisionSpinner size={18} />
+                        <span>Provisioning &amp; Generating Apps...</span>
+                      </>
+                    ) : provisionState === 'completed' ? (
+                      <>
+                        <SvgSuccessBurst size={18} />
+                        <span>✓ Employee Provisioned &amp; Apps Ready!</span>
+                      </>
+                    ) : (
+                      <span>Provision Employee &amp; Generate Apps</span>
+                    )}
+                  </span>
                 </button>
               </div>
             </RevealOnScroll>
