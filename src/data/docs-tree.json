@@ -1,0 +1,578 @@
+[
+  {
+    "id": "web-documentation",
+    "title": "Web documentation",
+    "children": [
+      {
+        "id": "organization",
+        "title": "Organization",
+        "children": [
+          {
+            "id": "organization/create-an-account",
+            "title": "Create an Account",
+            "children": [
+              {
+                "id": "organization/create-an-account/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "organization/sign-in",
+            "title": "Sign In",
+            "children": [
+              {
+                "id": "organization/sign-in/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "organization/organization-details",
+            "title": "Organization Details",
+            "children": [
+              {
+                "id": "organization/organization-details/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "organization/profile",
+            "title": "Profile",
+            "children": [
+              {
+                "id": "organization/profile/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "organization/organization-setup",
+            "title": "Organization SetUp",
+            "children": [
+              {
+                "id": "organization/organization-setup/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "organization/business-hub",
+            "title": "Business Hub",
+            "children": [
+              {
+                "id": "organization/business-hub/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "organization/support",
+            "title": "Support",
+            "children": [
+              {
+                "id": "organization/support/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "organization/settings",
+            "title": "Settings",
+            "children": [
+              {
+                "id": "organization/settings/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e-office",
+        "title": "E-Office",
+        "children": [
+          {
+            "id": "e-office/settings",
+            "title": "Settings",
+            "children": [
+              {
+                "id": "e-office/settings/employee",
+                "title": "Employee",
+                "children": [
+                  {
+                    "id": "e-office/settings/employee/shift",
+                    "title": "Shift",
+                    "children": [
+                      {
+                        "id": "e-office/settings/employee/shift/faq",
+                        "title": "FAQ",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "e-office/settings/employee/worker-type",
+                    "title": "Worker Type",
+                    "children": [
+                      {
+                        "id": "e-office/settings/employee/worker-type/faq",
+                        "title": "FAQ",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "e-office/settings/employee/probation-period",
+                    "title": "Probation period",
+                    "children": [
+                      {
+                        "id": "e-office/settings/employee/probation-period/faq",
+                        "title": "FAQ",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "e-office/settings/employee/notice-period",
+                    "title": "Notice period",
+                    "children": [
+                      {
+                        "id": "e-office/settings/employee/notice-period/faq",
+                        "title": "FAQ",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "e-office/settings/leave",
+                "title": "Leave",
+                "children": [
+                  {
+                    "id": "e-office/settings/leave/leave-type",
+                    "title": "Leave Type",
+                    "children": [
+                      {
+                        "id": "e-office/settings/leave/leave-type/faq",
+                        "title": "FAQ",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "e-office/settings/leave/leave-plan",
+                    "title": "Leave Plan",
+                    "children": [
+                      {
+                        "id": "e-office/settings/leave/leave-plan/faq",
+                        "title": "FAQ",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "e-office/settings/leave/week-off",
+                    "title": "Week Off",
+                    "children": [
+                      {
+                        "id": "e-office/settings/leave/week-off/faq",
+                        "title": "FAQ",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "e-office/settings/leave/holiday",
+                    "title": "Holiday",
+                    "children": [
+                      {
+                        "id": "e-office/settings/leave/holiday/faq",
+                        "title": "FAQ",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "e-office/settings/finance",
+                "title": "Finance",
+                "children": [
+                  {
+                    "id": "e-office/settings/finance/pay-grade",
+                    "title": "Pay Grade",
+                    "children": [
+                      {
+                        "id": "e-office/settings/finance/pay-grade/faq",
+                        "title": "FAQ",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "e-office/settings/finance/pay-scale",
+                    "title": "Pay Scale",
+                    "children": [
+                      {
+                        "id": "e-office/settings/finance/pay-scale/faq",
+                        "title": "FAQ",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "e-office/hierarchy",
+            "title": "Hierarchy",
+            "children": [
+              {
+                "id": "e-office/hierarchy/role-hierarchy",
+                "title": "Role Hierarchy",
+                "children": [
+                  {
+                    "id": "e-office/hierarchy/role-hierarchy/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "e-office/hierarchy/organization-tree",
+                "title": "Organization Tree",
+                "children": [
+                  {
+                    "id": "e-office/hierarchy/organization-tree/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "e-office/asset",
+            "title": "Asset",
+            "children": [
+              {
+                "id": "e-office/asset/asset-condition",
+                "title": "Asset Condition",
+                "children": [
+                  {
+                    "id": "e-office/asset/asset-condition/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "e-office/asset/asset-category",
+                "title": "Asset Category",
+                "children": [
+                  {
+                    "id": "e-office/asset/asset-category/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "e-office/asset/asset-status",
+                "title": "Asset status",
+                "children": [
+                  {
+                    "id": "e-office/asset/asset-status/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "e-office/asset/asset-type",
+                "title": "Asset Type",
+                "children": [
+                  {
+                    "id": "e-office/asset/asset-type/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "e-office/asset/asset",
+                "title": "Asset",
+                "children": [
+                  {
+                    "id": "e-office/asset/asset/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "e-office/department",
+            "title": "Department",
+            "children": [
+              {
+                "id": "e-office/department/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "e-office/roles",
+            "title": "Roles",
+            "children": [
+              {
+                "id": "e-office/roles/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "e-office/employees",
+            "title": "Employees",
+            "children": [
+              {
+                "id": "e-office/employees/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "e-office/clients",
+            "title": "Clients",
+            "children": [
+              {
+                "id": "e-office/clients/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "e-office/billing-type",
+            "title": "Billing Type",
+            "children": [
+              {
+                "id": "e-office/billing-type/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "e-office/attendance",
+            "title": "Attendance",
+            "children": [
+              {
+                "id": "e-office/attendance/attendance",
+                "title": "Attendance",
+                "children": []
+              },
+              {
+                "id": "e-office/attendance/leave",
+                "title": "Leave",
+                "children": []
+              },
+              {
+                "id": "e-office/attendance/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "e-office/project",
+            "title": "Project",
+            "children": [
+              {
+                "id": "e-office/project/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "e-office/team",
+            "title": "Team",
+            "children": [
+              {
+                "id": "e-office/team/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "e-office/support",
+            "title": "Support",
+            "children": [
+              {
+                "id": "e-office/support/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "streamline",
+        "title": "Streamline",
+        "children": [
+          {
+            "id": "streamline/projects",
+            "title": "Projects",
+            "children": [
+              {
+                "id": "streamline/projects/timeline",
+                "title": "Timeline",
+                "children": [
+                  {
+                    "id": "streamline/projects/timeline/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "streamline/projects/backlog",
+                "title": "Backlog",
+                "children": [
+                  {
+                    "id": "streamline/projects/backlog/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "streamline/projects/sprint",
+                "title": "Sprint",
+                "children": [
+                  {
+                    "id": "streamline/projects/sprint/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "streamline/projects/board",
+                "title": "Board",
+                "children": [
+                  {
+                    "id": "streamline/projects/board/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "streamline/projects/members",
+                "title": "Members",
+                "children": [
+                  {
+                    "id": "streamline/projects/members/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "streamline/projects/settings",
+                "title": "Settings",
+                "children": [
+                  {
+                    "id": "streamline/projects/settings/faq",
+                    "title": "FAQ",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "streamline/faq",
+            "title": "FAQ",
+            "children": []
+          },
+          {
+            "id": "streamline/members",
+            "title": "Members",
+            "children": [
+              {
+                "id": "streamline/members/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "streamline/settings",
+            "title": "Settings",
+            "children": [
+              {
+                "id": "streamline/settings/faq",
+                "title": "FAQ",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "calender",
+        "title": "Calender",
+        "children": [
+          {
+            "id": "calender/faq",
+            "title": "FAQ",
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "connect",
+        "title": "Connect",
+        "children": [
+          {
+            "id": "connect/faq",
+            "title": "FAQ",
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "mail",
+        "title": "Mail",
+        "children": [
+          {
+            "id": "mail/faq",
+            "title": "FAQ",
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]

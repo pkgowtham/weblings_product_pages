@@ -7,20 +7,41 @@ import Sidebar from './Sidebar';
 import DocViewer from './DocViewer';
 import TableOfContents from './TableOfContents';
 import AiChatWidget from './AiChatWidget';
+import defaultTree from '../../data/docs-tree.json';
 import type { DocItem, TreeNodeItem, FlatMapItem } from '../../lib/docs/markdown';
 
 interface DocsClientViewProps {
-  doc: DocItem;
-  tree: TreeNodeItem[];
-  flatMap: Record<string, FlatMapItem>;
+  doc?: DocItem;
+  title?: string;
+  content?: string;
+  tree?: TreeNodeItem[];
+  flatMap?: Record<string, FlatMapItem>;
   slugPath: string;
+  breadcrumbs?: { id: string; title: string; slug: string }[];
+  activePage?: {
+    prev?: { id?: string; title: string; slug: string } | null;
+    next?: { id?: string; title: string; slug: string } | null;
+  };
 }
 
-export default function DocsClientView({ doc, tree, flatMap, slugPath }: DocsClientViewProps) {
+export default function DocsClientView({
+  doc,
+  title,
+  content,
+  tree,
+  flatMap,
+  slugPath,
+  breadcrumbs: propBreadcrumbs,
+  activePage: propActivePage,
+}: DocsClientViewProps) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const effectiveTree = tree || (defaultTree as unknown as TreeNodeItem[]);
+  const effectiveTitle = title || doc?.title || 'Documentation';
+  const effectiveContent = content !== undefined ? content : (doc?.content || '');
 
   useEffect(() => {
     // Check saved theme in localStorage or default to light
@@ -88,29 +109,30 @@ export default function DocsClientView({ doc, tree, flatMap, slugPath }: DocsCli
     }
   };
 
-  // Construct breadcrumbs hierarchy
+  // Construct breadcrumbs hierarchy if not precomputed
   const getBreadcrumbs = (pageSlug: string) => {
-    const crumbs: FlatMapItem[] = [];
+    if (propBreadcrumbs) return propBreadcrumbs;
+    const crumbs: { id: string; title: string; slug: string }[] = [];
     let currentSlug: string | null = pageSlug;
     while (currentSlug && flatMap && flatMap[currentSlug]) {
       const item = flatMap[currentSlug];
-      crumbs.unshift(item);
+      crumbs.unshift({ id: item.id, title: item.title, slug: item.slug });
       currentSlug = item.parentId;
     }
     return crumbs;
   };
 
-  const activePage = (flatMap && flatMap[slugPath]) || {
+  const activePage = propActivePage || (flatMap && flatMap[slugPath]) || {
     id: slugPath,
     slug: slugPath,
     slugArray: [],
-    title: doc?.title || 'Documentation',
+    title: effectiveTitle,
     parentId: null,
     order: 0,
     prev: null,
     next: null,
   };
-  const breadcrumbs = getBreadcrumbs(slugPath);
+  const breadcrumbs = propBreadcrumbs || getBreadcrumbs(slugPath);
 
   return (
     <div className="app-layout">
@@ -131,7 +153,7 @@ export default function DocsClientView({ doc, tree, flatMap, slugPath }: DocsCli
         />
 
         <Sidebar
-          tree={tree}
+          tree={effectiveTree}
           activeId={slugPath}
           onSelect={handleSelectPage}
           searchQuery={searchQuery}
@@ -140,15 +162,15 @@ export default function DocsClientView({ doc, tree, flatMap, slugPath }: DocsCli
         />
 
         <DocViewer
-          pageTitle={doc?.title}
-          content={doc?.content}
+          pageTitle={effectiveTitle}
+          content={effectiveContent}
           breadcrumbs={breadcrumbs}
           activePage={activePage}
           onSelectPage={handleSelectPage}
           isLoading={false}
         />
 
-        <TableOfContents markdownContent={doc?.content} />
+        <TableOfContents markdownContent={effectiveContent} />
       </div>
       <AiChatWidget />
     </div>

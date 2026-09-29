@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import DocsClientView from '../../../components/docs/DocsClientView';
-import { getDocSlugs, getDocBySlug, getDocsTree } from '../../../lib/docs/markdown';
+import { getDocSlugs, getDocBySlug, getDocPageData } from '../../../lib/docs/markdown';
 
 export async function generateStaticParams() {
   const slugArrays = getDocSlugs();
@@ -32,20 +32,18 @@ export default async function DocSlugPage({
   params: Promise<{ slug: string[] }>;
 }) {
   const resolvedParams = await params;
-  const doc = getDocBySlug(resolvedParams.slug);
-  if (!doc) {
+  const pageData = getDocPageData(resolvedParams.slug);
+  if (!pageData) {
     notFound();
   }
 
-  const { tree, flatMap } = getDocsTree();
-  const slugPath = Array.isArray(resolvedParams.slug) ? resolvedParams.slug.join('/') : resolvedParams.slug;
-
   return (
     <DocsClientView
-      doc={doc}
-      tree={tree}
-      flatMap={flatMap}
-      slugPath={slugPath}
+      title={pageData.title}
+      content={pageData.content}
+      slugPath={pageData.slugPath}
+      breadcrumbs={pageData.breadcrumbs}
+      activePage={pageData.activePage}
     />
   );
 }

@@ -319,5 +319,75 @@ export function getDocsTree(): { tree: TreeNodeItem[]; flatMap: Record<string, F
     item.next = index < linearList.length - 1 ? { id: linearList[index + 1].id, title: linearList[index + 1].title, slug: linearList[index + 1].slug } : null;
   });
 
+  syncDocsTreeJson(rootNodes);
+
   return { tree: rootNodes, flatMap };
+}
+
+/**
+ * Sync compact tree JSON file to src/data/docs-tree.json for optimized static client bundling
+ */
+export function syncDocsTreeJson(rootNodes: TreeNodeItem[]): void {
+  try {
+    const dataDir = path.join(process.cwd(), 'src/data');
+    const treeJsonPath = path.join(dataDir, 'docs-tree.json');
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+    function compact(nodes: TreeNodeItem[]): any[] {
+      return nodes.map((n) => ({
+        id: n.id,
+        title: n.title,
+        children: n.children && n.children.length > 0 ? compact(n.children) : [],
+      }));
+    }
+    const compactTree = compact(rootNodes);
+    fs.writeFileSync(treeJsonPath, JSON.stringify(compactTree, null, 2));
+  } catch {
+    // Ignore in read-only environments
+  }
+}
+
+export interface DocPagePayload {
+  title: string;
+  content: string;
+  slugPath: string;
+  breadcrumbs: { id: string; title: string; slug: string }[];
+  activePage: {
+    prev: { id: string; title: string; slug: string } | null;
+    next: { id: string; title: string; slug: string } | null;
+  };
+}
+
+/**
+ * Get highly optimized, minimal payload for a documentation page without serializing the full navigation tree & flatMap
+ */
+export function getDocPageData(slug?: string | string[]): DocPagePayload | null {
+  const doc = getDocBySlug(slug);
+  if (!doc) return null;
+
+  const { flatMap } = getDocsTree();
+  const slugPath = doc.slug;
+
+  const breadcrumbs: { id: string; title: string; slug: string }[] = [];
+  let currentSlug: string | null = slugPath;
+  while (currentSlug && flatMap && flatMap[currentSlug]) {
+    const item = flatMap[currentSlug];
+    breadcrumbs.unshift({ id: item.id, title: item.title, slug: item.slug });
+    currentSlug = item.parentId;
+  }
+
+  const currentItem = flatMap[slugPath];
+  const activePage = {
+    prev: currentItem?.prev ? { id: currentItem.prev.id, title: currentItem.prev.title, slug: currentItem.prev.slug } : null,
+    next: currentItem?.next ? { id: currentItem.next.id, title: currentItem.next.title, slug: currentItem.next.slug } : null,
+  };
+
+  return {
+    title: doc.title,
+    content: doc.content,
+    slugPath,
+    breadcrumbs,
+    activePage,
+  };
 }
