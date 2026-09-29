@@ -1,13 +1,16 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import { useStyles } from './style';
 import {
-  DatabaseShieldIcon,
-  SettingsIcon,
-  CheckCircleIcon,
-  LockIcon,
+  IsolatedDatabaseIcon,
+  ImmutableHistoryIcon,
+  BranchPrivacyIcon,
+  DoorOpenIcon,
 } from '../../../assets/icons_component';
+import { getSrc } from '../../../utils/getSrc';
+import gowthamPhoto from '../../../assets/images/about/gowtham_founder.jpg';
 
 // Target URL for redirect after agreeing
 const REDIRECT_URL = 'https://org.weblings.dev';
@@ -30,29 +33,8 @@ const starsData = [
 
 const AgreementView: React.FC = () => {
   const classes = useStyles();
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [hasScrolledToBottom, setHasScrolledToBottom] = useState(false);
-
-  // Check if content fits without needing to scroll on large viewports
-  useEffect(() => {
-    if (scrollRef.current) {
-      const { scrollHeight, clientHeight } = scrollRef.current;
-      if (scrollHeight <= clientHeight + 35) {
-        setHasScrolledToBottom(true);
-      }
-    }
-  }, []);
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const target = e.currentTarget;
-    // Activate once scrolled within 35px of bottom
-    if (target.scrollTop + target.clientHeight >= target.scrollHeight - 35) {
-      setHasScrolledToBottom(true);
-    }
-  };
 
   const handleAgree = () => {
-    if (!hasScrolledToBottom) return;
     window.location.href = REDIRECT_URL;
   };
 
@@ -79,184 +61,138 @@ const AgreementView: React.FC = () => {
       </div>
 
       <main className={classes.container}>
-        {/* OUTSIDE HEADER (Matching pricing page design) */}
+        {/* PAGE HEADER */}
         <header className={classes.pageHeader}>
-          <span className={classes.eyebrow}>We are in Beta now</span>
+          <span className={classes.eyebrow}>Enterprise Beta Program</span>
           <h1 className={classes.title}>
-            Dedicated Database Isolation. Continuous Beta Evolution.
+            Early access to the future of work.{' '}
+            <span className={classes.titleAccent}>
+              Built on a rock-solid foundation.
+            </span>
           </h1>
           <p className={classes.intro}>
-            Weblings Worksuite is currently in an active beta testing phase scheduled through December 2026. You get full early access to our platform while we continuously optimize performance, roll out new apps, and fine-tune stability. Throughout this beta and beyond, your workspace is safeguarded by dedicated database isolation—your company data is strictly private and never pooled or shared.
+            We are actively adding new features, fine-tuning functionalities, and making the
+            interface more pleasant based on your daily feedback. But under the hood? Our core
+            infrastructure is already built for enterprise scale. Here is our uncompromising promise
+            to your team.
           </p>
-
-          {/* Heading and description outside the box */}
-          <div className={classes.betaDetailsGrid}>
-            <div className={classes.betaDetailItem}>
-              <div className={classes.betaDetailIcon}>
-                <DatabaseShieldIcon width={20} height={20} stroke="#0072C4" />
-              </div>
-              <div>
-                <h2 className={classes.betaDetailTitle}>Isolated Company Database</h2>
-                <p className={classes.betaDetailDesc}>
-                  Your workspace data is stored in a separate, dedicated database. It is strictly private and will never be shared, pooled, or leaked anywhere.
-                </p>
-              </div>
-            </div>
-
-            <div className={classes.betaDetailItem}>
-              <div className={classes.betaDetailIcon}>
-                <SettingsIcon width={20} height={20} stroke="#0072C4" />
-              </div>
-              <div>
-                <h2 className={classes.betaDetailTitle}>Active Beta &amp; Improvements</h2>
-                <p className={classes.betaDetailDesc}>
-                  Weblings Worksuite is in active beta. You may encounter occasional bugs or minor imperfections as we continuously optimize performance and deploy upgrades.
-                </p>
-              </div>
-            </div>
-          </div>
         </header>
 
-        {/* ONE SINGLE UNIFIED CARD (THE TERMS BOX) */}
-        <div className={classes.unifiedCard} role="region" aria-label="Terms of Service and Agreement">
-          {/* Scrollable container containing terms */}
-          <div
-            className={classes.scrollContainer}
-            ref={scrollRef}
-            onScroll={handleScroll}
-            tabIndex={0}
-            role="region"
-            aria-label="Scrollable Agreement Document"
+        {/* SECTION LABEL */}
+        <div className={classes.sectionLabel}>Our four unbreakable guarantees</div>
+
+        {/* 4 TRUST PILLARS — no cards, 2-column divider layout */}
+        <div className={classes.trustGrid} role="list">
+
+          {/* Pillar 1 — Isolated Databases */}
+          <div className={`${classes.trustItem} ${classes.trustItemBlue}`} role="listitem">
+            <div className={`${classes.trustIconWrap} ${classes.trustIconBlue}`}>
+              <IsolatedDatabaseIcon width={22} height={22} stroke="#3B82F6" />
+            </div>
+            <div className={classes.trustItemText}>
+              <h3 className={classes.trustItemTitle}>Isolated Databases</h3>
+              <p className={classes.trustItemBody}>
+                One company, one database. Your data is strictly private and never pooled with
+                other tenants.
+              </p>
+            </div>
+          </div>
+
+          {/* Pillar 2 — Concrete Backups */}
+          <div className={`${classes.trustItem} ${classes.trustItemEmerald}`} role="listitem">
+            <div className={`${classes.trustIconWrap} ${classes.trustIconEmerald}`}>
+              <ImmutableHistoryIcon width={22} height={22} stroke="#10B981" />
+            </div>
+            <div className={classes.trustItemText}>
+              <h3 className={classes.trustItemTitle}>Concrete Backups</h3>
+              <p className={classes.trustItemBody}>
+                Disaster-proof architecture with continuous, immutable backups to protect your
+                operational history.
+              </p>
+            </div>
+          </div>
+
+          {/* Pillar 3 — Absolute Privacy */}
+          <div className={`${classes.trustItem} ${classes.trustItemPurple}`} role="listitem">
+            <div className={`${classes.trustIconWrap} ${classes.trustIconPurple}`}>
+              <BranchPrivacyIcon width={22} height={22} stroke="#A855F7" />
+            </div>
+            <div className={classes.trustItemText}>
+              <h3 className={classes.trustItemTitle}>Absolute Privacy</h3>
+              <p className={classes.trustItemBody}>
+                You are the customer, not the product. We never sell your data or use it to train
+                global AI models.
+              </p>
+            </div>
+          </div>
+
+          {/* Pillar 4 — Zero Lock-In */}
+          <div className={`${classes.trustItem} ${classes.trustItemCyan}`} role="listitem">
+            <div className={`${classes.trustIconWrap} ${classes.trustIconCyan}`}>
+              <DoorOpenIcon width={22} height={22} stroke="#06B6D4" />
+            </div>
+            <div className={classes.trustItemText}>
+              <h3 className={classes.trustItemTitle}>Zero Lock-In</h3>
+              <p className={classes.trustItemBody}>
+                A clean, &ldquo;no-hostage&rdquo; exit policy. Export your complete data bundle
+                anytime without friction.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        {/* FOUNDER'S NOTE — avatar left, content right */}
+        <div className={classes.founderCard}>
+          <img
+            src={getSrc(gowthamPhoto)}
+            alt="Gowtham, Founder & Architect of Weblings"
+            className={classes.founderAvatar}
+          />
+
+          <div className={classes.founderContent}>
+            <h3 className={classes.founderQuote}>
+              &ldquo;Trust isn&rsquo;t given. It&rsquo;s engineered.&rdquo;
+            </h3>
+            <p className={classes.founderText}>
+              We know that migrating your team&rsquo;s workflow is a massive leap of faith. You are
+              trusting us with your company&rsquo;s nervous system.
+            </p>
+            <p className={classes.founderText}>
+              That is why we don&rsquo;t hide behind legal jargon. If you experience critical data
+              loss due to a flaw in our infrastructure, or if we ever violate the privacy promises
+              made on this page, I want you to hold us personally accountable. We built this platform
+              to fix the broken enterprise ecosystem, and we stand by our architecture.
+            </p>
+
+            <div className={classes.founderDivider} />
+
+            <div className={classes.founderSignatureRow}>
+              <div>
+                <div className={classes.founderSignature}>Gowtham</div>
+                <div className={classes.founderRole}>Founder &amp; Architect</div>
+              </div>
+              <Link href="/contact" className={classes.founderEmailButton}>
+                Email me directly
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* BOTTOM ACTION AREA */}
+        <div className={classes.pageAction}>
+          <button
+            type="button"
+            id="agree-and-continue-btn"
+            className={classes.agreeButton}
+            onClick={handleAgree}
           >
-            {/* Terms Document Header Inside The Box */}
-            <div className={classes.termsDocHeader}>
-              <h2 className={classes.termsDocTitle}>Review &amp; Accept Terms of Service</h2>
-              <p className={classes.termsDocSubtitle}>
-                Please review our terms of service below. To join Weblings, you must review and accept our beta terms and data privacy conditions.
-              </p>
-            </div>
+            Agree &amp; Continue to Account Setup
+          </button>
 
-            {/* Terms and Conditions Content */}
-            <p className={classes.introParagraph}>
-              Welcome to Weblings Worksuite. By accessing or using our platform, you agree to these Terms. Please read them carefully, as they govern your use of our software, APIs, and infrastructure.
-            </p>
-
-            <h2 className={classes.sectionHeading}>1. Acceptance of Terms &amp; Beta Phase</h2>
-            <p className={classes.paragraph}>
-              Currently, Weblings is in a &ldquo;Beta Testing Phase&rdquo; scheduled until December 2026. During this period, access is strictly by our approval only. We provide the software on an &ldquo;as-is&rdquo; and &ldquo;as-available&rdquo; basis. We make no guarantees regarding uptime, stability, or data integrity during this beta phase. We reserve the right to completely shut down the service or revoke your access at any time, for any reason, without prior notice.
-            </p>
-
-            <h2 className={classes.sectionHeading}>2. Account Security &amp; Age Restriction</h2>
-            <p className={classes.paragraph}>
-              You must be at least 18 years of age to use Weblings. You are solely responsible for maintaining the confidentiality of your login credentials. Weblings is not liable for any data loss, corruption, or unauthorized access resulting from compromised passwords or your failure to secure your account.
-            </p>
-
-            <h2 className={classes.sectionHeading}>3. Acceptable Use &amp; Resource Exploitation</h2>
-            <p className={classes.paragraph}>
-              You agree not to reverse-engineer, decompile, or use Weblings for any illegal activities. If we determine, in our sole discretion, that you are exploiting server resources beyond fair use limits, we reserve the right to immediately terminate your account without a refund, or bill your organization separately for the excess usage.
-            </p>
-
-            <h2 className={classes.sectionHeading}>4. Intellectual Property &amp; Feedback</h2>
-            <p className={classes.paragraph}>
-              Weblings retains all intellectual property rights to the platform. If you provide feedback, feature suggestions, or bug reports, you grant us the right to use and implement those ideas without any obligation, royalty, or compensation to you.
-            </p>
-
-            <h2 className={classes.sectionHeading}>5. Marketing &amp; Wall of Fame</h2>
-            <p className={classes.paragraph}>
-              By using Weblings, you grant us the non-exclusive right to use your company name and logo on our website and marketing materials. If you wish to be removed, you may email <strong className={classes.strong}>support@weblings.dev</strong>, and we will process the takedown as our schedule permits.
-            </p>
-
-            <h2 className={classes.sectionHeading}>6. Zero Tolerance for Spam &amp; Email Abuse</h2>
-            <p className={classes.paragraph}>
-              Weblings strictly prohibits the use of our infrastructure to send spam, unsolicited bulk emails, phishing campaigns, or malicious code. You agree to comply with all applicable anti-spam laws. If we detect any email abuse, we will instantly terminate your account without notice or refund. Weblings assumes zero responsibility or liability for the emails you send, the recipients you target, or any domain blacklisting that occurs due to your actions.
-            </p>
-
-            <h2 className={classes.sectionHeading}>7. Intermediary Liability &amp; Illegal Business Operations</h2>
-            <p className={classes.paragraph}>
-              Weblings provides software infrastructure; we do not police your business model. You are solely responsible for how you use our platform. If your organization uses Weblings to conduct illegal activities, violate local or international laws, or cause harm to society, you bear 100% of the legal, civil, and financial responsibility. Weblings explicitly disclaims all liability for the content you store, the nature of your business, or any societal or economic damage caused by your operations.
-            </p>
-
-            <h2 className={classes.sectionHeading}>8. Third-Party Domain Registration (Cloudflare)</h2>
-            <p className={classes.paragraph}>
-              Weblings provides a domain purchase feature that acts purely as a frontend interface for Cloudflare&rsquo;s registrar backend. Weblings is not a domain registrar. We do not guarantee domain availability, successful registration, or auto-renewal execution. You are solely responsible for monitoring your domain&rsquo;s expiration dates and ensuring successful renewals. If your domain expires, fails to renew, or is acquired by a third party for any reason, Weblings bears zero liability for any resulting loss of brand, traffic, or revenue. The risk of domain ownership and management falls entirely on you.
-            </p>
-
-            <h2 className={classes.sectionHeading}>9. Third-Party Email Infrastructure &amp; Data Loss</h2>
-            <p className={classes.paragraph}>
-              Weblings utilizes Cloudflare for email sending, receiving, and routing infrastructure. Weblings does not physically host these email transit servers and cannot guarantee 100% delivery rates. We are completely disclaimed from any liability regarding missing emails, dropped packets, delayed communications, or lost email data. If a critical email fails to send or receive, resulting in business loss or miscommunication, Weblings is not responsible.
-            </p>
-
-            <h2 className={classes.sectionHeading}>10. Internal Chat &amp; Communication Misuse</h2>
-            <p className={classes.paragraph}>
-              Weblings provides internal chat and communication tools for project collaboration. We do not monitor or police the content of your team&rsquo;s internal messages. If your employees or users utilize the chat features for illegal activities, harassment, unauthorized data sharing, or any other unintended purposes, Weblings assumes absolutely zero liability. You are solely responsible for the conduct of your users and the content they transmit through our platform.
-            </p>
-
-            <h2 className={classes.sectionHeading}>11. Limitation of Liability &amp; Explicit Waiver</h2>
-            <p className={classes.paragraph}>
-              To the maximum extent permitted by applicable law, Weblings and its founders shall not be liable for any indirect, incidental, consequential, or punitive damages, including but not limited to lost profits, lost revenue, or data corruption, whether during the beta phase or production. Any bugs, malfunctions, or server downtimes are not our liability.
-            </p>
-            <p className={classes.paragraph}>
-              Under no circumstances shall Weblings be held responsible for any loss of your business revenue, loss of clients, or loss of data resulting from your use of the platform, your inability to use the platform, or your engagement in restricted/illegal activities. Your business outcomes and data security practices are entirely your own responsibility.
-            </p>
-
-            <h2 className={classes.sectionHeading}>12. Indemnification</h2>
-            <p className={classes.paragraph}>
-              You agree to indemnify, defend, and hold harmless Weblings, its founders, and employees from any claims, damages, liabilities, costs, or legal fees arising out of your use of the platform, your violation of these Terms, or your infringement of any third-party rights. If your actions on our platform cause us to get sued, you are fully responsible for covering all our legal costs and damages.
-            </p>
-
-            <h2 className={classes.sectionHeading}>13. Governing Law &amp; Jurisdiction</h2>
-            <p className={classes.paragraph}>
-              These Terms shall be governed by the laws of India. Any disputes arising from the use of Weblings shall be subject to the exclusive jurisdiction of the courts located in <strong className={classes.strong}>Tiruppur, Tamil Nadu</strong>.
-            </p>
-
-
-
-            {/* End of Document Confirmation */}
-            <div className={classes.endDocumentMarker}>
-              <CheckCircleIcon width={18} height={18} stroke="#2E7D32" />
-              <span>You have reached the end of the terms and conditions</span>
-            </div>
-          </div>
-
-          {/* Sticky Bottom Action Bar INSIDE THE CARD */}
-          <div className={classes.cardStickyFooter}>
-            <div className={classes.footerTextGroup}>
-              <p className={classes.footerTitle}>
-                {hasScrolledToBottom ? (
-                  <>
-                    <CheckCircleIcon width={18} height={18} stroke="#2E7D32" />
-                    <span style={{ color: '#2E7D32' }}>Ready to Proceed</span>
-                  </>
-                ) : (
-                  <>
-                    <LockIcon width={18} height={18} stroke="#0072C4" />
-                    <span>Action Required: Review Terms</span>
-                  </>
-                )}
-              </p>
-              <p className={classes.footerSubtext}>
-                {hasScrolledToBottom
-                  ? 'You have scrolled through the entire agreement. Click "Agree & Continue" to proceed.'
-                  : 'Please scroll through the agreement above to unlock the Agree button.'}
-              </p>
-            </div>
-
-            <button
-              type="button"
-              className={`${classes.agreeButton} ${!hasScrolledToBottom ? classes.agreeButtonDisabled : ''}`}
-              disabled={!hasScrolledToBottom}
-              onClick={handleAgree}
-            >
-              <span className={classes.agreeButtonIcon}>
-                {hasScrolledToBottom ? (
-                  <CheckCircleIcon width={18} height={18} stroke="#FFFFFF" />
-                ) : (
-                  <LockIcon width={16} height={16} stroke="#FFFFFF" />
-                )}
-              </span>
-              <span>Agree &amp; Continue</span>
-            </button>
-          </div>
+          <p className={classes.pageActionNote}>
+            By proceeding, you acknowledge our beta guarantees and data privacy standards.
+          </p>
         </div>
       </main>
     </div>
