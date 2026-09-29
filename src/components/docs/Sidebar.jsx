@@ -21,8 +21,9 @@ function ChevronIcon({ isExpanded }) {
   );
 }
 
-// Global cache for expanded node IDs to keep folders open across route transitions
+// Global cache for expanded node IDs and scroll position to keep state across route transitions
 let globalExpandedIds = new Set(['web-documentation']);
+let globalSidebarScrollTop = 0;
 
 function getAncestorIds(nodes, targetId) {
   const ancestors = [];
@@ -142,9 +143,49 @@ export default function Sidebar({ tree, activeId, onSelect, searchQuery, isOpen,
   const [sidebarWidth, setSidebarWidth] = useState(290);
   const [isDragging, setIsDragging] = useState(false);
   const isResizingRef = useRef(false);
+  const sidebarRef = useRef(null);
 
-  // Initialize expandedIds deterministically so server and client initial render match
-  const [expandedIds, setExpandedIds] = useState(() => new Set(['web-documentation']));
+  // Initialize expandedIds with cached & active ancestors to avoid layout jerk
+  const [expandedIds, setExpandedIds] = useState(() => {
+    const initial = new Set(globalExpandedIds);
+    if (activeId && tree) {
+      const ancestors = getAncestorIds(tree, activeId);
+      ancestors.forEach((id) => initial.add(id));
+    }
+    return initial;
+  });
+
+  // Track scroll position of the sidebar in global variable and restore on mount
+  useEffect(() => {
+    const el = sidebarRef.current;
+    if (!el) return;
+
+    if (globalSidebarScrollTop > 0) {
+      el.scrollTop = globalSidebarScrollTop;
+    }
+
+    const handleScroll = () => {
+      globalSidebarScrollTop = el.scrollTop;
+    };
+
+    el.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      el.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // When active item changes, ensure it's visible in sidebar if offscreen
+  useEffect(() => {
+    if (!activeId || !sidebarRef.current) return;
+    const activeEl = sidebarRef.current.querySelector('.tree-item.active');
+    if (activeEl) {
+      const sidebarRect = sidebarRef.current.getBoundingClientRect();
+      const itemRect = activeEl.getBoundingClientRect();
+      if (itemRect.top < sidebarRect.top || itemRect.bottom > sidebarRect.bottom) {
+        activeEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+  }, [activeId]);
 
   // Sync expanded IDs from localStorage after mount (client-only) to avoid hydration mismatch
   useEffect(() => {
@@ -264,7 +305,7 @@ export default function Sidebar({ tree, activeId, onSelect, searchQuery, isOpen,
 
   return (
     <div className={`sidebar-container ${isOpen ? 'open' : ''} ${isDragging ? 'resizing' : ''}`}>
-      <aside className="sidebar">
+      <aside className="sidebar" ref={sidebarRef}>
         <div className="sidebar-mobile-header">
           <span className="sidebar-mobile-title">Documentation</span>
           {onClose && (

@@ -11,8 +11,137 @@ interface AvatarData {
   isHovered: boolean;
 }
 
+const AVATAR_URLS: Record<string, string> = {
+  avatar1: "https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-1.png",
+  avatar2: "https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-2.png",
+  avatar3: "https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-3.png",
+  avatar4: "https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-4.png",
+  avatar5: "https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-5.png",
+  avatar6: "https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-6.png",
+};
+
 const SvgNewHero = (props: SVGProps<SVGSVGElement>) => {
   const [hoveredAvatar, setHoveredAvatar] = React.useState<string | null>(null);
+  const [failedAvatars, setFailedAvatars] = React.useState<Record<string, boolean>>({});
+
+  const handleImageError = (id: string) => {
+    setFailedAvatars((prev) => ({ ...prev, [id]: true }));
+  };
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    Object.entries(AVATAR_URLS).forEach(([id, url]) => {
+      const img = new window.Image();
+      img.onerror = () => {
+        setFailedAvatars((prev) => ({ ...prev, [id]: true }));
+      };
+      img.src = url;
+    });
+  }, []);
+
+  const renderAvatarFallback = (id: string, cx: number, cy: number) => (
+    <g className="newHero_svg__avatar-fallback">
+      <g filter="url(#newHero_svg__avatar_fallback_shadow)">
+        <circle cx={cx} cy={cy} r={22} fill="#fff" />
+        <circle cx={cx} cy={cy} r={21.5} stroke="#E5E5E5" />
+      </g>
+      {id === "avatar1" && (
+        /* Streamline / Rocket Icon */
+        <g transform={`translate(${cx}, ${cy}) scale(0.85) translate(-12, -12)`}>
+          <path
+            d="M4.5 19.5c.8-.8 2-2 2-2s-1.2 1.2-2 2M3 21c1.5-1.5 3-3 3-3"
+            stroke="#A9A9A9"
+            strokeWidth={2}
+            strokeLinecap="round"
+          />
+          <path
+            d="M17.42 13.65C23.78 7.29 21.66 2.34 21.66 2.34s-4.95-2.12-11.31 4.24L7.86 6.08c-.65-.13-1.33.08-1.81.55L2 10.69l5 2.14 4.17 4.17 2.14 5 4.05-4.05c.47-.47.68-1.15.55-1.81l-.49-2.49z"
+            stroke="#A9A9A9"
+            strokeWidth={1.8}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <circle cx={15} cy={9} r={1.5} fill="#A9A9A9" />
+        </g>
+      )}
+      {id === "avatar2" && (
+        /* Cloud Server Icon */
+        <g transform={`translate(${cx}, ${cy}) scale(0.85) translate(-12, -12)`}>
+          <path
+            d="M5 12h14a3.5 3.5 0 0 0-1-6.8 5 5 0 0 0-9.2-1.2A4 4 0 0 0 5 12z"
+            stroke="#A9A9A9"
+            strokeWidth={1.8}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <line x1={12} y1={12} x2={12} y2={15} stroke="#A9A9A9" strokeWidth={1.8} />
+          <rect x={3} y={15} width={18} height={6} rx={1.5} stroke="#A9A9A9" strokeWidth={1.8} />
+          <circle cx={6.5} cy={18} r={0.8} fill="#A9A9A9" />
+          <circle cx={9.5} cy={18} r={0.8} fill="#A9A9A9" />
+          <line x1={13} y1={18} x2={18} y2={18} stroke="#A9A9A9" strokeWidth={1.5} strokeLinecap="round" />
+        </g>
+      )}
+      {id === "avatar3" && (
+        /* Brain / AI Icon */
+        <g transform={`translate(${cx}, ${cy}) scale(0.85) translate(-12, -12)`}>
+          <path
+            d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04"
+            stroke="#A9A9A9"
+            strokeWidth={1.8}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04"
+            stroke="#A9A9A9"
+            strokeWidth={1.8}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+      )}
+      {id === "avatar4" && (
+        /* Shield Check Icon */
+        <g transform={`translate(${cx}, ${cy}) scale(0.85) translate(-12, -12)`}>
+          <path
+            d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+            stroke="#A9A9A9"
+            strokeWidth={1.8}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <polyline
+            points="9 12 11 14 15 10"
+            stroke="#A9A9A9"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+      )}
+      {id === "avatar5" && (
+        /* Bolt Icon */
+        <g transform={`translate(${cx}, ${cy}) scale(0.85) translate(-12, -12)`}>
+          <path
+            d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"
+            stroke="#A9A9A9"
+            strokeWidth={1.8}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+      )}
+      {id === "avatar6" && (
+        /* Bar Chart Icon */
+        <g transform={`translate(${cx}, ${cy}) scale(0.85) translate(-12, -12)`}>
+          <path d="M6 20v-6" stroke="#A9A9A9" strokeWidth={2} strokeLinecap="round" />
+          <path d="M12 20V10" stroke="#A9A9A9" strokeWidth={2} strokeLinecap="round" />
+          <path d="M18 20V4" stroke="#A9A9A9" strokeWidth={2} strokeLinecap="round" />
+          <line x1={3} y1={20} x2={21} y2={20} stroke="#A9A9A9" strokeWidth={1.8} strokeLinecap="round" />
+        </g>
+      )}
+    </g>
+  );
 
   const avatars: AvatarData[] = [
     {
@@ -91,6 +220,33 @@ const SvgNewHero = (props: SVGProps<SVGSVGElement>) => {
       {...props}
     >
       <defs>
+        <filter
+          id="newHero_svg__avatar_fallback_shadow"
+          width="200%"
+          height="200%"
+          x="-50%"
+          y="-50%"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity={0} result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            result="hardAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          />
+          <feOffset />
+          <feGaussianBlur stdDeviation={3} />
+          <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0" />
+          <feBlend
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_7189_6303"
+          />
+          <feBlend
+            in="SourceGraphic"
+            in2="effect1_dropShadow_7189_6303"
+            result="shape"
+          />
+        </filter>
         <filter
           id="newHero_svg__filter0_d_7189_6303"
           width={56}
@@ -495,45 +651,57 @@ const SvgNewHero = (props: SVGProps<SVGSVGElement>) => {
         </pattern>
         <image
           xlinkHref="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-1.png"
+          href="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-1.png"
           id="newHero_svg__image0_7189_6303"
           width={1024}
           height={1024}
           preserveAspectRatio="none"
+          onError={() => handleImageError("avatar1")}
         />
         <image
           xlinkHref="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-2.png"
+          href="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-2.png"
           id="newHero_svg__image1_7189_6303"
           width={1024}
           height={1024}
           preserveAspectRatio="none"
+          onError={() => handleImageError("avatar2")}
         />
         <image
           xlinkHref="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-3.png"
+          href="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-3.png"
           id="newHero_svg__image2_7189_6303"
           width={1024}
           height={1024}
           preserveAspectRatio="none"
+          onError={() => handleImageError("avatar3")}
         />
         <image
           xlinkHref="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-4.png"
+          href="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-4.png"
           id="newHero_svg__image3_7189_6303"
           width={1024}
           height={1024}
           preserveAspectRatio="none"
+          onError={() => handleImageError("avatar4")}
         />
         <image
           xlinkHref="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-5.png"
+          href="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-5.png"
           id="newHero_svg__image4_7189_6303"
           width={1024}
           height={1024}
           preserveAspectRatio="none"
+          onError={() => handleImageError("avatar5")}
         />
         <image
           xlinkHref="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-6.png"
+          href="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/hero-avatar-6.png"
           id="newHero_svg__image5_7189_6303"
           width={1024}
           height={1024}
           preserveAspectRatio="none"
+          onError={() => handleImageError("avatar6")}
         />
         <linearGradient
           id="newHero_svg__paint0_linear_7189_6303"
@@ -803,7 +971,12 @@ const SvgNewHero = (props: SVGProps<SVGSVGElement>) => {
         />
 
         {/* Avatar 1 with hover effect & mild background glow */}
-        <g className="newHero_svg__avatar-group" style={{ cursor: "pointer" }}>
+        <g
+          className="newHero_svg__avatar-group"
+          style={{ cursor: "pointer" }}
+          onMouseEnter={() => handleMouseEnter("avatar1")}
+          onMouseLeave={handleMouseLeave}
+        >
           <g className="avatar1-ambient-glow">
             <circle cx={72} cy={140} r={46} fill="#60A5FA" opacity="0.3" filter="url(#newHero_svg__filter7_f_7189_6303)">
               <animate attributeName="opacity" values="0.25;0.45;0.25" dur="3.5s" repeatCount="indefinite" />
@@ -822,16 +995,22 @@ const SvgNewHero = (props: SVGProps<SVGSVGElement>) => {
               </g>
             </>
           )}
-          <path
-            onMouseEnter={() => handleMouseEnter("avatar1")}
-            onMouseLeave={handleMouseLeave}
-            fill="url(#newHero_svg__pattern0_7189_6303)"
-            d="M24 94h95v95H24z"
-          />
+          {renderAvatarFallback("avatar1", 72, 140)}
+          {!failedAvatars["avatar1"] && (
+            <path
+              fill="url(#newHero_svg__pattern0_7189_6303)"
+              d="M24 94h95v95H24z"
+            />
+          )}
         </g>
 
         {/* Avatar 2 with hover effect & mild background glow */}
-        <g className="newHero_svg__avatar-group" style={{ cursor: "pointer" }}>
+        <g
+          className="newHero_svg__avatar-group"
+          style={{ cursor: "pointer" }}
+          onMouseEnter={() => handleMouseEnter("avatar2")}
+          onMouseLeave={handleMouseLeave}
+        >
           <g className="avatar2-ambient-glow">
             <circle cx={186} cy={306} r={46} fill="#60A5FA" opacity="0.3" filter="url(#newHero_svg__filter9_f_7189_6303)">
               <animate attributeName="opacity" values="0.25;0.45;0.25" dur="3.8s" repeatCount="indefinite" />
@@ -850,19 +1029,21 @@ const SvgNewHero = (props: SVGProps<SVGSVGElement>) => {
               </g>
             </>
           )}
-          <path
-            onMouseEnter={() => handleMouseEnter("avatar2")}
-            onMouseLeave={handleMouseLeave}
-            fill="url(#newHero_svg__pattern1_7189_6303)"
-            d="M138 255h95v95h-95z"
-          />
+          {renderAvatarFallback("avatar2", 186, 306)}
+          {!failedAvatars["avatar2"] && (
+            <path
+              fill="url(#newHero_svg__pattern1_7189_6303)"
+              d="M138 255h95v95h-95z"
+            />
+          )}
         </g>
 
         {/* Avatar 3 with hover effect & mild background glow */}
         <g
-          onMouseEnter={() => handleMouseEnter("avatar3")}
           className="newHero_svg__avatar-group"
           style={{ cursor: "pointer" }}
+          onMouseEnter={() => handleMouseEnter("avatar3")}
+          onMouseLeave={handleMouseLeave}
         >
           <g className="avatar3-ambient-glow">
             <circle cx={1010} cy={157} r={46} fill="#60A5FA" opacity="0.3" filter="url(#newHero_svg__filter11_f_7189_6303)">
@@ -882,16 +1063,22 @@ const SvgNewHero = (props: SVGProps<SVGSVGElement>) => {
               </g>
             </>
           )}
-          <path
-            onMouseEnter={() => handleMouseEnter("avatar3")}
-            onMouseLeave={handleMouseLeave}
-            fill="url(#newHero_svg__pattern2_7189_6303)"
-            d="M964 109h95v95h-95z"
-          />
+          {renderAvatarFallback("avatar3", 1010, 157)}
+          {!failedAvatars["avatar3"] && (
+            <path
+              fill="url(#newHero_svg__pattern2_7189_6303)"
+              d="M964 109h95v95h-95z"
+            />
+          )}
         </g>
 
         {/* Avatar 4 with hover effect & mild background glow */}
-        <g className="newHero_svg__avatar-group" style={{ cursor: "pointer" }}>
+        <g
+          className="newHero_svg__avatar-group"
+          style={{ cursor: "pointer" }}
+          onMouseEnter={() => handleMouseEnter("avatar4")}
+          onMouseLeave={handleMouseLeave}
+        >
           <g className="avatar4-ambient-glow">
             <circle cx={1196} cy={360} r={46} fill="#60A5FA" opacity="0.3" filter="url(#newHero_svg__filter13_f_7189_6303)">
               <animate attributeName="opacity" values="0.25;0.45;0.25" dur="3.2s" repeatCount="indefinite" />
@@ -910,16 +1097,22 @@ const SvgNewHero = (props: SVGProps<SVGSVGElement>) => {
               </g>
             </>
           )}
-          <path
-            onMouseEnter={() => handleMouseEnter("avatar4")}
-            onMouseLeave={handleMouseLeave}
-            fill="url(#newHero_svg__pattern3_7189_6303)"
-            d="M1148 312h95v95h-95z"
-          />
+          {renderAvatarFallback("avatar4", 1196, 360)}
+          {!failedAvatars["avatar4"] && (
+            <path
+              fill="url(#newHero_svg__pattern3_7189_6303)"
+              d="M1148 312h95v95h-95z"
+            />
+          )}
         </g>
 
         {/* Avatar 5 with hover effect & mild background glow */}
-        <g className="newHero_svg__avatar-group" style={{ cursor: "pointer" }}>
+        <g
+          className="newHero_svg__avatar-group"
+          style={{ cursor: "pointer" }}
+          onMouseEnter={() => handleMouseEnter("avatar5")}
+          onMouseLeave={handleMouseLeave}
+        >
           <g className="avatar5-ambient-glow">
             <circle cx={1133} cy={581} r={46} fill="#60A5FA" opacity="0.3" filter="url(#newHero_svg__filter15_f_7189_6303)">
               <animate attributeName="opacity" values="0.25;0.45;0.25" dur="3.6s" repeatCount="indefinite" />
@@ -938,16 +1131,22 @@ const SvgNewHero = (props: SVGProps<SVGSVGElement>) => {
               </g>
             </>
           )}
-          <path
-            onMouseEnter={() => handleMouseEnter("avatar5")}
-            onMouseLeave={handleMouseLeave}
-            fill="url(#newHero_svg__pattern4_7189_6303)"
-            d="M1085 534h95v95h-95z"
-          />
+          {renderAvatarFallback("avatar5", 1133, 581)}
+          {!failedAvatars["avatar5"] && (
+            <path
+              fill="url(#newHero_svg__pattern4_7189_6303)"
+              d="M1085 534h95v95h-95z"
+            />
+          )}
         </g>
 
         {/* Avatar 6 with hover effect & mild background glow */}
-        <g className="newHero_svg__avatar-group" style={{ cursor: "pointer" }}>
+        <g
+          className="newHero_svg__avatar-group"
+          style={{ cursor: "pointer" }}
+          onMouseEnter={() => handleMouseEnter("avatar6")}
+          onMouseLeave={handleMouseLeave}
+        >
           <g className="avatar6-ambient-glow">
             <circle cx={61} cy={535} r={46} fill="#60A5FA" opacity="0.3" filter="url(#newHero_svg__filter17_f_7189_6303)">
               <animate attributeName="opacity" values="0.25;0.45;0.25" dur="4.0s" repeatCount="indefinite" />
@@ -966,12 +1165,13 @@ const SvgNewHero = (props: SVGProps<SVGSVGElement>) => {
               </g>
             </>
           )}
-          <path
-            onMouseEnter={() => handleMouseEnter("avatar6")}
-            onMouseLeave={handleMouseLeave}
-            fill="url(#newHero_svg__pattern5_7189_6303)"
-            d="M13.5 487.5h95v95h-95z"
-          />
+          {renderAvatarFallback("avatar6", 61, 535)}
+          {!failedAvatars["avatar6"] && (
+            <path
+              fill="url(#newHero_svg__pattern5_7189_6303)"
+              d="M13.5 487.5h95v95h-95z"
+            />
+          )}
         </g>
       </g>
     </svg>

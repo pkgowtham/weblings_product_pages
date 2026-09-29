@@ -165,6 +165,25 @@ const AgreementView: React.FC = () => {
               to fix the broken enterprise ecosystem, and we stand by our architecture.
             </p>
 
+            <Link href="/about" className={classes.teamLink}>
+              <span>Get to know the team and why we built Weblings</span>
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={classes.teamLinkArrow}
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </Link>
+
             <div className={classes.founderDivider} />
 
             <div className={classes.founderSignatureRow}>

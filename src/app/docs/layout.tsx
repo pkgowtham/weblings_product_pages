@@ -1,6 +1,7 @@
 import React from 'react';
 import 'prismjs/themes/prism-tomorrow.css';
 import '../../styles/docs.css';
+import DocsLayoutClient from '../../components/docs/DocsLayoutClient';
 
 export default function DocsLayout({
   children,
@@ -9,7 +10,9 @@ export default function DocsLayout({
 }) {
   return (
     <div className="docs-root-container">
-      {children}
+      <DocsLayoutClient>
+        {children}
+      </DocsLayoutClient>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import DocsClientView from '../../components/docs/DocsClientView';
+import DocViewer from '../../components/docs/DocViewer';
+import TableOfContents from '../../components/docs/TableOfContents';
 import { getDocPageData } from '../../lib/docs/markdown';
 
 export const metadata: Metadata = {
@@ -18,12 +19,16 @@ export default async function DocsRootPage() {
   };
 
   return (
-    <DocsClientView
-      title={pageData.title}
-      content={pageData.content}
-      slugPath={pageData.slugPath}
-      breadcrumbs={pageData.breadcrumbs}
-      activePage={pageData.activePage}
-    />
+    <>
+      <DocViewer
+        pageTitle={pageData.title}
+        content={pageData.content}
+        breadcrumbs={pageData.breadcrumbs}
+        activePage={pageData.activePage}
+        isLoading={false}
+      />
+      <TableOfContents markdownContent={pageData.content} />
+    </>
   );
 }
+

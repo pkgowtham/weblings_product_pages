@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { cleanNotionName, slugify } from '../../lib/docs/utils'
@@ -62,7 +63,21 @@ export default function DocViewer({
   isLoading,
   imagesMap = docsImagesData.images,
 }) {
+  const router = useRouter()
   const [lightboxImg, setLightboxImg] = useState(null)
+
+  const handleSelect = (targetSlug) => {
+    if (onSelectPage) {
+      onSelectPage(targetSlug)
+      return
+    }
+    if (!targetSlug || targetSlug.startsWith('section-')) return
+    if (targetSlug === 'web-documentation') {
+      router.push('/docs')
+    } else {
+      router.push(`/docs/${targetSlug}`)
+    }
+  }
 
   // Scroll to top when page changes, or scroll to hash element if present
   useEffect(() => {
@@ -163,7 +178,7 @@ export default function DocViewer({
             href={`/docs/${targetSlug}`}
             onClick={(e) => {
               e.preventDefault()
-              onSelectPage(targetSlug)
+              handleSelect(targetSlug)
             }}
           >
             {children}
@@ -216,7 +231,7 @@ export default function DocViewer({
                     onClick={(e) => {
                       e.preventDefault()
                       if (targetSlug) {
-                        onSelectPage(targetSlug)
+                        handleSelect(targetSlug)
                       }
                     }}
                   >
@@ -255,7 +270,7 @@ export default function DocViewer({
             {(prevPage || nextPage) && (
               <div className="article-nav-container">
                 {prevPage ? (
-                  <div className="article-nav-card" onClick={() => onSelectPage(prevPage.id || prevPage.slug)}>
+                  <div className="article-nav-card" onClick={() => handleSelect(prevPage.id || prevPage.slug)}>
                     <span className="article-nav-label">← Previous</span>
                     <span className="article-nav-title">{prevPage.title}</span>
                   </div>
@@ -267,7 +282,7 @@ export default function DocViewer({
                   <div
                     className="article-nav-card"
                     style={{ textAlign: 'right' }}
-                    onClick={() => onSelectPage(nextPage.id || nextPage.slug)}
+                    onClick={() => handleSelect(nextPage.id || nextPage.slug)}
                   >
                     <span className="article-nav-label">Next →</span>
                     <span className="article-nav-title">{nextPage.title}</span>

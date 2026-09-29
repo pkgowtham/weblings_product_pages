@@ -369,4 +369,28 @@ export const useStyles = createUseStyles((theme: Theme) => ({
     },
   },
 
+  teamLink: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: theme.light.brand.surface.medium || "#0072C4",
+    fontSize: "0.875rem",
+    fontWeight: 600,
+    textDecoration: "none",
+    marginTop: "4px",
+    transition: "color 0.2s ease",
+    "&:hover": {
+      color: theme.light.brand.surface.dark || "#004B82",
+      textDecoration: "underline",
+      "& $teamLinkArrow": {
+        transform: "translateX(3px)",
+      },
+    },
+  },
+
+  teamLinkArrow: {
+    display: "inline-block",
+    transition: "transform 0.2s ease",
+  },
+
 }));

@@ -26,7 +26,7 @@ const milestones = [
   {
     date: "October 1, 2026",
     title: "Web App Beta Live",
-    copy: "The core six modules open for approved beta testers on desktop browsers.",
+    copy: "The core six modules open for all on desktop browsers.",
     accent: "blue" as const,
     isLive: true,
   },
@@ -94,7 +94,7 @@ const PricingView: React.FC = () => {
                 <span className={classes.pricingLaterValue}>$7 / user / mo</span>
               </div>
             </div>
-            <Link className={classes.action} href="/contact">Join Basecamp Beta</Link>
+            <Link className={classes.action} href="/agreement">Join Basecamp Beta</Link>
             <p className={classes.featureLabel}>Everything included</p>
             <ul className={classes.features}>
               {suiteFeatures.map(([title, copy]) => (

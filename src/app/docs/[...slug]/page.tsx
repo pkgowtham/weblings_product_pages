@@ -1,7 +1,8 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import DocsClientView from '../../../components/docs/DocsClientView';
+import DocViewer from '../../../components/docs/DocViewer';
+import TableOfContents from '../../../components/docs/TableOfContents';
 import { getDocSlugs, getDocBySlug, getDocPageData } from '../../../lib/docs/markdown';
 
 export async function generateStaticParams() {
@@ -38,12 +39,16 @@ export default async function DocSlugPage({
   }
 
   return (
-    <DocsClientView
-      title={pageData.title}
-      content={pageData.content}
-      slugPath={pageData.slugPath}
-      breadcrumbs={pageData.breadcrumbs}
-      activePage={pageData.activePage}
-    />
+    <>
+      <DocViewer
+        pageTitle={pageData.title}
+        content={pageData.content}
+        breadcrumbs={pageData.breadcrumbs}
+        activePage={pageData.activePage}
+        isLoading={false}
+      />
+      <TableOfContents markdownContent={pageData.content} />
+    </>
   );
 }
+
