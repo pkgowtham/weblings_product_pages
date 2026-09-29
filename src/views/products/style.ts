@@ -2803,11 +2803,12 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     width: "100%",
     maxWidth: "560px",
     boxSizing: "border-box",
-    "& svg": {
+    "& svg, & img": {
       width: "100%",
       height: "auto",
       maxHeight: "360px",
       display: "block",
+      objectFit: "contain",
     },
     "@media (max-width: 900px)": {
       maxWidth: "100%",

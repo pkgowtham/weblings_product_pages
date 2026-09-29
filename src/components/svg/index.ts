@@ -11,8 +11,6 @@ export { default as Mail } from "./Mail";
 export { default as Menu } from "./Menu";
 export { default as Newsletter } from "./Newsletter";
 export { default as Star } from "./Star";
-export { default as StorageGraphic } from "./StorageGraphic";
-export { default as Group } from "./StorageGraphic";
 export { default as Threads } from "./Threads";
 export { default as Twitter } from "./Twitter";
 export { default as Weblingslogo } from "./Weblingslogo";

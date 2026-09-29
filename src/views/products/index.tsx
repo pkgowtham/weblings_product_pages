@@ -12,7 +12,6 @@ import SvgNewsletter from "../../components/svg/Newsletter";
 import WorkspaceDashboardMockup from "../../components/dashboardMockup/index";
 import { useRouter } from "next/navigation";
 import SvgWeblingslogo from "../../components/svg/Weblingslogo";
-import StorageGraphic from "../../components/svg/StorageGraphic";
 import PipelineStep from "../../components/pipelineStep/index";
 import PhoneMockup from "../../components/phoneMockup/index";
 import BentoCard from "../../components/bentoCard/index";
@@ -940,7 +939,13 @@ const Products = () => {
             </form>
           </div>
           <div className={classes.StorageGraphicRight}>
-            <StorageGraphic />
+            <img
+              src="https://pub-5672a1ed48d647e6aa3ba78e02e5445d.r2.dev/pages/home-page/stayupdated.png"
+              alt="Stay Updated"
+              width={481}
+              height={304}
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
