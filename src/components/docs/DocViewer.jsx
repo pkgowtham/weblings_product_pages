@@ -59,7 +59,7 @@ export default function DocViewer({
   content,
   breadcrumbs,
   activePage,
-  onSelectPage,
+  onSelectPage = undefined,
   isLoading,
   imagesMap = docsImagesData.images,
 }) {
