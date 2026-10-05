@@ -18,19 +18,19 @@ export const usestyles = createUseStyles((theme: Theme) => ({
     justifyContent: "space-between",
     width: "100%",
     maxWidth: "1200px",
-    padding: theme.spacing.s1200,
+    padding: `${theme.spacing.s1200} ${theme.spacing.s1200} ${theme.spacing.s800}`,
     boxSizing: "border-box",
     flexWrap: "wrap",
     gap: theme.spacing.s800,
     "@media (max-width: 950px)": {
       justifyContent: "flex-start",
       gap: "36px 48px",
-      padding: "40px 24px",
+      padding: "40px 24px 24px",
     },
     "@media (max-width: 600px)": {
       flexDirection: "column",
       gap: "32px",
-      padding: "32px 20px",
+      padding: "32px 20px 20px",
     },
   },
   FirstSection: {
@@ -144,5 +144,22 @@ export const usestyles = createUseStyles((theme: Theme) => ({
   contactIcon: {
     color: theme.light.brand.onSurface.default,
     flexShrink: 0,
+  },
+  bottomBar: {
+    width: "100%",
+    borderTop: `1px solid ${theme.light.neutral.border.light}`,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "12px 20px",
+    boxSizing: "border-box",
+    "@media (max-width: 600px)": {
+      padding: "10px 16px",
+    },
+  },
+  copyrightText: {
+    color: theme.light.neutral.onSurface.medium,
+    textAlign: "center",
+    lineHeight: "18px",
   },
 }));

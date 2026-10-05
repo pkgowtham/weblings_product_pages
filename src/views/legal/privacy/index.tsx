@@ -48,76 +48,119 @@ const PrivacyPolicyView: React.FC = () => {
       <main className={classes.container}>
         <div className={classes.header}>
           <h1 className={classes.title}>Privacy Policy</h1>
-          <p className={classes.lastUpdated}>Last Updated: September 14, 2026</p>
+          <p className={classes.lastUpdated}>Effective Date: October 1, 2026 &nbsp;|&nbsp; Last Updated: October 1, 2026</p>
         </div>
 
         <div className={classes.glassPanel}>
           <p className={classes.introParagraph}>
-            At Weblings, we believe in radical transparency. Because our platform serves as the central nervous system for your business operations, we handle highly sensitive data. This policy outlines exactly what we track, how we use it, and how our AI interacts with your proprietary information.
+            This Privacy Policy describes how WEBLINGS HUB (&ldquo;Weblings&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;), operating the platform Weblings Suite via{' '}
+            <a href="https://weblings.dev" target="_blank" rel="noopener noreferrer" className={classes.link}>
+              https://weblings.dev
+            </a>
+            , collects, uses, processes, and protects your information.
+          </p>
+          <p className={classes.paragraph}>
+            At Weblings, we prioritize transparency. Because our platform serves as an operational infrastructure for your business, we handle sensitive workflows and data. This policy outlines what data we process, how our AI systems interact with your proprietary information, and your legal rights.
           </p>
 
-          <h2 className={classes.sectionHeading}>1. Data Collection &amp; AI Access</h2>
+          <h2 className={classes.sectionHeading}>1. Legal Entity &amp; Scope</h2>
           <p className={classes.paragraph}>
-            To provide our core project-tracking and scope-deviation features, the Weblings AI requires deep access to your workspace. By using the platform, you explicitly consent that our systems and AI will read, process, and analyze your emails, project files, chat logs, source code, and all other data hosted within your Weblings system.
+            This platform and all related services are owned and operated by WEBLINGS HUB, an enterprise registered in Tamil Nadu, India. By accessing or using Weblings Suite, you agree to the collection and handling of your data as described in this policy.
           </p>
 
-          <h2 className={classes.sectionHeading}>2. AI Omnipresence, Complete Data Access, and Leakage</h2>
+          <h2 className={classes.sectionHeading}>2. Data Collection &amp; AI System Processing</h2>
           <p className={classes.paragraph}>
-            To function as designed, the Weblings AI requires and is granted <strong className={classes.strong}>complete, unrestricted access</strong> to all data within your system. This includes, but is not limited to, private emails, project files, chat logs, source code, and client requirements. You explicitly acknowledge and consent to this deep system access.
-          </p>
-          <p className={classes.paragraph}>
-            While we employ robust security measures, the integration of advanced AI models across all system data introduces inherent experimental risks. In the event that the AI inadvertently exposes sensitive information within your workspace, suffers a hallucination that corrupts data, or if a catastrophic cyberattack results in the leakage of AI-processed data, <strong className={classes.strong}>Weblings is explicitly not responsible for any resulting damages or data loss.</strong> By using this platform, you assume the full risk of granting an AI unrestricted access to your proprietary business data.
-          </p>
-
-          <h2 className={classes.sectionHeading}>3. Data Usage &amp; Third-Party Sharing</h2>
-          <p className={classes.paragraph}>
-            We do not sell your personal or company data to marketers or data brokers. We use your data strictly to operate the platform, train the AI for your specific workspace, and process payments.
-          </p>
-          <p className={classes.paragraph}>
-            We share necessary data with authorized third-party infrastructure providers to keep the platform running. These include, but are not limited to:
+            To deliver automated project-tracking, operational analytics, and scope-deviation detection, Weblings Suite utilizes proprietary automated models and algorithms:
           </p>
           <ul className={classes.list}>
             <li className={classes.listItem}>
-              <strong className={classes.strong}>Razorpay:</strong> For processing subscription payments and billing.
+              <strong className={classes.strong}>Workspace Data Ingestion:</strong> To function as intended, authorized platform features process project files, integrated communication streams (emails/chats), workspace code assets, and operational logs submitted to your tenant.
             </li>
             <li className={classes.listItem}>
-              <strong className={classes.strong}>AWS (Amazon Web Services):</strong> For core cloud hosting and infrastructure.
+              <strong className={classes.strong}>Consent to Process:</strong> By configuring integrations and onboarding your team, you authorize WEBLINGS HUB to ingest and analyze these inputs solely for executing workspace services and workspace-level model assistance.
             </li>
             <li className={classes.listItem}>
-              <strong className={classes.strong}>Cloudflare:</strong> For domain routing, edge security, and email transit infrastructure.
+              <strong className={classes.strong}>Workspace Isolation:</strong> Your proprietary workspace data is logically isolated. We do not use your confidential operational data or proprietary code to train public models or models available to other organizations.
+            </li>
+          </ul>
+
+          <h2 className={classes.sectionHeading}>3. AI Capabilities &amp; Service Limitations</h2>
+          <p className={classes.paragraph}>
+            While WEBLINGS HUB deploys industry-standard security safeguards, automated intelligence systems operate probabilistically:
+          </p>
+          <ul className={classes.list}>
+            <li className={classes.listItem}>
+              <strong className={classes.strong}>Output Verification:</strong> AI-generated suggestions, summaries, or detections are automated outputs and should be reviewed by authorized users prior to critical implementation.
+            </li>
+            <li className={classes.listItem}>
+              <strong className={classes.strong}>Limitation of Liability:</strong> To the maximum extent permitted by applicable law, WEBLINGS HUB shall not be liable for business disruptions, indirect losses, or unintended data corruption arising from third-party model interruptions, cyber events, or automated outputs beyond our reasonable technical control.
+            </li>
+          </ul>
+
+          <h2 className={classes.sectionHeading}>4. Data Usage &amp; Third-Party Infrastructure</h2>
+          <p className={classes.paragraph}>
+            We do not sell, rent, or trade your personal or business data to advertisers or third-party data brokers. We share data solely with trusted infrastructure vendors required to host, operate, and secure our SaaS architecture:
+          </p>
+          <ul className={classes.list}>
+            <li className={classes.listItem}>
+              <strong className={classes.strong}>Cloud Infrastructure &amp; Compute:</strong> Amazon Web Services (AWS) &mdash; Secure cloud hosting, storage, and processing.
+            </li>
+            <li className={classes.listItem}>
+              <strong className={classes.strong}>Edge &amp; Network Security:</strong> Cloudflare &mdash; DNS routing, DDoS protection, and SSL transit security.
+            </li>
+            <li className={classes.listItem}>
+              <strong className={classes.strong}>Payment Processing:</strong> Razorpay &mdash; PCI-DSS-compliant billing, subscription, and transaction processing.
             </li>
           </ul>
           <p className={classes.paragraph}>
-            We are not liable for any data breaches or incidents that occur on the infrastructure of these third-party providers.
+            All sub-processors are vetted for strict information security compliance.
           </p>
 
-          <h2 className={classes.sectionHeading}>4. Cyberattacks &amp; Security</h2>
+          <h2 className={classes.sectionHeading}>5. Data Security &amp; Storage</h2>
           <p className={classes.paragraph}>
-            While we implement industry-standard security measures, no system connected to the internet is impenetrable. In the extreme event of a cyberattack or unauthorized data breach, to the maximum extent permitted by law, Weblings is not financially liable for any resulting damages. Client organizations assume the risk and cost associated with utilizing a cloud-based SaaS platform.
+            WEBLINGS HUB employs robust, industry-standard administrative, physical, and technical safeguards (including TLS/HTTPS transit encryption and encrypted rest storage) to protect against unauthorized access, loss, or alteration.
           </p>
 
-          <h2 className={classes.sectionHeading}>5. Data Portability &amp; Deletion</h2>
+          <h2 className={classes.sectionHeading}>6. Data Ownership, Portability &amp; Deletion</h2>
           <p className={classes.paragraph}>
-            You have the absolute right to export your data at any time without hurdles. Upon account termination, we will delete your proprietary data from our active servers in accordance with our data retention policies and applicable law.
+            You retain complete ownership of all intellectual property and proprietary data uploaded to your workspace.
           </p>
+          <ul className={classes.list}>
+            <li className={classes.listItem}>
+              <strong className={classes.strong}>Export Rights:</strong> Account administrators may export workspace data at any time via platform controls.
+            </li>
+            <li className={classes.listItem}>
+              <strong className={classes.strong}>Account Termination:</strong> Upon closure of your account, WEBLINGS HUB will permanently delete your stored proprietary operational data from active production databases in accordance with our system lifecycle and applicable legal retention obligations.
+            </li>
+          </ul>
 
-          <h2 className={classes.sectionHeading}>6. Grievance Officer &amp; Contact Information</h2>
+          <h2 className={classes.sectionHeading}>7. Compliance &amp; Grievance Redressal (DPDP Act)</h2>
           <p className={classes.paragraph}>
-            In compliance with the Digital Personal Data Protection Act, 2023 (DPDP) and other applicable privacy regulations, we have appointed a Grievance Officer to address any privacy concerns, data deletion requests, or security reports.
+            In compliance with the Digital Personal Data Protection Act, 2023 (India) and applicable data protection regulations, WEBLINGS HUB has designated a dedicated Grievance Officer:
           </p>
 
           <div className={classes.grievanceBox}>
             <p className={classes.grievanceRow}>
-              <strong className={classes.strong}>Contact:</strong> Privacy &amp; Grievance Officer
+              <strong className={classes.strong}>Entity:</strong> WEBLINGS HUB
             </p>
             <p className={classes.grievanceRow}>
-              <strong className={classes.strong}>Email:</strong>{' '}
+              <strong className={classes.strong}>Attention:</strong> Privacy &amp; Data Grievance Officer
+            </p>
+            <p className={classes.grievanceRow}>
+              <strong className={classes.strong}>Registered Location:</strong> Tirupur, Tamil Nadu, India
+            </p>
+            <p className={classes.grievanceRow}>
+              <strong className={classes.strong}>Contact Email:</strong>{' '}
               <a href="mailto:support@weblings.dev" className={classes.link}>
                 support@weblings.dev
-              </a>
+              </a>{' '}
+              (CC:{' '}
+              <a href="mailto:founders@weblings.dev" className={classes.link}>
+                founders@weblings.dev
+              </a>)
             </p>
             <p className={classes.grievanceNote}>
-              Please allow up to 72 hours for a response to legal or data deletion inquiries.
+              <strong className={classes.strong}>Response Timeline:</strong> We acknowledge and address legitimate privacy and deletion inquiries within 72 hours.
             </p>
           </div>
         </div>

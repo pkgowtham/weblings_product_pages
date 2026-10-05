@@ -176,6 +176,11 @@ const Footer: React.FC<FooterProps> = ({ iconColor, brandColor, className }): Re
           </ul>
         </div>
       </div>
+      <div className={classes.bottomBar}>
+        <Typography variant="LXS" className={classes.copyrightText}>
+          © 2026 WEBLINGS HUB. All rights reserved. Weblings Suite is a product of WEBLINGS HUB.
+        </Typography>
+      </div>
     </footer>
   );
 };
